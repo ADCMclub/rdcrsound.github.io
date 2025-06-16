@@ -314,13 +314,52 @@
         RDCR Sound
       </h1>
     </div>
-    <!-- Desktop nav -->
-    <nav class="space-x-4 text-sm font-semibold desktop-nav">
-      <a href="#inicio" class="hover:text-yellow-400 transition-colors">Inicio</a>
-      <a href="#programacion" class="hover:text-yellow-400 transition-colors">Programación</a>
-      <a href="#emisoras" class="hover:text-yellow-400 transition-colors">Emisoras</a>
-      <a href="#locutores" class="hover:text-yellow-400 transition-colors">Locutores</a>
-      <a href="#galeria" class="hover:text-yellow-400 transition-colors">Galería</a>
+   <!-- Desktop nav with submenus -->
+    <nav class="space-x-4 text-sm font-semibold desktop-nav flex items-center">
+      <div class="relative group inline-block">
+        <a href="#inicio" class="hover:text-yellow-400 transition-colors">Inicio</a>
+      </div>
+      <div class="relative group inline-block">
+        <a href="/podcast/" class="hover:text-yellow-400 transition-colors">Podcast</a>
+        <div class="submenu absolute left-0 mt-2 w-56 bg-[#232526] rounded-lg shadow-lg"
+             style="min-width:200px;">
+          <a href="/podcast/entretelones/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Entretelones</a>
+          <a href="/podcast/manoamano/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Mano a Mano</a>
+        </div>
+      </div>
+      <div class="relative group inline-block">
+        <a href="#programacion" class="hover:text-yellow-400 transition-colors">Programación</a>
+        <div class="submenu absolute left-0 mt-2 w-56 bg-[#232526] rounded-lg shadow-lg"
+             style="min-width:200px;">
+          <a href="#programacion" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Horarios</a>
+          <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Emisoras</a>
+        </div>
+      </div>
+      <div class="relative group inline-block">
+        <a href="#emisoras" class="hover:text-yellow-400 transition-colors">Emisoras</a>
+        <div class="submenu absolute left-0 mt-2 w-56 bg-[#232526] rounded-lg shadow-lg"
+             style="min-width:200px;">
+          <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Radio EC</a>
+          <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Mix EC</a>
+          <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Clasicos EC</a>
+        </div>
+      </div>
+      <div class="relative group inline-block">
+        <a href="#locutores" class="hover:text-yellow-400 transition-colors">Locutores</a>
+        <div class="submenu absolute left-0 mt-2 w-56 bg-[#232526] rounded-lg shadow-lg"
+             style="min-width:200px;">
+          <a href="#locutores" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Dario Castellanos</a>
+          <a href="#locutores" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Andy Castellanos</a>
+        </div>
+      </div>
+      <div class="relative group inline-block">
+        <a href="#galeria" class="hover:text-yellow-400 transition-colors">Galería</a>
+        <div class="submenu absolute left-0 mt-2 w-56 bg-[#232526] rounded-lg shadow-lg"
+             style="min-width:200px;">
+          <a href="#galeria" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Videos</a>
+          <a href="#galeria" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Fotos</a>
+        </div>
+      </div>
     </nav>
     <!-- Hamburger -->
     <div class="hamburger" id="hamburger" aria-label="Abrir menú" tabindex="0">
@@ -921,8 +960,8 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
-<!-- PODCAST 2-->
-  <section id="podcast2" class="section-gradient py-16 px-6 animate-fade-up">
+<!-- PODCAST -->
+  <section id="podcast" class="section-gradient py-16 px-6 animate-fade-up">
     <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
         style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
       🎙️ Podcast
