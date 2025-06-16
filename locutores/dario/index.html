@@ -7,17 +7,17 @@
 <style>
   :root {
     --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --color-bg: #0e1b2a; /* azul oscuro */
-    --color-primary: #2a4d69; /* azul serio */
-    --color-accent: #4b86b4; /* azul suave */
-    --color-text-light: #e8eef5; /* un poco más brillante para mejor lectura */
+    --color-bg: #0e1b2a;
+    --color-primary: #2a4d69;
+    --color-accent: #4b86b4;
+    --color-text-light: #e8eef5;
     --color-text-muted: #a1b2c3;
     --color-white-bone: #f9f6f1;
     --shadow-glow: rgba(75, 134, 180, 0.4);
+    --transition-speed: 0.35s;
   }
 
-  /* Reset */
-  * {
+  *, *::before, *::after {
     margin: 0; padding: 0; box-sizing: border-box;
   }
 
@@ -27,9 +27,10 @@
     background-color: var(--color-bg);
     color: var(--color-text-light);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Canvas fondo partículas */
   #bg-canvas {
     position: fixed;
     top: 0; left: 0;
@@ -39,73 +40,112 @@
     background: linear-gradient(135deg, #0b1223, #1f2a44);
   }
 
-  /* Contenedor principal */
   .container {
     position: relative;
     max-width: 900px;
-    margin: 3rem auto 4rem;
-    background: rgba(20, 34, 59, 0.92);
-    padding: 3rem 3.5rem;
-    border-radius: 18px;
-    box-shadow: 0 0 30px var(--shadow-glow);
-    backdrop-filter: blur(12px);
+    margin: 4rem auto 5rem;
+    background: rgba(20, 34, 59, 0.95);
+    padding: 3.5rem 4rem;
+    border-radius: 20px;
+    box-shadow: 0 0 40px var(--shadow-glow);
+    backdrop-filter: blur(14px);
     z-index: 10;
+
+    opacity: 0;
+    transform: translateY(25px);
+    animation: fadeSlideUp 0.9s forwards ease-out;
+  }
+
+  @keyframes fadeSlideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
   }
 
-header h1 {
-  font-size: 3.4rem;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  color: var(--color-white-bone);  /* Cambié a blanco hueso para mejor contraste */
-  text-shadow: 0 0 2px rgba(249, 246, 241, 0.9); /* Sombra resplandor blanca */
-}
+  header h1 {
+    font-size: 3.8rem;
+    font-weight: 900;
+    letter-spacing: 0.07em;
+    color: var(--color-white-bone);
+    text-shadow: 0 0 6px rgba(249, 246, 241, 0.85);
+    opacity: 0;
+    animation: fadeSlideUp 1.2s forwards ease-out;
+  }
 
   header h2 {
     font-weight: 600;
-    font-size: 1.8rem;
+    font-size: 1.85rem;
     color: var(--color-text-muted);
     font-style: italic;
-    margin-top: 0.5rem;
+    margin-top: 0.6rem;
+    opacity: 0;
+    animation: fadeSlideUp 1.4s forwards ease-out;
   }
 
   section {
-    margin-bottom: 3rem;
-    padding-bottom: 1.8rem;
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeSlideUp 0.9s forwards ease-out;
+    animation-delay: 1.5s;
+  }
+
+  section:nth-of-type(2) {
+    animation-delay: 1.7s;
+  }
+
+  section:nth-of-type(3) {
+    animation-delay: 1.9s;
+  }
+
+  section:nth-of-type(4) {
+    animation-delay: 2.1s;
+    border-bottom: none;
   }
 
   h3 {
     color: var(--color-accent);
-    font-size: 1.9rem;
-    margin-bottom: 1.2rem;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
     border-left: 6px solid var(--color-primary);
-    padding-left: 1rem;
+    padding-left: 1.2rem;
     font-weight: 700;
+    transition: color var(--transition-speed);
+  }
+
+  h3:hover {
+    color: #7db3ff;
   }
 
   p {
-    line-height: 1.75;
+    line-height: 1.8;
     color: var(--color-text-light);
-    font-size: 1.2rem;
-    margin-bottom: 1.2rem;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
   }
 
   ul {
     list-style: none;
-    padding-left: 1.2rem;
+    padding-left: 1.4rem;
   }
+
   ul li {
     position: relative;
-    padding-left: 1.8rem;
-    margin-bottom: 1rem;
-    font-size: 1.15rem;
-    line-height: 1.5;
+    padding-left: 2rem;
+    margin-bottom: 1.25rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    transition: color var(--transition-speed);
   }
+
   ul li::before {
     content: "•";
     position: absolute;
@@ -113,163 +153,212 @@ header h1 {
     top: 0.15rem;
     color: var(--color-primary);
     font-weight: 900;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     line-height: 1;
+    transition: color var(--transition-speed);
   }
 
-  /* Nueva clase para presentación con imagen */
+  ul li:hover {
+    color: var(--color-accent);
+  }
+  ul li:hover::before {
+    color: var(--color-accent);
+  }
+
   .presentacion-flex {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 2.4rem;
     flex-wrap: wrap;
   }
+
   .presentacion-flex img {
-    max-width: 250px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px var(--shadow-glow);
+    max-width: 260px;
+    border-radius: 14px;
+    box-shadow: 0 0 22px var(--shadow-glow);
     flex-shrink: 0;
-  }
-  .presentacion-flex p {
-    flex: 1 1 300px;
-    font-size: 1.2rem;
-    color: var(--color-text-light);
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.4s ease;
+    will-change: transform;
   }
 
-  /* Contacto */
+  .presentacion-flex img:hover,
+  .presentacion-flex img:focus {
+    transform: scale(1.1) translateY(-8px);
+    box-shadow: 0 10px 30px var(--shadow-glow);
+    outline: none;
+  }
+
+  .presentacion-flex p {
+    flex: 1 1 320px;
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    opacity: 0;
+    animation: fadeSlideUp 1s forwards ease-out;
+    animation-delay: 1.6s;
+  }
+
   .contact {
     background: var(--color-primary);
-    padding: 2rem 2.5rem;
-    border-radius: 14px;
+    padding: 2.4rem 3rem;
+    border-radius: 16px;
     text-align: center;
-    box-shadow: 0 0 25px var(--color-accent);
-    margin-top: 1rem;
+    box-shadow: 0 0 30px var(--color-accent);
+    margin-top: 1.5rem;
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeSlideUp 1s forwards ease-out;
+    animation-delay: 2.3s;
   }
+
+  .contact:hover,
+  .contact:focus {
+    background-color: #1a3e6a;
+    box-shadow: 0 0 45px #81a6ffcc;
+    outline: none;
+  }
+
   .contact h3 {
     color: var(--color-white-bone);
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+    font-size: 2rem;
+    user-select: none;
   }
+
   .contact p {
     color: var(--color-white-bone);
-    font-size: 1.25rem;
+    font-size: 1.3rem;
+    margin-bottom: 1.1rem;
+    user-select: none;
   }
+
   .contact a {
     color: var(--color-white-bone);
     font-weight: 700;
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     text-decoration: underline;
-    transition: color 0.3s ease;
+    transition: color var(--transition-speed);
   }
+
   .contact a:hover,
   .contact a:focus {
     color: var(--color-text-light);
     outline: none;
   }
 
-  /* Footer */
   footer {
     text-align: center;
     color: var(--color-text-muted);
-    font-size: 1rem;
-    padding-bottom: 1.5rem;
+    font-size: 1.1rem;
+    padding-bottom: 2rem;
+    user-select: none;
   }
 
-  /* Responsive */
+  .boton-flotante {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    background: linear-gradient(90deg, #0080ff 0%, #0043bf 100%);
+    color: #111;
+    font-size: 1.1em;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    padding: 0.9em 2em;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 18px #0d00ff55, 0 1.5px 6px #ffd70022;
+    letter-spacing: 1.3px;
+    text-shadow: 0 1px 4px #fff8;
+    transition: all 0.35s ease;
+    animation: fadeInSlide 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .boton-flotante svg {
+    width: 1.2em;
+    height: 1.2em;
+    transition: transform 0.35s ease;
+    fill: currentColor;
+  }
+
+  .boton-flotante:hover {
+    transform: scale(1.12) rotate(-4deg);
+    box-shadow: 0 10px 28px #0004ffaa;
+    background: linear-gradient(90deg, #0019bf 0%, #2b00ff 100%);
+    color: #fff;
+    text-shadow: 0 1px 6px #0003;
+  }
+
+  .boton-flotante:hover svg {
+    transform: translateX(-8px);
+  }
+
+  @keyframes fadeInSlide {
+    from {
+      opacity: 0;
+      transform: translateY(-25px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @media (max-width: 600px) {
     .container {
       margin: 2rem 1rem 3rem;
-      padding: 2rem 2rem;
+      padding: 2.4rem 2rem;
     }
     header h1 {
-      font-size: 2.6rem;
+      font-size: 2.8rem;
     }
     header h2 {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
     h3 {
-      font-size: 1.5rem;
-      padding-left: 0.7rem;
-      border-left-width: 4px;
+      font-size: 1.6rem;
+      padding-left: 0.8rem;
+      border-left-width: 5px;
     }
     p, ul li {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+    }
+    .presentacion-flex img {
+      max-width: 100%;
+      margin-bottom: 1rem;
+    }
+    .presentacion-flex {
+      flex-direction: column;
+      gap: 1.4rem;
     }
     .contact {
-      padding: 1.5rem 1.8rem;
+      padding: 1.8rem 2rem;
+    }
+    .contact h3 {
+      font-size: 1.6rem;
     }
     .contact p, .contact a {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
     }
   }
 </style>
 </head>
 <body>
-<!-- Botón flotante animado y estilizado -->
-<style>
-    .boton-flotante {
-        position: fixed;
-        top: 1rem;
-        left: 1rem;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        gap: 0.6em;
-        background: linear-gradient(90deg, #0080ff 0%, #0043bf 100%);
-        color: #111;
-        font-size: 1.1em;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-weight: 600;
-        padding: 0.9em 2em;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        box-shadow: 0 4px 18px #0d00ff55, 0 1.5px 6px #ffd70022;
-        letter-spacing: 1.3px;
-        text-shadow: 0 1px 4px #fff8;
-        transition: all 0.35s ease;
-        animation: fadeInSlide 0.8s ease forwards;
-        opacity: 0;
-    }
-
-    .boton-flotante svg {
-        width: 1.2em;
-        height: 1.2em;
-        transition: transform 0.35s ease;
-        fill: currentColor;
-    }
-
-    .boton-flotante:hover {
-        transform: scale(1.07);
-        box-shadow: 0 10px 28px #0004ffaa;
-        background: linear-gradient(90deg, #0019bf 0%, #2b00ff 100%);
-        color: #fff;
-        text-shadow: 0 1px 6px #0003;
-    }
-
-    .boton-flotante:hover svg {
-        transform: translateX(-6px);
-    }
-
-    @keyframes fadeInSlide {
-        from {
-            opacity: 0;
-            transform: translateY(-25px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-</style>
-
-<button class="boton-flotante" onclick="window.history.back()">
-    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path d="M9.707 14.707a1 1 0 01-1.414 0L3.586 10l4.707-4.707a1 1 0 011.414 1.414L6.414 9H17a1 1 0 110 2H6.414l3.293 3.293a1 1 0 010 1.414z"/>
-    </svg>
-    <span>Volver atrás</span>
+<button class="boton-flotante" onclick="window.history.back()" aria-label="Volver atrás">
+  <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M9.707 14.707a1 1 0 01-1.414 0L3.586 10l4.707-4.707a1 1 0 011.414 1.414L6.414 9H17a1 1 0 110 2H6.414l3.293 3.293a1 1 0 010 1.414z"/>
+  </svg>
+  <span>Volver atrás</span>
 </button>
-<!-- FIN Botón flotante animado y estilizado -->
-<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+<canvas id="bg-canvas" aria-hidden="true" tabindex="-1"></canvas>
 
 <div class="container" role="main" aria-label="Perfil profesional de Darío Castellanos">
   <header>
@@ -280,9 +369,9 @@ header h1 {
   <section aria-labelledby="presentacion">
     <h3 id="presentacion">Presentación</h3>
     <div class="presentacion-flex">
-      <img src="/img_radio/Dario.jpeg" alt="Foto de Darío Castellanos" />
+      <img src="/img_radio/Dario.jpeg" alt="Foto profesional de Darío Castellanos sonriendo" />
       <p>
-        Soy Darío Castellanos, un locutor con más de 10 años de experiencia en radio, podcasting y producción de contenido audiovisual. Como creador y propietario de <strong>RDCR Sound</strong>, me especializo en brindar voces profesionales, dinámicas y con impacto para marcas, proyectos y medios digitales.
+        Soy Darío Castellanos, un locutor con más de 10 años de experiencia en radio, podcasting y producción audiovisual. Como creador y propietario de <strong>RDCR Sound</strong>, ofrezco voces profesionales, dinámicas y con impacto para marcas, proyectos y medios digitales.
       </p>
     </div>
   </section>
@@ -292,7 +381,7 @@ header h1 {
     <ul>
       <li>Conducción de más de 300 programas de radio y podcasts en vivo y grabados.</li>
       <li>Creación y producción de contenido para reconocidas marcas internacionales.</li>
-      <li>Premio Nacional de Locución en 2019 por excelencia en medios digitales.</li>
+      <li>Premio Nacional de Locución 2019 por excelencia en medios digitales.</li>
       <li>Colaborador en campañas publicitarias con más de 2 millones de reproducciones.</li>
       <li>Formación y coaching para nuevos talentos en locución y producción sonora.</li>
     </ul>
@@ -309,94 +398,93 @@ header h1 {
     </ul>
   </section>
 
-  <section class="contact" aria-label="Contacto">
+  <section class="contact" aria-label="Contacto" tabindex="0" role="region">
     <h3>Contacto</h3>
     <p>¿Quieres trabajar conmigo? Escríbeme:</p>
-    <p><a href="mailto:contacto@rdcrsound.com" aria-label="Enviar email a contacto@rdcrsound.com">contacto@rdcrsound.com</a></p>
+    <p><a href="mailto:contacto@rdcrsound.com" aria-label="Enviar email a contacto@rdcrsound.com" target="_blank" rel="noopener noreferrer">contacto@rdcrsound.com</a></p>
   </section>
 </div>
-
-<footer>
-  <p>© 2025 Darío Castellanos — RDCR Sound</p>
-</footer>
 
 <script>
   const canvas = document.getElementById('bg-canvas');
   const ctx = canvas.getContext('2d');
-
   let width, height;
-  function resize() {
+  let particles = [];
+  let mouse = { x: null, y: null };
+
+  function init() {
     width = window.innerWidth;
     height = window.innerHeight;
-    canvas.width = width * devicePixelRatio;
-    canvas.height = height * devicePixelRatio;
-    canvas.style.width = width + 'px';
-    canvas.style.height = height + 'px';
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.scale(devicePixelRatio, devicePixelRatio);
-  }
-  window.addEventListener('resize', resize);
-  resize();
+    canvas.width = width;
+    canvas.height = height;
 
-  class Particle {
-    constructor() {
-      this.reset();
+    particles = [];
+    for(let i = 0; i < 80; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+        size: Math.random() * 2.8 + 1.2,
+        opacity: Math.random() * 0.4 + 0.2,
+      });
     }
-    reset() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.15;
-      this.vy = (Math.random() - 0.5) * 0.15;
-      this.size = 1 + Math.random() * 1.5;
-      this.alpha = 0.15 + Math.random() * 0.25;
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < 0 || this.x > width) this.vx *= -1;
-      if (this.y < 0 || this.y > height) this.vy *= -1;
-    }
-    draw(ctx) {
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x > width) p.x = 0;
+      else if (p.x < 0) p.x = width;
+      if (p.y > height) p.y = 0;
+      else if (p.y < 0) p.y = height;
+
+      // Draw circle
       ctx.beginPath();
-      ctx.fillStyle = `rgba(249, 246, 241, ${this.alpha})`;
-      ctx.shadowColor = `rgba(249, 246, 241, ${this.alpha * 0.5})`;
-      ctx.shadowBlur = 4;
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(75,134,180,${p.opacity})`;
+      ctx.shadowColor = `rgba(75,134,180,0.6)`;
+      ctx.shadowBlur = 6;
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
-    }
-  }
 
-  const particles = [];
-  const PARTICLE_COUNT = 100; // menos para menor distracción
-  for(let i=0; i<PARTICLE_COUNT; i++){
-    particles.push(new Particle());
+      // Connect lines if close
+      particles.forEach(other => {
+        if (other !== p) {
+          const dx = other.x - p.x;
+          const dy = other.y - p.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(75,134,180,${(110 - dist) / 160})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(other.x, other.y);
+            ctx.stroke();
+          }
+        }
+      });
+    });
   }
 
   function animate() {
-    ctx.clearRect(0, 0, width, height);
-
-    for(let i=0; i<PARTICLE_COUNT; i++){
-      let p1 = particles[i];
-      p1.update();
-      p1.draw(ctx);
-
-      for(let j=i+1; j<PARTICLE_COUNT; j++){
-        let p2 = particles[j];
-        const dx = p1.x - p2.x;
-        const dy = p1.y - p2.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if(dist < 85){
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(249, 246, 241, ${0.07 * (1 - dist/85)})`;
-          ctx.lineWidth = 1;
-          ctx.moveTo(p1.x, p1.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
-        }
-      }
-    }
+    draw();
     requestAnimationFrame(animate);
   }
+
+  window.addEventListener('resize', () => {
+    init();
+  });
+
+  window.addEventListener('mousemove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  init();
   animate();
 </script>
 
