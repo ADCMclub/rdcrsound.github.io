@@ -70,10 +70,7 @@
       background: linear-gradient(120deg, #232526 0%, #fff 100%);
       color: #18181b;
     }
-    #contacto {
-      background: linear-gradient(120deg, #18181b 0%, #bfa76a 100%);
-      color: #fff;
-    }
+
     /* Animaciones personalizadas */
     @keyframes fade {
       from { opacity: 0; transform: translateY(20px);}
@@ -334,7 +331,6 @@
       };
     })();
   </script>
-  -->
   <!-- MODO MANTENIMIENTO FIN -->
 
 
@@ -460,20 +456,12 @@
         </div>
       </div>
       <div class="relative group inline-block">
-        <a href="#programacion" class="hover:text-yellow-400 transition-colors">Programación</a>
-        <div class="absolute left-0 mt-0 w-44 bg-[#232526] rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50"
-             style="min-width:160px;">
-          <a href="#programacion" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Horarios</a>
-          <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Emisoras</a>
-        </div>
-      </div>
-      <div class="relative group inline-block">
         <a href="#emisoras" class="hover:text-yellow-400 transition-colors">Emisoras</a>
         <div class="absolute left-0 mt-0 w-44 bg-[#232526] rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50"
              style="min-width:160px;">
-          <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Radio EC</a>
-          <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Mix EC</a>
-          <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Clasicos EC</a>
+          <a href="/DCRadioEC/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Radio EC</a>
+          <a href="/DCMixEC/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Mix EC</a>
+          <a href="/DCClasicosEC/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Clasicos EC</a>
         </div>
       </div>
       <div class="relative group inline-block">
@@ -489,7 +477,6 @@
         <div class="absolute left-0 mt-0 w-44 bg-[#232526] rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50"
              style="min-width:160px;">
           <a href="#galeria" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Videos</a>
-          <a href="#galeria" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Fotos</a>
         </div>
       </div>
     </nav>
@@ -505,18 +492,18 @@
         <a href="#inicio" onclick="closeMobileNav()">Inicio</a>
       </div>
       <div>
-        <button type="button" class="w-full text-left font-semibold text-white py-2 px-0" onclick="toggleSubmenu('prog-sub')">Programación ▼</button>
-        <div id="prog-sub" style="display:none; margin-left:1rem;">
-          <a href="#programacion" onclick="closeMobileNav()" class="block py-1">Horarios</a>
-          <a href="#emisoras" onclick="closeMobileNav()" class="block py-1">Emisoras</a>
+        <button type="button" class="w-full text-left font-semibold text-white py-2 px-0" onclick="toggleSubmenu('podcast-sub')">Podcast ▼</button>
+        <div id="podcast-sub" style="display:none; margin-left:1rem;">
+          <a href="/podcast/entretelones/" onclick="closeMobileNav()" class="block py-1">Entretelones</a>
+          <a href="/podcast/manoamano/" onclick="closeMobileNav()" class="block py-1">Mano a Mano</a>
         </div>
       </div>
       <div>
         <button type="button" class="w-full text-left font-semibold text-white py-2 px-0" onclick="toggleSubmenu('emisoras-sub')">Emisoras ▼</button>
         <div id="emisoras-sub" style="display:none; margin-left:1rem;">
-          <a href="#emisoras" onclick="closeMobileNav()" class="block py-1">DC Radio EC</a>
-          <a href="#emisoras" onclick="closeMobileNav()" class="block py-1">DC Mix EC</a>
-          <a href="#emisoras" onclick="closeMobileNav()" class="block py-1">DC Clasicos EC</a>
+          <a href="/DCRadioEC/" onclick="closeMobileNav()" class="block py-1">DC Radio EC</a>
+          <a href="/DCMixEC/" onclick="closeMobileNav()" class="block py-1">DC Mix EC</a>
+          <a href="/DCClasicosEC/" onclick="closeMobileNav()" class="block py-1">DC Clasicos EC</a>
         </div>
       </div>
       <div>
@@ -567,6 +554,9 @@
 </script>
 
   <!-- HERO -->
+  <!-- =========================
+     SECCIÓN HERO (INICIO)
+     ========================= -->
   <section id="inicio" class="section-gradient text-center py-20 animate-fade-up" style="position:relative; overflow:hidden;">
     <!-- Ondas SVG decorativas en el fondo, mitad de alto y más rápidas -->
     <div aria-hidden="true" style="position:absolute; left:0; right:0; top:0; bottom:0; width:100%; height:100%; z-index:0; pointer-events:none; overflow:hidden;">
@@ -646,14 +636,7 @@
       </h2>
       <p class="text-gray-800 mb-8 animate-fade-in text-lg">Conéctate al ritmo de la mejor música latina, salsa, y más.</p>
       <div class="flex justify-center gap-4 mt-8">
-        <a href="#podcast">
-
-        </a>
-      </div>
-    </div>
-  </section>
-<!-- podcast - Sección animada pequeña -->
-<section id="podcast" class="section-gradient py-10 px-6 animate-fade-up">
+        <a href="/podcast/">
   <div class="flex flex-col items-center justify-center">
     <a href="/podcast/"
       class="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300"
@@ -663,7 +646,7 @@
       <span class="font-extrabold text-2xl md:text-3xl tracking-widest animate-masprendidos-text"
         style="
           font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-          background: linear-gradient(90deg, #00086b 10%, #00086b 50%, #00086b 90%);
+          background: linear-gradient(90deg, #b67f00 10%, #b67f00 50%, #b67f00 90%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -679,7 +662,12 @@
       </svg>
     </a>
   </div>
-</section>
+        </a>
+      </div>
+    </div>
+  </section>
+<!-- podcast - Sección animada pequeña -->
+
 <style>
 @keyframes masprendidos-text {
   0%, 100% { letter-spacing: 2px; filter: brightness(1) drop-shadow(0 0 8px #fde04744);}
@@ -706,7 +694,7 @@
 }
 .group:hover .animate-masprendidos-btn {
   animation: none;
-  color: #000000 !important;
+  color: #2d251f !important;
 }
 @keyframes masprendidos-arrow {
   0%, 100% { transform: translateX(0);}
@@ -721,201 +709,13 @@
   transition: transform 0.2s;
 }
 </style>
-  <!-- PROGRAMACIÓN -->
-  <section id="programacion" class="section-gradient py-16 px-6 animate-fade-up">
-    <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent animate-shine select-none"
-        style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
-      🎧 Programación
-    </h3>
-    <div class="relative flex flex-col items-center">
-      <div class="flex items-center justify-center gap-2 w-full max-w-4xl mx-auto">
-        <div id="prog-carousel" class="flex items-center justify-center gap-2 w-full overflow-visible">
-          <!-- Cards will be rendered here -->
-        </div>
-      </div>
-      <div id="prog-indicators" class="flex justify-center mt-4 gap-2"></div>
-    </div>
-  </section>
-  <style>
-  /* Carousel effect for programacion */
-  #prog-carousel {
-    min-height: 220px;
-    position: relative;
-  }
-  .prog-card {
-    opacity: 0.6;
-    transform: scale(0.82) translateY(0);
-    transition:
-      transform 0.5s cubic-bezier(.4,0,.2,1),
-      opacity 0.5s cubic-bezier(.4,0,.2,1),
-      box-shadow 0.5s cubic-bezier(.4,0,.2,1);
-    z-index: 1;
-    pointer-events: none;
-    background: #fffbe6cc;
-    border-radius: 1.25rem;
-    min-width: 220px;
-    max-width: 320px;
-    margin: 0 0.25rem;
-    padding: 1.5rem 1.25rem;
-    box-shadow: 0 2px 12px #bfa76a22;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    opacity: 0.6;
-  }
-  .prog-card-center {
-    opacity: 1;
-    transform: scale(1.13) translateY(0);
-    box-shadow: 0 8px 32px #fde04799, 0 0 0 6px #bfa76a33;
-    z-index: 2;
-    pointer-events: auto;
-    background: #fff;
-    animation: carousel-pop-in 0.7s cubic-bezier(.4,0,.2,1);
-  }
-  .prog-card-side {
-    opacity: 0.85;
-    transform: scale(0.95) translateY(0);
-    z-index: 1;
-    pointer-events: auto;
-  }
-  @keyframes carousel-pop-in {
-    0% {
-      opacity: 0;
-      transform: scale(0.7) translateY(40px);
-      filter: blur(2px);
-    }
-    60% {
-      opacity: 1;
-      transform: scale(1.18) translateY(-10px);
-      filter: blur(0.5px);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1.13) translateY(0);
-      filter: blur(0);
-    }
-  }
-  @keyframes carousel-fade-out {
-    0% {
-      opacity: 1;
-      transform: scale(1.13) translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(0.7) translateY(40px);
-    }
-  }
-  .prog-card-leave {
-    animation: carousel-fade-out 0.5s cubic-bezier(.4,0,.2,1) forwards;
-  }
-  #prog-indicators button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #bfa76a55;
-    border: none;
-    margin: 0 2px;
-    transition: background 0.2s;
-    cursor: pointer;
-  }
-  #prog-indicators button.active {
-    background: #fde047;
-    box-shadow: 0 0 0 2px #bfa76a55;
-  }
-  @media (max-width: 600px) {
-    #prog-carousel {
-      min-height: 180px;
-    }
-    .prog-card {
-      min-width: 140px !important;
-      max-width: 180px !important;
-      font-size: 0.95rem;
-      padding: 1rem 0.75rem;
-    }
-  }
-  </style>
-  
-  <script>
-  const progData = [
-    {
-      title: "HORARIO LABORAL",
-      desc: "Lunes a Viernes | 6:00 AM - 8:00 PM [EC]"
-    },
-    {
-      title: "HORARIO DE FIN DE SEMANA",
-      desc: "Sábados a Domingo | 8:00 AM - 10:00 PM [EC]"
-    }
-  ];
-  let progCenter = 0, progInterval = null, progPaused = false, progLastIdx = 0;
-  function renderProgCarousel(centerIdx, direction = 1) {
-    const container = document.getElementById('prog-carousel');
-    // Animate out old center card
-    const oldCards = container.querySelectorAll('.prog-card-center');
-    oldCards.forEach(card => {
-      card.classList.remove('prog-card-center');
-      card.classList.add('prog-card-leave');
-      setTimeout(() => card.remove(), 480);
-    });
 
-    // Animate in new cards
-    container.innerHTML = '';
-    for (let i = 0; i < progData.length; i++) {
-      let cls = "prog-card group";
-      if (i === centerIdx) cls += " prog-card-center";
-      else if (i === (centerIdx - 1 + progData.length) % progData.length || i === (centerIdx + 1) % progData.length) cls += " prog-card-side";
-      container.innerHTML += `
-        <div class="${cls}">
-          <h4 class="font-bold text-lg group-hover:text-yellow-600 transition-colors duration-300 animate-shine">${progData[i].title}</h4>
-          <p class="text-sm group-hover:translate-x-2 transition-transform duration-300 animate-fade-in">${progData[i].desc}</p>
-        </div>
-      `;
-    }
-    // Indicators
-    const indicators = document.getElementById('prog-indicators');
-    if (progData.length > 1) {
-      indicators.innerHTML = progData.map((_, idx) =>
-        `<button class="${idx === centerIdx ? 'active' : ''}" aria-label="Ir a ${progData[idx].title}"></button>`
-      ).join('');
-      Array.from(indicators.children).forEach((btn, idx) => {
-        btn.onclick = () => {
-          progCenter = idx;
-          renderProgCarousel(progCenter, idx > progLastIdx ? 1 : -1);
-          progLastIdx = progCenter;
-          resetProgInterval();
-        };
-      });
-    } else {
-      indicators.innerHTML = '';
-    }
-    progLastIdx = centerIdx;
-  }
-  function nextProgCarousel() {
-    let nextIdx = (progCenter + 1) % progData.length;
-    renderProgCarousel(nextIdx, 1);
-    progCenter = nextIdx;
-  }
-  function startProgInterval() {
-    if (progInterval) clearInterval(progInterval);
-    progInterval = setInterval(() => {
-      if (!progPaused) nextProgCarousel();
-    }, 3200);
-  }
-  function resetProgInterval() {
-    startProgInterval();
-  }
-  document.addEventListener("DOMContentLoaded", function() {
-    renderProgCarousel(progCenter);
-    startProgInterval();
-    // Pause on hover
-    const progCarousel = document.getElementById('prog-carousel');
-    progCarousel.addEventListener('mouseenter', () => { progPaused = true; });
-    progCarousel.addEventListener('mouseleave', () => { progPaused = false; });
-  });
-  </script>
 
   <!-- EMISORAS -->
-  <!-- Animadas, sin fondo en los logos -->
-<section id="emisoras" class="section-gradient py-16 px-6 animate-fade-up">
+  <!-- =========================
+     SECCIÓN EMISORAS
+     ========================= -->
+  <section id="emisoras" class="section-gradient py-16 px-6 animate-fade-up">
   <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent animate-shine select-none"
       style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
     📻 Emisoras
@@ -1126,23 +926,10 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-
-<!-- PODCAST 2-->
-  <section id="podcast2" class="section-gradient py-16 px-6 animate-fade-up">
-    <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
-        style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
-      🎙️ Podcast
-    </h3>
-    <div class="flex flex-wrap justify-center gap-10 max-w-4xl mx-auto">
-      <!-- Entretelones -->
-      <a href="https://www.ivoox.com/podcast-entretelones_fg_f1255565_filtro_1.html" target="_blank" rel="noopener" style="display:block;max-width:800px;width:100%;text-decoration:none;">
-        <div style="border-radius:1.2rem;overflow:hidden;box-shadow:0 2px 12px #bfa76a33;background:#fffbe6cc;">
-          <iframe src="https://www.ivoox.com/player_es_podcast_1255565_zp_1.html?c1=111315" width="100%" height="400" frameborder="0" allowfullscreen="allowfullscreen" scrolling="no" loading="lazy"></iframe>
-        </div>
-      </a>
-    </div>
-  </section>
   <!-- LOCUTORES MEJORADO FONDO OSCURO OLD MONEY -->
+  <!-- =========================
+     SECCIÓN LOCUTORES
+     ========================= -->
   <section id="locutores" class="section-gradient py-16 px-6 animate-fade-up" style="background: linear-gradient(120deg, #232526 0%, #3a2f1d 100%); color: #e6d9b4;">
     <h3 class="text-3xl font-semibold text-center mb-10 animate-shine select-none"
         style="
@@ -1177,6 +964,9 @@ document.addEventListener("DOMContentLoaded", function() {
   </section>
 
   <!-- GALERÍA -->
+  <!-- =========================
+     SECCIÓN GALERÍA DE VIDEOS
+     ========================= -->
   <section id="galeria" class="section-gradient py-16 px-6 animate-fade-up">
   <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
       style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
@@ -1365,6 +1155,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   <!-- DESCARGAS -->
+  <!-- =========================
+     SECCIÓN DESCARGAS DE APPS
+     ========================= -->
   <section id="descargas" class="section-gradient py-16 px-6 animate-fade-up">
     <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
         style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
@@ -1383,6 +1176,9 @@ document.addEventListener("DOMContentLoaded", function() {
   </section>
 
 <!-- FOOTER -->
+<!-- =========================
+     FOOTER
+     ========================= -->
 <footer class="bg-gradient-to-r from-black via-gray-900 to-black text-gray-400 text-sm py-10 px-6 animate-fade-up" style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
   <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
     
@@ -1670,7 +1466,7 @@ document.addEventListener("DOMContentLoaded", function() {
   aria-label="Volver arriba"
   style="
     position: fixed;
-    right: 1.5rem;
+       right: 1.5rem;
     bottom: 2.5rem;
     z-index: 100;
     background: linear-gradient(135deg, #fde047 0%, #bfa76a 100%);
