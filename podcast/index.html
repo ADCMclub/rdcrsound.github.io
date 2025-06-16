@@ -1,353 +1,297 @@
 <!DOCTYPE html>
 <html lang="es">
-    
 <head>
-    <meta charset="UTF-8">
-    <title>Podcasts | RDC RSound</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-      <!-- Icono de pestaña -->
+  <meta charset="UTF-8">
+  <title>Podcasts | RDC RSound</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="/img_radio/RDCRSOUND_LOG.jpg" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/img_radio/RDCRSOUND_LOG.jpg">
   <link rel="apple-touch-icon" sizes="180x180" href="/img_radio/RDCRSOUND_LOG.jpg">
   <link rel="shortcut icon" href="/img_radio/RDCRSOUND_LOG.jpg">
-    <style>
-        body {
-            font-family: 'Inter', Arial, sans-serif;
-            margin: 0;
-            background: #111;
-            min-height: 100vh;
-            color: #ffd700;
-            position: relative;
-            overflow-x: hidden;
-        }
-        #tsparticles {
-            position: fixed;
-            z-index: 0;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-        }
-        header, main {
-            position: relative;
-            z-index: 1;
-        }
-        header {
-            text-align: center;
-            padding: 3rem 1rem 2rem 1rem;
-            background: linear-gradient(90deg, #111 60%, #222 100%);
-            border-bottom: 2px solid #ffd70033;
-            animation: fadeInDown 1.2s cubic-bezier(.4,2,.6,1);
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-40px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-        header h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-            margin: 0;
-            color: #ffd700;
-            text-shadow: 0 2px 16px #000, 0 0 8px #ffd70055;
-            animation: glow 2s infinite alternate;
-        }
-        @keyframes glow {
-            from { text-shadow: 0 2px 16px #000, 0 0 8px #ffd70055; }
-            to { text-shadow: 0 2px 32px #ffd700cc, 0 0 24px #ffd70099; }
-        }
-        .podcasts-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2.5rem;
-            padding: 2rem 1rem 3rem 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .podcast-card {
-            background: linear-gradient(135deg, #181818 80%, #222 100%);
-            border-radius: 2rem;
-            box-shadow: 0 8px 32px 0 #000a, 0 1.5px 6px 0 #ffd70022;
-            width: 340px;
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(40px) scale(0.98);
-            animation: fadeInUp 1s forwards;
-            border: 2px solid #ffd70033;
-            transition: box-shadow 0.3s, transform 0.3s;
-        }
-        .podcast-card:nth-child(2) {
-            animation-delay: 0.3s;
-        }
-        .podcast-card:hover {
-            box-shadow: 0 12px 48px 0 #ffd70044, 0 1.5px 12px 0 #ffd70055;
-            transform: translateY(-8px) scale(1.03) rotate(-1deg);
-            border-color: #ffd70088;
-        }
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        .podcast-art {
-            width: 90%;
-            height: 90%;
-            border-radius: 1.2rem;
-            background: linear-gradient(135deg, #ffd700 0%, #bfa100 100%);
-            margin-bottom: 1.2rem;
-            box-shadow: 0 4px 24px 0 #ffd70044, 0 0 0 6px #222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: #111;
-            font-weight: bold;
-            letter-spacing: 2px;
-            border: 2px solid #ffd700cc;
-            animation: artPulse 2.5s infinite alternate;
-        }
-        @keyframes artPulse {
-            from { box-shadow: 0 4px 24px 0 #ffd70044, 0 0 0 6px #222; }
-            to { box-shadow: 0 8px 48px 0 #ffd70088, 0 0 0 12px #222; }
-        }
-        .podcast-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin: 0.5rem 0 0.2rem 0;
-            color: #ffd700;
-            text-align: center;
-            text-shadow: 0 1px 8px #000;
-            letter-spacing: 1px;
-        }
-        .podcast-desc {
-            font-size: 1rem;
-            color: #ffe066;
-            text-align: center;
-            margin-bottom: 1.2rem;
-            text-shadow: 0 1px 4px #000;
-        }
-        .audio-player {
-            width: 100%;
-            margin-bottom: 1.2rem;
-            outline: none;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px 0 #ffd70022;
-            background: #222;
-            border: 1px solid #ffd70055;
-            accent-color: #ffd700;
-        }
-        .apple-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5em;
-            margin-top: 0.5em;
-            padding: 0.7em 1.3em;
-            background: linear-gradient(90deg, #ffd700 0%, #bfa100 100%);
-            color: #111;
-            border-radius: 2em;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.05em;
-            box-shadow: 0 2px 8px 0 #ffd70033;
-            border: 2px solid #ffd70088;
-            transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s, background 0.18s;
-            text-shadow: 0 1px 4px #fff8;
-        }
-        .apple-btn:hover {
-            transform: translateY(-3px) scale(1.07);
-            box-shadow: 0 6px 24px 0 #ffd70088;
-            background: linear-gradient(90deg, #bfa100 0%, #ffd700 100%);
-            color: #fff;
-        }
-        .apple-icon {
-            width: 1.3em;
-            height: 1.3em;
-            vertical-align: middle;
-            filter: drop-shadow(0 0 2px #ffd70088);
-        }
-        @media (max-width: 800px) {
-            .podcasts-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div id="tsparticles"></div>
-    <header>
-        <h1>🎙️ Nuestros Podcasts</h1>
-    </header>
-    <main>
-<!-- Botón flotante animado y estilizado -->
-<style>
-    .boton-flotante {
-        position: fixed;
-        top: 1rem;
-        left: 1rem;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        gap: 0.6em;
-        background: linear-gradient(90deg, #ffd700 0%, #bfa100 100%);
-        color: #111;
-        font-size: 1.1em;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-weight: 600;
-        padding: 0.9em 2em;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        box-shadow: 0 4px 18px #ffd70055, 0 1.5px 6px #ffd70022;
-        letter-spacing: 1.3px;
-        text-shadow: 0 1px 4px #fff8;
-        transition: all 0.35s ease;
-        animation: fadeInSlide 0.8s ease forwards;
-        opacity: 0;
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      background: #111;
+      color: #ffd700;
+      overflow-x: hidden;
     }
 
-    .boton-flotante svg {
-        width: 1.2em;
-        height: 1.2em;
-        transition: transform 0.35s ease;
-        fill: currentColor;
+    #tsparticles {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header {
+      z-index: 1;
+      position: relative;
+      padding: 3rem 1rem 2rem;
+      text-align: center;
+      background: linear-gradient(90deg, #111 60%, #222 100%);
+      border-bottom: 2px solid #ffd70033;
+      animation: fadeInDown 1.2s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #ffd700;
+      text-shadow: 0 2px 16px #000, 0 0 8px #ffd70088;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 2px 16px #000, 0 0 8px #ffd70055; }
+      to { text-shadow: 0 2px 32px #ffd700cc, 0 0 24px #ffd70099; }
+    }
+
+    .boton-flotante {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 0.6em;
+      background: linear-gradient(90deg, #ffd700 0%, #bfa100 100%);
+      color: #111;
+      font-size: 1.1em;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 600;
+      padding: 0.9em 2em;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 18px #ffd70055, 0 1.5px 6px #ffd70022;
+      letter-spacing: 1.3px;
+      text-shadow: 0 1px 4px #fff8;
+      transition: all 0.35s ease;
+      animation: fadeInSlide 0.8s ease forwards;
+      opacity: 0;
+      border: none;
     }
 
     .boton-flotante:hover {
-        transform: scale(1.07);
-        box-shadow: 0 10px 28px #ffd700aa;
-        background: linear-gradient(90deg, #bfa100 0%, #ffd700 100%);
-        color: #fff;
-        text-shadow: 0 1px 6px #0003;
+      transform: scale(1.07);
+      box-shadow: 0 10px 28px #ffd700aa;
+      background: linear-gradient(90deg, #bfa100 0%, #ffd700 100%);
+      color: #fff;
+    }
+
+    .boton-flotante svg {
+      width: 1.2em;
+      height: 1.2em;
+      fill: currentColor;
+      transition: transform 0.3s;
     }
 
     .boton-flotante:hover svg {
-        transform: translateX(-6px);
+      transform: translateX(-6px);
     }
 
     @keyframes fadeInSlide {
-        from {
-            opacity: 0;
-            transform: translateY(-25px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+      from { opacity: 0; transform: translateY(-25px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-</style>
 
-<button class="boton-flotante" onclick="window.history.back()">
-    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path d="M9.707 14.707a1 1 0 01-1.414 0L3.586 10l4.707-4.707a1 1 0 011.414 1.414L6.414 9H17a1 1 0 110 2H6.414l3.293 3.293a1 1 0 010 1.414z"/>
-    </svg>
+    .podcasts-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2.5rem;
+      padding: 2rem 1rem 3rem;
+      max-width: 1200px;
+      margin: auto;
+      z-index: 1;
+      position: relative;
+    }
+
+    .podcast-card {
+      width: 340px;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(135deg, #181818 80%, #222 100%);
+      border-radius: 2rem;
+      box-shadow: 0 8px 32px 0 #000a, 0 1.5px 6px 0 #ffd70022;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 2px solid #ffd70033;
+      transform: translateY(40px) scale(0.98);
+      animation: fadeInUp 1s forwards;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    }
+
+    .podcast-card:hover {
+      transform: translateY(-8px) scale(1.03) rotate(-1deg);
+      box-shadow: 0 12px 48px #ffd70044, 0 1.5px 12px #ffd70055;
+      border-color: #ffd70088;
+    }
+
+    @keyframes fadeInUp {
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .podcast-art img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px #ffd70044, 0 0 0 6px #222;
+      animation: artPulse 2.5s infinite alternate;
+    }
+
+    @keyframes artPulse {
+      from { box-shadow: 0 4px 24px #ffd70044, 0 0 0 6px #222; }
+      to { box-shadow: 0 8px 48px #ffd70088, 0 0 0 12px #222; }
+    }
+
+    .podcast-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 1rem 0 0.3rem;
+      text-align: center;
+      color: #ffd700;
+      text-shadow: 0 1px 8px #000;
+    }
+
+    .podcast-desc {
+      font-size: 1rem;
+      color: #ffe066;
+      text-align: center;
+      margin-bottom: 1rem;
+      text-shadow: 0 1px 4px #000;
+    }
+
+    .apple-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      margin-top: 0.5em;
+      padding: 0.7em 1.3em;
+      background: linear-gradient(90deg, #ffd700 0%, #bfa100 100%);
+      color: #111;
+      border-radius: 2em;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05em;
+      box-shadow: 0 2px 8px #ffd70033;
+      border: 2px solid #ffd70088;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      text-shadow: 0 1px 4px #fff8;
+    }
+
+    .apple-btn:hover {
+      transform: translateY(-3px) scale(1.07);
+      background: linear-gradient(90deg, #bfa100 0%, #ffd700 100%);
+      color: #fff;
+    }
+
+    .apple-icon {
+      width: 1.3em;
+      height: 1.3em;
+      filter: drop-shadow(0 0 2px #ffd70088);
+    }
+
+    @media (max-width: 800px) {
+      .podcasts-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="tsparticles"></div>
+
+  <header>
+    <h1>🎙️ Nuestros Podcasts</h1>
+  </header>
+
+  <button class="boton-flotante" onclick="window.history.back()">
+    <svg viewBox="0 0 20 20"><path d="M9.707 14.707a1 1 0 01-1.414 0L3.586 10l4.707-4.707a1 1 0 011.414 1.414L6.414 9H17a1 1 0 110 2H6.414l3.293 3.293a1 1 0 010 1.414z"/></svg>
     <span>Volver atrás</span>
-</button>
-<!-- FIN Botón flotante animado y estilizado -->
+  </button>
 
+  <main>
+    <section class="podcasts-container">
+      <div class="podcast-card">
+        <div class="podcast-art">
+          <img src="/img_radio/entretelones.jpeg" alt="Entretelones">
+        </div>
+        <div class="podcast-title">Entretelones</div>
+        <div class="podcast-desc">
+          Descubre historias, entrevistas y música que inspiran. Un espacio para los amantes del sonido y la creatividad.
+        </div>
+        <a class="apple-btn" href="https://podcasts.apple.com/podcast/id1819687775" target="_blank">
+          <svg class="apple-icon" viewBox="0 0 24 24"><path d="M16.365 1.43c0 1.14-.93 2.06-2.07 2.06-.02-1.18.95-2.06 2.07-2.06zm3.7 17.44c-.21.43-.44.84-.7 1.23-.46.7-.84 1.19-1.18 1.51-.47.46-.97.7-1.5.7-.38 0-.84-.11-1.39-.33-.55-.22-1.06-.33-1.53-.33-.48 0-1 .11-1.56.33-.56.22-1.01.33-1.36.33-.54 0-1.05-.23-1.53-.7-.34-.32-.73-.81-1.19-1.51-.31-.47-.62-.99-.91-1.56-.3-.59-.56-1.21-.78-1.86-.24-.7-.36-1.36-.36-1.97 0-1.09.25-2.02.75-2.78.5-.76 1.17-1.14 2.01-1.14.39 0 .9.13 1.54.39.63.26 1.04.39 1.22.39.14 0 .6-.16 1.39-.48.75-.29 1.39-.41 1.91-.36 1.41.12 2.07.97 2.07 2.54 0 .52-.12 1.09-.36 1.7-.24.61-.5 1.15-.78 1.62z"/></svg>
+          Escuchar en Apple Podcasts
+        </a>
+      </div>
 
+      <div class="podcast-card">
+        <div class="podcast-art">
+          <img src="/img_radio/manoamano.jpeg" alt="Mano a Mano">
+        </div>
+        <div class="podcast-title">Mano a Mano</div>
+        <div class="podcast-desc">
+          Tecnología, tendencias y cultura digital. Conversaciones frescas con expertos y creadores del mundo tech.
+        </div>
+        <a class="apple-btn" href="https://podcasts.apple.com/podcast/id1819685664" target="_blank">
+          <svg class="apple-icon" viewBox="0 0 24 24"><path d="M16.365 1.43c0 1.14-.93 2.06-2.07 2.06-.02-1.18.95-2.06 2.07-2.06zm3.7 17.44c-.21.43-.44.84-.7 1.23-.46.7-.84 1.19-1.18 1.51-.47.46-.97.7-1.5.7-.38 0-.84-.11-1.39-.33-.55-.22-1.06-.33-1.53-.33-.48 0-1 .11-1.56.33-.56.22-1.01.33-1.36.33-.54 0-1.05-.23-1.53-.7-.34-.32-.73-.81-1.19-1.51-.31-.47-.62-.99-.91-1.56-.3-.59-.56-1.21-.78-1.86-.24-.7-.36-1.36-.36-1.97 0-1.09.25-2.02.75-2.78.5-.76 1.17-1.14 2.01-1.14.39 0 .9.13 1.54.39.63.26 1.04.39 1.22.39.14 0 .6-.16 1.39-.48.75-.29 1.39-.41 1.91-.36 1.41.12 2.07.97 2.07 2.54 0 .52-.12 1.09-.36 1.7-.24.61-.5 1.15-.78 1.62z"/></svg>
+          Escuchar en Apple Podcasts
+        </a>
+      </div>
+    </section>
+  </main>
 
-        <section class="podcasts-container">
-            <div class="podcast-card">
-                <div class="podcast-art">
-            <img src="/img_radio/entretelones.jpeg" alt="ENT" style="width: 100%; max-width: 300px; height: auto; border-radius: 12px;" />
-                </div>
-                <div class="podcast-title">Entretelones</div>
-                <div class="podcast-desc">
-                    Descubre historias, entrevistas y música que inspiran. Un espacio para los amantes del sonido y la creatividad.
-                </div>
-                <a class="apple-btn" href="https://podcasts.apple.com/podcast/id1819687775" target="_blank">
-                    <svg class="apple-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 1.43c0 1.14-.93 2.06-2.07 2.06-.02-1.18.95-2.06 2.07-2.06zm3.7 17.44c-.21.43-.44.84-.7 1.23-.46.7-.84 1.19-1.18 1.51-.47.46-.97.7-1.5.7-.38 0-.84-.11-1.39-.33-.55-.22-1.06-.33-1.53-.33-.48 0-1 .11-1.56.33-.56.22-1.01.33-1.36.33-.54 0-1.05-.23-1.53-.7-.34-.32-.73-.81-1.19-1.51-.31-.47-.62-.99-.91-1.56-.3-.59-.56-1.21-.78-1.86-.24-.7-.36-1.36-.36-1.97 0-1.09.25-2.02.75-2.78.5-.76 1.17-1.14 2.01-1.14.39 0 .9.13 1.54.39.63.26 1.04.39 1.22.39.14 0 .6-.16 1.39-.48.75-.29 1.39-.41 1.91-.36 1.41.12 2.07.97 2.07 2.54 0 .52-.12 1.09-.36 1.7-.24.61-.5 1.15-.78 1.62zm-3.7-13.1c0-.01 0-.01 0 0z"/></svg>
-                    Escuchar en Apple Podcasts
-                </a>
-            </div>
-<a class="podcast-card" href="/podcast/entretelones/" target="_blank">
-  <div class="podcast-art">
-    <img src="/img_radio/entretelones.jpeg" alt="ENT" style="width: 100%; max-width: 300px; height: auto; border-radius: 12px;" />
-  </div>
-  <div class="podcast-title">Entretelones</div>
-  <div class="podcast-desc">
-    Descubre historias, entrevistas y música que inspiran. Un espacio para los amantes del sonido y la creatividad.
-  </div>
-</a>
-            <div class="podcast-card">
-                <div class="podcast-art">
-                    <img src="/img_radio/manoamano.jpeg" alt="MaM" style="width: 100%; max-width: 300px; height: auto; border-radius: 12px;" />
-                </div>
-                <div class="podcast-title">Mano a Mano</div>
-                <div class="podcast-desc">
-                    Tecnología, tendencias y cultura digital. Conversaciones frescas con expertos y creadores del mundo tech.
-                </div>
-
-                <a class="apple-btn" href="https://podcasts.apple.com/podcast/id1819685664" target="_blank">
-                    <svg class="apple-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 1.43c0 1.14-.93 2.06-2.07 2.06-.02-1.18.95-2.06 2.07-2.06zm3.7 17.44c-.21.43-.44.84-.7 1.23-.46.7-.84 1.19-1.18 1.51-.47.46-.97.7-1.5.7-.38 0-.84-.11-1.39-.33-.55-.22-1.06-.33-1.53-.33-.48 0-1 .11-1.56.33-.56.22-1.01.33-1.36.33-.54 0-1.05-.23-1.53-.7-.34-.32-.73-.81-1.19-1.51-.31-.47-.62-.99-.91-1.56-.3-.59-.56-1.21-.78-1.86-.24-.7-.36-1.36-.36-1.97 0-1.09.25-2.02.75-2.78.5-.76 1.17-1.14 2.01-1.14.39 0 .9.13 1.54.39.63.26 1.04.39 1.22.39.14 0 .6-.16 1.39-.48.75-.29 1.39-.41 1.91-.36 1.41.12 2.07.97 2.07 2.54 0 .52-.12 1.09-.36 1.7-.24.61-.5 1.15-.78 1.62zm-3.7-13.1c0-.01 0-.01 0 0z"/></svg>
-                    Escuchar en Apple Podcasts
-                </a>
-            </div>
-        </section>
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js"></script>
-    <script>
-        // Fondo de partículas doradas en movimiento constante
-        tsParticles.load("tsparticles", {
-            background: { color: { value: "transparent" } },
-            fpsLimit: 60,
-            particles: {
-                number: { value: 80, density: { enable: true, area: 800 } },
-                color: { value: ["#ffd700", "#fff8dc", "#bfa100"] },
-                shape: { type: "circle" },
-                opacity: { value: 0.7, random: true },
-                size: { value: 3.5, random: { enable: true, minimumValue: 1.5 } },
-                move: {
-                    enable: true,
-                    speed: 1.8,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    outModes: { default: "out" }
-                },
-                links: {
-                    enable: true,
-                    distance: 120,
-                    color: "#ffd700",
-                    opacity: 0.18,
-                    width: 1
-                }
-            },
-            interactivity: {
-                events: {
-                    onHover: { enable: true, mode: "repulse" },
-                    onClick: { enable: true, mode: "push" }
-                },
-                modes: {
-                    repulse: { distance: 90, duration: 0.4 },
-                    push: { quantity: 4 }
-                }
-            },
-            detectRetina: true
-        });
-
-        // Animación dinámica al hacer hover en las cards
-        document.querySelectorAll('.podcast-card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.background = `radial-gradient(circle at ${x}px ${y}px, #ffd70022 0%, #181818 80%)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.background = 'linear-gradient(135deg, #181818 80%, #222 100%)';
-            });
-        });
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js"></script>
+  <script>
+    tsParticles.load("tsparticles", {
+      background: { color: { value: "transparent" } },
+      fpsLimit: 60,
+      particles: {
+        number: { value: 80, density: { enable: true, area: 800 } },
+        color: { value: ["#ffd700", "#fff8dc", "#bfa100"] },
+        shape: { type: "circle" },
+        opacity: { value: 0.7, random: true },
+        size: { value: 3.5, random: { enable: true, minimumValue: 1.5 } },
+        move: {
+          enable: true,
+          speed: 1.8,
+          direction: "none",
+          random: true,
+          straight: false,
+          outModes: { default: "out" }
+        },
+        links: {
+          enable: true,
+          distance: 120,
+          color: "#ffd700",
+          opacity: 0.18,
+          width: 1
+        }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "repulse" },
+          onClick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 90, duration: 0.4 },
+          push: { quantity: 4 }
+        }
+      },
+      detectRetina: true
+    });
+  </script>
 </body>
 </html>
