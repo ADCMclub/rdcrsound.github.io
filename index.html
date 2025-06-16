@@ -301,44 +301,34 @@
       <img src="/img_radio/RDCRSOUND_LOG.jpg" alt="Logo RDC Sound" class="w-12 h-12 rounded-full shadow-lg" />
       <h1
         class="text-2xl md:text-3xl font-extrabold tracking-wide select-none"
-        style="
-          font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+        style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
           background: linear-gradient(90deg, #bfa76a 10%, #f6e27a 50%, #bfa76a 90%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
           text-fill-color: transparent;
-          filter: drop-shadow(0 0 8px #f6e27a88);
-        "
+          filter: drop-shadow(0 0 8px #f6e27a88);"
       >
         RDCR Sound
       </h1>
     </div>
-   <!-- Desktop nav with submenus -->
+    <!-- Desktop nav with submenus -->
     <nav class="space-x-4 text-sm font-semibold desktop-nav flex items-center">
       <div class="relative group inline-block">
         <a href="#inicio" class="hover:text-yellow-400 transition-colors">Inicio</a>
       </div>
       <div class="relative group inline-block">
-        <a href="/podcast/" class="hover:text-yellow-400 transition-colors">Podcast</a>
-        <div class="submenu absolute left-0 mt-2 w-56 bg-[#232526] rounded-lg shadow-lg"
-             style="min-width:200px;">
-          <a href="/podcast/entretelones/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Entretelones</a>
-          <a href="/podcast/manoamano/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Mano a Mano</a>
-        </div>
-      </div>
-      <div class="relative group inline-block">
         <a href="#programacion" class="hover:text-yellow-400 transition-colors">Programación</a>
-        <div class="submenu absolute left-0 mt-2 w-56 bg-[#232526] rounded-lg shadow-lg"
-             style="min-width:200px;">
+        <div class="absolute left-0 mt-2 w-44 bg-[#232526] rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50"
+             style="min-width:160px;">
           <a href="#programacion" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Horarios</a>
           <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Emisoras</a>
         </div>
       </div>
       <div class="relative group inline-block">
         <a href="#emisoras" class="hover:text-yellow-400 transition-colors">Emisoras</a>
-        <div class="submenu absolute left-0 mt-2 w-56 bg-[#232526] rounded-lg shadow-lg"
-             style="min-width:200px;">
+        <div class="absolute left-0 mt-2 w-44 bg-[#232526] rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50"
+             style="min-width:160px;">
           <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Radio EC</a>
           <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Mix EC</a>
           <a href="#emisoras" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Clasicos EC</a>
@@ -346,16 +336,16 @@
       </div>
       <div class="relative group inline-block">
         <a href="#locutores" class="hover:text-yellow-400 transition-colors">Locutores</a>
-        <div class="submenu absolute left-0 mt-2 w-56 bg-[#232526] rounded-lg shadow-lg"
-             style="min-width:200px;">
+        <div class="absolute left-0 mt-2 w-44 bg-[#232526] rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50"
+             style="min-width:160px;">
           <a href="#locutores" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Dario Castellanos</a>
           <a href="#locutores" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Andy Castellanos</a>
         </div>
       </div>
       <div class="relative group inline-block">
         <a href="#galeria" class="hover:text-yellow-400 transition-colors">Galería</a>
-        <div class="submenu absolute left-0 mt-2 w-56 bg-[#232526] rounded-lg shadow-lg"
-             style="min-width:200px;">
+        <div class="absolute left-0 mt-2 w-44 bg-[#232526] rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50"
+             style="min-width:160px;">
           <a href="#galeria" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Videos</a>
           <a href="#galeria" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Fotos</a>
         </div>
@@ -367,13 +357,40 @@
       <span></span>
       <span></span>
     </div>
-    <!-- Mobile nav -->
+    <!-- Mobile nav with submenus -->
     <nav class="mobile-nav" id="mobileNav" aria-label="Menú móvil">
-      <a href="#inicio" onclick="closeMobileNav()">Inicio</a>
-      <a href="#programacion" onclick="closeMobileNav()">Programación</a>
-      <a href="#emisoras" onclick="closeMobileNav()">Emisoras</a>
-      <a href="#locutores" onclick="closeMobileNav()">Locutores</a>
-      <a href="#galeria" onclick="closeMobileNav()">Galería</a>
+      <div>
+        <a href="#inicio" onclick="closeMobileNav()">Inicio</a>
+      </div>
+      <div>
+        <button type="button" class="w-full text-left font-semibold text-white py-2 px-0" onclick="toggleSubmenu('prog-sub')">Programación ▼</button>
+        <div id="prog-sub" style="display:none; margin-left:1rem;">
+          <a href="#programacion" onclick="closeMobileNav()" class="block py-1">Horarios</a>
+          <a href="#emisoras" onclick="closeMobileNav()" class="block py-1">Emisoras</a>
+        </div>
+      </div>
+      <div>
+        <button type="button" class="w-full text-left font-semibold text-white py-2 px-0" onclick="toggleSubmenu('emisoras-sub')">Emisoras ▼</button>
+        <div id="emisoras-sub" style="display:none; margin-left:1rem;">
+          <a href="#emisoras" onclick="closeMobileNav()" class="block py-1">DC Radio EC</a>
+          <a href="#emisoras" onclick="closeMobileNav()" class="block py-1">DC Mix EC</a>
+          <a href="#emisoras" onclick="closeMobileNav()" class="block py-1">DC Clasicos EC</a>
+        </div>
+      </div>
+      <div>
+        <button type="button" class="w-full text-left font-semibold text-white py-2 px-0" onclick="toggleSubmenu('locutores-sub')">Locutores ▼</button>
+        <div id="locutores-sub" style="display:none; margin-left:1rem;">
+          <a href="#locutores" onclick="closeMobileNav()" class="block py-1">Dario Castellanos</a>
+          <a href="#locutores" onclick="closeMobileNav()" class="block py-1">Andy Castellanos</a>
+        </div>
+      </div>
+      <div>
+        <button type="button" class="w-full text-left font-semibold text-white py-2 px-0" onclick="toggleSubmenu('galeria-sub')">Galería ▼</button>
+        <div id="galeria-sub" style="display:none; margin-left:1rem;">
+          <a href="#galeria" onclick="closeMobileNav()" class="block py-1">Videos</a>
+          <a href="#galeria" onclick="closeMobileNav()" class="block py-1">Fotos</a>
+        </div>
+      </div>
     </nav>
   </div>
 </header>
@@ -397,6 +414,14 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === "Escape") closeMobileNav();
   });
+  function toggleSubmenu(id) {
+    var el = document.getElementById(id);
+    if (el.style.display === "none" || el.style.display === "") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  }
 </script>
 
   <!-- HERO -->
@@ -960,8 +985,8 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
-<!-- PODCAST -->
-  <section id="podcast" class="section-gradient py-16 px-6 animate-fade-up">
+<!-- PODCAST 2-->
+  <section id="podcast2" class="section-gradient py-16 px-6 animate-fade-up">
     <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
         style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
       🎙️ Podcast
