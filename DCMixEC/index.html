@@ -426,5 +426,217 @@ function goBackToSection(event, sectionId) {
 }
 </script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  /* Botón flotante en esquina superior derecha */
+  #btn-pedir-cancion {
+    position: fixed;
+    top: 60px;
+    right: 30px;
+    background: linear-gradient(135deg, #7a6abf, #c1b4e6);
+    color: #23221c;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 22px;
+    box-shadow: 0 4px 15px rgba(106, 107, 191, 0.6);
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1.2px;
+    transition: all 0.3s ease;
+    z-index: 9999;
+  }
+  #btn-pedir-cancion:hover {
+    background: linear-gradient(135deg, #bdb4e6, #736abf);
+    box-shadow: 0 6px 20px rgba(106, 112, 191, 0.8);
+  }
+
+  /* Contenedor formulario, desliza desde arriba */
+  #form-container {
+    position: fixed;
+    top: 80px;
+    right: 30px;
+    width: 340px;
+    background: #1b182e;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(106, 141, 191, 0.5);
+    padding: 20px 24px;
+    font-family: 'Poppins', sans-serif;
+    color: #b4b4e6;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    z-index: 9998;
+  }
+  #form-container.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #form-container h3 {
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-align: center;
+    letter-spacing: 1.2px;
+  }
+
+  #form-container input,
+  #form-container textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #1c1c23;
+  }
+  #form-container input::placeholder,
+  #form-container textarea::placeholder {
+    color: #3b3a7a;
+  }
+  #form-container textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+
+  #form-container button[type="submit"] {
+    background: #6a6ebf;
+    color: #23221c;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    width: 100%;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: background 0.3s ease;
+  }
+  #form-container button[type="submit"]:hover {
+    background: #bbb4e6;
+  }
+
+  /* Adaptación móvil */
+  @media (max-width: 400px) {
+    #form-container {
+      width: 90vw;
+      right: 5vw;
+      top: 70px;
+      padding: 16px 20px;
+      border-radius: 12px;
+    }
+    #btn-pedir-cancion {
+      top: 60px;
+      right: 20px;
+      padding: 12px 18px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<!-- Botón flotante -->
+<button id="btn-pedir-cancion" aria-label="Pide tu canción">
+  🎵 Pide tu canción
+</button>
+
+<!-- Formulario desplegable -->
+<div id="form-container" aria-hidden="true">
+  <h3>🎶 Pide tu canción</h3>
+  <form id="formPedidoWhatsApp">
+    <input type="text" name="nombre" placeholder="Tu nombre" required autocomplete="off" />
+    <input type="text" name="cancion" placeholder="Nombre de la canción" required autocomplete="off" />
+    <input type="text" name="artista" placeholder="Artista" required autocomplete="off" />
+    <textarea name="mensaje" placeholder="Mensaje adicional (opcional)"></textarea>
+    <button type="submit">Enviar pedido</button>
+  </form>
+</div>
+
+<script>
+  const btn = document.getElementById('btn-pedir-cancion');
+  const formContainer = document.getElementById('form-container');
+  const form = document.getElementById('formPedidoWhatsApp');
+  const numeroWhatsApp = '593961480654'; // Tu número sin '+' ni espacios
+
+  btn.addEventListener('click', () => {
+    formContainer.classList.toggle('active');
+    const expanded = formContainer.classList.contains('active');
+    formContainer.setAttribute('aria-hidden', !expanded);
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const nombre = form.nombre.value.trim();
+    const cancion = form.cancion.value.trim();
+    const artista = form.artista.value.trim();
+    const mensaje = form.mensaje.value.trim();
+
+    // Aquí hacemos el texto con saltos de línea normales \n
+    let texto = `*_Pedido de canción_ DC Mix EC*\n`;
+    texto += `- *Nombre:* ${nombre}\n`;
+    texto += `- *Canción:* ${cancion}\n`;
+    texto += `- *Artista:* ${artista}\n`;
+    if (mensaje) texto += `- *Mensaje:*\n> ${mensaje}`;
+
+    // ¡Importante! Codificamos todo con encodeURIComponent para que los emojis y saltos funcionen bien
+    const textoCodificado = encodeURIComponent(texto);
+
+    // URL de WhatsApp sin '+', solo números
+    const url = `https://wa.me/${numeroWhatsApp}?text=${textoCodificado}`;
+
+    // Abrimos en nueva pestaña
+    window.open(url, '_blank');
+
+    // Limpiamos y ocultamos formulario
+    form.reset();
+    formContainer.classList.remove('active');
+    formContainer.setAttribute('aria-hidden', 'true');
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
