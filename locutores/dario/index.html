@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Darío Castellanos – Locutor Profesional & Creador</title>
+<style>
+  :root {
+    --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --color-bg: #0e1b2a; /* azul oscuro */
+    --color-primary: #2a4d69; /* azul serio */
+    --color-accent: #4b86b4; /* azul suave */
+    --color-text-light: #e8eef5; /* un poco más brillante para mejor lectura */
+    --color-text-muted: #a1b2c3;
+    --color-white-bone: #f9f6f1;
+    --shadow-glow: rgba(75, 134, 180, 0.4);
+  }
+
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+
+  body, html {
+    height: 100%;
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text-light);
+    overflow-x: hidden;
+  }
+
+  /* Canvas fondo partículas */
+  #bg-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    background: linear-gradient(135deg, #0b1223, #1f2a44);
+  }
+
+  /* Contenedor principal */
+  .container {
+    position: relative;
+    max-width: 900px;
+    margin: 3rem auto 4rem;
+    background: rgba(20, 34, 59, 0.92);
+    padding: 3rem 3.5rem;
+    border-radius: 18px;
+    box-shadow: 0 0 30px var(--shadow-glow);
+    backdrop-filter: blur(12px);
+    z-index: 10;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+header h1 {
+  font-size: 3.4rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--color-white-bone);  /* Cambié a blanco hueso para mejor contraste */
+  text-shadow: 0 0 2px rgba(249, 246, 241, 0.9); /* Sombra resplandor blanca */
+}
+
+  header h2 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin-top: 0.5rem;
+  }
+
+  section {
+    margin-bottom: 3rem;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  h3 {
+    color: var(--color-accent);
+    font-size: 1.9rem;
+    margin-bottom: 1.2rem;
+    border-left: 6px solid var(--color-primary);
+    padding-left: 1rem;
+    font-weight: 700;
+  }
+
+  p {
+    line-height: 1.75;
+    color: var(--color-text-light);
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 1.2rem;
+  }
+  ul li {
+    position: relative;
+    padding-left: 1.8rem;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    line-height: 1.5;
+  }
+  ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0.15rem;
+    color: var(--color-primary);
+    font-weight: 900;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  /* Nueva clase para presentación con imagen */
+  .presentacion-flex {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .presentacion-flex img {
+    max-width: 250px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px var(--shadow-glow);
+    flex-shrink: 0;
+  }
+  .presentacion-flex p {
+    flex: 1 1 300px;
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+  }
+
+  /* Contacto */
+  .contact {
+    background: var(--color-primary);
+    padding: 2rem 2.5rem;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 0 25px var(--color-accent);
+    margin-top: 1rem;
+  }
+  .contact h3 {
+    color: var(--color-white-bone);
+    margin-bottom: 1rem;
+  }
+  .contact p {
+    color: var(--color-white-bone);
+    font-size: 1.25rem;
+  }
+  .contact a {
+    color: var(--color-white-bone);
+    font-weight: 700;
+    font-size: 1.35rem;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  .contact a:hover,
+  .contact a:focus {
+    color: var(--color-text-light);
+    outline: none;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    padding-bottom: 1.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container {
+      margin: 2rem 1rem 3rem;
+      padding: 2rem 2rem;
+    }
+    header h1 {
+      font-size: 2.6rem;
+    }
+    header h2 {
+      font-size: 1.3rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+      padding-left: 0.7rem;
+      border-left-width: 4px;
+    }
+    p, ul li {
+      font-size: 1.1rem;
+    }
+    .contact {
+      padding: 1.5rem 1.8rem;
+    }
+    .contact p, .contact a {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+</head>
+<body>
+<!-- Botón flotante animado y estilizado -->
+<style>
+    .boton-flotante {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 0.6em;
+        background: linear-gradient(90deg, #0080ff 0%, #0043bf 100%);
+        color: #111;
+        font-size: 1.1em;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 600;
+        padding: 0.9em 2em;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 18px #0d00ff55, 0 1.5px 6px #ffd70022;
+        letter-spacing: 1.3px;
+        text-shadow: 0 1px 4px #fff8;
+        transition: all 0.35s ease;
+        animation: fadeInSlide 0.8s ease forwards;
+        opacity: 0;
+    }
+
+    .boton-flotante svg {
+        width: 1.2em;
+        height: 1.2em;
+        transition: transform 0.35s ease;
+        fill: currentColor;
+    }
+
+    .boton-flotante:hover {
+        transform: scale(1.07);
+        box-shadow: 0 10px 28px #0004ffaa;
+        background: linear-gradient(90deg, #0019bf 0%, #2b00ff 100%);
+        color: #fff;
+        text-shadow: 0 1px 6px #0003;
+    }
+
+    .boton-flotante:hover svg {
+        transform: translateX(-6px);
+    }
+
+    @keyframes fadeInSlide {
+        from {
+            opacity: 0;
+            transform: translateY(-25px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<button class="boton-flotante" onclick="window.history.back()">
+    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.707 14.707a1 1 0 01-1.414 0L3.586 10l4.707-4.707a1 1 0 011.414 1.414L6.414 9H17a1 1 0 110 2H6.414l3.293 3.293a1 1 0 010 1.414z"/>
+    </svg>
+    <span>Volver atrás</span>
+</button>
+<!-- FIN Botón flotante animado y estilizado -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+<div class="container" role="main" aria-label="Perfil profesional de Darío Castellanos">
+  <header>
+    <h1>Darío Castellanos</h1>
+    <h2>Locutor Profesional & Creador – Owner RDCR Sound</h2>
+  </header>
+
+  <section aria-labelledby="presentacion">
+    <h3 id="presentacion">Presentación</h3>
+    <div class="presentacion-flex">
+      <img src="/img_radio/Dario.jpeg" alt="Foto de Darío Castellanos" />
+      <p>
+        Soy Darío Castellanos, un locutor con más de 10 años de experiencia en radio, podcasting y producción de contenido audiovisual. Como creador y propietario de <strong>RDCR Sound</strong>, me especializo en brindar voces profesionales, dinámicas y con impacto para marcas, proyectos y medios digitales.
+      </p>
+    </div>
+  </section>
+
+  <section aria-labelledby="logros">
+    <h3 id="logros">Logros destacados</h3>
+    <ul>
+      <li>Conducción de más de 300 programas de radio y podcasts en vivo y grabados.</li>
+      <li>Creación y producción de contenido para reconocidas marcas internacionales.</li>
+      <li>Premio Nacional de Locución en 2019 por excelencia en medios digitales.</li>
+      <li>Colaborador en campañas publicitarias con más de 2 millones de reproducciones.</li>
+      <li>Formación y coaching para nuevos talentos en locución y producción sonora.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="servicios">
+    <h3 id="servicios">Servicios que ofrezco</h3>
+    <ul>
+      <li>Locución profesional para radio, TV y publicidad.</li>
+      <li>Producción y edición de podcasts.</li>
+      <li>Asesoría creativa y coaching para presentadores y narradores.</li>
+      <li>Diseño de identidad sonora para marcas.</li>
+      <li>Consultoría en estrategia de contenidos audiovisuales.</li>
+    </ul>
+  </section>
+
+  <section class="contact" aria-label="Contacto">
+    <h3>Contacto</h3>
+    <p>¿Quieres trabajar conmigo? Escríbeme:</p>
+    <p><a href="mailto:contacto@rdcrsound.com" aria-label="Enviar email a contacto@rdcrsound.com">contacto@rdcrsound.com</a></p>
+  </section>
+</div>
+
+<footer>
+  <p>© 2025 Darío Castellanos — RDCR Sound</p>
+</footer>
+
+<script>
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let width, height;
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * devicePixelRatio;
+    canvas.height = height * devicePixelRatio;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.15;
+      this.vy = (Math.random() - 0.5) * 0.15;
+      this.size = 1 + Math.random() * 1.5;
+      this.alpha = 0.15 + Math.random() * 0.25;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
+    draw(ctx) {
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(249, 246, 241, ${this.alpha})`;
+      ctx.shadowColor = `rgba(249, 246, 241, ${this.alpha * 0.5})`;
+      ctx.shadowBlur = 4;
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  const particles = [];
+  const PARTICLE_COUNT = 100; // menos para menor distracción
+  for(let i=0; i<PARTICLE_COUNT; i++){
+    particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    for(let i=0; i<PARTICLE_COUNT; i++){
+      let p1 = particles[i];
+      p1.update();
+      p1.draw(ctx);
+
+      for(let j=i+1; j<PARTICLE_COUNT; j++){
+        let p2 = particles[j];
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 85){
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(249, 246, 241, ${0.07 * (1 - dist/85)})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>
+
+</body>
+</html>
