@@ -1677,80 +1677,236 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 </script>
+
+
 <!-- Botón flotante de WhatsApp -->
-<a href="https://api.whatsapp.com/send/?phone=593961480654&text=Bienvenido+a+RDCR+LA+PRODUCTORA,+¿en+qué+puedo+ayudarte%3F&type=phone_number&app_absent=0"
-   rel="noopener" id="whatsapp-float" aria-label="Contáctanos por WhatsApp">
-  <div class="icon-bounce">
+<a href="#" 
+   id="whatsapp-float" 
+   aria-label="Contáctanos por WhatsApp" 
+   role="button" 
+   aria-haspopup="dialog" 
+   aria-expanded="false"
+>
+  <div class="icon-bounce" aria-hidden="true">
     <!-- Ícono de WhatsApp (vector limpio) -->
-    <svg xmlns="https://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" focusable="false" aria-hidden="true">
       <path d="M20.5 3.5A11.91 11.91 0 0 0 12 0C5.4 0 .1 5.4 0 12a11.89 11.89 0 0 0 1.7 6.1L0 24l6-1.6A11.9 11.9 0 0 0 12 24c6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.5-8.5zM12 22c-1.8 0-3.6-.5-5.2-1.4l-.4-.2-3.6 1 1.1-3.4-.3-.5A9.94 9.94 0 0 1 2 12c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10zm5.2-7.5c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2c-.2.3-.8 1-1 1.2-.2.2-.4.3-.7.1-1.3-.6-2.3-1.6-3.2-2.8-.2-.3-.2-.6.1-.8.2-.3.5-.6.7-.9.2-.2.2-.4.1-.6s-.8-2.1-1.1-2.8c-.3-.6-.5-.5-.8-.5h-.6c-.3 0-.6.1-.9.4-1.2 1.2-1.5 3.1-.4 4.9 1.7 2.8 4.1 4.7 7.2 5.3.5.1.9 0 1.2-.3l1-1c.3-.3.4-.5.6-.4s1.6.7 1.9.8c.3.1.5.2.8-.1s1-1.3 1-1.6c.1-.4 0-.6-.2-.7z"/>
     </svg>
   </div>
   <span>Contáctanos</span>
 </a>
 
+<!-- Formulario desplegable debajo del botón -->
+<div id="whatsapp-form-container" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="whatsapp-form-title" style="display:none;">
+  <form id="whatsapp-form" novalidate>
+    <h2 id="whatsapp-form-title">RDCR SOUND</h2>
+    <label for="mensaje-whatsapp">¿En qué puedo ayudarte?</label>
+    <textarea id="mensaje-whatsapp" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+
 <style>
-#whatsapp-float {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.75rem 1.3rem;
-  font-weight: 600;
-  font-size: 1.05rem;
-  font-family: 'Poppins', Arial, sans-serif;
-  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-  color: white;
-  text-decoration: none;
-  border-radius: 2rem;
-  box-shadow: 0 6px 24px rgba(18, 140, 126, 0.4);
-  transition: all 0.3s ease;
-  animation: floatInUp 0.8s ease-out, pulseGlow 2.8s infinite;
-}
-
-#whatsapp-float:hover {
-  transform: translateY(-4px) scale(1.05);
-  background: linear-gradient(135deg, #128c7e 0%, #25d366 100%);
-  box-shadow: 0 10px 30px rgba(18, 140, 126, 0.6);
-}
-
-.icon-bounce {
-  animation: bounceIcon 2.5s infinite ease-in-out;
-}
-
-#whatsapp-float span {
-  white-space: nowrap;
-}
-
-@media (max-width: 600px) {
+  /* Botón flotante */
   #whatsapp-float {
-    padding: 0.75rem;
-    border-radius: 50%;
-    font-size: 0;
-    gap: 0;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.75rem 1.3rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 2rem;
+    box-shadow: 0 6px 24px rgba(18, 140, 126, 0.4);
+    transition: all 0.3s ease;
+    animation: floatInUp 0.8s ease-out, pulseGlow 2.8s infinite;
+    cursor: pointer;
+    user-select: none;
   }
+
+  #whatsapp-float:hover,
+  #whatsapp-float:focus {
+    outline: none;
+    transform: translateY(-4px) scale(1.05);
+    background: linear-gradient(135deg, #128c7e 0%, #25d366 100%);
+    box-shadow: 0 10px 30px rgba(18, 140, 126, 0.6);
+  }
+
+  .icon-bounce {
+    animation: bounceIcon 2.5s infinite ease-in-out;
+  }
+
   #whatsapp-float span {
-    display: none;
+    white-space: nowrap;
   }
-}
 
-@keyframes floatInUp {
-  0% { transform: translateY(30px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
+  /* Formulario desplegable */
+  #whatsapp-form-container {
+    position: fixed;
+    bottom: 70px;
+    right: 1.5rem;
+    z-index: 10000;
+    max-width: 320px;
+    width: 90vw;
+    background: #25d366;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    font-family: Arial, sans-serif;
+    color: white;
+  }
 
-@keyframes bounceIcon {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
+  #whatsapp-form {
+    display: flex;
+    flex-direction: column;
+  }
 
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0px rgba(37, 211, 102, 0.6); }
-  50% { box-shadow: 0 0 15px rgba(37, 211, 102, 0.9); }
-}
+  #whatsapp-form h2 {
+    margin: 0 0 12px 0;
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+
+  #whatsapp-form label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 1rem;
+  }
+
+  #mensaje-whatsapp {
+    resize: vertical;
+    min-height: 80px;
+    border-radius: 8px;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    color: #0a3d0d;
+    background: #e0f7e9;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  }
+
+  #mensaje-whatsapp::placeholder {
+    color: #75b885;
+  }
+
+  #mensaje-whatsapp:focus {
+    outline: 2px solid #128c7e;
+    background: #d0f0db;
+  }
+
+  #whatsapp-form button {
+    background: #128c7e;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 700;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #whatsapp-form button:hover,
+  #whatsapp-form button:focus {
+    background: #0f6e63;
+    outline: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    #whatsapp-float {
+      padding: 0.75rem;
+      border-radius: 50%;
+      font-size: 0;
+      gap: 0;
+    }
+    #whatsapp-float span {
+      display: none;
+    }
+    #whatsapp-form-container {
+      right: 1rem;
+      bottom: 65px;
+      width: 90vw;
+      max-width: none;
+    }
+  }
+
+  @keyframes floatInUp {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes bounceIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0px rgba(37, 211, 102, 0.6); }
+    50% { box-shadow: 0 0 15px rgba(37, 211, 102, 0.9); }
+  }
 </style>
 
+<script>
+  const btnFloat = document.getElementById('whatsapp-float');
+  const formContainer = document.getElementById('whatsapp-form-container');
+  const form = document.getElementById('whatsapp-form');
+  const textarea = document.getElementById('mensaje-whatsapp');
+  const phone = '593961480654';
 
+  // Abrir/ocultar formulario al hacer click en el botón flotante
+  btnFloat.addEventListener('click', (e) => {
+    e.preventDefault();
+    const expanded = btnFloat.getAttribute('aria-expanded') === 'true';
+    if (expanded) {
+      formContainer.style.display = 'none';
+      btnFloat.setAttribute('aria-expanded', 'false');
+    } else {
+      formContainer.style.display = 'block';
+      btnFloat.setAttribute('aria-expanded', 'true');
+      textarea.focus();
+    }
+  });
+
+  // Enviar mensaje a WhatsApp al enviar formulario
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const mensaje = textarea.value.trim();
+    if (!mensaje) {
+      alert('Por favor, escribe un mensaje.');
+      textarea.focus();
+      return;
+    }
+    // Mensaje con formato: *_RDCR SOUND_* \n mensaje
+    const textoFormateado = `*_RDCR SOUND_*\n${mensaje}`;
+    const textoCodificado = encodeURIComponent(textoFormateado);
+    const url = `https://wa.me/${phone}?text=${textoCodificado}`;
+    window.open(url, '_blank');
+
+    // Cerrar y resetear formulario
+    form.reset();
+    formContainer.style.display = 'none';
+    btnFloat.setAttribute('aria-expanded', 'false');
+  });
+
+  // Cerrar formulario si haces clic fuera
+  document.addEventListener('click', (e) => {
+    if (!btnFloat.contains(e.target) && !formContainer.contains(e.target)) {
+      formContainer.style.display = 'none';
+      btnFloat.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Evitar cerrar si clic dentro del formulario
+  formContainer.addEventListener('click', e => e.stopPropagation());
+</script>
