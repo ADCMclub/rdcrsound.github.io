@@ -1754,4 +1754,55 @@ document.addEventListener("DOMContentLoaded", function() {
 </style>
 
 
+<!-- BOTÓN para instalar como Web App en iOS -->
+<button id="btnInstalar" class="group rounded-xl bg-black text-white px-6 py-3 hover:scale-110 transition-transform duration-300 animate-fade flex items-center justify-center">
+  📱 Instalar esta app en tu iPhone
+</button>
 
+<!-- GUÍA ANIMADA para agregar a pantalla de inicio -->
+<div id="instalacionGuia" style="display:none; margin-top: 20px;" class="text-center">
+  <div class="emoji">⬇️</div>
+  <div class="instruction">Presiona el botón <strong>“Compartir”</strong> (el icono de caja con flecha)</div>
+  <span class="arrow">⬇️</span>
+  <div class="instruction">Elige <strong>“Agregar a pantalla de inicio”</strong></div>
+  <span class="arrow">⬇️</span>
+  <div class="instruction">¡Listo! La app se instalará como una Web App.</div>
+</div>
+
+<!-- ESTILOS -->
+<style>
+.arrow {
+  font-size: 2rem;
+  animation: bounce 1s infinite;
+  display: block;
+  margin: 10px 0;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.emoji {
+  font-size: 3rem;
+}
+.instruction {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+</style>
+
+<!-- SCRIPT para mostrar solo en Safari iOS -->
+<script>
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+  document.getElementById("btnInstalar").addEventListener("click", function(e) {
+    if (isIOS && isSafari) {
+      e.preventDefault(); // Previene comportamiento por defecto si se quisiera
+      const guia = document.getElementById("instalacionGuia");
+      guia.style.display = "block";
+      guia.scrollIntoView({ behavior: "smooth" });
+    } else {
+      alert("Esta función solo está disponible en iPhone usando Safari.");
+    }
+  });
+</script>
