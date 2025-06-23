@@ -1699,7 +1699,15 @@ document.addEventListener("DOMContentLoaded", function() {
 <!-- Formulario desplegable debajo del botón -->
 <div id="whatsapp-form-container" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="whatsapp-form-title" style="display:none;">
   <form id="whatsapp-form" novalidate>
-    <h2 id="whatsapp-form-title">RDCR SOUND</h2>
+    <div class="form-header">
+      <h2 id="whatsapp-form-title">RDCR SOUND</h2>
+      <button type="button" id="minimize-btn" aria-label="Minimizar formulario">
+        <!-- Flecha hacia abajo para minimizar -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 10l5 5 5-5H7z"/>
+        </svg>
+      </button>
+    </div>
     <label for="mensaje-whatsapp">¿En qué puedo ayudarte?</label>
     <textarea id="mensaje-whatsapp" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
     <button type="submit">Enviar</button>
@@ -1768,10 +1776,34 @@ document.addEventListener("DOMContentLoaded", function() {
     flex-direction: column;
   }
 
+  .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
   #whatsapp-form h2 {
-    margin: 0 0 12px 0;
+    margin: 0;
     font-weight: 700;
     font-size: 1.3rem;
+  }
+
+  #minimize-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  #minimize-btn:hover,
+  #minimize-btn:focus {
+    outline: none;
+    transform: scale(1.2);
   }
 
   #whatsapp-form label {
@@ -1804,7 +1836,7 @@ document.addEventListener("DOMContentLoaded", function() {
     background: #d0f0db;
   }
 
-  #whatsapp-form button {
+  #whatsapp-form button[type="submit"] {
     background: #128c7e;
     border: none;
     border-radius: 8px;
@@ -1816,8 +1848,8 @@ document.addEventListener("DOMContentLoaded", function() {
     transition: background-color 0.3s ease;
   }
 
-  #whatsapp-form button:hover,
-  #whatsapp-form button:focus {
+  #whatsapp-form button[type="submit"]:hover,
+  #whatsapp-form button[type="submit"]:focus {
     background: #0f6e63;
     outline: none;
   }
@@ -1863,6 +1895,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById('whatsapp-form');
   const textarea = document.getElementById('mensaje-whatsapp');
   const phone = '593961480654';
+  const minimizeBtn = document.getElementById('minimize-btn');
 
   // Abrir/ocultar formulario al hacer click en el botón flotante
   btnFloat.addEventListener('click', (e) => {
@@ -1876,6 +1909,12 @@ document.addEventListener("DOMContentLoaded", function() {
       btnFloat.setAttribute('aria-expanded', 'true');
       textarea.focus();
     }
+  });
+
+  // Minimizar formulario con el botón de flecha
+  minimizeBtn.addEventListener('click', () => {
+    formContainer.style.display = 'none';
+    btnFloat.setAttribute('aria-expanded', 'false');
   });
 
   // Enviar mensaje a WhatsApp al enviar formulario
@@ -1899,9 +1938,9 @@ document.addEventListener("DOMContentLoaded", function() {
     btnFloat.setAttribute('aria-expanded', 'false');
   });
 
-  // Cerrar formulario si haces clic fuera
+  // Cerrar formulario si haces clic fuera (solo si está visible)
   document.addEventListener('click', (e) => {
-    if (!btnFloat.contains(e.target) && !formContainer.contains(e.target)) {
+    if (formContainer.style.display === 'block' && !btnFloat.contains(e.target) && !formContainer.contains(e.target)) {
       formContainer.style.display = 'none';
       btnFloat.setAttribute('aria-expanded', 'false');
     }
