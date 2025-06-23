@@ -1754,55 +1754,117 @@ document.addEventListener("DOMContentLoaded", function() {
 </style>
 
 
-<!-- BOTÓN para instalar como Web App en iOS -->
-<button id="btnInstalar" class="group rounded-xl bg-black text-white px-6 py-3 hover:scale-110 transition-transform duration-300 animate-fade flex items-center justify-center">
-  📱 Instalar esta app en tu iPhone
+<!-- BOTÓN con logo oficial App Store -->
+<button id="btnInstalar" class="group rounded-xl hover:scale-110 transition-transform duration-300 flex items-center justify-center bg-transparent border-none cursor-pointer p-0">
+  <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+       alt="Instalar en iOS"
+       class="w-40 md:w-48 shadow-lg rounded-xl">
 </button>
 
-<!-- GUÍA ANIMADA para agregar a pantalla de inicio -->
-<div id="instalacionGuia" style="display:none; margin-top: 20px;" class="text-center">
-  <div class="emoji">⬇️</div>
-  <div class="instruction">Presiona el botón <strong>“Compartir”</strong> (el icono de caja con flecha)</div>
-  <span class="arrow">⬇️</span>
-  <div class="instruction">Elige <strong>“Agregar a pantalla de inicio”</strong></div>
-  <span class="arrow">⬇️</span>
-  <div class="instruction">¡Listo! La app se instalará como una Web App.</div>
+<!-- MODAL OVERLAY para guía paso a paso -->
+<div id="overlayGuia" style="display:none;">
+  <div id="guiaPaso" class="modal-content">
+    <div class="emoji">⬇️</div>
+    <div class="instruction"></div>
+    <button id="btnSiguiente" class="btn-next">Siguiente ➡️</button>
+  </div>
 </div>
 
-<!-- ESTILOS -->
 <style>
-.arrow {
-  font-size: 2rem;
-  animation: bounce 1s infinite;
-  display: block;
-  margin: 10px 0;
-}
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.emoji {
-  font-size: 3rem;
-}
-.instruction {
-  font-size: 1.1rem;
-  margin-top: 10px;
-}
+  /* Overlay fondo semi-transparente */
+  #overlayGuia {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  /* Contenedor modal */
+  .modal-content {
+    background: white;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+  .arrow {
+    font-size: 3rem;
+    animation: bounce 1s infinite;
+    margin: 10px 0;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  .emoji {
+    font-size: 4rem;
+  }
+  .instruction {
+    font-size: 1.3rem;
+    margin: 15px 0 25px;
+  }
+  .btn-next {
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    background: #007aff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .btn-next:hover {
+    background: #005bb5;
+  }
 </style>
 
-<!-- SCRIPT para mostrar solo en Safari iOS -->
 <script>
+  const steps = [
+    "Presiona el botón <strong>“Compartir”</strong> (el icono de caja con flecha).",
+    "Elige <strong>“Agregar a pantalla de inicio”</strong>.",
+    "¡Listo! La app se instalará como una Web App sin navegador."
+  ];
+  
+  let currentStep = 0;
+
   const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-  document.getElementById("btnInstalar").addEventListener("click", function(e) {
+  const btnInstalar = document.getElementById("btnInstalar");
+  const overlay = document.getElementById("overlayGuia");
+  const instructionDiv = overlay.querySelector(".instruction");
+  const btnSiguiente = document.getElementById("btnSiguiente");
+
+  btnInstalar.addEventListener("click", () => {
     if (isIOS && isSafari) {
-      e.preventDefault(); // Previene comportamiento por defecto si se quisiera
-      const guia = document.getElementById("instalacionGuia");
-      guia.style.display = "block";
-      guia.scrollIntoView({ behavior: "smooth" });
+      currentStep = 0;
+      instructionDiv.innerHTML = steps[currentStep];
+      overlay.style.display = "flex";
     } else {
       alert("Esta función solo está disponible en iPhone usando Safari.");
     }
+  });
+
+  btnSiguiente.addEventListener("click", () => {
+    currentStep++;
+    if (currentStep < steps.length) {
+      instructionDiv.innerHTML = steps[currentStep];
+    } else {
+      overlay.style.display = "none";
+    }
+  });
+
+  // Opcional: cerrar con click fuera o tecla ESC
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) overlay.style.display = "none";
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") overlay.style.display = "none";
   });
 </script>
