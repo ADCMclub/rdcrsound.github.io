@@ -957,165 +957,179 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
   </section>
 
-  <!-- PLAYLIST Galeria -->
+  <!-- PLAYLIST Galeria Mejorada -->
   <section id="galeria" class="section-gradient py-16 px-6 animate-fade-up">
-  <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
-      style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
-    📸 Playlist
-  </h3>
-  <div class="relative flex flex-col items-center">
-    <div class="flex items-center justify-center gap-2 w-full max-w-4xl mx-auto">
-      <div id="galeria-carousel" class="flex gap-6 overflow-x-auto w-full px-2" style="scroll-behavior:smooth;">
-        <!-- Todos los iframes se renderizan horizontalmente -->
-        <div class="galeria-card" data-idx="0">
-          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5DQE2sxWqey5Ce0WlLvs71?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
+        style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
+      🎵 Playlist
+    </h3>
+    <div class="relative flex flex-col items-center">
+      <div class="flex items-center justify-center gap-2 w-full max-w-4xl mx-auto">
+        <div id="galeria-carousel" class="flex gap-6 overflow-x-auto w-full px-2" style="scroll-behavior:smooth;">
+          <!-- Renderizado dinámico por JS -->
         </div>
       </div>
+      <div id="galeria-indicators" class="flex justify-center mt-4 gap-2"></div>
+      <div id="galeria-arrows" class="flex justify-center items-center gap-6 mt-6"></div>
     </div>
-    <div id="galeria-indicators" class="flex justify-center mt-4 gap-2"></div>
-  </div>
-</section>
-<style>
-/* ...existing code... */
-#galeria-carousel {
-  min-height: 220px;
-  position: relative;
-  /* horizontal scroll */
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  /* hide scrollbar for aesthetics */
-  scrollbar-width: none;
-}
-#galeria-carousel::-webkit-scrollbar {
-  display: none;
-}
-.galeria-card {
-  flex: 0 0 auto;
-  width: 460px;
-  max-width: 90vw;
-  margin-right: 0.5rem;
-  margin-left: 0.5rem;
-  background: #fffbe6cc;
-  border-radius: 1.25rem;
-  box-shadow: 0 2px 12px #bfa76a22;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: box-shadow 0.3s;
-  /* highlight effect for center */
-  border: 3px solid transparent;
-}
-.galeria-card.active {
-  box-shadow: 0 8px 32px #fde04799, 0 0 0 6px #bfa76a33;
-  border-color: #fde047;
-  background: #fff;
-}
-#galeria-indicators button {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #bfa76a55;
-  border: none;
-  margin: 0 2px;
-  transition: background 0.2s;
-  cursor: pointer;
-}
-#galeria-indicators button.active {
-  background: #fde047;
-  box-shadow: 0 0 0 2px #bfa76a55;
-}
-@media (max-width: 600px) {
-  #galeria-carousel {
-    min-height: 120px;
-  }
-  .galeria-card {
-    width: 220px !important;
-    max-width: 95vw !important;
-  }
-  .galeria-card iframe {
-    width: 220px !important;
-    height: 120px !important;
-  }
-}
-</style>
-<script>
-// Galeria: solo manual, con flechas amigables y sin auto-cambio
-const galeriaCount = 3;
-let galeriaCenter = 0;
-
-function updateGaleriaActive(centerIdx, scroll = true) {
-  const cards = document.querySelectorAll('#galeria-carousel .galeria-card');
-  cards.forEach((card, idx) => {
-    if (idx === centerIdx) card.classList.add('active');
-    else card.classList.remove('active');
-  });
-  // Solo hacer scroll si fue por acción del usuario
-  if (scroll) {
-    const active = cards[centerIdx];
-    if (active) {
-      const carousel = document.getElementById('galeria-carousel');
-      const scrollLeft = active.offsetLeft - (carousel.clientWidth / 2) + (active.clientWidth / 2);
-      carousel.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+  </section>
+  <style>
+    #galeria-carousel {
+      min-height: 220px;
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
     }
-  }
-}
+    #galeria-carousel::-webkit-scrollbar { display: none; }
+    .galeria-card {
+      flex: 0 0 auto;
+      width: 460px;
+      max-width: 90vw;
+      margin: 0 0.5rem;
+      background: #fffbe6cc;
+      border-radius: 1.25rem;
+      box-shadow: 0 2px 12px #bfa76a22;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.3s, border-color 0.3s, background 0.3s;
+      border: 3px solid transparent;
+    }
+    .galeria-card.active {
+      box-shadow: 0 8px 32px #fde04799, 0 0 0 6px #bfa76a33;
+      border-color: #fde047;
+      background: #fff;
+    }
+    #galeria-indicators button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #bfa76a55;
+      border: none;
+      margin: 0 2px;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    #galeria-indicators button.active {
+      background: #fde047;
+      box-shadow: 0 0 0 2px #bfa76a55;
+    }
+    .galeria-arrow-btn {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: transform 0.18s;
+      padding: 0.2rem;
+      border-radius: 50%;
+    }
+    .galeria-arrow-btn:hover, .galeria-arrow-btn:focus {
+      transform: scale(1.13);
+      box-shadow: 0 0 0 4px #fde04755;
+      background: #fffbe6cc;
+    }
+    #galeria-arrows svg {
+      display: block;
+      filter: drop-shadow(0 2px 8px #bfa76a33);
+    }
+    @media (max-width: 600px) {
+      #galeria-carousel { min-height: 120px; }
+      .galeria-card { width: 220px !important; max-width: 95vw !important; }
+      .galeria-card iframe { width: 220px !important; height: 120px !important; }
+    }
+  </style>
+  <script>
+    // --- PLAYLISTS: Puedes agregar/quitar aquí tus playlists de Spotify ---
+    const galeriaPlaylists = [
+      {
+        src: "https://open.spotify.com/embed/playlist/5DQE2sxWqey5Ce0WlLvs71?utm_source=generator",
+        title: "Salsa Hits RDCR"
+      },
+      {
+        src: "https://open.spotify.com/embed/playlist/37i9dQZF1DXbITWG1ZJKYt?utm_source=generator",
+        title: "Éxitos Latinos"
+      },
+      {
+        src: "https://open.spotify.com/embed/playlist/37i9dQZF1DX7Y7BqFok9IQ?utm_source=generator",
+        title: "Lo Mejor de los 90"
+      }
+    ];
 
-function renderGaleriaIndicators(centerIdx) {
-  const indicators = document.getElementById('galeria-indicators');
-  indicators.innerHTML = Array.from({length: galeriaCount}).map((_, idx) =>
-    `<button class="${idx === centerIdx ? 'active' : ''}" aria-label="Ir a video ${idx+1}"></button>`
-  ).join('');
-  Array.from(indicators.children).forEach((btn, idx) => {
-    btn.onclick = () => {
-      galeriaCenter = idx;
-      updateGaleriaActive(galeriaCenter, true);
+    let galeriaCenter = 0;
+
+    function renderGaleria() {
+      const carousel = document.getElementById('galeria-carousel');
+      carousel.innerHTML = galeriaPlaylists.map((pl, idx) => `
+        <div class="galeria-card${idx === galeriaCenter ? ' active' : ''}" data-idx="${idx}">
+          <iframe style="border-radius:12px" src="${pl.src}" width="100%" height="380" frameBorder="0" allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="${pl.title}"></iframe>
+          <div class="text-center mt-2 font-semibold text-[#bfa76a]">${pl.title}</div>
+        </div>
+      `).join('');
+    }
+
+    function updateGaleriaActive(centerIdx, scroll = true) {
+      galeriaCenter = centerIdx;
+      const cards = document.querySelectorAll('#galeria-carousel .galeria-card');
+      cards.forEach((card, idx) => {
+        if (idx === centerIdx) card.classList.add('active');
+        else card.classList.remove('active');
+      });
+      if (scroll) {
+        const active = cards[centerIdx];
+        if (active) {
+          const carousel = document.getElementById('galeria-carousel');
+          const scrollLeft = active.offsetLeft - (carousel.clientWidth / 2) + (active.clientWidth / 2);
+          carousel.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+        }
+      }
+    }
+
+    function renderGaleriaIndicators(centerIdx) {
+      const indicators = document.getElementById('galeria-indicators');
+      indicators.innerHTML = galeriaPlaylists.map((_, idx) =>
+        `<button class="${idx === centerIdx ? 'active' : ''}" aria-label="Ir a playlist ${idx+1}"></button>`
+      ).join('');
+      Array.from(indicators.children).forEach((btn, idx) => {
+        btn.onclick = () => {
+          updateGaleriaActive(idx, true);
+          renderGaleriaIndicators(idx);
+        };
+      });
+    }
+
+    function renderGaleriaArrows() {
+      const arrows = document.getElementById('galeria-arrows');
+      arrows.innerHTML = `
+        <button id="galeria-prev" aria-label="Anterior playlist" class="galeria-arrow-btn">
+          <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#fde047"/><path d="M22 26L14 18L22 10" stroke="#bfa76a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="galeria-next" aria-label="Siguiente playlist" class="galeria-arrow-btn">
+          <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#fde047"/><path d="M14 26L22 18L14 10" stroke="#bfa76a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      `;
+      document.getElementById('galeria-prev').onclick = () => {
+        const idx = (galeriaCenter - 1 + galeriaPlaylists.length) % galeriaPlaylists.length;
+        updateGaleriaActive(idx, true);
+        renderGaleriaIndicators(idx);
+      };
+      document.getElementById('galeria-next').onclick = () => {
+        const idx = (galeriaCenter + 1) % galeriaPlaylists.length;
+        updateGaleriaActive(idx, true);
+        renderGaleriaIndicators(idx);
+      };
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      renderGaleria();
+      updateGaleriaActive(galeriaCenter, false);
       renderGaleriaIndicators(galeriaCenter);
-    };
-  });
-}
-
-// Flechas amigables para navegar
-function renderGaleriaArrows() {
-  let arrows = document.getElementById('galeria-arrows');
-  if (!arrows) {
-    arrows = document.createElement('div');
-    arrows.id = 'galeria-arrows';
-    arrows.style.display = 'flex';
-    arrows.style.justifyContent = 'center';
-    arrows.style.alignItems = 'center';
-    arrows.style.gap = '1.5rem';
-    arrows.style.margin = '1.5rem 0 0 0';
-    const parent = document.querySelector('#galeria .relative.flex.flex-col.items-center');
-    parent.appendChild(arrows);
-  }
-  arrows.innerHTML = `
-    <button id="galeria-prev" aria-label="Anterior video" class="galeria-arrow-btn">
-      <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#fde047"/><path d="M22 26L14 18L22 10" stroke="#bfa76a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <button id="galeria-next" aria-label="Siguiente video" class="galeria-arrow-btn">
-      <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#fde047"/><path d="M14 26L22 18L14 10" stroke="#bfa76a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  `;
-  document.getElementById('galeria-prev').onclick = () => {
-    galeriaCenter = (galeriaCenter - 1 + galeriaCount) % galeriaCount;
-    updateGaleriaActive(galeriaCenter, true);
-    renderGaleriaIndicators(galeriaCenter);
-  };
-  document.getElementById('galeria-next').onclick = () => {
-    galeriaCenter = (galeriaCenter + 1) % galeriaCount;
-    updateGaleriaActive(galeriaCenter, true);
-    renderGaleriaIndicators(galeriaCenter);
-  };
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  updateGaleriaActive(galeriaCenter, false);
-  renderGaleriaIndicators(galeriaCenter);
-  renderGaleriaArrows();
-});
-</script>
+      renderGaleriaArrows();
+    });
+  </script>
 <style>
 /* ...existing code... */
 .galeria-arrow-btn {
