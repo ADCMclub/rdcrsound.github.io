@@ -446,11 +446,12 @@
       <h1
         class="text-3xl md:text-4xl font-extrabold tracking-wide select-none"
         style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-          background: linear-gradient(90deg, #fde047 10%, #bfa76a 50%, #2d2d2d 90%);
+          background: linear-gradient(90deg, #e6d9b4 0%, #bfa76a 50%, #f6e27a 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          filter: drop-shadow(0 0 10px rgba(189,148,52,0.95));"
+          color: transparent;
+          filter: drop-shadow(0 6px 20px rgba(0,0,0,0.6)), drop-shadow(0 0 12px rgba(191,167,106,0.45));"
       >
         RDCR Sound
       </h1>
@@ -656,7 +657,7 @@
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          text-fill-color: transparent;
+          color: transparent;
           letter-spacing: 2px;
         "
       >
@@ -916,7 +917,7 @@ document.addEventListener("DOMContentLoaded", function() {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          text-fill-color: transparent;
+          color: transparent;
           filter: none;
         ">
       🎙 Locutores
@@ -947,6 +948,12 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="galeria-card" data-idx="0">
           <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5DQE2sxWqey5Ce0WlLvs71?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
+         <div class="galeria-card" data-idx="0">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/playlist/5fEt5ufSaf8MD7uXWcJTr4?si=Or5FxeidTEmIKQ8bWoEgdg" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+         <div class="galeria-card" data-idx="0">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/playlist/1Cx8BdskSsNIBvLIrNivz3?si=Dvv2AdKrQByibLBcIIgyDA&pi=Bkpe_poFSMebW" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
       </div>
     </div>
     <div id="galeria-indicators" class="flex justify-center mt-4 gap-2"></div>
@@ -955,165 +962,123 @@ document.addEventListener("DOMContentLoaded", function() {
 <style>
 /* ...existing code... */
 #galeria-carousel {
-  min-height: 220px;
-  position: relative;
-  /* horizontal scroll */
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  /* hide scrollbar for aesthetics */
-  scrollbar-width: none;
-}
-#galeria-carousel::-webkit-scrollbar {
-  display: none;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 20px;
+  padding-bottom: 10px;
 }
 .galeria-card {
-  flex: 0 0 auto;
-  width: 460px;
-  max-width: 90vw;
-  margin-right: 0.5rem;
-  margin-left: 0.5rem;
-  background: #fffbe6cc;
+  position: relative;
+  scroll-snap-align: center;
+  flex: 0 0 520px; /* larger on desktop */
+  max-width: 85vw;
   border-radius: 1.25rem;
-  box-shadow: 0 2px 12px #bfa76a22;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: box-shadow 0.3s;
-  /* highlight effect for center */
-  border: 3px solid transparent;
+  overflow: hidden;
+  transition: transform 0.36s cubic-bezier(.2,.9,.2,1), box-shadow 0.36s, filter 0.36s;
+  transform-origin: center center;
+  background: linear-gradient(180deg, rgba(255,251,230,0.95), rgba(255,251,230,0.9));
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
 }
-.galeria-card.active {
-  box-shadow: 0 8px 32px #fde04799, 0 0 0 6px #bfa76a33;
-  border-color: #fde047;
-  background: #fff;
+.galeria-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35), 0 0 18px rgba(191,167,106,0.12);
 }
-#galeria-indicators button {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #bfa76a55;
-  border: none;
-  margin: 0 2px;
-  transition: background 0.2s;
-  cursor: pointer;
+.galeria-card iframe { display: block; border: 0; width: 100%; height: 380px; }
+.galeria-card .galeria-overlay {
+  position: absolute; inset: 0; display:flex;align-items:center;justify-content:center;pointer-events:none;
 }
-#galeria-indicators button.active {
-  background: #fde047;
-  box-shadow: 0 0 0 2px #bfa76a55;
+.galeria-card .play-btn {
+  pointer-events:auto;
+  background: linear-gradient(135deg,#bfa76a, #f6e27a);
+  border-radius: 999px; width:68px; height:68px; display:flex;align-items:center;justify-content:center;box-shadow:0 8px 26px rgba(191,167,106,0.26); opacity:0; transform:scale(.9); transition:opacity .28s, transform .28s;
+}
+.galeria-card:hover .play-btn,
+.galeria-card:focus-within .play-btn,
+.galeria-card.active .play-btn { opacity:1; transform:scale(1); }
+
+.galeria-card .play-btn svg { filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+
+.galeria-card.active { transform: translateY(-12px) scale(1.06); box-shadow: 0 26px 60px rgba(0,0,0,0.42), 0 0 28px rgba(191,167,106,0.15); }
+
+/* Responsive tweaks */
+@media (max-width: 1000px) {
+  .galeria-card { flex: 0 0 420px; }
+  .galeria-card iframe { height: 320px; }
 }
 @media (max-width: 600px) {
-  #galeria-carousel {
-    min-height: 120px;
-  }
-  .galeria-card {
-    width: 220px !important;
-    max-width: 95vw !important;
-  }
-  .galeria-card iframe {
-    width: 220px !important;
-    height: 120px !important;
-  }
+  .galeria-card { flex: 0 0 86vw; max-width: 86vw; }
+  .galeria-card iframe { height: 220px; }
 }
 </style>
 <script>
-// Galeria: solo manual, con flechas amigables y sin auto-cambio
-const galeriaCount = 3;
-let galeriaCenter = 0;
+// Enhanced gallery behavior: dynamic indicators, intersection observer to detect center card, keyboard nav and play overlay
+(function(){
+  const carousel = document.getElementById('galeria-carousel');
+  if (!carousel) return;
 
-function updateGaleriaActive(centerIdx, scroll = true) {
-  const cards = document.querySelectorAll('#galeria-carousel .galeria-card');
-  cards.forEach((card, idx) => {
-    if (idx === centerIdx) card.classList.add('active');
-    else card.classList.remove('active');
+  const cards = Array.from(carousel.querySelectorAll('.galeria-card'));
+  let current = 0;
+
+  function createIndicators() {
+    const indicators = document.getElementById('galeria-indicators');
+    indicators.innerHTML = cards.map((_, idx) => `<button aria-label="Ir a playlist ${idx+1}" class="${idx===0? 'active':''}"></button>`).join('');
+    Array.from(indicators.children).forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        cards[idx].scrollIntoView({behavior:'smooth', inline:'center'});
+        setActive(idx);
+      });
+    });
+  }
+
+  function setActive(idx) {
+    cards.forEach((c,i)=> c.classList.toggle('active', i===idx));
+    const indicators = document.getElementById('galeria-indicators');
+    Array.from(indicators.children).forEach((b,i)=> b.classList.toggle('active', i===idx));
+    current = idx;
+  }
+
+  // IntersectionObserver: mark card active when >=60% visible
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const idx = cards.indexOf(entry.target);
+      if (entry.intersectionRatio >= 0.6) setActive(idx);
+    });
+  }, { root: carousel, threshold: [0.6] });
+
+  cards.forEach(c=> io.observe(c));
+
+  // Add play overlay button to each card (opens iframe src in new tab)
+  cards.forEach((card)=>{
+    const iframe = card.querySelector('iframe');
+    const link = iframe ? iframe.src.replace('/embed/','/playlist/') : '#';
+    const overlay = document.createElement('div'); overlay.className = 'galeria-overlay';
+    const btn = document.createElement('button'); btn.className = 'play-btn'; btn.setAttribute('aria-label','Abrir en Spotify');
+    btn.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2v20l18-10L4 2z" fill="#232526"/></svg>`;
+    btn.addEventListener('click', (e)=>{ e.preventDefault(); window.open(link, '_blank'); });
+    overlay.appendChild(btn);
+    card.appendChild(overlay);
+    // Make card focusable for keyboard users
+    card.setAttribute('tabindex','0');
+    card.addEventListener('keydown', (e)=>{
+      if (e.key === 'Enter' || e.key === ' ') { btn.click(); }
+    });
   });
-  // Solo hacer scroll si fue por acción del usuario
-  if (scroll) {
-    const active = cards[centerIdx];
-    if (active) {
-      const carousel = document.getElementById('galeria-carousel');
-      const scrollLeft = active.offsetLeft - (carousel.clientWidth / 2) + (active.clientWidth / 2);
-      carousel.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+
+  // Keyboard nav left/right
+  document.addEventListener('keydown', (e)=>{
+    if (['ArrowLeft','ArrowRight'].includes(e.key)) {
+      e.preventDefault();
+      const next = e.key === 'ArrowRight' ? Math.min(cards.length-1, current+1) : Math.max(0, current-1);
+      cards[next].scrollIntoView({behavior:'smooth', inline:'center'});
+      setActive(next);
     }
-  }
-}
-
-function renderGaleriaIndicators(centerIdx) {
-  const indicators = document.getElementById('galeria-indicators');
-  indicators.innerHTML = Array.from({length: galeriaCount}).map((_, idx) =>
-    `<button class="${idx === centerIdx ? 'active' : ''}" aria-label="Ir a video ${idx+1}"></button>`
-  ).join('');
-  Array.from(indicators.children).forEach((btn, idx) => {
-    btn.onclick = () => {
-      galeriaCenter = idx;
-      updateGaleriaActive(galeriaCenter, true);
-      renderGaleriaIndicators(galeriaCenter);
-    };
   });
-}
 
-// Flechas amigables para navegar
-function renderGaleriaArrows() {
-  let arrows = document.getElementById('galeria-arrows');
-  if (!arrows) {
-    arrows = document.createElement('div');
-    arrows.id = 'galeria-arrows';
-    arrows.style.display = 'flex';
-    arrows.style.justifyContent = 'center';
-    arrows.style.alignItems = 'center';
-    arrows.style.gap = '1.5rem';
-    arrows.style.margin = '1.5rem 0 0 0';
-    const parent = document.querySelector('#galeria .relative.flex.flex-col.items-center');
-    parent.appendChild(arrows);
-  }
-  arrows.innerHTML = `
-    <button id="galeria-prev" aria-label="Anterior video" class="galeria-arrow-btn">
-      <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#fde047"/><path d="M22 26L14 18L22 10" stroke="#bfa76a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <button id="galeria-next" aria-label="Siguiente video" class="galeria-arrow-btn">
-      <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#fde047"/><path d="M14 26L22 18L14 10" stroke="#bfa76a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  `;
-  document.getElementById('galeria-prev').onclick = () => {
-    galeriaCenter = (galeriaCenter - 1 + galeriaCount) % galeriaCount;
-    updateGaleriaActive(galeriaCenter, true);
-    renderGaleriaIndicators(galeriaCenter);
-  };
-  document.getElementById('galeria-next').onclick = () => {
-    galeriaCenter = (galeriaCenter + 1) % galeriaCount;
-    updateGaleriaActive(galeriaCenter, true);
-    renderGaleriaIndicators(galeriaCenter);
-  };
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  updateGaleriaActive(galeriaCenter, false);
-  renderGaleriaIndicators(galeriaCenter);
-  renderGaleriaArrows();
-});
+  createIndicators();
+  // Initial smooth center
+  setTimeout(()=> { if (cards[0]) cards[0].scrollIntoView({behavior:'smooth', inline:'center'}); }, 120);
+})();
 </script>
-<style>
-/* ...existing code... */
-.galeria-arrow-btn {
-  background: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  transition: transform 0.18s;
-  padding: 0.2rem;
-  border-radius: 50%;
-}
-.galeria-arrow-btn:hover, .galeria-arrow-btn:focus {
-  transform: scale(1.13);
-  box-shadow: 0 0 0 4px #fde04755;
-  background: #fffbe6cc;
-}
-#galeria-arrows svg {
-  display: block;
-  filter: drop-shadow(0 2px 8px #bfa76a33);
-}
-</style>
 
 
   <!-- DESCARGAS -->
@@ -1330,7 +1295,7 @@ document.addEventListener("DOMContentLoaded", function() {
   "
   class="group"
 >
-  <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+  <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
     <circle cx="19" cy="19" r="19" fill="none"/>
     <path d="M19 28V10M19 10L10 19M19 10L28 19" stroke="#232526" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
