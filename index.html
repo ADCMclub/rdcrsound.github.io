@@ -949,10 +949,11 @@ document.addEventListener("DOMContentLoaded", function() {
           <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5DQE2sxWqey5Ce0WlLvs71?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
          <div class="galeria-card" data-idx="0">
-          <iframe style="border-radius:12px" src="https://open.spotify.com/playlist/5fEt5ufSaf8MD7uXWcJTr4?si=Or5FxeidTEmIKQ8bWoEgdg" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5fEt5ufSaf8MD7uXWcJTr4?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
+        
          <div class="galeria-card" data-idx="0">
-          <iframe style="border-radius:12px" src="https://open.spotify.com/playlist/1Cx8BdskSsNIBvLIrNivz3?si=Dvv2AdKrQByibLBcIIgyDA&pi=Bkpe_poFSMebW" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1Cx8BdskSsNIBvLIrNivz3?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
       </div>
     </div>
@@ -960,124 +961,164 @@ document.addEventListener("DOMContentLoaded", function() {
   </div>
 </section>
 <style>
-/* ...existing code... */
+/* Gallery: ensure full card visibility, snap and sizing adjustments */
 #galeria-carousel {
+  gap: 28px;
+  padding: 18px 8px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  gap: 20px;
-  padding-bottom: 10px;
+  scroll-padding-left: 24px; /* avoid first card being cut */
 }
 .galeria-card {
   position: relative;
   scroll-snap-align: center;
-  flex: 0 0 520px; /* larger on desktop */
-  max-width: 85vw;
-  border-radius: 1.25rem;
+  flex: 0 0 min(760px, 92vw); /* adapt to viewport so card always fits */
+  max-width: 92vw;
+  box-sizing: border-box; /* ensure padding included in width */
+  padding: 12px;
+  height: auto;
+  border-radius: 1rem;
   overflow: hidden;
-  transition: transform 0.36s cubic-bezier(.2,.9,.2,1), box-shadow 0.36s, filter 0.36s;
+  transition: transform 0.45s cubic-bezier(.2,.9,.2,1), box-shadow 0.45s, filter 0.45s;
   transform-origin: center center;
-  background: linear-gradient(180deg, rgba(255,251,230,0.95), rgba(255,251,230,0.9));
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  background: linear-gradient(180deg, rgba(34,30,24,0.92), rgba(35,34,28,0.88));
+  border: 1px solid rgba(191,167,106,0.18);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.5), inset 0 -6px 24px rgba(191,167,106,0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.galeria-card iframe {
+  display: block;
+  border: 0;
+  width: 100%; /* fill the inner card so content isn't clipped */
+  height: 320px; /* balanced height for a panoramic look */
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.55), 0 0 18px rgba(191,167,106,0.06);
+  background: #000;
 }
 .galeria-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.35), 0 0 18px rgba(191,167,106,0.12);
+  transform: translateY(-10px) scale(1.03) rotateX(3deg);
+  box-shadow: 0 28px 80px rgba(0,0,0,0.56), 0 0 28px rgba(191,167,106,0.12);
 }
-.galeria-card iframe { display: block; border: 0; width: 100%; height: 380px; }
-.galeria-card .galeria-overlay {
-  position: absolute; inset: 0; display:flex;align-items:center;justify-content:center;pointer-events:none;
-}
-.galeria-card .play-btn {
-  pointer-events:auto;
-  background: linear-gradient(135deg,#bfa76a, #f6e27a);
-  border-radius: 999px; width:68px; height:68px; display:flex;align-items:center;justify-content:center;box-shadow:0 8px 26px rgba(191,167,106,0.26); opacity:0; transform:scale(.9); transition:opacity .28s, transform .28s;
-}
-.galeria-card:hover .play-btn,
-.galeria-card:focus-within .play-btn,
-.galeria-card.active .play-btn { opacity:1; transform:scale(1); }
+.galeria-card.active { transform: translateY(-14px) scale(1.06) rotateX(4deg); }
+/* Indicators styling */
+#galeria-indicators button { width: 10px; height: 10px; border-radius: 999px; background: rgba(255,255,255,0.18); border: none; transition: transform .18s, background .18s; }
 
-.galeria-card .play-btn svg { filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+/* Bigger playlist cards and taller iframes */
+.galeria-card { flex: 0 0 min(920px, 96vw); max-width: 96vw; }
+.galeria-card iframe { height: 460px; }
+@media (max-width: 1000px) { .galeria-card { flex: 0 0 92vw; } .galeria-card iframe { height: 360px; } }
+@media (max-width: 600px) { .galeria-card { flex: 0 0 96vw; } .galeria-card iframe { height: 220px; } }
 
-.galeria-card.active { transform: translateY(-12px) scale(1.06); box-shadow: 0 26px 60px rgba(0,0,0,0.42), 0 0 28px rgba(191,167,106,0.15); }
-
-/* Responsive tweaks */
+/* For mobile, make the cards full width but keep reduced height */
 @media (max-width: 1000px) {
-  .galeria-card { flex: 0 0 420px; }
-  .galeria-card iframe { height: 320px; }
+  .galeria-card { flex: 0 0 86vw; max-width: 86vw; }
+  .galeria-card iframe { height: 280px; }
 }
 @media (max-width: 600px) {
-  .galeria-card { flex: 0 0 86vw; max-width: 86vw; }
-  .galeria-card iframe { height: 220px; }
+  .galeria-card { flex: 0 0 92vw; }
+  .galeria-card iframe { height: 200px; }
 }
+
+/* Force gallery particles above section background and visible (override generic rules) */
+#galeria .section-particles { z-index: 1 !important; opacity: 0.95 !important; pointer-events: none !important; mix-blend-mode: screen !important; }
+#galeria .flex.items-center.justify-center { position: relative; z-index: 10; }
+
+/* Re-enable and style the horizontal scrollbar for gallery only (old money theme) */
+#galeria-carousel { scrollbar-width: thin; scrollbar-color: #bfa76a rgba(18,18,18,0.08); }
+#galeria-carousel::-webkit-scrollbar { height: 14px; }
+#galeria-carousel::-webkit-scrollbar-track { background: rgba(18,18,18,0.06); border-radius: 999px; margin: 4px 0; }
+#galeria-carousel::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,#e6d9b4,#bfa76a);
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,0.08);
+}
+#galeria-carousel::-webkit-scrollbar-thumb:hover { filter: brightness(1.04); }
 </style>
+
 <script>
-// Enhanced gallery behavior: dynamic indicators, intersection observer to detect center card, keyboard nav and play overlay
-(function(){
+// Auto-scroll for gallery: slow, smooth, stops permanently on user interaction or when iframe gets focus (play)
+document.addEventListener('DOMContentLoaded', function(){
   const carousel = document.getElementById('galeria-carousel');
   if (!carousel) return;
 
-  const cards = Array.from(carousel.querySelectorAll('.galeria-card'));
-  let current = 0;
+  let rafId = null;
+  let auto = true;
+  const SPEED = 0.28; // px per frame approx. adjust for desired slow speed
+  let lastTime = null;
+  let userInteracted = false;
 
-  function createIndicators() {
-    const indicators = document.getElementById('galeria-indicators');
-    indicators.innerHTML = cards.map((_, idx) => `<button aria-label="Ir a playlist ${idx+1}" class="${idx===0? 'active':''}"></button>`).join('');
-    Array.from(indicators.children).forEach((btn, idx) => {
-      btn.addEventListener('click', () => {
-        cards[idx].scrollIntoView({behavior:'smooth', inline:'center'});
-        setActive(idx);
-      });
-    });
+  function shouldAuto() {
+    return auto && !userInteracted && window.innerWidth > 700 && carousel.scrollWidth > carousel.clientWidth + 8;
   }
 
-  function setActive(idx) {
-    cards.forEach((c,i)=> c.classList.toggle('active', i===idx));
-    const indicators = document.getElementById('galeria-indicators');
-    Array.from(indicators.children).forEach((b,i)=> b.classList.toggle('active', i===idx));
-    current = idx;
-  }
-
-  // IntersectionObserver: mark card active when >=60% visible
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const idx = cards.indexOf(entry.target);
-      if (entry.intersectionRatio >= 0.6) setActive(idx);
-    });
-  }, { root: carousel, threshold: [0.6] });
-
-  cards.forEach(c=> io.observe(c));
-
-  // Add play overlay button to each card (opens iframe src in new tab)
-  cards.forEach((card)=>{
-    const iframe = card.querySelector('iframe');
-    const link = iframe ? iframe.src.replace('/embed/','/playlist/') : '#';
-    const overlay = document.createElement('div'); overlay.className = 'galeria-overlay';
-    const btn = document.createElement('button'); btn.className = 'play-btn'; btn.setAttribute('aria-label','Abrir en Spotify');
-    btn.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2v20l18-10L4 2z" fill="#232526"/></svg>`;
-    btn.addEventListener('click', (e)=>{ e.preventDefault(); window.open(link, '_blank'); });
-    overlay.appendChild(btn);
-    card.appendChild(overlay);
-    // Make card focusable for keyboard users
-    card.setAttribute('tabindex','0');
-    card.addEventListener('keydown', (e)=>{
-      if (e.key === 'Enter' || e.key === ' ') { btn.click(); }
-    });
-  });
-
-  // Keyboard nav left/right
-  document.addEventListener('keydown', (e)=>{
-    if (['ArrowLeft','ArrowRight'].includes(e.key)) {
-      e.preventDefault();
-      const next = e.key === 'ArrowRight' ? Math.min(cards.length-1, current+1) : Math.max(0, current-1);
-      cards[next].scrollIntoView({behavior:'smooth', inline:'center'});
-      setActive(next);
+  function step(timestamp){
+    if (!lastTime) lastTime = timestamp;
+    const dt = timestamp - lastTime;
+    lastTime = timestamp;
+    if (shouldAuto()){
+      // scale movement with time to be framerate independent
+      const delta = (SPEED * dt) / (1000/60);
+      carousel.scrollLeft += delta;
+      const max = carousel.scrollWidth - carousel.clientWidth;
+      if (carousel.scrollLeft >= max - 1) {
+        // smooth back to start
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+      }
     }
+    rafId = requestAnimationFrame(step);
+  }
+
+  function startAuto(){
+    if (!rafId) rafId = requestAnimationFrame(step);
+    auto = true; lastTime = null;
+  }
+  function stopAuto(){
+    auto = false;
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  }
+
+  // Stop auto when user interacts: pointerdown, touchstart, wheel, keydown, focusin inside carousel
+  function markUserInteracted(){ userInteracted = true; stopAuto(); }
+
+  ['pointerdown','touchstart','wheel','click','keydown','focusin'].forEach(evt => {
+    carousel.addEventListener(evt, (e) => {
+      // if event target is iframe or inside iframe element, or any user input, stop
+      const t = e.target;
+      if (t && (t.tagName === 'IFRAME' || t.closest && t.closest('.galeria-card'))) {
+        markUserInteracted();
+      } else {
+        // any wheel/keydown should also stop auto
+        if (['wheel','keydown','pointerdown','touchstart','click'].includes(evt)) markUserInteracted();
+      }
+    }, { passive: true });
   });
 
-  createIndicators();
-  // Initial smooth center
-  setTimeout(()=> { if (cards[0]) cards[0].scrollIntoView({behavior:'smooth', inline:'center'}); }, 120);
-})();
+  // Also stop when an iframe receives focus (user clicked play inside it in many browsers)
+  const iframes = Array.from(carousel.querySelectorAll('iframe'));
+  iframes.forEach(fr => {
+    // focus event on iframe element
+    fr.addEventListener('focus', markUserInteracted);
+    // a click on the iframe element itself indicates user intends to interact
+    fr.addEventListener('pointerdown', markUserInteracted, {passive:true});
+    fr.addEventListener('touchstart', markUserInteracted, {passive:true});
+  });
+
+  // Start autorotation only if conditions met
+  startAuto();
+
+  // Resize handler: restart loop
+  window.addEventListener('resize', function(){
+    if (shouldAuto()) { if (!rafId) startAuto(); } else { stopAuto(); }
+  });
+
+  // If user navigates with keyboard arrows to carousel, stop auto
+  document.addEventListener('keydown', function(e){ if (['ArrowLeft','ArrowRight','Space'].includes(e.key)) markUserInteracted(); });
+
+  // Expose controls for debugging if needed
+  window._rdcrGallery = { stop: markUserInteracted, start: startAuto };
+});
 </script>
 
 
@@ -1248,6 +1289,7 @@ document.addEventListener("DOMContentLoaded", function() {
       background: { color: 'transparent' },
       particles: {
         number: { value: count, density: { enable: true, area: 700 } },
+       
         color: { value: colors },
         shape: { type: 'circle' },
         opacity: { value: 0.22, random: true },
@@ -1263,7 +1305,22 @@ document.addEventListener("DOMContentLoaded", function() {
       tsParticles.load('tsparticles-inicio', baseConfig(['#bfa76a','#f6e27a','#ffffff'], 36));
       tsParticles.load('tsparticles-emisoras', baseConfig(['#06b6d4','#fde047','#ffffff'], 30));
       tsParticles.load('tsparticles-locutores', baseConfig(['#bfa76a','#e6d9b4','#3a2f1d'], 32));
-      tsParticles.load('tsparticles-galeria', baseConfig(['#ffffff','#fde047','#bfa76a'], 28));
+      // Unify: gallery specific config (bigger, round, higher opacity)
+      tsParticles.load('tsparticles-galeria', {
+        fpsLimit: 45,
+        background: { color: 'transparent' },
+        particles: {
+          number: { value: 34, density: { enable: true, area: 700 } },
+          color: { value: ['#e6d9b4', '#bfa76a', '#f6e27a'] },
+          shape: { type: 'circle' },
+          opacity: { value: 0.48, random: { enable: true, minimumValue: 0.22 } },
+          size: { value: 6, random: { enable: true, minimumValue: 3 } },
+          move: { enable: true, speed: 0.55, direction: 'none', random: true, straight: false, outModes: { default: 'out' } },
+          links: { enable: false }
+        },
+        interactivity: { events: { onHover: { enable: false }, onClick: { enable: false } }, modes: {} },
+        detectRetina: true
+      });
       tsParticles.load('tsparticles-descargas', baseConfig(['#25d366','#06b6d4','#ffffff'], 30));
     } catch (e) {
       // fail silently if multiple instances aren't supported in the environment
@@ -1272,13 +1329,13 @@ document.addEventListener("DOMContentLoaded", function() {
   })();
 </script>
 
-  <!-- Botón grande para volver arriba (al final del body, antes de </body>) -->
+<!-- Botón grande para volver arriba (al final del body, antes de </body>) -->
 <button id="backToTop"
   aria-label="Volver arriba"
   style="
     position: fixed;
     right: 1.5rem;
-    bottom: 2.5rem;
+    bottom:  2.5rem;
     z-index: 100;
     background: linear-gradient(135deg, #fde047 0%, #bfa76a 100%);
     color: #232526;
@@ -1348,6 +1405,7 @@ html::-webkit-scrollbar {
 </style>
 <script>
 /**
+
  * Vincula el desplazamiento automático con el manual:
  * - Si el usuario hace scroll manual (drag, wheel o touch), el auto-scroll se pausa.
  * - Si el usuario no interactúa por 5 segundos, el auto-scroll se reanuda (solo en PC y si hay overflow).
