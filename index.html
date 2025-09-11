@@ -444,14 +444,13 @@
     <div class="flex items-center space-x-3">
       <img src="/img_radio/RDCRSOUND_LOG.jpg" alt="Logo RDC Sound" class="w-12 h-12 rounded-full shadow-lg logo-left" />
       <h1
-        class="text-2xl md:text-3xl font-extrabold tracking-wide select-none"
+        class="text-3xl md:text-4xl font-extrabold tracking-wide select-none"
         style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-          background: linear-gradient(90deg, #bfa76a 10%, #f6e27a 50%, #bfa76a 90%);
+          background: linear-gradient(90deg, #fde047 10%, #bfa76a 50%, #2d2d2d 90%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          text-fill-color: transparent;
-          filter: drop-shadow(0 0 8px #f6e27a88);"
+          filter: drop-shadow(0 0 10px rgba(189,148,52,0.95));"
       >
         RDCR Sound
       </h1>
@@ -736,19 +735,19 @@
   </div>
 </section>
 <style>
-/* Carousel effect for emisoras - improved: all cards same base size, stronger zoom on hover/center */
+/* Carousel effect for emisoras - improved: all cards same base size, stronger zoom on hover/center and larger overall */
 #emisora-carousel {
-  min-height: 200px;
+  min-height: 240px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 24px;
 }
 .emisora-card {
-  opacity: 0.9;
+  opacity: 0.95;
   transform: scale(1);
-  transition: transform 0.42s cubic-bezier(.2,.9,.2,1), opacity 0.42s, box-shadow 0.42s;
+  transition: transform 0.38s cubic-bezier(.2,.9,.2,1), opacity 0.38s, box-shadow 0.38s;
   z-index: 1;
   pointer-events: auto;
   display: flex;
@@ -756,39 +755,39 @@
   align-items: center;
   cursor: pointer;
 }
-/* Base: make every image the same large size */
+/* Base: make every image the same larger size */
 .emisora-img {
-  width: 160px;
-  height: 160px;
+  width: 190px;
+  height: 190px;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   border-radius: 1rem;
-  box-shadow: 0 4px 18px #00000033;
-  transition: transform 0.42s ease, box-shadow 0.42s ease;
+  box-shadow: 0 6px 22px #00000044;
+  transition: transform 0.38s ease, box-shadow 0.38s ease;
 }
 /* Center/hover state: larger and more glow */
 .emisora-card-center,
 .emisora-card:hover {
-  transform: scale(1.35);
-  z-index: 3;
+  transform: scale(1.45);
+  z-index: 4;
 }
 .emisora-card-center .emisora-img,
 .emisora-card:hover .emisora-img {
-  transform: scale(1.06);
-  box-shadow: 0 12px 36px #fde04788, 0 0 0 6px #bfa76a22;
+  transform: scale(1.08);
+  box-shadow: 0 18px 48px #fde04799, 0 0 0 8px #bfa76a33;
 }
 /* Slightly dim non-centered neighbors */
-.emisora-card:not(.emisora-card-center):not(:hover) { opacity: 0.72; transform: scale(1); }
+.emisora-card:not(.emisora-card-center):not(:hover) { opacity: 0.68; transform: scale(1); }
 
 @media (max-width: 900px) {
-  .emisora-img { width: 110px; height: 110px; }
-  .emisora-card-center, .emisora-card:hover { transform: scale(1.18); }
+  .emisora-img { width: 140px; height: 140px; }
+  .emisora-card-center, .emisora-card:hover { transform: scale(1.35); }
 }
 @media (max-width: 600px) {
-  #emisora-carousel { min-height: 140px; gap: 10px; }
-  .emisora-img { width: 80px; height: 80px; }
-  .emisora-card-center, .emisora-card:hover { transform: scale(1.12); }
+  #emisora-carousel { min-height: 180px; gap: 14px; }
+  .emisora-img { width: 120px; height: 120px; }
+  .emisora-card-center, .emisora-card:hover { transform: scale(1.25); }
 }
 </style>
 <script>
@@ -1235,19 +1234,23 @@ document.addEventListener("DOMContentLoaded", function() {
   <!-- Agrega esto al final de tu <head> o antes de </body> -->
   <style>
   /* TYPOGRAPHY ENHANCEMENTS */
-  :root { --base-font-percent: 112.5%; }
-  html { font-size: 112.5%; /* base ~18px (helps Tailwind rem utilities scale) */ scroll-behavior: smooth; }
-  body { font-size: 1.125rem; /* ~18px fallback */ }
+  :root { --base-font-percent: 120%; }
+  html { font-size: 120%; /* base ~19.2px */ scroll-behavior: smooth; }
+  body { font-size: 1.18rem; /* slightly larger */ }
   /* Make text more prominent site-wide */
-  h1,h2,h3,h4,h5,h6 { font-weight: 800; letter-spacing: 0.6px; text-shadow: 0 2px 12px rgba(0,0,0,0.45); }
-  a, p, li, span, button { font-weight: 600; }
+  h1,h2,h3,h4,h5,h6 { font-weight: 800; letter-spacing: 0.6px; text-shadow: 0 2px 14px rgba(0,0,0,0.45); }
+  a, p, li, span, button { font-weight: 600; font-size: 1.02rem; }
   /* Slight left shift for the logo to appear more aligned to left */
   header .logo-left { margin-left: -8px; transform: translateX(-6px); }
+
+  /* Nav size and mobile tweaks */
+  nav.desktop-nav a { font-size: 1.06rem; padding: 0.4rem 0.6rem; }
+  .mobile-nav a, .mobile-nav button { font-size: 1.4rem; }
 
   /* Section-specific particle containers */
   .section-particles { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.55; }
   #inicio .section-particles { opacity: 0.65; }
-  #emisoras .section-particles { opacity: 0.45; }
+  #emisoras .section-particles { opacity: 0.5; }
   #locutores .section-particles { opacity: 0.55; }
   #galeria .section-particles { opacity: 0.5; }
   #descargas .section-particles { opacity: 0.5; }
@@ -1409,6 +1412,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const elapsed = timestamp - start + progress;
       let percent = (elapsed % duration) / duration;
       container.scrollLeft = percent * maxScroll;
+
 
       // Si está al final, vuelve al inicio suavemente (bucle)
       if (container.scrollLeft >= maxScroll - 2) {
