@@ -442,7 +442,7 @@
 <header class="bg-gradient-to-r from-black via-gray-900 to-black shadow-lg animate-fade-up" style="position:sticky;top:0;z-index:100;">
   <div class="container mx-auto px-6 py-4 flex justify-between items-center relative">
     <div class="flex items-center space-x-3">
-      <img src="/img_radio/RDCRSOUND_LOG.jpg" alt="Logo RDC Sound" class="w-12 h-12 rounded-full shadow-lg" />
+      <img src="/img_radio/RDCRSOUND_LOG.jpg" alt="Logo RDC Sound" class="w-12 h-12 rounded-full shadow-lg logo-left" />
       <h1
         class="text-2xl md:text-3xl font-extrabold tracking-wide select-none"
         style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
@@ -564,6 +564,7 @@
 
   <!-- HERO -->
   <section id="inicio" class="section-gradient text-center py-20 animate-fade-up" style="position:relative; overflow:hidden;">
+  <div id="tsparticles-inicio" class="section-particles" aria-hidden="true"></div>
     <!-- Ondas SVG decorativas en el fondo, mitad de alto y más rápidas -->
     <div aria-hidden="true" style="position:absolute; left:0; right:0; top:0; bottom:0; width:100%; height:100%; z-index:0; pointer-events:none; overflow:hidden;">
       <svg viewBox="0 0 1440 160" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute; left:0; right:0; top:20%; width:100%; height:100%;">
@@ -720,6 +721,7 @@
   <!-- EMISORAS -->
   <!-- Animadas, sin fondo en los logos -->
 <section id="emisoras" class="section-gradient py-16 px-6 animate-fade-up">
+  <div id="tsparticles-emisoras" class="section-particles" aria-hidden="true"></div>
   <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent animate-shine select-none"
       style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
     📻 Emisoras
@@ -932,6 +934,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   <!-- LOCUTORES MEJORADO FONDO OSCURO OLD MONEY -->
   <section id="locutores" class="section-gradient py-16 px-6 animate-fade-up" style="background: linear-gradient(120deg, #232526 0%, #3a2f1d 100%); color: #e6d9b4;">
+  <div id="tsparticles-locutores" class="section-particles" aria-hidden="true"></div>
     <h3 class="text-3xl font-semibold text-center mb-10 animate-shine select-none"
         style="
           font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; 
@@ -959,6 +962,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   <!-- PLAYLIST Galeria -->
   <section id="galeria" class="section-gradient py-16 px-6 animate-fade-up">
+  <div id="tsparticles-galeria" class="section-particles" aria-hidden="true"></div>
   <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
       style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
     📸 Playlist
@@ -1141,6 +1145,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   <!-- DESCARGAS -->
   <section id="descargas" class="section-gradient py-16 px-6 animate-fade-up">
+  <div id="tsparticles-descargas" class="section-particles" aria-hidden="true"></div>
     <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
         style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
       📲 Descarga nuestras aplicaciones
@@ -1255,190 +1260,75 @@ document.addEventListener("DOMContentLoaded", function() {
 
   <!-- Agrega esto al final de tu <head> o antes de </body> -->
   <style>
-  /* Animación de fade-up ya existe, solo aseguramos que esté bien definida */
-  .animate-fade-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1.1s cubic-bezier(.4,0,.2,1), transform 1.1s cubic-bezier(.4,0,.2,1);
-  }
-  .animate-fade-up.visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
+  /* TYPOGRAPHY ENHANCEMENTS */
+  :root { --base-font-percent: 112.5%; }
+  html { font-size: 112.5%; /* base ~18px (helps Tailwind rem utilities scale) */ scroll-behavior: smooth; }
+  body { font-size: 1.125rem; /* ~18px fallback */ }
+  /* Make text more prominent site-wide */
+  h1,h2,h3,h4,h5,h6 { font-weight: 800; letter-spacing: 0.6px; text-shadow: 0 2px 12px rgba(0,0,0,0.45); }
+  a, p, li, span, button { font-weight: 600; }
+  /* Slight left shift for the logo to appear more aligned to left */
+  header .logo-left { margin-left: -8px; transform: translateX(-6px); }
+
+  /* Section-specific particle containers */
+  .section-particles { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.55; }
+  #inicio .section-particles { opacity: 0.65; }
+  #emisoras .section-particles { opacity: 0.45; }
+  #locutores .section-particles { opacity: 0.55; }
+  #galeria .section-particles { opacity: 0.5; }
+  #descargas .section-particles { opacity: 0.5; }
+  /* Ensure sections can host absolute particles without layout break */
+  section { position: relative; }
   </style>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Selecciona todas las secciones y elementos con animate-fade-up
-    const fadeEls = document.querySelectorAll('.animate-fade-up');
-    const options = {
-      threshold: 0.18
-    };
-    const onIntersect = (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // Solo una vez
-        }
-      });
-    };
-    const observer = new window.IntersectionObserver(onIntersect, options);
-    fadeEls.forEach(el => observer.observe(el));
-
-    // --- Scroll suave para los enlaces del menú ---
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href').slice(1);
-        const target = document.getElementById(targetId);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  });
-  </script>
-
-  <!-- Agrega o reemplaza este bloque justo antes de </body> -->
-  <style>
-/* Fade-up animación para aparición desde abajo */
-.animate-fade-up {
-  opacity: 0;
-  transform: translateY(40px) scale(0.98);
-  transition:
-    opacity 0.8s cubic-bezier(.4,0,.2,1),
-    transform 0.8s cubic-bezier(.4,0,.2,1);
-  will-change: opacity, transform;
-}
-.animate-fade-up.visible {
-  opacity: 1 !important;
-  transform: translateY(0) scale(1) !important;
-}
-
-/* Fade-in lateral para elementos secundarios */
-.animate-fade-left {
-  opacity: 0;
-  transform: translateX(-40px) scale(0.98);
-  transition:
-    opacity 0.8s cubic-bezier(.4,0,.2,1),
-    transform 0.8s cubic-bezier(.4,0,.2,1);
-  will-change: opacity, transform;
-}
-.animate-fade-left.visible {
-  opacity: 1 !important;
-  transform: translateX(0) scale(1) !important;
-}
-
-/* Fade-in lateral derecha */
-.animate-fade-right {
-  opacity: 0;
-  transform: translateX(40px) scale(0.98);
-  transition:
-    opacity 0.8s cubic-bezier(.4,0,.2,1),
-    transform 0.8s cubic-bezier(.4,0,.2,1);
-  will-change: opacity, transform;
-}
-.animate-fade-right.visible {
-  opacity: 1 !important;
-  transform: translateX(0) scale(1) !important;
-}
-
-/* Mejora el scroll suave para todo el sitio */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Ajusta si tienes header fijo */
-}
-</style>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  // --- Animación de aparición al hacer scroll (solo una vez) ---
-  const fadeEls = document.querySelectorAll('.animate-fade-up, .animate-fade-left, .animate-fade-right');
-  const options = { threshold: 0.13 };
-  const onIntersect = (entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // Solo una vez
-      }
-    });
-  };
-  const observer = new window.IntersectionObserver(onIntersect, options);
-  fadeEls.forEach(el => observer.observe(el));
-
-  // --- Scroll suave mejorado para los enlaces del menú ---
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href').slice(1);
-      const target = document.getElementById(targetId);
-      if (target) {
-        e.preventDefault();
-        // Ajusta el desplazamiento si tienes un header fijo
-        const header = document.querySelector('header');
-        const headerHeight = header ? header.offsetHeight : 0;
-        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight + 1;
-
-        // Suaviza el scroll con una función personalizada
-        smoothScrollTo(window.scrollY, targetPosition, 600);
-      }
-    });
+  // existing tsParticles load
+  tsParticles.load("tsparticles", {
+    fpsLimit: 60,
+    background: { color: "transparent" },
+    particles: {
+      number: { value: 60, density: { enable: true, area: 800 } },
+      color: { value: ["#ec4899", "#06b6d4", "#fde047", "#fff"] },
+      shape: { type: "circle" },
+      opacity: { value: 0.25, random: true },
+      size: { value: 3, random: { enable: true, minimumValue: 1 } },
+      move: { enable: true, speed: 1.2, direction: "none", random: false, straight: false, outModes: { default: "out" }, attract: { enable: false } },
+      links: { enable: true, distance: 120, color: "#fff", opacity: 0.08, width: 1 }
+    },
+    interactivity: { events: { onHover: { enable: true, mode: "repulse" }, onClick: { enable: true, mode: "push" } }, modes: { repulse: { distance: 80, duration: 0.4 }, push: { quantity: 4 } } },
+    detectRetina: true
   });
 
-  // Función de scroll suave personalizada
-  function smoothScrollTo(start, end, duration) {
-    const change = end - start;
-    const startTime = performance.now();
+  // Additional section particle instances (lighter counts, color palettes matching each section)
+  (function(){
+    if (!window.tsParticles) return;
+    const baseConfig = (colors, count)=>({
+      fpsLimit: 60,
+      background: { color: 'transparent' },
+      particles: {
+        number: { value: count, density: { enable: true, area: 700 } },
+        color: { value: colors },
+        shape: { type: 'circle' },
+        opacity: { value: 0.22, random: true },
+        size: { value: 2.5, random: { enable: true, minimumValue: 0.8 } },
+        move: { enable: true, speed: 0.9, direction: 'none', random: true, straight: false, outModes: { default: 'out' } },
+        links: { enable: true, distance: 100, color: colors[0] || '#fff', opacity: 0.06, width: 1 }
+      },
+      interactivity: { events: { onHover: { enable: false }, onClick: { enable: false } }, modes: {} },
+      detectRetina: true
+    });
 
-    function animateScroll(currentTime) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // EaseInOutQuad
-      const ease = progress < 0.5
-        ? 2 * progress * progress
-        : -1 + (4 - 2 * progress) * progress;
-      window.scrollTo(0, start + change * ease);
-      if (progress < 1) {
-        requestAnimationFrame(animateScroll);
-      }
+    try {
+      tsParticles.load('tsparticles-inicio', baseConfig(['#bfa76a','#f6e27a','#ffffff'], 36));
+      tsParticles.load('tsparticles-emisoras', baseConfig(['#06b6d4','#fde047','#ffffff'], 30));
+      tsParticles.load('tsparticles-locutores', baseConfig(['#bfa76a','#e6d9b4','#3a2f1d'], 32));
+      tsParticles.load('tsparticles-galeria', baseConfig(['#ffffff','#fde047','#bfa76a'], 28));
+      tsParticles.load('tsparticles-descargas', baseConfig(['#25d366','#06b6d4','#ffffff'], 30));
+    } catch (e) {
+      // fail silently if multiple instances aren't supported in the environment
+      console.warn('tsParticles section loaders error', e);
     }
-    requestAnimationFrame(animateScroll);
-  }
-});
+  })();
 </script>
-
-<!-- ...en tu <head> o antes de </body> -->
-<style>
-    /* ...otros estilos... */
-
-    /* Barra de desplazamiento global elegante y personalizada */
-    ::-webkit-scrollbar {
-      width: 10px;
-      background: #18181b;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #bfa76a 0%, #232526 100%);
-      border-radius: 8px;
-      border: 2px solid #232526;
-      transition: background 0.3s;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(135deg, #e6d9b4 0%, #bfa76a 100%);
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #18181b;
-      border-radius: 8px;
-    }
-
-    /* Firefox */
-    html {
-      scrollbar-width: thin;
-      scrollbar-color: #bfa76a #18181b;
-    }
-
-    /* --- Adaptación responsive para móviles, iOS y Android --- */
-    /* ...resto de tus media queries... */
-  </style>
 
   <!-- Botón grande para volver arriba (al final del body, antes de </body>) -->
 <button id="backToTop"
@@ -1690,7 +1580,6 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 </script>
-
 
 <!-- Botón flotante de WhatsApp -->
 <a href="#" 
