@@ -957,179 +957,165 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
   </section>
 
-  <!-- PLAYLIST Galeria Mejorada -->
+  <!-- PLAYLIST Galeria -->
   <section id="galeria" class="section-gradient py-16 px-6 animate-fade-up">
-    <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
-        style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
-      🎵 Playlist
-    </h3>
-    <div class="relative flex flex-col items-center">
-      <div class="flex items-center justify-center gap-2 w-full max-w-4xl mx-auto">
-        <div id="galeria-carousel" class="flex gap-6 overflow-x-auto w-full px-2" style="scroll-behavior:smooth;">
-          <!-- Renderizado dinámico por JS -->
+  <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
+      style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
+    📸 Playlist
+  </h3>
+  <div class="relative flex flex-col items-center">
+    <div class="flex items-center justify-center gap-2 w-full max-w-4xl mx-auto">
+      <div id="galeria-carousel" class="flex gap-6 overflow-x-auto w-full px-2" style="scroll-behavior:smooth;">
+        <!-- Todos los iframes se renderizan horizontalmente -->
+        <div class="galeria-card" data-idx="0">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5DQE2sxWqey5Ce0WlLvs71?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
       </div>
-      <div id="galeria-indicators" class="flex justify-center mt-4 gap-2"></div>
-      <div id="galeria-arrows" class="flex justify-center items-center gap-6 mt-6"></div>
     </div>
-  </section>
-  <style>
-    #galeria-carousel {
-      min-height: 220px;
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      scrollbar-width: none;
-    }
-    #galeria-carousel::-webkit-scrollbar { display: none; }
-    .galeria-card {
-      flex: 0 0 auto;
-      width: 460px;
-      max-width: 90vw;
-      margin: 0 0.5rem;
-      background: #fffbe6cc;
-      border-radius: 1.25rem;
-      box-shadow: 0 2px 12px #bfa76a22;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: box-shadow 0.3s, border-color 0.3s, background 0.3s;
-      border: 3px solid transparent;
-    }
-    .galeria-card.active {
-      box-shadow: 0 8px 32px #fde04799, 0 0 0 6px #bfa76a33;
-      border-color: #fde047;
-      background: #fff;
-    }
-    #galeria-indicators button {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #bfa76a55;
-      border: none;
-      margin: 0 2px;
-      transition: background 0.2s;
-      cursor: pointer;
-    }
-    #galeria-indicators button.active {
-      background: #fde047;
-      box-shadow: 0 0 0 2px #bfa76a55;
-    }
-    .galeria-arrow-btn {
-      background: none;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      transition: transform 0.18s;
-      padding: 0.2rem;
-      border-radius: 50%;
-    }
-    .galeria-arrow-btn:hover, .galeria-arrow-btn:focus {
-      transform: scale(1.13);
-      box-shadow: 0 0 0 4px #fde04755;
-      background: #fffbe6cc;
-    }
-    #galeria-arrows svg {
-      display: block;
-      filter: drop-shadow(0 2px 8px #bfa76a33);
-    }
-    @media (max-width: 600px) {
-      #galeria-carousel { min-height: 120px; }
-      .galeria-card { width: 220px !important; max-width: 95vw !important; }
-      .galeria-card iframe { width: 220px !important; height: 120px !important; }
-    }
-  </style>
-  <script>
-    // --- PLAYLISTS: Puedes agregar/quitar aquí tus playlists de Spotify ---
-    const galeriaPlaylists = [
-      {
-        src: "https://open.spotify.com/embed/playlist/5DQE2sxWqey5Ce0WlLvs71?utm_source=generator",
-        title: "Salsa Hits RDCR"
-      },
-      {
-        src: "https://open.spotify.com/embed/playlist/37i9dQZF1DXbITWG1ZJKYt?utm_source=generator",
-        title: "Éxitos Latinos"
-      },
-      {
-        src: "https://open.spotify.com/embed/playlist/37i9dQZF1DX7Y7BqFok9IQ?utm_source=generator",
-        title: "Lo Mejor de los 90"
-      }
-    ];
+    <div id="galeria-indicators" class="flex justify-center mt-4 gap-2"></div>
+  </div>
+</section>
+<style>
+/* ...existing code... */
+#galeria-carousel {
+  min-height: 220px;
+  position: relative;
+  /* horizontal scroll */
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  /* hide scrollbar for aesthetics */
+  scrollbar-width: none;
+}
+#galeria-carousel::-webkit-scrollbar {
+  display: none;
+}
+.galeria-card {
+  flex: 0 0 auto;
+  width: 460px;
+  max-width: 90vw;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  background: #fffbe6cc;
+  border-radius: 1.25rem;
+  box-shadow: 0 2px 12px #bfa76a22;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s;
+  /* highlight effect for center */
+  border: 3px solid transparent;
+}
+.galeria-card.active {
+  box-shadow: 0 8px 32px #fde04799, 0 0 0 6px #bfa76a33;
+  border-color: #fde047;
+  background: #fff;
+}
+#galeria-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #bfa76a55;
+  border: none;
+  margin: 0 2px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+#galeria-indicators button.active {
+  background: #fde047;
+  box-shadow: 0 0 0 2px #bfa76a55;
+}
+@media (max-width: 600px) {
+  #galeria-carousel {
+    min-height: 120px;
+  }
+  .galeria-card {
+    width: 220px !important;
+    max-width: 95vw !important;
+  }
+  .galeria-card iframe {
+    width: 220px !important;
+    height: 120px !important;
+  }
+}
+</style>
+<script>
+// Galeria: solo manual, con flechas amigables y sin auto-cambio
+const galeriaCount = 3;
+let galeriaCenter = 0;
 
-    let galeriaCenter = 0;
-
-    function renderGaleria() {
+function updateGaleriaActive(centerIdx, scroll = true) {
+  const cards = document.querySelectorAll('#galeria-carousel .galeria-card');
+  cards.forEach((card, idx) => {
+    if (idx === centerIdx) card.classList.add('active');
+    else card.classList.remove('active');
+  });
+  // Solo hacer scroll si fue por acción del usuario
+  if (scroll) {
+    const active = cards[centerIdx];
+    if (active) {
       const carousel = document.getElementById('galeria-carousel');
-      carousel.innerHTML = galeriaPlaylists.map((pl, idx) => `
-        <div class="galeria-card${idx === galeriaCenter ? ' active' : ''}" data-idx="${idx}">
-          <iframe style="border-radius:12px" src="${pl.src}" width="100%" height="380" frameBorder="0" allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="${pl.title}"></iframe>
-          <div class="text-center mt-2 font-semibold text-[#bfa76a]">${pl.title}</div>
-        </div>
-      `).join('');
+      const scrollLeft = active.offsetLeft - (carousel.clientWidth / 2) + (active.clientWidth / 2);
+      carousel.scrollTo({ left: scrollLeft, behavior: 'smooth' });
     }
+  }
+}
 
-    function updateGaleriaActive(centerIdx, scroll = true) {
-      galeriaCenter = centerIdx;
-      const cards = document.querySelectorAll('#galeria-carousel .galeria-card');
-      cards.forEach((card, idx) => {
-        if (idx === centerIdx) card.classList.add('active');
-        else card.classList.remove('active');
-      });
-      if (scroll) {
-        const active = cards[centerIdx];
-        if (active) {
-          const carousel = document.getElementById('galeria-carousel');
-          const scrollLeft = active.offsetLeft - (carousel.clientWidth / 2) + (active.clientWidth / 2);
-          carousel.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-        }
-      }
-    }
-
-    function renderGaleriaIndicators(centerIdx) {
-      const indicators = document.getElementById('galeria-indicators');
-      indicators.innerHTML = galeriaPlaylists.map((_, idx) =>
-        `<button class="${idx === centerIdx ? 'active' : ''}" aria-label="Ir a playlist ${idx+1}"></button>`
-      ).join('');
-      Array.from(indicators.children).forEach((btn, idx) => {
-        btn.onclick = () => {
-          updateGaleriaActive(idx, true);
-          renderGaleriaIndicators(idx);
-        };
-      });
-    }
-
-    function renderGaleriaArrows() {
-      const arrows = document.getElementById('galeria-arrows');
-      arrows.innerHTML = `
-        <button id="galeria-prev" aria-label="Anterior playlist" class="galeria-arrow-btn">
-          <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#fde047"/><path d="M22 26L14 18L22 10" stroke="#bfa76a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button id="galeria-next" aria-label="Siguiente playlist" class="galeria-arrow-btn">
-          <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#fde047"/><path d="M14 26L22 18L14 10" stroke="#bfa76a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      `;
-      document.getElementById('galeria-prev').onclick = () => {
-        const idx = (galeriaCenter - 1 + galeriaPlaylists.length) % galeriaPlaylists.length;
-        updateGaleriaActive(idx, true);
-        renderGaleriaIndicators(idx);
-      };
-      document.getElementById('galeria-next').onclick = () => {
-        const idx = (galeriaCenter + 1) % galeriaPlaylists.length;
-        updateGaleriaActive(idx, true);
-        renderGaleriaIndicators(idx);
-      };
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-      renderGaleria();
-      updateGaleriaActive(galeriaCenter, false);
+function renderGaleriaIndicators(centerIdx) {
+  const indicators = document.getElementById('galeria-indicators');
+  indicators.innerHTML = Array.from({length: galeriaCount}).map((_, idx) =>
+    `<button class="${idx === centerIdx ? 'active' : ''}" aria-label="Ir a video ${idx+1}"></button>`
+  ).join('');
+  Array.from(indicators.children).forEach((btn, idx) => {
+    btn.onclick = () => {
+      galeriaCenter = idx;
+      updateGaleriaActive(galeriaCenter, true);
       renderGaleriaIndicators(galeriaCenter);
-      renderGaleriaArrows();
-    });
-  </script>
+    };
+  });
+}
+
+// Flechas amigables para navegar
+function renderGaleriaArrows() {
+  let arrows = document.getElementById('galeria-arrows');
+  if (!arrows) {
+    arrows = document.createElement('div');
+    arrows.id = 'galeria-arrows';
+    arrows.style.display = 'flex';
+    arrows.style.justifyContent = 'center';
+    arrows.style.alignItems = 'center';
+    arrows.style.gap = '1.5rem';
+    arrows.style.margin = '1.5rem 0 0 0';
+    const parent = document.querySelector('#galeria .relative.flex.flex-col.items-center');
+    parent.appendChild(arrows);
+  }
+  arrows.innerHTML = `
+    <button id="galeria-prev" aria-label="Anterior video" class="galeria-arrow-btn">
+      <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#fde047"/><path d="M22 26L14 18L22 10" stroke="#bfa76a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button id="galeria-next" aria-label="Siguiente video" class="galeria-arrow-btn">
+      <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="18" fill="#fde047"/><path d="M14 26L22 18L14 10" stroke="#bfa76a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  `;
+  document.getElementById('galeria-prev').onclick = () => {
+    galeriaCenter = (galeriaCenter - 1 + galeriaCount) % galeriaCount;
+    updateGaleriaActive(galeriaCenter, true);
+    renderGaleriaIndicators(galeriaCenter);
+  };
+  document.getElementById('galeria-next').onclick = () => {
+    galeriaCenter = (galeriaCenter + 1) % galeriaCount;
+    updateGaleriaActive(galeriaCenter, true);
+    renderGaleriaIndicators(galeriaCenter);
+  };
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  updateGaleriaActive(galeriaCenter, false);
+  renderGaleriaIndicators(galeriaCenter);
+  renderGaleriaArrows();
+});
+</script>
 <style>
 /* ...existing code... */
 .galeria-arrow-btn {
@@ -1477,9 +1463,9 @@ document.addEventListener("DOMContentLoaded", function() {
   "
   class="group"
 >
-  <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+  <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
     <circle cx="19" cy="19" r="19" fill="none"/>
-    <path d="M19 28V10M19 10L10 19L19 10L28 19" stroke="#232526" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M19 28V10M19 10L10 19M19 10L28 19" stroke="#232526" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 </button>
 
@@ -1975,181 +1961,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Evitar cerrar si clic dentro del formulario
   formContainer.addEventListener('click', e => e.stopPropagation());
-</script>
-
-<!-- NOTICIAS MEJORADAS: inicio -->
-<section id="noticias" class="section-gradient py-16 px-6 animate-fade-up" aria-labelledby="noticias-title">
-  <h3 id="noticias-title" class="text-3xl font-extrabold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none" style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
-    📰 Noticias Destacadas
-  </h3>
-
-  <div class="max-w-6xl mx-auto">
-    <!-- filtros / acciones rápidas -->
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mb-6">
-      <div class="flex items-center gap-3">
-        <button id="filter-all" class="px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100/10 text-yellow-300 border border-yellow-400/20">Todas</button>
-        <button id="filter-nuevo" class="px-3 py-1 rounded-full text-sm font-semibold bg-transparent text-yellow-200 border border-yellow-400/10">Nuevas</button>
-      </div>
-      <div class="text-sm text-gray-300">Actualiza noticias editando el array <code class="text-xs px-2 py-1 bg-[#111] rounded">noticiasData</code> en el script</div>
-    </div>
-
-    <!-- grid -->
-    <div id="noticias-list" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"></div>
-  </div>
-
-  <!-- Modal detalle noticia -->
-  <div id="noticia-modal" class="fixed inset-0 z-50 hidden items-center justify-center px-4 py-8" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-close="modal"></div>
-    <div class="relative max-w-3xl w-full bg-white rounded-xl overflow-hidden shadow-2xl" role="document" style="color:#232526;">
-      <button id="modal-close" aria-label="Cerrar" class="absolute right-4 top-4 z-20 bg-[#fde047] rounded-full p-2 shadow">✕</button>
-      <img id="modal-img" src="" alt="" style="width:100%;height:320px;object-fit:cover;display:block;" loading="lazy">
-      <div class="p-6">
-        <h4 id="modal-title" class="text-2xl font-bold text-[#bfa76a] mb-2"></h4>
-        <div id="modal-fecha" class="text-sm text-[#8a7c4a] mb-4"></div>
-        <div id="modal-content" class="prose max-w-none text-[#232526] mb-4"></div>
-        <div class="flex items-center gap-3">
-          <a id="modal-link" href="#" target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-[#fde047] font-semibold text-sm">Ver original</a>
-          <button id="modal-close-2" class="px-4 py-2 rounded-full bg-[#f0f0f0] border text-sm">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-  /* Noticias mejoradas */
-  #noticias-list .noticia-card { background: linear-gradient(120deg,#fffbe6 80%,#fde047 100%); border-radius:1rem; overflow:hidden; box-shadow:0 8px 28px rgba(0,0,0,0.18); transition:transform .28s, box-shadow .28s; border:2px solid rgba(253,224,71,0.12); }
-  #noticias-list .noticia-card:hover{ transform:translateY(-8px) scale(1.02); box-shadow:0 18px 48px rgba(0,0,0,0.28); }
-  .noticia-top { position:relative; overflow:hidden; }
-  .noticia-img { width:100%; height:180px; object-fit:cover; transition:transform .5s, filter .3s; display:block; }
-  .noticia-card:hover .noticia-img{ transform:scale(1.06); filter:brightness(1.05) saturate(1.08); }
-  .noticia-body{ padding:1rem 1rem 1.2rem; color:#232526; }
-  .noticia-badge{ position:absolute; left:12px; top:12px; background:linear-gradient(90deg,#fde047 60%, #bfa76a 100%); color:#232526; font-weight:800; padding:.28rem .7rem; border-radius:999px; box-shadow:0 6px 20px rgba(191,167,106,0.18); }
-  .noticia-title{ font-weight:800; color:#bfa76a; margin-bottom:.35rem; font-size:1.05rem; }
-  .noticia-fecha{ font-size:0.9rem; color:#8a7c4a; margin-bottom:.6rem; }
-  .noticia-excerpt{ font-size:0.98rem; line-height:1.45; }
-  .noticia-actions{ margin-top:.8rem; display:flex; gap:.6rem; align-items:center; }
-  .noticia-cta{ background:transparent; border:1px solid rgba(191,167,106,0.14); padding:.45rem .8rem; border-radius:999px; cursor:pointer; font-weight:700; color:#bfa76a; }
-
-  /* Modal */
-  #noticia-modal { display:none; }
-  #noticia-modal.show { display:flex; }
-  #noticia-modal .prose p{ color: #232526; }
-
-  /* small adjustments */
-  @media (max-width:640px){ .noticia-img{ height:140px } }
-</style>
-
-<script>
-// Datos: edita este array para actualizar noticias. Ejemplos incluidos.
-const noticiasData = [
-  {
-    id: 'n1',
-    titulo: '¡Nuevo sencillo: "Sabor de Calle"!',
-    fecha: '2025-09-10',
-    excerpt: 'RDCR SOUND presenta "Sabor de Calle", el nuevo tema que mezcla salsa y electrónica. Escúchalo ya en nuestras playlists.',
-    content: '<p>RDCR SOUND lanza hoy "Sabor de Calle", un tema fresco con arreglos modernos y ritmos latinos. Disponible en todas las plataformas. <strong>No te lo pierdas</strong>.</p>',
-    img: '/img_radio/RDCRSOUND_LOGrem.png',
-    link: 'https://holamusica.com/',
-    badge: 'Nuevo'
-  },
-  {
-    id: 'n2',
-    titulo: 'RDCR SOUND en vivo desde Ibarra - Resumen',
-    fecha: '2025-09-08',
-    excerpt: 'Revive las mejores entrevistas y presentaciones en nuestra transmisión especial desde Ibarra.',
-    content: '<p>La transmisión incluyó entrevistas con artistas locales, reportajes y lo mejor de la salsa. Mira las fotos y escucha los podcasts relacionados en nuestro sitio.</p>',
-    img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1200&q=80',
-    link: 'https://holamusica.com/',
-    badge: 'En Vivo'
-  },
-  {
-    id: 'n3',
-    titulo: 'Sorteo: Gana entradas VIP',
-    fecha: '2025-09-05',
-    excerpt: 'Participa enviando tu mensaje por WhatsApp y gana 2 entradas VIP al concierto de este mes.',
-    content: '<p>Envía tu nombre y la canción favorita al WhatsApp oficial para participar. Los ganadores se anunciarán en la emisión del viernes.</p>',
-    img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
-    link: 'https://holamusica.com/',
-    badge: 'Sorteo'
-  }
-];
-
-function formatFecha(fecha){
-  const meses=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
-  const d=new Date(fecha);
-  return `${d.getDate()} ${meses[d.getMonth()]} ${d.getFullYear()}`;
-}
-
-function renderNoticias(filter='all'){
-  const cont=document.getElementById('noticias-list');
-  const items = noticiasData.filter(n=> filter==='all' ? true : (n.badge && n.badge.toLowerCase().includes(filter)) );
-  cont.innerHTML = items.map(n => `
-    <article class="noticia-card" data-id="${n.id}" tabindex="0" role="article" aria-labelledby="${n.id}-title">
-      <div class="noticia-top">
-        <img class="noticia-img" src="${n.img}" alt="${n.titulo}">
-        <span class="noticia-badge">${n.badge||'Noticia'}</span>
-      </div>
-      <div class="noticia-body">
-        <div id="${n.id}-title" class="noticia-title">${n.titulo}</div>
-        <div class="noticia-fecha">${formatFecha(n.fecha)}</div>
-        <div class="noticia-excerpt">${n.excerpt}</div>
-        <div class="noticia-actions">
-          <button class="noticia-cta" data-action="open" data-id="${n.id}">Ver detalle</button>
-          <a class="noticia-cta" href="${n.link}" target="_blank" rel="noopener">Fuente</a>
-        </div>
-      </div>
-    </article>
-  `).join('');
-
-  // attach handlers
-  cont.querySelectorAll('[data-action="open"]').forEach(btn=>{
-    btn.addEventListener('click', ()=> openModal(btn.dataset.id));
-  });
-  // keyboard accessibility: Enter opens
-  cont.querySelectorAll('.noticia-card').forEach(card=>{
-    card.addEventListener('keydown', e=>{ if(e.key==='Enter') openModal(card.dataset.id); });
-  });
-
-  // animate into view with IntersectionObserver
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach(ent=>{
-      if(ent.isIntersecting) ent.target.classList.add('visible');
-    });
-  }, {threshold:0.12});
-  document.querySelectorAll('#noticias-list .noticia-card').forEach(el=>{ el.classList.add('opacity-0','translate-y-6'); obs.observe(el); });
-}
-
-function openModal(id){
-  const n = noticiasData.find(x=>x.id===id); if(!n) return;
-  document.getElementById('modal-img').src = n.img;
-  document.getElementById('modal-title').textContent = n.titulo;
-  document.getElementById('modal-fecha').textContent = formatFecha(n.fecha);
-  document.getElementById('modal-content').innerHTML = n.content;
-  document.getElementById('modal-link').href = n.link;
-  const modal = document.getElementById('noticia-modal');
-  modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(){
-  const modal = document.getElementById('noticia-modal');
-  modal.classList.remove('show'); modal.setAttribute('aria-hidden','true');
-  document.body.style.overflow = '';
-}
-
-// modal close handlers
-document.addEventListener('click', (e)=>{
-  if(e.target.matches('[data-close="modal"]') || e.target.id==='modal-close' || e.target.id==='modal-close-2') closeModal();
-});
-window.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
-
-// filters
-document.getElementById('filter-all').addEventListener('click', ()=>{ renderNoticias('all'); document.getElementById('filter-all').classList.add('bg-yellow-100/10'); document.getElementById('filter-nuevo').classList.remove('bg-yellow-100/10'); });
-document.getElementById('filter-nuevo').addEventListener('click', ()=>{ renderNoticias('nuevo'); document.getElementById('filter-nuevo').classList.add('bg-yellow-100/10'); document.getElementById('filter-all').classList.remove('bg-yellow-100/10'); });
-
-// inicializar
-document.addEventListener('DOMContentLoaded', ()=>{
-  renderNoticias();
-});
 </script>
