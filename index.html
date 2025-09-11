@@ -736,199 +736,173 @@
   </div>
 </section>
 <style>
-/* Carousel effect for emisoras */
+/* Carousel effect for emisoras - improved: all cards same base size, stronger zoom on hover/center */
 #emisora-carousel {
-  min-height: 160px;
+  min-height: 200px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
 }
 .emisora-card {
-  opacity: 0.6;
-  transform: scale(0.82) translateY(0);
-  transition:
-    transform 0.5s cubic-bezier(.4,0,.2,1),
-    opacity 0.5s cubic-bezier(.4,0,.2,1),
-    box-shadow 0.5s cubic-bezier(.4,0,.2,1);
+  opacity: 0.9;
+  transform: scale(1);
+  transition: transform 0.42s cubic-bezier(.2,.9,.2,1), opacity 0.42s, box-shadow 0.42s;
   z-index: 1;
-  pointer-events: none;
+  pointer-events: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
-.emisora-card-center {
-  opacity: 1;
-  transform: scale(1.13) translateY(0);
-  box-shadow: 0 8px 32px #fde04799, 0 0 0 6px #bfa76a33;
-  z-index: 2;
-  pointer-events: auto;
-  animation: carousel-pop-in 0.7s cubic-bezier(.4,0,.2,1);
-}
-.emisora-card-side {
-  opacity: 0.85;
-  transform: scale(0.95) translateY(0);
-  z-index: 1;
-  pointer-events: auto;
-}
-.emisora-card-leave {
-  animation: carousel-fade-out 0.5s cubic-bezier(.4,0,.2,1) forwards;
-}
-/* --- Tamaño controlable para todas las emisoras --- */
+/* Base: make every image the same large size */
 .emisora-img {
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 160px;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   border-radius: 1rem;
-  box-shadow: 0 2px 12px #bfa76a33;
-  transition: width 0.3s, height 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 18px #00000033;
+  transition: transform 0.42s ease, box-shadow 0.42s ease;
 }
-.emisora-card-center .emisora-img {
-  width: 160px;
-  height: 160px;
-  box-shadow: 0 8px 32px #fde04799, 0 0 0 6px #bfa76a33;
+/* Center/hover state: larger and more glow */
+.emisora-card-center,
+.emisora-card:hover {
+  transform: scale(1.35);
+  z-index: 3;
 }
-.emisora-card-side .emisora-img {
-  width: 100px;
-  height: 100px;
+.emisora-card-center .emisora-img,
+.emisora-card:hover .emisora-img {
+  transform: scale(1.06);
+  box-shadow: 0 12px 36px #fde04788, 0 0 0 6px #bfa76a22;
 }
+/* Slightly dim non-centered neighbors */
+.emisora-card:not(.emisora-card-center):not(:hover) { opacity: 0.72; transform: scale(1); }
+
 @media (max-width: 900px) {
-  .emisora-img {
-    width: 80px;
-    height: 80px;
-  }
-  .emisora-card-center .emisora-img {
-    width: 110px;
-    height: 110px;
-  }
-  .emisora-card-side .emisora-img {
-    width: 70px;
-    height: 70px;
-  }
+  .emisora-img { width: 110px; height: 110px; }
+  .emisora-card-center, .emisora-card:hover { transform: scale(1.18); }
 }
 @media (max-width: 600px) {
-  #emisora-carousel {
-    min-height: 120px;
-  }
-  .emisora-card {
-    min-width: 90px !important;
-    max-width: 120px !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-  .emisora-img {
-    width: 60px;
-    height: 60px;
-  }
-  .emisora-card-center .emisora-img {
-    width: 80px;
-    height: 80px;
-  }
-  .emisora-card-side .emisora-img {
-    width: 50px;
-    height: 50px;
-  }
-  /* Elimina bordes y sombras en mobile para galeria también */
-  .galeria-card {
-    border: none !important;
-    box-shadow: none !important;
-  }
-}
-#emisora-indicators button {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #bfa76a55;
-  border: none;
-  margin: 0 2px;
-  transition: background 0.2s;
-  cursor: pointer;
-}
-#emisora-indicators button.active {
-  background: #fde047;
-  box-shadow: 0 0 0 2px #bfa76a55;
+  #emisora-carousel { min-height: 140px; gap: 10px; }
+  .emisora-img { width: 80px; height: 80px; }
+  .emisora-card-center, .emisora-card:hover { transform: scale(1.12); }
 }
 </style>
 <script>
+// Improved emisora carousel logic: hover to center+zoom, pause auto-rotation, resume after delay
 const emisoraData = [
-  {
-    href: "/DCRadioEC",
-    img: "/img_radio/DCRADIOEC_LOG.jpeg",
-    alt: "DC Radio EC"
-  },
-  {
-    href: "/DCMixEC",
-    img: "/img_radio/dcmix_logo.jpg",
-    alt: "DC Mix EC"
-  },
-  {
-    href: "/DCClasicosEC",
-    img: "/img_radio/dcclasicos_logo.jpg",
-    alt: "DC Clasicos EC"
-  }
+  { href: "/DCRadioEC", img: "/img_radio/DCRADIOEC_LOG.jpeg", alt: "DC Radio EC" },
+  { href: "/DCMixEC", img: "/img_radio/dcmix_logo.jpg", alt: "DC Mix EC" },
+  { href: "/DCClasicosEC", img: "/img_radio/dcclasicos_logo.jpg", alt: "DC Clasicos EC" }
 ];
-let emisoraCenter = 0, emisoraInterval = null, emisoraPaused = false, emisoraLastIdx = 0;
+let emisoraCenter = 0, emisoraInterval = null, emisoraPaused = false, emisoraResumeTimeout = null;
+const EMISORA_AUTO_MS = 3800; // auto change interval
+const EMISORA_RESUME_DELAY = 1800; // resume after mouse leaves
+
 function renderEmisoraCarousel(centerIdx, direction = 1) {
   const container = document.getElementById('emisora-carousel');
-  // Animate out old center card
-  const oldCards = container.querySelectorAll('.emisora-card-center');
-  oldCards.forEach(card => {
-    card.classList.remove('emisora-card-center');
-    card.classList.add('emisora-card-leave');
-    setTimeout(() => card.remove(), 480);
+  if (!container) return;
+  container.innerHTML = '';
+
+  emisoraData.forEach((item, i) => {
+    const a = document.createElement('a');
+    a.href = item.href;
+    a.className = 'emisora-card' + (i === centerIdx ? ' emisora-card-center' : '');
+    a.setAttribute('data-idx', i);
+    a.setAttribute('aria-label', item.alt);
+
+    const img = document.createElement('img');
+    img.src = item.img;
+    img.alt = item.alt;
+    img.className = 'emisora-img';
+
+    a.appendChild(img);
+    container.appendChild(a);
   });
 
-  container.innerHTML = '';
-  for (let i = 0; i < emisoraData.length; i++) {
-    let cls = "emisora-card";
-    if (i === centerIdx) cls += " emisora-card-center";
-    else if (i === (centerIdx - 1 + emisoraData.length) % emisoraData.length || i === (centerIdx + 1) % emisoraData.length) cls += " emisora-card-side";
-    // Quitar target="_blank" para enlaces internos
-    container.innerHTML += `
-      <a href="${emisoraData[i].href}" class="${cls}">
-        <img src="${emisoraData[i].img}" alt="${emisoraData[i].alt}" class="emisora-img" />
-      </a>
-    `;
-  }
-  // Indicadores similares a programación
+  // Indicators (keep previous behavior)
   const indicators = document.getElementById('emisora-indicators');
-  if (emisoraData.length > 1) {
+  if (emisoraData.length > 1 && indicators) {
     indicators.innerHTML = emisoraData.map((_, idx) =>
       `<button class="${idx === centerIdx ? 'active' : ''}" aria-label="Ir a ${emisoraData[idx].alt}"></button>`
     ).join('');
     Array.from(indicators.children).forEach((btn, idx) => {
       btn.onclick = () => {
         emisoraCenter = idx;
-        renderEmisoraCarousel(emisoraCenter, idx > emisoraLastIdx ? 1 : -1);
-        emisoraLastIdx = emisoraCenter;
+        renderEmisoraCarousel(emisoraCenter, idx > emisoraCenter ? 1 : -1);
         resetEmisoraInterval();
       };
     });
-  } else {
-    indicators.innerHTML = '';
   }
-  emisoraLastIdx = centerIdx;
+
+  // Attach hover/click listeners to each card
+  Array.from(container.children).forEach((card) => {
+    const idx = Number(card.getAttribute('data-idx'));
+
+    card.addEventListener('mouseenter', () => {
+      // Pause auto and set center to hovered
+      emisoraPaused = true;
+      if (emisoraInterval) clearInterval(emisoraInterval);
+      if (emisoraResumeTimeout) clearTimeout(emisoraResumeTimeout);
+
+      if (idx !== emisoraCenter) {
+        emisoraCenter = idx;
+        // re-render to update center class
+        renderEmisoraCarousel(emisoraCenter, 0);
+      } else {
+        // ensure the hovered card has center class
+        card.classList.add('emisora-card-center');
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      // small debounce before resuming auto-change
+      emisoraResumeTimeout = setTimeout(() => {
+        emisoraPaused = false;
+        startEmisoraInterval();
+      }, EMISORA_RESUME_DELAY);
+    });
+
+    card.addEventListener('click', (e) => {
+      // on click keep it centered and reset interval
+      emisoraCenter = idx;
+      renderEmisoraCarousel(emisoraCenter);
+      resetEmisoraInterval();
+    });
+  });
 }
+
 function nextEmisoraCarousel() {
-  let nextIdx = (emisoraCenter + 1) % emisoraData.length;
-  renderEmisoraCarousel(nextIdx, 1);
-  emisoraCenter = nextIdx;
+  emisoraCenter = (emisoraCenter + 1) % emisoraData.length;
+  renderEmisoraCarousel(emisoraCenter, 1);
 }
+
 function startEmisoraInterval() {
   if (emisoraInterval) clearInterval(emisoraInterval);
   emisoraInterval = setInterval(() => {
     if (!emisoraPaused) nextEmisoraCarousel();
-  }, 3200);
+  }, EMISORA_AUTO_MS);
 }
+
 function resetEmisoraInterval() {
+  if (emisoraInterval) clearInterval(emisoraInterval);
+  emisoraPaused = false;
   startEmisoraInterval();
 }
+
 document.addEventListener("DOMContentLoaded", function() {
   renderEmisoraCarousel(emisoraCenter);
   startEmisoraInterval();
-  // Pause on hover
+
+  // Pause whole carousel on mouse enter, resume on leave (for the container)
   const emisoraCarousel = document.getElementById('emisora-carousel');
-  emisoraCarousel.addEventListener('mouseenter', () => { emisoraPaused = true; });
-  emisoraCarousel.addEventListener('mouseleave', () => { emisoraPaused = false; });
+  if (emisoraCarousel) {
+    emisoraCarousel.addEventListener('mouseenter', () => { emisoraPaused = true; if (emisoraInterval) clearInterval(emisoraInterval); });
+    emisoraCarousel.addEventListener('mouseleave', () => { emisoraPaused = false; startEmisoraInterval(); });
+  }
 });
 </script>
 
@@ -1441,7 +1415,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Suaviza el salto al inicio
         container.scrollLeft = 0;
         start = timestamp;
-        progress = 0;
+               progress = 0;
       }
 
       animationFrame = requestAnimationFrame(step);
