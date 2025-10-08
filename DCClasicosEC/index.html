@@ -372,12 +372,30 @@
 </div>
 
 <!-- =========================
-     REPRODUCTOR FLOTANTE INFERIOR
+     REPRODUCTOR FLOTANTE INFERIOR MEJORADO
      ========================= -->
-<!-- Iframe flotante inferior -->
-<div class="floating-player">
-  <iframe src="https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_7144_stream_710108856"
-    style="width:100%;height:100%;border:none;overflow:hidden;pointer-events:auto;" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+<div class="floating-player" id="floatingPlayer">
+  <button class="floating-player-toggle" id="playerToggle" aria-label="Minimizar reproductor">
+    <span class="icon-music">
+      <!-- Icono musical SVG animado dorado -->
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="12" fill="url(#gold-gradient2)" />
+        <path d="M11 21V9l8-2v12" stroke="#18181b" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="11" cy="21" r="2.3" fill="#ffe082" />
+        <circle cx="19" cy="19" r="2.3" fill="#ffe082" />
+        <defs>
+          <radialGradient id="gold-gradient2" cx="0" cy="0" r="1" gradientTransform="translate(14 14) scale(14)">
+            <stop stop-color="#ffe082"/>
+            <stop offset="1" stop-color="#bfa76a"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </span>
+  </button>
+  <div class="floating-player-content" id="playerContent">
+    <iframe src="https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_7144_stream_710108856"
+      style="width:100%;height:100%;border:none;overflow:hidden;pointer-events:auto;" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+  </div>
 </div>
 
 <!-- =========================
