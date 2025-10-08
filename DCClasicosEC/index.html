@@ -371,32 +371,153 @@
   </div>
 </div>
 
+<!-- ...todo el contenido anterior arriba... -->
+
 <!-- =========================
      REPRODUCTOR FLOTANTE INFERIOR MEJORADO
      ========================= -->
 <div class="floating-player" id="floatingPlayer">
-  <button class="floating-player-toggle" id="playerToggle" aria-label="Minimizar reproductor">
-    <span class="icon-music">
-      <!-- Icono musical SVG animado dorado -->
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="12" fill="url(#gold-gradient2)" />
-        <path d="M11 21V9l8-2v12" stroke="#18181b" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="11" cy="21" r="2.3" fill="#ffe082" />
-        <circle cx="19" cy="19" r="2.3" fill="#ffe082" />
+  <div class="player-controls">
+    <button id="playPauseBtn" class="player-btn" aria-label="Reproducir/Pausar">
+      <!-- Iconos SVG animados dorados -->
+      <svg id="playIcon" width="34" height="34" viewBox="0 0 34 34">
+        <circle cx="17" cy="17" r="16" fill="url(#gold-gradient-btn)" />
+        <polygon points="13,10 26,17 13,24" fill="#18181b"/>
         <defs>
-          <radialGradient id="gold-gradient2" cx="0" cy="0" r="1" gradientTransform="translate(14 14) scale(14)">
+          <radialGradient id="gold-gradient-btn" cx="0" cy="0" r="1" gradientTransform="translate(17 17) scale(17)">
             <stop stop-color="#ffe082"/>
             <stop offset="1" stop-color="#bfa76a"/>
           </radialGradient>
         </defs>
       </svg>
+      <svg id="pauseIcon" width="34" height="34" viewBox="0 0 34 34" style="display:none;">
+        <circle cx="17" cy="17" r="16" fill="url(#gold-gradient-btn2)" />
+        <rect x="13" y="10" width="3.5" height="14" rx="1.3" fill="#18181b"/>
+        <rect x="19" y="10" width="3.5" height="14" rx="1.3" fill="#18181b"/>
+        <defs>
+          <radialGradient id="gold-gradient-btn2" cx="0" cy="0" r="1" gradientTransform="translate(17 17) scale(17)">
+            <stop stop-color="#ffe082"/>
+            <stop offset="1" stop-color="#bfa76a"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </button>
+    <input type="range" min="0" max="1" step="0.01" value="1" id="volumeSlider" class="volume-slider" aria-label="Volumen" />
+    <span class="volume-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#ffe082" d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 4.45v15.1c0 .65-.69 1.07-1.27.74C11.4 19.13 9.68 17.29 8.3 15.1l-.3-.44V9.34c0-.62.52-1.11 1.13-1.11.31 0 .61.13.82.37C12.02 10.98 13.5 13.43 13.5 16c0 1.38-.56 2.63-1.46 3.54-.38.39-1.01.39-1.4 0-.39-.39-.39-1.01 0-1.4C11.94 17.29 12.5 16.05 12.5 14.67c0-2.57-1.48-5.02-3.35-6.4-.21-.24-.51-.37-.82-.37-.61 0-1.13.49-1.13 1.11v5.32l.3.44c1.38 2.19 3.1 4.03 5.43 5.19.58.33 1.27-.09 1.27-.74V4.45z"/></svg>
     </span>
-  </button>
-  <div class="floating-player-content" id="playerContent">
-    <iframe src="https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_7144_stream_710108856"
-      style="width:100%;height:100%;border:none;overflow:hidden;pointer-events:auto;" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
   </div>
+  <audio id="audioPlayer" src="https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_7144_stream_710108856" preload="none"></audio>
 </div>
+
+<style>
+.floating-player {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100px;
+  z-index: 9999;
+  box-shadow: 0 -2px 14px #bfa76a22;
+  background: linear-gradient(90deg,#18181b 60%,#23231c 100%);
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInPlayer 0.8s;
+}
+@keyframes fadeInPlayer {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.player-controls {
+  display:flex;
+  align-items:center;
+  gap: 18px;
+  width: 95vw;
+  max-width: 520px;
+  margin: 0 auto;
+  justify-content: center;
+}
+.player-btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: transform 0.18s;
+  filter: drop-shadow(0 0 10px #bfa76a44);
+}
+.player-btn:active { transform: scale(0.93); }
+.volume-slider {
+  width: 110px;
+  accent-color: #ffe082;
+  background: linear-gradient(90deg,#ffe082 40%,#bfa76a 100%);
+  border-radius: 7px;
+  height: 4px;
+  margin: 0 5px;
+  box-shadow: 0 2px 8px #bfa76a22;
+}
+.volume-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+@media (max-width:600px) {
+  .floating-player { height: 70px;}
+  .player-controls { max-width: 99vw; gap: 10px;}
+  .player-btn svg { width: 26px; height: 26px;}
+  .volume-slider { width: 70px;}
+}
+</style>
+
+<script>
+const audio = document.getElementById('audioPlayer');
+const playBtn = document.getElementById('playPauseBtn');
+const playIcon = document.getElementById('playIcon');
+const pauseIcon = document.getElementById('pauseIcon');
+const volSlider = document.getElementById('volumeSlider');
+
+// Play/Pause toggle
+playBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+});
+
+// Update icon on play/pause
+audio.addEventListener('play', () => {
+  playIcon.style.display = 'none';
+  pauseIcon.style.display = '';
+  playBtn.classList.add('playing');
+});
+audio.addEventListener('pause', () => {
+  playIcon.style.display = '';
+  pauseIcon.style.display = 'none';
+  playBtn.classList.remove('playing');
+});
+// Volume
+volSlider.addEventListener('input', () => {
+  audio.volume = volSlider.value;
+});
+
+// Auto show correct icon on load
+window.addEventListener('DOMContentLoaded', () => {
+  if (audio.paused) {
+    playIcon.style.display = '';
+    pauseIcon.style.display = 'none';
+  } else {
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = '';
+  }
+});
+</script>
+
+<!-- ...el resto de tu archivo abajo... -->
 
 <!-- =========================
      SCRIPTS DE EFECTOS Y UTILIDADES
