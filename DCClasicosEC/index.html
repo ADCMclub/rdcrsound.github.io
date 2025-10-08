@@ -384,10 +384,7 @@
     outline:none;display:flex;align-items:center;justify-content:center;width:60px;height:60px;
   ">
     <span id="playIcon" style="display:inline-block;transition:opacity 0.35s;">
-      <svg width="38" height="38" viewBox="0 0 38 38"><circle cx="19" cy="19" r="18" fill="#ffe082"/><polygon points="15,12 30,19 15,26" fill="#18181b">
-        <animate attributeName="points" dur="0.35s" values="15,12 30,19 15,26; 16,14 28,19 16,24; 15,12 30,19 15,26" repeatCount="indefinite"/>
-      </polygon>
-      </svg>
+      <svg width="38" height="38" viewBox="0 0 38 38"><circle cx="19" cy="19" r="18" fill="#ffe082"/><polygon points="15,12 30,19 15,26" fill="#18181b"></polygon></svg>
     </span>
     <span id="pauseIcon" style="display:none;transition:opacity 0.35s;">
       <svg width="38" height="38" viewBox="0 0 38 38"><circle cx="19" cy="19" r="18" fill="#ffe082"/><rect x="13" y="12" width="4.5" height="14" rx="1.6" fill="#18181b"/><rect x="21" y="12" width="4.5" height="14" rx="1.6" fill="#18181b"/></svg>
@@ -398,7 +395,6 @@
     <span id="volIcon" style="display:inline-block;vertical-align:middle;">
       <svg id="svgVol" width="32" height="32" viewBox="0 0 32 32">
         <path id="volPath" d="M6 12v8h6l6 6V6l-6 6H6z" fill="#ffe082" />
-        <animate id="volAnim" attributeName="d" dur="0.3s" repeatCount="1" />
       </svg>
     </span>
     <input type="range" min="0" max="100" value="100" id="volumeSlider" style="
@@ -406,13 +402,6 @@
       box-shadow:0 2px 12px #bfa76a55;
       height:4px;border-radius:4px;outline:none;">
   </div>
-  <span id="stateText" style="
-    color:#ffe082;font-weight:bold;font-size:1.1rem;
-    margin-left:20px;transition:opacity 0.4s,transform .3s;
-    opacity:0;transform:translateY(10px);
-    background:linear-gradient(90deg,#ffe08255,#fffbe655);padding:6px 15px;border-radius:8px;
-    box-shadow:0 2px 8px #bfa76a33;
-  "></span>
   <audio id="audioPlayer" src="https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_7144_stream_710108856" preload="none"></audio>
 </div>
 
@@ -422,122 +411,57 @@ const playBtn = document.getElementById('playPauseBtn');
 const playIcon = document.getElementById('playIcon');
 const pauseIcon = document.getElementById('pauseIcon');
 const volSlider = document.getElementById('volumeSlider');
-const stateText = document.getElementById('stateText');
-const volIcon = document.getElementById('volIcon');
-const svgVol = document.getElementById('svgVol');
 const volPath = document.getElementById('volPath');
 
 function setVolIcon(vol) {
-  // Smooth icon change for volume levels
   if (vol == 0) {
-    volPath.setAttribute('d','M6 12v8h6l6 6V6l-6 6H6z'); // mute (just speaker)
+    volPath.setAttribute('d','M6 12v8h6l6 6V6l-6 6H6z'); // mute
   } else if (vol < 35) {
-    volPath.setAttribute('d','M6 12v8h6l6 6V6l-6 6H6zm10.5-4a1 1 0 0 1 0 16'); // low volume
+    volPath.setAttribute('d','M6 12v8h6l6 6V6l-6 6H6zm10.5-4a1 1 0 0 1 0 16');
   } else if (vol < 70) {
-    volPath.setAttribute('d','M6 12v8h6l6 6V6l-6 6H6zm10.5-4a1 1 0 0 1 0 16M20 10a1 1 0 0 1 0 12'); // mid volume
+    volPath.setAttribute('d','M6 12v8h6l6 6V6l-6 6H6zm10.5-4a1 1 0 0 1 0 16M20 10a1 1 0 0 1 0 12');
   } else {
-    volPath.setAttribute('d','M6 12v8h6l6 6V6l-6 6H6zm10.5-4a1 1 0 0 1 0 16M20 10a1 1 0 0 1 0 12M23 8a1 1 0 0 1 0 16'); // high volume
+    volPath.setAttribute('d','M6 12v8h6l6 6V6l-6 6H6zm10.5-4a1 1 0 0 1 0 16M20 10a1 1 0 0 1 0 12M23 8a1 1 0 0 1 0 16');
   }
 }
-
-// Animación para el slider al cambiar
 volSlider.addEventListener('input', () => {
-  audio.volume = volSlider.value / 100;
+  audio.volume = Number(volSlider.value) / 100;
   setVolIcon(volSlider.value);
   volSlider.style.boxShadow = '0 0 0 8px #ffe08244';
   setTimeout(()=>volSlider.style.boxShadow='0 2px 12px #bfa76a55',170);
 });
 
-// Play/Pause con animación
 playBtn.addEventListener('click', () => {
   playBtn.style.transform = 'scale(0.85)';
   setTimeout(()=>{playBtn.style.transform = 'scale(1)';},140);
 
   if (audio.paused) {
-    audio.play().then(() => {
-      showState("🔊 Reproduciendo");
-    }).catch(e => {
-      showState("❌ Error al reproducir");
+    audio.play().catch(e => {
       alert("No se pudo reproducir el stream. Prueba más tarde.");
       console.error(e);
     });
   } else {
     audio.pause();
-    showState("⏸️ Pausado");
   }
 });
 
-// Animación de estado con fade-in
-function showState(txt) {
-  stateText.style.opacity = "0";
-  stateText.style.transform = "translateY(10px)";
-  setTimeout(() => {
-    stateText.textContent = txt;
-    stateText.style.opacity = "1";
-    stateText.style.transform = "translateY(0)";
-  }, 160);
-}
-
-// Cambia iconos Play/Pause
 audio.addEventListener('play', () => {
   playIcon.style.opacity = '0';
   pauseIcon.style.opacity = '1';
   playIcon.style.display = 'none';
   pauseIcon.style.display = 'inline-block';
-  showState("🔊 Reproduciendo");
 });
 audio.addEventListener('pause', () => {
   playIcon.style.opacity = '1';
   pauseIcon.style.opacity = '0';
   pauseIcon.style.display = 'none';
   playIcon.style.display = 'inline-block';
-  showState("⏸️ Pausado");
 });
 
-// Estado inicial
 window.addEventListener('DOMContentLoaded', () => {
-  audio.volume = volSlider.value / 100;
+  audio.volume = Number(volSlider.value) / 100;
   setVolIcon(volSlider.value);
-  showState(audio.paused ? "⏸️ Pausado" : "🔊 Reproduciendo");
 });
-</script>
-
-<!-- =========================
-     SCRIPTS DE EFECTOS Y UTILIDADES
-     ========================= -->
-<!-- Particles.js library -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script>
-  particlesJS('particles-js', {
-    "particles": {
-      "number": { "value": 80 },
-      "color": { "value": ["#ffe082", "#fffbe6", "#fff9c4", "#fffde7"] },
-      "shape": { "type": "circle" },
-      "opacity": { "value": 0.7, "random": true },
-      "size": { "value": 3, "random": { "enable": true, "minimumValue": 1 } },
-      "line_linked": { "enable": true, "distance": 150, "color": "#ffe082", "opacity": 0.35, "width": 1.2 },
-      "move": { "enable": true, "speed": 3 }
-    },
-    "interactivity": {
-      "events": {
-        "onhover": { "enable": false },
-        "onclick": { "enable": false }
-      }
-    },
-    "retina_detect": true
-  });
-</script>
-<script>
-function goBackToSection(event, sectionId) {
-  event.preventDefault();
-  if (document.referrer) {
-    let url = new URL(document.referrer);
-    url.hash = sectionId;
-    window.location.href = url.toString();
-  } else {
-    window.location.href = '/#' + sectionId;
-  }
-}
 </script>
 
 
