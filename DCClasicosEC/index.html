@@ -380,22 +380,22 @@
   <div class="player-controls">
     <button id="playPauseBtn" class="player-btn" aria-label="Reproducir/Pausar">
       <span class="btn-anim-wrap">
-        <svg id="playIcon" class="btn-anim" width="34" height="34" viewBox="0 0 34 34">
-          <circle cx="17" cy="17" r="16" fill="url(#gold-gradient-btn)" />
-          <polygon points="13,10 26,17 13,24" fill="#18181b"/>
+        <svg id="playIcon" class="btn-anim" width="38" height="38" viewBox="0 0 38 38">
+          <circle cx="19" cy="19" r="18" fill="url(#gold-gradient-btn)" />
+          <polygon points="15,12 30,19 15,26" fill="#18181b"/>
           <defs>
-            <radialGradient id="gold-gradient-btn" cx="0" cy="0" r="1" gradientTransform="translate(17 17) scale(17)">
+            <radialGradient id="gold-gradient-btn" cx="0" cy="0" r="1" gradientTransform="translate(19 19) scale(19)">
               <stop stop-color="#ffe082"/>
               <stop offset="1" stop-color="#bfa76a"/>
             </radialGradient>
           </defs>
         </svg>
-        <svg id="pauseIcon" class="btn-anim" width="34" height="34" viewBox="0 0 34 34" style="display:none;">
-          <circle cx="17" cy="17" r="16" fill="url(#gold-gradient-btn2)" />
-          <rect x="13" y="10" width="3.5" height="14" rx="1.3" fill="#18181b"/>
-          <rect x="19" y="10" width="3.5" height="14" rx="1.3" fill="#18181b"/>
+        <svg id="pauseIcon" class="btn-anim" width="38" height="38" viewBox="0 0 38 38" style="display:none;">
+          <circle cx="19" cy="19" r="18" fill="url(#gold-gradient-btn2)" />
+          <rect x="15" y="12" width="5" height="14" rx="1.6" fill="#18181b"/>
+          <rect x="23" y="12" width="5" height="14" rx="1.6" fill="#18181b"/>
           <defs>
-            <radialGradient id="gold-gradient-btn2" cx="0" cy="0" r="1" gradientTransform="translate(17 17) scale(17)">
+            <radialGradient id="gold-gradient-btn2" cx="0" cy="0" r="1" gradientTransform="translate(19 19) scale(19)">
               <stop stop-color="#ffe082"/>
               <stop offset="1" stop-color="#bfa76a"/>
             </radialGradient>
@@ -406,10 +406,13 @@
         </span>
       </span>
     </button>
-    <input type="range" min="0" max="1" step="0.01" value="1" id="volumeSlider" class="volume-slider" aria-label="Volumen" />
+    <div class="volume-slider-wrap">
+      <input type="range" min="0" max="100" step="1" value="100" id="volumeSlider" class="volume-slider" aria-label="Volumen" />
+      <div class="volume-slider-bar" id="volumeSliderBar"></div>
+    </div>
     <span class="volume-icon" id="volumeIcon">
       <!-- Icono volumen alto por defecto -->
-      <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#ffe082" d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 4.45v15.1c3.39-.82 5.5-4.04 5.5-7.55s-2.11-6.73-5.5-7.55z"></path></svg>
+      <svg width="30" height="30" viewBox="0 0 24 24"><path fill="#ffe082" d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2c0-[...]
     </span>
   </div>
   <audio id="audioPlayer" src="https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_7144_stream_710108856" preload="none"></audio>
@@ -422,12 +425,12 @@
   right: 0;
   bottom: 0;
   width: 100vw;
-  height: 100px;
+  height: 120px;
   z-index: 9999;
-  box-shadow: 0 -2px 14px #bfa76a22;
+  box-shadow: 0 -2px 18px #bfa76a44;
   background: linear-gradient(90deg,#18181b 60%,#23231c 100%);
-  border-top-left-radius: 14px;
-  border-top-right-radius: 14px;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -435,15 +438,15 @@
   transition: box-shadow 0.2s;
 }
 @keyframes fadeInPlayer {
-  from { opacity: 0; transform: translateY(40px);}
+  from { opacity: 0; transform: translateY(50px);}
   to { opacity: 1; transform: translateY(0);}
 }
 .player-controls {
   display:flex;
   align-items:center;
-  gap: 18px;
+  gap: 30px;
   width: 95vw;
-  max-width: 520px;
+  max-width: 690px;
   margin: 0 auto;
   justify-content: center;
 }
@@ -452,79 +455,152 @@
   border: none;
   outline: none;
   cursor: pointer;
-  margin-right: 10px;
-  filter: drop-shadow(0 0 10px #bfa76a44);
+  margin-right: 15px;
+  filter: drop-shadow(0 0 14px #bfa76a44);
   position: relative;
   transition: transform 0.18s;
 }
-.player-btn:active { transform: scale(0.93); }
+.player-btn:active { transform: scale(0.93) rotate(-6deg);}
+.player-btn.playing { 
+  animation: btnBounce 0.5s cubic-bezier(.4,0,.2,1); 
+  box-shadow: 0 0 18px #ffe08255;
+}
+@keyframes btnBounce {
+  0% { transform: scale(1.1);}
+  60% { transform: scale(0.93);}
+  100% { transform: scale(1.08);}
+}
 .btn-anim-wrap {
   display: flex;
   align-items: center;
 }
 .btn-anim {
   transition: transform 0.25s cubic-bezier(.6,-0.28,.74,.05), filter 0.3s cubic-bezier(.6,-0.28,.74,.05);
-  filter: drop-shadow(0 0 7px #ffe08244);
+  filter: drop-shadow(0 0 9px #ffe08244);
 }
 .player-btn.playing .btn-anim {
-  transform: scale(1.14) rotate(-5deg);
-  filter: drop-shadow(0 0 14px #ffe08299);
+  transform: scale(1.2) rotate(-8deg);
+  filter: drop-shadow(0 0 22px #ffe08299);
 }
 .wave-anim {
   display: flex;
-  gap: 2px;
-  margin-left: 7px;
+  gap: 3px;
+  margin-left: 10px;
   align-items: flex-end;
-  height: 26px;
+  height: 32px;
 }
 .wave-anim span {
   display: block;
-  width: 3px;
-  height: 10px;
+  width: 4px;
+  height: 13px;
   background: linear-gradient(180deg,#ffe082 40%,#bfa76a 100%);
   border-radius: 2px;
-  animation: wave 0.8s infinite linear alternate;
+  animation: wave 0.7s infinite linear alternate;
 }
 .wave-anim span:nth-child(2){
-  animation-delay: 0.16s;
-  height: 15px;
+  animation-delay: 0.13s;
+  height: 19px;
 }
 .wave-anim span:nth-child(3){
-  animation-delay: 0.32s;
-  height: 12px;
+  animation-delay: 0.26s;
+  height: 15px;
 }
 .wave-anim span:nth-child(4){
-  animation-delay: 0.48s;
-  height: 17px;
+  animation-delay: 0.39s;
+  height: 22px;
 }
 @keyframes wave {
-  from { height: 8px; }
-  to { height: 21px; }
+  from { height: 9px; }
+  to { height: 25px; }
+}
+
+/* Slider animado y extendido */
+.volume-slider-wrap {
+  position: relative;
+  width: 220px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
 }
 .volume-slider {
-  width: 110px;
+  width: 220px;
   accent-color: #ffe082;
   background: linear-gradient(90deg,#ffe082 40%,#bfa76a 100%);
-  border-radius: 7px;
-  height: 4px;
-  margin: 0 5px;
-  box-shadow: 0 2px 8px #bfa76a22;
+  border-radius: 9px;
+  height: 8px;
+  appearance: none;
+  box-shadow: 0 2px 12px #bfa76a22;
   transition: box-shadow 0.21s;
+  outline: none;
+  position: relative;
+  z-index: 2;
 }
 .volume-slider:active, .volume-slider:focus {
-  box-shadow: 0 2px 15px #ffe08266;
+  box-shadow: 0 2px 18px #ffe08288;
 }
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe082 60%, #bfa76a 100%);
+  box-shadow: 0 2px 10px #bfa76a88;
+  transition: background 0.3s, transform 0.18s;
+  cursor: pointer;
+}
+.volume-slider:active::-webkit-slider-thumb {
+  background: radial-gradient(circle, #fffbe6 80%, #ffe082 100%);
+  transform: scale(1.1);
+}
+.volume-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe082 60%, #bfa76a 100%);
+  box-shadow: 0 2px 10px #bfa76a88;
+  transition: background 0.3s, transform 0.18s;
+  cursor: pointer;
+}
+.volume-slider:active::-moz-range-thumb {
+  background: radial-gradient(circle, #fffbe6 80%, #ffe082 100%);
+  transform: scale(1.1);
+}
+.volume-slider-bar {
+  position: absolute;
+  left: 0; top: 50%;
+  width: 0;
+  height: 8px;
+  background: linear-gradient(90deg,#ffe082 60%,#bfa76a 100%);
+  border-radius: 9px;
+  box-shadow: 0 2px 10px #bfa76a44;
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: width 0.32s cubic-bezier(.4,0,.2,1);
+}
+
 .volume-icon {
   display: inline-block;
   vertical-align: middle;
-  margin-left: 5px;
-  transition: filter 0.18s;
+  margin-left: 8px;
+  transition: filter 0.18s, transform 0.4s;
+  filter: drop-shadow(0 0 8px #ffe08244);
 }
+.volume-icon.animated {
+  animation: volAnim 0.5s cubic-bezier(.4,0,.2,1);
+}
+@keyframes volAnim {
+  0% { transform: scale(1.2) rotate(-16deg);}
+  50% { transform: scale(0.9) rotate(10deg);}
+  100% { transform: scale(1) rotate(0);}
+}
+
 @media (max-width:600px) {
-  .floating-player { height: 70px;}
-  .player-controls { max-width: 99vw; gap: 10px;}
-  .player-btn svg { width: 26px; height: 26px;}
-  .volume-slider { width: 70px;}
+  .floating-player { height: 85px;}
+  .player-controls { max-width: 99vw; gap: 14px;}
+  .player-btn svg { width: 28px; height: 28px;}
+  .volume-slider-wrap { width: 120px;}
+  .volume-slider { width: 120px;}
 }
 </style>
 
@@ -536,28 +612,42 @@ const pauseIcon = document.getElementById('pauseIcon');
 const volSlider = document.getElementById('volumeSlider');
 const volumeIcon = document.getElementById('volumeIcon');
 const waveAnimation = document.getElementById('waveAnimation');
+const volSliderBar = document.getElementById('volumeSliderBar');
 
-// Iconos volumen con SVG
+// Iconos volumen con SVG animados
 function getVolumeSVG(level) {
   if (level === 'mute') {
-    return `<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#ffe082" d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5l-4.5 4.5H8v-9h2.5l4.5 4.5zM3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1z"></path></svg>`;
+    return `<svg width="30" height="30" viewBox="0 0 24 24"><path fill="#ffe082" d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5l-4.5 4.5H8v-9h2.5l4.5 4.5zM3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1z"/></svg>`;
   } else if (level === 'low') {
-    return `<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#ffe082" d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm7.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"></path></svg>`;
+    return `<svg width="30" height="30" viewBox="0 0 24 24"><path fill="#ffe082" d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm7.5 2c0-.83-.5-1.54-1.23-1.84v3.68c.73-.3 1.23-1.01 1.23-1.84z"/></svg>`;
   } else if (level === 'medium') {
-    return `<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#ffe082" d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm9.5 2c0-2.49-1.51-4.55-3.5-5.48v10.97c1.99-.93 3.5-2.99 3.5-5.49z"></path></svg>`;
+    return `<svg width="30" height="30" viewBox="0 0 24 24"><path fill="#ffe082" d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm9.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>`;
   }
   // Alto
-  return `<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#ffe082" d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 4.45v15.1c3.39-.82 5.5-4.04 5.5-7.55s-2.11-6.73-5.5-7.55z"></path></svg>`;
+  return `<svg width="30" height="30" viewBox="0 0 24 24"><path fill="#ffe082" d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2c0-2.76-1.64-5.1-4-6.13v2.06c1.48.73 2.5 2.25 2.5 4.02s-1.02 3.29-2.5 4.02v2.06c2.36-1.03 4-3.37 4-6.03z"/></svg>`;
 }
 
 // Establece el icono de volumen según el valor
 function setVolumeIcon(vol) {
-  let icon;
-  if (vol == 0) icon = getVolumeSVG('mute');
-  else if (vol <= 0.4) icon = getVolumeSVG('low');
-  else if (vol <= 0.7) icon = getVolumeSVG('medium');
-  else icon = getVolumeSVG('high');
-  volumeIcon.innerHTML = icon;
+  let level;
+  if (vol === 0) level = 'mute';
+  else if (vol <= 0.4) level = 'low';
+  else if (vol <= 0.7) level = 'medium';
+  else level = 'high';
+
+  volumeIcon.innerHTML = getVolumeSVG(level);
+
+  // Animación breve
+  volumeIcon.classList.remove('animated');
+  void volumeIcon.offsetWidth;
+  volumeIcon.classList.add('animated');
+}
+
+// Actualiza la barra de volumen animada
+function updateVolumeBar(vol) {
+  // vol es [0,1]
+  const sliderWidth = volSlider.offsetWidth;
+  volSliderBar.style.width = Math.round(sliderWidth * vol) + "px";
 }
 
 // Play/Pause toggle
@@ -583,16 +673,20 @@ audio.addEventListener('pause', () => {
   waveAnimation.style.display = 'none';
 });
 
-// Control de volumen
+// Control de volumen y animaciones
 volSlider.addEventListener('input', () => {
-  audio.volume = volSlider.value;
-  setVolumeIcon(Number(volSlider.value));
+  const vol = volSlider.value / 100;
+  audio.volume = vol;
+  setVolumeIcon(vol);
+  updateVolumeBar(vol);
 });
 
-// Sincroniza icono de volumen al cargar
+// Sincroniza icono y barra de volumen al cargar
 window.addEventListener('DOMContentLoaded', () => {
-  volSlider.value = audio.volume;
-  setVolumeIcon(audio.volume);
+  let vol = audio.volume;
+  volSlider.value = Math.round(vol * 100);
+  setVolumeIcon(vol);
+  updateVolumeBar(vol);
   if (audio.paused) {
     playIcon.style.display = '';
     pauseIcon.style.display = 'none';
@@ -604,10 +698,17 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Actualiza icono si el volumen cambia (por otras fuentes)
+// Actualiza icono y barra si el volumen cambia (por otras fuentes)
 audio.addEventListener('volumechange', () => {
-  volSlider.value = audio.volume;
-  setVolumeIcon(audio.volume);
+  let vol = audio.volume;
+  volSlider.value = Math.round(vol * 100);
+  setVolumeIcon(vol);
+  updateVolumeBar(vol);
+});
+
+// Ajusta barra si cambia tamaño pantalla
+window.addEventListener('resize', () => {
+  updateVolumeBar(audio.volume);
 });
 </script>
 
