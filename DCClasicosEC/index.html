@@ -229,6 +229,19 @@
 
 <div id="particles-js"></div>
 
+<!-- Script funcional -->
+<script>
+function goBackToSection(event, sectionId) {
+  event.preventDefault();
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    window.history.back();
+  }
+}
+</script>
+
 <!-- =========================
      EFECTO DE PARTÍCULAS DE FONDO
      ========================= -->
