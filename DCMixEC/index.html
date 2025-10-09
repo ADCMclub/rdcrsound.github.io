@@ -244,7 +244,7 @@
 
 
 
-<!-- Contenedor con contorno animado -->
+<!-- Contenedor del reproductor con animación -->
 <div class="radio-container">
   <div 
     data-type="newStreamPlayer" 
@@ -264,33 +264,25 @@
 <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
 
 <style>
-/* Fondo general */
-body {
-  background: #0b0c10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* Contenedor con borde animado */
+/* Contorno animado sin modificar el layout de la página */
 .radio-container {
+  display: inline-block;
   padding: 10px;
   border-radius: 20px;
   background: linear-gradient(45deg, #49D3F2, #0077FF, #49D3F2, #00BFFF);
   background-size: 300% 300%;
   animation: borderFlow 5s linear infinite;
-  box-shadow: 0 0 20px rgba(73, 211, 242, 0.7);
+  box-shadow: 0 0 20px rgba(73, 211, 242, 0.6);
 }
 
-/* Animación del gradiente */
+/* Animación del borde */
 @keyframes borderFlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Reproductor dentro del borde */
+/* Estilo interno del reproductor */
 .cstrEmbed {
   background: #000;
   border-radius: 15px;
@@ -298,12 +290,11 @@ body {
   box-shadow: inset 0 0 10px rgba(73, 211, 242, 0.4);
 }
 
-/* Quitar links visibles del reproductor (opcionales) */
+/* Quitar los enlaces visibles (opcional) */
 .cstrEmbed a {
   display: none;
 }
 </style>
-
 
 
   <!-- Ivoox player con play habilitado -->
