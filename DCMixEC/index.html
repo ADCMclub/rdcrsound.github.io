@@ -244,8 +244,8 @@
 
 
 
-<!-- Contenedor del reproductor con animación -->
-<div class="radio-container">
+<!-- Reproductor con contorno animado completo -->
+<div class="radio-frame">
   <div 
     data-type="newStreamPlayer" 
     data-publicToken="ada751f2-b23d-4c05-8abb-1430e3e51c53" 
@@ -264,33 +264,36 @@
 <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
 
 <style>
-/* Contorno animado sin modificar el layout de la página */
-.radio-container {
+/* Contenedor del borde */
+.radio-frame {
   display: inline-block;
-  padding: 10px;
-  border-radius: 20px;
-  background: linear-gradient(45deg, #49D3F2, #0077FF, #49D3F2, #00BFFF);
+  position: relative;
+  padding: 5px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #49D3F2, #0077FF, #00BFFF, #49D3F2);
   background-size: 300% 300%;
-  animation: borderFlow 5s linear infinite;
-  box-shadow: 0 0 20px rgba(73, 211, 242, 0.6);
+  animation: borderAnim 5s linear infinite;
+  box-shadow: 0 0 15px rgba(73, 211, 242, 0.7);
 }
 
-/* Animación del borde */
-@keyframes borderFlow {
+/* Borde animado fluido */
+@keyframes borderAnim {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Estilo interno del reproductor */
-.cstrEmbed {
+/* Reproductor dentro del contorno */
+.radio-frame .cstrEmbed {
   background: #000;
-  border-radius: 15px;
+  border-radius: 12px;
   padding: 10px;
-  box-shadow: inset 0 0 10px rgba(73, 211, 242, 0.4);
+  box-shadow: inset 0 0 10px rgba(73, 211, 242, 0.3);
+  width: 100%;
+  height: 100%;
 }
 
-/* Quitar los enlaces visibles (opcional) */
+/* Oculta los links de caster (opcional) */
 .cstrEmbed a {
   display: none;
 }
