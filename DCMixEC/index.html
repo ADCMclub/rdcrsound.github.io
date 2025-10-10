@@ -334,33 +334,42 @@
     </div>
     <div class="subtitle-modern">🎶 Los mejores mix de música</div>
 
-    <section class="radio-section" aria-labelledby="radio-title">
-      <h2 id="radio-title">Escucha en línea</h2>
-      <div class="radio-wrapper" aria-hidden="false">
-        <div class="radio-frame" role="region" aria-label="Reproductor DC Mix EC">
-          <div class="radio-inner">
-            <div 
-              data-type="newStreamPlayer" 
-              data-publicToken="ada751f2-b23d-4c05-8abb-1430e3e51c53" 
-              data-theme="dark" 
-              data-color="49D3F2" 
-              data-channelId="" 
-              data-rendered="false" 
-              class="cstrEmbed" aria-hidden="false">
-              <a href="https://www.caster.fm" rel="noopener" target="_blank">Shoutcast Hosting</a>
-            </div>
-          </div>
-          <div class="radio-scan" aria-hidden="true"></div>
+<!-- =========================
+     REPRODUCTOR CENTRADO + MARCO ANIMADO
+     ========================= -->
+<section class="radio-section" aria-labelledby="radio-title">
+  <h2 id="radio-title">Escucha en línea</h2>
+
+  <div class="radio-wrapper" aria-hidden="false">
+    <div class="radio-frame" role="region" aria-label="Reproductor DC Mix EC">
+      <div class="radio-inner">
+        <!-- REPRODUCTOR CASTER.FM CON MARCO ANIMADO -->
+        <div 
+          data-type="newStreamPlayer" 
+          data-publicToken="ada751f2-b23d-4c05-8abb-1430e3e51c53" 
+          data-theme="dark" 
+          data-color="49D3F2" 
+          data-channelId="" 
+          data-rendered="false" 
+          class="cstrEmbed">
+          <a href="https://www.caster.fm" rel="noopener" target="_blank">Shoutcast Hosting</a>
+          <a href="https://www.caster.fm" rel="noopener" target="_blank">Stream Hosting</a>
+          <a href="https://www.caster.fm" rel="noopener" target="_blank">Radio Server Hosting</a>
         </div>
+        <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
       </div>
-    </section>
+      <!-- Franja animada que cruza el marco -->
+      <div class="radio-scan" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
 
-    <div class="pdf-container" aria-hidden="false"></div>
-  </main>
+<!-- BOTÓN FLOTANTE MEJORADO (ahora más abajo para no tapar el menú) -->
+<button id="btn-pedir-cancion" aria-label="Pide tu canción" title="Pide tu canción"
+  style="bottom:180px; right:30px;">
+  🎵 <span>Pide tu canción</span>
+</button>
 
-  <button id="btn-pedir-cancion" aria-label="Pide tu canción" title="Pide tu canción">
-    🎵 <span>Pide tu canción</span>
-  </button>
 
   <div id="form-container" aria-hidden="true" aria-labelledby="form-title" role="dialog">
     <h3 id="form-title">🎶 Pide tu canción</h3>
