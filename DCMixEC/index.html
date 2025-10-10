@@ -214,9 +214,13 @@
 <body>
 
 <!-- =========================
+     FONDO DE PARTÍCULAS
+     ========================= -->
+<div id="particles-js"></div>
+
+<!-- =========================
      BARRA DE NAVEGACIÓN (BREADCRUMB)
      ========================= -->
-<!-- Sistema de navegación de páginas (breadcrumb y tabs) -->
 <nav aria-label="breadcrumb" style="background:rgba(24,24,27,0.92);backdrop-filter:blur(2px);border-bottom:1.5px solid #8297ff33;box-shadow:0 2px 8px #8297ff22;position:sticky;top:0;z-index:101;">
   <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:1.2rem;padding:0.7rem 1.5rem;">
     <a href="#" onclick="goBackToSection(event, 'emisoras')" style="color:#b3cfff;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:0.5rem;">
@@ -229,13 +233,6 @@
   </div>
 </nav>
 
-<div id="particles-js"></div>
-
-<!-- =========================
-     EFECTO DE PARTÍCULAS DE FONDO
-     ========================= -->
-<div id="particles-js"></div>
-
 <!-- =========================
      CONTENIDO PRINCIPAL
      ========================= -->
@@ -245,334 +242,38 @@
   </div>
   <div class="subtitle-modern">🎶 Los mejores mix de música</div>
 
-
-
-<!-- =========================
-   REPRODUCTOR CENTRADO + MARCO ANIMADO
-   Pega ESTE bloque donde quieras el reproductor.
-   Si no quieres que esté centrado, quita la capa .radio-wrapper.
-   ========================= -->
-<div class="radio-wrapper">
-  <div class="radio-frame">
-    <div class="radio-inner">
-      <div 
-        data-type="newStreamPlayer" 
-        data-publicToken="ada751f2-b23d-4c05-8abb-1430e3e51c53" 
-        data-theme="dark" 
-        data-color="49D3F2" 
-        data-channelId="" 
-        data-rendered="false" 
-        class="cstrEmbed">
-        <a href="https://www.caster.fm">Shoutcast Hosting</a>
-        <a href="https://www.caster.fm">Stream Hosting</a>
-        <a href="https://www.caster.fm">Radio Server Hosting</a>
+  <!-- =========================
+       REPRODUCTOR CENTRADO + MARCO ANIMADO
+       ========================= -->
+  <div class="radio-wrapper">
+    <div class="radio-frame">
+      <div class="radio-inner">
+        <div 
+          data-type="newStreamPlayer" 
+          data-publicToken="ada751f2-b23d-4c05-8abb-1430e3e51c53" 
+          data-theme="dark" 
+          data-color="49D3F2" 
+          data-channelId="" 
+          data-rendered="false" 
+          class="cstrEmbed">
+          <a href="https://www.caster.fm">Shoutcast Hosting</a>
+          <a href="https://www.caster.fm">Stream Hosting</a>
+          <a href="https://www.caster.fm">Radio Server Hosting</a>
+        </div>
       </div>
-    </div>
 
-    <!-- capa para la franja animada que cruza el marco -->
-    <div class="radio-scan" aria-hidden="true"></div>
+      <div class="radio-scan" aria-hidden="true"></div>
+    </div>
   </div>
 </div>
 
-<script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
-
-<style>
-/* --- Contenedor que centra solo este bloque (no toca el body) --- */
-.radio-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center; /* CENTRA el reproductor horizontalmente */
-  align-items: center;
-  box-sizing: border-box;
-  padding: 8px 0; /* opcional: espacio arriba/abajo */
-}
-
-/* --- Marco exterior animado (degradado en movimiento) --- */
-.radio-frame{
-  position: relative;
-  display: inline-block;
-  padding: 6px;              /* ancho del "borde" */
-  border-radius: 18px;
-  background: linear-gradient(45deg, #49D3F2, #0077FF, #00BFFF, #49D3F2);
-  background-size: 300% 300%;
-  animation: borderFlow 6s linear infinite, pulseGlow 3.6s ease-in-out infinite;
-  box-shadow: 0 0 20px rgba(73,211,242,0.20);
-  max-width: calc(100% - 20px); /* evita que sobresalga del viewport */
-  box-sizing: content-box; /* importante para que el padding sea el borde visible */
-  overflow: visible; /* evita que el borde se corte si el padre tiene overflow visible */
-}
-
-/* --- Animación del degradado del borde --- */
-@keyframes borderFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* --- Pulso suave de neón en el contorno --- */
-@keyframes pulseGlow {
-  0%   { box-shadow: 0 0 10px rgba(73,211,242,0.18); }
-  50%  { box-shadow: 0 0 32px rgba(73,211,242,0.30); transform: translateZ(0); }
-  100% { box-shadow: 0 0 10px rgba(73,211,242,0.18); }
-}
-
-/* --- Interior negro donde carga el widget (esto es lo que ves dentro del borde) --- */
-.radio-inner{
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.98), rgba(6,6,6,0.95));
-  padding: 8px;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 3; /* por encima de efectos */
-  overflow: hidden;
-  min-width: 260px;    /* tamaño mínimo */
-  max-width: 480px;    /* limita ancho para que no rompa layout */
-  width: 100%;
-}
-
-/* Asegura que el widget respete el ancho del contenedor */
-.radio-inner .cstrEmbed{
-  width: 100% !important;
-  height: auto !important;
-  border-radius: 8px;
-  overflow: hidden;
-  box-sizing: border-box;
-  z-index: 4;
-  position: relative;
-}
-
-/* --- Línea brillante que cruza el marco (efecto de movimiento) --- */
-.radio-scan{
-  position: absolute;
-  inset: 0;
-  border-radius: 18px;
-  pointer-events: none;
-  z-index: 2;
-  background: linear-gradient(90deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.03) 20%,
-    rgba(73,211,242,0.08) 45%,
-    rgba(255,255,255,0.03) 70%,
-    rgba(255,255,255,0) 100%);
-  mix-blend-mode: screen;
-  transform: translateX(-120%);
-  animation: scanMove 3.2s linear infinite;
-  filter: blur(6px);
-}
-
-/* mueve la franja de izquierda a derecha */
-@keyframes scanMove {
-  0%   { transform: translateX(-120%); opacity: 0; }
-  10%  { opacity: 1; }
-  45%  { transform: translateX(0%); opacity: 1; }
-  90%  { transform: translateX(120%); opacity: 0.6; }
-  100% { transform: translateX(220%); opacity: 0; }
-}
-
-/* --- Pequeña franja de partículas/brillos que se mueven dentro del borde (sutil) --- */
-.radio-frame::before{
-  content: "";
-  position: absolute;
-  inset: 2px;
-  border-radius: 16px;
-  z-index: 1;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(73,211,242,0.07) 0px, rgba(73,211,242,0) 8px),
-    radial-gradient(circle at 85% 70%, rgba(0,119,255,0.06) 0px, rgba(0,119,255,0) 10px);
-  background-repeat: no-repeat;
-  animation: particlesShift 8s linear infinite;
-  pointer-events: none;
-}
-
-/* mueve los brillos sutilmente */
-@keyframes particlesShift{
-  0%   { background-position: 10% 20%, 85% 70%; }
-  50%  { background-position: 30% 40%, 70% 50%; }
-  100% { background-position: 10% 20%, 85% 70%; }
-}
-
-/* --- Opcional: oculta los enlaces de caster.fm si no quieres verlos --- */
-.cstrEmbed a { display: none !important; }
-
-/* --- Compatibilidad móvil: reduce tamaño del marco --- */
-@media (max-width: 420px){
-  .radio-inner { max-width: 360px; min-width: 220px; padding: 6px; }
-  .radio-frame { padding: 5px; border-radius: 14px; }
-  .radio-scan { filter: blur(4px); }
-}
-</style>
-
-
-
 <!-- =========================
-     SCRIPTS DE EFECTOS Y UTILIDADES
+     BOTÓN FLOTANTE Y FORMULARIO
      ========================= -->
-<!-- Particles.js library -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script>
-  particlesJS('particles-js', {
-    "particles": {
-      "number": { "value": 80 },
-      "color": { "value": ["#1976d2", "#1565c0", "#0d47a1", "#64b5f6", "#90caf9", "#bbdefb", "#e3f2fd"] },
-      "shape": { "type": "circle" },
-      "opacity": { "value": 0.7, "random": true },
-      "size": { "value": 3, "random": { "enable": true, "minimumValue": 1 } },
-      "line_linked": { "enable": true, "distance": 150, "color": "#1976d2", "opacity": 0.35, "width": 1.2 },
-      "move": { "enable": true, "speed": 3 }
-    },
-    "interactivity": {
-      "events": {
-        "onhover": { "enable": false },
-        "onclick": { "enable": false }
-      }
-    },
-    "retina_detect": true
-  });
-</script>
-<script>
-function goBackToSection(event, sectionId) {
-  event.preventDefault();
-  if (document.referrer) {
-    let url = new URL(document.referrer);
-    url.hash = sectionId;
-    window.location.href = url.toString();
-  } else {
-    window.location.href = '/#' + sectionId;
-  }
-}
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<style>
-  /* Botón flotante en esquina superior derecha */
-  #btn-pedir-cancion {
-    position: fixed;
-    top: 60px;
-    right: 30px;
-    background: linear-gradient(135deg, #7a6abf, #c1b4e6);
-    color: #23221c;
-    font-weight: 700;
-    border: none;
-    border-radius: 50px;
-    padding: 14px 22px;
-    box-shadow: 0 4px 15px rgba(106, 107, 191, 0.6);
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 1.2px;
-    transition: all 0.3s ease;
-    z-index: 9999;
-  }
-  #btn-pedir-cancion:hover {
-    background: linear-gradient(135deg, #bdb4e6, #736abf);
-    box-shadow: 0 6px 20px rgba(106, 112, 191, 0.8);
-  }
-
-  /* Contenedor formulario, desliza desde arriba */
-  #form-container {
-    position: fixed;
-    top: 80px;
-    right: 30px;
-    width: 340px;
-    background: #1b182e;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(106, 141, 191, 0.5);
-    padding: 20px 24px;
-    font-family: 'Poppins', sans-serif;
-    color: #b4b4e6;
-    transform: translateY(-120%);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-    z-index: 9998;
-  }
-  #form-container.active {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  #form-container h3 {
-    margin-bottom: 15px;
-    font-weight: 700;
-    font-size: 1.4rem;
-    text-align: center;
-    letter-spacing: 1.2px;
-  }
-
-  #form-container input,
-  #form-container textarea {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    color: #1c1c23;
-  }
-  #form-container input::placeholder,
-  #form-container textarea::placeholder {
-    color: #3b3a7a;
-  }
-  #form-container textarea {
-    resize: vertical;
-    min-height: 60px;
-  }
-
-  #form-container button[type="submit"] {
-    background: #6a6ebf;
-    color: #23221c;
-    font-weight: 700;
-    border: none;
-    border-radius: 12px;
-    width: 100%;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    transition: background 0.3s ease;
-  }
-  #form-container button[type="submit"]:hover {
-    background: #bbb4e6;
-  }
-
-  /* Adaptación móvil */
-  @media (max-width: 400px) {
-    #form-container {
-      width: 90vw;
-      right: 5vw;
-      top: 70px;
-      padding: 16px 20px;
-      border-radius: 12px;
-    }
-    #btn-pedir-cancion {
-      top: 60px;
-      right: 20px;
-      padding: 12px 18px;
-      font-size: 0.9rem;
-    }
-  }
-</style>
-
-<!-- Botón flotante -->
 <button id="btn-pedir-cancion" aria-label="Pide tu canción">
   🎵 Pide tu canción
 </button>
 
-<!-- Formulario desplegable -->
 <div id="form-container" aria-hidden="true">
   <h3>🎶 Pide tu canción</h3>
   <form id="formPedidoWhatsApp">
@@ -584,62 +285,69 @@ function goBackToSection(event, sectionId) {
   </form>
 </div>
 
+<!-- =========================
+     SCRIPTS
+     ========================= -->
+<script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
+  // Partículas azul eléctrico
+  particlesJS('particles-js', {
+    "particles": {
+      "number": { "value": 80 },
+      "color": { "value": ["#49D3F2", "#0077FF", "#00BFFF", "#00E5FF"] },
+      "shape": { "type": "circle" },
+      "opacity": { "value": 0.7, "random": true },
+      "size": { "value": 3, "random": { "enable": true, "minimumValue": 1 } },
+      "line_linked": { "enable": true, "distance": 150, "color": "#49D3F2", "opacity": 0.35, "width": 1.2 },
+      "move": { "enable": true, "speed": 2 }
+    },
+    "interactivity": {
+      "events": {
+        "onhover": { "enable": false },
+        "onclick": { "enable": false }
+      }
+    },
+    "retina_detect": true
+  });
+
+  // Botón y formulario
   const btn = document.getElementById('btn-pedir-cancion');
   const formContainer = document.getElementById('form-container');
   const form = document.getElementById('formPedidoWhatsApp');
-  const numeroWhatsApp = '593961480654'; // Tu número sin '+' ni espacios
+  const numeroWhatsApp = '593961480654';
 
   btn.addEventListener('click', () => {
     formContainer.classList.toggle('active');
-    const expanded = formContainer.classList.contains('active');
-    formContainer.setAttribute('aria-hidden', !expanded);
+    formContainer.setAttribute('aria-hidden', !formContainer.classList.contains('active'));
   });
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-
     const nombre = form.nombre.value.trim();
     const cancion = form.cancion.value.trim();
     const artista = form.artista.value.trim();
     const mensaje = form.mensaje.value.trim();
-
-    // Aquí hacemos el texto con saltos de línea normales \n
-    let texto = `*_Pedido de canción_ DC Mix EC*\n`;
-    texto += `- *Nombre:* ${nombre}\n`;
-    texto += `- *Canción:* ${cancion}\n`;
-    texto += `- *Artista:* ${artista}\n`;
-    if (mensaje) texto += `- *Mensaje:*\n> ${mensaje}`;
-
-    // ¡Importante! Codificamos todo con encodeURIComponent para que los emojis y saltos funcionen bien
+    let texto = `*_Pedido de canción_ DC Mix EC*\n- *Nombre:* ${nombre}\n- *Canción:* ${cancion}\n- *Artista:* ${artista}`;
+    if (mensaje) texto += `\n- *Mensaje:*\n> ${mensaje}`;
     const textoCodificado = encodeURIComponent(texto);
-
-    // URL de WhatsApp sin '+', solo números
-    const url = `https://wa.me/${numeroWhatsApp}?text=${textoCodificado}`;
-
-    // Abrimos en nueva pestaña
-    window.open(url, '_blank');
-
-    // Limpiamos y ocultamos formulario
+    window.open(`https://wa.me/${numeroWhatsApp}?text=${textoCodificado}`, '_blank');
     form.reset();
     formContainer.classList.remove('active');
     formContainer.setAttribute('aria-hidden', 'true');
   });
+
+  function goBackToSection(event, sectionId) {
+    event.preventDefault();
+    if (document.referrer) {
+      let url = new URL(document.referrer);
+      url.hash = sectionId;
+      window.location.href = url.toString();
+    } else {
+      window.location.href = '/#' + sectionId;
+    }
+  }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
