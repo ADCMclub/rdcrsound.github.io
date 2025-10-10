@@ -5,39 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Radio Avenida Tropical</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
 <style>
+  :root {
+    --bg:#1a0f00;
+    --accent:#ffb347;
+    --accent-2:#ff6300;
+    --muted:#ffe0b3;
+    --panel:#2a1800;
+  }
+
   html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: 'Poppins', sans-serif;
-    color: white;
+    color: #fff;
+    background: transparent;
     overflow-x: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
   body::-webkit-scrollbar { display: none; }
 
-  /* Fondo partículas */
   #particles-js {
     position: fixed;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: -1;
-    background: radial-gradient(circle at bottom, #1a0f00, #000);
+    background: var(--bg);
   }
 
-  /* Menú superior */
   nav {
-    background: rgba(34, 20, 0, 0.85);
-    backdrop-filter: blur(4px);
-    border-bottom: 1.5px solid #ff9f4333;
+    background: rgba(42,24,0,0.92);
+    backdrop-filter: blur(3px);
+    border-bottom: 1.5px solid #ffb34744;
     box-shadow: 0 2px 8px #ffb34722;
     position: sticky;
     top: 0;
     z-index: 101;
   }
-
   nav div {
     max-width: 1100px;
     margin: 0 auto;
@@ -46,7 +53,6 @@
     gap: 1.2rem;
     padding: 0.7rem 1.5rem;
   }
-
   nav a {
     color: #ffb347;
     font-weight: 600;
@@ -63,105 +69,189 @@
     z-index: 1;
     max-width: 1100px;
     margin: 0 auto;
+    box-sizing: border-box;
   }
 
-  h1 {
-    text-align: center;
-    font-size: 2.5rem;
+  .title-box {
+    display: inline-block;
+    padding: 0.3em 1.2em;
+    border-radius: 1.2em;
+    background: linear-gradient(90deg, #ffe0b3 60%, #ffb347 100%);
+    box-shadow: 0 2px 16px #ffb34733;
+    color: #1a0f00 !important;
+    border: 2px solid #ffb34755;
     font-weight: 800;
-    letter-spacing: 2px;
-    margin-top: 1.5rem;
+    font-size: 2.1rem;
     margin-bottom: 0.5rem;
-    background: linear-gradient(90deg, #ff9a00, #ff6300);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 12px #ff630055);
+    margin-top: 1.5rem;
+    letter-spacing: 2px;
+    text-align: center;
   }
 
-  /* Marco animado del reproductor */
-  .player-box {
-    position: relative;
-    border-radius: 15px;
-    padding: 12px;
-    background: linear-gradient(45deg, #ffb347, #ff6300, #ffb347);
-    background-size: 300% 300%;
-    animation: borderMove 6s linear infinite;
-    box-shadow: 0 0 20px #ff630055;
-    width: 100%;
-    max-width: 600px;
-    margin: 2rem auto;
+  .subtitle-modern {
+    text-align: center;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 2.2rem;
+    color: #ffb347;
+    text-shadow: 0 2px 8px #ffb34755;
   }
-  @keyframes borderMove {
+
+  .radio-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0;
+  }
+
+  .radio-frame {
+    position: relative;
+    display: inline-block;
+    padding: 8px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, var(--accent), var(--accent-2), #ffb347, var(--accent));
+    background-size: 300% 300%;
+    animation: borderFlow 6s linear infinite, pulseGlow 3.6s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255,180,70,0.3);
+  }
+
+  @keyframes borderFlow {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
+  @keyframes pulseGlow {
+    0%   { box-shadow: 0 0 12px rgba(255,180,70,0.2); }
+    50%  { box-shadow: 0 0 40px rgba(255,140,0,0.35); }
+    100% { box-shadow: 0 0 12px rgba(255,180,70,0.2); }
+  }
 
-  .player-box iframe, .player-box div {
-    border-radius: 10px;
-    overflow: hidden;
+  .radio-inner {
+    border-radius: 14px;
+    background: rgba(26,15,0,0.6);
+    padding: 10px;
+    width: 100%;
+    max-width: 480px;
+    box-sizing: border-box;
+  }
+
+  .radio-scan {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,200,100,0.03) 20%,
+      rgba(255,180,80,0.08) 45%,
+      rgba(255,200,100,0.03) 70%,
+      rgba(255,255,255,0) 100%);
+    mix-blend-mode: screen;
+    transform: translateX(-120%);
+    animation: scanMove 3.2s linear infinite;
+    filter: blur(6px);
+  }
+
+  @keyframes scanMove {
+    0% { transform: translateX(-120%); opacity: 0; }
+    10% { opacity: 1; }
+    45% { transform: translateX(0%); opacity: 1; }
+    90% { transform: translateX(120%); opacity: 0.6; }
+    100% { transform: translateX(220%); opacity: 0; }
   }
 
   /* Botón flotante */
-  .float-btn {
+  #btn-pedir-cancion {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: linear-gradient(135deg, #ffb347, #ff6300);
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
     color: #fff;
-    padding: 14px 22px;
-    border-radius: 50px;
     font-weight: 700;
-    box-shadow: 0 0 15px #ff630099;
-    text-decoration: none;
-    transition: 0.3s;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 22px;
+    box-shadow: 0 4px 15px rgba(255,140,0,0.6);
+    cursor: pointer;
+    letter-spacing: 1.2px;
+    transition: all 0.3s ease;
     z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  .float-btn:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 25px #ff6300aa;
+  #btn-pedir-cancion:hover {
+    background: linear-gradient(135deg, #ff9a00, #ff7a00);
+    box-shadow: 0 6px 20px rgba(255,140,0,0.8);
   }
 
   /* Formulario emergente */
-  .popup {
-    display: none;
+  #form-container {
     position: fixed;
-    bottom: 90px;
-    right: 25px;
-    background: rgba(34, 20, 0, 0.95);
-    border: 2px solid #ffb347;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 0 20px #ff630088;
-    z-index: 9999;
-    width: 280px;
+    top: 70px;
+    right: 20px;
+    width: 360px;
+    background: rgba(42,24,0,0.95);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(255,140,0,0.5);
+    padding: 20px 24px;
+    color: var(--muted);
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s, opacity 0.4s ease;
+    z-index: 9998;
   }
-  .popup input, .popup textarea {
+  #form-container.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #form-container h3 {
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-align: center;
+    color: #ffe0b3;
+  }
+  #form-container input,
+  #form-container textarea {
     width: 100%;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 6px;
-    padding: 8px;
-    background: #1e1300;
-    color: white;
-    font-family: 'Poppins';
-  }
-  .popup button {
-    background: linear-gradient(135deg, #ffb347, #ff6300);
-    border: none;
-    color: white;
-    padding: 8px 12px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
     border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
+    border: none;
+    font-size: 1rem;
+    color: #1c1c23;
+    background: #fff8f1;
+    box-sizing: border-box;
   }
-  .popup-close {
-    position: absolute;
-    top: 5px;
-    right: 10px;
+  #form-container textarea { resize: vertical; min-height: 60px; }
+
+  #form-container button[type="submit"] {
+    background: var(--accent-2);
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    width: 100%;
+    padding: 12px;
     cursor: pointer;
-    color: #ffb347;
-    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: background 0.3s ease;
+  }
+  #form-container button[type="submit"]:hover {
+    background: #ff7a00;
+  }
+
+  @media (max-width: 420px){
+    #form-container { width: 90vw; right: 5vw; top: 70px; padding: 16px 20px; }
+    #btn-pedir-cancion { bottom: 15px; right: 15px; padding: 12px 18px; font-size: 0.9rem; }
   }
 </style>
 </head>
@@ -169,7 +259,7 @@
 <body>
 <div id="particles-js"></div>
 
-<nav aria-label="breadcrumb">
+<nav>
   <div>
     <a href="#" onclick="goBackToSection(event)">
       <svg width="20" height="20" fill="none" stroke="#ffb347" stroke-width="2" viewBox="0 0 24 24">
@@ -177,92 +267,96 @@
       </svg>
       EMISORAS
     </a>
-    <span style="color:#ff9f43;font-size:1.2rem;">/</span>
-    <span style="color:#fffbe6;font-weight:700;">Radio Avenida Tropical</span>
+    <span style="color:#ffb347;font-size:1.2rem;">/</span>
+    <span style="color:#fff;font-weight:700;">Radio Avenida Tropical</span>
     <div style="flex:1"></div>
   </div>
 </nav>
 
 <main class="content">
-  <h1>Radio Avenida Tropical</h1>
+  <div style="text-align:center;">
+    <span class="title-box">Radio Avenida Tropical</span>
+  </div>
+  <div class="subtitle-modern">🌴 Ritmos cálidos que te hacen vibrar ☀️</div>
 
-  <div class="player-box">
-    <div data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="dark" data-color="FF6300" data-channelId="a012d2d4-4ab4-4550-b184-3ae00c951cad" data-rendered="false" class="cstrEmbed">
-      <a href="https://www.caster.fm">Shoutcast Hosting</a>
-      <a href="https://www.caster.fm">Stream Hosting</a>
-      <a href="https://www.caster.fm">Radio Server Hosting</a>
+  <div class="radio-wrapper">
+    <div class="radio-frame">
+      <div class="radio-inner">
+        <div data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="dark" data-color="FF6300" data-channelId="a012d2d4-4ab4-4550-b184-3ae00c951cad" data-rendered="false" class="cstrEmbed">
+          <a href="https://www.caster.fm">Shoutcast Hosting</a>
+          <a href="https://www.caster.fm">Stream Hosting</a>
+          <a href="https://www.caster.fm">Radio Server Hosting</a>
+        </div>
+        <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+      </div>
+      <div class="radio-scan"></div>
     </div>
-    <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+  </div>
+
+  <button id="btn-pedir-cancion">🎵 Pide tu canción</button>
+
+  <div id="form-container">
+    <h3>🎶 Pide tu canción</h3>
+    <form id="formPedidoWhatsApp">
+      <input id="nombre" type="text" placeholder="Tu nombre" required>
+      <input id="cancion" type="text" placeholder="Nombre de la canción" required>
+      <input id="artista" type="text" placeholder="Artista" required>
+      <textarea id="mensaje" placeholder="Mensaje adicional (opcional)"></textarea>
+      <button type="submit">Enviar pedido</button>
+    </form>
   </div>
 </main>
 
-<!-- Botón flotante -->
-<a href="#" class="float-btn" onclick="toggleForm(event)">🎶 Pide tu canción</a>
-
-<!-- Formulario emergente -->
-<div class="popup" id="songForm">
-  <div class="popup-close" onclick="toggleForm(event)">✖</div>
-  <h3 style="margin-top:0;color:#ffb347;">Pide tu canción</h3>
-  <input type="text" id="nombre" placeholder="Tu nombre">
-  <input type="text" id="artista" placeholder="Artista">
-  <input type="text" id="cancion" placeholder="Canción">
-  <textarea id="mensaje" rows="3" placeholder="Dedicatoria o mensaje..."></textarea>
-  <button onclick="enviarCancion()">Enviar</button>
-</div>
-
-<!-- Partículas -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
-  particlesJS("particles-js", {
+  // Fondo partículas tropical
+  particlesJS('particles-js', {
     particles: {
-      number: { value: 90 },
-      color: { value: ["#ffb347", "#ff6300", "#ffd27f"] },
+      number: { value: 80 },
+      color: { value: ["#ffb347", "#ff7a00", "#ff6300"] },
       shape: { type: "circle" },
-      opacity: { value: 0.8 },
-      size: { value: 3 },
-      line_linked: {
-        enable: true,
-        distance: 150,
-        color: "#ff8c42",
-        opacity: 0.4,
-        width: 1
-      },
-      move: { enable: true, speed: 2.5 }
+      opacity: { value: 0.7, random: true },
+      size: { value: 3, random: true },
+      line_linked: { enable: true, distance: 160, color: "#ff9a00", opacity: 0.4, width: 1.3 },
+      move: { enable: true, speed: 2 }
     },
-    interactivity: {
-      events: { onhover: { enable: true, mode: "repulse" } }
-    },
+    interactivity: { events: { onhover: { enable: false } } },
     retina_detect: true
   });
 
-  // Función para regresar
-  function goBackToSection(e) {
+  // Botón y formulario
+  const btn = document.getElementById('btn-pedir-cancion');
+  const formContainer = document.getElementById('form-container');
+  const form = document.getElementById('formPedidoWhatsApp');
+  const numeroWhatsApp = '593961480654';
+
+  btn.addEventListener('click', () => {
+    formContainer.classList.toggle('active');
+  });
+
+  form.addEventListener('submit', e => {
     e.preventDefault();
-    window.history.back();
-  }
-
-  // Mostrar/ocultar formulario
-  function toggleForm(e) {
-    e.preventDefault();
-    const form = document.getElementById('songForm');
-    form.style.display = form.style.display === 'block' ? 'none' : 'block';
-  }
-
-  // Acción al enviar formulario
-  function enviarCancion() {
-    const nombre = document.getElementById('nombre').value.trim();
-    const artista = document.getElementById('artista').value.trim();
-    const cancion = document.getElementById('cancion').value.trim();
-    const mensaje = document.getElementById('mensaje').value.trim();
-
-    if (!nombre || !artista || !cancion) {
-      alert('Por favor completa todos los campos principales.');
+    const nombre = form.nombre.value.trim();
+    const cancion = form.cancion.value.trim();
+    const artista = form.artista.value.trim();
+    const mensaje = form.mensaje.value.trim();
+    if (!nombre || !cancion || !artista) {
+      alert('Completa todos los campos obligatorios.');
       return;
     }
+    let texto = `*_Pedido de canción_ - Radio Avenida Tropical*\n- *Nombre:* ${nombre}\n- *Canción:* ${cancion}\n- *Artista:* ${artista}`;
+    if (mensaje) texto += `\n- *Mensaje:* ${mensaje}`;
+    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank');
+    form.reset();
+    formContainer.classList.remove('active');
+  });
 
-    alert(`🎵 Gracias ${nombre}! Tu pedido de "${cancion}" de ${artista} fue enviado.`);
-    document.getElementById('songForm').style.display = 'none';
+  function goBackToSection(event) {
+    event.preventDefault();
+    window.history.back();
   }
 </script>
+
 </body>
 </html>
