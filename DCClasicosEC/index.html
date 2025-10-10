@@ -4,46 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DC Clasicos EC</title>
-  <!-- Iconos para añadir a pantalla de inicio en móviles (iOS y Android) -->
   <link rel="apple-touch-icon" sizes="180x180" href="/img_radio/RDCRSOUND_LOG.jpg">
   <link rel="icon" type="image/png" sizes="192x192" href="/img_radio/RDCRSOUND_LOG.jpg">
   <link rel="icon" type="image/png" sizes="512x512" href="/img_radio/RDCRSOUND_LOG.jpg">
-  <link rel="manifest" href="/manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="DCClasicosEC">
   <meta name="theme-color" content="#0d0d0d">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    body, html {
+    html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', Arial, sans-serif;
       color: white;
       overflow-x: hidden;
-      /* Oculta la barra de desplazamiento */
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none;  /* IE 10+ */
+      background: transparent;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    body::-webkit-scrollbar {
-      display: none; /* Chrome/Safari/Webkit */
-    }
+    body::-webkit-scrollbar { display: none; }
+
     #particles-js {
       position: fixed;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       z-index: -1;
       background: #0d0d0d;
     }
+
     .content {
       position: relative;
       padding: 2rem;
+      padding-bottom: 160px;
       z-index: 1;
-      padding-bottom: 120px; /* Espacio para el player flotante */
+      max-width: 1100px;
+      margin: 0 auto;
     }
+
     h1 {
       text-align: center;
       font-size: 2.5rem;
-      font-family: 'Poppins', Arial, sans-serif;
       font-weight: 800;
       letter-spacing: 2px;
       margin-top: 1.5rem;
@@ -51,533 +52,236 @@
       background: linear-gradient(90deg, #ffe082 10%, #bfa76a 90%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-fill-color: transparent;
       filter: drop-shadow(0 2px 12px #bfa76a55);
-      animation: title-fade-in 1.1s cubic-bezier(.4,0,.2,1);
-      user-select: none;
     }
-    @keyframes title-fade-in {
-      from { opacity: 0; transform: translateY(30px) scale(0.97);}
-      to { opacity: 1; transform: translateY(0) scale(1);}
-    }
+
     .subtitle-modern {
       text-align: center;
       font-size: 1.35rem;
-      font-family: 'Poppins', Arial, sans-serif;
       font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 2.2rem;
       color: #ffe082;
       text-shadow: 0 2px 8px #bfa76a55;
-      animation: subtitle-fade-in 1.2s cubic-bezier(.4,0,.2,1);
-      user-select: none;
+      margin-bottom: 2.5rem;
     }
-    @keyframes subtitle-fade-in {
-      from { opacity: 0; transform: translateY(20px);}
-      to { opacity: 1; transform: translateY(0);}
+
+    /* Reproductor centrado con marco animado */
+    .radio-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0;
     }
-    .radio-section h2 {
-      text-align: center;
-      font-size: 2rem;
-      font-family: 'Poppins', Arial, sans-serif;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      margin-bottom: 1.2rem;
-      background: linear-gradient(90deg, #bfa76a 10%, #ffe082 90%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-fill-color: transparent;
-      filter: drop-shadow(0 2px 8px #bfa76a55);
-      animation: radio-title-fade-in 1.1s cubic-bezier(.4,0,.2,1);
-      user-select: none;
+
+    .radio-frame-gold {
+      position: relative;
+      display: inline-block;
+      padding: 6px;
+      border-radius: 18px;
+      background: linear-gradient(45deg, #D9A05B, #FFD700, #B8860B, #FFD27F, #D9A05B);
+      background-size: 300% 300%;
+      animation: borderFlow 6s linear infinite, pulseGlow 3.5s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(217, 160, 91, 0.25);
     }
-    @keyframes radio-title-fade-in {
-      from { opacity: 0; transform: translateY(20px);}
-      to { opacity: 1; transform: translateY(0);}
+
+    @keyframes borderFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    .pdf-container {
+    @keyframes pulseGlow {
+      0%   { box-shadow: 0 0 10px rgba(217,160,91,0.18); }
+      50%  { box-shadow: 0 0 32px rgba(255,215,0,0.35); }
+      100% { box-shadow: 0 0 10px rgba(217,160,91,0.18); }
+    }
+
+    .radio-inner {
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.98), rgba(10,10,10,0.95));
+      padding: 8px;
+      min-width: 260px;
+      max-width: 480px;
       width: 100%;
-      height: 340px;
-      margin-top: 2rem;
+      z-index: 3;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      /* pointer-events: none;  <-- QUITA ESTA LÍNEA */
-    }
-    .pdf-container iframe {
+    .cstrEmbed { width: 100%!important; height: auto!important; border-radius: 8px; overflow: hidden; }
+
+    .radio-scan {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
       pointer-events: none;
+      z-index: 2;
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.04) 20%, rgba(255,215,0,0.1) 45%, rgba(255,255,255,0.04) 70%, rgba(255,255,255,0) 100%);
+      animation: scanMove 3.2s linear infinite;
+      filter: blur(6px);
     }
-    .radio-section {
-      margin-top: 4rem;
+    @keyframes scanMove {
+      0%   { transform: translateX(-120%); opacity: 0; }
+      10%  { opacity: 1; }
+      45%  { transform: translateX(0%); opacity: 1; }
+      90%  { transform: translateX(120%); opacity: 0.6; }
+      100% { transform: translateX(220%); opacity: 0; }
     }
-    .radio-section h2 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1rem;
+
+    .radio-frame-gold::before {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 16px;
+      z-index: 1;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,215,0,0.07) 0px, rgba(255,215,0,0) 8px),
+        radial-gradient(circle at 85% 70%, rgba(217,160,91,0.08) 0px, rgba(217,160,91,0) 10px);
+      animation: particlesShift 8s linear infinite;
     }
-    .radio-players {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
+    @keyframes particlesShift {
+      0%   { background-position: 10% 20%, 85% 70%; }
+      50%  { background-position: 30% 40%, 70% 50%; }
+      100% { background-position: 10% 20%, 85% 70%; }
     }
-    .radio-players iframe {
-      width: 100%;
-      height: 150px;
-    }
-    @media (max-width: 600px) {
-      .pdf-container, .radio-players iframe {
-        border: none !important;
-        box-shadow: none !important;
-      }
-      .pdf-container {
-        height: 140px !important;
-      }
-    }
-    .title-box {
-      display: inline-block;
-      padding: 0.3em 1.2em;
-      border-radius: 1.2em;
-      background: linear-gradient(90deg, #fffbe6 60%, #ffe082 100%);
-      box-shadow: 0 2px 16px #bfa76a33;
-      color: #18181b !important;
-      font-weight: 800;
-      font-size: 2.1rem;
-      margin-bottom: 0.5rem;
-      margin-top: 1.5rem;
-      letter-spacing: 2px;
-      border: 2px solid #bfa76a44;
-      text-align: center;
-      animation: title-fade-in 1.1s cubic-bezier(.4,0,.2,1);
-      user-select: none;
-    }
-    @media (max-width: 600px) {
-      .title-box {
-        font-size: 1.2rem;
-        padding: 0.2em 0.7em;
-      }
-    }
-    .section-title-box {
-      display: inline-block;
-      padding: 0.18em 1em;
-      border-radius: 1em;
-      background: linear-gradient(90deg, #ffe082 60%, #fffbe6 100%);
-      color: #18181b !important;
-      font-weight: 700;
-      font-size: 1.25rem;
-      margin-bottom: 1.2rem;
-      border: 1.5px solid #bfa76a33;
-      box-shadow: 0 1px 8px #bfa76a22;
-      letter-spacing: 1.2px;
-      text-align: center;
-      user-select: none;
-    }
-    /* Iframe flotante inferior */
-    .floating-player {
+
+    /* Botón flotante mejor posicionado */
+    #btn-pedir-cancion {
       position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100vw;
-      height: 100px;
-      z-index: 9999;
-      box-shadow: 0 -2px 12px #bfa76a33;
-      background: #18181b;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-      overflow: hidden;
-      /* Oculta cualquier scroll interno */
-      scrollbar-width: none;
-    }
-    .floating-player::-webkit-scrollbar {
-      display: none;
-    }
-    .floating-player iframe {
-      width: 100%;
-      height: 100%;
+      bottom: 25px;
+      right: 25px;
+      background: linear-gradient(135deg, #bcbf6a, #e4e6b4);
+      color: #23231c;
+      font-weight: 700;
       border: none;
-      overflow: hidden;
-      /* Oculta scroll dentro del iframe si lo tuviera */
-      scrollbar-width: none;
+      border-radius: 50px;
+      padding: 14px 22px;
+      box-shadow: 0 4px 15px rgba(191, 191, 106, 0.6);
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      z-index: 9999;
+      transition: all 0.3s ease;
     }
-    @media (max-width: 600px) {
-      .floating-player {
-        height: 70px;
-      }
+    #btn-pedir-cancion:hover {
+      background: linear-gradient(135deg, #e6e4b4, #bfb96a);
+      box-shadow: 0 6px 20px rgba(191, 187, 106, 0.8);
+    }
+
+    /* Formulario */
+    #form-container {
+      position: fixed;
+      bottom: 90px;
+      right: 25px;
+      width: 340px;
+      background: #2e2b18;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(191, 191, 106, 0.5);
+      padding: 20px 24px;
+      color: #e6e6b4;
+      transform: translateY(120%);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s ease;
+      z-index: 9998;
+    }
+    #form-container.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #form-container input, #form-container textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+    }
+    #form-container button[type="submit"] {
+      background: #bfbb6a;
+      color: #23231c;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      width: 100%;
+      padding: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #form-container button[type="submit"]:hover {
+      background: #e5e6b4;
     }
   </style>
 </head>
+
 <body>
-<!-- =========================
-     BARRA DE NAVEGACIÓN (BREADCRUMB)
-     ========================= -->
-<!-- Sistema de navegación de páginas (breadcrumb y tabs) -->
-<nav aria-label="breadcrumb" style="background:rgba(24,24,27,0.92);backdrop-filter:blur(2px);border-bottom:1.5px solid #bfa76a33;box-shadow:0 2px 8px #bfa76a22;position:sticky;top:0;z-index:101;">
-  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:1.2rem;padding:0.7rem 1.5rem;">
-    <a href="#" onclick="goBackToSection(event, 'emisoras')" style="color:#ffe082;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:0.5rem;">
-      <svg width="20" height="20" fill="none" stroke="#ffe082" stroke-width="2" viewBox="0 0 24 24"><path d="M10 19l-7-7 7-7"/><path d="M3 12h18"/></svg>
-      EMISORAS
-    </a>
-    <span style="color:#bfa76a;font-size:1.2rem;">/</span>
-    <span style="color:#fffbe6;font-weight:700;">DC Clasicos EC</span>
-    <div style="flex:1"></div>
-  </div>
-</nav>
+  <div id="particles-js"></div>
 
-<div id="particles-js"></div>
+  <div class="content">
+    <h1>DC Clasicos EC</h1>
+    <div class="subtitle-modern">🎶 La mejor selección de clásicos en un solo lugar</div>
 
-<!-- Script funcional -->
-<script>
-function goBackToSection(event, sectionId) {
-  event.preventDefault();
-  const section = document.getElementById(sectionId);
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  } else {
-    window.history.back();
-  }
-}
-</script>
-
-<!-- =========================
-     EFECTO DE PARTÍCULAS DE FONDO
-     ========================= -->
-<div class="content">
-  <div style="text-align:center;">
-    <span class="title-box">DC Clasicos EC</span>
-  </div>
-  <div class="subtitle-modern">🎶 La mejor selección de clásicos en un solo lugar</div>
-
-  <!-- =========================
-     CONTENIDO PRINCIPAL
-     ========================= -->
-<!-- =========================
-   REPRODUCTOR CENTRADO + MARCO ANIMADO DORADO
-   ========================= -->
-<div class="radio-wrapper">
-  <div class="radio-frame-gold">
-    <div class="radio-inner">
-      <div 
-        data-type="newStreamPlayer" 
-        data-publicToken="483de68b-f9e5-4fa3-b5ee-b27252721c33" 
-        data-theme="dark" 
-        data-color="D9A05B" 
-        data-channelId="" 
-        data-rendered="false" 
-        class="cstrEmbed">
-        <a href="https://www.caster.fm">Shoutcast Hosting</a>
-        <a href="https://www.caster.fm">Stream Hosting</a>
-        <a href="https://www.caster.fm">Radio Server Hosting</a>
+    <div class="radio-wrapper">
+      <div class="radio-frame-gold">
+        <div class="radio-inner">
+          <div data-type="newStreamPlayer"
+               data-publicToken="483de68b-f9e5-4fa3-b5ee-b27252721c33"
+               data-theme="dark"
+               data-color="D9A05B"
+               class="cstrEmbed">
+            <a href="https://www.caster.fm">Shoutcast Hosting</a>
+            <a href="https://www.caster.fm">Stream Hosting</a>
+          </div>
+        </div>
+        <div class="radio-scan"></div>
       </div>
     </div>
-
-    <!-- Franja brillante que se mueve -->
-    <div class="radio-scan" aria-hidden="true"></div>
   </div>
-</div>
 
-<script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+  <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 60 },
+        "color": { "value": "#ffe082" },
+        "size": { "value": 2 },
+        "move": { "speed": 1.5 }
+      }
+    });
+  </script>
 
-<style>
-/* Centrado del reproductor */
-.radio-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 10px 0;
-}
+  <button id="btn-pedir-cancion">🎵 Pide tu canción</button>
+  <div id="form-container">
+    <h3>🎶 Pide tu canción</h3>
+    <form id="formPedidoWhatsApp">
+      <input type="text" name="nombre" placeholder="Tu nombre" required>
+      <input type="text" name="cancion" placeholder="Nombre de la canción" required>
+      <input type="text" name="artista" placeholder="Artista" required>
+      <textarea name="mensaje" placeholder="Mensaje adicional (opcional)"></textarea>
+      <button type="submit">Enviar pedido</button>
+    </form>
+  </div>
 
-/* Marco exterior dorado animado */
-.radio-frame-gold {
-  position: relative;
-  display: inline-block;
-  padding: 6px;
-  border-radius: 18px;
-  background: linear-gradient(45deg, #D9A05B, #FFD700, #B8860B, #FFD27F, #D9A05B);
-  background-size: 300% 300%;
-  animation: borderFlow 6s linear infinite, pulseGlow 3.5s ease-in-out infinite;
-  box-shadow: 0 0 20px rgba(217, 160, 91, 0.25);
-  overflow: visible;
-}
-
-/* Movimiento del degradado del borde */
-@keyframes borderFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Pulso de luz (efecto neón dorado) */
-@keyframes pulseGlow {
-  0%   { box-shadow: 0 0 10px rgba(217,160,91,0.18); }
-  50%  { box-shadow: 0 0 32px rgba(255,215,0,0.35); transform: translateZ(0); }
-  100% { box-shadow: 0 0 10px rgba(217,160,91,0.18); }
-}
-
-/* Fondo interno negro donde va el widget */
-.radio-inner {
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.98), rgba(10,10,10,0.95));
-  padding: 8px;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 3;
-  overflow: hidden;
-  min-width: 260px;
-  max-width: 480px;
-  width: 100%;
-}
-
-/* Widget interno */
-.radio-inner .cstrEmbed {
-  width: 100% !important;
-  height: auto !important;
-  border-radius: 8px;
-  overflow: hidden;
-  z-index: 4;
-  position: relative;
-}
-
-/* Franja brillante que cruza el marco */
-.radio-scan {
-  position: absolute;
-  inset: 0;
-  border-radius: 18px;
-  pointer-events: none;
-  z-index: 2;
-  background: linear-gradient(90deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.04) 20%,
-    rgba(255,215,0,0.1) 45%,
-    rgba(255,255,255,0.04) 70%,
-    rgba(255,255,255,0) 100%);
-  mix-blend-mode: screen;
-  transform: translateX(-120%);
-  animation: scanMove 3.2s linear infinite;
-  filter: blur(6px);
-}
-
-/* Movimiento de la franja */
-@keyframes scanMove {
-  0%   { transform: translateX(-120%); opacity: 0; }
-  10%  { opacity: 1; }
-  45%  { transform: translateX(0%); opacity: 1; }
-  90%  { transform: translateX(120%); opacity: 0.6; }
-  100% { transform: translateX(220%); opacity: 0; }
-}
-
-/* Brillos dorados sutiles dentro del borde */
-.radio-frame-gold::before {
-  content: "";
-  position: absolute;
-  inset: 2px;
-  border-radius: 16px;
-  z-index: 1;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(255,215,0,0.07) 0px, rgba(255,215,0,0) 8px),
-    radial-gradient(circle at 85% 70%, rgba(217,160,91,0.08) 0px, rgba(217,160,91,0) 10px);
-  background-repeat: no-repeat;
-  animation: particlesShift 8s linear infinite;
-  pointer-events: none;
-}
-
-/* Movimiento de brillos */
-@keyframes particlesShift {
-  0%   { background-position: 10% 20%, 85% 70%; }
-  50%  { background-position: 30% 40%, 70% 50%; }
-  100% { background-position: 10% 20%, 85% 70%; }
-}
-
-/* Oculta enlaces Caster.fm (opcional) */
-.cstrEmbed a { display: none !important; }
-
-/* Versión móvil */
-@media (max-width: 420px) {
-  .radio-inner { max-width: 360px; min-width: 220px; padding: 6px; }
-  .radio-frame-gold { padding: 5px; border-radius: 14px; }
-  .radio-scan { filter: blur(4px); }
-}
-</style>
-
-
-
-
-<style>
-  /* Botón flotante en esquina superior derecha */
-  #btn-pedir-cancion {
-    position: fixed;
-    top: 60px;
-    right: 30px;
-    background: linear-gradient(135deg, #bcbf6a, #e4e6b4);
-    color: #23231c;
-    font-weight: 700;
-    border: none;
-    border-radius: 50px;
-    padding: 14px 22px;
-    box-shadow: 0 4px 15px rgba(191, 191, 106, 0.6);
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 1.2px;
-    transition: all 0.3s ease;
-    z-index: 9999;
-  }
-  #btn-pedir-cancion:hover {
-    background: linear-gradient(135deg, #e6e4b4, #bfb96a);
-    box-shadow: 0 6px 20px rgba(191, 187, 106, 0.8);
-  }
-
-  /* Contenedor formulario, desliza desde arriba */
-  #form-container {
-    position: fixed;
-    top: 80px;
-    right: 30px;
-    width: 340px;
-    background: #2e2b18;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(191, 191, 106, 0.5);
-    padding: 20px 24px;
-    font-family: 'Poppins', sans-serif;
-    color: #e6e6b4;
-    transform: translateY(-120%);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-    z-index: 9998;
-  }
-  #form-container.active {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  #form-container h3 {
-    margin-bottom: 15px;
-    font-weight: 700;
-    font-size: 1.4rem;
-    text-align: center;
-    letter-spacing: 1.2px;
-  }
-
-  #form-container input,
-  #form-container textarea {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    color: #23231c;
-  }
-  #form-container input::placeholder,
-  #form-container textarea::placeholder {
-    color: #797a3a;
-  }
-  #form-container textarea {
-    resize: vertical;
-    min-height: 60px;
-  }
-
-  #form-container button[type="submit"] {
-    background: #bfbb6a;
-    color: #23231c;
-    font-weight: 700;
-    border: none;
-    border-radius: 12px;
-    width: 100%;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    transition: background 0.3s ease;
-  }
-  #form-container button[type="submit"]:hover {
-    background: #e5e6b4;
-  }
-
-  /* Adaptación móvil */
-  @media (max-width: 400px) {
-    #form-container {
-      width: 90vw;
-      right: 5vw;
-      top: 70px;
-      padding: 16px 20px;
-      border-radius: 12px;
-    }
-    #btn-pedir-cancion {
-      top: 60px;
-      right: 20px;
-      padding: 12px 18px;
-      font-size: 0.9rem;
-    }
-  }
-</style>
-
-<!-- Botón flotante -->
-<button id="btn-pedir-cancion" aria-label="Pide tu canción">
-  🎵 Pide tu canción
-</button>
-
-<!-- Formulario desplegable -->
-<div id="form-container" aria-hidden="true">
-  <h3>🎶 Pide tu canción</h3>
-  <form id="formPedidoWhatsApp">
-    <input type="text" name="nombre" placeholder="Tu nombre" required autocomplete="off" />
-    <input type="text" name="cancion" placeholder="Nombre de la canción" required autocomplete="off" />
-    <input type="text" name="artista" placeholder="Artista" required autocomplete="off" />
-    <textarea name="mensaje" placeholder="Mensaje adicional (opcional)"></textarea>
-    <button type="submit">Enviar pedido</button>
-  </form>
-</div>
-
-<script>
-  const btn = document.getElementById('btn-pedir-cancion');
-  const formContainer = document.getElementById('form-container');
-  const form = document.getElementById('formPedidoWhatsApp');
-  const numeroWhatsApp = '593961480654'; // Tu número sin '+' ni espacios
-
-  btn.addEventListener('click', () => {
-    formContainer.classList.toggle('active');
-    const expanded = formContainer.classList.contains('active');
-    formContainer.setAttribute('aria-hidden', !expanded);
-  });
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-
-    const nombre = form.nombre.value.trim();
-    const cancion = form.cancion.value.trim();
-    const artista = form.artista.value.trim();
-    const mensaje = form.mensaje.value.trim();
-
-    // Aquí hacemos el texto con saltos de línea normales \n
-    let texto = `*_Pedido de canción_ DC Clasicos EC*\n`;
-    texto += `- *Nombre:* ${nombre}\n`;
-    texto += `- *Canción:* ${cancion}\n`;
-    texto += `- *Artista:* ${artista}\n`;
-    if (mensaje) texto += `- *Mensaje:*\n> ${mensaje}`;
-
-    // ¡Importante! Codificamos todo con encodeURIComponent para que los emojis y saltos funcionen bien
-    const textoCodificado = encodeURIComponent(texto);
-
-    // URL de WhatsApp sin '+', solo números
-    const url = `https://wa.me/${numeroWhatsApp}?text=${textoCodificado}`;
-
-    // Abrimos en nueva pestaña
-    window.open(url, '_blank');
-
-    // Limpiamos y ocultamos formulario
-    form.reset();
-    formContainer.classList.remove('active');
-    formContainer.setAttribute('aria-hidden', 'true');
-  });
-</script>
-
-
+  <script>
+    const btn = document.getElementById('btn-pedir-cancion');
+    const formContainer = document.getElementById('form-container');
+    const form = document.getElementById('formPedidoWhatsApp');
+    const numeroWhatsApp = '593961480654';
+    btn.onclick = () => formContainer.classList.toggle('active');
+    form.onsubmit = e => {
+      e.preventDefault();
+      const nombre = form.nombre.value;
+      const cancion = form.cancion.value;
+      const artista = form.artista.value;
+      const mensaje = form.mensaje.value;
+      const texto = encodeURIComponent(
+        `*_Pedido de canción - DC Clasicos EC_*\n` +
+        `• *Nombre:* ${nombre}\n` +
+        `• *Canción:* ${cancion}\n` +
+        `• *Artista:* ${artista}\n` +
+        (mensaje ? `• *Mensaje:* ${mensaje}` : "")
+      );
+      window.open(`https://wa.me/${numeroWhatsApp}?text=${texto}`, '_blank');
+      form.reset();
+      formContainer.classList.remove('active');
+    };
+  </script>
 </body>
 </html>
