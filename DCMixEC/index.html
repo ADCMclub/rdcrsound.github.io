@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DC Mix EC</title>
 
-  <!-- Iconos para añadir a pantalla de inicio en móviles (iOS y Android) -->
   <link rel="apple-touch-icon" sizes="180x180" href="/img_radio/RDCRSOUND_LOG.jpg">
   <link rel="icon" type="image/png" sizes="192x192" href="/img_radio/RDCRSOUND_LOG.jpg">
   <link rel="icon" type="image/png" sizes="512x512" href="/img_radio/RDCRSOUND_LOG.jpg">
@@ -15,7 +14,6 @@
   <meta name="theme-color" content="#0d0d0d">
   <meta name="description" content="DC Mix EC - Los mejores mix de música.">
 
-  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
@@ -37,13 +35,10 @@
       color: #fff;
       background: var(--bg);
       overflow-x: hidden;
-      /* Oculta la barra de desplazamiento en navegadores que lo soportan */
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none;  /* IE 10+ */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    body::-webkit-scrollbar {
-      display: none; /* Chrome/Safari/Webkit */
-    }
+    body::-webkit-scrollbar { display: none; }
 
     #particles-js {
       position: fixed;
@@ -56,7 +51,6 @@
       position: relative;
       padding: 2rem;
       z-index: 1;
-      padding-bottom: 120px; /* Espacio para el player flotante */
       max-width: 1100px;
       margin: 0 auto;
       box-sizing: border-box;
@@ -74,7 +68,6 @@
       background: linear-gradient(90deg, #8297ff 10%, #8297ff 90%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
       filter: drop-shadow(0 2px 12px #8297ff55);
       animation: title-fade-in 1.1s cubic-bezier(.4,0,.2,1);
     }
@@ -108,45 +101,12 @@
       background: linear-gradient(90deg, #8297ff 10%, #b3cfff 90%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
       filter: drop-shadow(0 2px 8px #8297ff55);
       animation: radio-title-fade-in 1.1s cubic-bezier(.4,0,.2,1);
     }
     @keyframes radio-title-fade-in {
       from { opacity: 0; transform: translateY(20px);}
       to { opacity: 1; transform: translateY(0);}
-    }
-
-    .pdf-container {
-      width: 100%;
-      height: 340px;
-      margin-top: 2rem;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      /* Permitimos la interacción en iframes (por ejemplo PDF o reproductores) */
-    }
-
-    .radio-players {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-    }
-    .radio-players iframe {
-      width: 100%;
-      height: 150px;
-    }
-
-    @media (max-width: 600px) {
-      .pdf-container, .radio-players iframe {
-        border: none !important;
-        box-shadow: none !important;
-      }
-      .pdf-container {
-        height: 140px !important;
-      }
     }
 
     .title-box {
@@ -165,28 +125,22 @@
       text-align: center;
       animation: title-fade-in 1.1s cubic-bezier(.4,0,.2,1);
     }
-    @media (max-width: 600px) {
-      .title-box {
-        font-size: 1.2rem;
-        padding: 0.2em 0.7em;
-      }
+
+    .pdf-container {
+      width: 100%;
+      height: 340px;
+      margin-top: 2rem;
     }
 
-    .section-title-box {
-      display: inline-block;
-      padding: 0.18em 1em;
-      border-radius: 1em;
-      background: linear-gradient(90deg, #b3cfff 60%, #e6eeff 100%);
-      color: #18181b !important;
-      border: 1.5px solid #8297ff33;
-      box-shadow: 0 1px 8px #8297ff22;
-      font-weight: 700;
-      font-size: 1.25rem;
-      margin-bottom: 1.2rem;
-      text-align: center;
+    iframe { width: 100%; height: 100%; border: none; }
+
+    .radio-players {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
     }
 
-    /* Iframe flotante inferior (si se usa) */
+    /* Iframe flotante inferior */
     .floating-player {
       position: fixed;
       left: 0;
@@ -200,24 +154,8 @@
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
       overflow: hidden;
-      scrollbar-width: none;
-    }
-    .floating-player::-webkit-scrollbar {
-      display: none;
-    }
-    .floating-player iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      overflow: hidden;
-    }
-    @media (max-width: 600px) {
-      .floating-player {
-        height: 70px;
-      }
     }
 
-    /* --- MARCO ANIMADO DEL REPRODUCTOR --- */
     .radio-wrapper {
       width: 100%;
       display: flex;
@@ -225,6 +163,7 @@
       align-items: center;
       padding: 12px 0;
     }
+
     .radio-frame{
       position: relative;
       display: inline-block;
@@ -254,10 +193,8 @@
       min-width: 260px;
       box-sizing: border-box;
     }
-    .radio-inner .cstrEmbed{
-      width: 100% !important;
-      border-radius: 10px;
-    }
+    .radio-inner .cstrEmbed{ width: 100% !important; border-radius: 10px; }
+
     .radio-scan{
       position: absolute;
       inset: 0;
@@ -283,11 +220,11 @@
       100% { transform: translateX(220%); opacity: 0; }
     }
 
-    /* --- BOTÓN FLOTANTE --- */
+    /* --- BOTÓN FLOTANTE EN ESQUINA SUPERIOR DERECHA --- */
     #btn-pedir-cancion {
       position: fixed;
-      bottom: 140px;
-      right: 30px;
+      top: 20px;
+      right: 20px;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       color: #fff;
       font-weight: 700;
@@ -311,15 +248,15 @@
     /* --- FORMULARIO DESPLEGABLE --- */
     #form-container {
       position: fixed;
-      bottom: 210px;
-      right: 30px;
+      top: 70px;
+      right: 20px;
       width: 360px;
       background: rgba(24,24,27,0.95);
       border-radius: 16px;
       box-shadow: 0 8px 24px rgba(73,211,242,0.5);
       padding: 20px 24px;
       color: var(--muted);
-      transform: translateY(30px);
+      transform: translateY(-20px);
       opacity: 0;
       pointer-events: none;
       transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
@@ -338,14 +275,6 @@
       letter-spacing: 1.2px;
       color: #e6f6ff;
     }
-    #form-container label.sr-only {
-      position: absolute;
-      left: -9999px;
-      top: auto;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-    }
     #form-container input,
     #form-container textarea {
       width: 100%;
@@ -358,10 +287,7 @@
       background: #f1f7fb;
       box-sizing: border-box;
     }
-    #form-container textarea {
-      resize: vertical;
-      min-height: 60px;
-    }
+    #form-container textarea { resize: vertical; min-height: 60px; }
     #form-container button[type="submit"] {
       background: var(--accent);
       color: #fff;
@@ -375,30 +301,21 @@
       letter-spacing: 1px;
       transition: background 0.3s ease;
     }
-    #form-container button[type="submit"]:hover {
-      background: #00BFFF;
-    }
+    #form-container button[type="submit"]:hover { background: #00BFFF; }
 
-    /* Adaptación móvil */
     @media (max-width: 420px){
       .radio-inner { max-width: 360px; min-width: 220px; padding: 8px; }
       .radio-frame { padding: 5px; border-radius: 14px; }
       .radio-scan { filter: blur(4px); }
-      #form-container { width: 90vw; right: 5vw; bottom: 220px; padding: 16px 20px; }
-      #btn-pedir-cancion { bottom: 140px; right: 20px; padding: 12px 18px; font-size: 0.9rem; }
+      #form-container { width: 90vw; right: 5vw; top: 70px; padding: 16px 20px; }
+      #btn-pedir-cancion { top: 15px; right: 15px; padding: 12px 18px; font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- =========================
-       FONDO DE PARTÍCULAS
-       ========================= -->
   <div id="particles-js" aria-hidden="true"></div>
 
-  <!-- =========================
-       BARRA DE NAVEGACIÓN (BREADCRUMB)
-       ========================= -->
   <nav aria-label="breadcrumb" style="background:rgba(24,24,27,0.92);backdrop-filter:blur(2px);border-bottom:1.5px solid #8297ff33;box-shadow:0 2px 8px #8297ff22;position:sticky;top:0;z-index:101;">
     <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:1.2rem;padding:0.7rem 1.5rem;">
       <a href="#" onclick="goBackToSection(event, 'emisoras')" style="color:#b3cfff;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:0.5rem;">
@@ -411,19 +328,14 @@
     </div>
   </nav>
 
-  <!-- =========================
-       CONTENIDO PRINCIPAL
-       ========================= -->
   <main class="content" role="main">
     <div style="text-align:center;">
       <span class="title-box">DC Mix EC</span>
     </div>
     <div class="subtitle-modern">🎶 Los mejores mix de música</div>
 
-    <!-- REPRODUCTOR CENTRADO + MARCO ANIMADO -->
     <section class="radio-section" aria-labelledby="radio-title">
       <h2 id="radio-title">Escucha en línea</h2>
-
       <div class="radio-wrapper" aria-hidden="false">
         <div class="radio-frame" role="region" aria-label="Reproductor DC Mix EC">
           <div class="radio-inner">
@@ -436,29 +348,20 @@
               data-rendered="false" 
               class="cstrEmbed" aria-hidden="false">
               <a href="https://www.caster.fm" rel="noopener" target="_blank">Shoutcast Hosting</a>
-              <a href="https://www.caster.fm" rel="noopener" target="_blank">Stream Hosting</a>
-              <a href="https://www.caster.fm" rel="noopener" target="_blank">Radio Server Hosting</a>
             </div>
           </div>
-          <!-- Franja animada que cruza el marco -->
           <div class="radio-scan" aria-hidden="true"></div>
         </div>
       </div>
     </section>
 
-    <!-- Ejemplo de contenedor PDF (si se requiere) -->
-    <div class="pdf-container" aria-hidden="false">
-      <!-- Si necesitas embeber un PDF, usar <iframe src="ruta_al_pdf"></iframe> -->
-      <!-- <iframe src="/ruta/al/documento.pdf" title="Ficha DC Mix EC"></iframe> -->
-    </div>
+    <div class="pdf-container" aria-hidden="false"></div>
   </main>
 
-  <!-- BOTÓN FLOTANTE MEJORADO -->
   <button id="btn-pedir-cancion" aria-label="Pide tu canción" title="Pide tu canción">
     🎵 <span>Pide tu canción</span>
   </button>
 
-  <!-- FORMULARIO DESPLEGABLE MEJORADO -->
   <div id="form-container" aria-hidden="true" aria-labelledby="form-title" role="dialog">
     <h3 id="form-title">🎶 Pide tu canción</h3>
     <form id="formPedidoWhatsApp" novalidate>
@@ -478,105 +381,93 @@
     </form>
   </div>
 
-  <!-- SCRIPTS -->
   <script src="https://cdn.caster.fm/widgets/embed.js" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" async></script>
 
-  <script>
-    // Inicializa partículas cuando la librería esté cargada
-    (function initParticles(){
-      // Esperar a que particlesJS exista
-      function run() {
-        if (typeof particlesJS === 'function') {
-          particlesJS('particles-js', {
-            "particles": {
-              "number": { "value": 90 },
-              "color": { "value": ["#49D3F2", "#0077FF", "#00BFFF", "#00E5FF"] },
-              "shape": { "type": "circle" },
-              "opacity": { "value": 0.7, "random": true },
-              "size": { "value": 3, "random": { "enable": true, "minimumValue": 1 } },
-              "line_linked": { "enable": true, "distance": 160, "color": "#49D3F2", "opacity": 0.35, "width": 1.5 },
-              "move": { "enable": true, "speed": 2 }
-            },
-            "interactivity": { "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
-            "retina_detect": true
-          });
-        } else {
-          // reintentar si la librería aún no se cargó
-          setTimeout(run, 200);
-        }
-      }
-      run();
-    })();
-
-    // Botón y formulario
-    (function setupForm(){
-      const btn = document.getElementById('btn-pedir-cancion');
-      const formContainer = document.getElementById('form-container');
-      const form = document.getElementById('formPedidoWhatsApp');
-      const numeroWhatsApp = '593961480654';
-
-      btn.addEventListener('click', () => {
-        formContainer.classList.toggle('active');
-        const isActive = formContainer.classList.contains('active');
-        formContainer.setAttribute('aria-hidden', String(!isActive));
-        if (isActive) {
-          // enfocar primer campo cuando se abra
-          const first = form.querySelector('input, textarea');
-          if (first) first.focus();
-        }
-      });
-
-      form.addEventListener('submit', e => {
-        e.preventDefault();
-        const nombre = (form.nombre.value || '').trim();
-        const cancion = (form.cancion.value || '').trim();
-        const artista = (form.artista.value || '').trim();
-        const mensaje = (form.mensaje.value || '').trim();
-
-        if (!nombre || !cancion || !artista) {
-          // validación básica en cliente
-          alert('Por favor completa tu nombre, la canción y el artista.');
-          return;
-        }
-
-        let texto = `*_Pedido de canción_ DC Mix EC*\n- *Nombre:* ${nombre}\n- *Canción:* ${cancion}\n- *Artista:* ${artista}`;
-        if (mensaje) texto += `\n- *Mensaje:*\n> ${mensaje}`;
-        const textoCodificado = encodeURIComponent(texto);
-
-        // Abrir WhatsApp en nueva pestaña de manera segura
-        const url = `https://wa.me/${numeroWhatsApp}?text=${textoCodificado}`;
-        // Use noopener para mayor seguridad
-        try {
-          window.open(url, '_blank', 'noopener');
-        } catch (err) {
-          // fallback si la característica no está soportada
-          window.open(url, '_blank');
-        }
-
-        form.reset();
-        formContainer.classList.remove('active');
-        formContainer.setAttribute('aria-hidden', 'true');
-      });
-    })();
-
-    // Navegación atrás hacia sección
-    function goBackToSection(event, sectionId) {
-      event.preventDefault();
-      try {
-        if (document.referrer) {
-          let url = new URL(document.referrer);
-          url.hash = sectionId;
-          window.location.href = url.toString();
-        } else {
-          window.location.href = '/#' + sectionId;
-        }
-      } catch (err) {
-        // Si ocurre algo, ir al índice con hash
-        window.location.href = '/#' + sectionId;
+<script>
+  // Inicializa partículas
+  (function initParticles(){
+    function run() {
+      if (typeof particlesJS === 'function') {
+        particlesJS('particles-js', {
+          "particles": {
+            "number": { "value": 90 },
+            "color": { "value": ["#49D3F2", "#0077FF", "#00BFFF", "#00E5FF"] },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.7, "random": true },
+            "size": { "value": 3, "random": { "enable": true, "minimumValue": 1 } },
+            "line_linked": { "enable": true, "distance": 160, "color": "#49D3F2", "opacity": 0.35, "width": 1.5 },
+            "move": { "enable": true, "speed": 2 }
+          },
+          "interactivity": { "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
+          "retina_detect": true
+        });
+      } else {
+        setTimeout(run, 200);
       }
     }
-  </script>
+    run();
+  })();
+
+  // Botón y formulario
+  (function setupForm(){
+    const btn = document.getElementById('btn-pedir-cancion');
+    const formContainer = document.getElementById('form-container');
+    const form = document.getElementById('formPedidoWhatsApp');
+    const numeroWhatsApp = '593961480654';
+
+    btn.addEventListener('click', () => {
+      formContainer.classList.toggle('active');
+      const isActive = formContainer.classList.contains('active');
+      formContainer.setAttribute('aria-hidden', String(!isActive));
+      if (isActive) {
+        const first = form.querySelector('input, textarea');
+        if (first) first.focus();
+      }
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const nombre = (form.nombre.value || '').trim();
+      const cancion = (form.cancion.value || '').trim();
+      const artista = (form.artista.value || '').trim();
+      const mensaje = (form.mensaje.value || '').trim();
+
+      if (!nombre || !cancion || !artista) {
+        alert('Por favor completa tu nombre, la canción y el artista.');
+        return;
+      }
+
+      let texto = `*_Pedido de canción_ DC Mix EC*\n- *Nombre:* ${nombre}\n- *Canción:* ${cancion}\n- *Artista:* ${artista}`;
+      if (mensaje) texto += `\n- *Mensaje:*\n> ${mensaje}`;
+      const textoCodificado = encodeURIComponent(texto);
+      const url = `https://wa.me/${numeroWhatsApp}?text=${textoCodificado}`;
+
+      try { window.open(url, '_blank', 'noopener'); }
+      catch { window.open(url, '_blank'); }
+
+      form.reset();
+      formContainer.classList.remove('active');
+      formContainer.setAttribute('aria-hidden', 'true');
+    });
+  })();
+
+  // Navegación atrás hacia sección
+  function goBackToSection(event, sectionId) {
+    event.preventDefault();
+    try {
+      if (document.referrer) {
+        let url = new URL(document.referrer);
+        url.hash = sectionId;
+        window.location.href = url.toString();
+      } else {
+        window.location.href = '/#' + sectionId;
+      }
+    } catch {
+      window.location.href = '/#' + sectionId;
+    }
+  }
+</script>
 
 </body>
 </html>
