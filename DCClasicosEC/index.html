@@ -4,77 +4,58 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DC Clasicos EC</title>
+  <!-- Iconos -->
   <link rel="apple-touch-icon" sizes="180x180" href="/img_radio/RDCRSOUND_LOG.jpg">
   <link rel="icon" type="image/png" sizes="192x192" href="/img_radio/RDCRSOUND_LOG.jpg">
   <link rel="icon" type="image/png" sizes="512x512" href="/img_radio/RDCRSOUND_LOG.jpg">
+  <link rel="manifest" href="/manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="DCClasicosEC">
   <meta name="theme-color" content="#0d0d0d">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: 'Poppins', Arial, sans-serif;
+      font-family: Arial, sans-serif;
       color: white;
       overflow-x: hidden;
-      background: transparent;
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
     body::-webkit-scrollbar { display: none; }
 
+    /* Fondo con partículas */
     #particles-js {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: -1;
-      background: #0d0d0d;
+      background: radial-gradient(circle at center, #0d0d0d 0%, #000 100%);
     }
 
     .content {
       position: relative;
       padding: 2rem;
-      padding-bottom: 160px;
+      padding-bottom: 160px; /* espacio inferior */
       z-index: 1;
       max-width: 1100px;
       margin: 0 auto;
+      box-sizing: border-box;
     }
 
-    h1 {
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(90deg, #ffe082 10%, #bfa76a 90%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 2px 12px #bfa76a55);
-    }
-
-    .subtitle-modern {
-      text-align: center;
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: #ffe082;
-      text-shadow: 0 2px 8px #bfa76a55;
-      margin-bottom: 2.5rem;
-    }
-
-    /* Reproductor centrado con marco animado */
+    /* Marco animado dorado */
     .radio-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 10px 0;
+      padding: 20px 0;
     }
-
     .radio-frame-gold {
       position: relative;
-      display: inline-block;
       padding: 6px;
       border-radius: 18px;
       background: linear-gradient(45deg, #D9A05B, #FFD700, #B8860B, #FFD27F, #D9A05B);
@@ -82,15 +63,14 @@
       animation: borderFlow 6s linear infinite, pulseGlow 3.5s ease-in-out infinite;
       box-shadow: 0 0 20px rgba(217, 160, 91, 0.25);
     }
-
     @keyframes borderFlow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
     @keyframes pulseGlow {
-      0%   { box-shadow: 0 0 10px rgba(217,160,91,0.18); }
-      50%  { box-shadow: 0 0 32px rgba(255,215,0,0.35); }
+      0% { box-shadow: 0 0 10px rgba(217,160,91,0.18); }
+      50% { box-shadow: 0 0 32px rgba(255,215,0,0.35); }
       100% { box-shadow: 0 0 10px rgba(217,160,91,0.18); }
     }
 
@@ -101,46 +81,34 @@
       min-width: 260px;
       max-width: 480px;
       width: 100%;
-      z-index: 3;
     }
-    .cstrEmbed { width: 100%!important; height: auto!important; border-radius: 8px; overflow: hidden; }
+    .cstrEmbed a { display: none !important; }
 
+    /* Franja brillante que cruza el borde */
     .radio-scan {
       position: absolute;
       inset: 0;
       border-radius: 18px;
       pointer-events: none;
       z-index: 2;
-      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.04) 20%, rgba(255,215,0,0.1) 45%, rgba(255,255,255,0.04) 70%, rgba(255,255,255,0) 100%);
+      background: linear-gradient(90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.04) 20%,
+        rgba(255,215,0,0.1) 45%,
+        rgba(255,255,255,0.04) 70%,
+        rgba(255,255,255,0) 100%);
+      mix-blend-mode: screen;
+      transform: translateX(-120%);
       animation: scanMove 3.2s linear infinite;
       filter: blur(6px);
     }
     @keyframes scanMove {
-      0%   { transform: translateX(-120%); opacity: 0; }
-      10%  { opacity: 1; }
-      45%  { transform: translateX(0%); opacity: 1; }
-      90%  { transform: translateX(120%); opacity: 0.6; }
+      0% { transform: translateX(-120%); opacity: 0; }
+      45% { transform: translateX(120%); opacity: 1; }
       100% { transform: translateX(220%); opacity: 0; }
     }
 
-    .radio-frame-gold::before {
-      content: "";
-      position: absolute;
-      inset: 2px;
-      border-radius: 16px;
-      z-index: 1;
-      background-image:
-        radial-gradient(circle at 10% 20%, rgba(255,215,0,0.07) 0px, rgba(255,215,0,0) 8px),
-        radial-gradient(circle at 85% 70%, rgba(217,160,91,0.08) 0px, rgba(217,160,91,0) 10px);
-      animation: particlesShift 8s linear infinite;
-    }
-    @keyframes particlesShift {
-      0%   { background-position: 10% 20%, 85% 70%; }
-      50%  { background-position: 30% 40%, 70% 50%; }
-      100% { background-position: 10% 20%, 85% 70%; }
-    }
-
-    /* Botón flotante mejor posicionado */
+    /* Botón flotante abajo a la derecha */
     #btn-pedir-cancion {
       position: fixed;
       bottom: 25px;
@@ -154,67 +122,44 @@
       box-shadow: 0 4px 15px rgba(191, 191, 106, 0.6);
       cursor: pointer;
       font-family: 'Poppins', sans-serif;
-      z-index: 9999;
+      letter-spacing: 1.2px;
       transition: all 0.3s ease;
+      z-index: 9999;
     }
     #btn-pedir-cancion:hover {
       background: linear-gradient(135deg, #e6e4b4, #bfb96a);
       box-shadow: 0 6px 20px rgba(191, 187, 106, 0.8);
     }
 
-    /* Formulario */
-    #form-container {
+    /* Partículas doradas */
+    canvas {
       position: fixed;
-      bottom: 90px;
-      right: 25px;
-      width: 340px;
-      background: #2e2b18;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(191, 191, 106, 0.5);
-      padding: 20px 24px;
-      color: #e6e6b4;
-      transform: translateY(120%);
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.4s ease;
-      z-index: 9998;
-    }
-    #form-container.active {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    #form-container input, #form-container textarea {
-      width: 100%;
-      padding: 10px 12px;
-      margin-bottom: 12px;
-      border-radius: 8px;
-      border: none;
-      font-family: 'Poppins', sans-serif;
-    }
-    #form-container button[type="submit"] {
-      background: #bfbb6a;
-      color: #23231c;
-      font-weight: 700;
-      border: none;
-      border-radius: 12px;
-      width: 100%;
-      padding: 12px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    #form-container button[type="submit"]:hover {
-      background: #e5e6b4;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      background: transparent;
     }
   </style>
 </head>
 
 <body>
+  <nav aria-label="breadcrumb" style="background:rgba(24,24,27,0.92);backdrop-filter:blur(2px);border-bottom:1.5px solid #bfa76a33;box-shadow:0 2px 8px #bfa76a22;position:sticky;top:0;z-index:101;">
+    <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:1.2rem;padding:0.7rem 1.5rem;">
+      <a href="#" onclick="goBackToSection(event, 'emisoras')" style="color:#ffe082;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:0.5rem;">
+        <svg width="20" height="20" fill="none" stroke="#ffe082" stroke-width="2" viewBox="0 0 24 24"><path d="M10 19l-7-7 7-7"/><path d="M3 12h18"/></svg>
+        EMISORAS
+      </a>
+      <span style="color:#bfa76a;font-size:1.2rem;">/</span>
+      <span style="color:#fffbe6;font-weight:700;">DC Clasicos EC</span>
+    </div>
+  </nav>
+
   <div id="particles-js"></div>
 
   <div class="content">
-    <h1>DC Clasicos EC</h1>
+    <div style="text-align:center;">
+      <span class="title-box">DC Clasicos EC</span>
+    </div>
     <div class="subtitle-modern">🎶 La mejor selección de clásicos en un solo lugar</div>
 
     <div class="radio-wrapper">
@@ -234,54 +179,24 @@
     </div>
   </div>
 
+  <button id="btn-pedir-cancion">🎵 Pide tu canción</button>
+
   <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
     particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 60 },
-        "color": { "value": "#ffe082" },
-        "size": { "value": 2 },
-        "move": { "speed": 1.5 }
-      }
+      particles: {
+        number: { value: 80 },
+        color: { value: "#FFD700" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: 2 },
+        line_linked: { enable: true, distance: 120, color: "#bfa76a", opacity: 0.3, width: 1 },
+        move: { enable: true, speed: 1.4, direction: "none", random: false, straight: false, out_mode: "out" }
+      },
+      interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "grab" } } },
+      retina_detect: true
     });
-  </script>
-
-  <button id="btn-pedir-cancion">🎵 Pide tu canción</button>
-  <div id="form-container">
-    <h3>🎶 Pide tu canción</h3>
-    <form id="formPedidoWhatsApp">
-      <input type="text" name="nombre" placeholder="Tu nombre" required>
-      <input type="text" name="cancion" placeholder="Nombre de la canción" required>
-      <input type="text" name="artista" placeholder="Artista" required>
-      <textarea name="mensaje" placeholder="Mensaje adicional (opcional)"></textarea>
-      <button type="submit">Enviar pedido</button>
-    </form>
-  </div>
-
-  <script>
-    const btn = document.getElementById('btn-pedir-cancion');
-    const formContainer = document.getElementById('form-container');
-    const form = document.getElementById('formPedidoWhatsApp');
-    const numeroWhatsApp = '593961480654';
-    btn.onclick = () => formContainer.classList.toggle('active');
-    form.onsubmit = e => {
-      e.preventDefault();
-      const nombre = form.nombre.value;
-      const cancion = form.cancion.value;
-      const artista = form.artista.value;
-      const mensaje = form.mensaje.value;
-      const texto = encodeURIComponent(
-        `*_Pedido de canción - DC Clasicos EC_*\n` +
-        `• *Nombre:* ${nombre}\n` +
-        `• *Canción:* ${cancion}\n` +
-        `• *Artista:* ${artista}\n` +
-        (mensaje ? `• *Mensaje:* ${mensaje}` : "")
-      );
-      window.open(`https://wa.me/${numeroWhatsApp}?text=${texto}`, '_blank');
-      form.reset();
-      formContainer.classList.remove('active');
-    };
   </script>
 </body>
 </html>
