@@ -261,21 +261,21 @@
           <a href="https://www.caster.fm">Radio Server Hosting</a>
         </div>
       </div>
-
+      <!-- Franja animada que cruza el marco -->
       <div class="radio-scan" aria-hidden="true"></div>
     </div>
   </div>
 </div>
 
 <!-- =========================
-     BOTÓN FLOTANTE
+     BOTÓN FLOTANTE MEJORADO
      ========================= -->
 <button id="btn-pedir-cancion" aria-label="Pide tu canción">
-  🎵 Pide tu canción
+  🎵 <span>Pide tu canción</span>
 </button>
 
 <!-- =========================
-     FORMULARIO DESPLEGABLE
+     FORMULARIO DESPLEGABLE MEJORADO
      ========================= -->
 <div id="form-container" aria-hidden="true">
   <h3>🎶 Pide tu canción</h3>
@@ -297,20 +297,15 @@
   // Partículas azul eléctrico
   particlesJS('particles-js', {
     "particles": {
-      "number": { "value": 80 },
+      "number": { "value": 90 },
       "color": { "value": ["#49D3F2", "#0077FF", "#00BFFF", "#00E5FF"] },
       "shape": { "type": "circle" },
       "opacity": { "value": 0.7, "random": true },
       "size": { "value": 3, "random": { "enable": true, "minimumValue": 1 } },
-      "line_linked": { "enable": true, "distance": 150, "color": "#49D3F2", "opacity": 0.35, "width": 1.2 },
+      "line_linked": { "enable": true, "distance": 160, "color": "#49D3F2", "opacity": 0.35, "width": 1.5 },
       "move": { "enable": true, "speed": 2 }
     },
-    "interactivity": {
-      "events": {
-        "onhover": { "enable": false },
-        "onclick": { "enable": false }
-      }
-    },
+    "interactivity": { "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
     "retina_detect": true
   });
 
@@ -352,5 +347,171 @@
   }
 </script>
 
+<!-- =========================
+     ESTILOS
+     ========================= -->
+<style>
+/* --- MARCO ANIMADO DEL REPRODUCTOR --- */
+.radio-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0;
+}
+.radio-frame{
+  position: relative;
+  display: inline-block;
+  padding: 8px; 
+  border-radius: 20px;
+  background: linear-gradient(45deg, #49D3F2, #0077FF, #00BFFF, #49D3F2);
+  background-size: 300% 300%;
+  animation: borderFlow 6s linear infinite, pulseGlow 3.6s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(73,211,242,0.25);
+}
+@keyframes borderFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes pulseGlow {
+  0%   { box-shadow: 0 0 12px rgba(73,211,242,0.2); }
+  50%  { box-shadow: 0 0 40px rgba(73,211,242,0.35); }
+  100% { box-shadow: 0 0 12px rgba(73,211,242,0.2); }
+}
+.radio-inner{
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.98), rgba(6,6,6,0.95));
+  padding: 10px;
+  width: 100%;
+  max-width: 480px;
+  min-width: 260px;
+  box-sizing: border-box;
+}
+.radio-inner .cstrEmbed{
+  width: 100% !important;
+  border-radius: 10px;
+}
+.radio-scan{
+  position: absolute;
+  inset: 0;
+   border-radius: 20px;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.03) 20%,
+    rgba(73,211,242,0.08) 45%,
+    rgba(255,255,255,0.03) 70%,
+    rgba(255,255,255,0) 100%);
+  mix-blend-mode: screen;
+  transform: translateX(-120%);
+  animation: scanMove 3.2s linear infinite;
+  filter: blur(6px);
+}
+@keyframes scanMove {
+  0%   { transform: translateX(-120%); opacity: 0; }
+  10%  { opacity: 1; }
+  45%  { transform: translateX(0%); opacity: 1; }
+  90%  { transform: translateX(120%); opacity: 0.6; }
+  100% { transform: translateX(220%); opacity: 0; }
+}
+
+/* --- BOTÓN FLOTANTE --- */
+#btn-pedir-cancion {
+  position: fixed;
+  bottom: 140px;
+  right: 30px;
+  background: linear-gradient(135deg, #49D3F2, #0077FF);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 22px;
+  box-shadow: 0 4px 15px rgba(73,211,242,0.6);
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1.2px;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#btn-pedir-cancion:hover {
+  background: linear-gradient(135deg, #00BFFF, #00E5FF);
+  box-shadow: 0 6px 20px rgba(73,211,242,0.8);
+}
+
+/* --- FORMULARIO DESPLEGABLE --- */
+#form-container {
+  position: fixed;
+  bottom: 210px;
+  right: 30px;
+  width: 360px;
+  background: rgba(24,24,27,0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(73,211,242,0.5);
+  padding: 20px 24px;
+  font-family: 'Poppins', sans-serif;
+  color: #b3d9ff;
+  transform: translateY(30px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
+  z-index: 9998;
+}
+#form-container.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+#form-container h3 {
+  margin-bottom: 15px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-align: center;
+  letter-spacing: 1.2px;
+}
+#form-container input,
+#form-container textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  color: #1c1c23;
+}
+#form-container textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+#form-container button[type="submit"] {
+  background: #49D3F2;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  width: 100%;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  transition: background 0.3s ease;
+}
+#form-container button[type="submit"]:hover {
+  background: #00BFFF;
+}
+
+/* Adaptación móvil */
+@media (max-width: 420px){
+  .radio-inner { max-width: 360px; min-width: 220px; padding: 8px; }
+  .radio-frame { padding: 5px; border-radius: 14px; }
+  .radio-scan { filter: blur(4px); }
+  #form-container { width: 90vw; right: 5vw; bottom: 220px; padding: 16px 20px; }
+  #btn-pedir-cancion { bottom: 140px; right: 20px; padding: 12px 18px; font-size: 0.9rem; }
+}
+</style>
 </body>
 </html>
