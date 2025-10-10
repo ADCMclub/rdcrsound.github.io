@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radio Avenida Tropical</title>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Fondo de partículas */
+  #particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at bottom, #1a0f00, #000);
+  }
+
+  /* Menú superior */
+  nav {
+    background: rgba(34, 20, 0, 0.85);
+    backdrop-filter: blur(4px);
+    border-bottom: 1.5px solid #ff9f4333;
+    box-shadow: 0 2px 8px #ffb34722;
+    position: sticky;
+    top: 0;
+    z-index: 101;
+  }
+
+  nav div {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0.7rem 1.5rem;
+  }
+
+  nav a {
+    color: #ffb347;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .content {
+    position: relative;
+    padding: 2rem;
+    padding-bottom: 160px;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #ff9a00, #ff6300);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 12px #ff630055);
+  }
+
+  /* Marco animado del reproductor */
+  .player-box {
+    position: relative;
+    border-radius: 15px;
+    padding: 12px;
+    background: linear-gradient(45deg, #ffb347, #ff6300, #ffb347);
+    background-size: 300% 300%;
+    animation: borderMove 6s linear infinite;
+    box-shadow: 0 0 20px #ff630055;
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+  }
+  @keyframes borderMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .player-box iframe, .player-box div {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  /* Botón flotante */
+  .float-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: linear-gradient(135deg, #ffb347, #ff6300);
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 50px;
+    font-weight: 700;
+    box-shadow: 0 0 15px #ff630099;
+    text-decoration: none;
+    transition: 0.3s;
+    z-index: 9999;
+  }
+  .float-btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 25px #ff6300aa;
+  }
+</style>
+</head>
+
+<body>
+<div id="particles-js"></div>
+
+<nav aria-label="breadcrumb">
+  <div>
+    <a href="#">
+      <svg width="20" height="20" fill="none" stroke="#ffb347" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M10 19l-7-7 7-7"/><path d="M3 12h18"/>
+      </svg>
+      EMISORAS
+    </a>
+    <span style="color:#ff9f43;font-size:1.2rem;">/</span>
+    <span style="color:#fffbe6;font-weight:700;">Radio Avenida Tropical</span>
+    <div style="flex:1"></div>
+  </div>
+</nav>
+
+<main class="content">
+  <h1>Radio Avenida Tropical</h1>
+
+  <div class="player-box">
+    <div data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="dark" data-color="FF6300" data-channelId="a012d2d4-4ab4-4550-b184-3ae00c951cad" data-rendered="false" class="cstrEmbed">
+      <a href="https://www.caster.fm">Shoutcast Hosting</a>
+      <a href="https://www.caster.fm">Stream Hosting</a>
+      <a href="https://www.caster.fm">Radio Server Hosting</a>
+    </div>
+    <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+  </div>
+</main>
+
+<a href="#" class="float-btn">🎶 Pide tu canción</a>
+
+<!-- Partículas -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<script>
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 80 },
+      color: { value: ["#ffb347", "#ff6300", "#ffd27f"] },
+      shape: { type: "circle" },
+      opacity: { value: 0.8 },
+      size: { value: 3 },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#ff8c42",
+        opacity: 0.4,
+        width: 1
+      },
+      move: { enable: true, speed: 2.5 }
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "repulse" }
+      }
+    },
+    retina_detect: true
+  });
+</script>
+</body>
+</html>
