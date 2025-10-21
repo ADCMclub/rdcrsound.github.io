@@ -1,1717 +1,1165 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RDCR SOUND</title>
-  <meta name="description" content="RDCR SOUND - Tu radio favorita en vivo 24/7. Música latina, salsa, programación, locutores, emisoras y más desde Ibarra, Ecuador.">
-  <meta name="keywords" content="rdcr,sound,rdcr sound,RDCR SOUND, radio, música, salsa, emisoras, Ecuador, locutores, programación, online, streaming, Ibarra">
-  <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
-  <meta property="og:site_name" content="RDCR SOUND" />
-   
-  <script type="application/ld+json">
-    {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "RDCR SOUND",
-  "url": "https://rdcrsound.adcm.club"
-  
-    }
-  </script>
-  <!-- Icono de pestaña -->
-  <link rel="icon" type="image/png"  sizes="32x32" href="/img_radio/RDCRSOUND_LOGrem.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/img_radio/RDCRSOUND_LOGrem.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/img_radio/RDCRSOUND_LOGrem.png">
-  <link rel="shortcut icon" href="/img_radio/RDCRSOUND_LOGrem.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-  <!-- tsParticles CDN para fondo animado -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js"></script>
-    <!-- Icono para añadir a pantalla de inicio en móviles (iOS y Android) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img_radio/RDCRSOUND_LOGrem.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img_radio/RDCRSOUND_LOGrem.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/img_radio/RDCRSOUND_LOGrem.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/img_radio/RDCRSOUND_LOGrem.png">
-  <link rel="shortcut icon" href="/img_radio/RDCRSOUND_LOGrem.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="RDCR SOUND">
-  <meta name="theme-color" content="#18181b">
-
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-      background: #111; /* Fondo negro elegante */
-      color: #fff;
-      transition: background 0.5s;
-    }
-    #tsparticles {
-      position: fixed;
-      z-index: -2;
-      width: 100vw;
-      height: 100vh;
-      top: 0;
-      left: 0;
-    }
-    /* Secciones con degradados */
-    section,
-    .section-gradient {
-      background: linear-gradient(135deg, #18181b 0%, #232526 100%);
-      transition: background 0.5s;
-    }
-    #inicio {
-      background: linear-gradient(120deg, #232526 0%, #fff 100%);
-      color: #18181b;
-      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
-    }
-    #programacion {
-      background: linear-gradient(120deg, #232526 0%, #bfa76a 100%);
-      color: #000000;
-    }
-    #locutores {
-      background: linear-gradient(120deg, #18181b 0%, #fffbe6 100%);
-      color: #18181b;
-    }
-    #galeria {
-      background: linear-gradient(120deg, #232526 0%, #fff 100%);
-      color: #18181b;
-    }
-
-    /* Animaciones personalizadas */
-    @keyframes fade {
-      from { opacity: 0; transform: translateY(20px);}
-      to { opacity: 1; transform: translateY(0);}
-    }
-    .animate-fade { animation: fade 1.2s cubic-bezier(.4,0,.2,1) both; }
-    @keyframes pulseSlow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);}
-      50% { box-shadow: 0 0 40px 10px rgba(0, 0, 0, 0.3);}
-    }
-    .animate-pulseSlow { animation: pulseSlow 2.5s infinite; }
-    /* Botón animado */
-    .btn-anim {
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s, color 0.3s, transform 0.2s;
-      background: linear-gradient(90deg, #bfa76a 0%, #fffbe6 100%);
-      color: #18181b;
-      border: none;
-      box-shadow: 0 2px 8px 0 #bfa76a44;
-      /* Animación de entrada */
-      animation: btn-fade-in 1s cubic-bezier(.4,0,.2,1);
-    }
-    .btn-anim::before {
-      content: "";
-      position: absolute;
-      left: -50%;
-      top: 0;
-      width: 200%;
-      height: 100%;
-      background: linear-gradient(90deg, #fffbe6 0%, #bfa76a 100%);
-      opacity: 0.12;
-      transform: skewX(-20deg);
-      transition: left 0.4s;
-      z-index: 0;
-    }
-    .btn-anim:hover::before {
-      left: 0;
-      opacity: 0.22;
-    }
-    .btn-anim span {
-      position: relative;
-      z-index: 1;
-    }
-    /* Animación de escala y brillo al pasar el mouse */
-    .btn-anim:hover {
-      transform: scale(1.07); /* Escala suave */
-      box-shadow: 0 4px 24px 0 #bfa76a99, 0 0 0 4px #fffbe633;
-      filter: brightness(1.08);
-      transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s, filter 0.25s;
-      /* Sin salto/bounce */
-    }
-    /* Animación de "pulse" suave */
-    @keyframes btn-fade-in {
-      from { opacity: 0; transform: scale(0.95);}
-      to { opacity: 1; transform: scale(1);}
-    }
-    .btn-anim:active {
-      transform: scale(0.97);
-      filter: brightness(0.98);
-    }
-    
-    /* Tarjeta de tips */
-    .tip-card {
-      background: linear-gradient(135deg, #fffbe6 0%, #bfa76a 100%);
-      color: #18181b;
-      border-radius: 1.25rem;
-      box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
-      padding: 1.5rem 1.25rem;
-      margin-bottom: 2rem;
-      border-left: 6px solid #bfa76a;
-      font-size: 1rem;
-      font-weight: 500;
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-    .tip-card svg {
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    @keyframes gold-shine {
-      0% {
-        filter: drop-shadow(0 0 8px #f6e27a88);
-        text-shadow: 0 0 16px #fffbe6cc, 0 0 8px #bfa76a88;
-      }
-      50% {
-        filter: drop-shadow(0 0 24px #f6e27a) brightness(1.15);
-        text-shadow: 0 0 32px #fffbe6cc, 0 0 16px #bfa76a;
-      }
-      100% {
-        filter: drop-shadow(0 0 8px #f6e27a88);
-        text-shadow: 0 0 16px #fffbe6cc, 0 0 8px #bfa76a88;
-      }
-    }
-    /* Animación de entrada fade-up */
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(30px);}
-      to { opacity: 1; transform: translateY(0);}
-    }
-    .animate-fade-up { animation: fade-up 1.1s cubic-bezier(.4,0,.2,1) both; }
-
-    /* Animación de entrada fade-in */
-    @keyframes fade-in {
-      from { opacity: 0;}
-      to { opacity: 1;}
-    }
-    .animate-fade-in { animation: fade-in 1.2s cubic-bezier(.4,0,.2,1) both; }
-
-    /* Animación de flotación suave */
-    @keyframes float {
-      0%, 100% { transform: translateY(0);}
-      50% { transform: translateY(-10px);}
-    }
-    .animate-float { animation: float 3s ease-in-out infinite; }
-
-    /* Animación de brillo dorado */
-    @keyframes shine {
-      0% { filter: brightness(1);}
-      50% { filter: brightness(1.15) drop-shadow(0 0 16px #bfa76a88);}
-      100% { filter: brightness(1);}
-    }
-    .animate-shine { animation: shine 2.5s linear infinite; }
-
-    /* Animación de rebote sutil */
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0);}
-      50% { transform: translateY(-6px);}
-    }
-    .animate-bounce { animation: bounce 1.2s cubic-bezier(.4,0,.2,1) infinite; }
-
-    /* Animación de wiggle para iconos */
-    @keyframes wiggle {
-      0%, 100% { transform: rotate(-3deg);}
-      50% { transform: rotate(3deg);}
-    }
-    .animate-wiggle { animation: wiggle 1.2s ease-in-out infinite; }
-
-    @keyframes radio-glow {
-
-      80% {
-        text-shadow: 0 0 18px #fffbe6cc, 0 0 12px #bfa76a;
-        filter: brightness(1.13) drop-shadow(0 0 12px #bfa76a88);
-      }
-    100% {
-        text-shadow: 0 0 18px #fffbe6cc, 0 0 12px #bfa76a;
-        filter: brightness(1.13) drop-shadow(0 0 12px #bfa76a88);
-      }
-    }
-   
-  </style>
-</head>
-<body class="bg-black text-white font-sans relative">
-
-
-  <!-- Fondo animado de partículas -->
-  <div id="tsparticles" class="animate-fade-up"></div>
-
-  <!-- NAV -->
-  <!-- NAV: Elimina la duplicidad de menús y mejora el responsive -->
-<style>
-  /* Menú hamburguesa y mobile nav */
-  .hamburger {
-    display: none;
-    position: relative; /* Asegura que esté sobre el header */
-    z-index: 120;
-  }
-  .mobile-nav { display: none; }
-  @media (max-width: 900px) {
-    nav.desktop-nav { display: none !important; }
-    .hamburger {
-      display: flex !important;
-      flex-direction: column;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      position: relative; /* Mantén relative para que respete el stacking context del header */
-      z-index: 120;
-    }
-    .hamburger span {
-      height: 4px;
-      width: 28px;
-      background: #fde047;
-      margin: 4px 0;
-      border-radius: 2px;
-      transition: all 0.3s;
-      display: block;
-    }
-    .mobile-nav {
-      display: flex !important;
-      flex-direction: column;
-      position: fixed;
-      top: 0; right: 0;
-      width: 80vw; max-width: 320px; height: 100vh;
-      background: linear-gradient(135deg, #18181b 80%, #bfa76a 100%);
-      box-shadow: -4px 0 24px #bfa76a33;
-      z-index: 110;
-      padding: 2.5rem 1.5rem 1.5rem 2rem;
-      transform: translateX(100%);
-      transition: transform 0.35s cubic-bezier(.4,0,.2,1);
-    }
-    .mobile-nav.open { transform: translateX(0); }
-    .mobile-nav a {
-      font-size: 1.25rem;
-      margin-bottom: 1.5rem;
-      color: #fffbe6;
-      font-weight: 600;
-      letter-spacing: 1px;
-      transition: color 0.2s;
-    }
-    .mobile-nav a:hover { color: #fde047; }
-    body.mobile-menu-open { overflow: hidden !important; }
-  }
-  /* Asegura que el header esté sobre el resto del contenido */
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: inherit;
-  }
-</style>
-<header class="bg-gradient-to-r from-black via-gray-900 to-black shadow-lg animate-fade-up" style="position:sticky;top:0;z-index:100;">
-  <div class="container mx-auto px-6 py-4 flex justify-between items-center relative">
-    <div class="flex items-center space-x-3">
-      <img src="/img_radio/RDCRSOUND_LOG.jpg" alt="Logo RDC Sound" class="w-12 h-12 rounded-full shadow-lg logo-left" />
-      <h1
-        class="text-3xl md:text-4xl font-extrabold tracking-wide select-none"
-        style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-          background: linear-gradient(90deg, #e6d9b4 0%, #bfa76a 50%, #f6e27a 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          color: transparent;
-          filter: drop-shadow(0 6px 20px rgba(0,0,0,0.6)), drop-shadow(0 0 12px rgba(191,167,106,0.45));"
-      >
-        RDCR Sound
-      </h1>
-    </div>
-    <!-- Desktop nav with submenus -->
-    <nav class="space-x-4 text-sm font-semibold desktop-nav flex items-center">
-      <div class="relative group inline-block">
-        <a href="#inicio" class="hover:text-yellow-400 transition-colors">Inicio</a>
-      </div>
-        <div class="relative group inline-block">
-        <a href="/podcast/" class="hover:text-yellow-400 transition-colors">Podcast</a>
-        <div class="absolute left-0 mt-0 w-44 bg-[#232526] rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50"
-             style="min-width:160px;">
-          <a href="/podcast/entretelones/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Entretelones</a>
-          <a href="/podcast/manoamano/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Mano a Mano</a>
-        </div>
-      </div>
-      <div class="relative group inline-block">
-        <a href="#emisoras" class="hover:text-yellow-400 transition-colors">Emisoras</a>
-        <div class="absolute left-0 mt-0 w-44 bg-[#232526] rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50"
-             style="min-width:160px;">
-          <a href="/DCRadioEC/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Radio EC</a>
-          <a href="/DCMixEC/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Mix EC</a>
-          <a href="/DCClasicosEC/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">DC Clasicos EC</a>
-          <a href="/RadioAvenidaTropical/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Radio Avenida Tropical</a>
-        </div>
-      </div>
-      <div class="relative group inline-block">
-        <a href="#locutores" class="hover:text-yellow-400 transition-colors">Locutores</a>
-        <div class="absolute left-0 mt-0 w-44 bg-[#232526] rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50"
-             style="min-width:160px;">
-          <a href="/locutores/dario/" class="block px-4 py-2 text-sm text-white hover:bg-yellow-400/10">Dario Castellanos</a>
-        </div>
-      </div>
-      <div class="relative group inline-block">
-        <a href="#galeria" class="hover:text-yellow-400 transition-colors">Playlist</a>
-        <div class="absolute left-0 mt-0 w-44 bg-[#232526] rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-50"
-             style="min-width:160px;">
-        </div>
-      </div>
-    </nav>
-    <!-- Hamburger -->
-    <div class="hamburger" id="hamburger" aria-label="Abrir menú" tabindex="0">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <!-- Mobile nav with submenus -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Menú móvil">
-      <div>
-        <a href="#inicio" onclick="closeMobileNav()">Inicio</a>
-      </div>
-      <div>
-        <button type="button" class="w-full text-left font-semibold text-white py-2 px-0" onclick="toggleSubmenu('podcast-sub')">Podcast ▼</button>
-        <div id="podcast-sub" style="display:none; margin-left:1rem;">
-          <a href="/podcast/entretelones/" onclick="closeMobileNav()" class="block py-1">Entretelones</a>
-          <a href="/podcast/manoamano/" onclick="closeMobileNav()" class="block py-1">Mano a Mano</a>
-        </div>
-      </div>
-      <div>
-        <button type="button" class="w-full text-left font-semibold text-white py-2 px-0" onclick="toggleSubmenu('emisoras-sub')">Emisoras ▼</button>
-        <div id="emisoras-sub" style="display:none; margin-left:1rem;">
-          <a href="/DCRadioEC/" onclick="closeMobileNav()" class="block py-1">DC Radio EC</a>
-          <a href="/DCMixEC/" onclick="closeMobileNav()" class="block py-1">DC Mix EC</a>
-          <a href="/DCClasicosEC/" onclick="closeMobileNav()" class="block py-1">DC Clasicos EC</a>
-          <a href="/RadioAvenidaTropical/" onclick="closeMobileNav()" class="block py-1">Radio Avenida Tropical</a>
-        </div>
-      </div>
-      <div>
-        <button type="button" class="w-full text-left font-semibold text-white py-2 px-0" onclick="toggleSubmenu('locutores-sub')">Locutores ▼</button>
-        <div id="locutores-sub" style="display:none; margin-left:1rem;">
-          <a href="/locutores/dario/" onclick="closeMobileNav()" class="block py-1">Dario Castellanos</a>
-        </div>
-      </div>
-      <div>
-        <a href="#galeria" onclick="closeMobileNav()" class="w-full text-left font-semibold text-white py-2 px-0">Playlist</a>
-      </div>
-    </nav>
-  </div>
-</header>
-<script>
-  // Menú hamburguesa
-  const hamburger = document.getElementById('hamburger');
-  const mobileNav = document.getElementById('mobileNav');
-  function closeMobileNav() {
-    mobileNav.classList.remove('open');
-    document.body.classList.remove('mobile-menu-open');
-  }
-  hamburger.addEventListener('click', function() {
-    mobileNav.classList.toggle('open');
-    document.body.classList.toggle('mobile-menu-open');
-  });
-  document.addEventListener('click', function(e) {
-    if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
-      closeMobileNav();
-    }
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === "Escape") closeMobileNav();
-  });
-  function toggleSubmenu(id) {
-    var el = document.getElementById(id);
-    if (el.style.display === "none" || el.style.display === "") {
-      el.style.display = "block";
-    } else {
-      el.style.display = "none";
-    }
-  }
-</script>
-
-  <!-- HERO -->
-  <section id="inicio" class="section-gradient text-center py-20 animate-fade-up" style="position:relative; overflow:hidden;">
-  <div id="tsparticles-inicio" class="section-particles" aria-hidden="true"></div>
-    <!-- Ondas SVG decorativas en el fondo, mitad de alto y más rápidas -->
-    <div aria-hidden="true" style="position:absolute; left:0; right:0; top:0; bottom:0; width:100%; height:100%; z-index:0; pointer-events:none; overflow:hidden;">
-      <svg viewBox="0 0 1440 160" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute; left:0; right:0; top:20%; width:100%; height:100%;">
-        <defs>
-          <!-- Old money gold mejorado -->
-          <linearGradient id="wave1-gradient" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#f8e7b5" stop-opacity="0.33"/>
-            <stop offset="100%" stop-color="#c2b280" stop-opacity="0.23"/>
-          </linearGradient>
-          <!-- Arena suave mejorado -->
-          <linearGradient id="wave2-gradient" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#f6e7c1" stop-opacity="0.23"/>
-            <stop offset="100%" stop-color="#f8e7b5" stop-opacity="0.17"/>
-          </linearGradient>
-          <!-- Arena/dorado extra sutil mejorado -->
-          <linearGradient id="wave3-gradient" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#f5e9d0" stop-opacity="0.15"/>
-            <stop offset="100%" stop-color="#c2b280" stop-opacity="0.12"/>
-          </linearGradient>
-        </defs>
-        <!-- Onda principal animada (mitad de alto, velocidad x2) -->
-        <path d="M0,80 Q360,120 720,80 T1440,80 L1440,160 L0,160 Z"
-          fill="url(#wave1-gradient)" opacity="0.75">
-          <animate attributeName="d" dur="4s" repeatCount="indefinite"
-            values="\
-              M0,80 Q360,120 720,80 T1440,80 L1440,160 L0,160 Z;\
-              M0,85 Q360,110 720,85 T1440,80 L1440,160 L0,160 Z;\
-              M0,80 Q360,120 720,80 T1440,80 L1440,160 L0,160 Z"
-            keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
-            calcMode="spline" />
-        </path>
-        <!-- Onda secundaria animada (mitad de alto, velocidad x2) -->
-        <path d="M0,90 Q480,160 960,20 T1440,100 L1440,160 L0,160 Z"
-          fill="url(#wave2-gradient)" opacity="0.48">
-          <animate attributeName="d" dur="5s" repeatCount="indefinite"
-            values="\
-              M0,90 Q300,130 960,80 T1440,80 L1440,160 L0,160 Z;\
-              M0,95 Q300,100 960,100 T1440,70 L1440,160 L0,160 Z;\
-              M0,90 Q300,130 960,80 T1440,80 L1440,160 L0,160 Z"
-            keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
-            calcMode="spline" />
-        </path>
-        <!-- Onda extra animada (mitad de alto, velocidad x2) -->
-        <path d="M0,110 Q360,160 1080,120 T1440,130 L1440,160 L0,160 Z"
-          fill="url(#wave3-gradient)" opacity="0.32">
-          <animate attributeName="d" dur="6s" repeatCount="indefinite"
-            values="\
-              M0,110 Q360,160 1080,120 T1440,130 L1440,160 L0,160 Z;\
-              M0,115 Q400,150 1080,140 T1440,120 L1440,160 L0,160 Z;\
-              M0,110 Q360,160 1080,120 T1440,130 L1440,160 L0,160 Z"
-            keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
-            calcMode="spline" />
-        </path>
-      </svg>
-      <style>
-        /* Brillo permanente para las ondas, sin apagarse al pasar el mouse */
-        #inicio svg path {
-          filter: drop-shadow(0 0 32px #f8e7b5cc) drop-shadow(0 0 16px #c2b28099);
-          transition: none;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dario LA Voz - Comunicaciones de Impacto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
         }
-      </style>
-    </div>
-    <div class="max-w-2xl mx-auto relative z-10">
-      <h2
-        class="text-4xl md:text-5xl font-extrabold mb-4 animate-radio-glow select-none"
-        style="
-          font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-          color: #fff;
-          background: none;
-          filter: drop-shadow(0 0 12px #bfa76a88);
-          letter-spacing: 1px;
-          text-shadow: 0 0 16px #bfa76a, 0 0 8px #fffbe6;
-        "
-      >
-        Tu radio favorita en vivo 24/7
-      </h2>
-      <p class="text-gray-800 mb-8 animate-fade-in text-lg">Conéctate al ritmo de la mejor música latina, salsa, y más.</p>
-      <div class="flex justify-center gap-4 mt-8">
-        <a href="/podcast/">
-  <div class="flex flex-col items-center justify-center">
-    <a href="/podcast/"
-      class="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300"
-      style="text-decoration: none;"
-      aria-label="Ver lista podcast"
-    >
-      <span class="font-extrabold text-2xl md:text-3xl tracking-widest animate-masprendidos-text"
-        style="
-          font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-          background: linear-gradient(90deg, #b67f00 10%, #b67f00 50%, #b67f00 90%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          color: transparent;
-          letter-spacing: 2px;
-        "
-      >
-        PODCAST
-      </span>
-      <span class="ml-2 font-bold text-lg text-yellow-900 animate-masprendidos-btn group-hover:animate-masprendidos-btn-hover transition-all">CLICK</span>
-      <svg class="ml-1 animate-masprendidos-arrow" width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <path d="M12 8L20 16L12 24" stroke="#bfa76a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-  </div>
-        </a>
-      </div>
-    </div>
-  </section>
-<!-- podcast - Sección animada pequeña -->
-
-<style>
-@keyframes masprendidos-text {
-  0%, 100% { letter-spacing: 2px; filter: brightness(1) drop-shadow(0 0 8px #fde04744);}
-  20% { letter-spacing: 6px; filter: brightness(1.12) drop-shadow(0 0 16px #fde04788);}
-  40% { letter-spacing: 2px; filter: brightness(1.08);}
-  60% { letter-spacing: 8px; filter: brightness(1.15) drop-shadow(0 0 24px #fde04799);}
-  80% { letter-spacing: 2px; filter: brightness(1.05);}
-}
-.animate-masprendidos-text {
-  animation: masprendidos-text 2.8s cubic-bezier(.4,0,.2,1) infinite;
-  display: inline-block;
-}
-@keyframes masprendidos-btn {
-  0%, 100% { transform: scale(1);}
-  50% { transform: scale(1.12);}
-}
-.animate-masprendidos-btn {
-  animation: masprendidos-btn 2.2s cubic-bezier(.4,0,.2,1) infinite;
-  display: inline-block;
-}
-@keyframes masprendidos-btn-hover {
-  0% { color: #bfa76a;}
-  100% { color: #fde047;}
-}
-.group:hover .animate-masprendidos-btn {
-  animation: none;
-  color: #2d251f !important;
-}
-@keyframes masprendidos-arrow {
-  0%, 100% { transform: translateX(0);}
-  50% { transform: translateX(8px);}
-}
-.animate-masprendidos-arrow {
-  animation: masprendidos-arrow 1.6s cubic-bezier(.4,0,.2,1) infinite;
-  transition: transform 0.2s;
-}
-.group:hover .animate-masprendidos-arrow {
-  transform: translateX(12px) scale(1.12);
-  transition: transform 0.2s;
-}
-</style>
-
-
-  <!-- EMISORAS -->
-  <!-- Animadas, sin fondo en los logos -->
-<section id="emisoras" class="section-gradient py-16 px-6 animate-fade-up">
-  <div id="tsparticles-emisoras" class="section-particles" aria-hidden="true"></div>
-  <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent animate-shine select-none"
-      style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
-    📻 Emisoras
-  </h3>
-  <div class="relative flex flex-col items-center">
-    <div class="flex items-center justify-center gap-2 w-full max-w-4xl mx-auto">
-      <div id="emisora-carousel" class="flex items-center justify-center gap-2 w-full overflow-visible">
-        <!-- Emisoras render here -->
-      </div>
-    </div>
-    <div id="emisora-indicators" class="flex justify-center mt-4 gap-2"></div>
-  </div>
-</section>
-<style>
-/* Carousel effect for emisoras - improved: all cards same base size, stronger zoom on hover/center and larger overall */
-#emisora-carousel {
-  min-height: 240px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-}
-.emisora-card {
-  opacity: 0.95;
-  transform: scale(1);
-  transition: transform 0.38s cubic-bezier(.2,.9,.2,1), opacity 0.38s, box-shadow 0.38s;
-  z-index: 1;
-  pointer-events: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-}
-/* Base: make every image the same larger size */
-.emisora-img {
-  width: 190px;
-  height: 190px;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 1rem;
-  box-shadow: 0 6px 22px #00000044;
-  transition: transform 0.38s ease, box-shadow 0.38s ease;
-}
-/* Center/hover state: larger and more glow */
-.emisora-card-center,
-.emisora-card:hover {
-  transform: scale(1.45);
-  z-index: 4;
-}
-.emisora-card-center .emisora-img,
-.emisora-card:hover .emisora-img {
-  transform: scale(1.08);
-  box-shadow: 0 18px 48px #fde04799, 0 0 0 8px #bfa76a33;
-}
-/* Slightly dim non-centered neighbors */
-.emisora-card:not(.emisora-card-center):not(:hover) { opacity: 0.68; transform: scale(1); }
-
-@media (max-width: 900px) {
-  .emisora-img { width: 140px; height: 140px; }
-  .emisora-card-center, .emisora-card:hover { transform: scale(1.35); }
-}
-@media (max-width: 600px) {
-  #emisora-carousel { min-height: 180px; gap: 14px; }
-  .emisora-img { width: 120px; height: 120px; }
-  .emisora-card-center, .emisora-card:hover { transform: scale(1.25); }
-}
-</style>
-<script>
-// Improved emisora carousel logic: hover to center+zoom, pause auto-rotation, resume after delay
-const emisoraData = [
-  { href: "/DCRadioEC", img: "/img_radio/DCRADIOEC_LOG.jpeg", alt: "DC Radio EC" },
-  { href: "/DCMixEC", img: "/img_radio/dcmix_logo.jpg", alt: "DC Mix EC" },
-  { href: "/DCClasicosEC", img: "/img_radio/dcclasicos_logo.jpg", alt: "DC Clasicos EC" },
-  { href: "/RadioAvenidaTropical", img: "/img_radio/radioat1.jpg", alt: "Radio Avenida Tropical" }
-];
-let emisoraCenter = 0, emisoraInterval = null, emisoraPaused = false, emisoraResumeTimeout = null;
-const EMISORA_AUTO_MS = 3800; // auto change interval
-const EMISORA_RESUME_DELAY = 1800; // resume after mouse leaves
-
-function renderEmisoraCarousel(centerIdx, direction = 1) {
-  const container = document.getElementById('emisora-carousel');
-  if (!container) return;
-  container.innerHTML = '';
-
-  emisoraData.forEach((item, i) => {
-    const a = document.createElement('a');
-    a.href = item.href;
-    a.className = 'emisora-card' + (i === centerIdx ? ' emisora-card-center' : '');
-    a.setAttribute('data-idx', i);
-    a.setAttribute('aria-label', item.alt);
-
-    const img = document.createElement('img');
-    img.src = item.img;
-    img.alt = item.alt;
-    img.className = 'emisora-img';
-
-    a.appendChild(img);
-    container.appendChild(a);
-  });
-
-  // Indicators (keep previous behavior)
-  const indicators = document.getElementById('emisora-indicators');
-  if (emisoraData.length > 1 && indicators) {
-    indicators.innerHTML = emisoraData.map((_, idx) =>
-      `<button class="${idx === centerIdx ? 'active' : ''}" aria-label="Ir a ${emisoraData[idx].alt}"></button>`
-    ).join('');
-    Array.from(indicators.children).forEach((btn, idx) => {
-      btn.onclick = () => {
-        emisoraCenter = idx;
-        renderEmisoraCarousel(emisoraCenter, idx > emisoraCenter ? 1 : -1);
-        resetEmisoraInterval();
-      };
-    });
-  }
-
-  // Attach hover/click listeners to each card
-  Array.from(container.children).forEach((card) => {
-    const idx = Number(card.getAttribute('data-idx'));
-
-    card.addEventListener('mouseenter', () => {
-      // Pause auto and set center to hovered
-      emisoraPaused = true;
-      if (emisoraInterval) clearInterval(emisoraInterval);
-      if (emisoraResumeTimeout) clearTimeout(emisoraResumeTimeout);
-
-      if (idx !== emisoraCenter) {
-        emisoraCenter = idx;
-        // re-render to update center class
-        renderEmisoraCarousel(emisoraCenter, 0);
-      } else {
-        // ensure the hovered card has center class
-        card.classList.add('emisora-card-center');
-      }
-    });
-
-    card.addEventListener('mouseleave', () => {
-      // small debounce before resuming auto-change
-      emisoraResumeTimeout = setTimeout(() => {
-        emisoraPaused = false;
-        startEmisoraInterval();
-      }, EMISORA_RESUME_DELAY);
-    });
-
-    card.addEventListener('click', (e) => {
-      // on click keep it centered and reset interval
-      emisoraCenter = idx;
-      renderEmisoraCarousel(emisoraCenter);
-      resetEmisoraInterval();
-    });
-  });
-}
-
-function nextEmisoraCarousel() {
-  emisoraCenter = (emisoraCenter + 1) % emisoraData.length;
-  renderEmisoraCarousel(emisoraCenter, 1);
-}
-
-function startEmisoraInterval() {
-  if (emisoraInterval) clearInterval(emisoraInterval);
-  emisoraInterval = setInterval(() => {
-    if (!emisoraPaused) nextEmisoraCarousel();
-  }, EMISORA_AUTO_MS);
-}
-
-function resetEmisoraInterval() {
-  if (emisoraInterval) clearInterval(emisoraInterval);
-  emisoraPaused = false;
-  startEmisoraInterval();
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  renderEmisoraCarousel(emisoraCenter);
-  startEmisoraInterval();
-
-  // Pause whole carousel on mouse enter, resume on leave (for the container)
-  const emisoraCarousel = document.getElementById('emisora-carousel');
-  if (emisoraCarousel) {
-    emisoraCarousel.addEventListener('mouseenter', () => { emisoraPaused = true; if (emisoraInterval) clearInterval(emisoraInterval); });
-    emisoraCarousel.addEventListener('mouseleave', () => { emisoraPaused = false; startEmisoraInterval(); });
-  }
-});
-</script>
-
-  <!-- LOCUTORES MEJORADO FONDO OSCURO OLD MONEY -->
-  <section id="locutores" class="section-gradient py-16 px-6 animate-fade-up" style="background: linear-gradient(120deg, #232526 0%, #3a2f1d 100%); color: #e6d9b4;">
-  <div id="tsparticles-locutores" class="section-particles" aria-hidden="true"></div>
-    <h3 class="text-3xl font-semibold text-center mb-10 animate-shine select-none"
-        style="
-          font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; 
-          letter-spacing: 1px;
-          background: linear-gradient(90deg, #e6d9b4 10%, #bfa76a 50%, #e6d9b4 90%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          color: transparent;
-          filter: none;
-        ">
-      🎙 Locutores
-    </h3>
-    <div class="flex flex-wrap justify-center gap-12 max-w-6xl mx-auto">
-      <!-- Locutor 1 -->
-<a href="/locutores/dario/" class="max-w-xs group transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:bg-[#2e2718]/90 animate-fade-up" style="box-shadow: 0 2px 16px 0 #bfa76a22, 0 2px 8px 0 #e6d9b444; border: 2px solid #bfa76a; border-radius: 1.5rem; background: rgba(35,34,28,0.9); text-align: center; display: block; padding: 2.5rem;">
-  <img src="/img_radio/Dario.jpeg" alt="Locutor" class="mx-auto rounded-full w-32 h-32 mb-5 border-2 border-[#bfa76a] shadow group-hover:border-[#e6d9b4] transition-all duration-300" style="background: #2e2718;">
-  <h4 class="font-bold text-xl text-[#e6d9b4] group-hover:text-[#bfa76a] transition-colors duration-300 tracking-wide animate-shine">Dario Castellanos</h4>
-  <p class="text-base text-[#bfa76a] group-hover:text-[#e6d9b4] transition-colors duration-300 mt-1 font-medium animate-fade-in">OWNER</p>
-</a>
-
-      <!-- Agrega más locutores aquí duplicando el bloque -->
-    </div>
-  </section>
-
-  <!-- PLAYLIST Galeria -->
-  <section id="galeria" class="section-gradient py-16 px-6 animate-fade-up">
-  <div id="tsparticles-galeria" class="section-particles" aria-hidden="true"></div>
-  <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
-      style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
-    📸 Playlist
-  </h3>
-  <div class="relative flex flex-col items-center">
-    <div class="flex items-center justify-center gap-2 w-full max-w-4xl mx-auto">
-      <div id="galeria-carousel" class="flex gap-6 overflow-x-auto w-full px-2" style="scroll-behavior:smooth;">
-        <!-- Todos los iframes se renderizan horizontalmente -->
-        <div class="galeria-card" data-idx="0">
-          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5DQE2sxWqey5Ce0WlLvs71?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-         <div class="galeria-card" data-idx="0">
-          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5fEt5ufSaf8MD7uXWcJTr4?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
         
-         <div class="galeria-card" data-idx="0">
-          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1Cx8BdskSsNIBvLIrNivz3?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Fondo con líneas azules animadas */
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #00e5ff, transparent);
+            opacity: 0.1;
+            animation: moveLine 15s linear infinite;
+        }
+        
+        @keyframes moveLine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #00e5ff;
+            color: #000;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn:hover {
+            background-color: #00ccff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 2px 10px rgba(0, 229, 255, 0.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #00e5ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px #00e5ff, 0 0 10px #00e5ff;
+            animation: neon-pulse 2s infinite alternate;
+        }
+        
+        @keyframes neon-pulse {
+            from {
+                text-shadow: 0 0 5px #00e5ff, 0 0 10px #00e5ff;
+            }
+            to {
+                text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff, 0 0 30px #00e5ff;
+            }
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #00e5ff;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #00e5ff;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #00e5ff;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9));
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 180px 0 100px;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+        
+        .hero-text {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .microphone-img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+            animation: float 6s ease-in-out infinite;
+            transition: transform 0.3s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .microphone-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.7);
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0,229,255,0.1) 0%, rgba(0,0,0,0.9) 70%);
+            z-index: 1;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .hero h1 span {
+            color: #00e5ff;
+            text-shadow: 0 0 5px #00e5ff, 0 0 10px #00e5ff;
+            animation: neon-pulse 2s infinite alternate;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #ddd;
+        }
+        
+        /* Botón de Radio Interactivo Mejorado */
+        .radio-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 35px;
+            background: linear-gradient(135deg, #00e5ff, #00a8ff);
+            color: #000;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 5px 20px rgba(0, 229, 255, 0.5);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .radio-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.7s;
+        }
+        
+        .radio-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.7);
+        }
+        
+        .radio-btn:hover:before {
+            left: 100%;
+        }
+        
+        .radio-btn i {
+            font-size: 1.8rem;
+            animation: radio-wave 2s infinite;
+        }
+        
+        @keyframes radio-wave {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            z-index: 1000;
+            animation: pulse-whatsapp 2s infinite;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
+        }
+        
+        @keyframes pulse-whatsapp {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        .whatsapp-btn i {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        /* Sección de Demos SoundCloud */
+        .demos {
+            background-color: #111;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .demos h2 {
+            color: #00e5ff;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+        
+        .demo-subtitle {
+            color: #bbb;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .demo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #00e5ff, #00a8ff);
+            color: #000;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-size: 1.1rem;
+        }
+        
+        .demo-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .demo-btn:hover:before {
+            left: 100%;
+        }
+        
+        .demo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 229, 255, 0.6);
+        }
+        
+        /* Servicios - 4 Módulos */
+        .services {
+            background-color: rgba(17, 17, 17, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 229, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(0, 229, 255, 0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .services h2 {
+            color: #00e5ff;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            border: 1px solid #222;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #00e5ff;
+            box-shadow: 0 0 10px #00e5ff;
+            z-index: 2;
+        }
+        
+        .service-card:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+            z-index: 0;
+        }
+        
+        .service-card:hover:after {
+            left: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.3);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: #00e5ff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+            animation: icon-glow 3s infinite alternate;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.2);
+            color: #00e5ff;
+        }
+        
+        @keyframes icon-glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+            }
+            50% {
+                text-shadow: 0 0 15px rgba(0, 229, 255, 0.9), 0 0 20px rgba(0, 229, 255, 0.5);
+            }
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-card p {
+            color: #bbb;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Sección de Podcasts */
+        .podcasts {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .podcasts h2 {
+            color: #00e5ff;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .podcast-subtitle {
+            text-align: center;
+            color: #bbb;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .podcasts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .podcast-card {
+            background-color: rgba(17, 17, 17, 0.8);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            border: 1px solid #222;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .podcast-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #00e5ff, #00a8ff);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+            z-index: 2;
+        }
+        
+        .podcast-card:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.1), transparent);
+            transition: left 0.7s ease;
+            z-index: 0;
+        }
+        
+        .podcast-card:hover:after {
+            left: 100%;
+        }
+        
+        .podcast-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 229, 255, 0.3);
+        }
+        
+        .podcast-icon {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .podcast-card:hover .podcast-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .mano-a-mano .podcast-icon {
+            color: #00e5ff;
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.7);
+        }
+        
+        .entretelones .podcast-icon {
+            color: #ff0080;
+            text-shadow: 0 0 20px rgba(255, 0, 128, 0.7);
+        }
+        
+        .podcast-card h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .podcast-description {
+            color: #bbb;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .podcast-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .podcast-features li {
+            margin-bottom: 12px;
+            color: #ddd;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .podcast-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00e5ff;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .podcast-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mano-a-mano .podcast-btn {
+            background: linear-gradient(135deg, #00e5ff, #00a8ff);
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+            color: #000;
+        }
+        
+        .entretelones .podcast-btn {
+            background: linear-gradient(135deg, #ff0080, #c4006a);
+            box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
+            color: white;
+        }
+        
+        .podcast-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .podcast-btn:hover:before {
+            left: 100%;
+        }
+        
+        .podcast-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+        
+        /* Testimonios Mejorados */
+        .testimonials {
+            background-color: rgba(17, 17, 17, 0.9);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials h2 {
+            color: #00e5ff;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 50px auto 0;
+            position: relative;
+            height: 320px;
+        }
+        
+        .testimonial {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(30, 30, 30, 0.9));
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+            border: 1px solid #333;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .testimonial.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 2;
+        }
+        
+        .testimonial:before {
+            content: """;
+            position: absolute;
+            top: 15px;
+            left: 25px;
+            font-size: 5rem;
+            color: #00e5ff;
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #f0f0f0;
+            position: relative;
+            z-index: 1;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #00e5ff;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
+        }
+        
+        .testimonial-role {
+            color: #bbb;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        
+        /* Indicadores de testimonios */
+        .testimonial-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+        
+        .indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background-color: #00e5ff;
+            box-shadow: 0 0 10px #00e5ff;
+            transform: scale(1.3);
+        }
+        
+        /* Efectos de neón adicionales */
+        .neon-border {
+            position: relative;
+        }
+        
+        .neon-border:before, .neon-border:after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00e5ff, #00a8ff, #00e5ff, #00a8ff);
+            background-size: 400%;
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .neon-border:after {
+            filter: blur(10px);
+        }
+        
+        .service-card:hover .neon-border:before,
+        .service-card:hover .neon-border:after {
+            opacity: 1;
+            animation: neon-border-animation 3s linear infinite;
+        }
+        
+        @keyframes neon-border-animation {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 400% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+        
+        /* Partículas de neón flotantes */
+        .neon-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #00e5ff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
+            opacity: 0;
+            z-index: 0;
+        }
+        
+        /* Sobre Nosotros */
+        .about {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .neumann-img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover .neumann-img {
+            transform: scale(1.05);
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-content h2 {
+            text-align: left;
+            color: #00e5ff;
+        }
+        
+        .about-content p {
+            color: #bbb;
+        }
+        
+        /* Redes Sociales Laterales */
+        .social-sidebar {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 999;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s;
+        }
+        
+        .social-icon:hover:before {
+            left: 100%;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .facebook {
+            background: linear-gradient(45deg, #3b5998, #4a6fbb);
+            box-shadow: 0 4px 15px rgba(59, 89, 152, 0.4);
+        }
+        
+        .instagram {
+            background: linear-gradient(45deg, #e4405f, #c13584, #833ab4);
+            box-shadow: 0 4px 15px rgba(228, 64, 95, 0.4);
+        }
+        
+        .youtube {
+            background: linear-gradient(45deg, #cd201f, #ff0000);
+            box-shadow: 0 4px 15px rgba(205, 32, 31, 0.4);
+        }
+        
+        .tiktok {
+            background: linear-gradient(45deg, #000000, #25f4ee, #fe2c55);
+            box-shadow: 0 4px 15px rgba(37, 244, 238, 0.4);
+        }
+        
+        .twitter {
+            background: linear-gradient(45deg, #1DA1F2, #0d8bd9);
+            box-shadow: 0 4px 15px rgba(29, 161, 242, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 60px 0 30px;
+            border-top: 1px solid #222;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #00e5ff;
+        }
+        
+        .footer-column p {
+            color: #bbb;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #00e5ff;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #222;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 15px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                text-align: center;
+            }
+            
+            .about {
+                flex-direction: column;
+            }
+            
+            .about-content h2 {
+                text-align: center;
+            }
+            
+            .testimonial-slider {
+                height: 380px;
+            }
+            
+            .social-sidebar {
+                display: none;
+            }
+            
+            .podcasts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .podcast-card {
+                padding: 30px 20px;
+            }
+            
+            .podcast-card h3 {
+                font-size: 1.7rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fondo con líneas azules animadas -->
+    <div class="animated-background" id="animatedBackground"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Dario LA Voz</div>
+            <div class="mobile-menu">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#demos">Demos</a></li>
+                    <li><a href="#podcasts">Podcasts</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                </ul>
+            </nav>
         </div>
-      </div>
-    </div>
-    <div id="galeria-indicators" class="flex justify-center mt-4 gap-2"></div>
-  </div>
-</section>
-<style>
-/* Gallery: ensure full card visibility, snap and sizing adjustments */
-#galeria-carousel {
-  gap: 28px;
-  padding: 18px 8px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scroll-padding-left: 24px; /* avoid first card being cut */
-}
-.galeria-card {
-  position: relative;
-  scroll-snap-align: center;
-  flex: 0 0 min(760px, 92vw); /* adapt to viewport so card always fits */
-  max-width: 92vw;
-  box-sizing: border-box; /* ensure padding included in width */
-  padding: 12px;
-  height: auto;
-  border-radius: 1rem;
-  overflow: hidden;
-  transition: transform 0.45s cubic-bezier(.2,.9,.2,1), box-shadow 0.45s, filter 0.45s;
-  transform-origin: center center;
-  background: linear-gradient(180deg, rgba(34,30,24,0.92), rgba(35,34,28,0.88));
-  border: 1px solid rgba(191,167,106,0.18);
-  box-shadow: 0 10px 36px rgba(0,0,0,0.5), inset 0 -6px 24px rgba(191,167,106,0.02);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.galeria-card iframe {
-  display: block;
-  border: 0;
-  width: 100%; /* fill the inner card so content isn't clipped */
-  height: 320px; /* balanced height for a panoramic look */
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.55), 0 0 18px rgba(191,167,106,0.06);
-  background: #000;
-}
-.galeria-card:hover {
-  transform: translateY(-10px) scale(1.03) rotateX(3deg);
-  box-shadow: 0 28px 80px rgba(0,0,0,0.56), 0 0 28px rgba(191,167,106,0.12);
-}
-.galeria-card.active { transform: translateY(-14px) scale(1.06) rotateX(4deg); }
-/* Indicators styling */
-#galeria-indicators button { width: 10px; height: 10px; border-radius: 999px; background: rgba(255,255,255,0.18); border: none; transition: transform .18s, background .18s; }
-
-/* Bigger playlist cards and taller iframes */
-.galeria-card { flex: 0 0 min(920px, 96vw); max-width: 96vw; }
-.galeria-card iframe { height: 460px; }
-@media (max-width: 1000px) { .galeria-card { flex: 0 0 92vw; } .galeria-card iframe { height: 360px; } }
-@media (max-width: 600px) { .galeria-card { flex: 0 0 96vw; } .galeria-card iframe { height: 220px; } }
-
-/* For mobile, make the cards full width but keep reduced height */
-@media (max-width: 1000px) {
-  .galeria-card { flex: 0 0 86vw; max-width: 86vw; }
-  .galeria-card iframe { height: 280px; }
-}
-@media (max-width: 600px) {
-  .galeria-card { flex: 0 0 92vw; }
-  .galeria-card iframe { height: 200px; }
-}
-
-/* Force gallery particles above section background and visible (override generic rules) */
-#galeria .section-particles { z-index: 1 !important; opacity: 0.95 !important; pointer-events: none !important; mix-blend-mode: screen !important; }
-#galeria .flex.items-center.justify-center { position: relative; z-index: 10; }
-
-/* Re-enable and style the horizontal scrollbar for gallery only (old money theme) */
-#galeria-carousel { scrollbar-width: thin; scrollbar-color: #bfa76a rgba(18,18,18,0.08); }
-#galeria-carousel::-webkit-scrollbar { height: 14px; }
-#galeria-carousel::-webkit-scrollbar-track { background: rgba(18,18,18,0.06); border-radius: 999px; margin: 4px 0; }
-#galeria-carousel::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg,#e6d9b4,#bfa76a);
-  border-radius: 999px;
-  box-shadow: inset 0 0 0 2px rgba(0,0,0,0.08);
-}
-#galeria-carousel::-webkit-scrollbar-thumb:hover { filter: brightness(1.04); }
-</style>
-
-<script>
-// Auto-scroll for gallery: slow, smooth, stops permanently on user interaction or when iframe gets focus (play)
-document.addEventListener('DOMContentLoaded', function(){
-  const carousel = document.getElementById('galeria-carousel');
-  if (!carousel) return;
-
-  let rafId = null;
-  let auto = true;
-  const SPEED = 0.28; // px per frame approx. adjust for desired slow speed
-  let lastTime = null;
-  let userInteracted = false;
-
-  function shouldAuto() {
-    return auto && !userInteracted && window.innerWidth > 700 && carousel.scrollWidth > carousel.clientWidth + 8;
-  }
-
-  function step(timestamp){
-    if (!lastTime) lastTime = timestamp;
-    const dt = timestamp - lastTime;
-    lastTime = timestamp;
-    if (shouldAuto()){
-      // scale movement with time to be framerate independent
-      const delta = (SPEED * dt) / (1000/60);
-      carousel.scrollLeft += delta;
-      const max = carousel.scrollWidth - carousel.clientWidth;
-      if (carousel.scrollLeft >= max - 1) {
-        // smooth back to start
-        carousel.scrollTo({ left: 0, behavior: 'smooth' });
-      }
-    }
-    rafId = requestAnimationFrame(step);
-  }
-
-  function startAuto(){
-    if (!rafId) rafId = requestAnimationFrame(step);
-    auto = true; lastTime = null;
-  }
-  function stopAuto(){
-    auto = false;
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-  }
-
-  // Stop auto when user interacts: pointerdown, touchstart, wheel, keydown, focusin inside carousel
-  function markUserInteracted(){ userInteracted = true; stopAuto(); }
-
-  ['pointerdown','touchstart','wheel','click','keydown','focusin'].forEach(evt => {
-    carousel.addEventListener(evt, (e) => {
-      // if event target is iframe or inside iframe element, or any user input, stop
-      const t = e.target;
-      if (t && (t.tagName === 'IFRAME' || t.closest && t.closest('.galeria-card'))) {
-        markUserInteracted();
-      } else {
-        // any wheel/keydown should also stop auto
-        if (['wheel','keydown','pointerdown','touchstart','click'].includes(evt)) markUserInteracted();
-      }
-    }, { passive: true });
-  });
-
-  // Also stop when an iframe receives focus (user clicked play inside it in many browsers)
-  const iframes = Array.from(carousel.querySelectorAll('iframe'));
-  iframes.forEach(fr => {
-    // focus event on iframe element
-    fr.addEventListener('focus', markUserInteracted);
-    // a click on the iframe element itself indicates user intends to interact
-    fr.addEventListener('pointerdown', markUserInteracted, {passive:true});
-    fr.addEventListener('touchstart', markUserInteracted, {passive:true});
-  });
-
-  // Start autorotation only if conditions met
-  startAuto();
-
-  // Resize handler: restart loop
-  window.addEventListener('resize', function(){
-    if (shouldAuto()) { if (!rafId) startAuto(); } else { stopAuto(); }
-  });
-
-  // If user navigates with keyboard arrows to carousel, stop auto
-  document.addEventListener('keydown', function(e){ if (['ArrowLeft','ArrowRight','Space'].includes(e.key)) markUserInteracted(); });
-
-  // Expose controls for debugging if needed
-  window._rdcrGallery = { stop: markUserInteracted, start: startAuto };
-});
-</script>
-
-
-  <!-- DESCARGAS -->
-  <section id="descargas" class="section-gradient py-16 px-6 animate-fade-up">
-  <div id="tsparticles-descargas" class="section-particles" aria-hidden="true"></div>
-    <h3 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-500 bg-clip-text text-transparent select-none"
-        style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
-      📲 Descarga nuestras aplicaciones
-    </h3>
-    <div class="flex flex-col md:flex-row justify-center items-center gap-10 max-w-3xl mx-auto">
-      <!-- Android solo imagen y link -->
-      <a href="https://www.appcreator24.com/app1472133-ekgbdf" target="_blank" class="group rounded-xl hover:scale-110 transition-transform duration-300 animate-fade flex items-center justify-center">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Descargar en Android" class="w-40 md:w-48 shadow-lg rounded-xl">
-      </a>
-    </div>
-  </section>
-
-<!-- FOOTER -->
-<footer class="bg-gradient-to-r from-black via-gray-900 to-black text-gray-400 text-sm py-10 px-6 animate-fade-up" style="font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
-    
-    <!-- Info General -->
-    <div>
-      <h3 class="text-yellow-400 text-base font-semibold mb-2">RDCR SOUND</h3>
-      <p>© 2025 RDCR SOUND - Todos los derechos reservados.</p>
-    </div>
-
-    <!-- Contacto -->
-    <div>
-      <h3 class="text-yellow-400 text-base font-semibold mb-2">Dónde estamos</h3>
-      <p>Ibarra, Ecuador</p>
-      <p>Canal de WhatsApp: <a href="https://whatsapp.com/channel/0029Vb57NMBCHDytO200C417" class="text-yellow-400 hover:underline">Link</a></p>
-    </div>
-
-    <!-- Redes Sociales -->
-<div>
-  <h3 class="text-yellow-400 text-base font-semibold mb-2">Síguenos</h3>
-  <div class="flex justify-center md:justify-start space-x-4">
-   <a href="https://x.com/tuusuario" class="hover:text-yellow-400 transition">X</a>
-    <a href="https://www.facebook.com/share/16VjpfbPFG/" class="hover:text-yellow-400 transition">Facebook</a>
-    <a href="https://www.instagram.com/rdcrsound" class="hover:text-yellow-400 transition">Instagram</a>
-
-  </div>
-</div>
-</div>
-
-  <!-- Botones de PDF -->
-  <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4 flex-wrap">
-    <!-- Código de Ética -->
-    <a href="/img_radio/Código de Ética  RDCR SOUND.pdf"
-       class="flex items-center gap-2 bg-yellow-100/10 hover:bg-yellow-200/10 border border-yellow-400/30 text-yellow-300 px-5 py-2 rounded-full text-xs font-semibold transition-all duration-300 shadow hover:shadow-md hover:scale-105">
-      <svg xmlns="https://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" width="18" height="18">
-        <path d="M10.185 2.002a1 1 0 0 0-.37.074l-5 2A1 1 0 0 0 4 5v10a1 1 0 0 0 .815.986l5 1a1 1 0 0 0 .37 0l5-1A1 1 0 0 0 16 15V5a1 1 0 0 0-.815-.986l-5-2a1 1 0 0 0-.37-.012zM10 4.118 14 5.5v9.382l-4 0.8-4-.8V5.5l4-1.382z"/>
-      </svg>
-      Ver Código de Ética (PDF)
-    </a>
-
-    <!-- Credenciales -->
-    <a href="https://www.canva.com/design/DAGbDTrrl-s/2L5sF5ebVl8cDhUQojy-_Q/view?utm_content=DAGbDTrrl-s&utm_campaign=designshare&utm_medium=embeds&utm_source=link#2"
-       class="flex items-center gap-2 bg-yellow-100/10 hover:bg-yellow-200/10 border border-yellow-400/30 text-yellow-300 px-5 py-2 rounded-full text-xs font-semibold transition-all duration-300 shadow hover:shadow-md hover:scale-105">
-      <svg xmlns="https://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" width="18" height="18">
-        <path d="M10.185 2.002a1 1 0 0 0-.37.074l-5 2A1 1 0 0 0 4 5v10a1 1 0 0 0 .815.986l5 1a1 1 0 0 0 .37 0l5-1A1 1 0 0 0 16 15V5a1 1 0 0 0-.815-.986l-5-2a1 1 0 0 0-.37-.012zM10 4.118 14 5.5v9.382l-4 0.8-4-.8V5.5l4-1.382z"/>
-      </svg>
-      Credenciales (PDF)
-    </a>
-  </div>
-</footer>
-
-
-
-
-  <!-- tsParticles config -->
-  <script>
-    tsParticles.load("tsparticles", {
-      fpsLimit: 60,
-      background: { color: "transparent" },
-      particles: {
-        number: { value: 60, density: { enable: true, area: 800 } },
-        color: { value: ["#ec4899", "#06b6d4", "#fde047", "#fff"] },
-        shape: { type: "circle" },
-        opacity: { value: 0.25, random: true },
-        size: { value: 3, random: { enable: true, minimumValue: 1 } },
-        move: {
-          enable: true,
-          speed: 1.2,
-          direction: "none",
-          random: false,
-          straight: false,
-          outModes: { default: "out" },
-          attract: { enable: false }
-        },
-        links: {
-          enable: true,
-          distance: 120,
-          color: "#fff",
-          opacity: 0.08,
-          width: 1
-        }
-      },
-      interactivity: {
-        events: {
-          onHover: { enable: true, mode: "repulse" },
-          onClick: { enable: true, mode: "push" }
-        },
-        modes: {
-          repulse: { distance: 80, duration: 0.4 },
-          push: { quantity: 4 }
-        }
-      },
-      detectRetina: true
-    });
-  </script>
-
-  <!-- Agrega esto al final de tu <head> o antes de </body> -->
-  <style>
-  /* TYPOGRAPHY ENHANCEMENTS */
-  :root { --base-font-percent: 120%; }
-  html { font-size: 120%; /* base ~19.2px */ scroll-behavior: smooth; }
-  body { font-size: 1.18rem; /* slightly larger */ }
-  /* Make text more prominent site-wide */
-  h1,h2,h3,h4,h5,h6 { font-weight: 800; letter-spacing: 0.6px; text-shadow: 0 2px 14px rgba(0,0,0,0.45); }
-  a, p, li, span, button { font-weight: 600; font-size: 1.02rem; }
-  /* Slight left shift for the logo to appear more aligned to left */
-  header .logo-left { margin-left: -8px; transform: translateX(-6px); }
-
-  /* Nav size and mobile tweaks */
-  nav.desktop-nav a { font-size: 1.06rem; padding: 0.4rem 0.6rem; }
-  .mobile-nav a, .mobile-nav button { font-size: 1.4rem; }
-
-  /* Section-specific particle containers */
-  .section-particles { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.55; }
-  #inicio .section-particles { opacity: 0.65; }
-  #emisoras .section-particles { opacity: 0.5; }
-  #locutores .section-particles { opacity: 0.55; }
-  #galeria .section-particles { opacity: 0.5; }
-  #descargas .section-particles { opacity: 0.5; }
-  /* Ensure sections can host absolute particles without layout break */
-  section { position: relative; }
-  </style>
-  <script>
-  // existing tsParticles load
-  tsParticles.load("tsparticles", {
-    fpsLimit: 60,
-    background: { color: "transparent" },
-    particles: {
-      number: { value: 60, density: { enable: true, area: 800 } },
-      color: { value: ["#ec4899", "#06b6d4", "#fde047", "#fff"] },
-      shape: { type: "circle" },
-      opacity: { value: 0.25, random: true },
-      size: { value: 3, random: { enable: true, minimumValue: 1 } },
-      move: { enable: true, speed: 1.2, direction: "none", random: false, straight: false, outModes: { default: "out" }, attract: { enable: false } },
-      links: { enable: true, distance: 120, color: "#fff", opacity: 0.08, width: 1 }
-    },
-    interactivity: { events: { onHover: { enable: true, mode: "repulse" }, onClick: { enable: true, mode: "push" } }, modes: { repulse: { distance: 80, duration: 0.4 }, push: { quantity: 4 } } },
-    detectRetina: true
-  });
-
-  // Additional section particle instances (lighter counts, color palettes matching each section)
-  (function(){
-    if (!window.tsParticles) return;
-    const baseConfig = (colors, count)=>({
-      fpsLimit: 60,
-      background: { color: 'transparent' },
-      particles: {
-        number: { value: count, density: { enable: true, area: 700 } },
-       
-        color: { value: colors },
-        shape: { type: 'circle' },
-        opacity: { value: 0.22, random: true },
-        size: { value: 2.5, random: { enable: true, minimumValue: 0.8 } },
-        move: { enable: true, speed: 0.9, direction: 'none', random: true, straight: false, outModes: { default: 'out' } },
-        links: { enable: true, distance: 100, color: colors[0] || '#fff', opacity: 0.06, width: 1 }
-      },
-      interactivity: { events: { onHover: { enable: false }, onClick: { enable: false } }, modes: {} },
-      detectRetina: true
-    });
-
-    try {
-      tsParticles.load('tsparticles-inicio', baseConfig(['#bfa76a','#f6e27a','#ffffff'], 36));
-      tsParticles.load('tsparticles-emisoras', baseConfig(['#06b6d4','#fde047','#ffffff'], 30));
-      tsParticles.load('tsparticles-locutores', baseConfig(['#bfa76a','#e6d9b4','#3a2f1d'], 32));
-      // Unify: gallery specific config (bigger, round, higher opacity)
-      tsParticles.load('tsparticles-galeria', {
-        fpsLimit: 45,
-        background: { color: 'transparent' },
-        particles: {
-          number: { value: 34, density: { enable: true, area: 700 } },
-          color: { value: ['#e6d9b4', '#bfa76a', '#f6e27a'] },
-          shape: { type: 'circle' },
-          opacity: { value: 0.48, random: { enable: true, minimumValue: 0.22 } },
-          size: { value: 6, random: { enable: true, minimumValue: 3 } },
-          move: { enable: true, speed: 0.55, direction: 'none', random: true, straight: false, outModes: { default: 'out' } },
-          links: { enable: false }
-        },
-        interactivity: { events: { onHover: { enable: false }, onClick: { enable: false } }, modes: {} },
-        detectRetina: true
-      });
-      tsParticles.load('tsparticles-descargas', baseConfig(['#25d366','#06b6d4','#ffffff'], 30));
-    } catch (e) {
-      // fail silently if multiple instances aren't supported in the environment
-      console.warn('tsParticles section loaders error', e);
-    }
-  })();
-</script>
-<!-- Botón grande para volver arriba (al final del body, antes de </body>) -->
-<button id="backToTop"
-  aria-label="Volver arriba"
-  style="
-    position: fixed;
-    right: 1.5rem;
-    bottom:  2.5rem;
-    z-index: 100;
-    background: linear-gradient(135deg, #fde047 0%, #bfa76a 100%);
-    color: #232526;
-    border: none;
-    border-radius: 50%;
-    width: 64px;
-       height: 64px;
-    box-shadow: 0 4px 24px #bfa76a55;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-  "
-  class="group"
->
-  <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
-    <circle cx="19" cy="19" r="19" fill="none"/>
-    <path d="M19 28V10M19 10L10 19M19 10L28 19" stroke="#232526" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-<style>
-/* Elimina la barra de desplazamiento visual en todo el sitio */
-html, body {
-  overflow-x: hidden !important;
-  scrollbar-width: none !important; /* Firefox */
-}
-body::-webkit-scrollbar,
-html::-webkit-scrollbar {
-  display: none !important; /* Chrome, Safari, Edge */
-}
-</style>
-<script>
-  // Mostrar/ocultar el botón al hacer scroll
-  window.addEventListener('scroll', function() {
-    const btn = document.getElementById('backToTop');
-    if (window.scrollY > 300) {
-      btn.style.display = 'flex';
-    } else {
-      btn.style.display = 'none';
-    }
-  });
-  // Scroll suave al top
-  document.getElementById('backToTop').onclick = function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-  
-</script>
-<!-- Mejora el scroll horizontal para que puedas ver el primer elemento completo en todas las secciones con scroll -->
-<style>
-  /* Ajusta el padding para que el primer y último elemento no queden cortados */
-  #prog-scroll,
-  #emisora-scroll,
-  #playlist-scroll {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-  @media (max-width: 600px) {
-    #prog-scroll,
-    #emisora-scroll,
-    #playlist-scroll {
-      padding-left: 12px !important;
-      padding-right: 12px !important;
-    }
-  }
-</style>
-<script>
-/**
-
- * Vincula el desplazamiento automático con el manual:
- * - Si el usuario hace scroll manual (drag, wheel o touch), el auto-scroll se pausa.
- * - Si el usuario no interactúa por 5 segundos, el auto-scroll se reanuda (solo en PC y si hay overflow).
- * - En móvil nunca hay auto-scroll, solo manual.
- * - El auto-scroll es en bucle infinito: cuando llega al final, vuelve al inicio suavemente.
- */
-document.addEventListener("DOMContentLoaded", function() {
-  const scrollIds = ['prog-scroll', 'playlist-scroll'];
-  const duration = 40000;
-  const resumeDelay = 5000; // ms para reanudar auto-scroll tras interacción
-
-  scrollIds.forEach(containerId => {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    let animationFrame, start, paused = false, progress = 0, resumeTimeout = null;
-
-    function getMaxScroll() {
-      return container.scrollWidth - container.clientWidth;
-    }
-
-    function step(timestamp) {
-      if (!start) start = timestamp;
-      if (paused) return;
-      const maxScroll = getMaxScroll();
-      if (maxScroll <= 0) return;
-      const elapsed = timestamp - start + progress;
-      let percent = (elapsed % duration) / duration;
-      container.scrollLeft = percent * maxScroll;
-
-
-      // Si está al final, vuelve al inicio suavemente (bucle)
-      if (container.scrollLeft >= maxScroll - 2) {
-        // Suaviza el salto al inicio
-        container.scrollLeft = 0;
-        start = timestamp;
-               progress = 0;
-      }
-
-      animationFrame = requestAnimationFrame(step);
-    }
-
-    function startAnim() {
-      if (animationFrame) cancelAnimationFrame(animationFrame);
-      paused = false;
-      start = null;
-      animationFrame = requestAnimationFrame(step);
-    }
-
-    function pauseAnim() {
-      paused = true;
-      if (animationFrame) cancelAnimationFrame(animationFrame);
-      const maxScroll = getMaxScroll();
-      progress = (container.scrollLeft / (maxScroll || 1)) * duration;
-    }
-
-    function stopAnimAndReset() {
-      paused = true;
-      if (animationFrame) cancelAnimationFrame(animationFrame);
-      progress = 0;
-      // No reiniciar scrollLeft, mantener donde está
-    }
-
-    function isPC() {
-      return window.innerWidth > 900;
-    }
-
-    function hasOverflow() {
-      return container.scrollWidth > container.clientWidth + 10;
-    }
-
-    function checkOverflowAndStart() {
-      if (isPC()) {
-        if (hasOverflow()) {
-          startAnim();
-          enableManualScroll();
-        } else {
-          stopAnimAndReset();
-          disableManualScroll();
-        }
-      } else {
-        stopAnimAndReset();
-        enableManualScroll();
-      }
-    }
-
-    // Permite scroll manual (drag, wheel, touch)
-    function enableManualScroll() {
-      container.style.pointerEvents = "auto";
-      // Drag con mouse solo en PC
-      let isDown = false, startX, scrollLeft;
-      if (isPC()) {
-        container.onmousedown = function(e) {
-          if (!hasOverflow()) return;
-          isDown = true;
-          startX = e.pageX - container.offsetLeft;
-          scrollLeft = container.scrollLeft;
-          pauseAnimAndResume();
-        };
-        container.onmouseleave = function() { isDown = false; };
-        container.onmouseup = function() { isDown = false; };
-        container.onmousemove = function(e) {
-          if (!isDown) return;
-          e.preventDefault();
-          const x = e.pageX - container.offsetLeft;
-          const walk = (x - startX) * 1.5;
-          container.scrollLeft = scrollLeft - walk;
-          // --- CORRECCIÓN: Si el usuario retrocede al inicio, ajusta para mostrar el primer elemento completo
-          if (container.scrollLeft < 0) container.scrollLeft = 0;
-          pauseAnimAndResume();
-        };
-        container.onwheel = function(e) {
-          if (!hasOverflow()) return;
-          // --- CORRECCIÓN: Si el usuario retrocede al inicio, ajusta para mostrar el primer elemento completo
-          setTimeout(() => {
-            if (container.scrollLeft < 0) container.scrollLeft =  0;
-          }, 0);
-          pauseAnimAndResume();
-        };
-      } else {
-        // En móvil: solo swipe nativo, sin drag JS, sin auto-scroll
-        container.onmousedown = null;
-        container.onmouseleave = null;
-        container.onmouseup = null;
-        container.onmousemove = null;
-        container.onwheel = null;
-      }
-      // Touch (ambos)
-      let touchStartX = 0, touchScrollLeft = 0;
-      container.ontouchstart = function(e) {
-        if (!hasOverflow()) return;
-        isDown = true;
-        touchStartX = e.touches[0].pageX;
-        touchScrollLeft = container.scrollLeft;
-        pauseAnimAndResume();
-      };
-      container.ontouchend = function() { isDown = false; };
-      container.ontouchmove = function(e) {
-        if (!isDown) return;
-        const x = e.touches[0].pageX;
-        const walk = (x - touchStartX) * 1.5;
-        container.scrollLeft = touchScrollLeft - walk;
-        // --- CORRECCIÓN: Si el usuario retrocede al inicio, ajusta para mostrar el primer elemento completo
-        if (container.scrollLeft < 0) container.scrollLeft = 0;
-        pauseAnimAndResume();
-      };
-    }
-
-    // Deshabilita scroll manual
-    function disableManualScroll() {
-      container.style.pointerEvents = "none";
-      container.onmousedown = e => e.preventDefault();
-      container.ontouchstart = e => e.preventDefault();
-      container.onwheel = e => e.preventDefault();
-      container.onmousemove = null;
-      container.onmouseup = null;
-      container.onmouseleave = null;
-      container.ontouchend = null;
-      container.ontouchmove = null;
-    }
-
-    // Pausa auto-scroll y lo reanuda después de X ms sin interacción
-    function pauseAnimAndResume() {
-      pauseAnim();
-      if (resumeTimeout) clearTimeout(resumeTimeout);
-      resumeTimeout = setTimeout(() => {
-        if (hasOverflow()) startAnim();
-      }, resumeDelay);
-    }
-
-    window.addEventListener('resize', checkOverflowAndStart);
-    checkOverflowAndStart();
-  });
-});
-</script>
-
-<!-- Botón flotante de WhatsApp -->
-<a href="#" 
-   id="whatsapp-float" 
-   aria-label="Contáctanos por WhatsApp" 
-   role="button" 
-   aria-haspopup="dialog" 
-   aria-expanded="false"
->
-  <div class="icon-bounce" aria-hidden="true">
-    <!-- Ícono de WhatsApp (vector limpio) -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" focusable="false" aria-hidden="true">
-      <path d="M20.5 3.5A11.91 11.91 0 0 0 12 0C5.4 0 .1 5.4 0 12a11.89 11.89 0 0 0 1.7 6.1L0 24l6-1.6A11.9 11.9 0 0 0 12 24c6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.5-8.5zM12 22c-1.8 0-3.6-.5-5.2-1.4l-.4-.2-3.6 1 1.1-3.4-.3-.5A9.94 9.94 0 0 1 2 12c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10zm5.2-7.5c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2c-.2.3-.8 1-1 1.2-.2.2-.4.3-.7.1-1.3-.6-2.3-1.6-3.2-2.8-.2-.3-.2-.6.1-.8.2-.3.5-.6.7-.9.2-.2.2-.4.1-.6s-.8-2.1-1.1-2.8c-.3-.6-.5-.5-.8-.5h-.6c-.3 0-.6.1-.9.4-1.2 1.2-1.5 3.1-.4 4.9 1.7 2.8 4.1 4.7 7.2 5.3.5.1.9 0 1.2-.3l1-1c.3-.3.4-.5.6-.4s1.6.7 1.9.8c.3.1.5.2.8-.1s1-1.3 1-1.6c.1-.4 0-.6-.2-.7z"/>
-    </svg>
-  </div>
-  <span>Contáctanos</span>
-</a>
-
-<!-- Formulario desplegable debajo del botón -->
-<div id="whatsapp-form-container" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="whatsapp-form-title" style="display:none;">
-  <form id="whatsapp-form" novalidate>
-    <div class="form-header">
-      <h2 id="whatsapp-form-title">RDCR SOUND</h2>
-      <button type="button" id="minimize-btn" aria-label="Minimizar formulario">
-        <!-- Flecha hacia abajo para minimizar -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M7 10l5 5 5-5H7z"/>
-        </svg>
-      </button>
-    </div>
-    <label for="mensaje-whatsapp">¿En qué puedo ayudarte?</label>
-    <textarea id="mensaje-whatsapp" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
-    <button type="submit">Enviar</button>
-  </form>
-</div>
-
-<style>
-  /* Botón flotante */
-  #whatsapp-float {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.75rem 1.3rem;
-    font-weight: 600;
-    font-size: 1.05rem;
-    font-family: 'Poppins', Arial, sans-serif;
-    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-    color: white;
-    text-decoration: none;
-    border-radius: 2rem;
-    box-shadow: 0 6px 24px rgba(18, 140, 126, 0.4);
-    transition: all 0.3s ease;
-    animation: floatInUp 0.8s ease-out, pulseGlow 2.8s infinite;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  #whatsapp-float:hover,
-  #whatsapp-float:focus {
-    outline: none;
-    transform: translateY(-4px) scale(1.05);
-    background: linear-gradient(135deg, #128c7e 0%, #25d366 100%);
-    box-shadow: 0 10px 30px rgba(18, 140, 126, 0.6);
-  }
-
-  .icon-bounce {
-    animation: bounceIcon 2.5s infinite ease-in-out;
-  }
-
-  #whatsapp-float span {
-    white-space: nowrap;
-  }
-
-  /* Formulario desplegable */
-  #whatsapp-form-container {
-    position: fixed;
-    bottom: 70px;
-    right: 1.5rem;
-    z-index: 10000;
-    max-width: 320px;
-    width: 90vw;
-    background: #25d366;
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-    font-family: Arial, sans-serif;
-    color: white;
-  }
-
-  #whatsapp-form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .form-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-
-  #whatsapp-form h2 {
-    margin: 0;
-    font-weight: 700;
-    font-size: 1.3rem;
-  }
-
-  #minimize-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-  }
-
-  #minimize-btn:hover,
-  #minimize-btn:focus {
-    outline: none;
-    transform: scale(1.2);
-  }
-
-  #whatsapp-form label {
-    font-weight: 600;
-    margin-bottom: 6px;
-    font-size: 1rem;
-  }
-
-  #mensaje-whatsapp {
-    resize: vertical;
-    min-height: 80px;
-    border-radius: 8px;
-    border: none;
-    padding: 10px;
-    font-size: 1rem;
-    font-family: inherit;
-    box-sizing: border-box;
-    margin-bottom: 12px;
-    color: #0a3d0d;
-    background: #e0f7e9;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
-  }
-
-  #mensaje-whatsapp::placeholder {
-    color: #75b885;
-  }
-
-  #mensaje-whatsapp:focus {
-    outline: 2px solid #128c7e;
-    background: #d0f0db;
-  }
-
-  #whatsapp-form button[type="submit"] {
-    background: #128c7e;
-    border: none;
-    border-radius: 8px;
-    padding: 12px;
-    font-weight: 700;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  #whatsapp-form button[type="submit"]:hover,
-  #whatsapp-form button[type="submit"]:focus {
-    background: #0f6e63;
-    outline: none;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    #whatsapp-float {
-      padding: 0.75rem;
-      border-radius: 50%;
-      font-size: 0;
-      gap: 0;
-    }
-    #whatsapp-float span {
-      display: none;
-    }
-    #whatsapp-form-container {
-      right: 1rem;
-      bottom: 65px;
-      width: 90vw;
-      max-width: none;
-    }
-  }
-
-  @keyframes floatInUp {
-    0% { transform: translateY(30px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
-  }
-
-  @keyframes bounceIcon {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-  }
-
-  @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 0px rgba(37, 211, 102, 0.6); }
-    50% { box-shadow: 0 0 15px rgba(37, 211, 102, 0.9); }
-  }
-</style>
-
-<script>
-  const btnFloat = document.getElementById('whatsapp-float');
-  const formContainer = document.getElementById('whatsapp-form-container');
-  const form = document.getElementById('whatsapp-form');
-  const textarea = document.getElementById('mensaje-whatsapp');
-  const phone = '593961480654';
-  const minimizeBtn = document.getElementById('minimize-btn');
-
-  // Abrir/ocultar formulario al hacer click en el botón flotante
-  btnFloat.addEventListener('click', (e) => {
-    e.preventDefault();
-    const expanded = btnFloat.getAttribute('aria-expanded') === 'true';
-    if (expanded) {
-      formContainer.style.display = 'none';
-      btnFloat.setAttribute('aria-expanded', 'false');
-    } else {
-      formContainer.style.display = 'block';
-      btnFloat.setAttribute('aria-expanded', 'true');
-      textarea.focus();
-    }
-  });
-
-  // Minimizar formulario con el botón de flecha
-  minimizeBtn.addEventListener('click', () => {
-    formContainer.style.display = 'none';
-    btnFloat.setAttribute('aria-expanded', 'false');
-  });
-
-  // Enviar mensaje a WhatsApp al enviar formulario
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const mensaje = textarea.value.trim();
-    if (!mensaje) {
-      alert('Por favor, escribe un mensaje.');
-      textarea.focus();
-      return;
-    }
-    // Mensaje con formato: *_RDCR SOUND_* \n mensaje
-    const textoFormateado = `*_RDCR SOUND_*\n${mensaje}`;
-    const textoCodificado = encodeURIComponent(textoFormateado);
-    const url = `https://wa.me/${phone}?text=${textoCodificado}`;
-    window.open(url, '_blank');
-
-    // Cerrar y resetear formulario
-    form.reset();
-    formContainer.style.display = 'none';
-    btnFloat.setAttribute('aria-expanded', 'false');
-  });
-
-  // Cerrar formulario si haces clic fuera (solo si está visible)
-  document.addEventListener('click', (e) => {
-    if (formContainer.style.display === 'block' && !btnFloat.contains(e.target) && !formContainer.contains(e.target)) {
-      formContainer.style.display = 'none';
-      btnFloat.setAttribute('aria-expanded', 'false');
-    }
-  });
-
-  // Evitar cerrar si clic dentro del formulario
-  formContainer.addEventListener('click', e => e.stopPropagation());
-</script>
+    </header>
+
+    <!-- Redes Sociales Laterales -->
+    <div class="social-sidebar">
+        <a href="https://www.facebook.com/rdcdrsound" class="social-icon facebook" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://x.com/DCradioEc" class="social-icon twitter" target="_blank">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/rdcrsound?igsh=bDd5Z2t6ZG56cDRi" class="social-icon instagram" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UC72BgWxDVoZxnS80l6x-Urw" class="social-icon youtube" target="_blank">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.tikt
