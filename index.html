@@ -1,1443 +1,237 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dario LA Voz - Comunicaciones de Impacto</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Estilos generales */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-        }
-        
-        body {
-            background-color: #000;
-            color: #fff;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        /* Fondo con líneas azules animadas */
-        .animated-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .line {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, #00e5ff, transparent);
-            opacity: 0.1;
-            animation: moveLine 15s linear infinite;
-        }
-        
-        @keyframes moveLine {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: #00e5ff;
-            color: #000;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .btn:hover {
-            background-color: #00ccff;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
-        }
-        
-        section {
-            padding: 80px 0;
-        }
-        
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        p {
-            margin-bottom: 15px;
-        }
-        
-        /* Header */
-        header {
-            background-color: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 2px 10px rgba(0, 229, 255, 0.2);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #333;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #00e5ff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 5px #00e5ff, 0 0 10px #00e5ff;
-            animation: neon-pulse 2s infinite alternate;
-        }
-        
-        @keyframes neon-pulse {
-            from {
-                text-shadow: 0 0 5px #00e5ff, 0 0 10px #00e5ff;
-            }
-            to {
-                text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff, 0 0 30px #00e5ff;
-            }
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            font-weight: 600;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        nav ul li a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: #00e5ff;
-            transition: width 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: #00e5ff;
-        }
-        
-        nav ul li a:hover:after {
-            width: 100%;
-        }
-        
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #00e5ff;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9));
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 180px 0 100px;
-            margin-top: 70px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-        }
-        
-        .hero-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 50px;
-        }
-        
-        .hero-text {
-            flex: 1;
-            text-align: left;
-        }
-        
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .microphone-img {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
-            animation: float 6s ease-in-out infinite;
-            transition: transform 0.3s;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-            100% {
-                transform: translateY(0px);
-            }
-        }
-        
-        .microphone-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(0, 229, 255, 0.7);
-        }
-        
-        .hero:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(0,229,255,0.1) 0%, rgba(0,0,0,0.9) 70%);
-            z-index: 1;
-        }
-        
-        .hero .container {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-        
-        .hero h1 span {
-            color: #00e5ff;
-            text-shadow: 0 0 5px #00e5ff, 0 0 10px #00e5ff;
-            animation: neon-pulse 2s infinite alternate;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            color: #ddd;
-        }
-        
-        /* Botón de Radio Interactivo Mejorado */
-        .radio-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            padding: 18px 35px;
-            background: linear-gradient(135deg, #00e5ff, #00a8ff);
-            color: #000;
-            border-radius: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            box-shadow: 0 5px 20px rgba(0, 229, 255, 0.5);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            margin-top: 20px;
-            font-size: 1.1rem;
-        }
-        
-        .radio-btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.7s;
-        }
-        
-        .radio-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.7);
-        }
-        
-        .radio-btn:hover:before {
-            left: 100%;
-        }
-        
-        .radio-btn i {
-            font-size: 1.8rem;
-            animation: radio-wave 2s infinite;
-        }
-        
-        @keyframes radio-wave {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.3);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        
-        /* WhatsApp Button */
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 70px;
-            height: 70px;
-            background-color: #25D366;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-            z-index: 1000;
-            animation: pulse-whatsapp 2s infinite;
-            transition: all 0.3s ease;
-        }
-        
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
-        }
-        
-        @keyframes pulse-whatsapp {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
-        }
-        
-        .whatsapp-btn i {
-            font-size: 2rem;
-            color: white;
-        }
-        
-        /* Sección de Demos SoundCloud */
-        .demos {
-            background-color: #111;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-        
-        .demos h2 {
-            color: #00e5ff;
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-        }
-        
-        .demo-subtitle {
-            color: #bbb;
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .demo-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 32px;
-            background: linear-gradient(135deg, #00e5ff, #00a8ff);
-            color: #000;
-            border-radius: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            font-size: 1.1rem;
-        }
-        
-        .demo-btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.7s;
-        }
-        
-        .demo-btn:hover:before {
-            left: 100%;
-        }
-        
-        .demo-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 229, 255, 0.6);
-        }
-        
-        /* Servicios - 4 Módulos */
-        .services {
-            background-color: rgba(17, 17, 17, 0.8);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .services:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(0, 229, 255, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgba(0, 229, 255, 0.05) 0%, transparent 50%);
-            z-index: 0;
-        }
-        
-        .services h2 {
-            color: #00e5ff;
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .service-card {
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
-            border: 1px solid #222;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            text-align: center;
-        }
-        
-        .service-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background-color: #00e5ff;
-            box-shadow: 0 0 10px #00e5ff;
-            z-index: 2;
-        }
-        
-        .service-card:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.2), transparent);
-            transition: left 0.7s ease;
-            z-index: 0;
-        }
-        
-        .service-card:hover:after {
-            left: 100%;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.3);
-        }
-        
-        .service-icon {
-            font-size: 3rem;
-            color: #00e5ff;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
-            animation: icon-glow 3s infinite alternate;
-            transition: all 0.3s ease;
-        }
-        
-        .service-card:hover .service-icon {
-            transform: scale(1.2);
-            color: #00e5ff;
-        }
-        
-        @keyframes icon-glow {
-            0%, 100% {
-                text-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
-            }
-            50% {
-                text-shadow: 0 0 15px rgba(0, 229, 255, 0.9), 0 0 20px rgba(0, 229, 255, 0.5);
-            }
-        }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #fff;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .service-card p {
-            color: #bbb;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Sección de Podcasts */
-        .podcasts {
-            background-color: rgba(0, 0, 0, 0.8);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .podcasts h2 {
-            color: #00e5ff;
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .podcast-subtitle {
-            text-align: center;
-            color: #bbb;
-            font-size: 1.2rem;
-            margin-bottom: 50px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .podcasts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            margin-top: 30px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .podcast-card {
-            background-color: rgba(17, 17, 17, 0.8);
-            border-radius: 15px;
-            padding: 40px 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: all 0.4s ease;
-            border: 1px solid #222;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-        
-        .podcast-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #00e5ff, #00a8ff);
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
-            z-index: 2;
-        }
-        
-        .podcast-card:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.1), transparent);
-            transition: left 0.7s ease;
-            z-index: 0;
-        }
-        
-        .podcast-card:hover:after {
-            left: 100%;
-        }
-        
-        .podcast-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 40px rgba(0, 229, 255, 0.3);
-        }
-        
-        .podcast-icon {
-            font-size: 4rem;
-            margin-bottom: 25px;
-            display: block;
-            transition: all 0.3s ease;
-        }
-        
-        .podcast-card:hover .podcast-icon {
-            transform: scale(1.2) rotate(5deg);
-        }
-        
-        .mano-a-mano .podcast-icon {
-            color: #00e5ff;
-            text-shadow: 0 0 20px rgba(0, 229, 255, 0.7);
-        }
-        
-        .entretelones .podcast-icon {
-            color: #ff0080;
-            text-shadow: 0 0 20px rgba(255, 0, 128, 0.7);
-        }
-        
-        .podcast-card h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #fff;
-            position: relative;
-            z-index: 1;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .podcast-description {
-            color: #bbb;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .podcast-features {
-            list-style: none;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-        
-        .podcast-features li {
-            margin-bottom: 12px;
-            color: #ddd;
-            position: relative;
-            padding-left: 30px;
-        }
-        
-        .podcast-features li:before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #00e5ff;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .podcast-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .mano-a-mano .podcast-btn {
-            background: linear-gradient(135deg, #00e5ff, #00a8ff);
-            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
-            color: #000;
-        }
-        
-        .entretelones .podcast-btn {
-            background: linear-gradient(135deg, #ff0080, #c4006a);
-            box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
-            color: white;
-        }
-        
-        .podcast-btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.7s;
-        }
-        
-        .podcast-btn:hover:before {
-            left: 100%;
-        }
-        
-        .podcast-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-        }
-        
-        /* Testimonios Mejorados */
-        .testimonials {
-            background-color: rgba(17, 17, 17, 0.9);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .testimonials h2 {
-            color: #00e5ff;
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-        }
-        
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 50px auto 0;
-            position: relative;
-            height: 320px;
-        }
-        
-        .testimonial {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(30, 30, 30, 0.9));
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
-            border: 1px solid #333;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s ease;
-        }
-        
-        .testimonial.active {
-            opacity: 1;
-            transform: translateX(0);
-            z-index: 2;
-        }
-        
-        .testimonial:before {
-            content: """;
-            position: absolute;
-            top: 15px;
-            left: 25px;
-            font-size: 5rem;
-            color: #00e5ff;
-            opacity: 0.2;
-            font-family: Georgia, serif;
-        }
-        
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 25px;
-            color: #f0f0f0;
-            position: relative;
-            z-index: 1;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-        }
-        
-        .testimonial-author {
-            font-weight: bold;
-            color: #00e5ff;
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
-        }
-        
-        .testimonial-role {
-            color: #bbb;
-            font-size: 1rem;
-            margin-top: 5px;
-        }
-        
-        /* Indicadores de testimonios */
-        .testimonial-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 40px;
-        }
-        
-        .indicator {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background-color: #333;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .indicator.active {
-            background-color: #00e5ff;
-            box-shadow: 0 0 10px #00e5ff;
-            transform: scale(1.3);
-        }
-        
-        /* Efectos de neón adicionales */
-        .neon-border {
-            position: relative;
-        }
-        
-        .neon-border:before, .neon-border:after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #00e5ff, #00a8ff, #00e5ff, #00a8ff);
-            background-size: 400%;
-            border-radius: 12px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .neon-border:after {
-            filter: blur(10px);
-        }
-        
-        .service-card:hover .neon-border:before,
-        .service-card:hover .neon-border:after {
-            opacity: 1;
-            animation: neon-border-animation 3s linear infinite;
-        }
-        
-        @keyframes neon-border-animation {
-            0% {
-                background-position: 0 0;
-            }
-            50% {
-                background-position: 400% 0;
-            }
-            100% {
-                background-position: 0 0;
-            }
-        }
-        
-        /* Partículas de neón flotantes */
-        .neon-particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background-color: #00e5ff;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
-            opacity: 0;
-            z-index: 0;
-        }
-        
-        /* Sobre Nosotros */
-        .about {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        
-        .about-image {
-            flex: 1;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .neumann-img {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 10px;
-            transition: transform 0.5s;
-        }
-        
-        .about-image:hover .neumann-img {
-            transform: scale(1.05);
-        }
-        
-        .about-content {
-            flex: 1;
-        }
-        
-        .about-content h2 {
-            text-align: left;
-            color: #00e5ff;
-        }
-        
-        .about-content p {
-            color: #bbb;
-        }
-        
-        /* Redes Sociales Laterales */
-        .social-sidebar {
-            position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 999;
-        }
-        
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .social-icon:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.7s;
-        }
-        
-        .social-icon:hover:before {
-            left: 100%;
-        }
-        
-        .social-icon:hover {
-            transform: translateY(-5px) scale(1.1);
-        }
-        
-        .facebook {
-            background: linear-gradient(45deg, #3b5998, #4a6fbb);
-            box-shadow: 0 4px 15px rgba(59, 89, 152, 0.4);
-        }
-        
-        .instagram {
-            background: linear-gradient(45deg, #e4405f, #c13584, #833ab4);
-            box-shadow: 0 4px 15px rgba(228, 64, 95, 0.4);
-        }
-        
-        .youtube {
-            background: linear-gradient(45deg, #cd201f, #ff0000);
-            box-shadow: 0 4px 15px rgba(205, 32, 31, 0.4);
-        }
-        
-        .tiktok {
-            background: linear-gradient(45deg, #000000, #25f4ee, #fe2c55);
-            box-shadow: 0 4px 15px rgba(37, 244, 238, 0.4);
-        }
-        
-        .twitter {
-            background: linear-gradient(45deg, #1DA1F2, #0d8bd9);
-            box-shadow: 0 4px 15px rgba(29, 161, 242, 0.4);
-        }
-        
-        /* Footer */
-        footer {
-            background-color: rgba(0, 0, 0, 0.9);
-            color: #fff;
-            padding: 60px 0 30px;
-            border-top: 1px solid #222;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: #00e5ff;
-        }
-        
-        .footer-column p {
-            color: #bbb;
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-column ul li a {
-            color: #bbb;
-            transition: color 0.3s;
-        }
-        
-        .footer-column ul li a:hover {
-            color: #00e5ff;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #222;
-            font-size: 0.9rem;
-            color: #777;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            nav {
-                width: 100%;
-                margin-top: 15px;
-                display: none;
-            }
-            
-            nav.active {
-                display: block;
-            }
-            
-            nav ul {
-                flex-direction: column;
-            }
-            
-            nav ul li {
-                margin: 10px 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-                position: absolute;
-                right: 20px;
-                top: 20px;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-content {
-                flex-direction: column;
-            }
-            
-            .hero-text {
-                text-align: center;
-            }
-            
-            .about {
-                flex-direction: column;
-            }
-            
-            .about-content h2 {
-                text-align: center;
-            }
-            
-            .testimonial-slider {
-                height: 380px;
-            }
-            
-            .social-sidebar {
-                display: none;
-            }
-            
-            .podcasts-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .podcast-card {
-                padding: 30px 20px;
-            }
-            
-            .podcast-card h3 {
-                font-size: 1.7rem;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Fondo con líneas azules animadas -->
-    <div class="animated-background" id="animatedBackground"></div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RDCR SOUND</title>
+  <meta name="description" content="RDCR SOUND - Tu radio favorita en vivo 24/7. Música latina, salsa, programación, locutores, emisoras y más desde Ibarra, Ecuador.">
+  <meta name="keywords" content="rdcr,sound,rdcr sound,RDCR SOUND, radio, música, salsa, emisoras, Ecuador, locutores, programación, online, streaming, Ibarra">
+  <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
+  <meta property="og:site_name" content="RDCR SOUND" />
+   
+  <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "RDCR SOUND",
+  "url": "https://rdcrsound.adcm.club"
+  
+    }
+  </script>
+  <!-- Icono de pestaña -->
+  <link rel="icon" type="image/png"  sizes="32x32" href="/img_radio/RDCRSOUND_LOGrem.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/img_radio/RDCRSOUND_LOGrem.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img_radio/RDCRSOUND_LOGrem.png">
+  <link rel="shortcut icon" href="/img_radio/RDCRSOUND_LOGrem.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- tsParticles CDN para fondo animado -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js"></script>
+    <!-- Icono para añadir a pantalla de inicio en móviles (iOS y Android) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img_radio/RDCRSOUND_LOGrem.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img_radio/RDCRSOUND_LOGrem.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/img_radio/RDCRSOUND_LOGrem.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/img_radio/RDCRSOUND_LOGrem.png">
+  <link rel="shortcut icon" href="/img_radio/RDCRSOUND_LOGrem.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="RDCR SOUND">
+  <meta name="theme-color" content="#18181b">
 
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">Dario LA Voz</div>
-            <div class="mobile-menu">☰</div>
-            <nav>
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#demos">Demos</a></li>
-                    <li><a href="#podcasts">Podcasts</a></li>
-                    <li><a href="#nosotros">Nosotros</a></li>
-                    <li><a href="#testimonios">Testimonios</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+      background: #111; /* Fondo negro elegante */
+      color: #fff;
+      transition: background 0.5s;
+    }
+    #tsparticles {
+      position: fixed;
+      z-index: -2;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+    }
+    /* Secciones con degradados */
+    section,
+    .section-gradient {
+      background: linear-gradient(135deg, #18181b 0%, #232526 100%);
+      transition: background 0.5s;
+    }
+    #inicio {
+      background: linear-gradient(120deg, #232526 0%, #fff 100%);
+      color: #18181b;
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+    }
+    #programacion {
+      background: linear-gradient(120deg, #232526 0%, #bfa76a 100%);
+      color: #000000;
+    }
+    #locutores {
+      background: linear-gradient(120deg, #18181b 0%, #fffbe6 100%);
+      color: #18181b;
+    }
+    #galeria {
+      background: linear-gradient(120deg, #232526 0%, #fff 100%);
+      color: #18181b;
+    }
 
-    <!-- Redes Sociales Laterales -->
-    <div class="social-sidebar">
-        <a href="https://www.facebook.com/rdcdrsound" class="social-icon facebook" target="_blank">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://x.com/DCradioEc" class="social-icon twitter" target="_blank">
-            <i class="fab fa-twitter"></i>
-        </a>
-        <a href="https://www.instagram.com/rdcrsound?igsh=bDd5Z2t6ZG56cDRi" class="social-icon instagram" target="_blank">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.youtube.com/channel/UC72BgWxDVoZxnS80l6x-Urw" class="social-icon youtube" target="_blank">
-            <i class="fab fa-youtube"></i>
-        </a>
-        <a href="https://www.tiktok.com/@rdcrsound" class="social-icon tiktok" target="_blank">
-            <i class="fab fa-tiktok"></i>
-        </a>
-    </div>
+    /* Animaciones personalizadas */
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .animate-fade { animation: fade 1.2s cubic-bezier(.4,0,.2,1) both; }
+    @keyframes pulseSlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);}
+      50% { box-shadow: 0 0 40px 10px rgba(0, 0, 0, 0.3);}
+    }
+    .animate-pulseSlow { animation: pulseSlow 2.5s infinite; }
+    /* Botón animado */
+    .btn-anim {
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+      background: linear-gradient(90deg, #bfa76a 0%, #fffbe6 100%);
+      color: #18181b;
+      border: none;
+      box-shadow: 0 2px 8px 0 #bfa76a44;
+      /* Animación de entrada */
+      animation: btn-fade-in 1s cubic-bezier(.4,0,.2,1);
+    }
+    .btn-anim::before {
+      content: "";
+      position: absolute;
+      left: -50%;
+      top: 0;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(90deg, #fffbe6 0%, #bfa76a 100%);
+      opacity: 0.12;
+      transform: skewX(-20deg);
+      transition: left 0.4s;
+      z-index: 0;
+    }
+    .btn-anim:hover::before {
+      left: 0;
+      opacity: 0.22;
+    }
+    .btn-anim span {
+      position: relative;
+      z-index: 1;
+    }
+    /* Animación de escala y brillo al pasar el mouse */
+    .btn-anim:hover {
+      transform: scale(1.07); /* Escala suave */
+      box-shadow: 0 4px 24px 0 #bfa76a99, 0 0 0 4px #fffbe633;
+      filter: brightness(1.08);
+      transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s, filter 0.25s;
+      /* Sin salto/bounce */
+    }
+    /* Animación de "pulse" suave */
+    @keyframes btn-fade-in {
+      from { opacity: 0; transform: scale(0.95);}
+      to { opacity: 1; transform: scale(1);}
+    }
+    .btn-anim:active {
+      transform: scale(0.97);
+      filter: brightness(0.98);
+    }
+    
+    /* Tarjeta de tips */
+    .tip-card {
+      background: linear-gradient(135deg, #fffbe6 0%, #bfa76a 100%);
+      color: #18181b;
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
+      padding: 1.5rem 1.25rem;
+      margin-bottom: 2rem;
+      border-left: 6px solid #bfa76a;
+      font-size: 1rem;
+      font-weight: 500;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .tip-card svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    @keyframes gold-shine {
+      0% {
+        filter: drop-shadow(0 0 8px #f6e27a88);
+        text-shadow: 0 0 16px #fffbe6cc, 0 0 8px #bfa76a88;
+      }
+      50% {
+        filter: drop-shadow(0 0 24px #f6e27a) brightness(1.15);
+        text-shadow: 0 0 32px #fffbe6cc, 0 0 16px #bfa76a;
+      }
+      100% {
+        filter: drop-shadow(0 0 8px #f6e27a88);
+        text-shadow: 0 0 16px #fffbe6cc, 0 0 8px #bfa76a88;
+      }
+    }
+    /* Animación de entrada fade-up */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .animate-fade-up { animation: fade-up 1.1s cubic-bezier(.4,0,.2,1) both; }
 
-    <!-- Sección Hero -->
-    <section id="inicio" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Dario <span>LA Voz</span></h1>
-                    <p>Comunicaciones de Impacto para tu Marca. Locución profesional, producción de podcasts y estrategias de comunicación que conectan con tu audiencia.</p>
-                    <a href="https://stream.zeno.fm/8hqgq6q9d3quv" class="radio-btn" target="_blank">
-                        <i class="fas fa-play-circle"></i>
-                        Escuchar Radio en Vivo
-                    </a>
-                </div>
-                <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Micrófono profesional" class="microphone-img">
-                </div>
-            </div>
-        </div>
-    </section>
+    /* Animación de entrada fade-in */
+    @keyframes fade-in {
+      from { opacity: 0;}
+      to { opacity: 1;}
+    }
+    .animate-fade-in { animation: fade-in 1.2s cubic-bezier(.4,0,.2,1) both; }
 
-    <!-- Sección de Servicios -->
-    <section id="servicios" class="services">
-        <div class="container">
-            <h2>Servicios Profesionales</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-microphone-alt"></i>
-                    </div>
-                    <h3>Locución Profesional</h3>
-                    <p>Voz para comerciales, videos corporativos, e-learning, audioguías y más. Calidad de estudio profesional.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-podcast"></i>
-                    </div>
-                    <h3>Producción de Podcasts</h3>
-                    <p>Creación, edición y distribución de podcasts. Desde la idea hasta las plataformas de streaming.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-broadcast-tower"></i>
-                    </div>
-                    <h3>Radio Online</h3>
-                    <p>Transmisión en vivo las 24 horas. Programación musical y segmentos especializados para tu audiencia.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3>Asesoría en Comunicación</h3>
-                    <p>Estrategias de comunicación efectivas para marcas y personalidades. Desarrollo de identidad vocal.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    /* Animación de flotación suave */
+    @keyframes float {
+      0%, 100% { transform: translateY(0);}
+      50% { transform: translateY(-10px);}
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
 
-    <!-- Sección de Demos -->
-    <section id="demos" class="demos">
-        <div class="container">
-            <h2>Demos y Trabajos</h2>
-            <p class="demo-subtitle">Escucha muestras de mi trabajo en locución y producción. Diferentes estilos y tonos para diversas necesidades.</p>
-            <a href="https://soundcloud.com/rdcrsound" class="demo-btn" target="_blank">
-                <i class="fab fa-soundcloud"></i>
-                Escuchar Demos en SoundCloud
-            </a>
-        </div>
-    </section>
+    /* Animación de brillo dorado */
+    @keyframes shine {
+      0% { filter: brightness(1);}
+      50% { filter: brightness(1.15) drop-shadow(0 0 16px #bfa76a88);}
+      100% { filter: brightness(1);}
+    }
+    .animate-shine { animation: shine 2.5s linear infinite; }
 
-    <!-- Sección de Podcasts -->
-    <section id="podcasts" class="podcasts">
-        <div class="container">
-            <h2>Nuestros Podcasts</h2>
-            <p class="podcast-subtitle">Programas especializados que informan, entretienen y conectan con audiencias específicas.</p>
-            
-            <div class="podcasts-grid">
-                <div class="podcast-card mano-a-mano">
-                    <i class="fas fa-handshake podcast-icon"></i>
-                    <h3>Mano a Mano</h3>
-                    <p class="podcast-description">Conversaciones profundas con personalidades influyentes. Un espacio para conocer las historias detrás del éxito.</p>
-                    <ul class="podcast-features">
-                        <li>Entrevistas exclusivas</li>
-                        <li>Historias de vida inspiradoras</li>
-                        <li>Análisis de trayectorias profesionales</li>
-                        <li>Consejos para el crecimiento personal</li>
-                    </ul>
-                    <a href="#" class="podcast-btn">
-                        <i class="fas fa-headphones"></i>
-                        Escuchar Episodios
-                    </a>
-                </div>
-                
-                <div class="podcast-card entretelones">
-                    <i class="fas fa-theater-masks podcast-icon"></i>
-                    <h3>Entretelones</h3>
-                    <p class="podcast-description">El detrás de escena del mundo del espectáculo, la cultura y los medios. Análisis y noticias del entretenimiento.</p>
-                    <ul class="podcast-features">
-                        <li>Noticias de espectáculos</li>
-                        <li>Análisis de tendencias culturales</li>
-                        <li>Reportajes exclusivos</li>
-                        <li>Críticas y recomendaciones</li>
-                    </ul>
-                    <a href="#" class="podcast-btn">
-                        <i class="fas fa-headphones"></i>
-                        Escuchar Episodios
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    /* Animación de rebote sutil */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0);}
+      50% { transform: translateY(-6px);}
+    }
+    .animate-bounce { animation: bounce 1.2s cubic-bezier(.4,0,.2,1) infinite; }
 
-    <!-- Sección Sobre Nosotros -->
-    <section id="nosotros" class="about">
-        <div class="container">
-            <div class="about-content">
-                <h2>Sobre Dario LA Voz</h2>
-                <p>Con más de 15 años de experiencia en el mundo de la locución y la comunicación, Dario se ha consolidado como una voz confiable y versátil en la industria.</p>
-                <p>Su trayectoria incluye trabajos para importantes marcas, producción de contenidos para radio y podcasts, y asesoría en estrategias de comunicación para empresas y personalidades.</p>
-                <p>Utilizando equipos profesionales de última generación, incluyendo micrófonos Neumann, garantiza la más alta calidad en cada proyecto.</p>
-                <a href="#" class="btn">Conoce Más</a>
-            </div>
-            <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Micrófono Neumann" class="neumann-img">
-            </div>
-        </div>
-    </section>
+    /* Animación de wiggle para iconos */
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-3deg);}
+      50% { transform: rotate(3deg);}
+    }
+    .animate-wiggle { animation: wiggle 1.2s ease-in-out infinite; }
 
-    <!-- Sección de Testimonios -->
-    <section id="testimonios" class="testimonials">
-        <div class="container">
-            <h2>Testimonios</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial active">
-                    <p class="testimonial-text">Trabajar con Dario fue una experiencia excepcional. Su voz le dio el carácter perfecto a nuestra campaña publicitaria y los resultados superaron nuestras expectativas.</p>
-                    <p class="testimonial-author">María González</p>
-                    <p class="testimonial-role">Directora de Marketing, TechSolutions</p>
-                </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">La producción de nuestro podcast con Dario fue impecable. No solo tiene una voz increíble, sino que su conocimiento técnico y creativo agregó un valor invaluable a nuestro proyecto.</p>
-                    <p class="testimonial-author">Carlos Rodríguez</p>
-                    <p class="testimonial-role">Productor de Contenidos, MediaLab</p>
-                </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">Dario tiene la capacidad de capturar la esencia de una marca y transmitirla a través de su voz. Su profesionalismo y talento son incomparables en la industria.</p>
-                    <p class="testimonial-author">Ana Martínez</p>
-                    <p class="testimonial-role">CEO, BrandVoice Agency</p>
-                </div>
-            </div>
-            <div class="testimonial-indicators">
-                <div class="indicator active"></div>
-                <div class="indicator"></div>
-                <div class="indicator"></div>
-            </div>
-        </div>
-    </section>
+    @keyframes radio-glow {
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Dario LA Voz</h3>
-                    <p>Comunicaciones de impacto para marcas y proyectos. Locución profesional, producción de podcasts y estrategias de comunicación.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Servicios</h3>
-                    <ul>
-                        <li><a href="#">Locución Profesional</a></li>
-                        <li><a href="#">Producción de Podcasts</a></li>
-                        <li><a href="#">Radio Online</a></li>
-                        <li><a href="#">Asesoría en Comunicación</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> info@dariolavoz.com</li>
-                        <li><i class="fas fa-phone"></i> +593 98 765 4321</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Quito, Ecuador</li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Síguenos</h3>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 Dario LA Voz. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Botón de WhatsApp -->
-    <a href="https://wa.me/593987654321" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <script>
-        // Menú móvil
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav').classList.toggle('active');
-        });
-
-        // Fondo animado con líneas
-        const background = document.getElementById('animatedBackground');
-        for (let i = 0; i < 20; i++) {
-            const line = document.createElement('div');
-            line.classList.add('line');
-            line.style.width = Math.random() * 100 + 50 + 'px';
-            line.style.height = '1px';
-            line.style.top = Math.random() * 100 + '%';
-            line.style.left = Math.random() * 100 + '%';
-            line.style.animationDelay = Math.random() * 15 + 's';
-            line.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            background.appendChild(line);
-        }
-
-        // Carrusel de testimonios
-        let currentTestimonial = 0;
-        const testimonials = document.querySelectorAll('.testimonial');
-        const indicators = document.querySelectorAll('.indicator');
-        
-        function showTestimonial(index) {
-            testimonials.forEach(testimonial => {
-                testimonial.classList.remove('active');
-            });
-            indicators.forEach(indicator => {
-                indicator.classList.remove('active');
-            });
-            
-            testimonials[index].classList.add('active');
-            indicators[index].classList.add('active');
-            currentTestimonial = index;
-        }
-        
-        // Cambiar testimonio cada 5 segundos
-        setInterval(() => {
-            let nextTestimonial = (currentTestimonial + 1) % testimonials.length;
-            showTestimonial(nextTestimonial);
-        }, 5000);
-        
-        // Indicadores clickeables
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                showTestimonial(index);
-            });
-        });
-
-        // Smooth scroll para enlaces de navegación
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetSection.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-                
-                // Cerrar menú móvil si está abierto
-                if (window.innerWidth <= 768) {
-                    document.querySelector('nav').classList.remove('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+      80% {
+        text-shadow: 0 0 18px #fffbe6cc, 0 0 12px #bfa76a;
+        filter: brightness(1.13) drop-shadow(0 0 12px #bfa76a88);
+      }
+    100% {
+        text-shadow: 0 0 18px #fffbe6cc, 0 0 12px #bfa76a;
+        filter: brightness(1.13) drop-shadow(0 0 12px #bfa76a88);
+      }
+    }
+   
+  </style>
