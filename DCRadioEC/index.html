@@ -17,28 +17,27 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
       overflow-x: hidden;
-      /* Oculta la barra de desplazamiento */
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none;  /* IE 10+ */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
     body::-webkit-scrollbar {
-      display: none; /* Chrome/Safari/Webkit */
+      display: none;
     }
     #particles-js {
       position: fixed;
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: #0d0d0d;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
     }
     .content {
       position: relative;
       padding: 2rem;
       z-index: 1;
-      padding-bottom: 120px; /* Espacio para el player flotante */
+      padding-bottom: 40px;
     }
     h1 {
       text-align: center;
@@ -106,7 +105,6 @@
       width: 100%;
       height: 100%;
       border: none;
-      /* pointer-events: none;  <-- QUITA ESTA LÍNEA */
     }
     .pdf-container iframe {
       pointer-events: none;
@@ -175,38 +173,188 @@
       text-align: center;
       user-select: none;
     }
-    /* Iframe flotante inferior */
-    .floating-player {
+    
+    /* Botón flotante en esquina superior derecha */
+    #btn-pedir-cancion {
       position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100vw;
-      height: 100px;
-      z-index: 9999;
-      box-shadow: 0 -2px 12px #b71c1c33;
-      background: #18181b;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-      overflow: hidden;
-      /* Oculta cualquier scroll interno */
-      scrollbar-width: none;
-    }
-    .floating-player::-webkit-scrollbar {
-      display: none;
-    }
-    .floating-player iframe {
-      width: 100%;
-      height: 100%;
+      top: 60px;
+      right: 30px;
+      background: linear-gradient(135deg, #bf6a6a, #e6b4b4);
+      color: #231c1c;
+      font-weight: 700;
       border: none;
-      overflow: hidden;
-      /* Oculta scroll dentro del iframe si lo tuviera */
-      scrollbar-width: none;
+      border-radius: 50px;
+      padding: 14px 22px;
+      box-shadow: 0 4px 15px rgba(191, 106, 106, 0.6);
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 1.2px;
+      transition: all 0.3s ease;
+      z-index: 9999;
     }
-    @media (max-width: 600px) {
-      .floating-player {
-        height: 70px;
+    #btn-pedir-cancion:hover {
+      background: linear-gradient(135deg, #e6b4b4, #bf6a6a);
+      box-shadow: 0 6px 20px rgba(191, 106, 106, 0.8);
+    }
+
+    /* Contenedor formulario, desliza desde arriba */
+    #form-container {
+      position: fixed;
+      top: 80px;
+      right: 30px;
+      width: 340px;
+      background: #2e1818;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(191, 106, 106, 0.5);
+      padding: 20px 24px;
+      font-family: 'Poppins', sans-serif;
+      color: #e6b4b4;
+      transform: translateY(-120%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+      z-index: 9998;
+    }
+    #form-container.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #form-container h3 {
+      margin-bottom: 15px;
+      font-weight: 700;
+      font-size: 1.4rem;
+      text-align: center;
+      letter-spacing: 1.2px;
+    }
+
+    #form-container input,
+    #form-container textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      color: #231c1c;
+    }
+    #form-container input::placeholder,
+    #form-container textarea::placeholder {
+      color: #7a3a3a;
+    }
+    #form-container textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    #form-container button[type="submit"] {
+      background: #bf6a6a;
+      color: #231c1c;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      width: 100%;
+      padding: 12px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      transition: background 0.3s ease;
+    }
+    #form-container button[type="submit"]:hover {
+      background: #e6b4b4;
+    }
+
+    /* Adaptación móvil */
+    @media (max-width: 400px) {
+      #form-container {
+        width: 90vw;
+        right: 5vw;
+        top: 70px;
+        padding: 16px 20px;
+        border-radius: 12px;
       }
+      #btn-pedir-cancion {
+        top: 60px;
+        right: 20px;
+        padding: 12px 18px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* Estilos para el reproductor simplificado */
+    .simple-player {
+      background: rgba(24, 24, 27, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 30px auto;
+      max-width: 600px;
+      box-shadow: 0 8px 32px rgba(183, 28, 28, 0.2);
+      border: 1px solid rgba(255, 82, 82, 0.1);
+      text-align: center;
+    }
+    
+    .simple-player h3 {
+      color: #ff5252;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+    }
+    
+    .simple-player p {
+      color: #e6b4b4;
+      margin-bottom: 20px;
+    }
+    
+    .player-btn {
+      background: rgba(255, 82, 82, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #ff5252;
+      font-size: 1.5rem;
+      margin: 0 10px;
+    }
+    
+    .player-btn:hover {
+      background: rgba(255, 82, 82, 0.4);
+      transform: scale(1.05);
+    }
+    
+    .play-btn {
+      background: linear-gradient(135deg, #ff5252, #b71c1c);
+      color: white;
+    }
+    
+    .play-btn:hover {
+      background: linear-gradient(135deg, #b71c1c, #ff5252);
+    }
+    
+    .now-playing {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255, 82, 82, 0.1);
+      border-radius: 10px;
+    }
+    
+    .now-playing h4 {
+      margin: 0 0 10px;
+      color: #ff5252;
+      font-size: 1rem;
+    }
+    
+    .now-playing p {
+      margin: 0;
+      color: #e6b4b4;
+      font-size: 1.1rem;
+      font-weight: 600;
     }
   </style>
 </head>
@@ -214,7 +362,6 @@
 <!-- =========================
      BARRA DE NAVEGACIÓN (BREADCRUMB)
      ========================= -->
-<!-- Sistema de navegación de páginas (breadcrumb y tabs) -->
 <nav aria-label="breadcrumb" style="background:rgba(24,24,27,0.92);backdrop-filter:blur(2px);border-bottom:1.5px solid #b71c1c33;box-shadow:0 2px 8px #b71c1c22;position:sticky;top:0;z-index:101;">
   <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:1.2rem;padding:0.7rem 1.5rem;">
     <a href="#" onclick="goBackToSection(event, 'emisoras')" style="color:#ff5252;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:0.5rem;">
@@ -226,8 +373,6 @@
     <div style="flex:1"></div>
   </div>
 </nav>
-
-<div id="particles-js"></div>
 
 <!-- =========================
      EFECTO DE PARTÍCULAS DE FONDO
@@ -241,22 +386,47 @@
   <div style="text-align:center;">
     <span class="title-box">DC Radio EC</span>
   </div>
-  <div class="subtitle-modern">🎶 Unete y disfruta de la mejor musica</div>
+  <div class="subtitle-modern">🎶 Únete y disfruta de la mejor música</div>
+
+  <!-- Reproductor simplificado -->
+  <div class="simple-player">
+    <h3>DC Radio EC</h3>
+    <p>Transmitiendo en vivo las 24 horas</p>
+    
+    <div>
+      <button class="player-btn" id="prev-btn">⏮</button>
+      <button class="player-btn play-btn" id="play-btn">▶</button>
+      <button class="player-btn" id="next-btn">⏭</button>
+    </div>
+    
+    <div class="now-playing">
+      <h4>Reproduciendo ahora:</h4>
+      <p id="current-song">Blinding Lights - The Weeknd</p>
+    </div>
+  </div>
 
   <div style="width:90%;max-width:800px;height:400px;margin:1.5rem auto 0 auto;box-shadow:0 2px 12px #bfa76a33;border-radius:1.1rem;overflow:hidden;">
     <iframe src="https://andydcm.github.io/dcradioec.github.io/" style="width:100%;height:100%;border:none;pointer-events:auto;" loading="lazy"></iframe>
   </div>
-
-  <!-- =========================
-
 </div>
 
+<!-- =========================
+     BOTÓN Y FORMULARIO PARA PEDIR CANCIONES
+     ========================= -->
+<button id="btn-pedir-cancion" aria-label="Pide tu canción">
+  🎵 Pide tu canción
+</button>
 
-<div class="floating-player">
-  <iframe src="https://sintonizaradio.com/estaciones/dcradioec/embed/playersmall?theme=dark"
-    style="width:100%;height:100%;border:none;overflow:hidden;pointer-events:auto;" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+<div id="form-container" aria-hidden="true">
+  <h3>🎶 Pide tu canción</h3>
+  <form id="formPedidoWhatsApp">
+    <input type="text" name="nombre" placeholder="Tu nombre" required autocomplete="off" />
+    <input type="text" name="cancion" placeholder="Nombre de la canción" required autocomplete="off" />
+    <input type="text" name="artista" placeholder="Artista" required autocomplete="off" />
+    <textarea name="mensaje" placeholder="Mensaje adicional (opcional)"></textarea>
+    <button type="submit">Enviar pedido</button>
+  </form>
 </div>
-
 
 <!-- =========================
      SCRIPTS DE EFECTOS Y UTILIDADES
@@ -282,156 +452,23 @@
     },
     "retina_detect": true
   });
-</script>
-<script>
-function goBackToSection(event, sectionId) {
-  event.preventDefault();
-  if (document.referrer) {
-    let url = new URL(document.referrer);
-    url.hash = sectionId;
-    window.location.href = url.toString();
-  } else {
-    window.location.href = '/#' + sectionId;
-  }
-}
-</script>
-
-
-
-
-<style>
-  /* Botón flotante en esquina superior derecha */
-  #btn-pedir-cancion {
-    position: fixed;
-    top: 60px;
-    right: 30px;
-    background: linear-gradient(135deg, #bf6a6a, #e6b4b4);
-    color: #231c1c;
-    font-weight: 700;
-    border: none;
-    border-radius: 50px;
-    padding: 14px 22px;
-    box-shadow: 0 4px 15px rgba(191, 106, 106, 0.6);
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 1.2px;
-    transition: all 0.3s ease;
-    z-index: 9999;
-  }
-  #btn-pedir-cancion:hover {
-    background: linear-gradient(135deg, #e6b4b4, #bf6a6a);
-    box-shadow: 0 6px 20px rgba(191, 106, 106, 0.8);
-  }
-
-  /* Contenedor formulario, desliza desde arriba */
-  #form-container {
-    position: fixed;
-    top: 80px;
-    right: 30px;
-    width: 340px;
-    background: #2e1818;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(191, 106, 106, 0.5);
-    padding: 20px 24px;
-    font-family: 'Poppins', sans-serif;
-    color: #e6b4b4;
-    transform: translateY(-120%);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-    z-index: 9998;
-  }
-  #form-container.active {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  #form-container h3 {
-    margin-bottom: 15px;
-    font-weight: 700;
-    font-size: 1.4rem;
-    text-align: center;
-    letter-spacing: 1.2px;
-  }
-
-  #form-container input,
-  #form-container textarea {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    color: #231c1c;
-  }
-  #form-container input::placeholder,
-  #form-container textarea::placeholder {
-    color: #7a3a3a;
-  }
-  #form-container textarea {
-    resize: vertical;
-    min-height: 60px;
-  }
-
-  #form-container button[type="submit"] {
-    background: #bf6a6a;
-    color: #231c1c;
-    font-weight: 700;
-    border: none;
-    border-radius: 12px;
-    width: 100%;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    transition: background 0.3s ease;
-  }
-  #form-container button[type="submit"]:hover {
-    background: #e6b4b4;
-  }
-
-  /* Adaptación móvil */
-  @media (max-width: 400px) {
-    #form-container {
-      width: 90vw;
-      right: 5vw;
-      top: 70px;
-      padding: 16px 20px;
-      border-radius: 12px;
-    }
-    #btn-pedir-cancion {
-      top: 60px;
-      right: 20px;
-      padding: 12px 18px;
-      font-size: 0.9rem;
+  
+  function goBackToSection(event, sectionId) {
+    event.preventDefault();
+    if (document.referrer) {
+      let url = new URL(document.referrer);
+      url.hash = sectionId;
+      window.location.href = url.toString();
+    } else {
+      window.location.href = '/#' + sectionId;
     }
   }
-</style>
-
-<!-- Botón flotante -->
-<button id="btn-pedir-cancion" aria-label="Pide tu canción">
-  🎵 Pide tu canción
-</button>
-
-<!-- Formulario desplegable -->
-<div id="form-container" aria-hidden="true">
-  <h3>🎶 Pide tu canción</h3>
-  <form id="formPedidoWhatsApp">
-    <input type="text" name="nombre" placeholder="Tu nombre" required autocomplete="off" />
-    <input type="text" name="cancion" placeholder="Nombre de la canción" required autocomplete="off" />
-    <input type="text" name="artista" placeholder="Artista" required autocomplete="off" />
-    <textarea name="mensaje" placeholder="Mensaje adicional (opcional)"></textarea>
-    <button type="submit">Enviar pedido</button>
-  </form>
-</div>
-
-<script>
+  
+  // Funcionalidad del formulario de pedidos
   const btn = document.getElementById('btn-pedir-cancion');
   const formContainer = document.getElementById('form-container');
   const form = document.getElementById('formPedidoWhatsApp');
-  const numeroWhatsApp = '593961480654'; // Tu número sin '+' ni espacios
+  const numeroWhatsApp = '593961480654';
 
   btn.addEventListener('click', () => {
     formContainer.classList.toggle('active');
@@ -447,29 +484,73 @@ function goBackToSection(event, sectionId) {
     const artista = form.artista.value.trim();
     const mensaje = form.mensaje.value.trim();
 
-    // Aquí hacemos el texto con saltos de línea normales \n
     let texto = `*_Pedido de canción_ DC Radio EC*\n`;
     texto += `- *Nombre:* ${nombre}\n`;
     texto += `- *Canción:* ${cancion}\n`;
     texto += `- *Artista:* ${artista}\n`;
     if (mensaje) texto += `- *Mensaje:*\n> ${mensaje}`;
 
-    // ¡Importante! Codificamos todo con encodeURIComponent para que los emojis y saltos funcionen bien
     const textoCodificado = encodeURIComponent(texto);
-
-    // URL de WhatsApp sin '+', solo números
     const url = `https://wa.me/${numeroWhatsApp}?text=${textoCodificado}`;
 
-    // Abrimos en nueva pestaña
     window.open(url, '_blank');
 
-    // Limpiamos y ocultamos formulario
     form.reset();
     formContainer.classList.remove('active');
     formContainer.setAttribute('aria-hidden', 'true');
   });
+
+  // Simulación de funcionalidad del reproductor
+  const playBtn = document.getElementById('play-btn');
+  const currentSongEl = document.getElementById('current-song');
+  
+  let isPlaying = false;
+  
+  // Lista de canciones simuladas
+  const songs = [
+    "Blinding Lights - The Weeknd",
+    "Shape of You - Ed Sheeran",
+    "Dance Monkey - Tones and I",
+    "Bad Guy - Billie Eilish",
+    "Watermelon Sugar - Harry Styles"
+  ];
+  
+  let currentSongIndex = 0;
+  
+  // Actualizar la canción actual
+  function updateCurrentSong() {
+    currentSongEl.textContent = songs[currentSongIndex];
+  }
+  
+  // Simular reproducción
+  function togglePlay() {
+    isPlaying = !isPlaying;
+    
+    if (isPlaying) {
+      playBtn.innerHTML = "⏸";
+    } else {
+      playBtn.innerHTML = "▶";
+    }
+  }
+  
+  // Cambiar canción
+  function nextSong() {
+    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    updateCurrentSong();
+  }
+  
+  function prevSong() {
+    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+    updateCurrentSong();
+  }
+  
+  // Configurar eventos
+  playBtn.addEventListener('click', togglePlay);
+  document.getElementById('next-btn').addEventListener('click', nextSong);
+  document.getElementById('prev-btn').addEventListener('click', prevSong);
+  
+  // Inicializar
+  updateCurrentSong();
 </script>
-
-
 </body>
 </html>
