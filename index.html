@@ -11,42 +11,17 @@
    PALETA OFICIAL RDCR SOUND NETWORK
 ===================== */
 :root {
-  /* 🖤 Negro profundo - fondo principal */
   --negro-profundo: #0F0F0F;
   --negro-profundo-alt: #111111;
-  
-  /* 💎 Cian eléctrico / Azul neón - color principal */
   --cian-electrico: #00E5FF;
   --cian-electrico-alt: #00B8D4;
-  
-  /* 🤍 Blanco limpio - textos */
   --blanco-limpio: #FFFFFF;
-  
-  /* ⚙️ Gris oscuro de apoyo */
   --gris-oscuro: #2A2A2A;
   --gris-oscuro-alt: #333333;
-  
-  /* Colores específicos para radios */
-  --dc-radio-azul: #0A1F44;
-  --dc-radio-blanco: #FFFFFF;
-  --dc-radio-gris: #888888;
-  
-  --dc-clasicos-dorado: #FFD700;
-  --dc-clasicos-negro: #000000;
-  --dc-clasicos-beige: #F5F5DC;
-  
-  --dc-mix-negro: #000000;
-  --dc-mix-fucsia: #FF00FF;
-  --dc-mix-verde: #00FF00;
-  --dc-mix-azul-electrico: #00E5FF;
-  
-  --avenida-naranja: #FF8C00;
-  --avenida-verde: #32CD32;
-  --avenida-amarillo: #FFD700;
 }
 
 /* =====================
-   ESTILOS GENERALES CON NUEVA PALETA
+   ESTILOS GENERALES
 ===================== */
 * {
   margin: 0;
@@ -59,12 +34,177 @@ body {
   color: var(--blanco-limpio);
   background: var(--negro-profundo);
   overflow-x: hidden;
-  position: relative;
   min-height: 100vh;
+  line-height: 1.6;
 }
 
 /* =====================
-   LOGO EN HEADER
+   MEJORAS DE TEXTO Y LEGIBILIDAD
+===================== */
+.about-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.about-content p {
+  margin-bottom: 1.5em;
+  text-align: justify;
+  line-height: 1.8;
+}
+
+.about-content strong {
+  color: var(--cian-electrico);
+  font-size: 1.2em;
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    text-align: left;
+    padding: 15px;
+    font-size: 1em;
+  }
+  
+  .about-content p {
+    text-align: left;
+    margin-bottom: 1.2em;
+  }
+}
+
+/* =====================
+   MEJORAS ESPECÍFICAS PARA MÓVILES
+===================== */
+@media (max-width: 768px) {
+  /* Ajuste de espaciados generales */
+  section {
+    padding: 60px 15px !important;
+  }
+  
+  .hero {
+    padding: 100px 15px !important;
+  }
+  
+  .hero h1 {
+    font-size: 2.2em !important;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+  
+  .hero p {
+    font-size: 1.1em !important;
+    line-height: 1.6;
+    padding: 0 10px;
+  }
+  
+  /* Mejorar legibilidad de textos en tarjetas */
+  .radio-info {
+    padding: 20px 15px !important;
+  }
+  
+  .radio-card h3 {
+    font-size: 1.4em !important;
+    margin-bottom: 15px;
+    line-height: 1.3;
+  }
+  
+  .radio-card p {
+    font-size: 0.95em !important;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    padding: 0 5px;
+  }
+  
+  /* Ajustar botones para toques más fáciles */
+  .btn-radio-card, .btn-primary-action {
+    min-height: 50px;
+    padding: 15px 25px !important;
+    font-size: 1em;
+  }
+  
+  /* Mejorar espaciado entre secciones */
+  .radios-grid {
+    gap: 25px !important;
+  }
+  
+  /* Ajustar texto en carrusel */
+  .programa-card h3 {
+    font-size: 1.3em !important;
+    min-height: 70px;
+    line-height: 1.3;
+  }
+  
+  .programa-card .conductor {
+    font-size: 1em;
+    min-height: 40px;
+  }
+  
+  /* Ajustar footer */
+  footer {
+    padding: 50px 15px 20px !important;
+  }
+  
+  /* Ajustar modal para móvil */
+  .modal-body {
+    padding: 20px 15px !important;
+    font-size: 0.95em;
+    line-height: 1.6;
+  }
+  
+  .modal-body p {
+    margin-bottom: 1.2em;
+  }
+}
+
+/* =====================
+   MEJORAS ESPECÍFICAS PARA MÓVILES PEQUEÑOS
+===================== */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8em !important;
+  }
+  
+  .hero p {
+    font-size: 1em !important;
+  }
+  
+  .radio-card {
+    height: 280px !important;
+  }
+  
+  .radio-info {
+    padding: 15px 10px !important;
+  }
+  
+  .radio-card h3 {
+    font-size: 1.2em !important;
+  }
+  
+  .radio-card p {
+    font-size: 0.9em !important;
+    line-height: 1.4;
+  }
+  
+  .btn-radio-card {
+    padding: 12px 20px !important;
+    font-size: 0.9em;
+  }
+  
+  .footer-action-btn {
+    min-width: 100% !important;
+    padding: 18px 20px !important;
+    font-size: 0.95em;
+  }
+  
+  .about-content {
+    font-size: 0.95em;
+    line-height: 1.5;
+  }
+}
+
+/* =====================
+   RESTANTE DEL CSS (MANTENIENDO EL EXISTENTE)
 ===================== */
 .header-logo {
   height: 50px;
@@ -72,9 +212,6 @@ body {
   margin-right: 15px;
 }
 
-/* =====================
-   BOTÓN WHATSAPP FLOTANTE (ARRIBA DEL BOTÓN ARRIBA)
-===================== */
 .whatsapp-float {
   position: fixed;
   bottom: 100px;
@@ -112,9 +249,6 @@ body {
   animation: none;
 }
 
-/* =====================
-   BOTONES DE ACCIÓN EN FOOTER (NUEVOS)
-===================== */
 .footer-action-buttons {
   display: flex;
   justify-content: center;
@@ -182,7 +316,6 @@ body {
   animation: iconGlow 1s infinite alternate;
 }
 
-/* Botón específico para Código Deontológico */
 .codigo-btn {
   border: 3px solid #FFD700;
 }
@@ -191,7 +324,6 @@ body {
   background: linear-gradient(45deg, #FFD700, #FF8C00);
 }
 
-/* Botón específico para Tarifario */
 .tarifario-btn {
   border: 3px solid #32CD32;
 }
@@ -205,9 +337,6 @@ body {
   100% { filter: drop-shadow(0 0 10px var(--cian-electrico)); }
 }
 
-/* =====================
-   BOTÓN IR ARRIBA CON NUEVA PALETA
-===================== */
 .back-to-top {
   position: fixed;
   bottom: 30px;
@@ -243,9 +372,6 @@ body {
   box-shadow: 0 8px 25px rgba(0, 229, 255, 0.5);
 }
 
-/* =====================
-   MODALES
-===================== */
 .modal {
   display: none;
   position: fixed;
@@ -392,9 +518,6 @@ body {
   margin-bottom: 15px;
 }
 
-/* =====================
-   FONDO CON LÍNEAS INTERACTIVAS EN NUEVA PALETA
-===================== */
 .interactive-bg {
   position: fixed;
   top: 0;
@@ -409,7 +532,6 @@ body {
     linear-gradient(45deg, var(--negro-profundo) 0%, var(--negro-profundo-alt) 50%, var(--negro-profundo) 100%);
 }
 
-/* Líneas interactivas con cian eléctrico */
 .interactive-line {
   position: absolute;
   background: linear-gradient(90deg, 
@@ -461,7 +583,6 @@ body {
   animation-duration: 40s;
 }
 
-/* Líneas verticales */
 .vertical-line {
   position: absolute;
   background: linear-gradient(180deg, 
@@ -495,7 +616,6 @@ body {
   animation-delay: 12s;
 }
 
-/* Animaciones */
 @keyframes lineMove {
   0% {
     transform: translateX(0) scaleX(1);
@@ -522,9 +642,6 @@ body {
   }
 }
 
-/* =====================
-   HEADER CON NUEVA PALETA
-===================== */
 header {
   background: rgba(15, 15, 15, 0.98);
   backdrop-filter: blur(15px);
@@ -572,9 +689,6 @@ header.scrolled {
   font-weight: 800;
 }
 
-/* =====================
-   BOTONES DE NAVEGACIÓN CON NUEVA PALETA
-===================== */
 .nav-buttons {
   display: flex;
   gap: 15px;
@@ -630,9 +744,6 @@ header.scrolled {
   animation: iconGlow 1s infinite alternate;
 }
 
-/* =====================
-   MENÚ MÓVIL
-===================== */
 .menu-toggle {
   display: none;
   background: transparent;
@@ -654,9 +765,6 @@ header.scrolled {
   transform: rotate(90deg);
 }
 
-/* =====================
-   SECCIÓN RADIOS EN 2 BLOQUES (2 ARRIBA, 2 ABAJO)
-===================== */
 .radios-section {
   padding: 100px 30px;
   max-width: 1000px;
@@ -687,7 +795,6 @@ header.scrolled {
   box-shadow: 0 0 15px var(--cian-electrico);
 }
 
-/* Contenedor de radios en 2 filas */
 .radios-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -696,7 +803,6 @@ header.scrolled {
   justify-items: center;
 }
 
-/* Tarjeta de radio base - AHORA CON ANIMACIÓN REVELADORA */
 .radio-card {
   width: 100%;
   max-width: 400px;
@@ -711,7 +817,6 @@ header.scrolled {
   cursor: pointer;
 }
 
-/* Imagen de fondo de la radio */
 .radio-image {
   width: 100%;
   height: 100%;
@@ -719,7 +824,6 @@ header.scrolled {
   transition: all 0.5s ease;
 }
 
-/* Información que se revela al hacer hover */
 .radio-info {
   position: absolute;
   top: 0;
@@ -763,13 +867,8 @@ header.scrolled {
   font-size: 0.95em;
 }
 
-/* =====================
-   ANIMACIONES ESPECÍFICAS PARA CADA RADIO CON NUEVA PALETA
-===================== */
-
-/* DC RADIO - Azul oscuro, blanco, gris */
 .dc-radio {
-  border-color: var(--dc-radio-azul);
+  border-color: #0A1F44;
   animation: dcRadioGlow 4s infinite alternate;
 }
 
@@ -781,20 +880,20 @@ header.scrolled {
   width: 100%;
   height: 5px;
   background: linear-gradient(90deg, 
-    var(--dc-radio-azul), 
-    var(--dc-radio-blanco),
-    var(--dc-radio-gris)
+    #0A1F44, 
+    #FFFFFF,
+    #888888
   );
   z-index: 2;
 }
 
 .dc-radio .radio-info {
-  border: 2px solid var(--dc-radio-azul);
+  border: 2px solid #0A1F44;
 }
 
 .dc-radio .btn-radio-card {
-  background: linear-gradient(45deg, var(--dc-radio-azul), var(--cian-electrico));
-  color: var(--dc-radio-blanco);
+  background: linear-gradient(45deg, #0A1F44, var(--cian-electrico));
+  color: #FFFFFF;
 }
 
 @keyframes dcRadioGlow {
@@ -809,9 +908,8 @@ header.scrolled {
   }
 }
 
-/* DC CLÁSICOS - Dorado, negro, beige */
 .dc-clasicos {
-  border-color: var(--dc-clasicos-dorado);
+  border-color: #FFD700;
   animation: dcClasicosGlow 4s infinite alternate;
 }
 
@@ -823,20 +921,20 @@ header.scrolled {
   width: 100%;
   height: 5px;
   background: linear-gradient(90deg, 
-    var(--dc-clasicos-dorado), 
-    var(--negro-profundo),
-    var(--dc-clasicos-beige)
+    #FFD700, 
+    #000000,
+    #F5F5DC
   );
   z-index: 2;
 }
 
 .dc-clasicos .radio-info {
-  border: 2px solid var(--dc-clasicos-dorado);
+  border: 2px solid #FFD700;
 }
 
 .dc-clasicos .btn-radio-card {
-  background: linear-gradient(45deg, var(--dc-clasicos-dorado), var(--dc-clasicos-beige));
-  color: var(--negro-profundo);
+  background: linear-gradient(45deg, #FFD700, #F5F5DC);
+  color: #000000;
 }
 
 @keyframes dcClasicosGlow {
@@ -851,9 +949,8 @@ header.scrolled {
   }
 }
 
-/* DC MIX - Negro + fucsia / verde neón / azul eléctrico */
 .dc-mix {
-  border-color: var(--dc-mix-fucsia);
+  border-color: #FF00FF;
   animation: dcMixGlow 4s infinite alternate;
 }
 
@@ -865,8 +962,8 @@ header.scrolled {
   width: 100%;
   height: 5px;
   background: linear-gradient(90deg, 
-    var(--dc-mix-fucsia), 
-    var(--dc-mix-verde),
+    #FF00FF, 
+    #00FF00,
     var(--cian-electrico)
   );
   animation: dcMixColors 3s infinite alternate;
@@ -874,11 +971,11 @@ header.scrolled {
 }
 
 .dc-mix .radio-info {
-  border: 2px solid var(--dc-mix-fucsia);
+  border: 2px solid #FF00FF;
 }
 
 .dc-mix .btn-radio-card {
-  background: linear-gradient(45deg, var(--dc-mix-fucsia), var(--cian-electrico));
+  background: linear-gradient(45deg, #FF00FF, var(--cian-electrico));
   color: var(--blanco-limpio);
 }
 
@@ -900,30 +997,29 @@ header.scrolled {
 @keyframes dcMixColors {
   0% {
     background: linear-gradient(90deg, 
-      var(--dc-mix-fucsia), 
-      var(--dc-mix-verde),
+      #FF00FF, 
+      #00FF00,
       var(--cian-electrico)
     );
   }
   50% {
     background: linear-gradient(90deg, 
-      var(--dc-mix-verde), 
+      #00FF00, 
       var(--cian-electrico),
-      var(--dc-mix-fucsia)
+      #FF00FF
     );
   }
   100% {
     background: linear-gradient(90deg, 
       var(--cian-electrico), 
-      var(--dc-mix-fucsia),
-      var(--dc-mix-verde)
+      #FF00FF,
+      #00FF00
     );
   }
 }
 
-/* AVENIDA TROPICAL - Naranja, verde, amarillo */
 .avenida-tropical {
-  border-color: var(--avenida-naranja);
+  border-color: #FF8C00;
   animation: avenidaGlow 4s infinite alternate;
 }
 
@@ -935,21 +1031,21 @@ header.scrolled {
   width: 100%;
   height: 5px;
   background: linear-gradient(90deg, 
-    var(--avenida-naranja), 
-    var(--avenida-verde),
-    var(--avenida-amarillo)
+    #FF8C00, 
+    #32CD32,
+    #FFD700
   );
   animation: avenidaColors 3s infinite alternate;
   z-index: 2;
 }
 
 .avenida-tropical .radio-info {
-  border: 2px solid var(--avenida-naranja);
+  border: 2px solid #FF8C00;
 }
 
 .avenida-tropical .btn-radio-card {
-  background: linear-gradient(45deg, var(--avenida-naranja), var(--avenida-amarillo));
-  color: var(--negro-profundo);
+  background: linear-gradient(45deg, #FF8C00, #FFD700);
+  color: #000000;
 }
 
 @keyframes avenidaGlow {
@@ -967,28 +1063,27 @@ header.scrolled {
 @keyframes avenidaColors {
   0% {
     background: linear-gradient(90deg, 
-      var(--avenida-naranja), 
-      var(--avenida-verde),
-      var(--avenida-amarillo)
+      #FF8C00, 
+      #32CD32,
+      #FFD700
     );
   }
   50% {
     background: linear-gradient(90deg, 
-      var(--avenida-verde), 
-      var(--avenida-amarillo),
-      var(--avenida-naranja)
+      #32CD32, 
+      #FFD700,
+      #FF8C00
     );
   }
   100% {
     background: linear-gradient(90deg, 
-      var(--avenida-amarillo), 
-      var(--avenida-naranja),
-      var(--avenida-verde)
+      #FFD700, 
+      #FF8C00,
+      #32CD32
     );
   }
 }
 
-/* Botón de radio específico */
 .btn-radio-card {
   position: relative;
   padding: 12px 25px;
@@ -1034,9 +1129,6 @@ header.scrolled {
   box-shadow: 0 10px 25px rgba(0, 229, 255, 0.3);
 }
 
-/* =====================
-   HERO CON NUEVA PALETA
-===================== */
 .hero {
   text-align: center;
   padding: 150px 20px;
@@ -1110,9 +1202,6 @@ header.scrolled {
   flex-wrap: wrap;
 }
 
-/* =====================
-   CARRUSEL DE PROGRAMACIÓN DESTACADA - CORREGIDO
-===================== */
 .carousel-container {
   position: relative;
   max-width: 1000px;
@@ -1126,11 +1215,11 @@ header.scrolled {
 .carousel-slide {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  width: calc(300px * 6 + 15px * 12); /* 6 tarjetas * 300px + márgenes */
+  width: calc(300px * 6 + 15px * 12);
 }
 
 .programa-card {
-  width: 280px; /* Ancho fijo para todas las tarjetas */
+  width: 280px;
   background: var(--gris-oscuro);
   margin: 0 15px;
   padding: 30px;
@@ -1223,9 +1312,6 @@ header.scrolled {
   background: var(--cian-electrico);
 }
 
-/* =====================
-   SECCIONES GENERALES CON NUEVA PALETA
-===================== */
 section {
   padding: 100px 30px;
   max-width: 1200px;
@@ -1256,11 +1342,6 @@ section h2::after {
   box-shadow: 0 0 10px var(--cian-electrico);
 }
 
-/* =====================
-   RESPONSIVE COMPLETO PARA MÓVILES
-===================== */
-
-/* Tabletas (768px - 992px) */
 @media (max-width: 992px) {
   .radios-grid {
     grid-template-columns: 1fr;
@@ -1270,16 +1351,16 @@ section h2::after {
   }
   
   .hero h1 {
-    font-size: 3.2em;
+    font-size: 3.2em !important;
   }
   
   .hero p {
-    font-size: 1.2em;
+    font-size: 1.2em !important;
     padding: 0 20px;
   }
   
   section, .radios-section {
-    padding: 80px 20px;
+    padding: 80px 20px !important;
   }
   
   .carousel-slide {
@@ -1322,10 +1403,9 @@ section h2::after {
   }
 }
 
-/* Móviles grandes (576px - 768px) */
 @media (max-width: 768px) {
   header {
-    padding: 15px 20px;
+    padding: 15px 20px !important;
     flex-wrap: wrap;
   }
   
@@ -1348,21 +1428,21 @@ section h2::after {
   .nav-btn {
     width: 100%;
     justify-content: center;
-    padding: 18px 20px;
+    padding: 18px 20px !important;
     font-size: 1.1em;
   }
   
   .hero {
-    padding: 120px 15px;
+    padding: 120px 15px !important;
   }
   
   .hero h1 {
-    font-size: 2.5em;
+    font-size: 2.5em !important;
     line-height: 1.2;
   }
   
   .hero p {
-    font-size: 1.1em;
+    font-size: 1.1em !important;
     margin-bottom: 40px;
   }
   
@@ -1379,25 +1459,25 @@ section h2::after {
   }
   
   h2 {
-    font-size: 2.2em;
+    font-size: 2.2em !important;
   }
   
   .radios-section h2 {
-    font-size: 2.2em;
+    font-size: 2.2em !important;
     margin-bottom: 40px;
   }
   
   .radio-card {
-    height: 280px;
+    height: 280px !important;
     max-width: 100%;
   }
   
   .radio-card h3 {
-    font-size: 1.4em;
+    font-size: 1.4em !important;
   }
   
   .radio-card p {
-    font-size: 0.9em;
+    font-size: 0.9em !important;
     padding: 0 10px;
   }
   
@@ -1433,12 +1513,12 @@ section h2::after {
   
   .footer-action-btn {
     min-width: 280px;
-    padding: 18px 30px;
+    padding: 18px 30px !important;
     font-size: 1em;
   }
   
   .modal-body {
-    padding: 20px;
+    padding: 20px !important;
     font-size: 1em;
   }
   
@@ -1451,14 +1531,13 @@ section h2::after {
   }
 }
 
-/* Móviles pequeños (hasta 576px) */
 @media (max-width: 576px) {
   .hero h1 {
-    font-size: 2em;
+    font-size: 2em !important;
   }
   
   .hero p {
-    font-size: 1em;
+    font-size: 1em !important;
     padding: 0 10px;
   }
   
@@ -1475,24 +1554,24 @@ section h2::after {
   }
   
   .radio-card {
-    height: 250px;
+    height: 250px !important;
   }
   
   .radio-info {
-    padding: 20px 15px;
+    padding: 20px 15px !important;
   }
   
   .radio-card h3 {
-    font-size: 1.3em;
+    font-size: 1.3em !important;
   }
   
   .radio-card p {
-    font-size: 0.85em;
+    font-size: 0.85em !important;
     margin-bottom: 15px;
   }
   
   .btn-radio-card {
-    padding: 10px 20px;
+    padding: 10px 20px !important;
     font-size: 0.9em;
   }
   
@@ -1522,7 +1601,7 @@ section h2::after {
   }
   
   .programa-card h3 {
-    font-size: 1.3em;
+    font-size: 1.3em !important;
     min-height: 50px;
   }
   
@@ -1543,7 +1622,7 @@ section h2::after {
   
   .footer-action-btn {
     min-width: 100%;
-    padding: 15px 20px;
+    padding: 15px 20px !important;
     font-size: 0.95em;
   }
   
@@ -1571,11 +1650,10 @@ section h2::after {
   }
   
   .modal-body {
-    padding: 15px;
+    padding: 15px !important;
     font-size: 0.95em;
   }
   
-  /* Ajustar grids en móviles */
   .plataformas-digitales div[style*="display: flex"] {
     flex-direction: column;
     align-items: center;
@@ -1596,14 +1674,13 @@ section h2::after {
   }
 }
 
-/* Móviles muy pequeños (hasta 400px) */
 @media (max-width: 400px) {
   .hero h1 {
-    font-size: 1.8em;
+    font-size: 1.8em !important;
   }
   
   .hero p {
-    font-size: 0.95em;
+    font-size: 0.95em !important;
   }
   
   .logo h2 {
@@ -1612,28 +1689,28 @@ section h2::after {
   
   .nav-btn {
     font-size: 1em;
-    padding: 15px;
+    padding: 15px !important;
   }
   
   .radios-section h2 {
-    font-size: 1.9em;
+    font-size: 1.9em !important;
   }
   
   .radio-card {
-    height: 230px;
+    height: 230px !important;
   }
   
   .radio-card h3 {
-    font-size: 1.2em;
+    font-size: 1.2em !important;
   }
   
   .radio-card p {
-    font-size: 0.8em;
+    font-size: 0.8em !important;
     line-height: 1.4;
   }
   
   .btn-radio-card {
-    padding: 8px 16px;
+    padding: 8px 16px !important;
     font-size: 0.85em;
   }
   
@@ -1643,7 +1720,7 @@ section h2::after {
   }
   
   .programa-card h3 {
-    font-size: 1.1em;
+    font-size: 1.1em !important;
   }
   
   .carousel-slide {
@@ -1651,7 +1728,7 @@ section h2::after {
   }
   
   .footer-action-btn {
-    padding: 12px 15px;
+    padding: 12px 15px !important;
     font-size: 0.9em;
     min-width: 100%;
   }
@@ -1675,9 +1752,6 @@ section h2::after {
   }
 }
 
-/* =====================
-   ESTILOS ADICIONALES CON NUEVA PALETA
-===================== */
 .about, .download-app, .plataformas-digitales, #contacto, #programacion {
   background: var(--gris-oscuro-alt);
   border-radius: 20px;
@@ -1687,7 +1761,6 @@ section h2::after {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Footer */
 footer {
   background: rgba(15, 15, 15, 0.98);
   padding: 70px 30px 30px;
@@ -1695,7 +1768,6 @@ footer {
   border-top: 2px solid rgba(0, 229, 255, 0.3);
 }
 
-/* Efectos de hover en todas las cards */
 .card-hover {
   transition: all 0.3s ease;
   text-decoration: none;
@@ -1707,7 +1779,6 @@ footer {
   box-shadow: 0 20px 40px rgba(0, 229, 255, 0.2);
 }
 
-/* Botón principal de acción */
 .btn-primary-action {
   background: linear-gradient(45deg, var(--cian-electrico), var(--cian-electrico-alt));
   color: var(--negro-profundo);
@@ -1758,7 +1829,6 @@ footer {
 <!-- HEADER CON LOGO PNG -->
 <header id="mainHeader">
   <div class="logo">
-    <!-- LOGO PNG - Reemplaza con la URL de tu logo -->
     <img src="/img_radio/RDCR SOUND NETWORK/10.png" alt="RDCR Sound Network" class="header-logo">
     <h2>RDCR SOUND</h2>
   </div>
@@ -1788,7 +1858,6 @@ footer {
     <h1>RDCR SOUND NETWORK</h1>
     <p>Es una red de radios online creada para conectar marcas con audiencias reales a través de experiencias sonoras segmentadas, modernas y profesionales.</p>
     <div class="hero-buttons">
-      <!-- PRIMER BOTÓN MODIFICADO PARA IR A LA SECCIÓN DE DESCARGA -->
       <button class="btn-primary-action" onclick="scrollToSection('download')">
         <i class="fas fa-mobile-alt"></i> Descargar App
       </button>
@@ -1799,59 +1868,53 @@ footer {
   </div>
 </section>
 
-<!-- RADIOS EN 2 BLOQUES (2 ARRIBA, 2 ABAJO) -->
+<!-- RADIOS EN 2 BLOQUES -->
 <section class="radios-section" id="radios">
   <h2>Nuestras Emisoras</h2>
   
   <div class="radios-grid">
-    <!-- DC RADIO (ARRIBA IZQUIERDA) -->
+    <!-- DC RADIO -->
     <div class="radio-card dc-radio">
-      <!-- IMAGEN DE FONDO DE LA RADIO -->
       <img src="/img_radio/DCRADIOEC/WhatsApp Image 2025-12-23 at 16.59.54.jpeg" alt="DC Radio" class="radio-image">
-      
-      <!-- INFORMACIÓN QUE SE REVELA AL HACER HOVER -->
       <div class="radio-info">
         <h3>DC RADIO</h3>
-        <p>"La música que acompaña tu jornada" Salsa, pop, baladas, merengue, reguetón, crossover latino  Radio Generalista.</p>
+        <p>"La música que acompaña tu jornada" Salsa, pop, baladas, merengue, reguetón, crossover latino. Radio Generalista.</p>
         <a href="/DCRadioEC/" class="btn-radio-card">
           <i class="fas fa-headphones-alt"></i> Sintonizar
         </a>
       </div>
     </div>
     
-    <!-- DC CLÁSICOS (ARRIBA DERECHA) -->
+    <!-- DC CLÁSICOS -->
     <div class="radio-card dc-clasicos">
       <img src="/img_radio/DCCLASICOS/WhatsApp Image 2025-12-23 at 16.59.55.jpeg" alt="DC Clásicos" class="radio-image">
-      
       <div class="radio-info">
         <h3>DC CLÁSICOS</h3>
-        <p>Baladas en español e inglés Desde los 80 hasta la actualidad Recuerdos, historias, nostalgia y elegancia.</p>
+        <p>Baladas en español e inglés desde los 80 hasta la actualidad. Recuerdos, historias, nostalgia y elegancia.</p>
         <a href="/DCClasicosEC/" class="btn-radio-card">
           <i class="fas fa-headphones-alt"></i> Sintonizar
         </a>
       </div>
     </div>
     
-    <!-- DC MIX (ABAJO IZQUIERDA) -->
+    <!-- DC MIX -->
     <div class="radio-card dc-mix">
       <img src="/img_radio/DCMIX/WhatsApp Image 2025-12-23 at 16.59.55 (1).jpeg" alt="DC Mix" class="radio-image">
-      
       <div class="radio-info">
         <h3>DC MIX</h3>
-        <p>Música mezclada 24/7 Mixes de DJs, sin pausas largas Energía constante, ritmo continuo</p>
+        <p>Música mezclada 24/7. Mixes de DJs, sin pausas largas. Energía constante, ritmo continuo.</p>
         <a href="/DCMixEC/" class="btn-radio-card">
           <i class="fas fa-headphones-alt"></i> Sintonizar
         </a>
       </div>
     </div>
     
-    <!-- AVENIDA TROPICAL (ABAJO DERECHA) -->
+    <!-- AVENIDA TROPICAL -->
     <div class="radio-card avenida-tropical">
       <img src="/img_radio/AVENIDA TTROPICAL/WhatsApp Image 2025-12-23 at 16.59.55 (2).jpeg" alt="Avenida Tropical" class="radio-image">
-      
       <div class="radio-info">
         <h3>AVENIDA TROPICAL</h3>
-        <p>Salsa pura, sin mezclas, sin excusas (clásica, romántica, dura, actual) </p>
+        <p>Salsa pura, sin mezclas, sin excusas. Clásica, romántica, dura y actual.</p>
         <a href="/RadioAvenidaTropical/" class="btn-radio-card">
           <i class="fas fa-headphones-alt"></i> Sintonizar
         </a>
@@ -1863,25 +1926,26 @@ footer {
 <!-- QUIÉNES SOMOS -->
 <section class="about">
   <h2>EVOLUCIONAMOS</h2>
-  <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.2em;">
-   RDCR Sound Network nace de una visión clara: crear radio online con identidad, criterio y propósito.
-Desde el lanzamiento de Avenida Tropical en septiembre de 2020, el proyecto creció con pasión y convicción, apostando por una radio digital hecha con carácter y calidad.
-
-En julio de 2021, este camino dio un paso decisivo con la creación de RDCR, entendiendo que el futuro no era una sola emisora, sino la construcción de una red sólida y en constante evolución. Así surge RDCR Sound Network, una propuesta que integra música, contenido y tecnología bajo una misma visión.
-
-Hoy presentamos una nueva etapa: imagen renovada, nuevos talentos, programación actualizada y una estructura pensada para el presente y proyectada al futuro. Nuestra historia no se deja atrás; se transforma en experiencia y aprendizaje.
-
-RDCR Sound Network 2026
-Radios online con visión.
-Contenido con identidad.
-La radio online se transforma.
-  </p>
+  <div class="about-content">
+    <p><strong>RDCR Sound Network</strong> nace de una visión clara: crear radio online con identidad, criterio y propósito.</p>
+    
+    <p>Desde el lanzamiento de Avenida Tropical en septiembre de 2020, el proyecto creció con pasión y convicción, apostando por una radio digital hecha con carácter y calidad.</p>
+    
+    <p>En julio de 2021, este camino dio un paso decisivo con la creación de RDCR, entendiendo que el futuro no era una sola emisora, sino la construcción de una red sólida y en constante evolución. Así surge RDCR Sound Network, una propuesta que integra música, contenido y tecnología bajo una misma visión.</p>
+    
+    <p>Hoy presentamos una nueva etapa: imagen renovada, nuevos talentos, programación actualizada y una estructura pensada para el presente y proyectada al futuro. Nuestra historia no se deja atrás; se transforma en experiencia y aprendizaje.</p>
+    
+    <p><strong>RDCR Sound Network 2026</strong></p>
+    <p>Radios online con visión.<br>
+       Contenido con identidad.<br>
+       La radio online se transforma.</p>
+  </div>
 </section>
 
-<!-- PROGRAMA DESTACADO - CARRUSEL CORREGIDO -->
+<!-- PROGRAMA DESTACADO -->
 <section id="programacion">
   <h2>Programación Destacada</h2>
-  <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; font-size: 1.2em;">
+  <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">
     Descubre nuestros programas más populares con los mejores conductores y temáticas innovadoras.
   </p>
   
@@ -2236,20 +2300,17 @@ La radio online se transforma.
 const interactiveBg = document.getElementById('interactiveBg');
 const lines = interactiveBg.querySelectorAll('.interactive-line, .vertical-line');
 
-// Crear más líneas dinámicamente
 function createMoreLines() {
   for (let i = 0; i < 6; i++) {
     const line = document.createElement('div');
     line.classList.add('interactive-line');
     
-    // Posición aleatoria
     const top = Math.random() * 100;
     const left = -200 - Math.random() * 300;
     const width = 300 + Math.random() * 500;
     const duration = 20 + Math.random() * 30;
     const delay = Math.random() * 20;
     
-    // Color con cian eléctrico
     const color = 'linear-gradient(90deg, transparent, var(--cian-electrico), transparent)';
     
     line.style.cssText = `
@@ -2268,7 +2329,6 @@ function createMoreLines() {
 
 createMoreLines();
 
-// Interactividad con el mouse
 let mouseX = 0;
 let mouseY = 0;
 
@@ -2276,7 +2336,6 @@ document.addEventListener('mousemove', (e) => {
   mouseX = e.clientX / window.innerWidth;
   mouseY = e.clientY / window.innerHeight;
   
-  // Mover líneas suavemente
   lines.forEach((line, index) => {
     const speed = 0.5;
     const x = (mouseX - 0.5) * speed * 50;
@@ -2295,7 +2354,6 @@ window.addEventListener('scroll', () => {
     backToTop.classList.remove('show');
   }
   
-  // Efecto en el header
   const header = document.getElementById('mainHeader');
   if (window.scrollY > 100) {
     header.classList.add('scrolled');
@@ -2316,7 +2374,6 @@ menuToggle.addEventListener('click', () => {
   mainNav.classList.toggle('active');
 });
 
-// Cerrar menú al hacer clic en un enlace
 document.querySelectorAll('.nav-btn').forEach(button => {
   button.addEventListener('click', () => {
     if(window.innerWidth <= 768) {
@@ -2325,7 +2382,6 @@ document.querySelectorAll('.nav-btn').forEach(button => {
   });
 });
 
-// Función para scroll suave
 function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId);
   if (section) {
@@ -2333,7 +2389,6 @@ function scrollToSection(sectionId) {
   }
 }
 
-// Funciones para modales
 function openModal(modalId) {
   const modal = document.getElementById(modalId);
   if (modal) {
@@ -2350,7 +2405,6 @@ function closeModal(modalId) {
   }
 }
 
-// Cerrar modal al hacer clic fuera
 window.addEventListener('click', (e) => {
   if (e.target.classList.contains('modal')) {
     e.target.style.display = 'none';
@@ -2358,7 +2412,6 @@ window.addEventListener('click', (e) => {
   }
 });
 
-// CERRAR MODAL CON ESC
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     const modals = document.querySelectorAll('.modal');
@@ -2369,7 +2422,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// CARRUSEL DE PROGRAMACIÓN - CORREGIDO
+// CARRUSEL DE PROGRAMACIÓN
 const carouselSlide = document.querySelector('.carousel-slide');
 const carouselCards = document.querySelectorAll('.programa-card');
 const prevBtn = document.querySelector('.prev-btn');
@@ -2377,12 +2430,9 @@ const nextBtn = document.querySelector('.next-btn');
 const dotsContainer = document.querySelector('.carousel-dots');
 
 let currentIndex = 0;
-// Ancho de tarjeta + márgenes (280px + 30px)
 const cardWidth = 310;
-// Mostrar 3 tarjetas a la vez (calculado según el ancho del contenedor)
 const visibleCards = window.innerWidth <= 768 ? 1 : 3;
 
-// Crear los puntos del carrusel basados en el número de tarjetas visibles
 const totalDots = Math.ceil(carouselCards.length / visibleCards);
 
 for (let i = 0; i < totalDots; i++) {
@@ -2398,7 +2448,6 @@ for (let i = 0; i < totalDots; i++) {
 const dots = document.querySelectorAll('.dot');
 
 function updateCarousel() {
-  // Asegurarse de que el índice no exceda el máximo
   const maxIndex = carouselCards.length - visibleCards;
   if (currentIndex > maxIndex) {
     currentIndex = maxIndex;
@@ -2406,7 +2455,6 @@ function updateCarousel() {
   
   carouselSlide.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
   
-  // Actualizar puntos
   const activeDotIndex = Math.floor(currentIndex / visibleCards);
   dots.forEach((dot, index) => {
     dot.classList.toggle('active', index === activeDotIndex);
@@ -2438,14 +2486,11 @@ function goToSlide(index) {
   updateCarousel();
 }
 
-// Eventos para los botones
 nextBtn.addEventListener('click', nextSlide);
 prevBtn.addEventListener('click', prevSlide);
 
-// Carrusel automático
 let autoSlide = setInterval(nextSlide, 5000);
 
-// Pausar el carrusel al pasar el ratón
 const carouselContainer = document.querySelector('.carousel-container');
 carouselContainer.addEventListener('mouseenter', () => {
   clearInterval(autoSlide);
@@ -2455,7 +2500,6 @@ carouselContainer.addEventListener('mouseleave', () => {
   autoSlide = setInterval(nextSlide, 5000);
 });
 
-// Efectos especiales para botones
 const navButtons = document.querySelectorAll('.nav-btn, .btn-radio-card, .btn-primary-action, .footer-action-btn');
 
 navButtons.forEach(button => {
@@ -2486,9 +2530,7 @@ navButtons.forEach(button => {
   });
 });
 
-// Inicializar
 document.addEventListener('DOMContentLoaded', () => {
-  // Efecto de carga inicial
   document.body.style.opacity = '0';
   document.body.style.transition = 'opacity 0.8s ease';
   
@@ -2496,10 +2538,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.opacity = '1';
   }, 100);
   
-  // Inicializar el carrusel
   updateCarousel();
   
-  // Añadir estilos para efectos dinámicos
   const styleSheet = document.createElement('style');
   styleSheet.textContent = `
     @keyframes rippleEffect {
@@ -2531,7 +2571,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.head.appendChild(styleSheet);
 });
 
-// Ajustar carrusel al cambiar tamaño de ventana
 window.addEventListener('resize', () => {
   const visibleCards = window.innerWidth <= 768 ? 1 : 3;
   updateCarousel();
