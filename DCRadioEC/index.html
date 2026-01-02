@@ -349,11 +349,15 @@ h1 {
   padding: 20px;
   position: relative;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 section {
   padding: 60px 20px;
   position: relative;
+  width: 100%;
 }
 
 .section-title {
@@ -363,6 +367,7 @@ section {
   position: relative;
   padding-bottom: 20px;
   font-size: 2.5rem;
+  width: 100%;
 }
 
 .section-title::after {
@@ -386,10 +391,12 @@ section {
   padding: 60px 20px;
   border: 1px solid rgba(0, 229, 255, 0.2);
   backdrop-filter: blur(5px);
+  width: 100%;
 }
 
 .program-swiper {
   padding: 40px 10px 80px;
+  width: 100%;
 }
 
 .program-slide {
@@ -398,10 +405,11 @@ section {
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease;
-  height: 400px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 229, 255, 0.3);
+  position: relative;
 }
 
 .program-slide:hover {
@@ -411,11 +419,16 @@ section {
 }
 
 .program-image {
-  height: 180px;
+  height: 250px;
   width: 100%;
   background-size: cover;
   background-position: center;
   position: relative;
+  transition: all 0.5s ease;
+}
+
+.program-slide:hover .program-image {
+  height: 150px;
 }
 
 .program-content {
@@ -423,6 +436,7 @@ section {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .program-content h3 {
@@ -430,12 +444,69 @@ section {
   margin-bottom: 10px;
   font-size: 1.5rem;
   min-height: 70px;
+  transition: all 0.3s ease;
+}
+
+.program-slide:hover .program-content h3 {
+  color: var(--main);
 }
 
 .program-content p {
   color: #CCCCCC;
   margin-bottom: 15px;
   flex-grow: 1;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.program-slide:hover .program-content p {
+  max-height: 200px;
+  opacity: 1;
+  margin-bottom: 20px;
+}
+
+.program-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(100%);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.program-slide:hover .program-info {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.program-info h4 {
+  color: var(--main);
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.program-info ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.program-info li {
+  color: #CCCCCC;
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.program-info li:before {
+  content: "•";
+  color: var(--main);
+  position: absolute;
+  left: 0;
 }
 
 .program-time {
@@ -458,10 +529,12 @@ section {
   padding: 60px 20px;
   border: 1px solid rgba(0, 229, 255, 0.2);
   backdrop-filter: blur(5px);
+  width: 100%;
 }
 
 .noticias-swiper {
   padding: 40px 10px 80px;
+  width: 100%;
 }
 
 .noticia-slide {
@@ -470,7 +543,7 @@ section {
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease;
-  height: 350px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 229, 255, 0.3);
@@ -483,7 +556,7 @@ section {
 }
 
 .noticia-image {
-  height: 150px;
+  height: 200px;
   width: 100%;
   background-size: cover;
   background-position: center;
@@ -517,10 +590,37 @@ section {
   min-height: 70px;
 }
 
+.noticia-link {
+  color: var(--light);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: block;
+  position: relative;
+}
+
+.noticia-link:hover {
+  color: var(--main);
+  text-decoration: underline;
+}
+
+.noticia-link:after {
+  content: "→";
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.noticia-link:hover:after {
+  opacity: 1;
+  right: -20px;
+}
+
 .noticia-content p {
   color: #CCCCCC;
   font-size: 0.95rem;
   flex-grow: 1;
+  margin-bottom: 15px;
 }
 
 .noticia-date {
@@ -529,60 +629,26 @@ section {
   margin-top: 10px;
 }
 
-/* Podcasts */
-.podcasts-section {
-  text-align: center;
-  background: rgba(15, 15, 15, 0.7);
+.read-more-btn {
+  display: inline-block;
+  background: transparent;
+  color: var(--main);
+  border: 1px solid var(--main);
+  padding: 8px 15px;
   border-radius: 20px;
-  margin: 0 0 60px;
-  padding: 60px 20px;
-  border: 1px solid rgba(0, 229, 255, 0.2);
-  backdrop-filter: blur(5px);
-}
-
-.podcasts-container {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  flex-wrap: wrap;
-  margin-top: 40px;
-}
-
-.podcast-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: var(--light);
-  transition: transform 0.3s ease;
-  width: 120px;
-}
-
-.podcast-link:hover {
-  transform: translateY(-10px);
-}
-
-.podcast-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-  transition: all 0.3s ease;
-}
-
-.podcast-link:hover .podcast-icon {
-  background: linear-gradient(135deg, var(--main), #00B8D4);
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
-}
-
-.podcast-name {
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+.read-more-btn:hover {
+  background: var(--main);
+  color: var(--dark);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 229, 255, 0.3);
 }
 
 /* Botones de navegación del swiper */
@@ -627,11 +693,15 @@ footer {
   text-align: center;
   padding: 60px 20px 30px;
   border-top: 3px solid var(--main);
+  width: 100%;
 }
 
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .network-logo {
@@ -643,34 +713,7 @@ footer {
   justify-content: center;
   gap: 15px;
   text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 30px 0;
-}
-
-.social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--light);
-  font-size: 1.3rem;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(0, 229, 255, 0.3);
-}
-
-.social-icon:hover {
-  background: var(--main);
-  color: var(--dark);
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 229, 255, 0.5);
+  text-align: center;
 }
 
 .copyright {
@@ -679,6 +722,7 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.95rem;
+  text-align: center;
 }
 
 /* Animaciones */
@@ -781,6 +825,10 @@ footer {
     height: 50px;
     font-size: 1.3rem;
   }
+  
+  .main-container {
+    padding: 10px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -802,7 +850,7 @@ footer {
     font-size: 1.1rem;
   }
   
-  .section {
+  section {
     padding: 40px 15px;
   }
   
@@ -830,6 +878,30 @@ footer {
     left: 15px;
     padding: 8px 15px;
   }
+  
+  .program-slide {
+    height: 450px;
+  }
+  
+  .program-image {
+    height: 200px;
+  }
+  
+  .program-slide:hover .program-image {
+    height: 120px;
+  }
+  
+  .noticia-slide {
+    height: 400px;
+  }
+  
+  .noticia-image {
+    height: 150px;
+  }
+  
+  .main-container {
+    padding: 5px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -843,20 +915,6 @@ footer {
   
   .slogan {
     font-size: 1rem;
-  }
-  
-  .podcasts-container {
-    gap: 30px;
-  }
-  
-  .podcast-link {
-    width: 100px;
-  }
-  
-  .podcast-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
   }
   
   .whatsapp-btn {
@@ -877,6 +935,49 @@ footer {
     left: 10px;
     padding: 6px 10px;
     font-size: 0.9rem;
+  }
+  
+  .program-slide {
+    height: 400px;
+  }
+  
+  .program-image {
+    height: 180px;
+  }
+  
+  .program-slide:hover .program-image {
+    height: 100px;
+  }
+  
+  .program-content h3 {
+    font-size: 1.3rem;
+    min-height: 60px;
+  }
+  
+  .noticia-slide {
+    height: 380px;
+  }
+  
+  .noticia-image {
+    height: 130px;
+  }
+  
+  .noticia-content h3 {
+    font-size: 1.2rem;
+    min-height: 60px;
+  }
+  
+  .network-logo {
+    font-size: 1.8rem;
+  }
+  
+  .main-container {
+    padding: 5px;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
   }
 }
 
@@ -901,6 +1002,35 @@ footer {
   100% {
     transform: translateY(-150px) translateX(30px);
     opacity: 0;
+  }
+}
+
+/* Estilos específicos para centrar todo en móvil */
+@media (max-width: 768px) {
+  .logo-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .player-top-container {
+    width: 95%;
+  }
+  
+  .program-swiper, .noticias-swiper {
+    padding: 30px 0 60px;
+  }
+  
+  .programacion-section, .noticias-section {
+    padding: 40px 10px;
+  }
+  
+  .footer-content {
+    padding: 0 10px;
+  }
+  
+  .copyright {
+    text-align: center;
+    padding: 0 10px;
   }
 }
 </style>
@@ -974,8 +1104,17 @@ footer {
           </div>
           <div class="program-content">
             <h3>Entretelones con Darío Castellanos</h3>
-            <p>Análisis y conversación sobre los temas más relevantes del día con invitados especiales.</p>
+            <p>Análisis y conversación sobre los temas más relevantes del día con invitados especiales. Un programa que te mantiene informado con profundidad y rigor periodístico.</p>
             <span class="program-time">Lun-Vie 7:00 AM</span>
+          </div>
+          <div class="program-info">
+            <h4>Detalles del programa:</h4>
+            <ul>
+              <li>Entrevistas exclusivas</li>
+              <li>Análisis político y económico</li>
+              <li>Debates con expertos</li>
+              <li>Noticias de última hora</li>
+            </ul>
           </div>
         </div>
         
@@ -985,8 +1124,17 @@ footer {
           </div>
           <div class="program-content">
             <h3>DC Noticias Express</h3>
-            <p>Las noticias más importantes en formato breve y directo cada hora. Información al instante.</p>
+            <p>Las noticias más importantes en formato breve y directo cada hora. Información al instante para que no te pierdas nada de lo que sucede en el mundo.</p>
             <span class="program-time">Todos los días cada hora</span>
+          </div>
+          <div class="program-info">
+            <h4>Características:</h4>
+            <ul>
+              <li>Actualizaciones cada 60 minutos</li>
+              <li>Cobertura nacional e internacional</li>
+              <li>Reportes de tráfico y clima</li>
+              <li>Noticias de última hora</li>
+            </ul>
           </div>
         </div>
         
@@ -996,8 +1144,17 @@ footer {
           </div>
           <div class="program-content">
             <h3>Música Sin Pausa</h3>
-            <p>Los mejores éxitos musicales de todos los tiempos sin interrupciones. De los 80s hasta hoy.</p>
+            <p>Los mejores éxitos musicales de todos los tiempos sin interrupciones. De los 80s hasta hoy, un viaje sonoro por las mejores canciones de la historia.</p>
             <span class="program-time">10:00 AM - 2:00 PM</span>
+          </div>
+          <div class="program-info">
+            <h4>Temas destacados:</h4>
+            <ul>
+              <li>Pop de los 80s y 90s</li>
+              <li>Rock clásico</li>
+              <li>Baladas románticas</li>
+              <li>Éxitos actuales</li>
+            </ul>
           </div>
         </div>
         
@@ -1007,8 +1164,17 @@ footer {
           </div>
           <div class="program-content">
             <h3>Noche DC</h3>
-            <p>Música relajada y conversación para terminar el día. Con María Rodríguez y Javier López.</p>
+            <p>Música relajada y conversación para terminar el día. Con María Rodríguez y Javier López, el acompañamiento perfecto para tus noches.</p>
             <span class="program-time">Lun-Vie 8:00 PM - 12:00 AM</span>
+          </div>
+          <div class="program-info">
+            <h4>Contenido nocturno:</h4>
+            <ul>
+              <li>Música relajante</li>
+              <li>Historias y anécdotas</li>
+              <li>Poesía y reflexiones</li>
+              <li>Dedicatorias especiales</li>
+            </ul>
           </div>
         </div>
         
@@ -1018,8 +1184,17 @@ footer {
           </div>
           <div class="program-content">
             <h3>Rock Legends</h3>
-            <p>Un recorrido por los clásicos del rock de todas las épocas. Con historias y anécdotas.</p>
+            <p>Un recorrido por los clásicos del rock de todas las épocas. Con historias y anécdotas detrás de las canciones más emblemáticas.</p>
             <span class="program-time">Sábados 4:00 PM - 7:00 PM</span>
+          </div>
+          <div class="program-info">
+            <h4>Artistas destacados:</h4>
+            <ul>
+              <li>The Beatles</li>
+              <li>Led Zeppelin</li>
+              <li>Queen</li>
+              <li>Rolling Stones</li>
+            </ul>
           </div>
         </div>
         
@@ -1029,8 +1204,17 @@ footer {
           </div>
           <div class="program-content">
             <h3>Urban Flow</h3>
-            <p>Lo último en música urbana, hip hop, reggaetón y tendencias. Con DJ Carlo.</p>
+            <p>Lo último en música urbana, hip hop, reggaetón y tendencias. Con DJ Carlo, la mejor selección para mantenerte al día.</p>
             <span class="program-time">Viernes 9:00 PM - 2:00 AM</span>
+          </div>
+          <div class="program-info">
+            <h4>Géneros incluidos:</h4>
+            <ul>
+              <li>Reggaetón</li>
+              <li>Hip Hop</li>
+              <li>Trap</li>
+              <li>Dembow</li>
+            </ul>
           </div>
         </div>
         
@@ -1040,8 +1224,17 @@ footer {
           </div>
           <div class="program-content">
             <h3>DC Deportes</h3>
-            <p>Toda la actualidad deportiva nacional e internacional. Resultados, análisis y entrevistas.</p>
+            <p>Toda la actualidad deportiva nacional e internacional. Resultados, análisis y entrevistas con los protagonistas del deporte.</p>
             <span class="program-time">Lun-Vie 6:00 PM - 7:00 PM</span>
+          </div>
+          <div class="program-info">
+            <h4>Cobertura deportiva:</h4>
+            <ul>
+              <li>Fútbol nacional e internacional</li>
+              <li>Basquetbol</li>
+              <li>Tenis</li>
+              <li>Deportes extremos</li>
+            </ul>
           </div>
         </div>
         
@@ -1051,8 +1244,17 @@ footer {
           </div>
           <div class="program-content">
             <h3>Jazz Lounge</h3>
-            <p>Lo mejor del jazz clásico y contemporáneo. Un espacio para relajarse y disfrutar.</p>
+            <p>Lo mejor del jazz clásico y contemporáneo. Un espacio para relajarse y disfrutar de la sofisticación del jazz.</p>
             <span class="program-time">Domingos 8:00 PM - 10:00 PM</span>
+          </div>
+          <div class="program-info">
+            <h4>Estilos de jazz:</h4>
+            <ul>
+              <li>Smooth Jazz</li>
+              <li>Bebop</li>
+              <li>Fusion</li>
+              <li>Jazz contemporáneo</li>
+            </ul>
           </div>
         </div>
         
@@ -1062,8 +1264,17 @@ footer {
           </div>
           <div class="program-content">
             <h3>Café con Letras</h3>
-            <p>Literatura, poesía y entrevistas con autores. Con la escritora Ana Martínez.</p>
+            <p>Literatura, poesía y entrevistas con autores. Con la escritora Ana Martínez, un espacio para los amantes de las letras.</p>
             <span class="program-time">Miércoles 4:00 PM - 5:00 PM</span>
+          </div>
+          <div class="program-info">
+            <h4>Temas literarios:</h4>
+            <ul>
+              <li>Novelas contemporáneas</li>
+              <li>Poesía latinoamericana</li>
+              <li>Entrevistas a escritores</li>
+              <li>Reseñas de libros</li>
+            </ul>
           </div>
         </div>
         
@@ -1073,8 +1284,17 @@ footer {
           </div>
           <div class="program-content">
             <h3>Electro Sunrise</h3>
-            <p>Música electrónica para empezar el día con energía. Los mejores DJs nacionales.</p>
+            <p>Música electrónica para empezar el día con energía. Los mejores DJs nacionales con los ritmos más vibrantes.</p>
             <span class="program-time">Sábados 6:00 AM - 10:00 AM</span>
+          </div>
+          <div class="program-info">
+            <h4>Subgéneros electrónicos:</h4>
+            <ul>
+              <li>House</li>
+              <li>Techno</li>
+              <li>Trance</li>
+              <li>EDM</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -1099,9 +1319,10 @@ footer {
             <div class="noticia-category">Actualidad</div>
           </div>
           <div class="noticia-content">
-            <h3>DC Radio lanza nueva temporada de programas</h3>
-            <p>Nueva programación con contenido exclusivo y entrevistas a personalidades relevantes.</p>
+            <h3><a href="https://ejemplo.com/noticia1" class="noticia-link" target="_blank">DC Radio lanza nueva temporada de programas</a></h3>
+            <p>Nueva programación con contenido exclusivo y entrevistas a personalidades relevantes del ámbito cultural y político.</p>
             <div class="noticia-date">15 Mar 2026</div>
+            <a href="https://ejemplo.com/noticia1" class="read-more-btn" target="_blank">Leer más</a>
           </div>
         </div>
         
@@ -1111,9 +1332,10 @@ footer {
             <div class="noticia-category">Cultura</div>
           </div>
           <div class="noticia-content">
-            <h3>Festival Internacional de Jazz 2026</h3>
-            <p>Cobertura completa del festival con entrevistas exclusivas a los artistas participantes.</p>
+            <h3><a href="https://ejemplo.com/noticia2" class="noticia-link" target="_blank">Festival Internacional de Jazz 2026</a></h3>
+            <p>Cobertura completa del festival con entrevistas exclusivas a los artistas participantes y transmisiones en vivo.</p>
             <div class="noticia-date">10 Mar 2026</div>
+            <a href="https://ejemplo.com/noticia2" class="read-more-btn" target="_blank">Leer más</a>
           </div>
         </div>
         
@@ -1123,9 +1345,10 @@ footer {
             <div class="noticia-category">Radio</div>
           </div>
           <div class="noticia-content">
-            <h3>DC Radio alcanza 1 millón de oyentes</h3>
-            <p>Marca histórica para la emisora que consolida su liderazgo en radiodifusión digital.</p>
+            <h3><a href="https://ejemplo.com/noticia3" class="noticia-link" target="_blank">DC Radio alcanza 1 millón de oyentes</a></h3>
+            <p>Marca histórica para la emisora que consolida su liderazgo en radiodifusión digital a nivel nacional.</p>
             <div class="noticia-date">5 Mar 2026</div>
+            <a href="https://ejemplo.com/noticia3" class="read-more-btn" target="_blank">Leer más</a>
           </div>
         </div>
         
@@ -1135,9 +1358,10 @@ footer {
             <div class="noticia-category">Tecnología</div>
           </div>
           <div class="noticia-content">
-            <h3>Nueva aplicación de DC Radio</h3>
-            <p>Lanzamiento de la app oficial con programación personalizada y contenidos exclusivos.</p>
+            <h3><a href="https://ejemplo.com/noticia4" class="noticia-link" target="_blank">Nueva aplicación de DC Radio</a></h3>
+            <p>Lanzamiento de la app oficial con programación personalizada y contenidos exclusivos para suscriptores.</p>
             <div class="noticia-date">28 Feb 2026</div>
+            <a href="https://ejemplo.com/noticia4" class="read-more-btn" target="_blank">Leer más</a>
           </div>
         </div>
         
@@ -1147,9 +1371,10 @@ footer {
             <div class="noticia-category">Música</div>
           </div>
           <div class="noticia-content">
-            <h3>Los 50 éxitos más reproducidos</h3>
-            <p>Ranking especial con las canciones más escuchadas por nuestros oyentes en el último año.</p>
+            <h3><a href="https://ejemplo.com/noticia5" class="noticia-link" target="_blank">Los 50 éxitos más reproducidos</a></h3>
+            <p>Ranking especial con las canciones más escuchadas por nuestros oyentes en el último año según nuestras estadísticas.</p>
             <div class="noticia-date">22 Feb 2026</div>
+            <a href="https://ejemplo.com/noticia5" class="read-more-btn" target="_blank">Leer más</a>
           </div>
         </div>
         
@@ -1159,9 +1384,10 @@ footer {
             <div class="noticia-category">Eventos</div>
           </div>
           <div class="noticia-content">
-            <h3>Concierto exclusivo de DC Radio</h3>
-            <p>Transmitiremos en directo el concierto de la banda "Los Herederos" desde el Teatro Nacional.</p>
+            <h3><a href="https://ejemplo.com/noticia6" class="noticia-link" target="_blank">Concierto exclusivo de DC Radio</a></h3>
+            <p>Transmitiremos en directo el concierto de la banda "Los Herederos" desde el Teatro Nacional este sábado.</p>
             <div class="noticia-date">15 Feb 2026</div>
+            <a href="https://ejemplo.com/noticia6" class="read-more-btn" target="_blank">Leer más</a>
           </div>
         </div>
         
@@ -1171,9 +1397,10 @@ footer {
             <div class="noticia-category">Tecnología</div>
           </div>
           <div class="noticia-content">
-            <h3>DC Radio con IA integrada</h3>
-            <p>Implementación de inteligencia artificial para recomendaciones personalizadas de música.</p>
+            <h3><a href="https://ejemplo.com/noticia7" class="noticia-link" target="_blank">DC Radio con IA integrada</a></h3>
+            <p>Implementación de inteligencia artificial para recomendaciones personalizadas de música basadas en tus gustos.</p>
             <div class="noticia-date">10 Feb 2026</div>
+            <a href="https://ejemplo.com/noticia7" class="read-more-btn" target="_blank">Leer más</a>
           </div>
         </div>
         
@@ -1183,9 +1410,10 @@ footer {
             <div class="noticia-category">Deportes</div>
           </div>
           <div class="noticia-content">
-            <h3>Cobertura especial: Liga Nacional</h3>
-            <p>Transmisiones en vivo de los partidos más importantes de la temporada 2026.</p>
+            <h3><a href="https://ejemplo.com/noticia8" class="noticia-link" target="_blank">Cobertura especial: Liga Nacional</a></h3>
+            <p>Transmisiones en vivo de los partidos más importantes de la temporada 2026 con comentaristas exclusivos.</p>
             <div class="noticia-date">5 Feb 2026</div>
+            <a href="https://ejemplo.com/noticia8" class="read-more-btn" target="_blank">Leer más</a>
           </div>
         </div>
         
@@ -1195,9 +1423,10 @@ footer {
             <div class="noticia-category">Cultura</div>
           </div>
           <div class="noticia-content">
-            <h3>Noche de Jazz en DC Radio</h3>
-            <p>Especial de 5 horas con los mejores exponentes del jazz nacional e internacional.</p>
+            <h3><a href="https://ejemplo.com/noticia9" class="noticia-link" target="_blank">Noche de Jazz en DC Radio</a></h3>
+            <p>Especial de 5 horas con los mejores exponentes del jazz nacional e internacional. Transmisión en vivo desde el estudio.</p>
             <div class="noticia-date">30 Ene 2026</div>
+            <a href="https://ejemplo.com/noticia9" class="read-more-btn" target="_blank">Leer más</a>
           </div>
         </div>
         
@@ -1207,9 +1436,205 @@ footer {
             <div class="noticia-category">Literatura</div>
           </div>
           <div class="noticia-content">
-            <h3>Entrevista exclusiva con autor bestseller</h3>
-            <p>Conversación con el reconocido escritor Miguel Ángel sobre su nueva novela.</p>
+            <h3><a href="https://ejemplo.com/noticia10" class="noticia-link" target="_blank">Entrevista exclusiva con autor bestseller</a></h3>
+            <p>Conversación con el reconocido escritor Miguel Ángel sobre su nueva novela y su proceso creativo.</p>
             <div class="noticia-date">25 Ene 2026</div>
+            <a href="https://ejemplo.com/noticia10" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 11 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Economía</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia11" class="noticia-link" target="_blank">Análisis económico con expertos</a></h3>
+            <p>Especialistas analizan las tendencias económicas para el próximo trimestre y sus implicaciones.</p>
+            <div class="noticia-date">20 Ene 2026</div>
+            <a href="https://ejemplo.com/noticia11" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 12 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Medio Ambiente</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia12" class="noticia-link" target="_blank">Iniciativas verdes en la radio</a></h3>
+            <p>DC Radio implementa nuevas tecnologías para reducir su huella de carbono y promover la sostenibilidad.</p>
+            <div class="noticia-date">15 Ene 2026</div>
+            <a href="https://ejemplo.com/noticia12" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 13 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Tecnología</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia13" class="noticia-link" target="_blank">Nueva plataforma streaming</a></h3>
+            <p>Lanzamiento de la plataforma de streaming de DC Radio con contenido exclusivo y archivos históricos.</p>
+            <div class="noticia-date">10 Ene 2026</div>
+            <a href="https://ejemplo.com/noticia13" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 14 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Música</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia14" class="noticia-link" target="_blank">Festival de música independiente</a></h3>
+            <p>Cobertura especial del festival que reúne a las bandas emergentes más prometedoras del país.</p>
+            <div class="noticia-date">5 Ene 2026</div>
+            <a href="https://ejemplo.com/noticia14" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 15 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Cultura</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia15" class="noticia-link" target="_blank">Exposición de arte sonoro</a></h3>
+            <p>DC Radio colabora con museos locales para una exposición única que combina arte visual y sonoro.</p>
+            <div class="noticia-date">30 Dic 2025</div>
+            <a href="https://ejemplo.com/noticia15" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 16 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Salud</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia16" class="noticia-link" target="_blank">Programa especial de bienestar</a></h3>
+            <p>Nueva serie de programas dedicados a la salud mental y el bienestar emocional con expertos en psicología.</p>
+            <div class="noticia-date">25 Dic 2025</div>
+            <a href="https://ejemplo.com/noticia16" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 17 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Educación</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia17" class="noticia-link" target="_blank">Radionovelas educativas</a></h3>
+            <p>Lanzamiento de una serie de radionovelas con contenido educativo para niños y adolescentes.</p>
+            <div class="noticia-date">20 Dic 2025</div>
+            <a href="https://ejemplo.com/noticia17" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 18 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Entretenimiento</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia18" class="noticia-link" target="_blank">Concursos de verano</a></h3>
+            <p>Participa en los concursos de verano de DC Radio con premios exclusivos y experiencias únicas.</p>
+            <div class="noticia-date">15 Dic 2025</div>
+            <a href="https://ejemplo.com/noticia18" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 19 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Actualidad</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia19" class="noticia-link" target="_blank">Premios DC Radio 2025</a></h3>
+            <p>Gala de premiación a los mejores programas y locutores del año según la votación del público.</p>
+            <div class="noticia-date">10 Dic 2025</div>
+            <a href="https://ejemplo.com/noticia19" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 20 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Tecnología</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia20" class="noticia-link" target="_blank">Nuevos estudios de transmisión</a></h3>
+            <p>Inauguración de los nuevos estudios de DC Radio equipados con la última tecnología en audio digital.</p>
+            <div class="noticia-date">5 Dic 2025</div>
+            <a href="https://ejemplo.com/noticia20" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 21 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Música</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia21" class="noticia-link" target="_blank">Especial de música clásica</a></h3>
+            <p>Semana dedicada a la música clásica con interpretaciones en vivo desde el estudio principal.</p>
+            <div class="noticia-date">30 Nov 2025</div>
+            <a href="https://ejemplo.com/noticia21" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 22 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Deportes</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia22" class="noticia-link" target="_blank">Maratón deportivo 24 horas</a></h3>
+            <p>Transmisión continua de 24 horas dedicada a los deportes extremos y aventura.</p>
+            <div class="noticia-date">25 Nov 2025</div>
+            <a href="https://ejemplo.com/noticia22" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 23 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Cultura</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia23" class="noticia-link" target="_blank">Documentales sonoros</a></h3>
+            <p>Nueva serie de documentales sonoros que exploran la historia cultural de la región.</p>
+            <div class="noticia-date">20 Nov 2025</div>
+            <a href="https://ejemplo.com/noticia23" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 24 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Tecnología</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia24" class="noticia-link" target="_blank">Realidad virtual en la radio</a></h3>
+            <p>DC Radio experimenta con experiencias de realidad virtual para sus programas especiales.</p>
+            <div class="noticia-date">15 Nov 2025</div>
+            <a href="https://ejemplo.com/noticia24" class="read-more-btn" target="_blank">Leer más</a>
+          </div>
+        </div>
+        
+        <!-- Noticia 25 -->
+        <div class="swiper-slide noticia-slide">
+          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+            <div class="noticia-category">Actualidad</div>
+          </div>
+          <div class="noticia-content">
+            <h3><a href="https://ejemplo.com/noticia25" class="noticia-link" target="_blank">Especial aniversario 5 años</a></h3>
+            <p>Celebración del 5to aniversario de DC Radio con programación especial y sorpresas para los oyentes.</p>
+            <div class="noticia-date">10 Nov 2025</div>
+            <a href="https://ejemplo.com/noticia25" class="read-more-btn" target="_blank">Leer más</a>
           </div>
         </div>
       </div>
@@ -1220,37 +1645,6 @@ footer {
       <div class="swiper-pagination"></div>
     </div>
   </section>
-
-  <!-- Podcasts -->
-  <section class="podcasts-section">
-    <h2 class="section-title">Escucha nuestros Podcasts</h2>
-    
-    <div class="podcasts-container">
-      <!-- Spotify -->
-      <a href="https://open.spotify.com/show/example" class="podcast-link" target="_blank">
-        <div class="podcast-icon" style="color: #1DB954;">
-          <i class="fab fa-spotify"></i>
-        </div>
-        <div class="podcast-name">Spotify</div>
-      </a>
-      
-      <!-- iVoox -->
-      <a href="https://www.ivoox.com/podcast-dcradio_sq_f123456_1.html" class="podcast-link" target="_blank">
-        <div class="podcast-icon" style="color: #FF6600;">
-          <i class="fas fa-podcast"></i>
-        </div>
-        <div class="podcast-name">iVoox</div>
-      </a>
-      
-      <!-- Apple Podcasts -->
-      <a href="https://podcasts.apple.com/us/podcast/dcradio/id123456789" class="podcast-link" target="_blank">
-        <div class="podcast-icon" style="color: #9933CC;">
-          <i class="fab fa-apple"></i>
-        </div>
-        <div class="podcast-name">Apple Podcasts</div>
-      </a>
-    </div>
-  </section>
 </div>
 
 <footer>
@@ -1259,14 +1653,6 @@ footer {
       <i class="fas fa-satellite-dish"></i> DCRADIOEC - Radio Generalista
     </div>
     <p style="font-size: 1.2rem; margin-bottom: 10px;">"La música que acompaña tu jornada"</p>
-    
-    <div class="social-icons">
-      <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-      <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-      <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-      <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
-    </div>
     
     <div class="copyright">
       <p>DCRADIOEC · Radio Generalista 2026</p>
