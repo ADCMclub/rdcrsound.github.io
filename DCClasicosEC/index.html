@@ -36,6 +36,38 @@ body {
   min-height: 100vh;
 }
 
+/* Botón Atrás */
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, var(--neon-gold), var(--dark-gold));
+  color: var(--black);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 1001;
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  z-index: 1001;
+  border: 2px solid rgba(255, 215, 0, 0.5);
+}
+
+.back-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.7);
+  background: linear-gradient(135deg, var(--dark-gold), var(--neon-gold));
+  color: var(--dark);
+}
+
 /* Líneas de fondo animadas */
 .background-lines {
   position: fixed;
@@ -1088,6 +1120,13 @@ footer {
     height: 50px;
     font-size: 1.3rem;
   }
+  
+  .back-button {
+    top: 15px;
+    left: 15px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1125,11 +1164,23 @@ footer {
     bottom: 15px;
     right: 15px;
   }
+  
+  .back-button {
+    top: 10px;
+    left: 10px;
+    padding: 8px 15px;
+    font-size: 0.8rem;
+  }
 }
 </style>
 </head>
 
 <body>
+
+<!-- Botón Atrás -->
+<a href="https://rdcrsound.adcm.club" class="back-button" target="_self">
+  <i class="fas fa-arrow-left"></i> Volver a RDCR Sound
+</a>
 
 <!-- Líneas de fondo interactivas -->
 <div class="background-lines" id="backgroundLines">
