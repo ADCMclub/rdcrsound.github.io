@@ -64,6 +64,15 @@ body {
 }
 
 /* =====================
+   LOGO EN HEADER
+===================== */
+.header-logo {
+  height: 50px;
+  width: auto;
+  margin-right: 15px;
+}
+
+/* =====================
    BOTÓN WHATSAPP FLOTANTE (ARRIBA DEL BOTÓN ARRIBA)
 ===================== */
 .whatsapp-float {
@@ -705,60 +714,62 @@ header.scrolled {
   justify-items: center;
 }
 
-/* Tarjeta de radio base REDISEÑADA */
+/* Tarjeta de radio base - AHORA CON ANIMACIÓN REVELADORA */
 .radio-card {
   width: 100%;
   max-width: 400px;
+  height: 300px;
   background: var(--gris-oscuro);
   border-radius: 20px;
-  padding: 25px 20px;
   position: relative;
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 2px solid transparent;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-  text-align: center;
+  cursor: pointer;
+}
+
+/* Imagen de fondo de la radio */
+.radio-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease;
+}
+
+/* Información que se revela al hacer hover */
+.radio-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 15, 0.95);
+  padding: 25px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.radio-card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 20px 40px rgba(0, 229, 255, 0.2);
-}
-
-/* Espacio para el logo encima del card */
-.radio-logo {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-bottom: 20px;
-  border: 3px solid var(--cian-electrico);
-  display: flex;
-  align-items: center;
   justify-content: center;
-  background: var(--negro-profundo);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  padding: 5px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+  border-radius: 20px;
 }
 
-/* Estilo para las imágenes de logos */
-.radio-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 50%;
+.radio-card:hover .radio-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.radio-card:hover .radio-image {
+  filter: blur(3px) brightness(0.5);
+  transform: scale(1.05);
 }
 
 .radio-card h3 {
   font-size: 1.6em;
   margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
   color: var(--blanco-limpio);
 }
 
@@ -792,15 +803,11 @@ header.scrolled {
     var(--dc-radio-blanco),
     var(--dc-radio-gris)
   );
+  z-index: 2;
 }
 
-.dc-radio .radio-logo {
-  border-color: var(--dc-radio-azul);
-  background: linear-gradient(135deg, var(--dc-radio-azul), #1a3b7a);
-}
-
-.dc-radio .radio-logo i {
-  color: var(--dc-radio-blanco);
+.dc-radio .radio-info {
+  border: 2px solid var(--dc-radio-azul);
 }
 
 .dc-radio .btn-radio-card {
@@ -838,15 +845,11 @@ header.scrolled {
     var(--negro-profundo),
     var(--dc-clasicos-beige)
   );
+  z-index: 2;
 }
 
-.dc-clasicos .radio-logo {
-  border-color: var(--dc-clasicos-dorado);
-  background: linear-gradient(135deg, var(--dc-clasicos-dorado), #ffed4e);
-}
-
-.dc-clasicos .radio-logo i {
-  color: var(--negro-profundo);
+.dc-clasicos .radio-info {
+  border: 2px solid var(--dc-clasicos-dorado);
 }
 
 .dc-clasicos .btn-radio-card {
@@ -885,16 +888,11 @@ header.scrolled {
     var(--cian-electrico)
   );
   animation: dcMixColors 3s infinite alternate;
+  z-index: 2;
 }
 
-.dc-mix .radio-logo {
-  border-color: var(--dc-mix-fucsia);
-  background: linear-gradient(135deg, var(--dc-mix-fucsia), #ff66ff);
-}
-
-.dc-mix .radio-logo i {
-  color: var(--blanco-limpio);
-  animation: dcMixIcon 2s infinite alternate;
+.dc-mix .radio-info {
+  border: 2px solid var(--dc-mix-fucsia);
 }
 
 .dc-mix .btn-radio-card {
@@ -941,25 +939,6 @@ header.scrolled {
   }
 }
 
-@keyframes dcMixIcon {
-  0% {
-    color: var(--dc-mix-fucsia);
-    transform: scale(1);
-  }
-  33% {
-    color: var(--dc-mix-verde);
-    transform: scale(1.1);
-  }
-  66% {
-    color: var(--cian-electrico);
-    transform: scale(1.2);
-  }
-  100% {
-    color: var(--dc-mix-fucsia);
-    transform: scale(1);
-  }
-}
-
 /* AVENIDA TROPICAL - Naranja, verde, amarillo */
 .avenida-tropical {
   border-color: var(--avenida-naranja);
@@ -979,16 +958,11 @@ header.scrolled {
     var(--avenida-amarillo)
   );
   animation: avenidaColors 3s infinite alternate;
+  z-index: 2;
 }
 
-.avenida-tropical .radio-logo {
-  border-color: var(--avenida-naranja);
-  background: linear-gradient(135deg, var(--avenida-naranja), #ffaa33);
-}
-
-.avenida-tropical .radio-logo i {
-  color: var(--blanco-limpio);
-  animation: avenidaIcon 2s infinite alternate;
+.avenida-tropical .radio-info {
+  border: 2px solid var(--avenida-naranja);
 }
 
 .avenida-tropical .btn-radio-card {
@@ -1029,21 +1003,6 @@ header.scrolled {
       var(--avenida-naranja),
       var(--avenida-verde)
     );
-  }
-}
-
-@keyframes avenidaIcon {
-  0% {
-    color: var(--avenida-naranja);
-    transform: scale(1);
-  }
-  50% {
-    color: var(--avenida-verde);
-    transform: scale(1.2);
-  }
-  100% {
-    color: var(--avenida-amarillo);
-    transform: scale(1.1);
   }
 }
 
@@ -1170,7 +1129,7 @@ header.scrolled {
 }
 
 /* =====================
-   CARRUSEL DE PROGRAMACIÓN DESTACADA
+   CARRUSEL DE PROGRAMACIÓN DESTACADA - CORREGIDO
 ===================== */
 .carousel-container {
   position: relative;
@@ -1185,10 +1144,11 @@ header.scrolled {
 .carousel-slide {
   display: flex;
   transition: transform 0.5s ease-in-out;
+  width: calc(300px * 6 + 15px * 12); /* 6 tarjetas * 300px + márgenes */
 }
 
 .programa-card {
-  min-width: 300px;
+  width: 280px; /* Ancho fijo para todas las tarjetas */
   background: var(--gris-oscuro);
   margin: 0 15px;
   padding: 30px;
@@ -1203,18 +1163,24 @@ header.scrolled {
   color: var(--cian-electrico);
   margin-bottom: 15px;
   font-size: 1.5em;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .programa-card .conductor {
   color: var(--blanco-limpio);
   margin-bottom: 10px;
   opacity: 0.8;
+  min-height: 40px;
 }
 
 .programa-card .horario {
   color: var(--blanco-limpio);
   font-size: 0.9em;
   opacity: 0.8;
+  min-height: 40px;
 }
 
 .programa-icon {
@@ -1336,6 +1302,14 @@ section h2::after {
   .whatsapp-float {
     bottom: 100px;
   }
+  
+  .carousel-slide {
+    width: calc(280px * 6 + 15px * 12);
+  }
+  
+  .programa-card {
+    width: 260px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1408,7 +1382,7 @@ section h2::after {
   }
   
   .programa-card {
-    min-width: 280px;
+    min-width: 250px;
     margin: 0 10px;
   }
   
@@ -1417,9 +1391,12 @@ section h2::after {
     max-height: 85vh;
   }
   
-  .radio-logo {
-    width: 90px;
-    height: 90px;
+  .carousel-slide {
+    width: calc(250px * 6 + 10px * 12);
+  }
+  
+  .radio-card {
+    height: 250px;
   }
 }
 
@@ -1450,9 +1427,17 @@ section h2::after {
     bottom: 80px;
   }
   
-  .radio-logo {
-    width: 80px;
-    height: 80px;
+  .radio-card {
+    height: 220px;
+  }
+  
+  .programa-card {
+    min-width: 220px;
+    padding: 20px;
+  }
+  
+  .carousel-slide {
+    width: calc(220px * 6 + 10px * 12);
   }
 }
 
@@ -1546,10 +1531,11 @@ footer {
   <i class="fas fa-arrow-up"></i>
 </div>
 
-<!-- HEADER -->
+<!-- HEADER CON LOGO PNG -->
 <header id="mainHeader">
   <div class="logo">
-    <i class="fas fa-broadcast-tower"></i>
+    <!-- LOGO PNG - Reemplaza con la URL de tu logo -->
+    <img src="logo-rdcr.png" alt="RDCR Sound Network" class="header-logo">
     <h2>RDCR SOUND</h2>
   </div>
   
@@ -1596,54 +1582,56 @@ footer {
   <div class="radios-grid">
     <!-- DC RADIO (ARRIBA IZQUIERDA) -->
     <div class="radio-card dc-radio">
-      <div class="radio-logo">
-        <!-- LOGO DE DC RADIO - Reemplaza con la URL de tu logo -->
-        <img src="https://cdn.pixabay.com/photo/2017/01/31/18/59/radio-2026867_1280.png" alt="DC Radio Logo">
+      <!-- IMAGEN DE FONDO DE LA RADIO -->
+      <img src="https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="DC Radio" class="radio-image">
+      
+      <!-- INFORMACIÓN QUE SE REVELA AL HACER HOVER -->
+      <div class="radio-info">
+        <h3>DC RADIO</h3>
+        <p>Música variada con bloques informativos en tiempo real. Efectos de sonido espaciales y transiciones con sintetizadores digitales.</p>
+        <a href="/DCRadioEC/" class="btn-radio-card">
+          <i class="fas fa-headphones-alt"></i> Sintonizar
+        </a>
       </div>
-      <h3>DC RADIO</h3>
-      <p>Música variada con bloques informativos en tiempo real. Efectos de sonido espaciales y transiciones con sintetizadores digitales.</p>
-      <a href="/DCRadioEC/" class="btn-radio-card">
-        <i class="fas fa-headphones-alt"></i> Sintonizar
-      </a>
     </div>
     
     <!-- DC CLÁSICOS (ARRIBA DERECHA) -->
     <div class="radio-card dc-clasicos">
-      <div class="radio-logo">
-        <!-- LOGO DE DC CLÁSICOS - Reemplaza con la URL de tu logo -->
-        <img src="https://cdn.pixabay.com/photo/2017/01/31/18/59/radio-2026867_1280.png" alt="DC Clásicos Logo">
+      <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="DC Clásicos" class="radio-image">
+      
+      <div class="radio-info">
+        <h3>DC CLÁSICOS</h3>
+        <p>Baladas remasterizadas con efectos de audio 3D. Revive los grandes éxitos con una calidad de sonido nunca antes escuchada.</p>
+        <a href="/DCClasicosEC/" class="btn-radio-card">
+          <i class="fas fa-headphones-alt"></i> Sintonizar
+        </a>
       </div>
-      <h3>DC CLÁSICOS</h3>
-      <p>Baladas remasterizadas con efectos de audio 3D. Revive los grandes éxitos con una calidad de sonido nunca antes escuchada.</p>
-      <a href="/DCClasicosEC/" class="btn-radio-card">
-        <i class="fas fa-headphones-alt"></i> Sintonizar
-      </a>
     </div>
     
     <!-- DC MIX (ABAJO IZQUIERDA) -->
     <div class="radio-card dc-mix">
-      <div class="radio-logo">
-        <!-- LOGO DE DC MIX - Reemplaza con la URL de tu logo -->
-        <img src="https://cdn.pixabay.com/photo/2017/01/31/18/59/radio-2026867_1280.png" alt="DC Mix Logo">
+      <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="DC Mix" class="radio-image">
+      
+      <div class="radio-info">
+        <h3>DC MIX</h3>
+        <p>Mezclas continuas generadas por IA con efectos visuales sincronizados. La experiencia de club en tu dispositivo.</p>
+        <a href="/DCMixEC/" class="btn-radio-card">
+          <i class="fas fa-headphones-alt"></i> Sintonizar
+        </a>
       </div>
-      <h3>DC MIX</h3>
-      <p>Mezclas continuas generadas por IA con efectos visuales sincronizados. La experiencia de club en tu dispositivo.</p>
-      <a href="/DCMixEC/" class="btn-radio-card">
-        <i class="fas fa-headphones-alt"></i> Sintonizar
-      </a>
     </div>
     
     <!-- AVENIDA TROPICAL (ABAJO DERECHA) -->
     <div class="radio-card avenida-tropical">
-      <div class="radio-logo">
-        <!-- LOGO DE AVENIDA TROPICAL - Reemplaza con la URL de tu logo -->
-        <img src="https://cdn.pixabay.com/photo/2017/01/31/18/59/radio-2026867_1280.png" alt="Avenida Tropical Logo">
+      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Avenida Tropical" class="radio-image">
+      
+      <div class="radio-info">
+        <h3>AVENIDA TROPICAL</h3>
+        <p>Salsa 24/7 con efectos de percusión digital y mezclas en vivo. La energía del Caribe con tecnología futurista.</p>
+        <a href="/RadioAvenidaTropical/" class="btn-radio-card">
+          <i class="fas fa-headphones-alt"></i> Sintonizar
+        </a>
       </div>
-      <h3>AVENIDA TROPICAL</h3>
-      <p>Salsa 24/7 con efectos de percusión digital y mezclas en vivo. La energía del Caribe con tecnología futurista.</p>
-      <a href="/RadioAvenidaTropical/" class="btn-radio-card">
-        <i class="fas fa-headphones-alt"></i> Sintonizar
-      </a>
     </div>
   </div>
 </section>
@@ -1656,7 +1644,7 @@ footer {
   </p>
 </section>
 
-<!-- PROGRAMA DESTACADO - CARRUSEL -->
+<!-- PROGRAMA DESTACADO - CARRUSEL CORREGIDO -->
 <section id="programacion">
   <h2>Programación Destacada</h2>
   <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; font-size: 1.2em;">
@@ -2104,7 +2092,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// CARRUSEL DE PROGRAMACIÓN
+// CARRUSEL DE PROGRAMACIÓN - CORREGIDO
 const carouselSlide = document.querySelector('.carousel-slide');
 const carouselCards = document.querySelectorAll('.programa-card');
 const prevBtn = document.querySelector('.prev-btn');
@@ -2112,37 +2100,59 @@ const nextBtn = document.querySelector('.next-btn');
 const dotsContainer = document.querySelector('.carousel-dots');
 
 let currentIndex = 0;
-const cardWidth = 330; // Ancho de la tarjeta + margen (300px + 30px)
+// Ancho de tarjeta + márgenes (280px + 30px)
+const cardWidth = 310;
+// Mostrar 3 tarjetas a la vez (calculado según el ancho del contenedor)
+const visibleCards = 3;
 
-// Crear los puntos del carrusel
-carouselCards.forEach((_, index) => {
+// Crear los puntos del carrusel basados en el número de tarjetas visibles
+const totalDots = Math.ceil(carouselCards.length / visibleCards);
+
+for (let i = 0; i < totalDots; i++) {
   const dot = document.createElement('div');
   dot.classList.add('dot');
-  if (index === 0) dot.classList.add('active');
+  if (i === 0) dot.classList.add('active');
   dot.addEventListener('click', () => {
-    goToSlide(index);
+    goToSlide(i * visibleCards);
   });
   dotsContainer.appendChild(dot);
-});
+}
 
 const dots = document.querySelectorAll('.dot');
 
 function updateCarousel() {
+  // Asegurarse de que el índice no exceda el máximo
+  const maxIndex = carouselCards.length - visibleCards;
+  if (currentIndex > maxIndex) {
+    currentIndex = maxIndex;
+  }
+  
   carouselSlide.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
   
   // Actualizar puntos
+  const activeDotIndex = Math.floor(currentIndex / visibleCards);
   dots.forEach((dot, index) => {
-    dot.classList.toggle('active', index === currentIndex);
+    dot.classList.toggle('active', index === activeDotIndex);
   });
 }
 
 function nextSlide() {
-  currentIndex = (currentIndex + 1) % carouselCards.length;
+  const maxIndex = carouselCards.length - visibleCards;
+  if (currentIndex >= maxIndex) {
+    currentIndex = 0;
+  } else {
+    currentIndex += visibleCards;
+  }
   updateCarousel();
 }
 
 function prevSlide() {
-  currentIndex = (currentIndex - 1 + carouselCards.length) % carouselCards.length;
+  const maxIndex = carouselCards.length - visibleCards;
+  if (currentIndex <= 0) {
+    currentIndex = maxIndex;
+  } else {
+    currentIndex -= visibleCards;
+  }
   updateCarousel();
 }
 
