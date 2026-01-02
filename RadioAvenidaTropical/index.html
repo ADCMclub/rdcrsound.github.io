@@ -1,362 +1,1552 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radio Avenida Tropical</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-
-<style>
-  :root {
-    --bg:#1a0f00;
-    --accent:#ffb347;
-    --accent-2:#ff6300;
-    --muted:#ffe0b3;
-    --panel:#2a1800;
-  }
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Poppins', sans-serif;
-    color: #fff;
-    background: transparent;
-    overflow-x: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  body::-webkit-scrollbar { display: none; }
-
-  #particles-js {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background: var(--bg);
-  }
-
-  nav {
-    background: rgba(42,24,0,0.92);
-    backdrop-filter: blur(3px);
-    border-bottom: 1.5px solid #ffb34744;
-    box-shadow: 0 2px 8px #ffb34722;
-    position: sticky;
-    top: 0;
-    z-index: 101;
-  }
-  nav div {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    padding: 0.7rem 1.5rem;
-  }
-  nav a {
-    color: #ffb347;
-    font-weight: 600;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .content {
-    position: relative;
-    padding: 2rem;
-    padding-bottom: 160px;
-    z-index: 1;
-    max-width: 1100px;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-
-  .title-box {
-    display: inline-block;
-    padding: 0.3em 1.2em;
-    border-radius: 1.2em;
-    background: linear-gradient(90deg, #ffe0b3 60%, #ffb347 100%);
-    box-shadow: 0 2px 16px #ffb34733;
-    color: #1a0f00 !important;
-    border: 2px solid #ffb34755;
-    font-weight: 800;
-    font-size: 2.1rem;
-    margin-bottom: 0.5rem;
-    margin-top: 1.5rem;
-    letter-spacing: 2px;
-    text-align: center;
-  }
-
-  .subtitle-modern {
-    text-align: center;
-    font-size: 1.35rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 2.2rem;
-    color: #ffb347;
-    text-shadow: 0 2px 8px #ffb34755;
-  }
-
-  .radio-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 0;
-  }
-
-  .radio-frame {
-    position: relative;
-    display: inline-block;
-    padding: 8px;
-    border-radius: 20px;
-    background: linear-gradient(45deg, var(--accent), var(--accent-2), #ffb347, var(--accent));
-    background-size: 300% 300%;
-    animation: borderFlow 6s linear infinite, pulseGlow 3.6s ease-in-out infinite;
-    box-shadow: 0 0 20px rgba(255,180,70,0.3);
-  }
-
-  @keyframes borderFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  @keyframes pulseGlow {
-    0%   { box-shadow: 0 0 12px rgba(255,180,70,0.2); }
-    50%  { box-shadow: 0 0 40px rgba(255,140,0,0.35); }
-    100% { box-shadow: 0 0 12px rgba(255,180,70,0.2); }
-  }
-
-  .radio-inner {
-    border-radius: 14px;
-    background: rgba(26,15,0,0.6);
-    padding: 10px;
-    width: 100%;
-    max-width: 480px;
-    box-sizing: border-box;
-  }
-
-  .radio-scan {
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    pointer-events: none;
-    z-index: 2;
-    background: linear-gradient(90deg,
-      rgba(255,255,255,0) 0%,
-      rgba(255,200,100,0.03) 20%,
-      rgba(255,180,80,0.08) 45%,
-      rgba(255,200,100,0.03) 70%,
-      rgba(255,255,255,0) 100%);
-    mix-blend-mode: screen;
-    transform: translateX(-120%);
-    animation: scanMove 3.2s linear infinite;
-    filter: blur(6px);
-  }
-
-  @keyframes scanMove {
-    0% { transform: translateX(-120%); opacity: 0; }
-    10% { opacity: 1; }
-    45% { transform: translateX(0%); opacity: 1; }
-    90% { transform: translateX(120%); opacity: 0.6; }
-    100% { transform: translateX(220%); opacity: 0; }
-  }
-
-  /* Botón flotante */
-  #btn-pedir-cancion {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    color: #fff;
-    font-weight: 700;
-    border: none;
-    border-radius: 50px;
-    padding: 14px 22px;
-    box-shadow: 0 4px 15px rgba(255,140,0,0.6);
-    cursor: pointer;
-    letter-spacing: 1.2px;
-    transition: all 0.3s ease;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  #btn-pedir-cancion:hover {
-    background: linear-gradient(135deg, #ff9a00, #ff7a00);
-    box-shadow: 0 6px 20px rgba(255,140,0,0.8);
-  }
-
-  /* Formulario emergente */
-  #form-container {
-    position: fixed;
-    top: 70px;
-    right: 20px;
-    width: 360px;
-    background: rgba(42,24,0,0.95);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(255,140,0,0.5);
-    padding: 20px 24px;
-    color: var(--muted);
-    transform: translateY(-20px);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.4s, opacity 0.4s ease;
-    z-index: 9998;
-  }
-  #form-container.active {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  #form-container h3 {
-    margin-bottom: 15px;
-    font-weight: 700;
-    font-size: 1.4rem;
-    text-align: center;
-    color: #ffe0b3;
-  }
-  #form-container input,
-  #form-container textarea {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    border: none;
-    font-size: 1rem;
-    color: #1c1c23;
-    background: #fff8f1;
-    box-sizing: border-box;
-  }
-  #form-container textarea { resize: vertical; min-height: 60px; }
-
-  #form-container button[type="submit"] {
-    background: var(--accent-2);
-    color: #fff;
-    font-weight: 700;
-    border: none;
-    border-radius: 12px;
-    width: 100%;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    transition: background 0.3s ease;
-  }
-  #form-container button[type="submit"]:hover {
-    background: #ff7a00;
-  }
-
-  @media (max-width: 420px){
-    #form-container { width: 90vw; right: 5vw; top: 70px; padding: 16px 20px; }
-    #btn-pedir-cancion { bottom: 15px; right: 15px; padding: 12px 18px; font-size: 0.9rem; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avenida Tropical | RDCR Sound Network</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-orange: #ff5e00;
+            --neon-green: #39ff14;
+            --neon-yellow: #fff01f;
+            --neon-orange-glow: rgba(255, 94, 0, 0.7);
+            --neon-green-glow: rgba(57, 255, 20, 0.7);
+            --neon-yellow-glow: rgba(255, 240, 31, 0.7);
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --card-bg: #111111;
+            --text-light: #f0f0f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 94, 0, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(57, 255, 20, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 40% 80%, rgba(255, 240, 31, 0.03) 0%, transparent 20%);
+            z-index: -1;
+        }
+        
+        /* BOTÓN WHATSAPP FLOTANTE */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.8);
+            animation: pulse-whatsapp 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.9);
+            animation: none;
+        }
+        
+        .whatsapp-tooltip {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            background: var(--card-bg);
+            color: var(--neon-yellow);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border: 2px solid var(--neon-yellow);
+            box-shadow: 0 0 15px var(--neon-yellow-glow);
+            font-weight: 600;
+        }
+        
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+        }
+        
+        @keyframes pulse-whatsapp {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        /* BOTÓN IR ARRIBA */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--card-bg);
+            border: 2px solid var(--neon-yellow);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--neon-yellow);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--neon-yellow-glow);
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px var(--neon-yellow-glow);
+            background: var(--neon-yellow);
+            color: var(--dark-bg);
+        }
+        
+        /* HEADER */
+        header {
+            background-color: rgba(5, 5, 5, 0.95);
+            color: #fff;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid var(--neon-orange);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.8rem;
+            color: var(--neon-orange);
+            text-shadow: 0 0 10px var(--neon-orange-glow);
+            animation: pulse-neon 2s infinite alternate;
+        }
+        
+        .logo-text h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(90deg, var(--neon-orange), var(--neon-yellow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .logo-text p {
+            font-size: 1rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green-glow);
+            font-style: italic;
+        }
+        
+        /* NAVEGACIÓN */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            font-size: 1.1rem;
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-green);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 5px var(--neon-green-glow);
+        }
+        
+        nav a:hover::before {
+            width: 100%;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green-glow);
+        }
+        
+        /* HERO */
+        .hero {
+            position: relative;
+            padding: 120px 5%;
+            text-align: center;
+            overflow: hidden;
+            background: linear-gradient(45deg, rgba(10, 10, 10, 0.9), rgba(5, 5, 5, 0.9));
+            border-bottom: 3px solid var(--neon-orange);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--neon-yellow), var(--neon-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(255, 94, 0, 0.3);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero-tagline {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green-glow);
+            font-style: italic;
+            font-weight: 700;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            color: var(--neon-yellow);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-style: italic;
+            text-shadow: 0 0 5px var(--neon-yellow-glow);
+        }
+        
+        .hero-year {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        
+        /* BOTONES */
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+            text-transform: uppercase;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background-color: var(--neon-orange);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-orange-glow);
+        }
+        
+        .btn-primary:hover {
+            background-color: #ff4500;
+            box-shadow: 0 0 30px var(--neon-orange-glow);
+            transform: translateY(-5px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 0 15px var(--neon-green-glow);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--neon-green);
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px var(--neon-green-glow);
+            transform: translateY(-5px);
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        /* PLAYER EN VIVO - CÓDIGO PROPORCIONADO */
+        .player-section {
+            background-color: var(--darker-bg);
+            padding: 40px 5%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid var(--neon-green);
+        }
+        
+        /* Contenedor principal del reproductor */
+        .player-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 
+                0 10px 30px rgba(255, 99, 0, 0.2),
+                0 0 0 1px rgba(255, 99, 0, 0.1),
+                inset 0 0 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 99, 0, 0.2);
+        }
+        
+        /* Efecto de borde animado */
+        .player-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                #FF6300, 
+                #FF9D00, 
+                #FF6300, 
+                #FF3300);
+            border-radius: 27px;
+            z-index: -1;
+            animation: borderGlow 4s linear infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes borderGlow {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+        
+        /* Cabecera del reproductor */
+        .player-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .player-title {
+            color: #FF6300;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 99, 0, 0.3);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        
+        .player-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+        
+        /* Área del reproductor */
+        .player-area {
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .cstrEmbed {
+            width: 100%;
+            min-height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(10, 10, 10, 0.7);
+            padding: 10px;
+        }
+        
+        /* Indicador de estado de audio */
+        .audio-visualizer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                #FF6300, 
+                #FF9D00, 
+                #FF6300, 
+                transparent);
+            opacity: 0.7;
+            animation: audioWave 2s ease-in-out infinite;
+        }
+        
+        @keyframes audioWave {
+            0%, 100% {
+                transform: scaleX(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scaleX(1);
+                opacity: 0.8;
+            }
+        }
+        
+        /* Información adicional */
+        .player-info {
+            margin-top: 25px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 99, 0, 0.1);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Indicadores de señal */
+        .signal-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .signal-bar {
+            width: 5px;
+            height: 20px;
+            background: #FF6300;
+            border-radius: 2px;
+            animation: signalPulse 1.5s infinite;
+        }
+        
+        .signal-bar:nth-child(2) { animation-delay: 0.2s; }
+        .signal-bar:nth-child(3) { animation-delay: 0.4s; }
+        .signal-bar:nth-child(4) { animation-delay: 0.6s; }
+        .signal-bar:nth-child(5) { animation-delay: 0.8s; }
+        
+        @keyframes signalPulse {
+            0%, 100% {
+                transform: scaleY(0.5);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Estados de carga */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 99, 0, 0.3);
+            border-top: 3px solid #FF6300;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: rgba(255, 99, 0, 0.8);
+            font-size: 0.9rem;
+            animation: fadeInOut 2s infinite;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        /* PROGRAMACIÓN */
+        .programacion-section {
+            padding: 80px 5%;
+            background-color: var(--dark-bg);
+            position: relative;
+            border-bottom: 3px solid var(--neon-yellow);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--neon-orange);
+            text-shadow: 0 0 10px var(--neon-orange-glow);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green-glow);
+            font-style: italic;
+        }
+        
+        /* CARRUSEL DE PROGRAMACIÓN */
+        .carousel-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 60px;
+        }
+        
+        .carousel {
+            display: flex;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            gap: 30px;
+            padding: 20px 0;
+        }
+        
+        .carousel-item {
+            flex: 0 0 calc(33.333% - 20px);
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+        
+        .carousel-item:hover {
+            transform: translateY(-15px);
+            border-color: var(--neon-orange);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 25px var(--neon-orange-glow);
+        }
+        
+        .program-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 3px solid var(--neon-green);
+        }
+        
+        .program-content {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .program-time {
+            color: var(--neon-yellow);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-shadow: 0 0 5px var(--neon-yellow-glow);
+        }
+        
+        .program-name {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: var(--card-bg);
+            border: 2px solid var(--neon-yellow);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--neon-yellow);
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--neon-yellow-glow);
+        }
+        
+        .carousel-nav:hover {
+            background-color: var(--neon-yellow);
+            color: var(--dark-bg);
+            box-shadow: 0 0 25px var(--neon-yellow-glow);
+        }
+        
+        .carousel-prev {
+            left: 0;
+        }
+        
+        .carousel-next {
+            right: 0;
+        }
+        
+        /* ESPECIALES SALSEROS - CARRUSEL DE ARTISTAS */
+        .especiales-section {
+            padding: 80px 5%;
+            background-color: var(--darker-bg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .artist-carousel {
+            display: flex;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            gap: 30px;
+            padding: 20px 0;
+        }
+        
+        .artist-card {
+            flex: 0 0 calc(20% - 24px);
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+        
+        .artist-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: var(--neon-green);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 30px var(--neon-green-glow);
+        }
+        
+        .artist-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .artist-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .artist-name {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 5px var(--neon-yellow-glow);
+        }
+        
+        .artist-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: transparent;
+            color: var(--neon-orange);
+            border: 2px solid var(--neon-orange);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .artist-link:hover {
+            background-color: var(--neon-orange);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-orange-glow);
+        }
+        
+        /* FOOTER */
+        footer {
+            background-color: rgba(5, 5, 5, 0.95);
+            color: #fff;
+            text-align: center;
+            padding: 60px 5% 30px;
+            position: relative;
+            overflow: hidden;
+            border-top: 3px solid var(--neon-green);
+        }
+        
+        .network-logo {
+            font-size: 3.5rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 15px var(--neon-green-glow);
+            margin-bottom: 20px;
+        }
+        
+        .network-title {
+            font-size: 2.5rem;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 10px var(--neon-yellow-glow);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .network-subtitle {
+            font-size: 1.5rem;
+            color: var(--neon-orange);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        .footer-slogan {
+            font-size: 1.8rem;
+            margin: 40px 0;
+            color: var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green-glow);
+            font-style: italic;
+        }
+        
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 1rem;
+        }
+        
+        /* ANIMACIONES */
+        @keyframes pulse-neon {
+            0% {
+                text-shadow: 0 0 5px var(--neon-orange-glow);
+                transform: scale(1);
+            }
+            100% {
+                text-shadow: 0 0 20px var(--neon-orange-glow), 0 0 30px var(--neon-orange-glow);
+                transform: scale(1.05);
+            }
+        }
+        
+        /* PARTÍCULAS DE FONDO PARA PLAYER */
+        .background-animations {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 99, 0, 0.1);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .pulse-ring {
+            position: absolute;
+            border: 2px solid rgba(255, 99, 0, 0.3);
+            border-radius: 50%;
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .carousel-item {
+                flex: 0 0 calc(50% - 15px);
+            }
+            
+            .artist-card {
+                flex: 0 0 calc(25% - 23px);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .artist-card {
+                flex: 0 0 calc(33.333% - 20px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .carousel-item {
+                flex: 0 0 100%;
+            }
+            
+            .artist-card {
+                flex: 0 0 calc(50% - 15px);
+            }
+            
+            .carousel-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .whatsapp-float {
+                bottom: 90px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.3rem;
+            }
+            
+            .artist-card {
+                flex: 0 0 100%;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .whatsapp-float {
+                bottom: 80px;
+                right: 15px;
+                width: 55px;
+                height: 55px;
+                font-size: 28px;
+            }
+            
+            .scroll-top {
+                bottom: 20px;
+                right: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-<div id="particles-js"></div>
-
-<nav>
-  <div>
-    <a href="#" onclick="goBackToSection(event)">
-      <svg width="20" height="20" fill="none" stroke="#ffb347" stroke-width="2" viewBox="0 0 24 24">
-        <path d="M10 19l-7-7 7-7"/><path d="M3 12h18"/>
-      </svg>
-      EMISORAS
-    </a>
-    <span style="color:#ffb347;font-size:1.2rem;">/</span>
-    <span style="color:#fff;font-weight:700;">Radio Avenida Tropical</span>
-    <div style="flex:1"></div>
-  </div>
-</nav>
-
-<main class="content">
-  <div style="text-align:center;">
-    <span class="title-box">Radio Avenida Tropical</span>
-  </div>
-  <div class="subtitle-modern">🌴 Ritmos cálidos que te hacen vibrar ☀️</div>
-
-  <div class="radio-wrapper">
-    <div class="radio-frame">
-      <div class="radio-inner">
-        <div data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="dark" data-color="FF6300" data-channelId="a012d2d4-4ab4-4550-b184-3ae00c951cad" data-rendered="false" class="cstrEmbed">
-          <a href="https://www.caster.fm">Shoutcast Hosting</a>
-          <a href="https://www.caster.fm">Stream Hosting</a>
-          <a href="https://www.caster.fm">Radio Server Hosting</a>
-        </div>
-        <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
-      </div>
-      <div class="radio-scan"></div>
+    <!-- BOTÓN WHATSAPP -->
+    <div class="whatsapp-float" id="whatsappBtn">
+        <i class="fab fa-whatsapp"></i>
+        <div class="whatsapp-tooltip">Solicita tu canción</div>
     </div>
-  </div>
+    
+    <!-- BOTÓN IR ARRIBA -->
+    <div class="scroll-top" id="scrollTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
-  <button id="btn-pedir-cancion">🎵 Pide tu canción</button>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-palm-tree logo-icon"></i>
+            <div class="logo-text">
+                <h1>Avenida Tropical</h1>
+                <p>La calle de la salsa online</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Inicio</a></li>
+                <li><a href="#player">En Vivo</a></li>
+                <li><a href="#programacion">Programación</a></li>
+                <li><a href="#especiales">Especiales</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <div id="form-container">
-    <h3>🎶 Pide tu canción</h3>
-    <form id="formPedidoWhatsApp">
-      <input id="nombre" type="text" placeholder="Tu nombre" required>
-      <input id="cancion" type="text" placeholder="Nombre de la canción" required>
-      <input id="artista" type="text" placeholder="Artista" required>
-      <textarea id="mensaje" placeholder="Mensaje adicional (opcional)"></textarea>
-      <button type="submit">Enviar pedido</button>
-    </form>
-  </div>
-</main>
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-content">
+            <h2>Aquí no se habla, se baila</h2>
+            <div class="hero-tagline">Salsa. Solo salsa.</div>
+            <div class="hero-subtitle">"Avenida Tropical, donde la salsa vive."</div>
+            <div class="hero-year">Cultura y pasión salsera desde 2020</div>
+            <div class="hero-btns">
+                <a href="#player" class="btn btn-primary">Escuchar en vivo</a>
+                <a href="#programacion" class="btn btn-secondary">Ver programación</a>
+            </div>
+        </div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script>
-  // Fondo partículas tropical
-  particlesJS('particles-js', {
-    particles: {
-      number: { value: 80 },
-      color: { value: ["#ffb347", "#ff7a00", "#ff6300"] },
-      shape: { type: "circle" },
-      opacity: { value: 0.7, random: true },
-      size: { value: 3, random: true },
-      line_linked: { enable: true, distance: 160, color: "#ff9a00", opacity: 0.4, width: 1.3 },
-      move: { enable: true, speed: 2 }
-    },
-    interactivity: { events: { onhover: { enable: false } } },
-    retina_detect: true
-  });
+    <!-- PLAYER EN VIVO - CÓDIGO PROPORCIONADO -->
+    <div class="player-section" id="player">
+        <!-- Animaciones de fondo -->
+        <div class="background-animations" id="backgroundAnimations"></div>
+        
+        <!-- Contenedor principal del reproductor -->
+        <div class="player-container">
+            <div class="player-header">
+                <h1 class="player-title">AVENIDA TROPICAL</h1>
+                <p class="player-subtitle">Streaming en vivo • 24/7</p>
+            </div>
+            
+            <div class="player-area">
+                <!-- Estado de carga -->
+                <div class="loading" id="loadingState">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Conectando a la radio...</div>
+                </div>
+                
+                <!-- Reproductor de Caster.fm -->
+                <div data-type="newStreamPlayer" 
+                     data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" 
+                     data-theme="dark" 
+                     data-color="FF6300" 
+                     data-channelId="a012d2d4-4ab4-4550-b184-3ae00c951cad" 
+                     data-rendered="false" 
+                     class="cstrEmbed" 
+                     style="display: none;">
+                    <a href="https://www.caster.fm">Shoutcast Hosting</a>
+                    <a href="https://www.caster.fm">Stream Hosting</a>
+                    <a href="https://www.caster.fm">Radio Server Hosting</a>
+                </div>
+                
+                <!-- Visualizador de audio -->
+                <div class="audio-visualizer"></div>
+            </div>
+            
+            <!-- Indicadores de señal -->
+            <div class="signal-indicators">
+                <div class="signal-bar"></div>
+                <div class="signal-bar"></div>
+                <div class="signal-bar"></div>
+                <div class="signal-bar"></div>
+                <div class="signal-bar"></div>
+            </div>
+            
+            <!-- Información del reproductor -->
+            <div class="player-info">
+                <p>Streaming de alta calidad • 128 kbps</p>
+                <p>DERECHOS RDCR SOUND</p>
+            </div>
+        </div>
+    </div>
 
-  // Botón y formulario
-  const btn = document.getElementById('btn-pedir-cancion');
-  const formContainer = document.getElementById('form-container');
-  const form = document.getElementById('formPedidoWhatsApp');
-  const numeroWhatsApp = '593961480654';
+    <!-- PROGRAMACIÓN SALSERA -->
+    <section class="programacion-section" id="programacion">
+        <div class="section-header">
+            <h2 class="section-title">Programación Salsera</h2>
+            <div class="section-subtitle">Tu horario para bailar, las 24 horas</div>
+        </div>
+        
+        <div class="carousel-container">
+            <div class="carousel-nav carousel-prev" id="programacionPrev">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="carousel" id="programacionCarousel">
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Salsa Clásica" class="program-img">
+                    <div class="program-content">
+                        <div class="program-time">06:00 - 10:00 AM</div>
+                        <div class="program-name">SALSA CLÁSICA</div>
+                    </div>
+                </div>
+                
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" alt="Salsa Romántica" class="program-img">
+                    <div class="program-content">
+                        <div class="program-time">10:00 - 14:00 PM</div>
+                        <div class="program-name">SALSA ROMÁNTICA</div>
+                    </div>
+                </div>
+                
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Salsa para Bailar" class="program-img">
+                    <div class="program-content">
+                        <div class="program-time">14:00 - 18:00 PM</div>
+                        <div class="program-name">SALSA PARA BAILAR</div>
+                    </div>
+                </div>
+                
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Salsa Dura" class="program-img">
+                    <div class="program-content">
+                        <div class="program-time">18:00 - 22:00 PM</div>
+                        <div class="program-name">SALSA DURA</div>
+                    </div>
+                </div>
+                
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Especial Nocturno" class="program-img">
+                    <div class="program-content">
+                        <div class="program-time">22:00 - 02:00 AM</div>
+                        <div class="program-name">ESPECIAL NOCTURNO</div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-nav carousel-next" id="programacionNext">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+    </section>
 
-  btn.addEventListener('click', () => {
-    formContainer.classList.toggle('active');
-  });
+    <!-- ESPECIALES SALSEROS -->
+    <section class="especiales-section" id="especiales">
+        <div class="section-header">
+            <h2 class="section-title">Especiales Salseros</h2>
+            <div class="section-subtitle">Homenajes a los grandes de la salsa</div>
+        </div>
+        
+        <div class="carousel-container">
+            <div class="carousel-nav carousel-prev" id="artistasPrev">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="artist-carousel" id="artistasCarousel">
+                <!-- 15+ artistas de salsa -->
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Celia Cruz" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Celia Cruz</div>
+                        <a href="https://es.wikipedia.org/wiki/Celia_Cruz" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Marc Anthony" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Marc Anthony</div>
+                        <a href="https://es.wikipedia.org/wiki/Marc_Anthony" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Rubén Blades" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Rubén Blades</div>
+                        <a href="https://es.wikipedia.org/wiki/Rub%C3%A9n_Blades" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Héctor Lavoe" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Héctor Lavoe</div>
+                        <a href="https://es.wikipedia.org/wiki/H%C3%A9ctor_Lavoe" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" alt="Willie Colón" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Willie Colón</div>
+                        <a href="https://es.wikipedia.org/wiki/Willie_Col%C3%B3n" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Gilberto Santa Rosa" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Gilberto Santa Rosa</div>
+                        <a href="https://es.wikipedia.org/wiki/Gilberto_Santa_Rosa" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Fania All Stars" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Fania All Stars</div>
+                        <a href="https://es.wikipedia.org/wiki/Fania_All-Stars" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Johnny Pacheco" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Johnny Pacheco</div>
+                        <a href="https://es.wikipedia.org/wiki/Johnny_Pacheco" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Larry Harlow" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Larry Harlow</div>
+                        <a href="https://es.wikipedia.org/wiki/Larry_Harlow" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Ray Barretto" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Ray Barretto</div>
+                        <a href="https://es.wikipedia.org/wiki/Ray_Barretto" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" alt="Eddie Palmieri" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Eddie Palmieri</div>
+                        <a href="https://es.wikipedia.org/wiki/Eddie_Palmieri" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Tito Puente" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Tito Puente</div>
+                        <a href="https://es.wikipedia.org/wiki/Tito_Puente" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Frankie Ruiz" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Frankie Ruiz</div>
+                        <a href="https://es.wikipedia.org/wiki/Frankie_Ruiz" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Víctor Manuelle" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Víctor Manuelle</div>
+                        <a href="https://es.wikipedia.org/wiki/V%C3%ADctor_Manuelle" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="La Sonora Ponceña" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Sonora Ponceña</div>
+                        <a href="https://es.wikipedia.org/wiki/Sonora_Ponce%C3%B1a" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Oscar D'León" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Oscar D'León</div>
+                        <a href="https://es.wikipedia.org/wiki/Oscar_D%27Le%C3%B3n" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="El Gran Combo" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">El Gran Combo</div>
+                        <a href="https://es.wikipedia.org/wiki/El_Gran_Combo_de_Puerto_Rico" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+                
+                <div class="artist-card">
+                    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Ismael Miranda" class="artist-img">
+                    <div class="artist-content">
+                        <div class="artist-name">Ismael Miranda</div>
+                        <a href="https://es.wikipedia.org/wiki/Ismael_Miranda" target="_blank" class="artist-link">Ver Especial</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-nav carousel-next" id="artistasNext">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+    </section>
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const nombre = form.nombre.value.trim();
-    const cancion = form.cancion.value.trim();
-    const artista = form.artista.value.trim();
-    const mensaje = form.mensaje.value.trim();
-    if (!nombre || !cancion || !artista) {
-      alert('Completa todos los campos obligatorios.');
-      return;
-    }
-    let texto = `*_Pedido de canción_ - Radio Avenida Tropical*\n- *Nombre:* ${nombre}\n- *Canción:* ${cancion}\n- *Artista:* ${artista}`;
-    if (mensaje) texto += `\n- *Mensaje:* ${mensaje}`;
-    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
-    window.open(url, '_blank');
-    form.reset();
-    formContainer.classList.remove('active');
-  });
+    <!-- FOOTER -->
+    <footer>
+        <div class="network-logo">
+            <i class="fas fa-satellite-dish"></i>
+        </div>
+        <div class="network-title">RDCR Sound Network</div>
+        <div class="network-subtitle">La red de estaciones musicales puras</div>
+        
+        <div class="footer-slogan">Aquí no se habla, se baila. Salsa. Solo salsa.</div>
+        
+        <div class="copyright">
+            <p>Avenida Tropical · RDCR Sound Network 2026</p>
+            <p>“Avenida Tropical, donde la salsa vive.”</p>
+            <p>Cultura y pasión salsera desde 2020</p>
+        </div>
+    </footer>
 
-  function goBackToSection(event) {
-    event.preventDefault();
-    window.history.back();
-  }
-</script>
-
+    <script>
+        // BOTÓN WHATSAPP
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        whatsappBtn.addEventListener('click', function() {
+            // Número de WhatsApp (reemplazar con número real)
+            const phoneNumber = '1234567890'; 
+            const message = 'Hola Avenida Tropical, quisiera solicitar la canción: ';
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        });
+        
+        // BOTÓN IR ARRIBA
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // CARRUSEL DE PROGRAMACIÓN
+        const programacionCarousel = document.getElementById('programacionCarousel');
+        const programacionPrev = document.getElementById('programacionPrev');
+        const programacionNext = document.getElementById('programacionNext');
+        
+        programacionNext.addEventListener('click', () => {
+            programacionCarousel.scrollBy({
+                left: 400,
+                behavior: 'smooth'
+            });
+        });
+        
+        programacionPrev.addEventListener('click', () => {
+            programacionCarousel.scrollBy({
+                left: -400,
+                behavior: 'smooth'
+            });
+        });
+        
+        // CARRUSEL DE ARTISTAS
+        const artistasCarousel = document.getElementById('artistasCarousel');
+        const artistasPrev = document.getElementById('artistasPrev');
+        const artistasNext = document.getElementById('artistasNext');
+        
+        artistasNext.addEventListener('click', () => {
+            artistasCarousel.scrollBy({
+                left: 350,
+                behavior: 'smooth'
+            });
+        });
+        
+        artistasPrev.addEventListener('click', () => {
+            artistasCarousel.scrollBy({
+                left: -350,
+                behavior: 'smooth'
+            });
+        });
+        
+        // NAVEGACIÓN SUAVE
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // CÓDIGO DEL REPRODUCTOR PROPORCIONADO
+        function createParticles() {
+            const container = document.getElementById('backgroundAnimations');
+            if (!container) return;
+            
+            const colors = ['#FF6300', '#FF9D00', '#FF3300', '#FF6B00'];
+            
+            // Crear partículas flotantes
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 20 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posición aleatoria
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Color aleatorio
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = `radial-gradient(circle, ${color}40, transparent)`;
+                
+                // Animación personalizada
+                const duration = Math.random() * 20 + 15;
+                const delay = Math.random() * 10;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(particle);
+            }
+            
+            // Crear anillos de pulso
+            for (let i = 0; i < 2; i++) {
+                const ring = document.createElement('div');
+                ring.className = 'pulse-ring';
+                
+                // Posición aleatoria
+                const posX = Math.random() * 80 + 10;
+                const posY = Math.random() * 80 + 10;
+                
+                ring.style.left = `${posX}%`;
+                ring.style.top = `${posY}%`;
+                ring.style.width = `${Math.random() * 100 + 50}px`;
+                ring.style.height = ring.style.width;
+                
+                // Animación personalizada
+                ring.style.animationDelay = `${Math.random() * 2}s`;
+                ring.style.animationDuration = `${Math.random() * 2 + 2}s`;
+                
+                container.appendChild(ring);
+            }
+        }
+        
+        // Inicializar el reproductor de Caster.fm
+        function initPlayer() {
+            const player = document.querySelector('.cstrEmbed');
+            const loading = document.getElementById('loadingState');
+            
+            if (!player || !loading) return;
+            
+            // Cargar el script de Caster.fm
+            const script = document.createElement('script');
+            script.src = '//cdn.cloud.caster.fm/widgets/embed.js';
+            script.onload = function() {
+                console.log('Reproductor Caster.fm cargado');
+                
+                // Ocultar estado de carga después de un tiempo
+                setTimeout(() => {
+                    if (loading) {
+                        loading.style.display = 'none';
+                    }
+                    if (player) {
+                        player.style.display = 'flex';
+                    }
+                }, 2000);
+            };
+            
+            script.onerror = function() {
+                console.error('Error al cargar el reproductor');
+                if (loading) {
+                    loading.innerHTML = `
+                        <div style="color: #FF6300; text-align: center;">
+                            <p>⚠️ Error de conexión</p>
+                            <p style="font-size: 0.8rem; margin-top: 10px;">Intenta recargar la página</p>
+                        </div>
+                    `;
+                }
+            };
+            
+            document.body.appendChild(script);
+        }
+        
+        // Simular visualización de audio cuando se reproduce
+        function simulateAudioVisualization() {
+            const visualizer = document.querySelector('.audio-visualizer');
+            const signalBars = document.querySelectorAll('.signal-bar');
+            
+            if (!visualizer || signalBars.length === 0) return;
+            
+            setInterval(() => {
+                // Animar el visualizador principal
+                if (visualizer) {
+                    const randomHeight = Math.random() * 3 + 1;
+                    visualizer.style.height = `${randomHeight}px`;
+                }
+                
+                // Animar las barras de señal
+                signalBars.forEach(bar => {
+                    const randomScale = Math.random() * 0.8 + 0.3;
+                    bar.style.transform = `scaleY(${randomScale})`;
+                });
+            }, 200);
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            initPlayer();
+            simulateAudioVisualization();
+            
+            // Efecto de interacción táctil para el reproductor
+            const container = document.querySelector('.player-container');
+            if (container) {
+                container.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                
+                container.addEventListener('touchend', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            }
+        });
+        
+        // Manejar orientación del dispositivo
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                // Recrear partículas al cambiar orientación
+                const bgAnim = document.getElementById('backgroundAnimations');
+                if (bgAnim) {
+                    bgAnim.innerHTML = '';
+                    createParticles();
+                }
+            }, 300);
+        });
+    </script>
 </body>
 </html>

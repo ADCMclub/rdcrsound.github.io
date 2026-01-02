@@ -1,387 +1,1867 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DC Clásicos EC</title>
+<meta charset="UTF-8">
+<title>DC CLÁSICOS | La radio emocional</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/img_radio/RDCRSOUND_LOG.jpg">
-  <link rel="icon" type="image/png" sizes="192x192" href="/img_radio/RDCRSOUND_LOG.jpg">
-  <link rel="icon" type="image/png" sizes="512x512" href="/img_radio/RDCRSOUND_LOG.jpg">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="DCClasicosEC">
-  <meta name="theme-color" content="#0d0d0d">
+<style>
+:root {
+  --neon-gold: #FFD700;
+  --neon-gold-glow: #FFEE77;
+  --gold: #C9A227;
+  --dark-gold: #B08C1E;
+  --black: #000000;
+  --dark: #0A0A0A;
+  --cream: #FFF8E7;
+  --light-cream: #FFFCF5;
+  --text: #E8E1D1;
+  --text-light: #D4CFC2;
+}
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <style>
-    :root{
-      --bg:#0d0d0d;
-      --accent:#D9A05B;
-      --accent-2:#FFD700;
-      --muted:#fffbe6;
-      --panel:#18181b;
-    }
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+  background-color: var(--black);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Poppins', Arial, sans-serif;
-      color: #fff;
-      background: transparent; /* permite ver partículas */
-      overflow-x: hidden;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    body::-webkit-scrollbar { display: none; }
+/* Líneas de fondo animadas */
+.background-lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
 
-    /* Fondo de partículas (contenedor) */
-    #particles-js {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background: var(--bg);
-    }
+.line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  height: 1px;
+  width: 100%;
+  opacity: 0.1;
+  filter: blur(1px);
+}
 
-    .content {
-      position: relative;
-      padding: 2rem;
-      padding-bottom: 160px; /* espacio para reproductor/botón flotante */
-      z-index: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      box-sizing: border-box;
-    }
+.line-1 {
+  top: 10%;
+  animation: moveLine 20s linear infinite;
+}
 
-    /* Breadcrumb / Nav (se mantiene igual que tu original) */
-    nav.breadcrumb {
-      background: rgba(24,24,27,0.92);
-      backdrop-filter: blur(2px);
-      border-bottom: 1.5px solid #bfa76a33;
-      box-shadow: 0 2px 8px #bfa76a22;
-      position: sticky;
-      top: 0;
-      z-index: 101;
-    }
+.line-2 {
+  top: 30%;
+  animation: moveLine 25s linear infinite reverse;
+}
 
-    .title-box {
-      display: inline-block;
-      padding: 0.4em 1.2em;
-      border-radius: 1.2em;
-      background: linear-gradient(90deg, #fffbe6 60%, #ffe082 100%);
-      box-shadow: 0 2px 16px #bfa76a33;
-      color: #18181b !important;
-      font-weight: 800;
-      font-size: 2.1rem;
-      margin-bottom: 0.5rem;
-      margin-top: 1.5rem;
-      letter-spacing: 2px;
-      border: 2px solid #bfa76a44;
-      text-align: center;
-      user-select: none;
-    }
+.line-3 {
+  top: 50%;
+  animation: moveLine 30s linear infinite;
+}
 
-    .subtitle-modern {
-      text-align: center;
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: #ffe082;
-      text-shadow: 0 2px 8px #bfa76a55;
-      margin-bottom: 2.2rem;
-    }
+.line-4 {
+  top: 70%;
+  animation: moveLine 22s linear infinite reverse;
+}
 
-    /* Marco del reproductor (doradito) */
-    .radio-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 12px 0;
-    }
+.line-5 {
+  top: 90%;
+  animation: moveLine 28s linear infinite;
+}
 
-    .radio-frame-gold {
-      position: relative;
-      display: inline-block;
-      padding: 6px;
-      border-radius: 18px;
-      background: linear-gradient(45deg, #D9A05B, #FFD700, #B8860B, #FFD27F, #D9A05B);
-      background-size: 300% 300%;
-      animation: borderFlow 6s linear infinite, pulseGlow 3.5s ease-in-out infinite;
-      box-shadow: 0 0 20px rgba(217, 160, 91, 0.25);
-      overflow: visible;
-    }
-    @keyframes borderFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @keyframes pulseGlow {
-      0%   { box-shadow: 0 0 10px rgba(217,160,91,0.18); }
-      50%  { box-shadow: 0 0 32px rgba(255,215,0,0.35); transform: translateZ(0); }
-      100% { box-shadow: 0 0 10px rgba(217,160,91,0.18); }
-    }
+@keyframes moveLine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
 
-    .radio-inner {
-      border-radius: 12px;
-      background: rgba(6,6,6,0.55); /* semitransparente para ver partículas detrás */
-      padding: 8px;
-      box-sizing: border-box;
-      position: relative;
-      z-index: 3;
-      overflow: hidden;
-      min-width: 260px;
-      max-width: 480px;
-      width: 100%;
-    }
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: var(--neon-gold);
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(1px);
+}
 
-    .radio-inner .cstrEmbed {
-      width: 100% !important;
-      height: auto !important;
-      border-radius: 8px;
-      overflow: hidden;
-      z-index: 4;
-      position: relative;
-    }
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
 
-    /* Franja animada */
-    .radio-scan {
-      position: absolute;
-      inset: 0;
-      border-radius: 18px;
-      pointer-events: none;
-      z-index: 2;
-      background: linear-gradient(90deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0.04) 20%,
-        rgba(255,215,0,0.10) 45%,
-        rgba(255,255,255,0.04) 70%,
-        rgba(255,255,255,0) 100%);
-      mix-blend-mode: screen;
-      transform: translateX(-120%);
-      animation: scanMove 3.2s linear infinite;
-      filter: blur(6px);
-    }
-    @keyframes scanMove {
-      0%   { transform: translateX(-120%); opacity: 0; }
-      10%  { opacity: 1; }
-      45%  { transform: translateX(0%); opacity: 1; }
-      90%  { transform: translateX(120%); opacity: 0.6; }
-      100% { transform: translateX(220%); opacity: 0; }
-    }
+/* Efectos de neón */
+.neon-text {
+  color: var(--neon-gold);
+  text-shadow: 
+    0 0 5px var(--neon-gold),
+    0 0 10px rgba(255, 215, 0, 0.5),
+    0 0 20px rgba(255, 215, 0, 0.3);
+}
 
-    /* Botón flotante abajo-derecha */
-    #btn-pedir-cancion {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #bcbf6a, #e4e6b4);
-      color: #23231c;
-      font-weight: 700;
-      border: none;
-      border-radius: 50px;
-      padding: 14px 22px;
-      box-shadow: 0 4px 15px rgba(191, 191, 106, 0.6);
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      letter-spacing: 1.2px;
-      z-index: 9999;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    #btn-pedir-cancion:hover {
-      background: linear-gradient(135deg, #e6e4b4, #bfb96a);
-      box-shadow: 0 6px 20px rgba(191, 187, 106, 0.8);
-    }
+.neon-border {
+  border: 2px solid var(--neon-gold);
+  box-shadow: 
+    0 0 5px var(--neon-gold),
+    inset 0 0 5px var(--neon-gold),
+    0 0 20px rgba(255, 215, 0, 0.3);
+}
 
-    /* Formulario (desplegable) */
-    #form-container {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      width: 360px;
-      background: #2e2b18;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(191, 191, 106, 0.5);
-      padding: 20px 24px;
-      color: #e6e6b4;
-      transform: translateY(120%);
-      opacity: 0;
-      pointer-events: none;
-      transition: transform 0.35s ease, opacity 0.35s ease;
-      z-index: 9998;
-    }
-    #form-container.active {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-    #form-container h3 { margin: 0 0 12px 0; text-align:center; color:#fffbe6; }
-    #form-container input, #form-container textarea {
-      width:100%; padding:10px 12px; margin-bottom:10px; border-radius:8px; border:none; font-size:14px;
-      background:#fffbe6; color:#1c1c23; box-sizing:border-box;
-    }
-    #form-container button[type="submit"] {
-      width:100%; padding:10px; border-radius:10px; border:none; background:var(--accent); color:#000; font-weight:700;
-    }
+.neon-glow {
+  animation: neon-pulse 3s infinite alternate;
+}
 
-    @media (max-width: 420px){
-      .radio-inner{ max-width:360px; min-width:220px; padding:8px;}
-      .radio-frame-gold{ padding:5px; border-radius:14px;}
-      #form-container{ width:90vw; right:5vw; bottom:90px; }
-      #btn-pedir-cancion{ bottom:16px; right:16px; padding:12px 18px; }
-    }
-  </style>
+@keyframes neon-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px var(--neon-gold),
+      inset 0 0 5px rgba(255, 215, 0, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 15px var(--neon-gold-glow),
+      inset 0 0 10px rgba(255, 215, 0, 0.5),
+      0 0 30px rgba(255, 238, 119, 0.3);
+  }
+}
+
+/* Header NO FIJADO */
+header {
+  background-color: rgba(10, 10, 10, 0.95);
+  color: var(--cream);
+  padding: 25px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+
+header .subtitle {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto 15px;
+  font-weight: 300;
+}
+
+header .tagline {
+  font-size: 1rem;
+  color: var(--gold);
+  font-style: italic;
+  margin-top: 10px;
+  font-weight: 300;
+}
+
+/* Navegación */
+nav {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.nav-btn {
+  background: transparent;
+  color: var(--cream);
+  text-decoration: none;
+  padding: 10px 22px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.nav-btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+  transition: left 0.6s;
+  z-index: -1;
+}
+
+.nav-btn:hover:before {
+  left: 100%;
+}
+
+.nav-btn:hover, .nav-btn.active {
+  border-color: var(--neon-gold);
+  color: var(--neon-gold);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  transform: translateY(-3px);
+}
+
+/* Botones flotantes */
+.floating-buttons {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1000;
+}
+
+.whatsapp-btn, .scroll-top-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.whatsapp-btn {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+}
+
+.scroll-top-btn {
+  background: linear-gradient(135deg, var(--neon-gold), var(--dark-gold));
+}
+
+.whatsapp-btn:hover, .scroll-top-btn:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.whatsapp-btn:hover {
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
+
+.scroll-top-btn:hover {
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+}
+
+.whatsapp-tooltip, .scroll-tooltip {
+  position: absolute;
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.whatsapp-btn:hover .whatsapp-tooltip,
+.scroll-top-btn:hover .scroll-tooltip {
+  opacity: 1;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1571974599782-87624638275b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  color: var(--cream);
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.9) 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero h2 {
+  font-size: 3.2rem;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  color: var(--text-light);
+  margin-bottom: 40px;
+  font-weight: 300;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Reproductor Vintage */
+.vintage-player-section {
+  background-color: rgba(10, 10, 10, 0.8);
+  padding: 50px 20px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 215, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.vintage-player-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.vintage-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(217, 160, 91, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(217, 160, 91, 0.05) 0%, transparent 20%),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d9a05b' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+  z-index: 1;
+  pointer-events: none;
+}
+
+.vinyl-record {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #1a0f0a 30%, #000 100%);
+  border: 15px solid #2c1a10;
+  box-shadow: 
+    inset 0 0 50px rgba(217, 160, 91, 0.3),
+    0 0 60px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+  animation: spinVinyl 20s linear infinite;
+  opacity: 0.1;
+  left: -100px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes spinVinyl {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+.vinyl-center {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: var(--neon-gold);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.timeline {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-gold), transparent);
+  opacity: 0.3;
+  z-index: 1;
+  animation: timelineMove 20s linear infinite;
+}
+
+.timeline:nth-child(1) { top: 20%; animation-delay: 0s; }
+.timeline:nth-child(2) { top: 40%; animation-delay: -5s; }
+.timeline:nth-child(3) { top: 60%; animation-delay: -10s; }
+.timeline:nth-child(4) { top: 80%; animation-delay: -15s; }
+
+@keyframes timelineMove {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.vintage-player {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  background: rgba(26, 15, 10, 0.9);
+  backdrop-filter: blur(5px);
+  border-radius: 15px;
+  padding: 25px;
+  border: 2px solid var(--neon-gold);
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.7),
+    inset 0 0 30px rgba(255, 215, 0, 0.1),
+    0 0 0 1px rgba(44, 26, 16, 0.8);
+  margin: 20px auto;
+  border-style: double;
+  border-width: 3px;
+}
+
+.vintage-player::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.player-header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.player-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-gold), transparent);
+}
+
+.station-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--neon-gold);
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(255, 215, 0, 0.3);
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+  font-weight: normal;
+}
+
+.station-subtitle {
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #E6C9A0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  letter-spacing: 1px;
+}
+
+.frequency-indicator {
+  background: rgba(44, 26, 16, 0.8);
+  border: 1px solid var(--neon-gold);
+  border-radius: 20px;
+  padding: 8px 20px;
+  display: inline-block;
+  margin-top: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: #E6C9A0;
+  letter-spacing: 3px;
+  animation: frequencyGlow 3s ease-in-out infinite;
+}
+
+@keyframes frequencyGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+}
+
+.player-area {
+  position: relative;
+  min-height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(44, 26, 16, 0.6);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.cstrEmbed {
+  width: 100%;
+  min-height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(26, 15, 10, 0.8);
+  padding: 15px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.vintage-meter {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  height: 4px;
+  background: rgba(44, 26, 16, 0.8);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.meter-level {
+  position: absolute;
+  height: 100%;
+  width: 60%;
+  background: linear-gradient(90deg, var(--neon-gold), #E6C9A0);
+  border-radius: 2px;
+  animation: meterPulse 2s ease-in-out infinite;
+}
+
+@keyframes meterPulse {
+  0%, 100% { width: 40%; opacity: 0.8; }
+  50% { width: 80%; opacity: 1; }
+}
+
+.decade-indicators {
+  display: flex;
+  justify-content: space-around;
+  margin: 25px 0;
+  padding: 15px;
+  background: rgba(44, 26, 16, 0.5);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.decade {
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: #E6C9A0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.decade:hover {
+  background: rgba(255, 215, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.decade.active {
+  background: rgba(255, 215, 0, 0.3);
+  color: #FFD8A6;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.player-footer {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+  color: #B8945C;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.vintage-loading {
+  text-align: center;
+  padding: 20px;
+}
+
+.record-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 215, 0, 0.2);
+  border-top: 4px solid var(--neon-gold);
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  animation: spin 1.5s linear infinite;
+  position: relative;
+}
+
+.record-spinner::before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: var(--neon-gold);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.memory-flash {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 2;
+  animation: flashAppear 1s ease-out;
+}
+
+@keyframes flashAppear {
+  0% { transform: scale(0); opacity: 0.8; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* Secciones */
+section {
+  padding: 80px 30px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.section-title h2 {
+  font-size: 2.5rem;
+  color: var(--cream);
+  display: inline-block;
+  padding-bottom: 15px;
+}
+
+.section-title h2:after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-gold), transparent);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Carrusel de Programación */
+.programacion-carousel {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.carousel-container {
+  overflow: hidden;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  background-color: rgba(20, 20, 20, 0.8);
+  padding: 20px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 20px;
+}
+
+.carousel-slide {
+  min-width: calc(33.333% - 14px);
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.carousel-slide:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+}
+
+.carousel-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  padding: 30px 20px 20px;
+  color: white;
+}
+
+.carousel-overlay h3 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: var(--neon-gold);
+}
+
+.carousel-overlay p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.carousel-time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.carousel-btn {
+  background-color: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  color: var(--cream);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(255, 215, 0, 0.2);
+  border-color: var(--neon-gold);
+  color: var(--neon-gold);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  transform: scale(1.1);
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active, .carousel-dot:hover {
+  background-color: var(--neon-gold);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  transform: scale(1.2);
+}
+
+/* Concepto */
+.concept-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+.concept-card {
+  background-color: rgba(20, 20, 20, 0.8);
+  border-radius: 10px;
+  padding: 35px;
+  text-align: center;
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.concept-card:hover {
+  border-color: rgba(255, 215, 0, 0.3);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.concept-icon {
+  font-size: 3rem;
+  color: var(--neon-gold);
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.concept-content h3 {
+  font-size: 1.5rem;
+  color: var(--cream);
+  margin-bottom: 15px;
+}
+
+.concept-content p {
+  color: var(--text-light);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* Mensajes emocionales */
+.messages-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.message-slider {
+  background-color: rgba(20, 20, 20, 0.8);
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-slider:before {
+  content: '"';
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 6rem;
+  color: rgba(255, 215, 0, 0.1);
+  font-family: 'Playfair Display', serif;
+}
+
+.message-slider p {
+  font-size: 1.4rem;
+  color: var(--cream);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.8;
+  z-index: 2;
+  position: relative;
+}
+
+.message-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.message-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.message-dot.active, .message-dot:hover {
+  background-color: var(--neon-gold);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  transform: scale(1.3);
+}
+
+/* Footer */
+footer {
+  background-color: rgba(10, 10, 10, 0.95);
+  color: var(--cream);
+  text-align: center;
+  padding: 60px 25px 25px;
+  border-top: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.footer-section h3 {
+  color: var(--neon-gold);
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.footer-section p, .footer-section a {
+  color: var(--text-light);
+  margin-bottom: 12px;
+  display: block;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-weight: 300;
+}
+
+.footer-section a:hover {
+  color: var(--neon-gold);
+  padding-left: 5px;
+  transform: translateX(5px);
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  color: var(--cream);
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.social-icons a:hover {
+  background-color: rgba(255, 215, 0, 0.1);
+  color: var(--neon-gold);
+  border-color: var(--neon-gold);
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.copyright {
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.copyright strong {
+  color: var(--neon-gold);
+}
+
+/* Botones interactivos */
+.btn-neon {
+  background: transparent;
+  color: var(--neon-gold);
+  padding: 14px 32px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.4s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid var(--neon-gold);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  letter-spacing: 1px;
+}
+
+.btn-neon:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+  transition: left 0.7s;
+  z-index: -1;
+}
+
+.btn-neon:hover:before {
+  left: 100%;
+}
+
+.btn-neon:hover {
+  background-color: rgba(255, 215, 0, 0.1);
+  box-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.5),
+    0 0 20px rgba(255, 215, 0, 0.2);
+  transform: translateY(-5px) scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .carousel-slide {
+    min-width: calc(50% - 10px);
+  }
+  
+  .vinyl-record {
+    left: -150px;
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero h2 {
+    font-size: 2.5rem;
+  }
+  
+  .section-title h2 {
+    font-size: 2rem;
+  }
+  
+  section {
+    padding: 60px 20px;
+  }
+  
+  .hero {
+    padding: 80px 20px;
+  }
+  
+  .carousel-slide {
+    min-width: calc(100% - 0px);
+  }
+  
+  .vinyl-record {
+    display: none;
+  }
+  
+  .floating-buttons {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .whatsapp-btn, .scroll-top-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h2 {
+    font-size: 2rem;
+  }
+  
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav-btn {
+    width: 80%;
+    text-align: center;
+  }
+  
+  .concept-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .message-slider p {
+    font-size: 1.2rem;
+  }
+  
+  .carousel-image {
+    height: 250px;
+  }
+  
+  .station-title {
+    font-size: 1.8rem;
+  }
+  
+  .floating-buttons {
+    bottom: 15px;
+    right: 15px;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <!-- NAV / BREADCRUMB (igual al tuyo) -->
-  <nav class="breadcrumb" aria-label="breadcrumb">
-    <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:1.2rem;padding:0.7rem 1.5rem;">
-      <a href="#" onclick="goBackToSection(event, 'emisoras')" style="color:#ffe082;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:0.5rem;">
-        <svg width="20" height="20" fill="none" stroke="#ffe082" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 19l-7-7 7-7"/><path d="M3 12h18"/></svg>
-        EMISORAS
-      </a>
-      <span style="color:#bfa76a;font-size:1.2rem;">/</span>
-      <span style="color:#fffbe6;font-weight:700;">DC Clasicos EC</span>
-      <div style="flex:1"></div>
-    </div>
+<!-- Líneas de fondo interactivas -->
+<div class="background-lines" id="backgroundLines">
+  <div class="line line-1"></div>
+  <div class="line line-2"></div>
+  <div class="line line-3"></div>
+  <div class="line line-4"></div>
+  <div class="line line-5"></div>
+</div>
+
+<!-- Botones flotantes -->
+<div class="floating-buttons">
+  <button class="whatsapp-btn" id="whatsappBtn">
+    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-tooltip">Pide tu canción</span>
+  </button>
+  
+  <button class="scroll-top-btn" id="scrollTopBtn">
+    <i class="fas fa-arrow-up"></i>
+    <span class="scroll-tooltip">Volver arriba</span>
+  </button>
+</div>
+
+<header>
+  <h1 class="neon-text">DC CLÁSICOS</h1>
+  <p class="subtitle">Las canciones que marcaron tu historia</p>
+  <p class="tagline">🎼 La radio emocional 🎼</p>
+  
+  <nav>
+    <a href="#" class="nav-btn active"><i class="fas fa-home"></i> Inicio</a>
+    <a href="#reproductor" class="nav-btn"><i class="fas fa-play-circle"></i> Escuchar</a>
+    <a href="#programacion" class="nav-btn"><i class="fas fa-calendar-alt"></i> Programación</a>
+    <a href="#concepto" class="nav-btn"><i class="fas fa-heart"></i> Concepto</a>
   </nav>
+</header>
 
-  <!-- Contenedor de partículas -->
-  <div id="particles-js" aria-hidden="true"></div>
+<div class="hero">
+  <div class="hero-content">
+    <h2 class="neon-text">Baladas que viven en la memoria</h2>
+    <p>La radio que acompaña recuerdos, amores y silencios. Revive las emociones con las canciones que marcaron una época.</p>
+    <a href="#reproductor" class="btn-neon"><i class="fas fa-headphones"></i> Escuchar en vivo</a>
+  </div>
+</div>
 
-  <!-- CONTENIDO (se conserva TODO tu contenido) -->
-  <main class="content" role="main">
-    <div style="text-align:center;">
-      <span class="title-box">DC Clasicos EC</span>
+<section class="vintage-player-section" id="reproductor">
+  <div class="vintage-player-container">
+    <div class="vintage-overlay"></div>
+    
+    <!-- Vinilo animado -->
+    <div class="vinyl-record">
+      <div class="vinyl-center"></div>
     </div>
-    <div class="subtitle-modern">🎶 La mejor selección de clásicos en un solo lugar</div>
-
-    <!-- REPRODUCTOR CENTRADO + MARCO DORADO -->
-    <section class="radio-section" aria-labelledby="radio-title">
-      <h2 id="radio-title" style="text-align:center;color:transparent;background:linear-gradient(90deg,#bfa76a,#ffe082);-webkit-background-clip:text;">Escucha en línea</h2>
-
-      <div class="radio-wrapper" aria-hidden="false">
-        <div class="radio-frame-gold" role="region" aria-label="Reproductor DC Clasicos EC">
-          <div class="radio-inner">
-            <!-- === AQUÍ ESTÁ TU DIV JUSTO COMO LO PUSISTE === -->
-            <div data-type="newStreamPlayer" data-publicToken="483de68b-f9e5-4fa3-b5ee-b27252721c33" data-theme="dark" data-color="D9A05B" data-channelId="" data-rendered="false" class="cstrEmbed">
-              <a href="https://www.caster.fm">Shoutcast Hosting</a>
-              <a href="https://www.caster.fm">Stream Hosting</a>
-              <a href="https://www.caster.fm">Radio Server Hosting</a>
-            </div>
-            <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
-            <!-- ================================================= -->
-          </div>
-
-          <div class="radio-scan" aria-hidden="true"></div>
+    
+    <!-- Líneas de tiempo -->
+    <div class="timeline"></div>
+    <div class="timeline"></div>
+    <div class="timeline"></div>
+    <div class="timeline"></div>
+    
+    <!-- Reproductor vintage -->
+    <div class="vintage-player">
+      <div class="player-header">
+        <h1 class="station-title">DC CLÁSICOS</h1>
+        <p class="station-subtitle">Donde viven tus recuerdos</p>
+        <div class="frequency-indicator">FM 98.7</div>
+      </div>
+      
+      <div class="player-area">
+        <!-- Estado de carga vintage -->
+        <div class="vintage-loading" id="loadingState">
+          <div class="record-spinner"></div>
+          <p style="color: #D9A05B; font-style: italic; margin-top: 10px;">
+            Sintonizando memorias...
+          </p>
+        </div>
+        
+        <!-- Reproductor de Caster.fm -->
+        <div data-type="newStreamPlayer" 
+             data-publicToken="483de68b-f9e5-4fa3-b5ee-b27252721c33" 
+             data-theme="dark" 
+             data-color="D9A05B" 
+             data-channelId="" 
+             data-rendered="false" 
+             class="cstrEmbed" 
+             style="display: none;">
+          <a href="https://www.caster.fm">Shoutcast Hosting</a>
+          <a href="https://www.caster.fm">Stream Hosting</a>
+          <a href="https://www.caster.fm">Radio Server Hosting</a>
+        </div>
+        
+        <!-- Medidor vintage -->
+        <div class="vintage-meter">
+          <div class="meter-level"></div>
         </div>
       </div>
-    </section>
-
-    <!-- BOTÓN FLOTANTE -->
-    <button id="btn-pedir-cancion" aria-label="Pide tu canción" title="Pide tu canción">
-      🎵 Pide tu canción
-    </button>
-
-    <!-- FORMULARIO DESPLEGABLE -->
-    <div id="form-container" aria-hidden="true" role="dialog" aria-labelledby="pedido-title">
-      <h3 id="pedido-title">🎶 Pide tu canción</h3>
-      <form id="formPedidoWhatsApp" novalidate>
-        <input type="text" name="nombre" placeholder="Tu nombre" required autocomplete="name">
-        <input type="text" name="cancion" placeholder="Nombre de la canción" required>
-        <input type="text" name="artista" placeholder="Artista" required>
-        <textarea name="mensaje" placeholder="Mensaje adicional (opcional)"></textarea>
-        <button type="submit">Enviar pedido</button>
-      </form>
+      
+      <!-- Indicadores de década -->
+      <div class="decade-indicators">
+        <div class="decade active" data-decade="80">80's</div>
+        <div class="decade" data-decade="90">90's</div>
+        <div class="decade" data-decade="00">00's</div>
+        <div class="decade" data-decade="10">10's</div>
+      </div>
+      
+      <!-- Información del stream -->
+      <div class="player-footer">
+        <p>Música que trasciende el tiempo • Streaming en alta fidelidad</p>
+        <p style="margin-top: 8px; font-size: 0.7rem;">Revive tus mejores momentos con nosotros</p>
+      </div>
     </div>
-  </main>
+  </div>
+</section>
 
-  <!-- SCRIPTS: particles + formulario + utilidades -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    // Inicializa partículas (dorado suave)
-    (function(){
-      function run() {
-        if (typeof particlesJS === 'function') {
-          particlesJS('particles-js', {
-            "particles": {
-              "number": { "value": 80 },
-              "color": { "value": ["#FFD700","#D9A05B"] },
-              "shape": { "type": "circle" },
-              "opacity": { "value": 0.6, "random": true },
-              "size": { "value": 3, "random": { "enable": true, "minimumValue": 1 } },
-              "line_linked": { "enable": true, "distance": 140, "color": "#D9A05B", "opacity": 0.25, "width": 1.2 },
-              "move": { "enable": true, "speed": 1.8 }
-            },
-            "interactivity": { "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
-            "retina_detect": true
-          });
-        } else {
-          setTimeout(run, 200);
-        }
-      }
-      run();
-    })();
+<section id="programacion">
+  <div class="section-title">
+    <h2 class="neon-text">Programación en Imágenes</h2>
+  </div>
+  
+  <div class="programacion-carousel">
+    <div class="carousel-container">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Las diapositivas del carrusel se generarán con JavaScript -->
+      </div>
+    </div>
+    
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prevCarouselBtn">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      
+      <div class="carousel-dots" id="carouselDots">
+        <!-- Los puntos del carrusel se generarán con JavaScript -->
+      </div>
+      
+      <button class="carousel-btn" id="nextCarouselBtn">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
 
-    // Botón y formulario (WhatsApp)
-    (function(){
-      const btn = document.getElementById('btn-pedir-cancion');
-      const formContainer = document.getElementById('form-container');
-      const form = document.getElementById('formPedidoWhatsApp');
-      const numeroWhatsApp = '593961480654';
+<section id="concepto">
+  <div class="section-title">
+    <h2 class="neon-text">Nuestro Concepto</h2>
+  </div>
+  
+  <div class="concept-container">
+    <div class="concept-card">
+      <div class="concept-icon">
+        <i class="fas fa-heart"></i>
+      </div>
+      <div class="concept-content">
+        <h3>Emisora emocional y atemporal</h3>
+        <p>No somos solo música. Somos la banda sonora de tus recuerdos, el acompañamiento en tus silencios, la voz que entiende lo que sientes.</p>
+      </div>
+    </div>
+    
+    <div class="concept-card">
+      <div class="concept-icon">
+        <i class="fas fa-music"></i>
+      </div>
+      <div class="concept-content">
+        <h3>Baladas en español e inglés</h3>
+        <p>Desde los 80 hasta la actualidad. Seleccionamos cuidadosamente cada canción. Solo baladas que han marcado generaciones y siguen vivas en la memoria.</p>
+      </div>
+    </div>
+    
+    <div class="concept-card">
+      <div class="concept-icon">
+        <i class="fas fa-star"></i>
+      </div>
+      <div class="concept-content">
+        <h3>Recuerdos, historias, nostalgia y elegancia</h3>
+        <p>Creamos un espacio para quienes buscan calma y nostalgia, lejos del ruido y la prisa. Música para recordar, sentir y revivir con elegancia.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      btn.addEventListener('click', () => {
-        formContainer.classList.toggle('active');
-        const isActive = formContainer.classList.contains('active');
-        formContainer.setAttribute('aria-hidden', String(!isActive));
-        if (isActive) {
-          const first = form.querySelector('input, textarea');
-          if (first) first.focus();
-        }
-      });
+<section>
+  <div class="section-title">
+    <h2 class="neon-text">Mensajes Emocionales</h2>
+  </div>
+  
+  <div class="messages-container">
+    <div class="message-slider">
+      <p id="message-text">La música no se escucha con los oídos, se siente con el alma. Estas canciones son el eco de momentos que nunca se olvidan.</p>
+    </div>
+    <div class="message-controls">
+      <button class="message-dot active" data-index="0"></button>
+      <button class="message-dot" data-index="1"></button>
+      <button class="message-dot" data-index="2"></button>
+    </div>
+  </div>
+</section>
 
-      form.addEventListener('submit', e => {
-        e.preventDefault();
-        const nombre = (form.nombre.value || '').trim();
-        const cancion = (form.cancion.value || '').trim();
-        const artista = (form.artista.value || '').trim();
-        const mensaje = (form.mensaje.value || '').trim();
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3 class="neon-text">DC CLÁSICOS</h3>
+      <p>La radio emocional. Parte de RDCR Sound Network.</p>
+      <p>Baladas que viven en la memoria. Canciones que marcaron tu historia.</p>
+      <p>24/7 transmitiendo calma y nostalgia.</p>
+    </div>
+    
+    <div class="footer-section">
+      <h3 class="neon-text">Conéctate</h3>
+      <p><i class="fas fa-envelope"></i> contacto@dcclasicos.com</p>
+      <p><i class="fas fa-phone"></i> +1 800 CLASICOS</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fas fa-podcast"></i></a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="copyright">
+    <p>DC CLÁSICOS · RDCR Sound Network © 2026 | <strong>Las canciones que marcaron tu historia</strong></p>
+    <p style="margin-top: 10px; font-size: 0.8rem;">🎼 La radio emocional 🎼</p>
+  </div>
+</footer>
 
-        if (!nombre || !cancion || !artista) {
-          alert('Por favor completa tu nombre, la canción y el artista.');
-          return;
-        }
-
-        let texto = `*_Pedido de canción - DC Clasicos EC_*%0A- *Nombre:* ${nombre}%0A- *Canción:* ${cancion}%0A- *Artista:* ${artista}`;
-        if (mensaje) texto += `%0A- *Mensaje:* ${mensaje}`;
-
-        window.open(`https://wa.me/${numeroWhatsApp}?text=${texto}`, '_blank');
-        form.reset();
-        formContainer.classList.remove('active');
-        formContainer.setAttribute('aria-hidden', 'true');
-      });
-    })();
-
-    // Navegar atrás a sección (breadcrumb)
-    function goBackToSection(event, sectionId) {
-      event.preventDefault();
-      try {
-        if (document.referrer) {
-          let url = new URL(document.referrer);
-          url.hash = sectionId;
-          window.location.href = url.toString();
-        } else {
-          window.location.href = '/#' + sectionId;
-        }
-      } catch {
-        window.location.href = '/#' + sectionId;
-      }
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Elementos del reproductor vintage
+  const loadingState = document.getElementById('loadingState');
+  const cstrEmbed = document.querySelector('.cstrEmbed');
+  const vinylRecord = document.querySelector('.vinyl-record');
+  const decades = document.querySelectorAll('.decade');
+  
+  // Elementos del carrusel
+  const carouselTrack = document.getElementById('carouselTrack');
+  const prevCarouselBtn = document.getElementById('prevCarouselBtn');
+  const nextCarouselBtn = document.getElementById('nextCarouselBtn');
+  const carouselDots = document.getElementById('carouselDots');
+  
+  // Elementos de mensajes
+  const messageDots = document.querySelectorAll('.message-dot');
+  const messageText = document.getElementById('message-text');
+  
+  // Botones flotantes
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+  
+  // Datos para el carrusel (10 ejemplos)
+  const carouselData = [
+    {
+      image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+      title: "Recuerdos Eternos",
+      description: "Las baladas más memorables de los 70s, 80s y 90s.",
+      time: "Lunes a Viernes, 9:00 - 12:00"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+      title: "Clásicos de Siempre",
+      description: "Los grandes éxitos del rock suave y pop clásico.",
+      time: "Lunes a Viernes, 16:00 - 19:00"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+      title: "Noche de Baladas",
+      description: "Baladas románticas para acompañar tus noches.",
+      time: "Sábados, 20:00 - 00:00"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+      title: "Momentos de Amor",
+      description: "Canciones de amor que definieron una generación.",
+      time: "Domingos, 14:00 - 17:00"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+      title: "Voces Inolvidables",
+      description: "Los mejores intérpretes de baladas de todos los tiempos.",
+      time: "Martes y Jueves, 20:00 - 22:00"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+      title: "Años Dorados",
+      description: "Un viaje por las canciones que hicieron historia.",
+      time: "Miércoles, 10:00 - 13:00"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+      title: "Sólo Baladas",
+      description: "Exclusivamente baladas en inglés y español.",
+      time: "Viernes, 21:00 - 00:00"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+      title: "Café y Música",
+      description: "Música suave para acompañar tus momentos de relax.",
+      time: "Lunes a Viernes, 7:00 - 9:00"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+      title: "Sesiones Acústicas",
+      description: "Versiones acústicas de los grandes clásicos.",
+      time: "Sábados, 14:00 - 16:00"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+      title: "Hits Románticos",
+      description: "Las canciones de amor más populares de siempre.",
+      time: "Domingos, 20:00 - 23:00"
     }
-  </script>
+  ];
+  
+  // Lista de mensajes emocionales
+  const messages = [
+    "La música no se escucha con los oídos, se siente con el alma. Estas canciones son el eco de momentos que nunca se olvidan.",
+    "En el silencio entre notas, encontramos los recuerdos más valiosos. DC Clásicos: la banda sonora de tu vida.",
+    "Algunas canciones no terminan cuando para la música. Siguen vibrando en el corazón mucho tiempo después."
+  ];
+  
+  // Variables para el carrusel
+  let currentSlide = 0;
+  const slidesPerView = getSlidesPerView();
+  
+  // Variables generales
+  let currentMessageIndex = 0;
+  
+  // Inicializar líneas de fondo interactivas
+  initBackgroundLines();
+  
+  // Inicializar carrusel
+  initCarousel();
+  
+  // Inicializar reproductor vintage
+  initVintagePlayer();
+  
+  // Inicializar botones flotantes
+  initFloatingButtons();
+  
+  // Configurar efectos interactivos
+  setupInteractiveEffects();
+  
+  // Inicializar líneas de fondo interactivas
+  function initBackgroundLines() {
+    const backgroundLines = document.getElementById('backgroundLines');
+    
+    // Crear partículas adicionales
+    for (let i = 0; i < 30; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      // Posición aleatoria
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      
+      // Tamaño aleatorio
+      const size = Math.random() * 3 + 1;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      
+      // Opacidad aleatoria
+      particle.style.opacity = `${Math.random() * 0.4 + 0.1}`;
+      
+      // Animación
+      particle.style.animation = `moveLine ${Math.random() * 40 + 20}s linear infinite`;
+      particle.style.animationDirection = Math.random() > 0.5 ? 'normal' : 'reverse';
+      
+      backgroundLines.appendChild(particle);
+    }
+    
+    // Hacer que las líneas reaccionen al movimiento del mouse
+    document.addEventListener('mousemove', function(e) {
+      const lines = document.querySelectorAll('.line');
+      const mouseX = e.clientX / window.innerWidth;
+      const mouseY = e.clientY / window.innerHeight;
+      
+      lines.forEach((line, index) => {
+        const speed = (index + 1) * 0.5;
+        line.style.transform = `translateX(${-100 + mouseX * 200}%)`;
+        line.style.opacity = `${0.05 + mouseY * 0.1}`;
+      });
+    });
+  }
+  
+  // Inicializar reproductor vintage
+  function initVintagePlayer() {
+    // Crear efectos de memoria al tocar
+    function createMemoryFlash(x, y) {
+      const flash = document.createElement('div');
+      flash.className = 'memory-flash';
+      flash.style.left = `${x}px`;
+      flash.style.top = `${y}px`;
+      
+      document.body.appendChild(flash);
+      
+      setTimeout(() => {
+        flash.remove();
+      }, 1000);
+    }
+    
+    // Cargar el script de Caster.fm
+    const script = document.createElement('script');
+    script.src = '//cdn.cloud.caster.fm/widgets/embed.js';
+    
+    script.onload = function() {
+      console.log('Reproductor DC Clásicos cargado');
+      
+      // Ocultar estado de carga después de 2 segundos
+      setTimeout(() => {
+        if (loadingState) {
+          loadingState.style.display = 'none';
+        }
+        if (cstrEmbed) {
+          cstrEmbed.style.display = 'flex';
+        }
+        
+        // Animar el vinilo
+        if (vinylRecord) {
+          vinylRecord.style.animationDuration = '15s';
+          vinylRecord.style.opacity = '0.15';
+        }
+      }, 2000);
+    };
+    
+    script.onerror = function() {
+      console.error('Error al cargar el reproductor');
+      if (loadingState) {
+        loadingState.innerHTML = `
+          <div style="color: #D9A05B; text-align: center; font-style: italic;">
+            <p>📻 Sintonía interrumpida</p>
+            <p style="font-size: 0.8rem; margin-top: 10px;">Reconectando con tus recuerdos...</p>
+          </div>
+        `;
+      }
+    };
+    
+    document.body.appendChild(script);
+    
+    // Simular cambio de década
+    decades.forEach(decade => {
+      decade.addEventListener('click', function() {
+        // Remover clase active de todos
+        decades.forEach(d => d.classList.remove('active'));
+        
+        // Añadir al seleccionado
+        this.classList.add('active');
+        
+        // Crear efecto visual
+        const rect = this.getBoundingClientRect();
+        createMemoryFlash(
+          rect.left + rect.width / 2,
+          rect.top + rect.height / 2
+        );
+        
+        // Cambiar texto del subtítulo temporalmente
+        const subtitle = document.querySelector('.station-subtitle');
+        const originalText = subtitle.textContent;
+        
+        const decadeText = this.getAttribute('data-decade');
+        const decadeNames = {
+          '80': 'Revive los 80s',
+          '90': 'Memorias de los 90s',
+          '00': 'Los clásicos 2000',
+          '10': 'Baladas recientes'
+        };
+        
+        subtitle.textContent = decadeNames[decadeText] || originalText;
+        
+        // Restaurar después de 3 segundos
+        setTimeout(() => {
+          subtitle.textContent = originalText;
+        }, 3000);
+      });
+    });
+    
+    // Animar el medidor de señal
+    const meterLevel = document.querySelector('.meter-level');
+    if (meterLevel) {
+      let direction = 1;
+      let width = 40;
+      
+      setInterval(() => {
+        if (direction === 1) {
+          width += Math.random() * 5;
+          if (width > 85) direction = -1;
+        } else {
+          width -= Math.random() * 5;
+          if (width < 35) direction = 1;
+        }
+        
+        meterLevel.style.width = `${width}%`;
+        meterLevel.style.opacity = 0.7 + (width / 100) * 0.3;
+      }, 200);
+    }
+    
+    // Efecto de texto parpadeante
+    const title = document.querySelector('.station-title');
+    if (title) {
+      let glowIntensity = 0.3;
+      let increasing = true;
+      
+      setInterval(() => {
+        if (increasing) {
+          glowIntensity += 0.02;
+          if (glowIntensity >= 0.6) increasing = false;
+        } else {
+          glowIntensity -= 0.02;
+          if (glowIntensity <= 0.2) increasing = true;
+        }
+        
+        title.style.textShadow = `
+          0 2px 4px rgba(0, 0, 0, 0.8),
+          0 0 ${20 * glowIntensity}px rgba(255, 215, 0, ${glowIntensity})
+        `;
+      }, 100);
+    }
+    
+    // Crear flashes aleatorios de memoria
+    setInterval(() => {
+      if (Math.random() > 0.7) {
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        createMemoryFlash(x, y);
+      }
+    }, 3000);
+  }
+  
+  // Inicializar carrusel
+  function initCarousel() {
+    // Limpiar carrusel
+    carouselTrack.innerHTML = '';
+    carouselDots.innerHTML = '';
+    
+    // Crear slides
+    carouselData.forEach((item, index) => {
+      // Crear slide
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide';
+      slide.dataset.index = index;
+      
+      slide.innerHTML = `
+        <img src="${item.image}" alt="${item.title}" class="carousel-image">
+        <div class="carousel-overlay">
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          <div class="carousel-time">
+            <i class="far fa-clock"></i> ${item.time}
+          </div>
+        </div>
+      `;
+      
+      carouselTrack.appendChild(slide);
+      
+      // Crear punto para el slide
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot';
+      if (index === 0) dot.classList.add('active');
+      dot.dataset.index = index;
+      dot.addEventListener('click', () => goToSlide(index));
+      
+      carouselDots.appendChild(dot);
+    });
+    
+    // Actualizar carrusel
+    updateCarousel();
+    
+    // Event listeners para los botones del carrusel
+    prevCarouselBtn.addEventListener('click', prevSlide);
+    nextCarouselBtn.addEventListener('click', nextSlide);
+    
+    // Actualizar carrusel en redimensionamiento de ventana
+    window.addEventListener('resize', updateCarousel);
+  }
+  
+  // Obtener número de slides visibles según el ancho de pantalla
+  function getSlidesPerView() {
+    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 768) return 2;
+    return 1;
+  }
+  
+  // Actualizar carrusel
+  function updateCarousel() {
+    const slideWidth = 100 / slidesPerView;
+    const translateX = -currentSlide * slideWidth;
+    carouselTrack.style.transform = `translateX(${translateX}%)`;
+    
+    // Actualizar puntos activos
+    document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+      if (index === currentSlide) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+  
+  // Ir a slide anterior
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + carouselData.length) % carouselData.length;
+    updateCarousel();
+    
+    // Efecto visual en el botón
+    prevCarouselBtn.classList.add('neon-glow');
+    setTimeout(() => prevCarouselBtn.classList.remove('neon-glow'), 300);
+  }
+  
+  // Ir a siguiente slide
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % carouselData.length;
+    updateCarousel();
+    
+    // Efecto visual en el botón
+    nextCarouselBtn.classList.add('neon-glow');
+    setTimeout(() => nextCarouselBtn.classList.remove('neon-glow'), 300);
+  }
+  
+  // Ir a slide específico
+  function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
+  }
+  
+  // Inicializar botones flotantes
+  function initFloatingButtons() {
+    // Botón de WhatsApp
+    whatsappBtn.addEventListener('click', function() {
+      const phoneNumber = "51987654321"; // Número de teléfono (cambiar por el real)
+      const message = "Hola DC Clásicos, me encantaría pedir una canción!";
+      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+      
+      // Efecto visual
+      this.style.transform = 'scale(0.9)';
+      setTimeout(() => {
+        this.style.transform = '';
+      }, 200);
+    });
+    
+    // Botón para subir
+    scrollTopBtn.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      
+      // Efecto visual
+      this.style.transform = 'scale(0.9)';
+      setTimeout(() => {
+        this.style.transform = '';
+      }, 200);
+    });
+    
+    // Mostrar/ocultar botón de subir según scroll
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 500) {
+        scrollTopBtn.style.opacity = '1';
+        scrollTopBtn.style.visibility = 'visible';
+      } else {
+        scrollTopBtn.style.opacity = '0';
+        scrollTopBtn.style.visibility = 'hidden';
+      }
+    });
+  }
+  
+  // Configurar efectos interactivos
+  function setupInteractiveEffects() {
+    // Cambiar mensajes emocionales
+    function changeMessage(index) {
+      messageText.textContent = messages[index];
+      messageDots.forEach(dot => dot.classList.remove('active'));
+      messageDots[index].classList.add('active');
+      currentMessageIndex = index;
+    }
+    
+    // Event listeners para los dots de mensajes
+    messageDots.forEach(dot => {
+      dot.addEventListener('click', function() {
+        const index = parseInt(this.getAttribute('data-index'));
+        changeMessage(index);
+        
+        // Efecto visual
+        this.style.transform = 'scale(0.8)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 200);
+      });
+    });
+    
+    // Cambiar mensaje automáticamente cada 10 segundos
+    setInterval(() => {
+      currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+      changeMessage(currentMessageIndex);
+    }, 10000);
+    
+    // Autoavance del carrusel cada 5 segundos
+    setInterval(() => {
+      nextSlide();
+    }, 5000);
+    
+    // Navegación suave
+    document.querySelectorAll('nav a, .btn-neon').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          const targetId = href.substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+    
+    // Efecto de neón en los botones de navegación al pasar el mouse
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('mouseenter', function() {
+        this.classList.add('neon-glow');
+      });
+      
+      btn.addEventListener('mouseleave', function() {
+        if (!this.classList.contains('active')) {
+          this.classList.remove('neon-glow');
+        }
+      });
+    });
+  }
+});
+</script>
+
 </body>
 </html>

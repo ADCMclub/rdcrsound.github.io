@@ -1,464 +1,2387 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DC Mix EC</title>
+<meta charset="UTF-8">
+<title>DC MIX | Energía Sin Pausa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DC Mix - Mezclas que no se detienen. Música mezclada 24 horas. Dance, House, Urban remixes y música electrónica.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --black: #000000;
+  --black-dark: #0a0a0a;
+  --black-light: #1a1a1a;
+  --neon-pink: #ff00ff;
+  --neon-pink-glow: rgba(255, 0, 255, 0.7);
+  --neon-pink-light: #ff66ff;
+  --neon-green: #00ff00;
+  --neon-green-glow: rgba(0, 255, 0, 0.7);
+  --neon-green-light: #66ff66;
+  --neon-blue: #00ffff;
+  --neon-blue-glow: rgba(0, 255, 255, 0.7);
+  --neon-blue-light: #66ffff;
+  --white: #ffffff;
+  --gray: #222222;
+  --gray-light: #333333;
+}
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/img_radio/RDCRSOUND_LOG.jpg">
-  <link rel="icon" type="image/png" sizes="192x192" href="/img_radio/RDCRSOUND_LOG.jpg">
-  <link rel="icon" type="image/png" sizes="512x512" href="/img_radio/RDCRSOUND_LOG.jpg">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="DC Mix EC">
-  <meta name="theme-color" content="#0d0d0d">
-  <meta name="description" content="DC Mix EC - Los mejores mix de música.">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg:#0d0d0d;
-      --accent:#49D3F2;
-      --accent-2:#0077FF;
-      --muted:#b3d9ff;
-      --panel:#18181b;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Poppins', Arial, sans-serif;
-      color: #fff;
-      background: transparent; /* ahora se ve el fondo de partículas */
-      overflow-x: hidden;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    body::-webkit-scrollbar { display: none; }
-
-    #particles-js {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background: var(--bg);
-    }
-
-.content {
-  position: relative;
-  padding: 2rem;
-  padding-bottom: 160px; /* espacio extra para no tapar contenido por el botón y reproductor */
-  z-index: 1;
-  max-width: 1100px;
-  margin: 0 auto;
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-    h1, .title-box { user-select: none; }
+body {
+  font-family: 'Exo 2', sans-serif;
+  color: var(--white);
+  background-color: var(--black);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 0, 255, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.03) 0%, transparent 30%);
+  background-attachment: fixed;
+}
 
-    h1 {
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(90deg, #8297ff 10%, #8297ff 90%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 2px 12px #8297ff55);
-      animation: title-fade-in 1.1s cubic-bezier(.4,0,.2,1);
-    }
-    @keyframes title-fade-in {
-      from { opacity: 0; transform: translateY(30px) scale(0.97);}
-      to { opacity: 1; transform: translateY(0) scale(1);}
-    }
+h1, h2, h3, h4, .logo, .neon-text {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
-    .subtitle-modern {
-      text-align: center;
-      font-size: 1.35rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 2.2rem;
-      color: #8297ff;
-      text-shadow: 0 2px 8px #8297ff55;
-      animation: subtitle-fade-in 1.2s cubic-bezier(.4,0,.2,1);
-    }
-    @keyframes subtitle-fade-in {
-      from { opacity: 0; transform: translateY(20px);}
-      to { opacity: 1; transform: translateY(0);}
-    }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-    /* Títulos de secciones */
-    .radio-section h2 {
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      margin-bottom: 1.2rem;
-      background: linear-gradient(90deg, #8297ff 10%, #b3cfff 90%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 2px 8px #8297ff55);
-      animation: radio-title-fade-in 1.1s cubic-bezier(.4,0,.2,1);
-    }
-    @keyframes radio-title-fade-in {
-      from { opacity: 0; transform: translateY(20px);}
-      to { opacity: 1; transform: translateY(0);}
-    }
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
-    .title-box {
-      display: inline-block;
-      padding: 0.3em 1.2em;
-      border-radius: 1.2em;
-      background: linear-gradient(90deg, #e6eeff 60%, #b3cfff 100%);
-      box-shadow: 0 2px 16px #8297ff33;
-      color: #18181b !important;
-      border: 2px solid #8297ff44;
-      font-weight: 800;
-      font-size: 2.1rem;
-      margin-bottom: 0.5rem;
-      margin-top: 1.5rem;
-      letter-spacing: 2px;
-      text-align: center;
-      animation: title-fade-in 1.1s cubic-bezier(.4,0,.2,1);
-    }
+/* Efectos de neón */
+.neon-pink {
+  color: var(--neon-pink);
+  text-shadow: 
+    0 0 5px var(--neon-pink),
+    0 0 10px var(--neon-pink),
+    0 0 15px var(--neon-pink),
+    0 0 20px var(--neon-pink-glow);
+}
 
-    .radio-players {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-    }
+.neon-green {
+  color: var(--neon-green);
+  text-shadow: 
+    0 0 5px var(--neon-green),
+    0 0 10px var(--neon-green),
+    0 0 15px var(--neon-green),
+    0 0 20px var(--neon-green-glow);
+}
 
-    /* Iframe flotante inferior */
-    .floating-player {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100vw;
-      height: 100px;
-      z-index: 9999;
-      box-shadow: 0 -2px 12px #8297ff33;
-      background: var(--panel);
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-      overflow: hidden;
-    }
+.neon-blue {
+  color: var(--neon-blue);
+  text-shadow: 
+    0 0 5px var(--neon-blue),
+    0 0 10px var(--neon-blue),
+    0 0 15px var(--neon-blue),
+    0 0 20px var(--neon-blue-glow);
+}
 
-    .radio-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 12px 0;
-    }
+.neon-border-pink {
+  border: 2px solid var(--neon-pink);
+  box-shadow: 
+    0 0 5px var(--neon-pink),
+    0 0 10px var(--neon-pink),
+    inset 0 0 5px var(--neon-pink);
+}
 
-    .radio-frame{
-      position: relative;
-      display: inline-block;
-      padding: 8px;
-      border-radius: 20px;
-      background: linear-gradient(45deg, var(--accent), var(--accent-2), #00BFFF, var(--accent));
-      background-size: 300% 300%;
-      animation: borderFlow 6s linear infinite, pulseGlow 3.6s ease-in-out infinite;
-      box-shadow: 0 0 20px rgba(73,211,242,0.25);
-    }
-    @keyframes borderFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @keyframes pulseGlow {
-      0%   { box-shadow: 0 0 12px rgba(73,211,242,0.2); }
-      50%  { box-shadow: 0 0 40px rgba(73,211,242,0.35); }
-      100% { box-shadow: 0 0 12px rgba(73,211,242,0.2); }
-    }
-    .radio-inner{
-      border-radius: 14px;
-      background: rgba(6,6,6,0.5); /* semitransparente para ver partículas */
-      padding: 10px;
-      width: 100%;
-      max-width: 480px;
-      min-width: 260px;
-      box-sizing: border-box;
-    }
-    .radio-inner .cstrEmbed{ width: 100% !important; border-radius: 10px; }
+.neon-border-green {
+  border: 2px solid var(--neon-green);
+  box-shadow: 
+    0 0 5px var(--neon-green),
+    0 0 10px var(--neon-green),
+    inset 0 0 5px var(--neon-green);
+}
 
-    .radio-scan{
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      pointer-events: none;
-      z-index: 2;
-      background: linear-gradient(90deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0.03) 20%,
-        rgba(73,211,242,0.08) 45%,
-        rgba(255,255,255,0.03) 70%,
-        rgba(255,255,255,0) 100%);
-      mix-blend-mode: screen;
-      transform: translateX(-120%);
-      animation: scanMove 3.2s linear infinite;
-      filter: blur(6px);
-    }
-    @keyframes scanMove {
-      0%   { transform: translateX(-120%); opacity: 0; }
-      10%  { opacity: 1; }
-      45%  { transform: translateX(0%); opacity: 1; }
-      90%  { transform: translateX(120%); opacity: 0.6; }
-      100% { transform: translateX(220%); opacity: 0; }
-    }
+.neon-border-blue {
+  border: 2px solid var(--neon-blue);
+  box-shadow: 
+    0 0 5px var(--neon-blue),
+    0 0 10px var(--neon-blue),
+    inset 0 0 5px var(--neon-blue);
+}
 
-    /* --- BOTÓN FLOTANTE EN ESQUINA INFERIOR DERECHA --- */
-    #btn-pedir-cancion {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #fff;
-      font-weight: 700;
-      border: none;
-      border-radius: 50px;
-      padding: 14px 22px;
-      box-shadow: 0 4px 15px rgba(73,211,242,0.6);
-      cursor: pointer;
-      letter-spacing: 1.2px;
-      transition: all 0.3s ease;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    #btn-pedir-cancion:hover {
-      background: linear-gradient(135deg, #00BFFF, #00E5FF);
-      box-shadow: 0 6px 20px rgba(73,211,242,0.8);
-    }
+/* Header */
+header {
+  background-color: rgba(10, 10, 10, 0.95);
+  padding: 15px 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--neon-pink);
+}
 
-    /* --- FORMULARIO DESPLEGABLE --- */
-    #form-container {
-      position: fixed;
-      top: 70px;
-      right: 20px;
-      width: 360px;
-      background: rgba(24,24,27,0.95);
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(73,211,242,0.5);
-      padding: 20px 24px;
-      color: var(--muted);
-      transform: translateY(-20px);
-      opacity: 0;
-      pointer-events: none;
-      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
-      z-index: 9998;
-    }
-    #form-container.active {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-    #form-container h3 {
-      margin-bottom: 15px;
-      font-weight: 700;
-      font-size: 1.4rem;
-      text-align: center;
-      letter-spacing: 1.2px;
-      color: #e6f6ff;
-    }
-    #form-container input,
-    #form-container textarea {
-      width: 100%;
-      padding: 10px 12px;
-      margin-bottom: 12px;
-      border-radius: 8px;
-      border: none;
-      font-size: 1rem;
-      color: #1c1c23;
-      background: #f1f7fb;
-      box-sizing: border-box;
-    }
-    #form-container textarea { resize: vertical; min-height: 60px; }
-    #form-container button[type="submit"] {
-      background: var(--accent);
-      color: #fff;
-      font-weight: 700;
-      border: none;
-      border-radius: 12px;
-      width: 100%;
-      padding: 12px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-      transition: background 0.3s ease;
-    }
-    #form-container button[type="submit"]:hover { background: #00BFFF; }
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    @media (max-width: 420px){
-      .radio-inner { max-width: 360px; min-width: 220px; padding: 8px; }
-      .radio-frame { padding: 5px; border-radius: 14px; }
-      .radio-scan { filter: blur(4px); }
-      #form-container { width: 90vw; right: 5vw; top: 70px; padding: 16px 20px; }
-      #btn-pedir-cancion { bottom: 15px; right: 15px; padding: 12px 18px; font-size: 0.9rem; }
-    }
-  </style>
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.logo-icon {
+  color: var(--neon-pink);
+  font-size: 2rem;
+  filter: drop-shadow(0 0 5px var(--neon-pink));
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text h1 {
+  font-size: 2rem;
+  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+  line-height: 1;
+}
+
+.logo-text p {
+  font-size: 0.7rem;
+  color: var(--neon-green);
+  letter-spacing: 3px;
+  text-shadow: 0 0 5px var(--neon-green);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+nav a {
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s;
+  position: relative;
+  padding: 5px 10px;
+}
+
+nav a:hover {
+  color: var(--neon-pink);
+  text-shadow: 0 0 5px var(--neon-pink);
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--neon-green);
+  box-shadow: 0 0 5px var(--neon-green);
+  transition: width 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  padding: 200px 20px 120px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.95));
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+  animation: pulse 10s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.hero h2 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  letter-spacing: 3px;
+  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue), var(--neon-green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3); }
+  100% { text-shadow: 0 0 20px rgba(255, 0, 255, 0.8), 0 0 30px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 0, 0.3); }
+}
+
+.hero .tagline {
+  font-size: 1.5rem;
+  color: var(--neon-pink);
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px var(--neon-pink);
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  color: var(--white);
+  font-weight: 300;
+}
+
+.hero .concept {
+  font-size: 1.4rem;
+  color: var(--neon-blue);
+  margin-top: 20px;
+  font-weight: 600;
+  text-shadow: 0 0 8px var(--neon-blue);
+}
+
+/* Botones mejorados */
+.cta-button {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--neon-pink);
+  padding: 18px 45px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-top: 20px;
+  border: 2px solid var(--neon-pink);
+  box-shadow: 
+    0 0 15px var(--neon-pink),
+    inset 0 0 10px rgba(255, 0, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.3), transparent);
+  transition: left 0.7s;
+  z-index: -1;
+}
+
+.cta-button:hover {
+  color: var(--white);
+  background-color: transparent;
+  box-shadow: 
+    0 0 25px var(--neon-pink),
+    0 0 35px var(--neon-pink),
+    inset 0 0 15px rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px) scale(1.05);
+  letter-spacing: 3px;
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+/* Reproductor Section - MODIFICADO */
+.player-section {
+  padding: 80px 0;
+  background-color: var(--black-dark);
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue), var(--neon-green));
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.7);
+}
+
+/* Contenedor del reproductor - MÁS ANCHO Y CENTRADO */
+.reproductor-container {
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: rgba(15, 15, 30, 0.9);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  padding: 30px;
+  border: 1px solid rgba(255, 0, 255, 0.4);
+  box-shadow: 
+    0 15px 50px rgba(0, 0, 0, 0.8),
+    0 0 80px rgba(255, 0, 255, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+/* Encabezado del reproductor - REDISEÑADO */
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 0, 255, 0.3);
+}
+
+.station-info {
+  flex: 1;
+}
+
+.station-logo {
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue), var(--neon-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+  text-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+  0%, 100% { 
+    text-shadow: 0 0 20px rgba(255, 0, 255, 0.5),
+                0 0 40px rgba(255, 0, 255, 0.3);
+  }
+  50% { 
+    text-shadow: 0 0 30px rgba(255, 0, 255, 0.8),
+                0 0 60px rgba(255, 0, 255, 0.5);
+  }
+}
+
+.station-tagline {
+  font-size: 1.1rem;
+  color: var(--neon-green);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 300;
+}
+
+/* Indicador de estado 24/7 */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 0, 255, 0.15);
+  padding: 8px 20px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 0, 255, 0.4);
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  background: #FF4D4D;
+  border-radius: 50%;
+  animation: livePulse 1s infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7);
+  }
+  50% { 
+    transform: scale(1.2);
+    box-shadow: 0 0 0 5px rgba(255, 77, 77, 0);
+  }
+}
+
+/* Área principal del reproductor */
+.player-main {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 900px) {
+  .player-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Área del reproductor de audio */
+.player-area {
+  position: relative;
+  background: rgba(10, 10, 20, 0.7);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 0, 255, 0.2);
+  padding: 25px;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Efecto de escaneo */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 0, 255, 0.8), 
+    transparent);
+  animation: scan 3s linear infinite;
+  z-index: 2;
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* Información de mezcla */
+.mix-info {
+  background: rgba(255, 0, 255, 0.08);
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(255, 0, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bpm-counter {
+  text-align: center;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.bpm-value {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--neon-pink);
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.bpm-label {
+  font-size: 0.9rem;
+  color: var(--neon-blue);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+.genre-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.genre-tag {
+  background: rgba(255, 0, 255, 0.15);
+  color: var(--neon-green);
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 0, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.genre-tag:hover {
+  background: rgba(255, 0, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 255, 0.2);
+}
+
+/* Controles de mezcla */
+.mix-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.mix-btn {
+  background: rgba(255, 0, 255, 0.12);
+  border: 1px solid rgba(255, 0, 255, 0.3);
+  border-radius: 12px;
+  padding: 15px;
+  color: var(--neon-green);
+  font-size: 0.9rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.mix-btn:hover {
+  background: rgba(255, 0, 255, 0.22);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(255, 0, 255, 0.25);
+}
+
+.btn-icon {
+  font-size: 1.5rem;
+}
+
+/* Estado de carga */
+.mix-loading {
+  text-align: center;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mix-spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(255, 0, 255, 0.2);
+  border-top: 3px solid var(--neon-pink);
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: var(--neon-pink);
+  font-size: 1rem;
+  letter-spacing: 2px;
+  animation: fadeInOut 2s infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Efecto de borde neón para el reproductor */
+.reproductor-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    var(--neon-pink), 
+    var(--neon-blue), 
+    var(--neon-green),
+    var(--neon-pink));
+  border-radius: 27px;
+  z-index: -1;
+  animation: neonBorder 3s linear infinite;
+  opacity: 0.7;
+  filter: blur(8px);
+}
+
+@keyframes neonBorder {
+  0% {
+    filter: hue-rotate(0deg) blur(8px);
+  }
+  100% {
+    filter: hue-rotate(360deg) blur(8px);
+  }
+}
+
+/* Visualizador de mezcla */
+.mix-visualizer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--neon-pink), 
+    var(--neon-blue), 
+    var(--neon-green), 
+    var(--neon-pink));
+  background-size: 200% 100%;
+  animation: gradientShift 2s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Fondo con partículas */
+.particles-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 0, 255, 0.2);
+  filter: blur(1px);
+  animation: floatParticle 20s infinite linear;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.4;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-100px) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Barras de equalizador */
+.equalizer-bars {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 4px;
+  z-index: 1;
+  opacity: 0.15;
+}
+
+.eq-bar {
+  width: 10px;
+  background: linear-gradient(to top, var(--neon-pink), var(--neon-blue));
+  border-radius: 5px 5px 0 0;
+  animation: eqPulse 1.5s infinite ease-in-out;
+}
+
+.eq-bar:nth-child(2n) { animation-delay: 0.2s; }
+.eq-bar:nth-child(3n) { animation-delay: 0.4s; }
+.eq-bar:nth-child(4n) { animation-delay: 0.6s; }
+.eq-bar:nth-child(5n) { animation-delay: 0.8s; }
+
+@keyframes eqPulse {
+  0%, 100% { height: 10px; }
+  50% { height: 60px; }
+}
+
+/* Efecto de ondas de sonido */
+.sound-waves {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  z-index: 1;
+  opacity: 0.12;
+}
+
+.wave {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--neon-blue);
+  border-radius: 50%;
+  animation: waveExpand 3s infinite ease-out;
+}
+
+.wave:nth-child(2) { animation-delay: 1s; }
+.wave:nth-child(3) { animation-delay: 2s; }
+
+@keyframes waveExpand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.8;
+  }
+  100% {
+    width: 400px;
+    height: 400px;
+    opacity: 0;
+  }
+}
+
+/* Programas Section */
+.programs {
+  padding: 80px 20px;
+  background-color: var(--black);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title h2 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+.section-title p {
+  color: var(--neon-green);
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  text-shadow: 0 0 5px var(--neon-green);
+}
+
+/* Carrusel de programas */
+.carousel-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  height: 500px;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+  transition: transform 0.5s;
+}
+
+.carousel-slide:hover img {
+  transform: scale(1.05);
+}
+
+.carousel-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  border-radius: 0 0 20px 20px;
+}
+
+.carousel-content h3 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.carousel-content p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: var(--white);
+  max-width: 600px;
+  font-weight: 300;
+}
+
+.program-time {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--neon-green);
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-shadow: 0 0 5px var(--neon-green);
+}
+
+/* Botones del carrusel */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid var(--neon-blue);
+  color: var(--neon-blue);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+.carousel-btn:hover {
+  background: rgba(255, 0, 255, 0.3);
+  color: var(--neon-pink);
+  border: 2px solid var(--neon-pink);
+  box-shadow: 0 0 25px var(--neon-pink);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn:active {
+  transform: translateY(-50%) scale(1.05);
+  transition: transform 0.1s;
+}
+
+.carousel-btn.prev {
+  left: 20px;
+}
+
+.carousel-btn.next {
+  right: 20px;
+}
+
+/* Indicadores del carrusel */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.carousel-indicator {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: var(--gray);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+}
+
+.carousel-indicator:hover {
+  background-color: var(--neon-blue);
+  transform: scale(1.2);
+}
+
+.carousel-indicator.active {
+  background-color: var(--neon-pink);
+  transform: scale(1.3);
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* DJs Section */
+.djs {
+  padding: 80px 20px;
+  background-color: var(--black-dark);
+}
+
+.djs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.dj-card {
+  background: rgba(30, 30, 30, 0.8);
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.dj-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+}
+
+.dj-card:hover {
+  transform: translateY(-15px) scale(1.03);
+  border: 1px solid var(--neon-green);
+  box-shadow: 0 15px 30px rgba(0, 255, 0, 0.2);
+}
+
+.dj-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  border: 3px solid var(--neon-blue);
+  box-shadow: 0 0 20px var(--neon-blue);
+  transition: all 0.3s;
+}
+
+.dj-card:hover .dj-avatar {
+  border: 3px solid var(--neon-pink);
+  box-shadow: 0 0 25px var(--neon-pink);
+  transform: rotate(5deg);
+}
+
+.dj-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: var(--neon-pink);
+}
+
+.dj-card p {
+  color: var(--white);
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.dj-social {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* On Demand Section */
+.on-demand {
+  padding: 80px 20px;
+  background-color: var(--black);
+}
+
+.platforms {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.platform {
+  background: rgba(30, 30, 30, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+  width: 200px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.platform::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+}
+
+.platform:hover {
+  transform: translateY(-10px) scale(1.05);
+  border: 1px solid var(--neon-blue);
+  box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+}
+
+.platform i {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px var(--neon-pink);
+  transition: all 0.3s;
+}
+
+.platform:hover i {
+  transform: scale(1.2) rotate(5deg);
+  color: var(--neon-green);
+}
+
+.platform h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: var(--neon-green);
+}
+
+.platform p {
+  color: var(--white);
+  font-weight: 300;
+}
+
+/* Footer */
+footer {
+  background-color: var(--black-dark);
+  padding: 60px 20px 30px;
+  border-top: 1px solid var(--neon-pink);
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, var(--neon-pink), var(--neon-green), var(--neon-blue));
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.7);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-logo .logo-text h1 {
+  font-size: 2rem;
+}
+
+.footer-links h3, .footer-social h3 {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: var(--neon-blue);
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: var(--white);
+  transition: all 0.3s;
+  font-weight: 300;
+  padding: 5px 0;
+  display: inline-block;
+  position: relative;
+}
+
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--neon-pink);
+  transition: width 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--neon-pink);
+  text-shadow: 0 0 5px var(--neon-pink);
+  padding-left: 10px;
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+.footer-social .social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background-color: rgba(255, 0, 255, 0.1);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid transparent;
+}
+
+.social-icons a:hover {
+  background-color: var(--neon-pink);
+  border: 1px solid var(--neon-pink);
+  box-shadow: 0 0 20px var(--neon-pink);
+  transform: translateY(-5px) scale(1.1);
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid var(--gray);
+  color: var(--neon-green);
+  font-size: 0.9rem;
+  text-shadow: 0 0 5px var(--neon-green);
+}
+
+/* Botones Flotantes */
+.floating-buttons {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 9999;
+}
+
+.floating-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: none;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.floating-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1;
+  transition: transform 0.3s;
+}
+
+.floating-btn:hover::before {
+  transform: scale(1.1);
+}
+
+.floating-btn i {
+  position: relative;
+  z-index: 2;
+}
+
+.whatsapp-btn {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 0 30px rgba(37, 211, 102, 0.8);
+}
+
+.scroll-top-btn {
+  background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+  color: white;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-top-btn:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+}
+
+/* Tooltip para botones flotantes */
+.tooltip {
+  position: absolute;
+  right: 70px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  border: 1px solid var(--neon-pink);
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+.floating-btn:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Efectos de interacción del reproductor */
+.energy-pulse {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 0, 255, 0.4) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 5;
+  animation: energyExpand 0.8s ease-out;
+}
+
+@keyframes energyExpand {
+  0% { transform: scale(0); opacity: 0.8; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .reproductor-container {
+    width: 95%;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero h2 {
+    font-size: 3rem;
+  }
+  
+  .section-title h2 {
+    font-size: 2.3rem;
+  }
+  
+  .carousel-slide {
+    height: 450px;
+  }
+  
+  .carousel-content h3 {
+    font-size: 1.8rem;
+  }
+  
+  .floating-buttons {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .floating-btn {
+    width: 55px;
+    height: 55px;
+    font-size: 1.6rem;
+  }
+  
+  .station-logo {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  nav ul {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(10, 10, 10, 0.98);
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--neon-pink);
+    border-bottom: 1px solid var(--neon-blue);
+    z-index: 999;
+  }
+  
+  nav ul.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .hero {
+    padding: 150px 20px 80px;
+  }
+  
+  .hero h2 {
+    font-size: 2.5rem;
+  }
+  
+  .carousel-slide {
+    height: 400px;
+  }
+  
+  .carousel-content {
+    padding: 25px;
+  }
+  
+  .carousel-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .carousel-content p {
+    font-size: 1rem;
+  }
+  
+  .carousel-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+  
+  .floating-buttons {
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .floating-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+  
+  .tooltip {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+  
+  .reproductor-container {
+    width: 95%;
+    padding: 25px;
+  }
+  
+  .station-logo {
+    font-size: 2.2rem;
+  }
+  
+  .player-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .bpm-value {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero h2 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1.1rem;
+  }
+  
+  .section-title h2 {
+    font-size: 1.8rem;
+  }
+  
+  .djs-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .platforms {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .platform {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .logo-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .carousel-slide {
+    height: 350px;
+  }
+  
+  .carousel-content h3 {
+    font-size: 1.3rem;
+  }
+  
+  .carousel-content p {
+    font-size: 0.9rem;
+  }
+  
+  .program-time {
+    font-size: 1rem;
+  }
+  
+  .floating-buttons {
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .floating-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+  
+  .reproductor-container {
+    padding: 20px;
+  }
+  
+  .player-main {
+    gap: 20px;
+  }
+  
+  .mix-controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
 </head>
+
 <body>
+  <!-- Botones Flotantes -->
+  <div class="floating-buttons">
+    <!-- Botón de WhatsApp -->
+    <a href="https://wa.me/1234567890?text=¡Hola%20DC%20Mix!%20Me%20gustaría%20solicitar%20una%20canción%20para%20la%20mezcla%20continua." 
+       class="floating-btn whatsapp-btn" 
+       target="_blank"
+       title="Solicitar tu canción">
+      <i class="fab fa-whatsapp"></i>
+      <span class="tooltip">Solicita tu canción</span>
+    </a>
+    
+    <!-- Botón para ir arriba -->
+    <button class="floating-btn scroll-top-btn" id="scrollTopBtn">
+      <i class="fas fa-arrow-up"></i>
+      <span class="tooltip">Volver arriba</span>
+    </button>
+  </div>
 
-  <div id="particles-js" aria-hidden="true"></div>
-
-  <nav aria-label="breadcrumb" style="background:rgba(24,24,27,0.92);backdrop-filter:blur(2px);border-bottom:1.5px solid #8297ff33;box-shadow:0 2px 8px #8297ff22;position:sticky;top:0;z-index:101;">
-    <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:1.2rem;padding:0.7rem 1.5rem;">
-      <a href="#" onclick="goBackToSection(event, 'emisoras')" style="color:#b3cfff;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:0.5rem;">
-        <svg width="20" height="20" fill="none" stroke="#b3cfff" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 19l-7-7 7-7"/><path d="M3 12h18"/></svg>
-        EMISORAS
-      </a>
-      <span style="color:#8297ff;font-size:1.2rem;">/</span>
-      <span style="color:#e6eeff;font-weight:700;">DC Mix EC</span>
-      <div style="flex:1" aria-hidden="true"></div>
-    </div>
-  </nav>
-
-  <main class="content" role="main">
-    <div style="text-align:center;">
-      <span class="title-box">DC Mix EC</span>
-    </div>
-    <div class="subtitle-modern">🎶 Los mejores mix de música</div>
-
-    <!-- REPRODUCTOR CENTRADO + MARCO ANIMADO -->
-    <section class="radio-section" aria-labelledby="radio-title">
-      <h2 id="radio-title">Escucha en línea</h2>
-
-      <div class="radio-wrapper" aria-hidden="false">
-        <div class="radio-frame" role="region" aria-label="Reproductor DC Mix EC">
-          <div class="radio-inner">
-            <div 
-              data-type="newStreamPlayer" 
-              data-publicToken="ada751f2-b23d-4c05-8abb-1430e3e51c53" 
-              data-theme="dark" 
-              data-color="49D3F2" 
-              data-channelId="" 
-              data-rendered="false" 
-              class="cstrEmbed">
-              <a href="https://www.caster.fm" rel="noopener" target="_blank">Shoutcast Hosting</a>
-              <a href="https://www.caster.fm" rel="noopener" target="_blank">Stream Hosting</a>
-              <a href="https://www.caster.fm" rel="noopener" target="_blank">Radio Server Hosting</a>
-            </div>
-            <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
-          </div>
-          <div class="radio-scan" aria-hidden="true"></div>
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div class="logo-text">
+          <h1>DC MIX</h1>
+          <p>ENERGÍA SIN PAUSA</p>
         </div>
       </div>
-    </section>
-
-    <!-- BOTÓN FLOTANTE INFERIOR DERECHO -->
-    <button id="btn-pedir-cancion" aria-label="Pide tu canción" title="Pide tu canción">
-      🎵 <span>Pide tu canción</span>
-    </button>
-
-    <div id="form-container" aria-hidden="true" aria-labelledby="form-title" role="dialog">
-      <h3 id="form-title">🎶 Pide tu canción</h3>
-      <form id="formPedidoWhatsApp" novalidate>
-        <label class="sr-only" for="nombre">Tu nombre</label>
-        <input id="nombre" type="text" name="nombre" placeholder="Tu nombre" required autocomplete="name" aria-required="true" />
-        <label class="sr-only" for="cancion">Nombre de la canción</label>
-        <input id="cancion" type="text" name="cancion" placeholder="Nombre de la canción" required autocomplete="off" aria-required="true" />
-        <label class="sr-only" for="artista">Artista</label>
-        <input id="artista" type="text" name="artista" placeholder="Artista" required autocomplete="off" aria-required="true" />
-        <label class="sr-only" for="mensaje">Mensaje adicional</label>
-        <textarea id="mensaje" name="mensaje" placeholder="Mensaje adicional (opcional)"></textarea>
-        <button type="submit">Enviar pedido</button>
-      </form>
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav>
+        <ul id="navMenu">
+          <li><a href="#home">INICIO</a></li>
+          <li><a href="#player">EN VIVO</a></li>
+          <li><a href="#programs">MEZCLAS</a></li>
+          <li><a href="#djs">DJs</a></li>
+          <li><a href="#ondemand">ON DEMAND</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-  </main>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <h2>MEZCLAS QUE NO SE DETIENEN</h2>
+      <div class="tagline">DC MIX = ENERGÍA SIN PAUSA</div>
+      <p>Música mezclada 24 horas sin interrupciones. Dance, House, Urban remixes y música electrónica de tendencias globales.</p>
+      <div class="concept">ENERGÍA CONSTANTE, RITMO CONTINUO</div>
+      <a href="#player" class="cta-button">ESCUCHAR EN VIVO</a>
+    </div>
+  </section>
 
-  <script src="https://cdn.caster.fm/widgets/embed.js" async defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" async></script>
+  <!-- Player Section -->
+  <section class="player-section" id="player">
+    <div class="reproductor-container">
+      <!-- Fondo con partículas -->
+      <div class="particles-bg" id="particlesBg"></div>
+      
+      <!-- Ondas de sonido -->
+      <div class="sound-waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+      </div>
+      
+      <!-- Barras de equalizador -->
+      <div class="equalizer-bars">
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+      </div>
+      
+      <!-- Encabezado del reproductor -->
+      <div class="player-header">
+        <div class="station-info">
+          <h1 class="station-logo">DC MIX</h1>
+          <p class="station-tagline">¡La mezcla que nunca duerme!</p>
+        </div>
+        
+        <div class="status-indicator">
+          <span class="live-dot"></span>
+          <span style="color: var(--neon-green); font-size: 0.9rem; font-weight: 600;">TRANSMISIÓN 24/7</span>
+        </div>
+      </div>
+      
+      <!-- Área principal del reproductor -->
+      <div class="player-main">
+        <div class="player-area">
+          <!-- Línea de escaneo -->
+          <div class="scan-line"></div>
+          
+          <!-- Estado de carga -->
+          <div class="mix-loading" id="loadingState">
+            <div class="mix-spinner"></div>
+            <div class="loading-text">MEZCLANDO FRECUENCIAS...</div>
+          </div>
+          
+          <!-- Reproductor de Caster.fm - MANTENIDO -->
+          <div data-type="newStreamPlayer" 
+               data-publicToken="ada751f2-b23d-4c05-8abb-1430e3e51c53" 
+               data-theme="dark" 
+               data-color="49D3F2" 
+               data-channelId="" 
+               data-rendered="false" 
+               class="cstrEmbed" 
+               style="display: none; width: 100%; min-height: 150px; align-items: center; justify-content: center;">
+            <a href="https://www.caster.fm">Shoutcast Hosting</a>
+            <a href="https://www.caster.fm">Stream Hosting</a>
+            <a href="https://www.caster.fm">Radio Server Hosting</a>
+          </div>
+          
+          <!-- Visualizador de mezcla -->
+          <div class="mix-visualizer"></div>
+        </div>
+        
+        <!-- Información de mezcla -->
+        <div class="mix-info">
+          <div class="bpm-counter">
+            <div class="bpm-value" id="bpmValue">128</div>
+            <div class="bpm-label">BPM</div>
+          </div>
+          <div class="genre-tags">
+            <span class="genre-tag">DANCE</span>
+            <span class="genre-tag">HOUSE</span>
+            <span class="genre-tag">ELECTRO</span>
+            <span class="genre-tag">URBAN</span>
+            <span class="genre-tag">TECHNO</span>
+            <span class="genre-tag">PROGRESSIVE</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Controles de mezcla -->
+      <div class="mix-controls">
+        <div class="mix-btn" id="energyBoost">
+          <span class="btn-icon">⚡</span>
+          <span>ENERGÍA</span>
+        </div>
+        <div class="mix-btn" id="bassBoost">
+          <span class="btn-icon">🎵</span>
+          <span>BASS</span>
+        </div>
+        <div class="mix-btn" id="mixMode">
+          <span class="btn-icon">🔄</span>
+          <span>AUTO-MIX</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script>
-  // Inicializa partículas
-  (function initParticles(){
-    function run() {
-      if (typeof particlesJS === 'function') {
-        particlesJS('particles-js', {
-          "particles": {
-            "number": { "value": 90 },
-            "color": { "value": ["#49D3F2", "#0077FF", "#00BFFF", "#00E5FF"] },
-            "shape": { "type": "circle" },
-            "opacity": { "value": 0.7, "random": true },
-            "size": { "value": 3, "random": { "enable": true, "minimumValue": 1 } },
-            "line_linked": { "enable": true, "distance": 160, "color": "#49D3F2", "opacity": 0.35, "width": 1.5 },
-            "move": { "enable": true, "speed": 2 }
-          },
-          "interactivity": { "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
-          "retina_detect": true
-        });
-      } else { setTimeout(run, 200); }
-    }
-    run();
-  })();
+  <!-- Programs Section con Carrusel -->
+  <section class="programs" id="programs">
+    <div class="container">
+      <div class="section-title">
+        <h2>MEZCLAS POR HORARIO</h2>
+        <p>Programas especiales diseñados para cada momento del día y de la noche. El ritmo nunca para en DC Mix.</p>
+      </div>
+      
+      <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- Slide 1 -->
+          <div class="carousel-slide active">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Energy Wake-Up">
+            <div class="carousel-content">
+              <h3>ENERGY WAKE-UP</h3>
+              <p>Comienza tu día con energía. Mezclas progresivas y motivadoras para activar tu mañana y prepararte para el día.</p>
+              <div class="program-time">
+                <i class="far fa-clock"></i>
+                <span>06:00 - 10:00 · DANCE & PROGRESSIVE</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 2 -->
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Daylight Flow">
+            <div class="carousel-content">
+              <h3>DAYLIGHT FLOW</h3>
+              <p>Ritmo constante para mantener tu productividad y energía durante el día. Perfecto para trabajar, estudiar o hacer ejercicio.</p>
+              <div class="program-time">
+                <i class="far fa-clock"></i>
+                <span>10:00 - 16:00 · HOUSE & URBAN REMIXES</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 3 -->
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Afterwork Boost">
+            <div class="carousel-content">
+              <h3>AFTERWORK BOOST</h3>
+              <p>La transición perfecta del trabajo a la noche. Mezclas vibrantes para liberar energía acumulada y prepararte para la fiesta.</p>
+              <div class="program-time">
+                <i class="far fa-clock"></i>
+                <span>16:00 - 20:00 · ELECTRO & GLOBAL TRENDS</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 4 -->
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Neon Night Mix">
+            <div class="carousel-content">
+              <h3>NEON NIGHT MIX</h3>
+              <p>El programa estelar de DC Mix. Sonidos profundos y energéticos para la noche. La energía máxima para tus fiestas nocturnas.</p>
+              <div class="program-time">
+                <i class="far fa-clock"></i>
+                <span>20:00 - 02:00 · DEEP TECHNO & HARD GROOVE</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 5 -->
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Late Night Sessions">
+            <div class="carousel-content">
+              <h3>LATE NIGHT SESSIONS</h3>
+              <p>Para los noctámbulos. Mezclas intensas que mantienen viva la energía hasta el amanecer. Sesiones extendidas sin interrupciones.</p>
+              <div class="program-time">
+                <i class="far fa-clock"></i>
+                <span>02:00 - 06:00 · DEEP HOUSE & AMBIENT TECHNO</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Slide 6 -->
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Weekend Special">
+            <div class="carousel-content">
+              <h3>WEEKEND SPECIAL</h3>
+              <p>Mezclas exclusivas de fin de semana con DJs invitados y sesiones extendidas sin interrupciones. El ritmo máximo del viernes al domingo.</p>
+              <div class="program-time">
+                <i class="far fa-clock"></i>
+                <span>SÁBADO & DOMINGO · DJ INVITADOS & SETS ESPECIALES</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <button class="carousel-btn prev" id="prevSlide">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-btn next" id="nextSlide">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <div class="carousel-indicators" id="carouselIndicators">
+          <div class="carousel-indicator active" data-slide="0"></div>
+          <div class="carousel-indicator" data-slide="1"></div>
+          <div class="carousel-indicator" data-slide="2"></div>
+          <div class="carousel-indicator" data-slide="3"></div>
+          <div class="carousel-indicator" data-slide="4"></div>
+          <div class="carousel-indicator" data-slide="5"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  // Botón y formulario
-  (function setupForm(){
-    const btn = document.getElementById('btn-pedir-cancion');
-    const formContainer = document.getElementById('form-container');
-    const form = document.getElementById('formPedidoWhatsApp');
-    const numeroWhatsApp = '593961480654';
+  <!-- DJs Section -->
+  <section class="djs" id="djs">
+    <div class="container">
+      <div class="section-title">
+        <h2>DJs RESIDENTES</h2>
+        <p>Los talentos que mantienen el ritmo 24/7 con mezclas innovadoras y energía constante.</p>
+      </div>
+      
+      <div class="djs-grid">
+        <div class="dj-card">
+          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1780&q=80" alt="DJ PULSE" class="dj-avatar">
+          <h3>DJ PULSE</h3>
+          <p>Especialista en techno energético y sesiones extendidas. Maestro del ritmo constante.</p>
+          <div class="dj-social">
+            <a href="#"><i class="fab fa-soundcloud"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-spotify"></i></a>
+          </div>
+        </div>
+        
+        <div class="dj-card">
+          <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" alt="DJ NEON" class="dj-avatar">
+          <h3>DJ NEON</h3>
+          <p>Reina del night mix. Especializada en melodic techno y sesiones con energía vibrante.</p>
+          <div class="dj-social">
+            <a href="#"><i class="fab fa-soundcloud"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-spotify"></i></a>
+          </div>
+        </div>
+        
+        <div class="dj-card">
+          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="DJ VOLT" class="dj-avatar">
+          <h3>DJ VOLT</h3>
+          <p>Energía pura. Mezclas de high energy techno y progressive para mantener el ritmo elevado.</p>
+          <div class="dj-social">
+            <a href="#"><i class="fab fa-soundcloud"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-spotify"></i></a>
+          </div>
+        </div>
+        
+        <div class="dj-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" alt="DJ FLUX" class="dj-avatar">
+          <h3>DJ FLUX</h3>
+          <p>Experto en transiciones fluidas y sesiones continuas. El ritmo nunca se detiene con Flux.</p>
+          <div class="dj-social">
+            <a href="#"><i class="fab fa-soundcloud"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-spotify"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    btn.addEventListener('click', () => {
-      formContainer.classList.toggle('active');
-      const isActive = formContainer.classList.contains('active');
-      formContainer.setAttribute('aria-hidden', String(!isActive));
-      if (isActive) {
-        const first = form.querySelector('input, textarea');
-        if (first) first.focus();
-      }
+  <!-- On Demand Section -->
+  <section class="on-demand" id="ondemand">
+    <div class="container">
+      <div class="section-title">
+        <h2>ON DEMAND</h2>
+        <p>Accede a nuestras mezclas desde tus plataformas favoritas. El ritmo te sigue a todas partes, 24/7.</p>
+      </div>
+      
+      <div class="platforms">
+        <div class="platform">
+          <i class="fab fa-spotify"></i>
+          <h3>Spotify</h3>
+          <p>Playlists y mixes exclusivos</p>
+        </div>
+        
+        <div class="platform">
+          <i class="fab fa-soundcloud"></i>
+          <h3>SoundCloud</h3>
+          <p>Mezclas completas para streaming</p>
+        </div>
+        
+        <div class="platform">
+          <i class="fab fa-mixcloud"></i>
+          <h3>Mixcloud</h3>
+          <p>Sesiones extendidas y especiales</p>
+        </div>
+        
+        <div class="platform">
+          <i class="fab fa-apple"></i>
+          <h3>Apple Music</h3>
+          <p>Integración completa con tu librería</p>
+        </div>
+        
+        <div class="platform">
+          <i class="fab fa-youtube"></i>
+          <h3>YouTube</h3>
+          <p>Visual mixes y sesiones en video</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <div class="logo">
+            <div class="logo-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <div class="logo-text">
+              <h1>DC MIX</h1>
+              <p>ENERGÍA SIN PAUSA</p>
+            </div>
+          </div>
+          <p style="margin-top: 15px; font-weight: 300;">Mezclas que no se detienen. Música mezclada 24 horas.</p>
+        </div>
+        
+        <div class="footer-links">
+          <h3>ENLACES</h3>
+          <ul>
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#player">En Vivo</a></li>
+            <li><a href="#programs">Mezclas</a></li>
+            <li><a href="#djs">DJs</a></li>
+            <li><a href="#ondemand">On Demand</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-social">
+          <h3>CONÉCTATE</h3>
+          <p style="font-weight: 300; margin-bottom: 20px;">Sigue el ritmo en redes sociales</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>DC MIX · MEZCLAS QUE NO SE DETIENEN © 2024 · ENERGÍA CONSTANTE, RITMO CONTINUO</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">DANCE · HOUSE · URBAN REMIXES · MÚSICA ELECTRÓNICA</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
     });
-
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const nombre = (form.nombre.value || '').trim();
-      const cancion = (form.cancion.value || '').trim();
-      const artista = (form.artista.value || '').trim();
-      const mensaje = (form.mensaje.value || '').trim();
-
-      if (!nombre || !cancion || !artista) {
-        alert('Por favor completa tu nombre, la canción y el artista.');
-        return;
-      }
-
-      let texto = `*_Pedido de canción_ DC Mix EC*\n- *Nombre:* ${nombre}\n- *Canción:* ${cancion}\n- *Artista:* ${artista}`;
-      if (mensaje) texto += `\n- *Mensaje:*\n> ${mensaje}`;
-      const textoCodificado = encodeURIComponent(texto);
-      const url = `https://wa.me/${numeroWhatsApp}?text=${textoCodificado}`;
-
-      try { window.open(url, '_blank', 'noopener'); }
-      catch { window.open(url, '_blank'); }
-
-      form.reset();
-      formContainer.classList.remove('active');
-      formContainer.setAttribute('aria-hidden', 'true');
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      });
     });
-  })();
-
-  function goBackToSection(event, sectionId) {
-    event.preventDefault();
-    try {
-      if (document.referrer) {
-        let url = new URL(document.referrer);
-        url.hash = sectionId;
-        window.location.href = url.toString();
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Scroll to top button functionality
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add('visible');
       } else {
-        window.location.href = '/#' + sectionId;
+        scrollTopBtn.classList.remove('visible');
       }
-    } catch {
-      window.location.href = '/#' + sectionId;
+    });
+    
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Reproductor Functionality
+    // Crear partículas dinámicas
+    function createParticles() {
+      const container = document.getElementById('particlesBg');
+      const colors = [getComputedStyle(document.documentElement).getPropertyValue('--neon-pink').trim(), 
+                     getComputedStyle(document.documentElement).getPropertyValue('--neon-blue').trim(), 
+                     getComputedStyle(document.documentElement).getPropertyValue('--neon-green').trim(), 
+                     '#a0e6ff'];
+      
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Tamaño aleatorio
+        const size = Math.random() * 20 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Posición aleatoria
+        particle.style.left = `${Math.random() * 100}%`;
+        
+        // Color aleatorio
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.background = `radial-gradient(circle, ${color}30, transparent)`;
+        
+        // Animación personalizada
+        const duration = Math.random() * 25 + 15;
+        const delay = Math.random() * 10;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        container.appendChild(particle);
+      }
     }
-  }
-</script>
-
+    
+    // Inicializar el reproductor
+    function initPlayer() {
+      const player = document.querySelector('.cstrEmbed');
+      const loading = document.getElementById('loadingState');
+      
+      const script = document.createElement('script');
+      script.src = '//cdn.cloud.caster.fm/widgets/embed.js';
+      
+      script.onload = function() {
+        console.log('Reproductor DC MIX cargado');
+        
+        setTimeout(() => {
+          if (loading) {
+            loading.style.display = 'none';
+          }
+          if (player) {
+            player.style.display = 'flex';
+          }
+          
+          // Activar animaciones más intensas
+          activateEnergyMode();
+        }, 2000);
+      };
+      
+      script.onerror = function() {
+        console.error('Error al cargar el reproductor');
+        if (loading) {
+          loading.innerHTML = `
+            <div style="color: var(--neon-pink); text-align: center;">
+              <p style="margin-bottom: 10px;">🔧 SINCRONIZANDO...</p>
+              <p style="font-size: 0.8rem; opacity: 0.8;">Reconectando al mix infinito</p>
+            </div>
+          `;
+        }
+      };
+      
+      document.body.appendChild(script);
+    }
+    
+    // Modo energía máxima
+    function activateEnergyMode() {
+      const eqBars = document.querySelectorAll('.eq-bar');
+      const waves = document.querySelectorAll('.wave');
+      
+      // Acelerar animaciones
+      eqBars.forEach(bar => {
+        bar.style.animationDuration = '0.8s';
+      });
+      
+      waves.forEach(wave => {
+        wave.style.animationDuration = '2s';
+      });
+    }
+    
+    // Crear pulso de energía
+    function createEnergyPulse(x, y) {
+      const pulse = document.createElement('div');
+      pulse.className = 'energy-pulse';
+      pulse.style.left = `${x}px`;
+      pulse.style.top = `${y}px`;
+      
+      document.body.appendChild(pulse);
+      
+      setTimeout(() => {
+        pulse.remove();
+      }, 800);
+    }
+    
+    // Simular cambios de BPM
+    function simulateBPMChanges() {
+      const bpmValue = document.getElementById('bpmValue');
+      if (!bpmValue) return;
+      
+      let currentBPM = 128;
+      let direction = 1;
+      
+      setInterval(() => {
+        if (Math.random() > 0.7) {
+          if (direction === 1) {
+            currentBPM += Math.floor(Math.random() * 5);
+            if (currentBPM > 140) direction = -1;
+          } else {
+            currentBPM -= Math.floor(Math.random() * 5);
+            if (currentBPM < 120) direction = 1;
+          }
+          
+          bpmValue.textContent = currentBPM;
+          
+          // Efecto visual con el cambio
+          bpmValue.style.transform = 'scale(1.1)';
+          bpmValue.style.color = '#FF4D4D';
+          
+          setTimeout(() => {
+            bpmValue.style.transform = 'scale(1)';
+            bpmValue.style.color = 'var(--neon-pink)';
+          }, 200);
+        }
+      }, 3000);
+    }
+    
+    // Configurar controles interactivos
+    function setupMixControls() {
+      const energyBtn = document.getElementById('energyBoost');
+      const bassBtn = document.getElementById('bassBoost');
+      const mixBtn = document.getElementById('mixMode');
+      
+      // Botón de energía
+      energyBtn.addEventListener('click', function() {
+        createEnergyPulse(
+          this.getBoundingClientRect().left + this.offsetWidth / 2,
+          this.getBoundingClientRect().top + this.offsetHeight / 2
+        );
+        
+        // Efecto visual
+        this.style.background = 'rgba(255, 0, 255, 0.3)';
+        this.style.boxShadow = '0 0 20px rgba(255, 0, 255, 0.5)';
+        
+        setTimeout(() => {
+          this.style.background = '';
+          this.style.boxShadow = '';
+        }, 300);
+        
+        // Acelerar todas las animaciones temporalmente
+        document.querySelectorAll('.eq-bar, .wave').forEach(el => {
+          const originalDuration = el.style.animationDuration;
+          el.style.animationDuration = '0.5s';
+          
+          setTimeout(() => {
+            el.style.animationDuration = originalDuration || '1.5s';
+          }, 2000);
+        });
+      });
+      
+      // Botón de bass
+      bassBtn.addEventListener('click', function() {
+        const playerArea = document.querySelector('.player-area');
+        playerArea.style.transform = 'scale(0.98)';
+        
+        // Efecto de vibración
+        setTimeout(() => {
+          playerArea.style.transform = 'scale(1)';
+        }, 100);
+        
+        // Cambiar color del visualizador
+        const visualizer = document.querySelector('.mix-visualizer');
+        visualizer.style.background = 'linear-gradient(90deg, #FF4D4D, #FF9900, #FF4D4D)';
+        visualizer.style.animationDuration = '1s';
+        
+        setTimeout(() => {
+          visualizer.style.background = '';
+          visualizer.style.animationDuration = '';
+        }, 1500);
+      });
+      
+      // Botón de auto-mix
+      mixBtn.addEventListener('click', function() {
+        const tags = document.querySelectorAll('.genre-tag');
+        const genres = ['TECHNO', 'HOUSE', 'TRANCE', 'DUBSTEP', 'DEEP', 'ELECTRO', 'PROGRESSIVE', 'MINIMAL', 'DANCE', 'URBAN'];
+        
+        // Rotar géneros
+        tags.forEach((tag, index) => {
+          setTimeout(() => {
+            tag.textContent = genres[Math.floor(Math.random() * genres.length)];
+            tag.style.transform = 'scale(1.1)';
+            
+            setTimeout(() => {
+              tag.style.transform = 'scale(1)';
+            }, 200);
+          }, index * 100);
+        });
+        
+        // Efecto visual
+        this.innerHTML = '<span class="btn-icon">🎛️</span><span>MEZCLANDO...</span>';
+        
+        setTimeout(() => {
+          this.innerHTML = '<span class="btn-icon">🔄</span><span>AUTO-MIX</span>';
+        }, 2000);
+      });
+    }
+    
+    // Interacciones táctiles
+    function setupTouchInteractions() {
+      const player = document.querySelector('.reproductor-container');
+      
+      if (player) {
+        player.addEventListener('touchstart', function(e) {
+          this.style.transform = 'scale(0.99)';
+          
+          // Crear pulso en la posición del toque
+          const touch = e.touches[0];
+          createEnergyPulse(touch.clientX, touch.clientY);
+        });
+        
+        player.addEventListener('touchend', function() {
+          this.style.transform = 'scale(1)';
+        });
+        
+        // Pulsos aleatorios
+        setInterval(() => {
+          if (Math.random() > 0.8) {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            createEnergyPulse(x, y);
+          }
+        }, 2000);
+      }
+    }
+    
+    // Animar barras de equalizador dinámicamente
+    function animateEqualizer() {
+      const bars = document.querySelectorAll('.eq-bar');
+      
+      if (bars.length > 0) {
+        setInterval(() => {
+          bars.forEach(bar => {
+            if (Math.random() > 0.5) {
+              const randomHeight = Math.random() * 60 + 30;
+              bar.style.height = `${randomHeight}px`;
+            }
+          });
+        }, 300);
+      }
+    }
+    
+    // Carousel functionality
+    const carouselTrack = document.getElementById('carouselTrack');
+    const carouselSlides = document.querySelectorAll('.carousel-slide');
+    const prevSlideBtn = document.getElementById('prevSlide');
+    const nextSlideBtn = document.getElementById('nextSlide');
+    const carouselIndicators = document.querySelectorAll('.carousel-indicator');
+    let currentSlide = 0;
+    
+    function updateCarousel() {
+      if (!carouselTrack) return;
+      
+      // Move the carousel
+      carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      // Update indicators
+      carouselIndicators.forEach((indicator, index) => {
+        if (index === currentSlide) {
+          indicator.classList.add('active');
+        } else {
+          indicator.classList.remove('active');
+        }
+      });
+      
+      // Update slides
+      carouselSlides.forEach((slide, index) => {
+        if (index === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+    }
+    
+    // Carousel navigation buttons
+    if (prevSlideBtn && nextSlideBtn) {
+      prevSlideBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide === 0) ? carouselSlides.length - 1 : currentSlide - 1;
+        updateCarousel();
+      });
+      
+      nextSlideBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide === carouselSlides.length - 1) ? 0 : currentSlide + 1;
+        updateCarousel();
+      });
+    }
+    
+    // Carousel indicators
+    if (carouselIndicators.length > 0) {
+      carouselIndicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+          currentSlide = index;
+          updateCarousel();
+        });
+      });
+    }
+    
+    // Auto-carousel every 8 seconds
+    let carouselInterval;
+    if (carouselTrack) {
+      carouselInterval = setInterval(() => {
+        currentSlide = (currentSlide === carouselSlides.length - 1) ? 0 : currentSlide + 1;
+        updateCarousel();
+      }, 8000);
+      
+      // Pause auto-carousel on interaction
+      carouselTrack.addEventListener('mouseenter', () => {
+        clearInterval(carouselInterval);
+      });
+      
+      carouselTrack.addEventListener('mouseleave', () => {
+        carouselInterval = setInterval(() => {
+          currentSlide = (currentSlide === carouselSlides.length - 1) ? 0 : currentSlide + 1;
+          updateCarousel();
+        }, 8000);
+      });
+    }
+    
+    // Initialize everything when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      initPlayer();
+      simulateBPMChanges();
+      setupMixControls();
+      setupTouchInteractions();
+      animateEqualizer();
+      updateCarousel();
+      
+      // Add glow effect to navigation on scroll
+      window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+          header.style.boxShadow = '0 0 20px rgba(255, 0, 255, 0.5)';
+          header.style.borderBottom = '1px solid var(--neon-pink)';
+        } else {
+          header.style.boxShadow = 'none';
+          header.style.borderBottom = '1px solid var(--neon-pink)';
+        }
+      });
+    });
+    
+    // Handle orientation change
+    window.addEventListener('orientationchange', function() {
+      setTimeout(() => {
+        // Recreate particles
+        const particlesBg = document.getElementById('particlesBg');
+        if (particlesBg) {
+          particlesBg.innerHTML = '';
+          createParticles();
+        }
+      }, 300);
+    });
+  </script>
 </body>
 </html>
