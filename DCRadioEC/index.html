@@ -33,6 +33,36 @@ body {
   position: relative;
 }
 
+/* Botón Atrás */
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, var(--main), #00B8D4);
+  color: var(--dark);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 1001;
+  box-shadow: 0 5px 20px rgba(0, 229, 255, 0.5);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  z-index: 1001;
+}
+
+.back-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 229, 255, 0.7);
+  background: linear-gradient(135deg, #00B8D4, var(--main));
+}
+
 /* Fondo animado con líneas */
 .lines-background {
   position: fixed;
@@ -741,7 +771,7 @@ footer {
     font-size: 2rem;
   }
   
-  .whatsapp-btn, .scroll-top-btn {
+  .whatsapp-btn, .scroll-top-btn, .back-button {
     padding: 12px 20px;
     font-size: 1rem;
   }
@@ -794,6 +824,12 @@ footer {
     height: 45px;
     font-size: 1.2rem;
   }
+  
+  .back-button {
+    top: 15px;
+    left: 15px;
+    padding: 8px 15px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -835,6 +871,13 @@ footer {
     height: 40px;
     font-size: 1.1rem;
   }
+  
+  .back-button {
+    top: 10px;
+    left: 10px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
 }
 
 /* Efecto de partículas */
@@ -864,6 +907,11 @@ footer {
 </head>
 
 <body>
+
+<!-- Botón Atrás -->
+<a href="https://rdcrsound.adcm.club" class="back-button" target="_self">
+  <i class="fas fa-arrow-left"></i> Atrás
+</a>
 
 <!-- Fondo con líneas en movimiento -->
 <div class="lines-background" id="linesBackground"></div>
