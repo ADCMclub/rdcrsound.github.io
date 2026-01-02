@@ -590,7 +590,7 @@ nav a:hover::after {
   backdrop-filter: blur(5px);
 }
 
-/* Información de mezcla */
+/* Información de mezcla - SIMPLIFICADA */
 .mix-info {
   background: rgba(255, 0, 255, 0.08);
   border-radius: 15px;
@@ -600,6 +600,8 @@ nav a:hover::after {
   flex-direction: column;
   gap: 20px;
   backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
 }
 
 .bpm-counter {
@@ -608,6 +610,8 @@ nav a:hover::after {
   background: rgba(0, 0, 0, 0.3);
   border-radius: 12px;
   border: 1px solid rgba(0, 255, 255, 0.2);
+  width: 100%;
+  max-width: 200px;
 }
 
 .bpm-value {
@@ -617,6 +621,7 @@ nav a:hover::after {
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 2px;
   text-shadow: 0 0 10px var(--neon-pink);
+  transition: all 0.1s ease;
 }
 
 .bpm-label {
@@ -627,64 +632,43 @@ nav a:hover::after {
   margin-top: 5px;
 }
 
-.genre-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+/* BPM Temperature Indicator */
+.bpm-temperature {
+  margin-top: 15px;
+  width: 100%;
+  max-width: 200px;
 }
 
-.genre-tag {
-  background: rgba(255, 0, 255, 0.15);
-  color: var(--neon-green);
-  padding: 6px 15px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  border: 1px solid rgba(255, 0, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-.genre-tag:hover {
-  background: rgba(255, 0, 255, 0.25);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 0, 255, 0.2);
-}
-
-/* Controles de mezcla */
-.mix-controls {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin-top: 20px;
+.temperature-bar {
+  height: 8px;
+  background: linear-gradient(to right, 
+    var(--neon-green), 
+    var(--neon-blue), 
+    var(--neon-pink), 
+    #FF4D4D);
+  border-radius: 4px;
+  margin-top: 5px;
   position: relative;
-  z-index: 10;
+  overflow: hidden;
 }
 
-.mix-btn {
-  background: rgba(255, 0, 255, 0.12);
-  border: 1px solid rgba(255, 0, 255, 0.3);
-  border-radius: 12px;
-  padding: 15px;
-  color: var(--neon-green);
-  font-size: 0.9rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.temperature-indicator {
+  position: absolute;
+  height: 100%;
+  width: 4px;
+  background: white;
+  box-shadow: 0 0 10px white;
+  border-radius: 2px;
+  left: 0%;
+  transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.temperature-labels {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  backdrop-filter: blur(5px);
-}
-
-.mix-btn:hover {
-  background: rgba(255, 0, 255, 0.22);
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(255, 0, 255, 0.25);
-}
-
-.btn-icon {
-  font-size: 1.5rem;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--neon-green);
+  margin-top: 3px;
 }
 
 /* Estado de carga */
@@ -862,8 +846,6 @@ nav a:hover::after {
   0% { transform: scale(0); opacity: 0.8; }
   100% { transform: scale(4); opacity: 0; }
 }
-
-/* Resto del CSS (Programs, DJs, On Demand, Footer, etc.) se mantiene igual... */
 
 /* Programas Section */
 .programs {
@@ -1469,12 +1451,6 @@ footer::before {
     text-align: center;
   }
   
-  .mix-controls {
-    width: 100%;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-  }
-  
   .status-indicator {
     margin-top: 10px;
   }
@@ -1564,20 +1540,6 @@ footer::before {
     gap: 15px;
   }
   
-  .mix-controls {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-  
-  .mix-btn {
-    padding: 12px;
-    font-size: 0.8rem;
-  }
-  
-  .btn-icon {
-    font-size: 1.2rem;
-  }
-  
   .station-logo {
     font-size: 2rem;
   }
@@ -1593,16 +1555,6 @@ footer::before {
   
   .bpm-value {
     font-size: 2.2rem;
-  }
-  
-  .genre-tags {
-    justify-content: center;
-    gap: 8px;
-  }
-  
-  .genre-tag {
-    padding: 4px 10px;
-    font-size: 0.75rem;
   }
   
   .back-button {
@@ -1792,36 +1744,25 @@ footer::before {
             <div class="mix-visualizer"></div>
           </div>
           
-          <!-- Información de mezcla -->
+          <!-- Información de mezcla SIMPLIFICADA - Solo BPM -->
           <div class="mix-info">
             <div class="bpm-counter">
               <div class="bpm-value" id="bpmValue">128</div>
               <div class="bpm-label">BPM</div>
             </div>
-            <div class="genre-tags">
-              <span class="genre-tag">DANCE</span>
-              <span class="genre-tag">HOUSE</span>
-              <span class="genre-tag">ELECTRO</span>
-              <span class="genre-tag">URBAN</span>
-              <span class="genre-tag">TECHNO</span>
-              <span class="genre-tag">PROGRESSIVE</span>
+            
+            <!-- Indicador de temperatura BPM -->
+            <div class="bpm-temperature">
+              <div class="temperature-bar">
+                <div class="temperature-indicator" id="temperatureIndicator"></div>
+              </div>
+              <div class="temperature-labels">
+                <span>BAJO</span>
+                <span>MEDIO</span>
+                <span>ALTO</span>
+                <span>MAX</span>
+              </div>
             </div>
-          </div>
-        </div>
-        
-        <!-- Controles de mezcla -->
-        <div class="mix-controls">
-          <div class="mix-btn" id="energyBoost">
-            <span class="btn-icon">⚡</span>
-            <span>ENERGÍA</span>
-          </div>
-          <div class="mix-btn" id="bassBoost">
-            <span class="btn-icon">🎵</span>
-            <span>BASS</span>
-          </div>
-          <div class="mix-btn" id="mixMode">
-            <span class="btn-icon">🔄</span>
-            <span>AUTO-MIX</span>
           </div>
         </div>
       </div>
@@ -2186,116 +2127,91 @@ footer::before {
       }, 800);
     }
     
-    // Simular cambios de BPM
-    function simulateBPMChanges() {
+    // Metrónomo BPM avanzado
+    function advancedBPMMetronome() {
       const bpmValue = document.getElementById('bpmValue');
-      if (!bpmValue) return;
+      const tempIndicator = document.getElementById('temperatureIndicator');
+      if (!bpmValue || !tempIndicator) return;
       
       let currentBPM = 128;
       let direction = 1;
+      let beatCount = 0;
+      let lastBeatTime = 0;
       
-      setInterval(() => {
-        if (Math.random() > 0.7) {
-          if (direction === 1) {
-            currentBPM += Math.floor(Math.random() * 5);
-            if (currentBPM > 140) direction = -1;
-          } else {
-            currentBPM -= Math.floor(Math.random() * 5);
-            if (currentBPM < 120) direction = 1;
+      // Función para el latido del BPM
+      function beat() {
+        beatCount++;
+        const now = Date.now();
+        
+        if (lastBeatTime !== 0) {
+          const actualBPM = Math.round(60000 / (now - lastBeatTime));
+          if (actualBPM > 60 && actualBPM < 200) {
+            currentBPM = actualBPM;
           }
-          
-          bpmValue.textContent = currentBPM;
-          
-          // Efecto visual con el cambio
-          bpmValue.style.transform = 'scale(1.1)';
-          bpmValue.style.color = '#FF4D4D';
-          
-          setTimeout(() => {
-            bpmValue.style.transform = 'scale(1)';
-            bpmValue.style.color = 'var(--neon-pink)';
-          }, 200);
         }
-      }, 3000);
-    }
-    
-    // Configurar controles interactivos
-    function setupMixControls() {
-      const energyBtn = document.getElementById('energyBoost');
-      const bassBtn = document.getElementById('bassBoost');
-      const mixBtn = document.getElementById('mixMode');
-      
-      // Botón de energía
-      energyBtn.addEventListener('click', function() {
-        createEnergyPulse(
-          this.getBoundingClientRect().left + this.offsetWidth / 2,
-          this.getBoundingClientRect().top + this.offsetHeight / 2
-        );
+        lastBeatTime = now;
         
-        // Efecto visual
-        this.style.background = 'rgba(255, 0, 255, 0.3)';
-        this.style.boxShadow = '0 0 20px rgba(255, 0, 255, 0.5)';
+        // Actualizar valor BPM con efecto visual
+        bpmValue.textContent = currentBPM;
+        bpmValue.style.transform = 'scale(1.15)';
+        bpmValue.style.color = '#FF4D4D';
         
+        // Actualizar indicador de temperatura
+        const bpmPercentage = Math.min(100, (currentBPM - 60) / 140 * 100);
+        tempIndicator.style.left = `${bpmPercentage}%`;
+        
+        // Cambiar color según la temperatura
+        if (currentBPM < 100) {
+          tempIndicator.style.background = 'var(--neon-green)';
+        } else if (currentBPM < 130) {
+          tempIndicator.style.background = 'var(--neon-blue)';
+        } else if (currentBPM < 160) {
+          tempIndicator.style.background = 'var(--neon-pink)';
+        } else {
+          tempIndicator.style.background = '#FF4D4D';
+        }
+        
+        // Efecto de pulso en el BPM
         setTimeout(() => {
-          this.style.background = '';
-          this.style.boxShadow = '';
-        }, 300);
-        
-        // Acelerar todas las animaciones temporalmente
-        document.querySelectorAll('.eq-bar-bg, .wave-bg').forEach(el => {
-          const originalDuration = el.style.animationDuration;
-          el.style.animationDuration = '0.5s';
-          
-          setTimeout(() => {
-            el.style.animationDuration = originalDuration || '1.5s';
-          }, 2000);
-        });
-      });
-      
-      // Botón de bass
-      bassBtn.addEventListener('click', function() {
-        const playerArea = document.querySelector('.player-area');
-        playerArea.style.transform = 'scale(0.98)';
-        
-        // Efecto de vibración
-        setTimeout(() => {
-          playerArea.style.transform = 'scale(1)';
+          bpmValue.style.transform = 'scale(1)';
+          bpmValue.style.color = 'var(--neon-pink)';
         }, 100);
         
-        // Cambiar color del visualizador
-        const visualizer = document.querySelector('.mix-visualizer');
-        visualizer.style.background = 'linear-gradient(90deg, #FF4D4D, #FF9900, #FF4D4D)';
-        visualizer.style.animationDuration = '1s';
-        
-        setTimeout(() => {
-          visualizer.style.background = '';
-          visualizer.style.animationDuration = '';
-        }, 1500);
-      });
+        // Crear partícula aleatoria
+        if (Math.random() > 0.7) {
+          createEnergyPulse(
+            Math.random() * window.innerWidth,
+            Math.random() * window.innerHeight
+          );
+        }
+      }
       
-      // Botón de auto-mix
-      mixBtn.addEventListener('click', function() {
-        const tags = document.querySelectorAll('.genre-tag');
-        const genres = ['TECHNO', 'HOUSE', 'TRANCE', 'DUBSTEP', 'DEEP', 'ELECTRO', 'PROGRESSIVE', 'MINIMAL', 'DANCE', 'URBAN'];
-        
-        // Rotar géneros
-        tags.forEach((tag, index) => {
-          setTimeout(() => {
-            tag.textContent = genres[Math.floor(Math.random() * genres.length)];
-            tag.style.transform = 'scale(1.1)';
-            
-            setTimeout(() => {
-              tag.style.transform = 'scale(1)';
-            }, 200);
-          }, index * 100);
-        });
-        
-        // Efecto visual
-        this.innerHTML = '<span class="btn-icon">🎛️</span><span>MEZCLANDO...</span>';
-        
-        setTimeout(() => {
-          this.innerHTML = '<span class="btn-icon">🔄</span><span>AUTO-MIX</span>';
-        }, 2000);
-      });
+      // Iniciar latido
+      setInterval(beat, 60000 / currentBPM);
+      
+      // Variación dinámica del BPM
+      setInterval(() => {
+        if (Math.random() > 0.5) {
+          if (direction === 1) {
+            currentBPM += Math.floor(Math.random() * 8);
+            if (currentBPM > 170) direction = -1;
+          } else {
+            currentBPM -= Math.floor(Math.random() * 8);
+            if (currentBPM < 90) direction = 1;
+          }
+          
+          // Asegurar que esté en rango razonable
+          currentBPM = Math.max(80, Math.min(180, currentBPM));
+        }
+      }, 5000);
+      
+      // Variaciones más pequeñas frecuentes
+      setInterval(() => {
+        if (Math.random() > 0.7) {
+          const smallChange = Math.floor(Math.random() * 5) - 2;
+          currentBPM = Math.max(80, Math.min(180, currentBPM + smallChange));
+        }
+      }, 1500);
     }
     
     // Interacciones táctiles
@@ -2423,8 +2339,7 @@ footer::before {
     document.addEventListener('DOMContentLoaded', function() {
       createParticles();
       initPlayer();
-      simulateBPMChanges();
-      setupMixControls();
+      advancedBPMMetronome();
       setupTouchInteractions();
       animateEqualizer();
       updateCarousel();
