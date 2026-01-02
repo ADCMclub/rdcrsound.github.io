@@ -48,102 +48,57 @@
             z-index: -1;
         }
         
-        /* BOTÓN WHATSAPP FLOTANTE */
-        .whatsapp-float {
+        /* BOTÓN VOLVER A RDCRSOUND - SUPERIOR IZQUIERDA */
+        .back-button {
             position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 70px;
-            height: 70px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 35px;
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.8);
-            animation: pulse-whatsapp 2s infinite;
-        }
-        
-        .whatsapp-float:hover {
-            transform: scale(1.1) rotate(10deg);
-            box-shadow: 0 0 30px rgba(37, 211, 102, 0.9);
-            animation: none;
-        }
-        
-        .whatsapp-tooltip {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            background: var(--card-bg);
-            color: var(--neon-yellow);
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 1rem;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border: 2px solid var(--neon-yellow);
-            box-shadow: 0 0 15px var(--neon-yellow-glow);
-            font-weight: 600;
-        }
-        
-        .whatsapp-float:hover .whatsapp-tooltip {
-            opacity: 1;
-        }
-        
-        @keyframes pulse-whatsapp {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
-        }
-        
-        /* BOTÓN IR ARRIBA */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
+            top: 30px;
+            left: 30px;
             width: 60px;
             height: 60px;
             background: var(--card-bg);
-            border: 2px solid var(--neon-yellow);
+            border: 2px solid var(--neon-orange);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: var(--neon-yellow);
+            color: var(--neon-orange);
             font-size: 24px;
             cursor: pointer;
-            z-index: 999;
+            z-index: 1001;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px var(--neon-yellow-glow);
-            opacity: 0;
-            visibility: hidden;
+            box-shadow: 0 0 15px var(--neon-orange-glow);
         }
         
-        .scroll-top.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .scroll-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px var(--neon-yellow-glow);
-            background: var(--neon-yellow);
+        .back-button:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 0 25px var(--neon-orange-glow);
+            background: var(--neon-orange);
             color: var(--dark-bg);
         }
         
-        /* HEADER */
+        .back-tooltip {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            color: var(--neon-orange);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border: 2px solid var(--neon-orange);
+            box-shadow: 0 0 15px var(--neon-orange-glow);
+            font-weight: 600;
+        }
+        
+        .back-button:hover .back-tooltip {
+            opacity: 1;
+        }
+        
+        /* HEADER - CON ESCONDER AL BAJAR */
         header {
             background-color: rgba(5, 5, 5, 0.95);
             color: #fff;
@@ -151,11 +106,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
             border-bottom: 2px solid var(--neon-orange);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(0);
+            padding-left: 100px; /* Espacio para el botón volver */
+        }
+        
+        header.hidden {
+            transform: translateY(-100%);
         }
         
         .logo {
@@ -229,14 +193,110 @@
             text-shadow: 0 0 5px var(--neon-green-glow);
         }
         
+        /* BOTÓN WHATSAPP FLOTANTE */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.8);
+            animation: pulse-whatsapp 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.9);
+            animation: none;
+        }
+        
+        .whatsapp-tooltip {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            background: var(--card-bg);
+            color: var(--neon-yellow);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border: 2px solid var(--neon-yellow);
+            box-shadow: 0 0 15px var(--neon-yellow-glow);
+            font-weight: 600;
+        }
+        
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+        }
+        
+        @keyframes pulse-whatsapp {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        /* BOTÓN IR ARRIBA */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--card-bg);
+            border: 2px solid var(--neon-yellow);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--neon-yellow);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 997;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--neon-yellow-glow);
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px var(--neon-yellow-glow);
+            background: var(--neon-yellow);
+            color: var(--dark-bg);
+        }
+        
         /* HERO */
         .hero {
             position: relative;
-            padding: 120px 5%;
+            padding: 160px 5% 120px;
             text-align: center;
             overflow: hidden;
             background: linear-gradient(45deg, rgba(10, 10, 10, 0.9), rgba(5, 5, 5, 0.9));
             border-bottom: 3px solid var(--neon-orange);
+            margin-top: 80px;
         }
         
         .hero-content {
@@ -881,12 +941,19 @@
             header {
                 flex-direction: column;
                 gap: 20px;
+                padding: 15px 5%;
+                padding-left: 90px;
             }
             
             nav ul {
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 15px;
+            }
+            
+            .hero {
+                margin-top: 130px;
+                padding: 100px 5% 80px;
             }
             
             .hero h2 {
@@ -899,6 +966,30 @@
             
             .artist-card {
                 flex: 0 0 calc(33.333% - 20px);
+            }
+            
+            .back-button {
+                top: 20px;
+                left: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 22px;
+            }
+            
+            .whatsapp-float {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
+                bottom: 80px;
+                right: 20px;
+            }
+            
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 22px;
             }
         }
         
@@ -929,16 +1020,33 @@
                 font-size: 1.3rem;
             }
             
+            .back-button {
+                top: 15px;
+                left: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
             .whatsapp-float {
-                bottom: 90px;
-                right: 20px;
-                width: 60px;
-                height: 60px;
-                font-size: 30px;
+                width: 55px;
+                height: 55px;
+                font-size: 28px;
+                bottom: 70px;
+                right: 15px;
+            }
+            
+            header {
+                padding-left: 80px;
             }
         }
         
         @media (max-width: 576px) {
+            .hero {
+                margin-top: 150px;
+                padding: 80px 5% 60px;
+            }
+            
             .hero h2 {
                 font-size: 2rem;
             }
@@ -960,38 +1068,73 @@
                 font-size: 2rem;
             }
             
+            .back-button {
+                top: 10px;
+                left: 10px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+            
             .whatsapp-float {
-                bottom: 80px;
-                right: 15px;
-                width: 55px;
-                height: 55px;
-                font-size: 28px;
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 60px;
+                right: 10px;
             }
             
             .scroll-top {
-                bottom: 20px;
-                right: 15px;
+                bottom: 15px;
+                right: 10px;
                 width: 50px;
                 height: 50px;
                 font-size: 20px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav a {
+                font-size: 1rem;
+                padding: 6px 10px;
+            }
+            
+            header {
+                padding-left: 70px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .back-button {
+                top: 8px;
+                left: 8px;
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .back-tooltip {
+                font-size: 0.8rem;
+                padding: 8px 15px;
+            }
+            
+            header {
+                padding-left: 60px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- BOTÓN WHATSAPP -->
-    <div class="whatsapp-float" id="whatsappBtn">
-        <i class="fab fa-whatsapp"></i>
-        <div class="whatsapp-tooltip">Solicita tu canción</div>
-    </div>
-    
-    <!-- BOTÓN IR ARRIBA -->
-    <div class="scroll-top" id="scrollTopBtn">
-        <i class="fas fa-arrow-up"></i>
+    <!-- BOTÓN VOLVER A RDCRSOUND - SUPERIOR IZQUIERDA -->
+    <div class="back-button" id="backButton">
+        <i class="fas fa-arrow-left"></i>
+        <div class="back-tooltip">Volver a RDCR Sound</div>
     </div>
 
-    <!-- HEADER -->
-    <header>
+    <!-- HEADER OCULTABLE -->
+    <header id="mainHeader">
         <div class="logo">
             <i class="fas fa-palm-tree logo-icon"></i>
             <div class="logo-text">
@@ -1008,6 +1151,17 @@
             </ul>
         </nav>
     </header>
+    
+    <!-- BOTÓN WHATSAPP -->
+    <div class="whatsapp-float" id="whatsappBtn">
+        <i class="fab fa-whatsapp"></i>
+        <div class="whatsapp-tooltip">Solicita tu canción</div>
+    </div>
+    
+    <!-- BOTÓN IR ARRIBA -->
+    <div class="scroll-top" id="scrollTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
     <!-- HERO -->
     <div class="hero">
@@ -1023,7 +1177,7 @@
         </div>
     </div>
 
-    <!-- PLAYER EN VIVO - CÓDIGO PROPORCIONADO -->
+    <!-- PLAYER EN VIVO -->
     <div class="player-section" id="player">
         <!-- Animaciones de fondo -->
         <div class="background-animations" id="backgroundAnimations"></div>
@@ -1310,17 +1464,40 @@
         
         <div class="copyright">
             <p>Avenida Tropical · RDCR Sound Network 2026</p>
-            <p>“Avenida Tropical, donde la salsa vive.”</p>
+            <p>"Avenida Tropical, donde la salsa vive."</p>
             <p>Cultura y pasión salsera desde 2020</p>
         </div>
     </footer>
 
     <script>
+        // HEADER OCULTABLE AL BAJAR
+        const mainHeader = document.getElementById('mainHeader');
+        let lastScrollTop = 0;
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Bajando - ocultar header
+                mainHeader.classList.add('hidden');
+            } else {
+                // Subiendo - mostrar header
+                mainHeader.classList.remove('hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // BOTÓN VOLVER A RDCRSOUND
+        const backButton = document.getElementById('backButton');
+        backButton.addEventListener('click', function() {
+            window.location.href = 'https://rdcrsound.adcm.club';
+        });
+        
         // BOTÓN WHATSAPP
         const whatsappBtn = document.getElementById('whatsappBtn');
         whatsappBtn.addEventListener('click', function() {
-            // Número de WhatsApp (reemplazar con número real)
-            const phoneNumber = '1234567890'; 
+            const phoneNumber = '1234567890'; // Reemplazar con número real
             const message = 'Hola Avenida Tropical, quisiera solicitar la canción: ';
             const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
@@ -1393,7 +1570,7 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
                     });
                 }
@@ -1487,7 +1664,6 @@
                         <div style="color: #FF6300; text-align: center;">
                             <p>⚠️ Error de conexión</p>
                             <p style="font-size: 0.8rem; margin-top: 10px;">Intenta recargar la página</p>
-                        </div>
                     `;
                 }
             };
