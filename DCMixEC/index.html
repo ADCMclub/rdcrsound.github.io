@@ -1115,72 +1115,6 @@ nav a:hover::after {
   margin-top: 15px;
 }
 
-/* On Demand Section */
-.on-demand {
-  padding: 80px 20px;
-  background-color: var(--black);
-}
-
-.platforms {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 50px;
-}
-
-.platform {
-  background: rgba(30, 30, 30, 0.8);
-  border-radius: 15px;
-  padding: 30px;
-  width: 200px;
-  text-align: center;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid transparent;
-  position: relative;
-  overflow: hidden;
-}
-
-.platform::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
-}
-
-.platform:hover {
-  transform: translateY(-10px) scale(1.05);
-  border: 1px solid var(--neon-blue);
-  box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
-}
-
-.platform i {
-  font-size: 3.5rem;
-  margin-bottom: 20px;
-  color: var(--neon-pink);
-  text-shadow: 0 0 10px var(--neon-pink);
-  transition: all 0.3s;
-}
-
-.platform:hover i {
-  transform: scale(1.2) rotate(5deg);
-  color: var(--neon-green);
-}
-
-.platform h3 {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-  color: var(--neon-green);
-}
-
-.platform p {
-  color: var(--white);
-  font-weight: 300;
-}
-
 /* Footer */
 footer {
   background-color: var(--black-dark);
@@ -1253,32 +1187,6 @@ footer::before {
 
 .footer-links a:hover::after {
   width: 100%;
-}
-
-.footer-social .social-icons {
-  display: flex;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.social-icons a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 45px;
-  height: 45px;
-  background-color: rgba(255, 0, 255, 0.1);
-  border-radius: 50%;
-  font-size: 1.2rem;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid transparent;
-}
-
-.social-icons a:hover {
-  background-color: var(--neon-pink);
-  border: 1px solid var(--neon-pink);
-  box-shadow: 0 0 20px var(--neon-pink);
-  transform: translateY(-5px) scale(1.1);
 }
 
 .copyright {
@@ -1390,7 +1298,7 @@ footer::before {
   visibility: visible;
 }
 
-/* Responsive Design */
+/* Responsive Design - MEJORADO PARA CELULAR */
 @media (max-width: 1200px) {
   .reproductor-container {
     width: 95%;
@@ -1470,6 +1378,7 @@ footer::before {
   
   .hero h2 {
     font-size: 2.5rem;
+    text-align: center;
   }
   
   .carousel-slide {
@@ -1510,23 +1419,64 @@ footer::before {
     padding: 6px 12px;
   }
   
+  /* MEJORAS PARA EL REPRODUCTOR EN MÓVIL */
   .reproductor-container {
-    width: 95%;
-    padding: 25px;
+    width: 98%; /* Más ancho para móvil */
+    padding: 20px;
+    margin: 0 auto; /* Centrado */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar contenido */
   }
   
   .station-logo {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
+    text-align: center;
   }
   
   .player-header {
     flex-direction: column;
     gap: 15px;
     text-align: center;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .player-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .player-area {
+    width: 100%;
+    min-height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mix-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .bpm-value {
     font-size: 2.5rem;
+    text-align: center;
+  }
+  
+  .mix-controls {
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+  }
+  
+  .status-indicator {
+    margin-top: 10px;
   }
   
   .back-button {
@@ -1541,18 +1491,22 @@ footer::before {
 @media (max-width: 576px) {
   .hero h2 {
     font-size: 2rem;
+    line-height: 1.2;
   }
   
   .hero p {
     font-size: 1.1rem;
+    text-align: center;
   }
   
   .section-title h2 {
     font-size: 1.8rem;
+    text-align: center;
   }
   
   .djs-grid {
     grid-template-columns: 1fr;
+    text-align: center;
   }
   
   .platforms {
@@ -1575,14 +1529,17 @@ footer::before {
   
   .carousel-content h3 {
     font-size: 1.3rem;
+    text-align: center;
   }
   
   .carousel-content p {
     font-size: 0.9rem;
+    text-align: center;
   }
   
   .program-time {
     font-size: 1rem;
+    justify-content: center;
   }
   
   .floating-buttons {
@@ -1596,16 +1553,56 @@ footer::before {
     font-size: 1.3rem;
   }
   
+  /* MÁS MEJORAS PARA MÓVIL PEQUEÑO */
   .reproductor-container {
-    padding: 20px;
+    padding: 15px;
+    width: 98%;
+    margin: 0 auto;
   }
   
   .player-main {
-    gap: 20px;
+    gap: 15px;
   }
   
   .mix-controls {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  
+  .mix-btn {
+    padding: 12px;
+    font-size: 0.8rem;
+  }
+  
+  .btn-icon {
+    font-size: 1.2rem;
+  }
+  
+  .station-logo {
+    font-size: 2rem;
+  }
+  
+  .station-tagline {
+    font-size: 0.9rem;
+  }
+  
+  .player-area {
+    min-height: 150px;
+    padding: 15px;
+  }
+  
+  .bpm-value {
+    font-size: 2.2rem;
+  }
+  
+  .genre-tags {
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .genre-tag {
+    padding: 4px 10px;
+    font-size: 0.75rem;
   }
   
   .back-button {
@@ -1614,6 +1611,44 @@ footer::before {
     padding: 6px 12px;
     font-size: 0.7rem;
     z-index: 1002;
+  }
+  
+  .footer-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-links h3 {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .footer-links ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Mejoras adicionales para orientación horizontal en móviles */
+@media (max-height: 600px) and (orientation: landscape) {
+  .hero {
+    padding: 120px 20px 60px;
+  }
+  
+  .hero h2 {
+    font-size: 2rem;
+  }
+  
+  .reproductor-container {
+    min-height: 400px;
+    padding: 20px;
+  }
+  
+  .player-area {
+    min-height: 140px;
   }
 }
 </style>
@@ -1957,8 +1992,6 @@ footer::before {
     </div>
   </section>
 
-  
-
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -1984,18 +2017,6 @@ footer::before {
             <li><a href="#programs">Mezclas</a></li>
             <li><a href="#djs">DJs</a></li>
           </ul>
-        </div>
-        
-        <div class="footer-social">
-          <h3>CONÉCTATE</h3>
-          <p style="font-weight: 300; margin-bottom: 20px;">Sigue el ritmo en redes sociales</p>
-          <div class="social-icons">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
-            <a href="#"><i class="fab fa-telegram"></i></a>
-          </div>
         </div>
       </div>
       
