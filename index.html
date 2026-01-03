@@ -39,6 +39,171 @@ body {
 }
 
 /* =====================
+   CARRUSEL DE PUBLICIDAD
+===================== */
+.publicidad-section {
+  padding: 80px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.publicidad-section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5em;
+  position: relative;
+  color: var(--cian-electrico);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.publicidad-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--cian-electrico), transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 15px var(--cian-electrico);
+}
+
+.publicidad-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 229, 255, 0.3);
+  border: 3px solid var(--cian-electrico);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 300px;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  color: var(--blanco-limpio);
+  padding: 20px;
+  border-radius: 0 0 20px 20px;
+}
+
+.carousel-caption h3 {
+  color: var(--cian-electrico);
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.carousel-btn {
+  background: rgba(0, 229, 255, 0.2);
+  border: 2px solid var(--cian-electrico);
+  color: var(--blanco-limpio);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.carousel-btn:hover {
+  background: var(--cian-electrico);
+  color: var(--negro-profundo);
+  transform: scale(1.1);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: var(--cian-electrico);
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .publicidad-section {
+    padding: 60px 15px;
+  }
+  
+  .publicidad-section h2 {
+    font-size: 2em;
+  }
+  
+  .carousel-track {
+    height: 250px;
+  }
+  
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-track {
+    height: 200px;
+  }
+  
+  .carousel-caption h3 {
+    font-size: 1.2em;
+  }
+}
+
+/* =====================
    MEJORAS DE TEXTO Y LEGIBILIDAD
 ===================== */
 .about-content {
@@ -58,56 +223,6 @@ body {
 .about-content strong {
   color: var(--cian-electrico);
   font-size: 1.2em;
-}
-
-/* =====================
-   NUEVOS ESTILOS PARA BANNER DE PUBLICIDAD
-===================== */
-.publicidad-banner {
-  width: 100%;
-  max-width: 900px;
-  height: auto;
-  margin: 40px auto;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3);
-  border: 3px solid var(--cian-electrico);
-  transition: all 0.3s ease;
-}
-
-.publicidad-banner:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 229, 255, 0.5);
-}
-
-.banner-placeholder {
-  background: linear-gradient(45deg, var(--gris-oscuro), var(--gris-oscuro-alt));
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--cian-electrico);
-  font-size: 2.5em;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  padding: 40px;
-  text-align: center;
-  border: 3px dashed var(--cian-electrico);
-}
-
-.banner-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.banner-label {
-  color: var(--blanco-limpio);
-  font-size: 1.1em;
-  opacity: 0.8;
-  text-align: center;
 }
 
 /* =====================
@@ -298,16 +413,6 @@ body {
   .podcast-item {
     padding: 20px;
   }
-  
-  .publicidad-banner {
-    max-width: 95%;
-  }
-  
-  .banner-placeholder {
-    font-size: 1.8em;
-    padding: 30px 20px;
-    min-height: 150px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -322,12 +427,6 @@ body {
   
   .podcast-item {
     padding: 15px;
-  }
-  
-  .banner-placeholder {
-    font-size: 1.5em;
-    padding: 25px 15px;
-    min-height: 120px;
   }
   
   .whatsapp-float {
@@ -1675,7 +1774,7 @@ section h2::after {
   }
 }
 
-.about, .download-app, .plataformas-digitales, #contacto, #programacion {
+.about, .download-app, .plataformas-digitales, #contacto {
   background: var(--gris-oscuro-alt);
   border-radius: 20px;
   margin: 80px auto;
@@ -1766,8 +1865,8 @@ footer {
       <i class="fas fa-radio"></i> Radio
     </button>
     
-    <button class="nav-btn btn-programacion" onclick="scrollToSection('programacion')">
-      <i class="fas fa-calendar-alt"></i> Publicidad
+    <button class="nav-btn btn-programacion" onclick="scrollToSection('publicidad')">
+      <i class="fas fa-ad"></i> Publicidad
     </button>
     
     <button class="nav-btn btn-podcasts" onclick="scrollToSection('podcasts')">
@@ -1863,6 +1962,49 @@ footer {
     <p>Radios online con visión.<br>
        Contenido con identidad.<br>
        La radio online se transforma.</p>
+  </div>
+</section>
+
+<!-- SECCIÓN PUBLICIDAD CON CARRUSEL -->
+<section class="publicidad-section" id="publicidad">
+  <h2>Publicidad en RDCR</h2>
+  <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">
+    Tu marca puede llegar a miles de oyentes en nuestra red de radios online. Contáctanos para más información.
+  </p>
+  
+  <div class="publicidad-carousel">
+    <div class="carousel-track">
+      <!-- Imagen 1 -->
+      <div class="carousel-slide">
+        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Publicidad Ejemplo 1" class="carousel-img">
+        <div class="carousel-caption">
+          <h3>Publicidad en DC Radio</h3>
+          <p>Llega a nuestra audiencia generalista con tu mensaje publicitario</p>
+        </div>
+      </div>
+      
+      <!-- Imagen 2 -->
+      <div class="carousel-slide">
+        <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" alt="Publicidad Ejemplo 2" class="carousel-img">
+        <div class="carousel-caption">
+          <h3>Publicidad en Avenida Tropical</h3>
+          <p>Conecta con amantes de la salsa pura y auténtica</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="carousel-controls">
+      <button class="carousel-btn prev-btn">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-btn next-btn">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    
+    <div class="carousel-dots">
+      <!-- Los puntos se generarán con JavaScript -->
+    </div>
   </div>
 </section>
 
@@ -2416,6 +2558,82 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// CARRUSEL DE PUBLICIDAD
+const carouselTrack = document.querySelector('.carousel-track');
+const carouselSlides = document.querySelectorAll('.carousel-slide');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+const dotsContainer = document.querySelector('.carousel-dots');
+
+let currentSlide = 0;
+let autoSlideInterval;
+
+// Crear puntos de navegación
+carouselSlides.forEach((_, index) => {
+  const dot = document.createElement('div');
+  dot.classList.add('carousel-dot');
+  if (index === 0) dot.classList.add('active');
+  dot.addEventListener('click', () => {
+    goToSlide(index);
+  });
+  dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll('.carousel-dot');
+
+function updateCarousel() {
+  carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+  
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentSlide);
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % carouselSlides.length;
+  updateCarousel();
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + carouselSlides.length) % carouselSlides.length;
+  updateCarousel();
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  updateCarousel();
+  resetAutoSlide();
+}
+
+function startAutoSlide() {
+  autoSlideInterval = setInterval(nextSlide, 5000); // Cambia cada 5 segundos
+}
+
+function resetAutoSlide() {
+  clearInterval(autoSlideInterval);
+  startAutoSlide();
+}
+
+nextBtn.addEventListener('click', () => {
+  nextSlide();
+  resetAutoSlide();
+});
+
+prevBtn.addEventListener('click', () => {
+  prevSlide();
+  resetAutoSlide();
+});
+
+// Pausar auto-slide al pasar el cursor
+const carouselContainer = document.querySelector('.publicidad-carousel');
+carouselContainer.addEventListener('mouseenter', () => {
+  clearInterval(autoSlideInterval);
+});
+
+carouselContainer.addEventListener('mouseleave', () => {
+  startAutoSlide();
+});
+
 const navButtons = document.querySelectorAll('.nav-btn, .btn-radio-card, .btn-primary-action, .footer-action-btn');
 
 navButtons.forEach(button => {
@@ -2453,6 +2671,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     document.body.style.opacity = '1';
   }, 100);
+  
+  updateCarousel();
+  startAutoSlide();
   
   const styleSheet = document.createElement('style');
   styleSheet.textContent = `
