@@ -39,7 +39,79 @@ body {
 }
 
 /* =====================
-   CARRUSEL DE PUBLICIDAD
+   SECCIÓN ESTADÍSTICAS FINAL
+===================== */
+.estadisticas-section {
+  padding: 80px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.estadisticas-section h2 {
+  margin-bottom: 40px;
+  font-size: 2.5em;
+  position: relative;
+  color: var(--cian-electrico);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.estadisticas-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--cian-electrico), transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 15px var(--cian-electrico);
+}
+
+.estadisticas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.estadistica-card {
+  background: var(--gris-oscuro);
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid var(--cian-electrico);
+  transition: all 0.3s ease;
+}
+
+.estadistica-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 229, 255, 0.3);
+}
+
+.estadistica-icon {
+  font-size: 3em;
+  color: var(--cian-electrico);
+  margin-bottom: 20px;
+}
+
+.contador-numero {
+  font-size: 3em;
+  font-weight: bold;
+  color: var(--blanco-limpio);
+  margin: 15px 0;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 10px var(--cian-electrico);
+}
+
+.contador-texto {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1em;
+}
+
+/* =====================
+   CARRUSEL DE PUBLICIDAD CON BOTÓN TARIFARIO
 ===================== */
 .publicidad-section {
   padding: 80px 20px;
@@ -69,6 +141,29 @@ body {
   background: linear-gradient(90deg, transparent, var(--cian-electrico), transparent);
   border-radius: 2px;
   box-shadow: 0 0 15px var(--cian-electrico);
+}
+
+.tarifario-header-btn {
+  display: block;
+  margin: 0 auto 30px;
+  padding: 15px 30px;
+  background: linear-gradient(45deg, #32CD32, #228B22);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(50, 205, 50, 0.4);
+  text-decoration: none;
+  text-align: center;
+  max-width: 300px;
+}
+
+.tarifario-header-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(50, 205, 50, 0.6);
 }
 
 .publicidad-carousel {
@@ -174,7 +269,7 @@ body {
 }
 
 /* =====================
-   SECCIÓN PODCASTS - NUEVO DISEÑO
+   SECCIÓN PODCASTS CON BOTÓN ATRÁS
 ===================== */
 .podcasts-section {
   padding: 80px 20px;
@@ -204,6 +299,30 @@ body {
   background: linear-gradient(90deg, transparent, var(--cian-electrico), transparent);
   border-radius: 2px;
   box-shadow: 0 0 15px var(--cian-electrico);
+}
+
+.podcast-back-btn-fixed {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background: var(--gris-oscuro);
+  border: 2px solid var(--cian-electrico);
+  color: var(--blanco-limpio);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+  z-index: 10;
+}
+
+.podcast-back-btn-fixed:hover {
+  background: var(--cian-electrico);
+  color: var(--negro-profundo);
+  transform: translateX(-5px);
 }
 
 .podcasts-grid {
@@ -384,81 +503,66 @@ body {
   box-shadow: 0 10px 20px rgba(0, 229, 255, 0.4);
 }
 
-@media (max-width: 768px) {
-  .podcast-container {
-    grid-template-columns: 1fr;
-    padding: 20px;
-    gap: 20px;
-  }
-  
-  .podcast-embed {
-    height: 250px;
-  }
-  
-  .podcasts-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  .podcast-card {
-    height: 180px;
-    padding: 20px;
-  }
-  
-  .podcast-card i {
-    font-size: 2.5em;
-    margin-bottom: 15px;
-  }
-  
-  .podcast-card h3 {
-    font-size: 1.1em;
-  }
+/* =====================
+   SECCIÓN DESCARGAR APP SIMPLIFICADA
+===================== */
+.download-app {
+  padding: 80px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--gris-oscuro-alt);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 229, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 480px) {
-  .podcasts-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .podcast-card {
-    height: 160px;
-    padding: 15px;
-  }
-  
-  .podcast-card i {
-    font-size: 2em;
-    margin-bottom: 10px;
-  }
-  
-  .podcast-card h3 {
-    font-size: 1em;
-  }
-  
-  .podcast-card p {
-    font-size: 0.8em;
-  }
+.download-app h2 {
+  margin-bottom: 40px;
+  font-size: 2.5em;
+  position: relative;
+  color: var(--cian-electrico);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.download-app h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--cian-electrico), transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 15px var(--cian-electrico);
 }
 
 /* =====================
-   MEJORAS DE TEXTO Y LEGIBILIDAD
+   BOTÓN QUIÉNES SOMOS
 ===================== */
-.about-content {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
+.quienes-somos-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
+  background: linear-gradient(45deg, #9C27B0, #673AB7);
+  border: 2px solid var(--blanco-limpio);
+  border-radius: 10px;
+  color: var(--blanco-limpio);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 40px auto;
   font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.about-content p {
-  margin-bottom: 1.5em;
-  text-align: justify;
-  line-height: 1.8;
-}
-
-.about-content strong {
-  color: var(--cian-electrico);
-  font-size: 1.2em;
+.quienes-somos-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(156, 39, 176, 0.4);
 }
 
 /* =====================
@@ -549,94 +653,6 @@ body {
   height: 50px;
   width: auto;
   margin-right: 15px;
-}
-
-.footer-action-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin: 40px auto;
-  flex-wrap: wrap;
-  max-width: 1000px;
-  padding: 0 20px;
-}
-
-.footer-action-btn {
-  position: relative;
-  padding: 20px 40px;
-  border: none;
-  background: transparent;
-  color: var(--blanco-limpio);
-  font-weight: 700;
-  font-size: 1.1em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  border-radius: 15px;
-  overflow: hidden;
-  transition: all 0.4s ease;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  min-width: 250px;
-  justify-content: center;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.footer-action-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, var(--cian-electrico), var(--cian-electrico-alt));
-  z-index: -1;
-  transition: all 0.4s ease;
-  border-radius: 15px;
-  opacity: 0.9;
-}
-
-.footer-action-btn:hover::before {
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-.footer-action-btn:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0, 229, 255, 0.5);
-}
-
-.footer-action-btn i {
-  font-size: 1.5em;
-  transition: all 0.3s ease;
-}
-
-.footer-action-btn:hover i {
-  transform: scale(1.3) rotate(10deg);
-  animation: iconGlow 1s infinite alternate;
-}
-
-.codigo-btn {
-  border: 3px solid #FFD700;
-}
-
-.codigo-btn::before {
-  background: linear-gradient(45deg, #FFD700, #FF8C00);
-}
-
-.tarifario-btn {
-  border: 3px solid #32CD32;
-}
-
-.tarifario-btn::before {
-  background: linear-gradient(45deg, #32CD32, #228B22);
-}
-
-@keyframes iconGlow {
-  0% { filter: drop-shadow(0 0 5px var(--cian-electrico)); }
-  100% { filter: drop-shadow(0 0 10px var(--cian-electrico)); }
 }
 
 .back-to-top {
@@ -1551,19 +1567,8 @@ section h2::after {
     padding: 0 20px;
   }
   
-  section, .radios-section, .podcasts-section, .publicidad-section {
+  section, .radios-section, .podcasts-section, .publicidad-section, .estadisticas-section, .download-app {
     padding: 80px 20px !important;
-  }
-  
-  .footer-action-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .footer-action-btn {
-    min-width: 300px;
-    width: 100%;
-    max-width: 400px;
   }
   
   .modal-content {
@@ -1584,6 +1589,10 @@ section h2::after {
   .modal-close-buttons {
     width: 100%;
     justify-content: center;
+  }
+  
+  .estadisticas-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -1646,7 +1655,7 @@ section h2::after {
     font-size: 2.2em !important;
   }
   
-  .radios-section h2, .podcasts-section h2, .publicidad-section h2 {
+  .radios-section h2, .podcasts-section h2, .publicidad-section h2, .estadisticas-section h2, .download-app h2 {
     font-size: 2.2em !important;
     margin-bottom: 40px;
   }
@@ -1680,12 +1689,6 @@ section h2::after {
     height: 50px;
   }
   
-  .footer-action-btn {
-    min-width: 280px;
-    padding: 18px 30px !important;
-    font-size: 1em;
-  }
-  
   .modal-body {
     padding: 20px !important;
     font-size: 1em;
@@ -1697,6 +1700,19 @@ section h2::after {
   
   .modal-body h4 {
     font-size: 1.1em;
+  }
+  
+  .podcast-back-btn-fixed {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0 auto 20px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .estadisticas-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1760,17 +1776,6 @@ section h2::after {
     font-size: 1.2em;
   }
   
-  .footer-action-buttons {
-    margin: 30px auto;
-    gap: 20px;
-  }
-  
-  .footer-action-btn {
-    min-width: 100%;
-    padding: 15px 20px !important;
-    font-size: 0.95em;
-  }
-  
   .modal-content {
     width: 98%;
     border-radius: 15px;
@@ -1807,6 +1812,10 @@ section h2::after {
     flex-wrap: wrap;
     gap: 10px;
   }
+  
+  .contador-numero {
+    font-size: 2.5em;
+  }
 }
 
 @media (max-width: 400px) {
@@ -1827,7 +1836,7 @@ section h2::after {
     padding: 15px !important;
   }
   
-  .radios-section h2, .podcasts-section h2, .publicidad-section h2 {
+  .radios-section h2, .podcasts-section h2, .publicidad-section h2, .estadisticas-section h2, .download-app h2 {
     font-size: 1.9em !important;
   }
   
@@ -1849,16 +1858,6 @@ section h2::after {
     font-size: 0.85em;
   }
   
-  .footer-action-btn {
-    padding: 12px 15px !important;
-    font-size: 0.9em;
-    min-width: 100%;
-  }
-  
-  .footer-action-btn i {
-    font-size: 1.2em;
-  }
-  
   .whatsapp-float {
     bottom: 70px;
     right: 10px;
@@ -1872,9 +1871,13 @@ section h2::after {
     width: 40px;
     height: 40px;
   }
+  
+  .contador-numero {
+    font-size: 2em;
+  }
 }
 
-.about, .download-app, .plataformas-digitales, #contacto {
+#contacto {
   background: var(--gris-oscuro-alt);
   border-radius: 20px;
   margin: 80px auto;
@@ -1972,6 +1975,14 @@ footer {
     <button class="nav-btn btn-podcasts" onclick="scrollToSection('podcasts')">
       <i class="fas fa-podcast"></i> Podcasts
     </button>
+    
+    <button class="nav-btn" onclick="openModal('quienesSomos')">
+      <i class="fas fa-users"></i> Quiénes Somos
+    </button>
+    
+    <button class="nav-btn" onclick="openModal('codigoDeontologico')">
+      <i class="fas fa-scroll"></i> Código
+    </button>
   </nav>
 </header>
 
@@ -2046,8 +2057,12 @@ footer {
   </div>
 </section>
 
-<!-- PODCASTS - NUEVA SECCIÓN DESPUÉS DE RADIOS -->
+<!-- PODCASTS - CON BOTÓN ATRÁS FIJO -->
 <section class="podcasts-section" id="podcasts">
+  <button class="podcast-back-btn-fixed" onclick="scrollToSection('radios')">
+    <i class="fas fa-arrow-left"></i> Volver a Radios
+  </button>
+  
   <h2>Podcasts Exclusivos</h2>
   <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">
     Disfruta de nuestros contenidos especializados en tus plataformas favoritas. Programas completos, entrevistas y contenido exclusivo.
@@ -2080,8 +2095,19 @@ footer {
   </div>
 </section>
 
-<!-- SECCIÓN PUBLICIDAD CON CARRUSEL -->
+<!-- BOTÓN QUIÉNES SOMOS -->
+<div style="text-align: center;">
+  <button class="quienes-somos-btn" onclick="openModal('quienesSomos')">
+    <i class="fas fa-users"></i> CONOCE MÁS SOBRE NOSOTROS
+  </button>
+</div>
+
+<!-- SECCIÓN PUBLICIDAD CON BOTÓN TARIFARIO -->
 <section class="publicidad-section" id="publicidad">
+  <button class="tarifario-header-btn" onclick="openModal('tarifario')">
+    <i class="fas fa-file-invoice-dollar"></i> Ver Tarifario Publicitario
+  </button>
+  
   <h2>Tu Publicidad Aquí</h2>
   <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">
     Tu marca puede llegar a miles de oyentes en nuestra red de radios online. Contáctanos para más información.
@@ -2123,33 +2149,14 @@ footer {
   </div>
 </section>
 
-<!-- QUIÉNES SOMOS -->
-<section class="about">
-  <h2>EVOLUCIONAMOS</h2>
-  <div class="about-content">
-    <p><strong>RDCR Sound Network</strong> nace de una visión clara: crear radio online con identidad, criterio y propósito.</p>
-    
-    <p>Desde el lanzamiento de Avenida Tropical en septiembre de 2020, el proyecto creció con pasión y convicción, apostando por una radio digital hecha con carácter y calidad.</p>
-    
-    <p>En julio de 2021, este camino dio un paso decisivo con la creación de RDCR, entendiendo que el futuro no era una sola emisora, sino la construcción de una red sólida y en constante evolución. Así surge RDCR Sound Network, una propuesta que integra música, contenido y tecnología bajo una misma visión.</p>
-    
-    <p>Hoy presentamos una nueva etapa: imagen renovada, nuevos talentos, programación actualizada y una estructura pensada para el presente y proyectada al futuro. Nuestra historia no se deja atrás; se transforma en experiencia y aprendizaje.</p>
-    
-    <p><strong>RDCR Sound Network 2026</strong></p>
-    <p>Radios online con visión.<br>
-       Contenido con identidad.<br>
-       La radio online se transforma.</p>
-  </div>
-</section>
-
-<!-- DESCARGAR APP -->
+<!-- DESCARGAR APP SIMPLIFICADA -->
 <section class="download-app" id="download">
   <h2>Descarga Nuestra App</h2>
   <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">
     Lleva RDCR Sound Network contigo a todas partes. Disfruta de nuestras radios, programas en vivo, podcasts y efectos exclusivos directamente desde tu dispositivo móvil.
   </p>
   
-  <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+  <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px;">
     <a href="https://www.appcreator24.com/app1472133-ekgbdf" target="_blank" class="btn-primary-action">
       <i class="fab fa-google-play"></i> Google Play
     </a>
@@ -2160,16 +2167,44 @@ footer {
   </div>
 </section>
 
-<!-- BOTONES DE ACCIÓN EN FOOTER -->
-<div class="footer-action-buttons">
-  <button class="footer-action-btn codigo-btn" onclick="openModal('codigoDeontologico')">
-    <i class="fas fa-scroll"></i> Código Deontológico
-  </button>
+<!-- SECCIÓN ESTADÍSTICAS FINAL -->
+<section class="estadisticas-section" id="estadisticas">
+  <h2>Nuestra Comunidad en Números</h2>
   
-  <button class="footer-action-btn tarifario-btn" onclick="openModal('tarifario')">
-    <i class="fas fa-file-invoice-dollar"></i> Tarifario Publicitario
-  </button>
-</div>
+  <div class="estadisticas-grid">
+    <div class="estadistica-card">
+      <div class="estadistica-icon">
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="contador-numero" id="contadorVisitas">15,842</div>
+      <div class="contador-texto">Visitas Totales</div>
+    </div>
+    
+    <div class="estadistica-card">
+      <div class="estadistica-icon">
+        <i class="fas fa-headphones-alt"></i>
+      </div>
+      <div class="contador-numero" id="contadorOyentes">3,256</div>
+      <div class="contador-texto">Oyentes en Vivo</div>
+    </div>
+    
+    <div class="estadistica-card">
+      <div class="estadistica-icon">
+        <i class="fas fa-mobile-alt"></i>
+      </div>
+      <div class="contador-numero" id="contadorDescargas">8,742</div>
+      <div class="contador-texto">Descargas de App</div>
+    </div>
+    
+    <div class="estadistica-card">
+      <div class="estadistica-icon">
+        <i class="fas fa-globe-americas"></i>
+      </div>
+      <div class="contador-numero" id="contadorPaises">18</div>
+      <div class="contador-texto">Países Alcanzados</div>
+    </div>
+  </div>
+</section>
 
 <!-- CONTACTO -->
 <section id="contacto">
@@ -2229,6 +2264,35 @@ footer {
   </div>
 </footer>
 
+<!-- MODAL QUIÉNES SOMOS -->
+<div id="quienesSomos" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>QUIÉNES SOMOS</h2>
+      <div class="modal-close-buttons">
+        <button class="modal-back-btn" onclick="closeModal('quienesSomos')">
+          <i class="fas fa-arrow-left"></i> Atrás
+        </button>
+        <button class="close-modal" onclick="closeModal('quienesSomos')">&times;</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p><strong>RDCR Sound Network</strong> nace de una visión clara: crear radio online con identidad, criterio y propósito.</p>
+      
+      <p>Desde el lanzamiento de Avenida Tropical en septiembre de 2020, el proyecto creció con pasión y convicción, apostando por una radio digital hecha con carácter y calidad.</p>
+      
+      <p>En julio de 2021, este camino dio un paso decisivo con la creación de RDCR, entendiendo que el futuro no era una sola emisora, sino la construcción de una red sólida y en constante evolución. Así surge RDCR Sound Network, una propuesta que integra música, contenido y tecnología bajo una misma visión.</p>
+      
+      <p>Hoy presentamos una nueva etapa: imagen renovada, nuevos talentos, programación actualizada y una estructura pensada para el presente y proyectada al futuro. Nuestra historia no se deja atrás; se transforma en experiencia y aprendizaje.</p>
+      
+      <p><strong>RDCR Sound Network 2026</strong></p>
+      <p>Radios online con visión.<br>
+         Contenido con identidad.<br>
+         La radio online se transforma.</p>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL CÓDIGO DEONTOLÓGICO -->
 <div id="codigoDeontologico" class="modal">
   <div class="modal-content">
@@ -2253,7 +2317,7 @@ footer {
       <p>Todos los contenidos promueven el respeto a las personas, sin distinción de edad, género, cultura, origen o condición social.</p>
       
       <h4>Diversidad Cultural y Musical</h4>
-      <p>RDCR Sound Network impulsa la pluralidad de estilos musicales, generaciones y expresiones culturales, reconociendo la riqueza de la diversidad.</p>
+      <p>RDCR Sound Network impulsa la pluralidad de estilos musicales, generaciones y expresiones culturales, reconocimiento la riqueza de la diversidad.</p>
       
       <h4>Libertad Creativa Responsable</h4>
       <p>Se fomenta la creatividad artística y radial, siempre dentro de un marco de responsabilidad social y buen criterio comunicacional.</p>
@@ -2734,7 +2798,47 @@ carouselContainer.addEventListener('mouseleave', () => {
   startAutoSlide();
 });
 
-const navButtons = document.querySelectorAll('.nav-btn, .btn-radio-card, .btn-primary-action, .footer-action-btn');
+// CONTADORES DE ESTADÍSTICAS
+function iniciarContadores() {
+  const contadores = document.querySelectorAll('.contador-numero');
+  
+  contadores.forEach(contador => {
+    const target = parseInt(contador.textContent.replace(/,/g, ''));
+    const incremento = target / 200;
+    let valorActual = 0;
+    
+    const actualizarContador = () => {
+      valorActual += incremento;
+      if (valorActual < target) {
+        contador.textContent = Math.floor(valorActual).toLocaleString();
+        setTimeout(actualizarContador, 10);
+      } else {
+        contador.textContent = target.toLocaleString();
+        
+        // Añadir efecto de parpadeo al final
+        contador.style.animation = 'none';
+        setTimeout(() => {
+          contador.style.animation = 'pulse 1s 3';
+        }, 100);
+      }
+    };
+    
+    // Iniciar cuando el elemento sea visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          actualizarContador();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    observer.observe(contador);
+  });
+}
+
+// ANIMACIÓN DE RIPPLE PARA BOTONES
+const navButtons = document.querySelectorAll('.nav-btn, .btn-radio-card, .btn-primary-action, .quienes-somos-btn, .tarifario-header-btn');
 
 navButtons.forEach(button => {
   button.addEventListener('mouseenter', function(e) {
@@ -2774,6 +2878,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   updateCarousel();
   startAutoSlide();
+  iniciarContadores();
   
   const styleSheet = document.createElement('style');
   styleSheet.textContent = `
@@ -2801,6 +2906,11 @@ document.addEventListener('DOMContentLoaded', () => {
         height: 500px;
         opacity: 0;
       }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
     }
   `;
   document.head.appendChild(styleSheet);
