@@ -1550,6 +1550,9 @@ section h2::after {
   box-shadow: 0 0 10px var(--cian-electrico);
 }
 
+/* =====================
+   RESPONSIVE DESIGN - MEJORADO
+===================== */
 @media (max-width: 992px) {
   .radios-grid {
     grid-template-columns: 1fr;
@@ -1593,6 +1596,19 @@ section h2::after {
   
   .estadisticas-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Carrusel responsive tablet */
+  .publicidad-carousel {
+    height: 250px;
+  }
+  
+  .carousel-track {
+    height: 250px;
+  }
+  
+  .carousel-img {
+    object-fit: cover;
   }
 }
 
@@ -1674,6 +1690,51 @@ section h2::after {
     padding: 0 10px;
   }
   
+  /* Carrusel móvil optimizado */
+  .publicidad-carousel {
+    height: 200px;
+    border-width: 2px;
+    border-radius: 15px;
+  }
+  
+  .carousel-track {
+    height: 200px;
+  }
+  
+  .carousel-slide {
+    height: 200px;
+  }
+  
+  .carousel-img {
+    border-radius: 15px;
+  }
+  
+  .carousel-controls {
+    padding: 0 10px;
+  }
+  
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+  }
+  
+  .carousel-caption {
+    padding: 15px;
+  }
+  
+  .carousel-caption h3 {
+    font-size: 1.2em;
+  }
+  
+  .carousel-caption p {
+    font-size: 0.9em;
+  }
+  
+  .carousel-dots {
+    margin-top: 15px;
+  }
+  
   .whatsapp-float {
     bottom: 90px;
     right: 20px;
@@ -1713,6 +1774,19 @@ section h2::after {
   
   .estadisticas-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .estadistica-card {
+    padding: 20px;
+  }
+  
+  .contador-numero {
+    font-size: 2.5em;
+  }
+  
+  .podcast-container {
+    grid-template-columns: 1fr;
+    padding: 20px;
   }
 }
 
@@ -1758,6 +1832,31 @@ section h2::after {
   .btn-radio-card {
     padding: 10px 20px !important;
     font-size: 0.9em;
+  }
+  
+  /* Carrusel móvil pequeño */
+  .publicidad-carousel {
+    height: 180px;
+  }
+  
+  .carousel-track {
+    height: 180px;
+  }
+  
+  .carousel-slide {
+    height: 180px;
+  }
+  
+  .carousel-caption {
+    padding: 10px;
+  }
+  
+  .carousel-caption h3 {
+    font-size: 1em;
+  }
+  
+  .carousel-caption p {
+    font-size: 0.8em;
   }
   
   .whatsapp-float {
@@ -1814,6 +1913,19 @@ section h2::after {
   }
   
   .contador-numero {
+    font-size: 2.2em;
+  }
+  
+  .podcasts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .podcast-card {
+    height: 150px;
+    padding: 20px;
+  }
+  
+  .podcast-card i {
     font-size: 2.5em;
   }
 }
@@ -1853,6 +1965,25 @@ section h2::after {
     line-height: 1.4;
   }
   
+  /* Carrusel móvil muy pequeño */
+  .publicidad-carousel {
+    height: 160px;
+  }
+  
+  .carousel-track {
+    height: 160px;
+  }
+  
+  .carousel-slide {
+    height: 160px;
+  }
+  
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1em;
+  }
+  
   .btn-radio-card {
     padding: 8px 16px !important;
     font-size: 0.85em;
@@ -1874,6 +2005,10 @@ section h2::after {
   
   .contador-numero {
     font-size: 2em;
+  }
+  
+  .estadistica-icon {
+    font-size: 2.5em;
   }
 }
 
@@ -2108,22 +2243,61 @@ footer {
   
   <div class="publicidad-carousel">
     <div class="carousel-track">
-      <!-- Imagen 1 -->
+      <!-- Imagen 1 - Ejemplo de publicidad -->
       <div class="carousel-slide">
         <img src="/img_radio/Auspiciantes/@D ´Clary.jpg" alt="Publicidad Ejemplo 1" class="carousel-img">
         <div class="carousel-caption">
+          <h3>D'Clary Boutique</h3>
+          <p>Moda y estilo para toda ocasión</p>
         </div>
       </div>
       
-      <!-- Imagen 2 -->
+      <!-- Imagen 2 - Ejemplo de publicidad -->
       <div class="carousel-slide">
-        <img src="/img_radio/Auspiciantes/Marcelo Valverde.jpg" alt="Publicidad Ejemplo 2" class="carousel-img">
+        <img src="/img_radio/Auspiciantes/Marcelo Valverde 2.jpg" alt="Publicidad Ejemplo 2" class="carousel-img">
         <div class="carousel-caption">
+          <h3>Marcelo Valverde</h3>
+          <p>Servicios profesionales de calidad</p>
+        </div>
+      </div>
+      
+      <!-- Imagen 3 - Ejemplo de publicidad -->
+      <div class="carousel-slide">
+        <img src="/img_radio/Auspiciantes/@D ´Clary.jpg" alt="Publicidad Ejemplo 3" class="carousel-img">
+        <div class="carousel-caption">
+          <h3>Restaurante La Tradición</h3>
+          <p>La mejor comida ecuatoriana en la ciudad</p>
+        </div>
+      </div>
+      
+      <!-- Imagen 4 - Ejemplo de publicidad -->
+      <div class="carousel-slide">
+        <img src="/img_radio/Auspiciantes/Marcelo Valverde 2.jpg" alt="Publicidad Ejemplo 4" class="carousel-img">
+        <div class="carousel-caption">
+          <h3>AutoService Premium</h3>
+          <p>Mantenimiento y reparación de vehículos</p>
+        </div>
+      </div>
+      
+      <!-- Imagen 5 - Ejemplo de publicidad -->
+      <div class="carousel-slide">
+        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Publicidad Ejemplo 5" class="carousel-img">
+        <div class="carousel-caption">
+          <h3>Inmobiliaria Horizonte</h3>
+          <p>Tu hogar soñado está aquí</p>
+        </div>
+      </div>
+      
+      <!-- Imagen 6 - Ejemplo de publicidad -->
+      <div class="carousel-slide">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Publicidad Ejemplo 6" class="carousel-img">
+        <div class="carousel-caption">
+          <h3>TechSolutions Ecuador</h3>
+          <p>Soluciones tecnológicas para tu negocio</p>
         </div>
       </div>
     </div>
     
-  
     <div class="carousel-controls">
       <button class="carousel-btn prev-btn">
         <i class="fas fa-chevron-left"></i>
@@ -2749,7 +2923,8 @@ function goToSlide(index) {
 }
 
 function startAutoSlide() {
-  autoSlideInterval = setInterval(nextSlide, 5000); // Cambia cada 5 segundos
+  // Cambia cada 5 segundos (5000ms)
+  autoSlideInterval = setInterval(nextSlide, 5000);
 }
 
 function resetAutoSlide() {
@@ -2856,7 +3031,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 100);
   
   updateCarousel();
-  startAutoSlide();
+  startAutoSlide(); // Iniciar carrusel automático cada 5 segundos
   iniciarContadores();
   
   const styleSheet = document.createElement('style');
