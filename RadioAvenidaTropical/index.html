@@ -528,7 +528,7 @@
             animation: spin 1s linear infinite;
         }
         
-        /* NUEVA SECCIÓN DE PROGRAMACIÓN */
+        /* NUEVA SECCIÓN DE PROGRAMACIÓN CON PESTAÑAS HORIZONTALES */
         .programacion-nueva-section {
             padding: 60px 20px;
             background-color: var(--dark-bg);
@@ -566,124 +566,171 @@
             line-height: 1.3;
         }
 
-        /* Contenedor de acordeones por día */
-        .acordeon-dias {
+        /* CONTENEDOR DE PESTAÑAS DE DÍAS */
+        .dias-tabs-container {
             width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 10px;
+        }
+
+        .dias-tabs {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .dia-acordeon {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 240, 31, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .dia-acordeon.active {
-            border-color: var(--neon-yellow);
-            box-shadow: 0 0 20px rgba(255, 240, 31, 0.3);
-        }
-        
-        .dia-acordeon.active .dia-header {
-            background: rgba(255, 240, 31, 0.1);
-        }
-        
-        .dia-header {
-            padding: 18px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.03);
-            transition: all 0.3s ease;
-        }
-        
-        .dia-header:hover {
-            background: rgba(255, 240, 31, 0.08);
-        }
-        
-        .dia-nombre {
-            display: flex;
-            align-items: center;
+            flex-wrap: nowrap;
+            justify-content: center;
             gap: 10px;
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: var(--neon-yellow);
+            padding: 10px 5px;
+            min-width: max-content;
         }
-        
-        .dia-numero {
+
+        .dia-tab {
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 240, 31, 0.3);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            min-width: 110px;
+            text-align: center;
+            white-space: nowrap;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .dia-tab:hover {
+            border-color: var(--neon-yellow);
+            color: var(--neon-yellow);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 240, 31, 0.2);
+        }
+
+        .dia-tab.active {
+            background: var(--neon-yellow);
+            border-color: var(--neon-yellow);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-yellow-glow);
+            font-weight: 700;
+        }
+
+        /* Indicador del día actual */
+        .hoy-badge {
+            position: absolute;
+            top: -8px;
+            right: 10px;
             background: var(--neon-orange);
             color: var(--dark-bg);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 0.7rem;
             font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 10px;
             box-shadow: 0 0 10px var(--neon-orange-glow);
         }
-        
-        .dia-hoy-badge {
+
+        /* CONTENEDOR DE PROGRAMAS */
+        .programas-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 10px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .programas-dia {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            animation: fadeIn 0.5s ease;
+            width: 100%;
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
+        .programas-dia.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* CABECERA DEL DÍA */
+        .dia-cabecera {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 240, 31, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--neon-yellow);
+        }
+
+        .dia-titulo {
+            font-size: 1.8rem;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 10px var(--neon-yellow-glow);
+            margin-bottom: 5px;
+        }
+
+        .dia-fecha {
+            font-size: 1rem;
+            color: var(--neon-green);
+            font-style: italic;
+        }
+
+        /* LISTA DE PROGRAMAS POR HORA */
+        .programas-horarios {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .programa-horario-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 4px solid var(--neon-orange);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .programa-horario-item:hover {
+            background: rgba(255, 94, 0, 0.08);
+            transform: translateX(5px);
+        }
+
+        /* Programa actual en vivo */
+        .programa-horario-item.en-vivo {
+            border-left: 4px solid var(--neon-green);
+            background: rgba(57, 255, 20, 0.05);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+        }
+
+        .en-vivo-badge {
+            position: absolute;
+            top: -8px;
+            right: 15px;
             background: var(--neon-green);
             color: var(--dark-bg);
             font-size: 0.7rem;
             font-weight: 800;
             padding: 3px 10px;
-            border-radius: 10px;
-            margin-left: 10px;
+            border-radius: 12px;
             box-shadow: 0 0 10px var(--neon-green-glow);
+            animation: pulse-badge 2s infinite;
         }
-        
-        .dia-icon {
-            color: var(--neon-yellow);
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .dia-acordeon.active .dia-icon {
-            transform: rotate(180deg);
-        }
-        
-        /* Contenido del acordeón (programas) */
-        .programas-contenido {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .programas-contenido.active {
-            max-height: 2000px;
-        }
-        
-        .programas-lista {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .programa-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            border-left: 4px solid var(--neon-orange);
-            transition: all 0.3s ease;
-        }
-        
-        .programa-item:hover {
-            background: rgba(255, 94, 0, 0.1);
-            transform: translateX(5px);
-        }
-        
-        .programa-hora {
+
+        .hora-programa {
             min-width: 80px;
             background: var(--neon-orange);
             color: var(--dark-bg);
@@ -696,11 +743,16 @@
             box-shadow: 0 0 10px var(--neon-orange-glow);
             flex-shrink: 0;
         }
-        
-        .programa-info-texto {
+
+        .en-vivo .hora-programa {
+            background: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green-glow);
+        }
+
+        .programa-info {
             flex: 1;
         }
-        
+
         .programa-titulo {
             font-size: 1.1rem;
             font-weight: 700;
@@ -708,20 +760,21 @@
             margin-bottom: 5px;
             line-height: 1.3;
         }
-        
+
         .programa-conductor {
             font-size: 0.9rem;
             color: var(--neon-green);
             margin-bottom: 5px;
             font-weight: 600;
         }
-        
+
         .programa-descripcion {
             font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.4;
+            margin-bottom: 8px;
         }
-        
+
         .programa-genero {
             display: inline-block;
             background: rgba(255, 255, 255, 0.1);
@@ -729,22 +782,8 @@
             border-radius: 12px;
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.8);
-            margin-top: 8px;
         }
-        
-        /* Indicador de programa en vivo */
-        .en-vivo-badge {
-            background: var(--neon-green);
-            color: var(--dark-bg);
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 10px;
-            margin-left: 10px;
-            box-shadow: 0 0 10px var(--neon-green-glow);
-            animation: pulse-badge 2s infinite;
-        }
-        
+
         /* ESPECIALES SALSEROS */
         .especiales-section {
             padding: 60px 20px;
@@ -1101,30 +1140,32 @@
             }
             
             /* PROGRAMACIÓN PARA TABLET */
-            .acordeon-dias {
-                max-width: 800px;
+            .dias-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
-            .dia-nombre {
-                font-size: 1.4rem;
+            .dia-tab {
+                min-width: 120px;
+                padding: 15px 20px;
             }
             
-            .programa-item {
-                flex-direction: row;
-                align-items: flex-start;
+            .programas-horarios {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
             }
             
-            .programa-hora {
-                min-width: 90px;
-                font-size: 1rem;
+            .programa-horario-item {
+                flex-direction: column;
+                height: 100%;
             }
             
-            .programa-titulo {
-                font-size: 1.2rem;
-            }
-            
-            .programa-conductor {
-                font-size: 1rem;
+            .hora-programa {
+                min-width: 100px;
+                margin-right: 0;
+                margin-bottom: 10px;
+                align-self: flex-start;
             }
             
             /* ESPECIALES PARA TABLET */
@@ -1312,40 +1353,73 @@
                 font-size: 1.5rem;
             }
             
-            .acordeon-dias {
-                max-width: 1000px;
-                gap: 20px;
+            /* PESTAÑAS DE DÍAS - ESCRITORIO */
+            .dias-tabs-container {
+                max-width: 1200px;
+                margin-bottom: 40px;
             }
             
-            .dia-header {
-                padding: 22px 30px;
+            .dias-tabs {
+                flex-wrap: nowrap;
+                gap: 15px;
+                padding: 15px 0;
             }
             
-            .dia-nombre {
-                font-size: 1.5rem;
-            }
-            
-            .dia-numero {
-                width: 35px;
-                height: 35px;
+            .dia-tab {
+                min-width: 140px;
+                padding: 15px 25px;
                 font-size: 1.1rem;
             }
             
-            .dia-hoy-badge {
+            .hoy-badge {
+                top: -10px;
+                right: 15px;
+                font-size: 0.8rem;
+                padding: 3px 10px;
+            }
+            
+            /* CONTENEDOR DE PROGRAMAS - ESCRITORIO */
+            .programas-container {
+                max-width: 1200px;
+            }
+            
+            .dia-cabecera {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .dia-titulo {
+                font-size: 2.2rem;
+            }
+            
+            .dia-fecha {
+                font-size: 1.2rem;
+            }
+            
+            .programas-horarios {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 25px;
+            }
+            
+            .programa-horario-item {
+                padding: 20px;
+                flex-direction: row;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            .programa-horario-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(255, 94, 0, 0.1);
+            }
+            
+            .en-vivo-badge {
+                top: 10px;
+                right: 20px;
                 font-size: 0.8rem;
                 padding: 4px 12px;
             }
             
-            .programas-lista {
-                padding: 25px 30px;
-                gap: 18px;
-            }
-            
-            .programa-item {
-                padding: 18px 20px;
-            }
-            
-            .programa-hora {
+            .hora-programa {
                 min-width: 100px;
                 padding: 10px 15px;
                 font-size: 1.1rem;
@@ -1532,8 +1606,9 @@
             }
             
             /* PROGRAMACIÓN - PANTALLAS GRANDES */
-            .acordeon-dias {
-                max-width: 1200px;
+            .programas-horarios {
+                grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+                gap: 30px;
             }
             
             /* ESPECIALES - PANTALLAS GRANDES */
@@ -1549,6 +1624,11 @@
         
         /* MEJORAS PARA LA VERSIÓN DE ESCRITORIO - DISEÑO RESPONSIVO AVANZADO */
         @media (min-width: 1024px) and (max-width: 1439px) {
+            .programas-horarios {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 20px;
+            }
+            
             .artist-card {
                 flex: 0 0 calc(25% - 20px);
                 height: 320px;
@@ -1597,43 +1677,27 @@
             }
             
             /* PROGRAMACIÓN PARA CELULAR PEQUEÑO */
-            .dia-header {
-                padding: 15px;
-            }
-            
-            .dia-nombre {
-                font-size: 1.1rem;
-            }
-            
-            .dia-numero {
-                width: 25px;
-                height: 25px;
+            .dia-tab {
+                min-width: 90px;
+                padding: 10px 15px;
                 font-size: 0.9rem;
             }
             
-            .dia-hoy-badge {
+            .hoy-badge {
                 font-size: 0.6rem;
                 padding: 2px 6px;
+                top: -6px;
+                right: 5px;
             }
             
-            .programas-lista {
-                padding: 15px;
-                gap: 12px;
-            }
-            
-            .programa-item {
+            .programa-horario-item {
                 flex-direction: column;
-                align-items: flex-start;
-                padding: 15px;
             }
             
-            .programa-hora {
+            .hora-programa {
                 min-width: 70px;
-                padding: 6px 10px;
-                font-size: 0.8rem;
                 margin-right: 0;
                 margin-bottom: 10px;
-                align-self: flex-start;
             }
             
             .programa-titulo {
@@ -1646,6 +1710,13 @@
             
             .programa-descripcion {
                 font-size: 0.8rem;
+            }
+            
+            .en-vivo-badge {
+                top: 5px;
+                right: 10px;
+                font-size: 0.6rem;
+                padding: 2px 8px;
             }
             
             .back-button {
@@ -1715,21 +1786,20 @@
             }
             
             /* PROGRAMACIÓN PARA PANTALLAS MUY PEQUEÑAS */
-            .dia-header {
-                padding: 12px 15px;
+            .dia-tab {
+                min-width: 80px;
+                padding: 8px 12px;
+                font-size: 0.85rem;
             }
             
-            .dia-nombre {
-                font-size: 1rem;
-            }
-            
-            .programas-lista {
+            .programa-horario-item {
                 padding: 12px;
-                gap: 10px;
             }
             
-            .programa-item {
-                padding: 12px;
+            .hora-programa {
+                min-width: 65px;
+                padding: 6px 10px;
+                font-size: 0.8rem;
             }
             
             .artist-card {
@@ -1844,16 +1914,23 @@
         </div>
     </section>
 
-    <!-- NUEVA SECCIÓN DE PROGRAMACIÓN CON ACORDEÓN POR DÍA -->
+    <!-- NUEVA SECCIÓN DE PROGRAMACIÓN CON PESTAÑAS HORIZONTALES -->
     <section class="programacion-nueva-section" id="programacion">
         <div class="section-header">
             <h2 class="section-title">Programación Salsera Semanal</h2>
-            <div class="section-subtitle">Tu horario para bailar, organizado por días. <span id="dia-actual-text"></span></div>
+            <div class="section-subtitle">Tu horario para bailar, organizado por días y horas. <span id="dia-actual-text"></span></div>
         </div>
         
-        <!-- Acordeón de días de la semana -->
-        <div class="acordeon-dias" id="acordeonDias">
-            <!-- Los acordeones se generarán con JavaScript -->
+        <!-- Pestañas de días en fila horizontal -->
+        <div class="dias-tabs-container">
+            <div class="dias-tabs" id="diasTabs">
+                <!-- Las pestañas se generarán con JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Contenedor de programas por día -->
+        <div class="programas-container">
+            <!-- Los programas de cada día se generarán con JavaScript -->
         </div>
     </section>
 
@@ -2330,7 +2407,7 @@
             }
         }
         
-        // SISTEMA DE PROGRAMACIÓN POR DÍAS - DATOS
+        // SISTEMA DE PROGRAMACIÓN POR DÍAS Y HORAS
         const programacionSemanal = {
             "lunes": [
                 { hora: "06:00", titulo: "Despertar Salsero", conductor: "DJ Ritmo", descripcion: "Salsa suave para empezar el día con energía", genero: "Salsa Romántica" },
@@ -2427,13 +2504,13 @@
 
         // Días de la semana en español
         const diasSemana = [
-            { nombre: "lunes", numero: 1 },
-            { nombre: "martes", numero: 2 },
-            { nombre: "miércoles", numero: 3 },
-            { nombre: "jueves", numero: 4 },
-            { nombre: "viernes", numero: 5 },
-            { nombre: "sábado", numero: 6 },
-            { nombre: "domingo", numero: 7 }
+            { nombre: "lunes", numero: 1, fecha: "Hoy" },
+            { nombre: "martes", numero: 2, fecha: "Mañana" },
+            { nombre: "miércoles", numero: 3, fecha: "Miércoles" },
+            { nombre: "jueves", numero: 4, fecha: "Jueves" },
+            { nombre: "viernes", numero: 5, fecha: "Viernes" },
+            { nombre: "sábado", numero: 6, fecha: "Sábado" },
+            { nombre: "domingo", numero: 7, fecha: "Domingo" }
         ];
         
         // Obtener el día actual
@@ -2443,7 +2520,10 @@
         const diaActualNombre = diasSemana[diaActualIndex].nombre;
 
         // FUNCIÓN PARA DETERMINAR SI UN PROGRAMA ESTÁ EN VIVO
-        function programaEstaEnVivo(horaPrograma) {
+        function programaEstaEnVivo(horaPrograma, diaNombre) {
+            // Solo verificar para el día actual
+            if (diaNombre !== diaActualNombre) return false;
+            
             const ahora = new Date();
             const horaActual = ahora.getHours().toString().padStart(2, '0') + ':' + ahora.getMinutes().toString().padStart(2, '0');
             
@@ -2458,111 +2538,117 @@
             return minutosActual >= minutosPrograma && minutosActual <= (minutosPrograma + 10);
         }
 
-        // FUNCIÓN PARA INICIALIZAR LA PROGRAMACIÓN SEMANAL CON ACORDEÓN
+        // FUNCIÓN PARA INICIALIZAR LA PROGRAMACIÓN SEMANAL CON PESTAÑAS
         function inicializarProgramacionSemanal() {
-            const acordeonContainer = document.getElementById('acordeonDias');
+            const diasTabsContainer = document.getElementById('diasTabs');
+            const programasContainer = document.querySelector('.programas-container');
             const diaActualText = document.getElementById('dia-actual-text');
             
             // Mostrar texto del día actual
             diaActualText.textContent = `(Hoy es ${diaActualNombre.charAt(0).toUpperCase() + diaActualNombre.slice(1)})`;
             
-            // LIMPIAR contenedor antes de agregar nuevos elementos
-            acordeonContainer.innerHTML = '';
+            // LIMPIAR contenedores antes de agregar nuevos elementos
+            diasTabsContainer.innerHTML = '';
+            programasContainer.innerHTML = '';
             
-            // Crear acordeón para cada día
+            // Crear pestañas para cada día
             diasSemana.forEach((diaObj, index) => {
                 const diaNombre = diaObj.nombre;
-                const diaNumero = diaObj.numero;
                 const esHoy = diaNombre === diaActualNombre;
                 
-                // Crear elemento del acordeón
-                const acordeonItem = document.createElement('div');
-                acordeonItem.className = `dia-acordeon ${esHoy ? 'active' : ''}`;
-                acordeonItem.id = `acordeon-${diaNombre}`;
+                // Crear pestaña
+                const diaTab = document.createElement('div');
+                diaTab.className = `dia-tab ${esHoy ? 'active' : ''}`;
+                diaTab.textContent = diaNombre.charAt(0).toUpperCase() + diaNombre.slice(1);
+                diaTab.dataset.dia = diaNombre;
                 
-                // Crear encabezado del acordeón
-                const header = document.createElement('div');
-                header.className = 'dia-header';
-                header.innerHTML = `
-                    <div class="dia-nombre">
-                        <div class="dia-numero">${diaNumero}</div>
-                        ${diaNombre.charAt(0).toUpperCase() + diaNombre.slice(1)}
-                        ${esHoy ? '<span class="dia-hoy-badge">HOY</span>' : ''}
-                    </div>
-                    <i class="fas fa-chevron-down dia-icon"></i>
+                // Añadir badge para hoy
+                if (esHoy) {
+                    const hoyBadge = document.createElement('span');
+                    hoyBadge.className = 'hoy-badge';
+                    hoyBadge.textContent = 'HOY';
+                    diaTab.appendChild(hoyBadge);
+                }
+                
+                // Añadir evento de clic
+                diaTab.addEventListener('click', function() {
+                    // Remover clase 'active' de todas las pestañas
+                    document.querySelectorAll('.dia-tab').forEach(tab => tab.classList.remove('active'));
+                    // Añadir clase 'active' a la pestaña clickeada
+                    this.classList.add('active');
+                    // Mostrar programas del día seleccionado
+                    mostrarProgramasDia(this.dataset.dia);
+                });
+                
+                diasTabsContainer.appendChild(diaTab);
+                
+                // Crear contenedor de programas para este día
+                const programasDia = document.createElement('div');
+                programasDia.className = `programas-dia ${esHoy ? 'active' : ''}`;
+                programasDia.id = `programas-${diaNombre}`;
+                
+                // Crear cabecera del día
+                const diaCabecera = document.createElement('div');
+                diaCabecera.className = 'dia-cabecera';
+                diaCabecera.innerHTML = `
+                    <h3 class="dia-titulo">${diaNombre.charAt(0).toUpperCase() + diaNombre.slice(1)}</h3>
+                    <div class="dia-fecha">Programación completa del día</div>
                 `;
                 
-                // Crear contenido del acordeón
-                const contenido = document.createElement('div');
-                contenido.className = `programas-contenido ${esHoy ? 'active' : ''}`;
+                programasDia.appendChild(diaCabecera);
                 
-                // Crear lista de programas
-                const programasLista = document.createElement('div');
-                programasLista.className = 'programas-lista';
+                // Crear lista de horarios
+                const programasHorarios = document.createElement('div');
+                programasHorarios.className = 'programas-horarios';
                 
                 // Añadir programas del día
                 if (programacionSemanal[diaNombre]) {
                     programacionSemanal[diaNombre].forEach(programa => {
-                        const programaItem = document.createElement('div');
-                        programaItem.className = 'programa-item';
+                        const enVivo = programaEstaEnVivo(programa.hora, diaNombre);
                         
-                        // Verificar si el programa está en vivo
-                        const enVivo = programaEstaEnVivo(programa.hora) && esHoy;
+                        const programaItem = document.createElement('div');
+                        programaItem.className = `programa-horario-item ${enVivo ? 'en-vivo' : ''}`;
                         
                         programaItem.innerHTML = `
-                            <div class="programa-hora">${programa.hora}</div>
-                            <div class="programa-info-texto">
-                                <h3 class="programa-titulo">${programa.titulo} ${enVivo ? '<span class="en-vivo-badge">EN VIVO</span>' : ''}</h3>
+                            ${enVivo ? '<span class="en-vivo-badge">EN VIVO</span>' : ''}
+                            <div class="hora-programa">${programa.hora}</div>
+                            <div class="programa-info">
+                                <h3 class="programa-titulo">${programa.titulo}</h3>
                                 <div class="programa-conductor">Conductor: ${programa.conductor}</div>
                                 <p class="programa-descripcion">${programa.descripcion}</p>
                                 <span class="programa-genero">${programa.genero}</span>
                             </div>
                         `;
                         
-                        programasLista.appendChild(programaItem);
+                        programasHorarios.appendChild(programaItem);
                     });
                 }
                 
-                contenido.appendChild(programasLista);
-                
-                // Añadir encabezado y contenido al acordeón
-                acordeonItem.appendChild(header);
-                acordeonItem.appendChild(contenido);
-                
-                // Añadir evento de clic al encabezado
-                header.addEventListener('click', function() {
-                    const acordeonActivo = document.querySelector('.dia-acordeon.active');
-                    const contenidoActivo = document.querySelector('.programas-contenido.active');
-                    
-                    // Si el acordeón clickeado ya está activo, cerrarlo
-                    if (acordeonItem.classList.contains('active')) {
-                        acordeonItem.classList.remove('active');
-                        contenido.classList.remove('active');
-                    } else {
-                        // Cerrar acordeón activo anterior
-                        if (acordeonActivo) {
-                            acordeonActivo.classList.remove('active');
-                        }
-                        if (contenidoActivo) {
-                            contenidoActivo.classList.remove('active');
-                        }
-                        
-                        // Abrir nuevo acordeón
-                        acordeonItem.classList.add('active');
-                        contenido.classList.add('active');
-                    }
-                });
-                
-                acordeonContainer.appendChild(acordeonItem);
+                programasDia.appendChild(programasHorarios);
+                programasContainer.appendChild(programasDia);
+            });
+        }
+
+        // FUNCIÓN PARA MOSTRAR PROGRAMAS DE UN DÍA ESPECÍFICO
+        function mostrarProgramasDia(diaNombre) {
+            // Ocultar TODOS los contenedores de programas
+            document.querySelectorAll('.programas-dia').forEach(container => {
+                container.classList.remove('active');
             });
             
-            // Desplazarse al día actual al cargar la página
-            setTimeout(() => {
-                const acordeonHoy = document.getElementById(`acordeon-${diaActualNombre}`);
-                if (acordeonHoy) {
-                    acordeonHoy.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }, 500);
+            // Mostrar SOLO el contenedor del día seleccionado
+            const diaContainer = document.getElementById(`programas-${diaNombre}`);
+            if (diaContainer) {
+                diaContainer.classList.add('active');
+                
+                // Desplazar suavemente a la sección de programación
+                setTimeout(() => {
+                    const programacionSection = document.getElementById('programacion');
+                    if (programacionSection) {
+                        programacionSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 300);
+            }
         }
 
         // Inicializar cuando el DOM esté listo
@@ -2606,24 +2692,31 @@
             
             // Actualizar indicadores de programas en vivo cada minuto
             setInterval(() => {
-                const diaActualElement = document.getElementById(`acordeon-${diaActualNombre}`);
-                if (diaActualElement && diaActualElement.classList.contains('active')) {
-                    // Forzar actualización visual de programas en vivo
-                    const programasItems = diaActualElement.querySelectorAll('.programa-item');
+                const diaActualContainer = document.getElementById(`programas-${diaActualNombre}`);
+                if (diaActualContainer && diaActualContainer.classList.contains('active')) {
+                    // Actualizar visualmente los programas en vivo
+                    const programasItems = diaActualContainer.querySelectorAll('.programa-horario-item');
                     programasItems.forEach(item => {
-                        const horaElement = item.querySelector('.programa-hora');
+                        const horaElement = item.querySelector('.hora-programa');
                         if (horaElement) {
                             const horaPrograma = horaElement.textContent;
-                            const enVivo = programaEstaEnVivo(horaPrograma);
-                            const enVivoBadge = item.querySelector('.en-vivo-badge');
+                            const enVivo = programaEstaEnVivo(horaPrograma, diaActualNombre);
                             
-                            if (enVivo && !enVivoBadge) {
-                                const tituloElement = item.querySelector('.programa-titulo');
-                                if (tituloElement) {
-                                    tituloElement.innerHTML += '<span class="en-vivo-badge">EN VIVO</span>';
+                            if (enVivo && !item.classList.contains('en-vivo')) {
+                                item.classList.add('en-vivo');
+                                // Añadir badge si no existe
+                                if (!item.querySelector('.en-vivo-badge')) {
+                                    const badge = document.createElement('span');
+                                    badge.className = 'en-vivo-badge';
+                                    badge.textContent = 'EN VIVO';
+                                    item.prepend(badge);
                                 }
-                            } else if (!enVivo && enVivoBadge) {
-                                enVivoBadge.remove();
+                            } else if (!enVivo && item.classList.contains('en-vivo')) {
+                                item.classList.remove('en-vivo');
+                                const badge = item.querySelector('.en-vivo-badge');
+                                if (badge) {
+                                    badge.remove();
+                                }
                             }
                         }
                     });
