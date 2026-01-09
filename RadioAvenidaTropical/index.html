@@ -566,216 +566,162 @@
             line-height: 1.3;
         }
 
-        /* Contenedor de pestañas de días */
-        .dias-semana {
-            display: flex;
-            justify-content: flex-start;
-            flex-wrap: nowrap;
-            gap: 8px;
-            margin-bottom: 30px;
-            padding: 10px 5px 15px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scrollbar-width: thin;
-            scrollbar-color: var(--neon-orange) var(--card-bg);
+        /* Contenedor de acordeones por día */
+        .acordeon-dias {
             width: 100%;
-            -webkit-overflow-scrolling: touch;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-
-        .dias-semana::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .dias-semana::-webkit-scrollbar-track {
-            background: var(--card-bg);
-            border-radius: 10px;
-        }
-
-        .dias-semana::-webkit-scrollbar-thumb {
-            background: var(--neon-orange);
-            border-radius: 10px;
-        }
-
-        .dia-btn {
-            padding: 12px 20px;
+        
+        .dia-acordeon {
             background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 240, 31, 0.3);
-            border-radius: 50px;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 600;
-            cursor: pointer;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 240, 31, 0.2);
             transition: all 0.3s ease;
-            font-size: 0.95rem;
-            min-width: 110px;
-            text-align: center;
-            white-space: nowrap;
-            flex-shrink: 0;
         }
-
-        .dia-btn:hover {
+        
+        .dia-acordeon.active {
             border-color: var(--neon-yellow);
-            color: var(--neon-yellow);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 240, 31, 0.2);
+            box-shadow: 0 0 20px rgba(255, 240, 31, 0.3);
         }
-
-        .dia-btn.active {
-            background: var(--neon-yellow);
-            border-color: var(--neon-yellow);
-            color: var(--dark-bg);
-            box-shadow: 0 0 20px var(--neon-yellow-glow);
+        
+        .dia-acordeon.active .dia-header {
+            background: rgba(255, 240, 31, 0.1);
+        }
+        
+        .dia-header {
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.3s ease;
+        }
+        
+        .dia-header:hover {
+            background: rgba(255, 240, 31, 0.08);
+        }
+        
+        .dia-nombre {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--neon-yellow);
         }
-
-        /* Indicador del día actual */
-        .dia-hoy {
-            position: relative;
-        }
-
-        .dia-hoy::after {
-            content: 'HOY';
-            position: absolute;
-            top: -8px;
-            right: 10px;
+        
+        .dia-numero {
             background: var(--neon-orange);
+            color: var(--dark-bg);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            box-shadow: 0 0 10px var(--neon-orange-glow);
+        }
+        
+        .dia-hoy-badge {
+            background: var(--neon-green);
             color: var(--dark-bg);
             font-size: 0.7rem;
             font-weight: 800;
-            padding: 2px 8px;
+            padding: 3px 10px;
             border-radius: 10px;
-            box-shadow: 0 0 10px var(--neon-orange-glow);
+            margin-left: 10px;
+            box-shadow: 0 0 10px var(--neon-green-glow);
         }
-
-        /* Contenedor de programas del día */
-        .programas-dia-container {
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 5px;
-            flex: 1;
+        
+        .dia-icon {
+            color: var(--neon-yellow);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .dia-acordeon.active .dia-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Contenido del acordeón (programas) */
+        .programas-contenido {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .programas-contenido.active {
+            max-height: 2000px;
+        }
+        
+        .programas-lista {
+            padding: 20px;
             display: flex;
             flex-direction: column;
+            gap: 15px;
         }
-
-        .programas-dia {
-            display: none;
-            flex-direction: column;
-            gap: 20px;
-            animation: fadeIn 0.5s ease;
-            width: 100%;
-            flex: 1;
-            overflow-y: auto;
-            padding-bottom: 20px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .programas-dia.active {
+        
+        .programa-item {
             display: flex;
-        }
-
-        /* Tarjetas de programas */
-        .programa-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            height: 180px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            display: flex;
-            width: 100%;
-        }
-
-        .programa-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--neon-green);
-            box-shadow: 0 10px 25px rgba(57, 255, 20, 0.2);
-        }
-
-        /* Imagen del programa */
-        .programa-img-container {
-            width: 40%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .programa-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .programa-card:hover .programa-img {
-            transform: scale(1.05);
-        }
-
-        /* Información del programa */
-        .programa-info {
-            flex: 1;
+            align-items: center;
             padding: 15px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border-left: 4px solid var(--neon-orange);
+            transition: all 0.3s ease;
         }
-
-        /* Badge de hora siempre visible */
+        
+        .programa-item:hover {
+            background: rgba(255, 94, 0, 0.1);
+            transform: translateX(5px);
+        }
+        
         .programa-hora {
-            position: absolute;
-            top: 15px;
-            right: 15px;
+            min-width: 80px;
             background: var(--neon-orange);
             color: var(--dark-bg);
-            padding: 5px 12px;
+            padding: 8px 12px;
             border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            box-shadow: 0 0 15px var(--neon-orange-glow);
-            z-index: 2;
-        }
-
-        /* Contenido informativo */
-        .programa-titulo {
-            font-size: 1.2rem;
+            text-align: center;
             font-weight: 800;
-            margin-bottom: 5px;
-            color: var(--neon-yellow);
-            text-shadow: 0 0 10px var(--neon-yellow-glow);
-            line-height: 1.2;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            padding-right: 60px;
+            font-size: 0.9rem;
+            margin-right: 15px;
+            box-shadow: 0 0 10px var(--neon-orange-glow);
+            flex-shrink: 0;
         }
-
+        
+        .programa-info-texto {
+            flex: 1;
+        }
+        
+        .programa-titulo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--neon-yellow);
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        
         .programa-conductor {
             font-size: 0.9rem;
             color: var(--neon-green);
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: 600;
         }
-
+        
         .programa-descripcion {
             font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 10px;
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.4;
         }
-
+        
         .programa-genero {
             display: inline-block;
             background: rgba(255, 255, 255, 0.1);
@@ -783,7 +729,20 @@
             border-radius: 12px;
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.8);
-            align-self: flex-start;
+            margin-top: 8px;
+        }
+        
+        /* Indicador de programa en vivo */
+        .en-vivo-badge {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-left: 10px;
+            box-shadow: 0 0 10px var(--neon-green-glow);
+            animation: pulse-badge 2s infinite;
         }
         
         /* ESPECIALES SALSEROS */
@@ -1034,6 +993,15 @@
             100% { transform: rotate(360deg); }
         }
         
+        @keyframes pulse-badge {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        
         /* PARTÍCULAS */
         .background-animations {
             position: fixed;
@@ -1133,38 +1101,33 @@
             }
             
             /* PROGRAMACIÓN PARA TABLET */
-            .programas-dia {
-                display: grid !important;
-                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-                gap: 25px;
+            .acordeon-dias {
+                max-width: 800px;
             }
             
-            .programa-card {
-                flex-direction: column;
-                height: 280px;
+            .dia-nombre {
+                font-size: 1.4rem;
             }
             
-            .programa-img-container {
-                width: 100%;
-                height: 60%;
+            .programa-item {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            
+            .programa-hora {
+                min-width: 90px;
+                font-size: 1rem;
             }
             
             .programa-titulo {
-                padding-right: 0;
-                -webkit-line-clamp: 2;
+                font-size: 1.2rem;
             }
             
-            .programa-descripcion {
-                -webkit-line-clamp: 3;
+            .programa-conductor {
+                font-size: 1rem;
             }
             
-            .dias-semana {
-                justify-content: center;
-                flex-wrap: wrap;
-                overflow-x: visible;
-            }
-            
-            /* CARRUSEL PARA TABLET */
+            /* ESPECIALES PARA TABLET */
             .artist-card {
                 flex: 0 0 calc(50% - 20px);
                 aspect-ratio: auto;
@@ -1331,7 +1294,7 @@
                 font-size: 1.1rem;
             }
             
-            /* NUEVA PROGRAMACIÓN - ESCRITORIO */
+            /* PROGRAMACIÓN - ESCRITORIO */
             .programacion-nueva-section {
                 padding: 80px 40px;
             }
@@ -1349,79 +1312,56 @@
                 font-size: 1.5rem;
             }
             
-            /* PESTAÑAS DE DÍAS - ESCRITORIO */
-            .dias-semana {
-                justify-content: center;
-                gap: 15px;
-                margin-bottom: 50px;
-                padding: 15px 0 25px;
-                overflow-x: visible;
-                flex-wrap: wrap;
+            .acordeon-dias {
+                max-width: 1000px;
+                gap: 20px;
             }
             
-            .dia-btn {
-                min-width: 140px;
-                padding: 15px 25px;
+            .dia-header {
+                padding: 22px 30px;
+            }
+            
+            .dia-nombre {
+                font-size: 1.5rem;
+            }
+            
+            .dia-numero {
+                width: 35px;
+                height: 35px;
                 font-size: 1.1rem;
             }
             
-            /* CONTENEDOR DE PROGRAMAS - ESCRITORIO */
-            .programas-dia-container {
-                max-width: 1200px;
-                margin: 0 auto;
+            .dia-hoy-badge {
+                font-size: 0.8rem;
+                padding: 4px 12px;
             }
             
-            .programas-dia {
-                display: grid !important;
-                grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-                gap: 30px;
-                padding: 0 20px 40px;
+            .programas-lista {
+                padding: 25px 30px;
+                gap: 18px;
             }
             
-            .programa-card {
-                height: 220px;
-                flex-direction: row;
-                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            }
-            
-            .programa-card:hover {
-                transform: translateY(-10px) scale(1.02);
-                box-shadow: 0 15px 35px rgba(57, 255, 20, 0.25);
-            }
-            
-            .programa-img-container {
-                width: 35%;
-                height: 100%;
-            }
-            
-            .programa-info {
-                padding: 25px;
-                width: 65%;
+            .programa-item {
+                padding: 18px 20px;
             }
             
             .programa-hora {
-                top: 20px;
-                right: 20px;
-                padding: 6px 15px;
-                font-size: 0.9rem;
+                min-width: 100px;
+                padding: 10px 15px;
+                font-size: 1.1rem;
+                margin-right: 20px;
             }
             
             .programa-titulo {
-                font-size: 1.4rem;
-                padding-right: 80px;
-                -webkit-line-clamp: 2;
+                font-size: 1.3rem;
             }
             
             .programa-conductor {
-                font-size: 1rem;
-                margin-bottom: 10px;
+                font-size: 1.1rem;
             }
             
             .programa-descripcion {
                 font-size: 0.95rem;
-                line-height: 1.5;
-                -webkit-line-clamp: 3;
-                margin-bottom: 15px;
             }
             
             .programa-genero {
@@ -1429,7 +1369,7 @@
                 padding: 5px 12px;
             }
             
-            /* ESPECIALES SALSEROS - ESCRITORIO */
+            /* ESPECIALES - ESCRITORIO */
             .especiales-section {
                 padding: 80px 40px;
             }
@@ -1592,13 +1532,8 @@
             }
             
             /* PROGRAMACIÓN - PANTALLAS GRANDES */
-            .programas-dia {
-                grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
-                gap: 40px;
-            }
-            
-            .programa-card {
-                height: 240px;
+            .acordeon-dias {
+                max-width: 1200px;
             }
             
             /* ESPECIALES - PANTALLAS GRANDES */
@@ -1614,11 +1549,6 @@
         
         /* MEJORAS PARA LA VERSIÓN DE ESCRITORIO - DISEÑO RESPONSIVO AVANZADO */
         @media (min-width: 1024px) and (max-width: 1439px) {
-            .programas-dia {
-                grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-                gap: 25px;
-            }
-            
             .artist-card {
                 flex: 0 0 calc(25% - 20px);
                 height: 320px;
@@ -1666,18 +1596,48 @@
                 font-size: 1.1rem;
             }
             
-            /* NUEVA PROGRAMACIÓN PARA CELULAR PEQUEÑO */
-            .programa-card {
-                height: 170px;
+            /* PROGRAMACIÓN PARA CELULAR PEQUEÑO */
+            .dia-header {
+                padding: 15px;
             }
             
-            .programa-img-container {
-                width: 35%;
+            .dia-nombre {
+                font-size: 1.1rem;
+            }
+            
+            .dia-numero {
+                width: 25px;
+                height: 25px;
+                font-size: 0.9rem;
+            }
+            
+            .dia-hoy-badge {
+                font-size: 0.6rem;
+                padding: 2px 6px;
+            }
+            
+            .programas-lista {
+                padding: 15px;
+                gap: 12px;
+            }
+            
+            .programa-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+            }
+            
+            .programa-hora {
+                min-width: 70px;
+                padding: 6px 10px;
+                font-size: 0.8rem;
+                margin-right: 0;
+                margin-bottom: 10px;
+                align-self: flex-start;
             }
             
             .programa-titulo {
-                font-size: 1.1rem;
-                -webkit-line-clamp: 2;
+                font-size: 1rem;
             }
             
             .programa-conductor {
@@ -1686,20 +1646,6 @@
             
             .programa-descripcion {
                 font-size: 0.8rem;
-                -webkit-line-clamp: 2;
-            }
-            
-            .programa-hora {
-                top: 10px;
-                right: 10px;
-                padding: 4px 10px;
-                font-size: 0.75rem;
-            }
-            
-            .dia-btn {
-                min-width: 100px;
-                padding: 10px 15px;
-                font-size: 0.9rem;
             }
             
             .back-button {
@@ -1768,37 +1714,22 @@
                 font-size: 1.5rem;
             }
             
-            /* NUEVA PROGRAMACIÓN PARA PANTALLAS MUY PEQUEÑAS */
-            .programa-card {
-                height: 160px;
+            /* PROGRAMACIÓN PARA PANTALLAS MUY PEQUEÑAS */
+            .dia-header {
+                padding: 12px 15px;
             }
             
-            .programa-img-container {
-                width: 40%;
-            }
-            
-            .programa-titulo {
+            .dia-nombre {
                 font-size: 1rem;
-                -webkit-line-clamp: 2;
             }
             
-            .programa-conductor {
-                font-size: 0.8rem;
-            }
-            
-            .programa-descripcion {
-                font-size: 0.75rem;
-                -webkit-line-clamp: 2;
-            }
-            
-            .programa-info {
+            .programas-lista {
                 padding: 12px;
+                gap: 10px;
             }
             
-            .dia-btn {
-                min-width: 90px;
-                padding: 8px 12px;
-                font-size: 0.85rem;
+            .programa-item {
+                padding: 12px;
             }
             
             .artist-card {
@@ -1913,21 +1844,16 @@
         </div>
     </section>
 
-    <!-- NUEVA SECCIÓN DE PROGRAMACIÓN CON PESTAÑAS POR DÍA -->
+    <!-- NUEVA SECCIÓN DE PROGRAMACIÓN CON ACORDEÓN POR DÍA -->
     <section class="programacion-nueva-section" id="programacion">
         <div class="section-header">
             <h2 class="section-title">Programación Salsera Semanal</h2>
             <div class="section-subtitle">Tu horario para bailar, organizado por días. <span id="dia-actual-text"></span></div>
         </div>
         
-        <!-- Pestañas de días de la semana -->
-        <div class="dias-semana" id="diasSemana">
-            <!-- Los botones se generarán con JavaScript -->
-        </div>
-        
-        <!-- Contenedor de programas por día -->
-        <div class="programas-dia-container">
-            <!-- Los programas de cada día se generarán con JavaScript -->
+        <!-- Acordeón de días de la semana -->
+        <div class="acordeon-dias" id="acordeonDias">
+            <!-- Los acordeones se generarán con JavaScript -->
         </div>
     </section>
 
@@ -1943,7 +1869,7 @@
                 <div class="artist-carousel" id="artistasCarousel">
                     <!-- 10 artistas de salsa -->
                     <div class="artist-card">
-                        <img src="/img_radio/AVENIDA TTROPICAL/Especiales/Celia Cruz.jpg" alt="Celia Cruz" class="artist-img">
+                        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Celia Cruz" class="artist-img">
                         <div class="artist-content">
                             <div class="artist-name">Celia Cruz</div>
                             <p class="artist-desc">La Reina de la Salsa</p>
@@ -2191,7 +2117,6 @@
                         <div style="color: #FF6300; text-align: center;">
                             <p>⚠️ Error de conexión</p>
                             <p style="font-size: 0.8rem; margin-top: 10px;">Intenta recargar la página</p>
-                        </div>
                     `;
                 }
             };
@@ -2408,204 +2333,236 @@
         // SISTEMA DE PROGRAMACIÓN POR DÍAS - DATOS
         const programacionSemanal = {
             "lunes": [
-                { hora: "06:00", titulo: "Despertar Salsero", conductor: "DJ Ritmo", descripcion: "Salsa suave para empezar el día con energía", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Programas/MAXI.jpg" },
-                { hora: "08:00", titulo: "Salsa Laboral", conductor: "Carlos el Conductor", descripcion: "Los éxitos que te acompañan en el trabajo", genero: "Salsa Clásica", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "10:00", titulo: "Éxitos del Ayer", conductor: "María la Sonera", descripcion: "Los clásicos que nunca pasan de moda", genero: "Salsa Vintage", img: "/img_radio/AVENIDA TTROPICAL/Programas/Dario Castellanos.jpg" },
-                { hora: "12:00", titulo: "Sabor del Mediodía", conductor: "Ricky Sabroso", descripcion: "Lo mejor para tu hora de almuerzo", genero: "Salsa Cubana", img: "/img_radio/AVENIDA TTROPICAL/Programas/Yvette.jpg" },
-                { hora: "14:00", titulo: "Fiesta en la Oficina", conductor: "Orquesta 2024", descripcion: "Ritmos movidos para mantener el ánimo", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "16:00", titulo: "Retro Salsa", conductor: "Vicente Clásico", descripcion: "Viaje a los años 70-80 de la salsa", genero: "Salsa Dura", img: "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" },
-                { hora: "18:00", titulo: "Hora Pico Salsera", conductor: "Los Hermanos Ritmo", descripcion: "El tráfico se lleva mejor con buena salsa", genero: "Salsa Mix", img: "/img_radio/AVENIDA TTROPICAL/Programas/Diego Cheito.jpg" },
-                { hora: "20:00", titulo: "Noche de Estrellas", conductor: "Estrella Salsera", descripcion: "Los grandes intérpretes de la salsa", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Especiales/Celia Cruz.jpg" },
-                { hora: "22:00", titulo: "Salsa Nocturna", conductor: "Luna y Son", descripcion: "Para los que trasnochan con estilo", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "00:00", titulo: "Madrugada Salsera", conductor: "DJ Nocturno", descripcion: "Salsa para las horas más tranquilas", genero: "Salsa Vintage", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "02:00", titulo: "Sueños Salseros", conductor: "Armonía Nocturna", descripcion: "Salsa suave para terminar la noche", genero: "Salsa Romántica", img: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" }
+                { hora: "06:00", titulo: "Despertar Salsero", conductor: "DJ Ritmo", descripcion: "Salsa suave para empezar el día con energía", genero: "Salsa Romántica" },
+                { hora: "08:00", titulo: "Salsa Laboral", conductor: "Carlos el Conductor", descripcion: "Los éxitos que te acompañan en el trabajo", genero: "Salsa Clásica" },
+                { hora: "10:00", titulo: "Éxitos del Ayer", conductor: "María la Sonera", descripcion: "Los clásicos que nunca pasan de moda", genero: "Salsa Vintage" },
+                { hora: "12:00", titulo: "Sabor del Mediodía", conductor: "Ricky Sabroso", descripcion: "Lo mejor para tu hora de almuerzo", genero: "Salsa Cubana" },
+                { hora: "14:00", titulo: "Fiesta en la Oficina", conductor: "Orquesta 2024", descripcion: "Ritmos movidos para mantener el ánimo", genero: "Salsa para Bailar" },
+                { hora: "16:00", titulo: "Retro Salsa", conductor: "Vicente Clásico", descripcion: "Viaje a los años 70-80 de la salsa", genero: "Salsa Dura" },
+                { hora: "18:00", titulo: "Hora Pico Salsera", conductor: "Los Hermanos Ritmo", descripcion: "El tráfico se lleva mejor con buena salsa", genero: "Salsa Mix" },
+                { hora: "20:00", titulo: "Noche de Estrellas", conductor: "Estrella Salsera", descripcion: "Los grandes intérpretes de la salsa", genero: "Salsa Romántica" },
+                { hora: "22:00", titulo: "Salsa Nocturna", conductor: "Luna y Son", descripcion: "Para los que trasnochan con estilo", genero: "Salsa para Bailar" },
+                { hora: "00:00", titulo: "Madrugada Salsera", conductor: "DJ Nocturno", descripcion: "Salsa para las horas más tranquilas", genero: "Salsa Vintage" },
+                { hora: "02:00", titulo: "Sueños Salseros", conductor: "Armonía Nocturna", descripcion: "Salsa suave para terminar la noche", genero: "Salsa Romántica" }
             ],
             "martes": [
-                { hora: "06:00", titulo: "Amanecer Tropical", conductor: "Sol Naciente", descripcion: "Salsa para despertar con alegría", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Programas/MAXI.jpg" },
-                { hora: "08:00", titulo: "Salsa Matutina", conductor: "Café con Ritmo", descripcion: "El acompañante perfecto del desayuno", genero: "Salsa Clásica", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "10:00", titulo: "Clásicos Revividos", conductor: "Tradición Viva", descripcion: "Reinterpretaciones de grandes éxitos", genero: "Salsa Vintage", img: "/img_radio/AVENIDA TTROPICAL/Programas/Dario Castellanos.jpg" },
-                { hora: "12:00", titulo: "Salsa Picante", conductor: "Chili y Son", descripcion: "Los ritmos más calientes del mediodía", genero: "Salsa Cubana", img: "/img_radio/AVENIDA TTROPICAL/Programas/Yvette.jpg" },
-                { hora: "14:00", titulo: "Energía Salsera", conductor: "Batería Total", descripcion: "Para mantener el ritmo toda la tarde", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "16:00", titulo: "Raíces Salseras", conductor: "Orígenes", descripcion: "La historia de la salsa en canciones", genero: "Salsa Dura", img: "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" },
-                { hora: "18:30", titulo: "LOS MAXIMOS DE LA SALSA", conductor: "Maximino Rivera Jr", descripcion: "Los mejores éxitos de todos los tiempos", genero: "Salsa Mix", img: "/img_radio/AVENIDA TTROPICAL/Programas/MAXI.jpg" },
-                { hora: "20:00", titulo: "Estrellas en Vivo", conductor: "Concierto Nocturno", descripcion: "Grabaciones en vivo de grandes conciertos", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Especiales/Celia Cruz.jpg" },
-                { hora: "22:00", titulo: "Fiesta en Casa", conductor: "DJ Hogareño", descripcion: "Salsa para bailar en la sala", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "00:00", titulo: "Serenata Salsera", conductor: "Cantantes Nocturnos", descripcion: "Las baladas salseras más sentidas", genero: "Salsa Vintage", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "02:00", titulo: "Madrugada con Sabor", conductor: "Sabores Nocturnos", descripcion: "Salsa para acompañar las horas pequeñas", genero: "Salsa Romántica", img: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" }
+                { hora: "06:00", titulo: "Amanecer Tropical", conductor: "Sol Naciente", descripcion: "Salsa para despertar con alegría", genero: "Salsa Romántica" },
+                { hora: "08:00", titulo: "Salsa Matutina", conductor: "Café con Ritmo", descripcion: "El acompañante perfecto del desayuno", genero: "Salsa Clásica" },
+                { hora: "10:00", titulo: "Clásicos Revividos", conductor: "Tradición Viva", descripcion: "Reinterpretaciones de grandes éxitos", genero: "Salsa Vintage" },
+                { hora: "12:00", titulo: "Salsa Picante", conductor: "Chili y Son", descripcion: "Los ritmos más calientes del mediodía", genero: "Salsa Cubana" },
+                { hora: "14:00", titulo: "Energía Salsera", conductor: "Batería Total", descripcion: "Para mantener el ritmo toda la tarde", genero: "Salsa para Bailar" },
+                { hora: "16:00", titulo: "Raíces Salseras", conductor: "Orígenes", descripcion: "La historia de la salsa en canciones", genero: "Salsa Dura" },
+                { hora: "18:30", titulo: "LOS MAXIMOS DE LA SALSA", conductor: "Maximino Rivera Jr", descripcion: "Los mejores éxitos de todos los tiempos", genero: "Salsa Mix" },
+                { hora: "20:00", titulo: "Estrellas en Vivo", conductor: "Concierto Nocturno", descripcion: "Grabaciones en vivo de grandes conciertos", genero: "Salsa Romántica" },
+                { hora: "22:00", titulo: "Fiesta en Casa", conductor: "DJ Hogareño", descripcion: "Salsa para bailar en la sala", genero: "Salsa para Bailar" },
+                { hora: "00:00", titulo: "Serenata Salsera", conductor: "Cantantes Nocturnos", descripcion: "Las baladas salseras más sentidas", genero: "Salsa Vintage" },
+                { hora: "02:00", titulo: "Madrugada con Sabor", conductor: "Sabores Nocturnos", descripcion: "Salsa para acompañar las horas pequeñas", genero: "Salsa Romántica" }
             ],
             "miércoles": [
-                { hora: "06:00", titulo: "Desayuno Salsero", conductor: "Leche y Ritmo", descripcion: "Salsa ligera para empezar el día", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Programas/MAXI.jpg" },
-                { hora: "08:00", titulo: "Camino al Trabajo", conductor: "Tráfico Salsero", descripcion: "Salsa para el viaje matutino", genero: "Salsa Clásica", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "10:00", titulo: "Joyas Perdidas", conductor: "Tesoro Musical", descripcion: "Salsa poco conocida pero de gran calidad", genero: "Salsa Vintage", img: "/img_radio/AVENIDA TTROPICAL/Programas/Dario Castellanos.jpg" },
-                { hora: "12:00", titulo: "Salsa del Caribe", conductor: "Brisa Marina", descripcion: "Ritmos caribeños en su máxima expresión", genero: "Salsa Cubana", img: "/img_radio/AVENIDA TTROPICAL/Programas/Yvette.jpg" },
-                { hora: "14:00", titulo: "Ritmo Continuo", conductor: "Energía Constante", descripcion: "Salsa sin pausa para la tarde", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "16:00", titulo: "Salsa Brava", conductor: "Fuerza Musical", descripcion: "Los temas más potentes de la salsa", genero: "Salsa Dura", img: "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" },
-                { hora: "18:00", titulo: "Crossover Salsero", conductor: "Fusión Total", descripcion: "Salsa mezclada con otros ritmos", genero: "Salsa Mix", img: "/img_radio/AVENIDA TTROPICAL/Programas/Diego Cheito.jpg" },
-                { hora: "20:00", titulo: "Leyendas Vivas", conductor: "Inmortales", descripcion: "Grandes artistas que siguen vigentes", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Especiales/Celia Cruz.jpg" },
-                { hora: "22:00", titulo: "Noche de Baile", conductor: "Pista Abierta", descripcion: "Salsa perfecta para practicar pasos", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "00:00", titulo: "Recuerdos Salseros", conductor: "Memoria Musical", descripcion: "Salsa que evoca grandes momentos", genero: "Salsa Vintage", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "02:00", titulo: "Sueños Tropicales", conductor: "Ensueño Musical", descripcion: "Salsa suave para dormir con ritmo", genero: "Salsa Romántica", img: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" }
+                { hora: "06:00", titulo: "Desayuno Salsero", conductor: "Leche y Ritmo", descripcion: "Salsa ligera para empezar el día", genero: "Salsa Romántica" },
+                { hora: "08:00", titulo: "Camino al Trabajo", conductor: "Tráfico Salsero", descripcion: "Salsa para el viaje matutino", genero: "Salsa Clásica" },
+                { hora: "10:00", titulo: "Joyas Perdidas", conductor: "Tesoro Musical", descripcion: "Salsa poco conocida pero de gran calidad", genero: "Salsa Vintage" },
+                { hora: "12:00", titulo: "Salsa del Caribe", conductor: "Brisa Marina", descripcion: "Ritmos caribeños en su máxima expresión", genero: "Salsa Cubana" },
+                { hora: "14:00", titulo: "Ritmo Continuo", conductor: "Energía Constante", descripcion: "Salsa sin pausa para la tarde", genero: "Salsa para Bailar" },
+                { hora: "16:00", titulo: "Salsa Brava", conductor: "Fuerza Musical", descripcion: "Los temas más potentes de la salsa", genero: "Salsa Dura" },
+                { hora: "18:00", titulo: "Crossover Salsero", conductor: "Fusión Total", descripcion: "Salsa mezclada con otros ritmos", genero: "Salsa Mix" },
+                { hora: "20:00", titulo: "Leyendas Vivas", conductor: "Inmortales", descripcion: "Grandes artistas que siguen vigentes", genero: "Salsa Romántica" },
+                { hora: "22:00", titulo: "Noche de Baile", conductor: "Pista Abierta", descripcion: "Salsa perfecta para practicar pasos", genero: "Salsa para Bailar" },
+                { hora: "00:00", titulo: "Recuerdos Salseros", conductor: "Memoria Musical", descripcion: "Salsa que evoca grandes momentos", genero: "Salsa Vintage" },
+                { hora: "02:00", titulo: "Sueños Tropicales", conductor: "Ensueño Musical", descripcion: "Salsa suave para dormir con ritmo", genero: "Salsa Romántica" }
             ],
             "jueves": [
-                { hora: "06:00", titulo: "Amanecer con Salsa", conductor: "Alba Musical", descripcion: "Salsa para recibir el nuevo día", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Programas/MAXI.jpg" },
-                { hora: "08:00", titulo: "Salsa Ejecutiva", conductor: "Oficina Activa", descripcion: "Salsa para la jornada laboral", genero: "Salsa Clásica", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "10:00", titulo: "Época Dorada", conductor: "Edad de Oro", descripcion: "La mejor salsa de los años dorados", genero: "Salsa Vintage", img: "/img_radio/AVENIDA TTROPICAL/Programas/Dario Castellanos.jpg" },
-                { hora: "12:00", titulo: "Salsa Caliente", conductor: "Pimiento Musical", descripcion: "Ritmos ardientes para el mediodía", genero: "Salsa Cubana", img: "/img_radio/AVENIDA TTROPICAL/Programas/Yvette.jpg" },
-                { hora: "14:00", titulo: "Movimiento Salsero", conductor: "Cuerpo en Acción", descripcion: "Salsa que invita a mover el cuerpo", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "16:00", titulo: "Potencia Salsera", conductor: "Energía Pura", descripcion: "Los temas más fuertes y potentes", genero: "Salsa Dura", img: "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" },
-                { hora: "18:00", titulo: "Mezcla Perfecta", conductor: "DJ Combinación", descripcion: "Variedad salsera para todos los gustos", genero: "Salsa Mix", img: "/img_radio/AVENIDA TTROPICAL/Programas/Diego Cheito.jpg" },
-                { hora: "20:00", titulo: "Ídolos Salseros", conductor: "Adoración Musical", descripcion: "Homenaje a los grandes de la salsa", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Especiales/Celia Cruz.jpg" },
-                { hora: "22:00", titulo: "Fiesta Nocturna", conductor: "Ritmo de Noche", descripcion: "Salsa para celebrar la noche", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "00:00", titulo: "Antología Salsera", conductor: "Colección Completa", descripcion: "Lo mejor de la historia de la salsa", genero: "Salsa Vintage", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "02:00", titulo: "Armonía Nocturna", conductor: "Melodías de Noche", descripcion: "Salsa tranquila para finalizar", genero: "Salsa Romántica", img: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" }
+                { hora: "06:00", titulo: "Amanecer con Salsa", conductor: "Alba Musical", descripcion: "Salsa para recibir el nuevo día", genero: "Salsa Romántica" },
+                { hora: "08:00", titulo: "Salsa Ejecutiva", conductor: "Oficina Activa", descripcion: "Salsa para la jornada laboral", genero: "Salsa Clásica" },
+                { hora: "10:00", titulo: "Época Dorada", conductor: "Edad de Oro", descripcion: "La mejor salsa de los años dorados", genero: "Salsa Vintage" },
+                { hora: "12:00", titulo: "Salsa Caliente", conductor: "Pimiento Musical", descripcion: "Ritmos ardientes para el mediodía", genero: "Salsa Cubana" },
+                { hora: "14:00", titulo: "Movimiento Salsero", conductor: "Cuerpo en Acción", descripcion: "Salsa que invita a mover el cuerpo", genero: "Salsa para Bailar" },
+                { hora: "16:00", titulo: "Potencia Salsera", conductor: "Energía Pura", descripcion: "Los temas más fuertes y potentes", genero: "Salsa Dura" },
+                { hora: "18:00", titulo: "Mezcla Perfecta", conductor: "DJ Combinación", descripcion: "Variedad salsera para todos los gustos", genero: "Salsa Mix" },
+                { hora: "20:00", titulo: "Ídolos Salseros", conductor: "Adoración Musical", descripcion: "Homenaje a los grandes de la salsa", genero: "Salsa Romántica" },
+                { hora: "22:00", titulo: "Fiesta Nocturna", conductor: "Ritmo de Noche", descripcion: "Salsa para celebrar la noche", genero: "Salsa para Bailar" },
+                { hora: "00:00", titulo: "Antología Salsera", conductor: "Colección Completa", descripcion: "Lo mejor de la historia de la salsa", genero: "Salsa Vintage" },
+                { hora: "02:00", titulo: "Armonía Nocturna", conductor: "Melodías de Noche", descripcion: "Salsa tranquila para finalizar", genero: "Salsa Romántica" }
             ],
             "viernes": [
-                { hora: "06:00", titulo: "Viernes Salsero", conductor: "Fin de Semana", descripcion: "Salsa para empezar el viernes con alegría", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Programas/MAXI.jpg" },
-                { hora: "08:00", titulo: "Salsa de Oficina", conductor: "Jornada Final", descripcion: "Último día laboral con buena música", genero: "Salsa Clásica", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "10:00", titulo: "Tesoros Musicales", conductor: "Cofre del Recuerdo", descripcion: "Salsa que merece ser redescubierta", genero: "Salsa Vintage", img: "/img_radio/AVENIDA TTROPICAL/Programas/Dario Castellanos.jpg" },
-                { hora: "12:00", titulo: "Salsa Sabrosa", conductor: "Sabor Caribeño", descripcion: "Los ritmos más sabrosos del Caribe", genero: "Salsa Cubana", img: "/img_radio/AVENIDA TTROPICAL/Programas/Yvette.jpg" },
-                { hora: "14:00", titulo: "Pre-Fiesta", conductor: "Calentamiento", descripcion: "Salsa para ir entrando en ambiente", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "16:00", titulo: "Salsa Fuerte", conductor: "Potencia Máxima", descripcion: "Los temas más potentes para la tarde", genero: "Salsa Dura", img: "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" },
-                { hora: "18:00", titulo: "Viernes de Salsa", conductor: "Fiesta Inminente", descripcion: "Lo mejor para empezar el fin de semana", genero: "Salsa Mix", img: "/img_radio/AVENIDA TTROPICAL/Programas/Diego Cheito.jpg" },
-                { hora: "19:00", titulo: "El Mensajero de la Salsa", conductor: "Mr Cheo", descripcion: "Los mensajes salseros más importantes", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Programas/Diego Cheito.jpg" },
-                { hora: "22:00", titulo: "Fiesta Viernes", conductor: "DJ Fin de Semana", descripcion: "Salsa para bailar toda la noche", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "00:00", titulo: "Madrugada de Fiesta", conductor: "Resistencia Salsera", descripcion: "Salsa para los que aguantan hasta tarde", genero: "Salsa Vintage", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "02:00", titulo: "Viernes Nocturno", conductor: "Noche Larga", descripcion: "Salsa para acompañar la madrugada", genero: "Salsa Romántica", img: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" }
+                { hora: "06:00", titulo: "Viernes Salsero", conductor: "Fin de Semana", descripcion: "Salsa para empezar el viernes con alegría", genero: "Salsa Romántica" },
+                { hora: "08:00", titulo: "Salsa de Oficina", conductor: "Jornada Final", descripcion: "Último día laboral con buena música", genero: "Salsa Clásica" },
+                { hora: "10:00", titulo: "Tesoros Musicales", conductor: "Cofre del Recuerdo", descripcion: "Salsa que merece ser redescubierta", genero: "Salsa Vintage" },
+                { hora: "12:00", titulo: "Salsa Sabrosa", conductor: "Sabor Caribeño", descripcion: "Los ritmos más sabrosos del Caribe", genero: "Salsa Cubana" },
+                { hora: "14:00", titulo: "Pre-Fiesta", conductor: "Calentamiento", descripcion: "Salsa para ir entrando en ambiente", genero: "Salsa para Bailar" },
+                { hora: "16:00", titulo: "Salsa Fuerte", conductor: "Potencia Máxima", descripcion: "Los temas más potentes para la tarde", genero: "Salsa Dura" },
+                { hora: "18:00", titulo: "Viernes de Salsa", conductor: "Fiesta Inminente", descripcion: "Lo mejor para empezar el fin de semana", genero: "Salsa Mix" },
+                { hora: "19:00", titulo: "El Mensajero de la Salsa", conductor: "Mr Cheo", descripcion: "Los mensajes salseros más importantes", genero: "Salsa Romántica" },
+                { hora: "22:00", titulo: "Fiesta Viernes", conductor: "DJ Fin de Semana", descripcion: "Salsa para bailar toda la noche", genero: "Salsa para Bailar" },
+                { hora: "00:00", titulo: "Madrugada de Fiesta", conductor: "Resistencia Salsera", descripcion: "Salsa para los que aguantan hasta tarde", genero: "Salsa Vintage" },
+                { hora: "02:00", titulo: "Viernes Nocturno", conductor: "Noche Larga", descripcion: "Salsa para acompañar la madrugada", genero: "Salsa Romántica" }
             ],
             "sábado": [
-                { hora: "08:00", titulo: "ENTRETELONES", conductor: "Dario Castellanos", descripcion: "Los secretos detrás de los grandes éxitos", genero: "Salsa Vintage", img: "/img_radio/AVENIDA TTROPICAL/Programas/Dario Castellanos.jpg" },
-                { hora: "10:00", titulo: "Sábado Relajado", conductor: "Descanso Musical", descripcion: "Salsa tranquila para el sábado matutino", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Programas/MAXI.jpg" },
-                { hora: "12:00", titulo: "++ PRENDIDOS", conductor: "Diego Cheito Grijalva", descripcion: "La salsa más energética del mediodía", genero: "Salsa para Bailar", img: "/img_radio/AVENIDA TTROPICAL/Programas/Diego Cheito.jpg" },
-                { hora: "14:00", titulo: "Salsa Familiar", conductor: "En Familia", descripcion: "Salsa para disfrutar en casa con todos", genero: "Salsa Clásica", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "16:00", titulo: "Preparando la Noche", conductor: "Calentamiento Nocturno", descripcion: "Salsa para ir entrando en ambiente festivo", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "17:30", titulo: "TIMBA Y SABOR", conductor: "Yvettte", descripcion: "Lo mejor de la timba cubana con sabor único", genero: "Salsa Cubana", img: "/img_radio/AVENIDA TTROPICAL/Programas/Yvette.jpg" },
-                { hora: "19:00", titulo: "Sábado de Fiesta", conductor: "Celebración Total", descripcion: "Salsa para comenzar la noche sabatina", genero: "Salsa Mix", img: "/img_radio/AVENIDA TTROPICAL/Programas/Diego Cheito.jpg" },
-                { hora: "21:00", titulo: "Noche de Estrellas", conductor: "Gala Salsera", descripcion: "Los grandes hits para la noche del sábado", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Especiales/Celia Cruz.jpg" },
-                { hora: "23:00", titulo: "Baile Sabatino", conductor: "Pista Llena", descripcion: "Salsa para bailar hasta tarde", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "01:00", titulo: "Madrugada del Sábado", conductor: "Resistencia Total", descripcion: "Salsa para los que no quieren que acabe la noche", genero: "Salsa Vintage", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "03:00", titulo: "Sábado Nocturno", conductor: "Noche Larga", descripcion: "Salsa para las horas más pequeñas", genero: "Salsa Romántica", img: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" }
+                { hora: "08:00", titulo: "ENTRETELONES", conductor: "Dario Castellanos", descripcion: "Los secretos detrás de los grandes éxitos", genero: "Salsa Vintage" },
+                { hora: "10:00", titulo: "Sábado Relajado", conductor: "Descanso Musical", descripcion: "Salsa tranquila para el sábado matutino", genero: "Salsa Romántica" },
+                { hora: "12:00", titulo: "++ PRENDIDOS", conductor: "Diego Cheito Grijalva", descripcion: "La salsa más energética del mediodía", genero: "Salsa para Bailar" },
+                { hora: "14:00", titulo: "Salsa Familiar", conductor: "En Familia", descripcion: "Salsa para disfrutar en casa con todos", genero: "Salsa Clásica" },
+                { hora: "16:00", titulo: "Preparando la Noche", conductor: "Calentamiento Nocturno", descripcion: "Salsa para ir entrando en ambiente festivo", genero: "Salsa para Bailar" },
+                { hora: "17:30", titulo: "TIMBA Y SABOR", conductor: "Yvettte", descripcion: "Lo mejor de la timba cubana con sabor único", genero: "Salsa Cubana" },
+                { hora: "19:00", titulo: "Sábado de Fiesta", conductor: "Celebración Total", descripcion: "Salsa para comenzar la noche sabatina", genero: "Salsa Mix" },
+                { hora: "21:00", titulo: "Noche de Estrellas", conductor: "Gala Salsera", descripcion: "Los grandes hits para la noche del sábado", genero: "Salsa Romántica" },
+                { hora: "23:00", titulo: "Baile Sabatino", conductor: "Pista Llena", descripcion: "Salsa para bailar hasta tarde", genero: "Salsa para Bailar" },
+                { hora: "01:00", titulo: "Madrugada del Sábado", conductor: "Resistencia Total", descripcion: "Salsa para los que no quieren que acabe la noche", genero: "Salsa Vintage" },
+                { hora: "03:00", titulo: "Sábado Nocturno", conductor: "Noche Larga", descripcion: "Salsa para las horas más pequeñas", genero: "Salsa Romántica" }
             ],
             "domingo": [
-                { hora: "06:00", titulo: "Amanecer Dominical", conductor: "Paz Matutina", descripcion: "Salsa tranquila para el domingo temprano", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Programas/MAXI.jpg" },
-                { hora: "08:00", titulo: "Desayuno Familiar", conductor: "Familia y Ritmo", descripcion: "Salsa para compartir en el desayuno dominical", genero: "Salsa Clásica", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "10:00", titulo: "Domingo Retro", conductor: "Nostalgia", descripcion: "Los éxitos que marcaron épocas", genero: "Salsa Vintage", img: "/img_radio/AVENIDA TTROPICAL/Programas/Dario Castellanos.jpg" },
-                { hora: "12:00", titulo: "Salsa para el Almuerzo", conductor: "Comida con Ritmo", descripcion: "Acompañamiento perfecto para el almuerzo familiar", genero: "Salsa Cubana", img: "/img_radio/AVENIDA TTROPICAL/Programas/Yvette.jpg" },
-                { hora: "14:00", titulo: "Siesta Salsera", conductor: "Descanso Activo", descripcion: "Salsa suave para la tarde dominical", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "16:00", titulo: "Tarde de Clásicos", conductor: "Esencia Pura", descripcion: "Lo fundamental de la salsa", genero: "Salsa Dura", img: "https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" },
-                { hora: "18:00", titulo: "Atardecer Salsero", conductor: "Ocaso Musical", descripcion: "Salsa para despedir el domingo", genero: "Salsa Mix", img: "/img_radio/AVENIDA TTROPICAL/Programas/Diego Cheito.jpg" },
-                { hora: "20:00", titulo: "Domingo Nocturno", conductor: "Noche Tranquila", descripcion: "Salsa para preparar la nueva semana", genero: "Salsa Romántica", img: "/img_radio/AVENIDA TTROPICAL/Especiales/Celia Cruz.jpg" },
-                { hora: "22:00", titulo: "Despedida Dominical", conductor: "Adiós al Fin de Semana", descripcion: "Salsa para cerrar el domingo con estilo", genero: "Salsa para Bailar", img: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "00:00", titulo: "Reflexión Salsera", conductor: "Pensamientos Nocturnos", descripcion: "Salsa para reflexionar sobre la semana", genero: "Salsa Vintage", img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" },
-                { hora: "02:00", titulo: "Dulces Sueños", conductor: "Descanso Final", descripcion: "Salsa suave para terminar el domingo", genero: "Salsa Romántica", img: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" }
+                { hora: "06:00", titulo: "Amanecer Dominical", conductor: "Paz Matutina", descripcion: "Salsa tranquila para el domingo temprano", genero: "Salsa Romántica" },
+                { hora: "08:00", titulo: "Desayuno Familiar", conductor: "Familia y Ritmo", descripcion: "Salsa para compartir en el desayuno dominical", genero: "Salsa Clásica" },
+                { hora: "10:00", titulo: "Domingo Retro", conductor: "Nostalgia", descripcion: "Los éxitos que marcaron épocas", genero: "Salsa Vintage" },
+                { hora: "12:00", titulo: "Salsa para el Almuerzo", conductor: "Comida con Ritmo", descripcion: "Acompañamiento perfecto para el almuerzo familiar", genero: "Salsa Cubana" },
+                { hora: "14:00", titulo: "Siesta Salsera", conductor: "Descanso Activo", descripcion: "Salsa suave para la tarde dominical", genero: "Salsa para Bailar" },
+                { hora: "16:00", titulo: "Tarde de Clásicos", conductor: "Esencia Pura", descripcion: "Lo fundamental de la salsa", genero: "Salsa Dura" },
+                { hora: "18:00", titulo: "Atardecer Salsero", conductor: "Ocaso Musical", descripcion: "Salsa para despedir el domingo", genero: "Salsa Mix" },
+                { hora: "20:00", titulo: "Domingo Nocturno", conductor: "Noche Tranquila", descripcion: "Salsa para preparar la nueva semana", genero: "Salsa Romántica" },
+                { hora: "22:00", titulo: "Despedida Dominical", conductor: "Adiós al Fin de Semana", descripcion: "Salsa para cerrar el domingo con estilo", genero: "Salsa para Bailar" },
+                { hora: "00:00", titulo: "Reflexión Salsera", conductor: "Pensamientos Nocturnos", descripcion: "Salsa para reflexionar sobre la semana", genero: "Salsa Vintage" },
+                { hora: "02:00", titulo: "Dulces Sueños", conductor: "Descanso Final", descripcion: "Salsa suave para terminar el domingo", genero: "Salsa Romántica" }
             ]
         };
 
         // Días de la semana en español
-        const diasSemana = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"];
+        const diasSemana = [
+            { nombre: "lunes", numero: 1 },
+            { nombre: "martes", numero: 2 },
+            { nombre: "miércoles", numero: 3 },
+            { nombre: "jueves", numero: 4 },
+            { nombre: "viernes", numero: 5 },
+            { nombre: "sábado", numero: 6 },
+            { nombre: "domingo", numero: 7 }
+        ];
         
         // Obtener el día actual
         const fecha = new Date();
         let diaActualIndex = fecha.getDay();
         diaActualIndex = diaActualIndex === 0 ? 6 : diaActualIndex - 1;
-        const diaActual = diasSemana[diaActualIndex];
+        const diaActualNombre = diasSemana[diaActualIndex].nombre;
 
-        // FUNCIÓN CORREGIDA - INICIALIZAR PROGRAMACIÓN SEMANAL
+        // FUNCIÓN PARA DETERMINAR SI UN PROGRAMA ESTÁ EN VIVO
+        function programaEstaEnVivo(horaPrograma) {
+            const ahora = new Date();
+            const horaActual = ahora.getHours().toString().padStart(2, '0') + ':' + ahora.getMinutes().toString().padStart(2, '0');
+            
+            // Convertir a minutos para comparar
+            const [horaProg, minProg] = horaPrograma.split(':').map(Number);
+            const [horaAct, minAct] = horaActual.split(':').map(Number);
+            
+            const minutosPrograma = horaProg * 60 + minProg;
+            const minutosActual = horaAct * 60 + minAct;
+            
+            // Considerar que un programa está en vivo si la hora actual está dentro de los 10 minutos siguientes a la hora del programa
+            return minutosActual >= minutosPrograma && minutosActual <= (minutosPrograma + 10);
+        }
+
+        // FUNCIÓN PARA INICIALIZAR LA PROGRAMACIÓN SEMANAL CON ACORDEÓN
         function inicializarProgramacionSemanal() {
-            const diasContainer = document.getElementById('diasSemana');
-            const programasContainer = document.querySelector('.programas-dia-container');
+            const acordeonContainer = document.getElementById('acordeonDias');
             const diaActualText = document.getElementById('dia-actual-text');
             
             // Mostrar texto del día actual
-            diaActualText.textContent = `(Hoy es ${diaActual.charAt(0).toUpperCase() + diaActual.slice(1)})`;
+            diaActualText.textContent = `(Hoy es ${diaActualNombre.charAt(0).toUpperCase() + diaActualNombre.slice(1)})`;
             
-            // LIMPIAR contenedores antes de agregar nuevos elementos
-            diasContainer.innerHTML = '';
-            programasContainer.innerHTML = '';
+            // LIMPIAR contenedor antes de agregar nuevos elementos
+            acordeonContainer.innerHTML = '';
             
-            // Crear botones para cada día
-            diasSemana.forEach((dia, index) => {
-                const btn = document.createElement('button');
-                btn.className = `dia-btn ${dia === diaActual ? 'active dia-hoy' : ''}`;
-                btn.textContent = dia.charAt(0).toUpperCase() + dia.slice(1);
-                btn.dataset.dia = dia;
+            // Crear acordeón para cada día
+            diasSemana.forEach((diaObj, index) => {
+                const diaNombre = diaObj.nombre;
+                const diaNumero = diaObj.numero;
+                const esHoy = diaNombre === diaActualNombre;
                 
-                btn.addEventListener('click', function() {
-                    // Remover clase 'active' de todos los botones
-                    document.querySelectorAll('.dia-btn').forEach(b => b.classList.remove('active'));
-                    // Añadir clase 'active' al botón clickeado
-                    this.classList.add('active');
-                    // Llamar a la función para mostrar programas
-                    mostrarProgramasDia(this.dataset.dia);
-                });
+                // Crear elemento del acordeón
+                const acordeonItem = document.createElement('div');
+                acordeonItem.className = `dia-acordeon ${esHoy ? 'active' : ''}`;
+                acordeonItem.id = `acordeon-${diaNombre}`;
                 
-                diasContainer.appendChild(btn);
-            });
-            
-            // Crear contenedores para los programas de cada día
-            diasSemana.forEach(dia => {
-                const diaContainer = document.createElement('div');
-                diaContainer.className = 'programas-dia';
-                diaContainer.id = `programas-${dia}`;
+                // Crear encabezado del acordeón
+                const header = document.createElement('div');
+                header.className = 'dia-header';
+                header.innerHTML = `
+                    <div class="dia-nombre">
+                        <div class="dia-numero">${diaNumero}</div>
+                        ${diaNombre.charAt(0).toUpperCase() + diaNombre.slice(1)}
+                        ${esHoy ? '<span class="dia-hoy-badge">HOY</span>' : ''}
+                    </div>
+                    <i class="fas fa-chevron-down dia-icon"></i>
+                `;
                 
-                // Inicialmente ocultar todos los contenedores
-                diaContainer.style.display = 'none';
+                // Crear contenido del acordeón
+                const contenido = document.createElement('div');
+                contenido.className = `programas-contenido ${esHoy ? 'active' : ''}`;
                 
-                if (programacionSemanal[dia]) {
-                    programacionSemanal[dia].forEach(programa => {
-                        const programaCard = document.createElement('div');
-                        programaCard.className = 'programa-card';
+                // Crear lista de programas
+                const programasLista = document.createElement('div');
+                programasLista.className = 'programas-lista';
+                
+                // Añadir programas del día
+                if (programacionSemanal[diaNombre]) {
+                    programacionSemanal[diaNombre].forEach(programa => {
+                        const programaItem = document.createElement('div');
+                        programaItem.className = 'programa-item';
                         
-                        const imagen = programa.img || "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80";
+                        // Verificar si el programa está en vivo
+                        const enVivo = programaEstaEnVivo(programa.hora) && esHoy;
                         
-                        programaCard.innerHTML = `
+                        programaItem.innerHTML = `
                             <div class="programa-hora">${programa.hora}</div>
-                            <div class="programa-img-container">
-                                <img src="${imagen}" alt="${programa.titulo}" class="programa-img" onerror="this.src='https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'">
-                            </div>
-                            <div class="programa-info">
-                                <h3 class="programa-titulo">${programa.titulo}</h3>
+                            <div class="programa-info-texto">
+                                <h3 class="programa-titulo">${programa.titulo} ${enVivo ? '<span class="en-vivo-badge">EN VIVO</span>' : ''}</h3>
                                 <div class="programa-conductor">Conductor: ${programa.conductor}</div>
                                 <p class="programa-descripcion">${programa.descripcion}</p>
                                 <span class="programa-genero">${programa.genero}</span>
                             </div>
                         `;
                         
-                        diaContainer.appendChild(programaCard);
+                        programasLista.appendChild(programaItem);
                     });
                 }
                 
-                programasContainer.appendChild(diaContainer);
-            });
-            
-            // Mostrar solo los programas del día actual al cargar la página
-            mostrarProgramasDia(diaActual);
-        }
-
-        // FUNCIÓN CORREGIDA - MOSTRAR PROGRAMAS DE UN DÍA ESPECÍFICO
-        function mostrarProgramasDia(dia) {
-            // Ocultar TODOS los contenedores de programas
-            document.querySelectorAll('.programas-dia').forEach(container => {
-                container.style.display = 'none';
-            });
-            
-            // Mostrar SOLO el contenedor del día seleccionado
-            const diaContainer = document.getElementById(`programas-${dia}`);
-            if (diaContainer) {
-                // Para móvil: flex, para tablet/escritorio: grid
-                const displayStyle = window.innerWidth < 768 ? 'flex' : 'grid';
-                diaContainer.style.display = displayStyle;
-            }
-        }
-
-        // MEJORAS PARA LA VERSIÓN DE ESCRITORIO
-        function adaptarParaEscritorio() {
-            if (window.innerWidth >= 1024) {
-                // Asegurar que las imágenes se vean bien en escritorio
-                const programaImgs = document.querySelectorAll('.programa-img');
-                programaImgs.forEach(img => {
-                    img.style.objectFit = 'cover';
+                contenido.appendChild(programasLista);
+                
+                // Añadir encabezado y contenido al acordeón
+                acordeonItem.appendChild(header);
+                acordeonItem.appendChild(contenido);
+                
+                // Añadir evento de clic al encabezado
+                header.addEventListener('click', function() {
+                    const acordeonActivo = document.querySelector('.dia-acordeon.active');
+                    const contenidoActivo = document.querySelector('.programas-contenido.active');
+                    
+                    // Si el acordeón clickeado ya está activo, cerrarlo
+                    if (acordeonItem.classList.contains('active')) {
+                        acordeonItem.classList.remove('active');
+                        contenido.classList.remove('active');
+                    } else {
+                        // Cerrar acordeón activo anterior
+                        if (acordeonActivo) {
+                            acordeonActivo.classList.remove('active');
+                        }
+                        if (contenidoActivo) {
+                            contenidoActivo.classList.remove('active');
+                        }
+                        
+                        // Abrir nuevo acordeón
+                        acordeonItem.classList.add('active');
+                        contenido.classList.add('active');
+                    }
                 });
-            }
+                
+                acordeonContainer.appendChild(acordeonItem);
+            });
+            
+            // Desplazarse al día actual al cargar la página
+            setTimeout(() => {
+                const acordeonHoy = document.getElementById(`acordeon-${diaActualNombre}`);
+                if (acordeonHoy) {
+                    acordeonHoy.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 500);
         }
 
         // Inicializar cuando el DOM esté listo
@@ -2614,7 +2571,6 @@
             initPlayer();
             simulateAudioVisualization();
             inicializarProgramacionSemanal();
-            adaptarParaEscritorio();
             
             // Efecto táctil para móviles
             const container = document.querySelector('.player-container');
@@ -2648,15 +2604,31 @@
                 
             }, 1500);
             
-            // Adaptar al redimensionar la ventana
-            window.addEventListener('resize', function() {
-                adaptarParaEscritorio();
-                // Asegurar que el día activo se muestre correctamente después del resize
-                const activeBtn = document.querySelector('.dia-btn.active');
-                if (activeBtn) {
-                    mostrarProgramasDia(activeBtn.dataset.dia);
+            // Actualizar indicadores de programas en vivo cada minuto
+            setInterval(() => {
+                const diaActualElement = document.getElementById(`acordeon-${diaActualNombre}`);
+                if (diaActualElement && diaActualElement.classList.contains('active')) {
+                    // Forzar actualización visual de programas en vivo
+                    const programasItems = diaActualElement.querySelectorAll('.programa-item');
+                    programasItems.forEach(item => {
+                        const horaElement = item.querySelector('.programa-hora');
+                        if (horaElement) {
+                            const horaPrograma = horaElement.textContent;
+                            const enVivo = programaEstaEnVivo(horaPrograma);
+                            const enVivoBadge = item.querySelector('.en-vivo-badge');
+                            
+                            if (enVivo && !enVivoBadge) {
+                                const tituloElement = item.querySelector('.programa-titulo');
+                                if (tituloElement) {
+                                    tituloElement.innerHTML += '<span class="en-vivo-badge">EN VIVO</span>';
+                                }
+                            } else if (!enVivo && enVivoBadge) {
+                                enVivoBadge.remove();
+                            }
+                        }
+                    });
                 }
-            });
+            }, 60000); // Cada minuto
         });
     </script>
 </body>
