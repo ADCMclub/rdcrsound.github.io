@@ -422,7 +422,7 @@
             z-index: 1000;
         }
 
-        .whatsapp-btn, .back-button {
+        .whatsapp-btn, .back-button, .scroll-top-btn {
             background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
             border: none;
@@ -449,8 +449,27 @@
             bottom: auto;
         }
 
-        .whatsapp-btn:hover, .back-button:hover {
+        .scroll-top-btn {
+            background: linear-gradient(135deg, var(--main), #00B8D4);
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .whatsapp-btn:hover, .back-button:hover, .scroll-top-btn:hover {
             transform: scale(1.05);
+        }
+
+        .scroll-top-btn:hover {
+            transform: translateY(-3px) scale(1.05);
         }
 
         /* Footer */
@@ -553,6 +572,16 @@
             .programa-info h4 {
                 font-size: 1rem;
             }
+            
+            .floating-buttons {
+                right: 15px;
+                bottom: 15px;
+            }
+            
+            .whatsapp-btn, .scroll-top-btn {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -586,6 +615,22 @@
             
             .programa-info p {
                 font-size: 0.8rem;
+            }
+            
+            .floating-buttons {
+                right: 10px;
+                bottom: 10px;
+            }
+            
+            .whatsapp-btn, .scroll-top-btn {
+                padding: 8px 12px;
+                font-size: 0.75rem;
+            }
+            
+            .back-button {
+                top: 15px;
+                left: 15px;
+                padding: 8px 15px;
             }
         }
     </style>
@@ -720,8 +765,14 @@
         </section>
     </div>
 
-    <!-- Botón WhatsApp -->
+    <!-- Botones flotantes -->
     <div class="floating-buttons">
+        <!-- Botón Ir Arriba -->
+        <button class="scroll-top-btn" id="scrollTopBtn">
+            <i class="fas fa-chevron-up"></i> Arriba
+        </button>
+        
+        <!-- Botón WhatsApp -->
         <a href="https://wa.me/593XXXXXXXXX?text=Hola%20DCRADIOEC,%20me%20gustaría%20pedir%20una%20canción:" 
            class="whatsapp-btn" target="_blank">
             <i class="fab fa-whatsapp"></i> Pedir Canción
@@ -1005,6 +1056,28 @@
             });
         }
 
+        // FUNCIÓN PARA EL BOTÓN "IR ARRIBA"
+        function configurarBotonArriba() {
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            
+            // Mostrar/ocultar botón al hacer scroll
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.add('show');
+                } else {
+                    scrollTopBtn.classList.remove('show');
+                }
+            });
+            
+            // Evento para ir al inicio
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
         // INICIALIZACIÓN AL CARGAR LA PÁGINA
         document.addEventListener('DOMContentLoaded', function() {
             // Generar botones de días
@@ -1030,6 +1103,9 @@
                     generarProgramacion(diaSeleccionado);
                 });
             });
+            
+            // Configurar botón "Ir arriba"
+            configurarBotonArriba();
             
             // Iniciar reloj en tiempo real
             actualizarReloj();
