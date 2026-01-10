@@ -366,17 +366,24 @@
         .noticia-slide {
             background: rgba(30, 30, 30, 0.95);
             border-radius: 12px;
-            height: 350px;
+            height: 380px;
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(0, 229, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .noticia-slide:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 229, 255, 0.2);
         }
 
         .noticia-image {
-            height: 150px;
+            height: 140px;
             background-size: cover;
             background-position: center;
             position: relative;
+            border-radius: 10px 10px 0 0;
         }
 
         .noticia-category {
@@ -400,7 +407,7 @@
 
         .noticia-content h3 {
             font-size: 1.1rem;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: var(--light);
             min-height: 50px;
         }
@@ -409,6 +416,39 @@
             color: #CCCCCC;
             font-size: 0.85rem;
             flex-grow: 1;
+            margin-bottom: 15px;
+        }
+
+        .noticia-date {
+            color: #999;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+        }
+
+        /* Botón de enlace en cada noticia */
+        .noticia-link {
+            background: linear-gradient(135deg, var(--main), #00B8D4);
+            color: var(--dark);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .noticia-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
         }
 
         /* Botones flotantes */
@@ -528,6 +568,10 @@
             .live-info-container {
                 align-items: center;
             }
+            
+            .noticia-slide {
+                height: 380px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -582,6 +626,10 @@
                 padding: 10px 15px;
                 font-size: 0.8rem;
             }
+            
+            .noticia-slide {
+                height: 360px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -631,6 +679,10 @@
                 top: 15px;
                 left: 15px;
                 padding: 8px 15px;
+            }
+            
+            .noticia-slide {
+                height: 350px;
             }
         }
     </style>
@@ -722,39 +774,98 @@
             </div>
         </div>
         
-        <!-- Noticias -->
+        <!-- Noticias - Carrusel con 6 noticias -->
         <section class="noticias-section">
             <h2 class="section-title">DC NOTICIAS</h2>
             <div class="swiper noticias-swiper">
                 <div class="swiper-wrapper">
+                    <!-- Noticia 1 -->
                     <div class="swiper-slide noticia-slide">
                         <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                            <div class="noticia-category">Actualidad</div>
-                        </div>
-                        <div class="noticia-content">
-                            <h3>DC Radio lanza nueva temporada de programas</h3>
-                            <p>Nueva programación con contenido exclusivo y entrevistas a personalidades relevantes.</p>
-                            <div class="noticia-date">15 Mar 2026</div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide noticia-slide">
-                        <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                            <div class="noticia-category">Cultura</div>
-                        </div>
-                        <div class="noticia-content">
-                            <h3>Festival Internacional de Jazz 2026</h3>
-                            <p>Cobertura completa del festival con entrevistas exclusivas a los artistas participantes.</p>
-                            <div class="noticia-date">10 Mar 2026</div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide noticia-slide">
-                        <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
                             <div class="noticia-category">Radio</div>
                         </div>
                         <div class="noticia-content">
-                            <h3>DC Radio alcanza 1 millón de oyentes</h3>
-                            <p>Marca histórica para la emisora que consolida su liderazgo en radiodifusión digital.</p>
+                            <h3>DC Radio supera el millón de oyentes en Ecuador</h3>
+                            <p>La emisora líder en radiodifusión digital alcanza un hito histórico con un millón de oyentes mensuales en todo el país.</p>
+                            <div class="noticia-date">15 Mar 2026</div>
+                            <a href="https://dcradioec.com/noticias/millon-oyentes" class="noticia-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Leer más
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Noticia 2 -->
+                    <div class="swiper-slide noticia-slide">
+                        <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="noticia-category">Música</div>
+                        </div>
+                        <div class="noticia-content">
+                            <h3>Festival Internacional de Jazz llega a Quito</h3>
+                            <p>Artistas de 12 países participarán en el evento que se transmitirá en vivo por DC Radio desde el Teatro Nacional.</p>
+                            <div class="noticia-date">12 Mar 2026</div>
+                            <a href="https://dcradioec.com/noticias/festival-jazz" class="noticia-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Leer más
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Noticia 3 -->
+                    <div class="swiper-slide noticia-slide">
+                        <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="noticia-category">Tecnología</div>
+                        </div>
+                        <div class="noticia-content">
+                            <h3>DC Radio lanza nueva app con funciones exclusivas</h3>
+                            <p>La aplicación incluye programación personalizada, podcasts originales y chat en vivo con los locutores.</p>
+                            <div class="noticia-date">10 Mar 2026</div>
+                            <a href="https://dcradioec.com/noticias/nueva-app" class="noticia-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Leer más
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Noticia 4 -->
+                    <div class="swiper-slide noticia-slide">
+                        <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1561489396-888724a1543d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="noticia-category">Espectáculos</div>
+                        </div>
+                        <div class="noticia-content">
+                            <h3>Entrevista exclusiva con Juanes en DC Radio</h3>
+                            <p>El artista colombiano conversará sobre su nueva gira y presentará canciones inéditas en nuestro estudio.</p>
+                            <div class="noticia-date">8 Mar 2026</div>
+                            <a href="https://dcradioec.com/noticias/entrevista-juanes" class="noticia-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Leer más
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Noticia 5 -->
+                    <div class="swiper-slide noticia-slide">
+                        <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="noticia-category">Cultura</div>
+                        </div>
+                        <div class="noticia-content">
+                            <h3>DC Radio presenta serie sobre música ecuatoriana</h3>
+                            <p>Documental sonoro de 10 capítulos que recorre la historia de la música nacional desde los años 50.</p>
                             <div class="noticia-date">5 Mar 2026</div>
+                            <a href="https://dcradioec.com/noticias/serie-musica-ecuatoriana" class="noticia-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Leer más
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Noticia 6 -->
+                    <div class="swiper-slide noticia-slide">
+                        <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="noticia-category">Actualidad</div>
+                        </div>
+                        <div class="noticia-content">
+                            <h3>Nuevos estudios de transmisión en Guayaquil</h3>
+                            <p>DC Radio inaugura modernas instalaciones con tecnología 4K para producciones en vivo y podcasts.</p>
+                            <div class="noticia-date">1 Mar 2026</div>
+                            <a href="https://dcradioec.com/noticias/nuevos-estudios" class="noticia-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Leer más
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -793,98 +904,94 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // DATOS COMPLETOS DE PROGRAMACIÓN (compactos)
+        // DATOS COMPLETOS DE PROGRAMACIÓN (actualizada - sin Especial DC, Sabías Que, Ranking DC, Domingo en Familia)
         const programacionCompleta = {
             lunes: [
-                { hora: "05:00", duracion: "2h", titulo: "Despertar DC", desc: "Noticias, clima y tráfico matutino.", categoria: "Informativo" },
-                { hora: "07:00", duracion: "2h", titulo: "DC News Morning", desc: "Análisis de noticias nacionales.", categoria: "Noticias" },
-                { hora: "09:00", duracion: "3h", titulo: "Éxitos del Ayer y Hoy", desc: "Viaje musical por las décadas.", categoria: "Música Retro" },
-                { hora: "12:00", duracion: "1h", titulo: "Magazine Informativo", desc: "Entrevistas y reportajes.", categoria: "Magazine" },
-                { hora: "13:00", duracion: "2h", titulo: "Conexión Musical", desc: "Temas populares del momento.", categoria: "Música Actual" },
-                { hora: "15:00", duracion: "1h", titulo: "La Tarde DC", desc: "Conversación amena y noticias.", categoria: "Variedades" },
-                { hora: "16:00", duracion: "2h", titulo: "Radar Musical", desc: "Éxitos para tu tarde.", categoria: "Música" },
-                { hora: "18:00", duracion: "1h", titulo: "Deportes Total", desc: "Resultados y análisis deportivos.", categoria: "Deportes" },
-                { hora: "19:00", duracion: "1h", titulo: "Noticias del Día", desc: "Resumen informativo completo.", categoria: "Noticias" },
-                { hora: "20:00", duracion: "4h", titulo: "Noche DC", desc: "Música relajada para terminar.", categoria: "Música Nocturna" },
-                { hora: "00:00", duracion: "5h", titulo: "DC Through the Night", desc: "Música suave y noticias.", categoria: "Madrugada" }
+                { hora: "00:00", duracion: "5h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
+                { hora: "05:00", duracion: "1h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
+                { hora: "09:00", duracion: "2h", titulo: "Hits y Tendencias", desc: "Pop latino, pop anglo, reguetón comercial light", categoria: "Música Actual" },
+                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Pop & soft rock 2000–2025", categoria: "Música Variada" },
+                { hora: "12:00", duracion: "2h", titulo: "Mediodía en Compañía", desc: "Baladas pop, latin pop, tropical suave", categoria: "Variedades" },
+                { hora: "14:00", duracion: "3h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
+                { hora: "17:00", duracion: "2h", titulo: "Drive Time DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
+                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas variados para tu noche", categoria: "Música Variada" },
+                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             martes: [
-                { hora: "05:00", duracion: "2h", titulo: "Despertar DC", desc: "Noticias y clima para comenzar.", categoria: "Informativo" },
-                { hora: "07:00", duracion: "2h", titulo: "Entrevistas Exclusivas", desc: "Conversaciones con personalidades.", categoria: "Entrevistas" },
-                { hora: "09:00", duracion: "3h", titulo: "Música Sin Pausa", desc: "Éxitos musicales sin parar.", categoria: "Música" },
-                { hora: "12:00", duracion: "1h", titulo: "DC Noticias Express", desc: "Actualidad en formato breve.", categoria: "Noticias" },
-                { hora: "13:00", duracion: "2h", titulo: "Baladas Inolvidables", desc: "Canciones románticas hermosas.", categoria: "Música Romántica" },
-                { hora: "15:00", duracion: "1h", titulo: "Tecnología Hoy", desc: "Novedades tecnológicas.", categoria: "Tecnología" },
-                { hora: "16:00", duracion: "2h", titulo: "La Tarde DC", desc: "Compañía musical vespertina.", categoria: "Variedades" },
-                { hora: "18:00", duracion: "1h", titulo: "DC Deportes", desc: "Actualidad deportiva.", categoria: "Deportes" },
-                { hora: "19:00", duracion: "1h", titulo: "Noticias Nocturnas", desc: "Información de última hora.", categoria: "Noticias" },
-                { hora: "20:00", duracion: "4h", titulo: "Noche de Baladas", desc: "Canciones románticas.", categoria: "Música Romántica" },
-                { hora: "00:00", duracion: "5h", titulo: "Música para Dormir", desc: "Melodías para conciliar sueño.", categoria: "Relajación" }
+                { hora: "00:00", duracion: "5h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
+                { hora: "05:00", duracion: "1h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
+                { hora: "09:00", duracion: "2h", titulo: "Hits y Tendencias", desc: "Pop latino, pop anglo, reguetón comercial light", categoria: "Música Actual" },
+                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Pop & soft rock 2000–2025", categoria: "Música Variada" },
+                { hora: "12:00", duracion: "2h", titulo: "Mediodía en Compañía", desc: "Baladas pop, latin pop, tropical suave", categoria: "Variedades" },
+                { hora: "14:00", duracion: "3h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
+                { hora: "17:00", duracion: "2h", titulo: "Drive Time DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
+                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas variados para tu noche", categoria: "Música Variada" },
+                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             miercoles: [
-                { hora: "05:00", duracion: "2h", titulo: "Despertar DC", desc: "Información para comenzar.", categoria: "Informativo" },
-                { hora: "07:00", duracion: "2h", titulo: "Hablemos de Cultura", desc: "Arte, cine y espectáculos.", categoria: "Cultura" },
-                { hora: "09:00", duracion: "3h", titulo: "Mix Musical DC", desc: "Variedad de géneros.", categoria: "Música Variada" },
-                { hora: "12:00", duracion: "1h", titulo: "DC Noticias Express", desc: "Actualidad en directo.", categoria: "Noticias" },
-                { hora: "13:00", duracion: "2h", titulo: "Rock Clásico", desc: "Grandes éxitos del rock.", categoria: "Rock" },
-                { hora: "15:00", duracion: "1h", titulo: "Salud y Bienestar", desc: "Consejos saludables.", categoria: "Salud" },
-                { hora: "16:00", duracion: "2h", titulo: "La Tarde DC", desc: "Entretenimiento vespertino.", categoria: "Variedades" },
-                { hora: "18:00", duracion: "1h", titulo: "Deportes Extremos", desc: "Aventura y deportes.", categoria: "Deportes" },
-                { hora: "19:00", duracion: "1h", titulo: "Noticias del Día", desc: "Síntesis informativa.", categoria: "Noticias" },
-                { hora: "20:00", duracion: "4h", titulo: "Jazz Lounge", desc: "Jazz clásico y contemporáneo.", categoria: "Jazz" },
-                { hora: "00:00", duracion: "5h", titulo: "Noche de Paz", desc: "Música instrumental.", categoria: "Relajación" }
+                { hora: "00:00", duracion: "5h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
+                { hora: "05:00", duracion: "1h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
+                { hora: "09:00", duracion: "2h", titulo: "Hits y Tendencias", desc: "Pop latino, pop anglo, reguetón comercial light", categoria: "Música Actual" },
+                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Pop & soft rock 2000–2025", categoria: "Música Variada" },
+                { hora: "12:00", duracion: "2h", titulo: "Mediodía en Compañía", desc: "Baladas pop, latin pop, tropical suave", categoria: "Variedades" },
+                { hora: "14:00", duracion: "3h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
+                { hora: "17:00", duracion: "2h", titulo: "Drive Time DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
+                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas variados para tu noche", categoria: "Música Variada" },
+                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             jueves: [
-                { hora: "05:00", duracion: "2h", titulo: "Despertar DC", desc: "Noticias importantes.", categoria: "Informativo" },
-                { hora: "07:00", duracion: "2h", titulo: "Economía y Finanzas", desc: "Análisis del mercado.", categoria: "Economía" },
-                { hora: "09:00", duracion: "3h", titulo: "Pop Internacional", desc: "Éxitos del pop mundial.", categoria: "Pop" },
-                { hora: "12:00", duracion: "1h", titulo: "DC Noticias Express", desc: "Información concisa.", categoria: "Noticias" },
-                { hora: "13:00", duracion: "2h", titulo: "Música Latina", desc: "Lo mejor latinoamericano.", categoria: "Latina" },
-                { hora: "15:00", duracion: "1h", titulo: "Cine y Series", desc: "Críticas audiovisuales.", categoria: "Entretenimiento" },
-                { hora: "16:00", duracion: "2h", titulo: "La Tarde DC", desc: "Compañía musical.", categoria: "Variedades" },
-                { hora: "18:00", duracion: "1h", titulo: "Fútbol Total", desc: "Todo sobre el deporte rey.", categoria: "Fútbol" },
-                { hora: "19:00", duracion: "1h", titulo: "Noticias Nocturnas", desc: "Resumen con perspectiva.", categoria: "Noticias" },
-                { hora: "20:00", duracion: "4h", titulo: "Noche de Soul", desc: "Soul y R&B.", categoria: "Soul/R&B" },
-                { hora: "00:00", duracion: "5h", titulo: "Sonidos del Mundo", desc: "Música étnica.", categoria: "World Music" }
+                { hora: "00:00", duracion: "5h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
+                { hora: "05:00", duracion: "1h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
+                { hora: "09:00", duracion: "2h", titulo: "Hits y Tendencias", desc: "Pop latino, pop anglo, reguetón comercial light", categoria: "Música Actual" },
+                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Pop & soft rock 2000–2025", categoria: "Música Variada" },
+                { hora: "12:00", duracion: "2h", titulo: "Mediodía en Compañía", desc: "Baladas pop, latin pop, tropical suave", categoria: "Variedades" },
+                { hora: "14:00", duracion: "3h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
+                { hora: "17:00", duracion: "2h", titulo: "Drive Time DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
+                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas variados para tu noche", categoria: "Música Variada" },
+                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             viernes: [
-                { hora: "05:00", duracion: "2h", titulo: "Despertar DC", desc: "Noticias, clima y tráfico.", categoria: "Informativo" },
-                { hora: "07:00", duracion: "2h", titulo: "DC News Morning", desc: "Noticias nacionales.", categoria: "Noticias" },
-                { hora: "09:00", duracion: "3h", titulo: "Éxitos del Ayer y Hoy", desc: "Viaje por las décadas.", categoria: "Música Retro" },
-                { hora: "12:00", duracion: "1h", titulo: "Magazine Informativo", desc: "Entrevistas especiales.", categoria: "Magazine" },
-                { hora: "13:00", duracion: "2h", titulo: "Conexión Musical", desc: "Temas populares.", categoria: "Música Actual" },
-                { hora: "15:00", duracion: "1h", titulo: "La Tarde DC", desc: "Conversación y noticias.", categoria: "Variedades" },
-                { hora: "16:00", duracion: "2h", titulo: "Radar Musical", desc: "Éxitos para la tarde.", categoria: "Música" },
-                { hora: "18:00", duracion: "1h", titulo: "Deportes Total", desc: "Resultados y análisis.", categoria: "Deportes" },
-                { hora: "19:00", duracion: "1h", titulo: "Noticias Fin de Semana", desc: "Información para el finde.", categoria: "Noticias" },
-                { hora: "20:00", duracion: "4h", titulo: "Fiesta DC", desc: "Música para el fin de semana.", categoria: "Fiesta" },
-                { hora: "00:00", duracion: "5h", titulo: "After Hours", desc: "Música electrónica.", categoria: "Electrónica" }
+                { hora: "00:00", duracion: "5h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
+                { hora: "05:00", duracion: "1h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
+                { hora: "09:00", duracion: "2h", titulo: "Hits y Tendencias", desc: "Pop latino, pop anglo, reguetón comercial light", categoria: "Música Actual" },
+                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Pop & soft rock 2000–2025", categoria: "Música Variada" },
+                { hora: "12:00", duracion: "2h", titulo: "Mediodía en Compañía", desc: "Baladas pop, latin pop, tropical suave", categoria: "Variedades" },
+                { hora: "14:00", duracion: "3h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
+                { hora: "17:00", duracion: "2h", titulo: "Drive Time DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
+                { hora: "19:00", duracion: "2h", titulo: "El Mensajero de la Salsa", desc: "Con Mr Cheo – salsa, historia y sentimiento", categoria: "Salsa" },
+                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             sabado: [
-                { hora: "06:00", duracion: "2h", titulo: "Despertar Sabatino", desc: "Noticias y música relajada.", categoria: "Informativo" },
-                { hora: "08:00", duracion: "2h", titulo: "Música para Desayunar", desc: "Temas suaves para comenzar.", categoria: "Música Relajada" },
-                { hora: "10:00", duracion: "3h", titulo: "Top 40 DC", desc: "Los 40 más sonados.", categoria: "Música" },
-                { hora: "13:00", duracion: "1h", titulo: "Deportes Finde", desc: "Resultados deportivos.", categoria: "Deportes" },
-                { hora: "14:00", duracion: "2h", titulo: "Sábado Musical", desc: "Variedad de géneros.", categoria: "Música Variada" },
-                { hora: "16:00", duracion: "1h", titulo: "Cultura y Espectáculos", desc: "Arte y entretenimiento.", categoria: "Cultura" },
-                { hora: "17:00", duracion: "2h", titulo: "Rock Legends", desc: "Clásicos del rock.", categoria: "Rock" },
-                { hora: "19:00", duracion: "1h", titulo: "Noticias del Sábado", desc: "Resumen informativo.", categoria: "Noticias" },
-                { hora: "20:00", duracion: "4h", titulo: "Sábado Noche", desc: "Música para tu noche.", categoria: "Música Nocturna" },
-                { hora: "00:00", duracion: "4h", titulo: "Urban Flow", desc: "Música urbana y hip hop.", categoria: "Urbano" },
-                { hora: "04:00", duracion: "3h", titulo: "Electro Sunrise", desc: "Electrónica para amanecer.", categoria: "Electrónica" }
+                { hora: "00:00", duracion: "4h", titulo: "DC Mix Night", desc: "Mixes crossover suaves (sin locución)", categoria: "Música Mix" },
+                { hora: "04:00", duracion: "2h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
+                { hora: "06:00", duracion: "2h", titulo: "Amanecer DC Weekend", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "08:00", duracion: "1h", titulo: "Entretelones", desc: "Con Darío Castellanos", categoria: "Entrevistas" },
+                { hora: "09:00", duracion: "2h", titulo: "Clásicos DC", desc: "Pop 90s, 2000s, baladas memorables", categoria: "Retro" },
+                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Los mejores temas de la semana", categoria: "Música Variada" },
+                { hora: "12:00", duracion: "1h", titulo: "++ Prendidos", desc: "Con Diego Cheíto Grijalva", categoria: "Variedades" },
+                { hora: "13:00", duracion: "2h", titulo: "Tarde DC Weekend", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
+                { hora: "15:00", duracion: "2h", titulo: "Música Continua", desc: "Variedad musical para tu tarde", categoria: "Música Variada" },
+                { hora: "17:00", duracion: "2h", titulo: "Salsa & Más DC", desc: "Salsa clásica y moderna", categoria: "Salsa" },
+                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas especiales para tu noche", categoria: "Música Variada" },
+                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             domingo: [
-                { hora: "07:00", duracion: "2h", titulo: "Despertar Dominical", desc: "Noticias y música tranquila.", categoria: "Informativo" },
-                { hora: "09:00", duracion: "2h", titulo: "Música Clásica", desc: "Obras de música clásica.", categoria: "Clásica" },
-                { hora: "11:00", duracion: "3h", titulo: "Domingo Familiar", desc: "Contenido para toda la familia.", categoria: "Familiar" },
-                { hora: "14:00", duracion: "1h", titulo: "Resumen Deportivo", desc: "Lo más destacado deportivo.", categoria: "Deportes" },
-                { hora: "15:00", duracion: "2h", titulo: "Baladas Dominicales", desc: "Canciones románticas.", categoria: "Baladas" },
-                { hora: "17:00", duracion: "1h", titulo: "Reflexiones", desc: "Contenido para pensar.", categoria: "Espiritual" },
-                { hora: "18:00", duracion: "2h", titulo: "Jazz & Blues", desc: "Jazz y blues internacional.", categoria: "Jazz/Blues" },
-                { hora: "20:00", duracion: "1h", titulo: "Noticias de la Semana", desc: "Resumen semanal.", categoria: "Noticias" },
-                { hora: "21:00", duracion: "3h", titulo: "Noche de Jazz", desc: "Sesión especial de jazz.", categoria: "Jazz" },
-                { hora: "00:00", duracion: "4h", titulo: "Domingo Tranquilo", desc: "Música suave para dormir.", categoria: "Relajación" },
-                { hora: "04:00", duracion: "3h", titulo: "Amanecer Musical", desc: "Melodías para el nuevo día.", categoria: "Música Suave" }
+                { hora: "00:00", duracion: "5h", titulo: "DC Mix Night", desc: "Mixes crossover suaves (sin locución)", categoria: "Música Mix" },
+                { hora: "05:00", duracion: "2h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "07:00", duracion: "1h", titulo: "Música Continua", desc: "Temas variados para comenzar el día", categoria: "Música Variada" },
+                { hora: "08:00", duracion: "1h", titulo: "Entretelones", desc: "Con Darío Castellanos", categoria: "Entrevistas" },
+                { hora: "09:00", duracion: "2h", titulo: "Recuerdos DC", desc: "Éxitos de los 80s y 90s", categoria: "Retro" },
+                { hora: "11:00", duracion: "2h", titulo: "Música Continua", desc: "Variedad musical dominical", categoria: "Música Variada" },
+                { hora: "13:00", duracion: "2h", titulo: "Tarde DC Relax", desc: "Música suave para el domingo", categoria: "Relajación" },
+                { hora: "15:00", duracion: "2h", titulo: "Música Continua", desc: "Selección especial dominical", categoria: "Música Variada" },
+                { hora: "17:00", duracion: "2h", titulo: "Salsa & Pop DC", desc: "Mezcla de salsa y pop latino", categoria: "Salsa/Pop" },
+                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas variados para terminar el día", categoria: "Música Variada" },
+                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ]
         };
 
@@ -1115,12 +1222,12 @@
             calcularProgramaActual();
             setInterval(calcularProgramaActual, 60000); // Actualizar cada minuto
             
-            // Configurar Swiper para noticias
+            // Configurar Swiper para noticias (6 noticias)
             new Swiper('.noticias-swiper', {
                 slidesPerView: 1,
                 spaceBetween: 15,
                 loop: true,
-                autoplay: { delay: 4000, disableOnInteraction: false },
+                autoplay: { delay: 5000, disableOnInteraction: false },
                 pagination: { el: '.swiper-pagination', clickable: true },
                 navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
                 breakpoints: {
