@@ -1,1916 +1,1064 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>DCRADIOEC - Radio Generalista</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<style>
-:root {
-  --main: #00E5FF; /* Cian RDCR */
-  --dark: #0F0F0F; /* Fondo negro */
-  --light: #FFFFFF; /* Texto blanco */
-  --gray: #6c757d;
-  --accent: #00B8D4;
-  --neon-pink: #00E5FF; /* Cambiado a cian */
-  --neon-blue: #00E5FF; /* Cambiado a cian */
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--light); /* Texto blanco */
-  line-height: 1.6;
-  background: var(--dark); /* Fondo negro */
-  overflow-x: hidden;
-  min-height: 100vh;
-  position: relative;
-}
-
-/* Botón Atrás */
-.back-button {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background: linear-gradient(135deg, var(--main), #00B8D4);
-  color: var(--dark);
-  border: none;
-  border-radius: 50px;
-  padding: 12px 25px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  z-index: 1001;
-  box-shadow: 0 5px 20px rgba(0, 229, 255, 0.5);
-  transition: all 0.3s ease;
-  text-decoration: none;
-  z-index: 1001;
-}
-
-.back-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 229, 255, 0.7);
-  background: linear-gradient(135deg, #00B8D4, var(--main));
-}
-
-/* Fondo animado con líneas */
-.lines-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-  background: linear-gradient(135deg, #0a0a0a 0%, var(--dark) 100%);
-}
-
-.line {
-  position: absolute;
-  background: linear-gradient(90deg, 
-    rgba(0, 229, 255, 0) 0%,
-    rgba(0, 229, 255, 0.7) 50%,
-    rgba(0, 229, 255, 0) 100%);
-  border-radius: 1px;
-  filter: blur(0.5px);
-}
-
-.vertical-line {
-  width: 1px;
-  height: 200px;
-  animation: moveVertical 15s linear infinite;
-}
-
-.horizontal-line {
-  height: 1px;
-  width: 200px;
-  animation: moveHorizontal 12s linear infinite;
-}
-
-.diagonal-line {
-  width: 300px;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    rgba(0, 229, 255, 0) 0%,
-    rgba(0, 229, 255, 0.7) 50%,
-    rgba(0, 229, 255, 0) 100%);
-  animation: moveDiagonal 20s linear infinite;
-}
-
-.pulse-line {
-  position: absolute;
-  height: 1px;
-  width: 100px;
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0) 100%);
-  animation: pulseLine 8s ease-in-out infinite;
-  filter: blur(1px);
-}
-
-/* Botón flotante de WhatsApp abajo */
-.whatsapp-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: linear-gradient(135deg, #25D366, #128C7E);
-  color: var(--light);
-  border: none;
-  border-radius: 50px;
-  padding: 15px 25px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  z-index: 1000;
-  box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
-  transition: all 0.3s ease;
-  text-decoration: none;
-  z-index: 1000;
-}
-
-.whatsapp-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.7);
-}
-
-/* Botón "Ir Arriba" debajo del WhatsApp */
-.scroll-top-btn {
-  position: fixed;
-  bottom: 100px; /* Colocado debajo del botón de WhatsApp */
-  right: 30px;
-  background: linear-gradient(135deg, var(--main), #00B8D4);
-  color: var(--dark);
-  border: none;
-  border-radius: 50px;
-  width: 60px;
-  height: 60px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  box-shadow: 0 5px 20px rgba(0, 229, 255, 0.5);
-  transition: all 0.3s ease;
-  text-decoration: none;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-}
-
-.scroll-top-btn.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.scroll-top-btn:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 229, 255, 0.7);
-}
-
-/* Header */
-header {
-  background: rgba(15, 15, 15, 0.9);
-  color: var(--light);
-  padding: 20px;
-  text-align: center;
-  border-bottom: 3px solid var(--main);
-  backdrop-filter: blur(10px);
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 10px;
-}
-
-.logo-container i {
-  color: var(--main);
-  font-size: 2.5rem;
-  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.7));
-}
-
-h1 {
-  font-size: 3rem;
-  letter-spacing: 2px;
-  margin-bottom: 5px;
-  background: linear-gradient(90deg, #00E5FF, #FFFFFF, #00E5FF);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradientFlow 3s ease infinite;
-  text-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
-}
-
-.slogan {
-  font-size: 1.3rem;
-  color: var(--main);
-  letter-spacing: 1px;
-  font-weight: 300;
-  margin-top: 5px;
-}
-
-/* Reproductor superior */
-.player-top-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 40px auto;
-  position: relative;
-  border-radius: 25px;
-  overflow: hidden;
-  z-index: 50;
-  box-shadow: 
-    0 0 50px rgba(0, 229, 255, 0.3),
-    0 0 100px rgba(0, 229, 255, 0.2),
-    inset 0 0 30px rgba(0, 0, 0, 0.8);
-  background: rgba(15, 15, 20, 0.6);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  height: 520px;
-}
-
-.player-frame {
-  width: 100%;
-  height: 100%;
-  border: none;
-  position: relative;
-  z-index: 60;
-  border-radius: 25px;
-  background: rgba(0, 0, 0, 0.7);
-}
-
-/* Efectos alrededor del reproductor */
-.player-effects {
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  right: -20px;
-  bottom: -20px;
-  z-index: 40;
-  border-radius: 35px;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.corner-effect {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  opacity: 0.8;
-}
-
-.corner-tl {
-  top: 0;
-  left: 0;
-  border-top: 3px solid var(--main);
-  border-left: 3px solid var(--main);
-  border-radius: 15px 0 0 0;
-}
-
-.corner-tr {
-  top: 0;
-  right: 0;
-  border-top: 3px solid var(--main);
-  border-right: 3px solid var(--main);
-  border-radius: 0 15px 0 0;
-}
-
-.corner-bl {
-  bottom: 0;
-  left: 0;
-  border-bottom: 3px solid var(--main);
-  border-left: 3px solid var(--main);
-  border-radius: 0 0 0 15px;
-}
-
-.corner-br {
-  bottom: 0;
-  right: 0;
-  border-bottom: 3px solid var(--main);
-  border-right: 3px solid var(--main);
-  border-radius: 0 0 15px 0;
-}
-
-.scan-line {
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, 
-    transparent 0%,
-    rgba(0, 229, 255, 0.8) 50%,
-    transparent 100%);
-  box-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
-  animation: scan 4s linear infinite;
-  z-index: 45;
-}
-
-.glow-effect {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 105%;
-  height: 110%;
-  border-radius: 30px;
-  background: radial-gradient(
-    circle at center,
-    rgba(0, 229, 255, 0.1) 0%,
-    rgba(0, 229, 255, 0.05) 30%,
-    transparent 70%
-  );
-  z-index: 35;
-  animation: glowPulse 6s ease-in-out infinite;
-}
-
-/* Contenido principal */
-.main-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
-  position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-section {
-  padding: 60px 20px;
-  position: relative;
-  width: 100%;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 50px;
-  color: var(--light);
-  position: relative;
-  padding-bottom: 20px;
-  font-size: 2.5rem;
-  width: 100%;
-}
-
-.section-title::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 5px;
-  background: linear-gradient(to right, var(--main), #00B8D4);
-  border-radius: 5px;
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
-}
-
-/* Carrusel de programación */
-.programacion-section {
-  background: rgba(15, 15, 15, 0.7);
-  border-radius: 20px;
-  margin: 0 0 60px;
-  padding: 60px 20px;
-  border: 1px solid rgba(0, 229, 255, 0.2);
-  backdrop-filter: blur(5px);
-  width: 100%;
-}
-
-.program-swiper {
-  padding: 40px 10px 80px;
-  width: 100%;
-}
-
-.program-slide {
-  background: rgba(30, 30, 30, 0.95);
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  transition: all 0.4s ease;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgba(0, 229, 255, 0.3);
-  position: relative;
-}
-
-.program-slide:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  border-color: var(--main);
-}
-
-.program-image {
-  height: 250px;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  transition: all 0.5s ease;
-}
-
-.program-slide:hover .program-image {
-  height: 150px;
-}
-
-.program-content {
-  padding: 25px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.program-content h3 {
-  color: var(--light);
-  margin-bottom: 10px;
-  font-size: 1.5rem;
-  min-height: 70px;
-  transition: all 0.3s ease;
-}
-
-.program-slide:hover .program-content h3 {
-  color: var(--main);
-}
-
-.program-content p {
-  color: #CCCCCC;
-  margin-bottom: 15px;
-  flex-grow: 1;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: all 0.5s ease;
-}
-
-.program-slide:hover .program-content p {
-  max-height: 200px;
-  opacity: 1;
-  margin-bottom: 20px;
-}
-
-.program-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.8);
-  transform: translateY(100%);
-  transition: all 0.5s ease;
-  opacity: 0;
-}
-
-.program-slide:hover .program-info {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.program-info h4 {
-  color: var(--main);
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-}
-
-.program-info ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.program-info li {
-  color: #CCCCCC;
-  margin-bottom: 8px;
-  padding-left: 20px;
-  position: relative;
-}
-
-.program-info li:before {
-  content: "•";
-  color: var(--main);
-  position: absolute;
-  left: 0;
-}
-
-.program-time {
-  display: inline-block;
-  background: linear-gradient(to right, var(--main), #00B8D4);
-  color: var(--dark);
-  padding: 8px 18px;
-  border-radius: 30px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  align-self: flex-start;
-  box-shadow: 0 3px 10px rgba(0, 229, 255, 0.3);
-}
-
-/* Carrusel de noticias */
-.noticias-section {
-  background: rgba(15, 15, 15, 0.7);
-  border-radius: 20px;
-  margin: 0 0 60px;
-  padding: 60px 20px;
-  border: 1px solid rgba(0, 229, 255, 0.2);
-  backdrop-filter: blur(5px);
-  width: 100%;
-}
-
-.noticias-swiper {
-  padding: 40px 10px 80px;
-  width: 100%;
-}
-
-.noticia-slide {
-  background: rgba(30, 30, 30, 0.95);
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  transition: all 0.4s ease;
-  height: 450px;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgba(0, 229, 255, 0.3);
-}
-
-.noticia-slide:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  border-color: var(--main);
-}
-
-.noticia-image {
-  height: 200px;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.noticia-category {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  background: var(--main);
-  color: var(--dark);
-  padding: 5px 15px;
-  font-weight: bold;
-  font-size: 0.85rem;
-  border-radius: 20px;
-  box-shadow: 0 3px 10px rgba(0, 229, 255, 0.5);
-}
-
-.noticia-content {
-  padding: 20px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.noticia-content h3 {
-  color: var(--light);
-  margin-bottom: 10px;
-  font-size: 1.3rem;
-  min-height: 70px;
-}
-
-.noticia-link {
-  color: var(--light);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  display: block;
-  position: relative;
-}
-
-.noticia-link:hover {
-  color: var(--main);
-  text-decoration: underline;
-}
-
-.noticia-link:after {
-  content: "→";
-  position: absolute;
-  right: 0;
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.noticia-link:hover:after {
-  opacity: 1;
-  right: -20px;
-}
-
-.noticia-content p {
-  color: #CCCCCC;
-  font-size: 0.95rem;
-  flex-grow: 1;
-  margin-bottom: 15px;
-}
-
-.noticia-date {
-  color: #999;
-  font-size: 0.85rem;
-  margin-top: 10px;
-}
-
-.read-more-btn {
-  display: inline-block;
-  background: transparent;
-  color: var(--main);
-  border: 1px solid var(--main);
-  padding: 8px 15px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  margin-top: 10px;
-  align-self: flex-start;
-}
-
-.read-more-btn:hover {
-  background: var(--main);
-  color: var(--dark);
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 229, 255, 0.3);
-}
-
-/* Botones de navegación del swiper */
-.swiper-button-next, .swiper-button-prev {
-  background: var(--main);
-  color: var(--dark);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-}
-
-.swiper-button-next:after, .swiper-button-prev:after {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.swiper-button-next:hover, .swiper-button-prev:hover {
-  background: #00B8D4;
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.7);
-}
-
-.swiper-pagination-bullet {
-  background: rgba(255, 255, 255, 0.5);
-  opacity: 0.7;
-  width: 12px;
-  height: 12px;
-}
-
-.swiper-pagination-bullet-active {
-  opacity: 1;
-  background: var(--main);
-  box-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
-}
-
-/* Footer */
-footer {
-  background: linear-gradient(135deg, rgba(15, 15, 15, 0.95), rgba(25, 25, 25, 0.95));
-  color: var(--light);
-  text-align: center;
-  padding: 60px 20px 30px;
-  border-top: 3px solid var(--main);
-  width: 100%;
-}
-
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.network-logo {
-  font-size: 2.2rem;
-  margin-bottom: 20px;
-  color: var(--main);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-  text-align: center;
-}
-
-.copyright {
-  margin-top: 40px;
-  padding-top: 25px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.95rem;
-  text-align: center;
-}
-
-/* Animaciones */
-@keyframes moveVertical {
-  0% { 
-    transform: translateY(-100vh) rotate(0deg);
-    opacity: 0;
-  }
-  10% { opacity: 0.7; }
-  90% { opacity: 0.7; }
-  100% { 
-    transform: translateY(100vh) rotate(0deg);
-    opacity: 0;
-  }
-}
-
-@keyframes moveHorizontal {
-  0% { 
-    transform: translateX(-100vw) rotate(0deg);
-    opacity: 0;
-  }
-  10% { opacity: 0.5; }
-  90% { opacity: 0.5; }
-  100% { 
-    transform: translateX(100vw) rotate(0deg);
-    opacity: 0;
-  }
-}
-
-@keyframes moveDiagonal {
-  0% { 
-    transform: translateX(-100vw) translateY(-100vh) rotate(45deg);
-    opacity: 0;
-  }
-  10% { opacity: 0.4; }
-  90% { opacity: 0.4; }
-  100% { 
-    transform: translateX(100vw) translateY(100vh) rotate(45deg);
-    opacity: 0;
-  }
-}
-
-@keyframes pulseLine {
-  0%, 100% { 
-    opacity: 0.2;
-    transform: scaleX(0.5);
-  }
-  50% { 
-    opacity: 0.8;
-    transform: scaleX(1.2);
-  }
-}
-
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes scan {
-  0% { top: 0%; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
-}
-
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.7; }
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-  .player-top-container {
-    max-width: 1000px;
-    height: 480px;
-  }
-}
-
-@media (max-width: 992px) {
-  .player-top-container {
-    height: 420px;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-  }
-  
-  .whatsapp-btn, .scroll-top-btn, .back-button {
-    padding: 12px 20px;
-    font-size: 1rem;
-  }
-  
-  .scroll-top-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 1.3rem;
-  }
-  
-  .main-container {
-    padding: 10px;
-  }
-}
-
-@media (max-width: 768px) {
-  .player-top-container {
-    height: 380px;
-    margin: 20px auto;
-  }
-  
-  .corner-effect {
-    width: 50px;
-    height: 50px;
-  }
-  
-  h1 {
-    font-size: 2rem;
-  }
-  
-  .slogan {
-    font-size: 1.1rem;
-  }
-  
-  section {
-    padding: 40px 15px;
-  }
-  
-  .programacion-section, .noticias-section, .podcasts-section {
-    padding: 40px 15px;
-    margin: 0 0 40px;
-  }
-  
-  .whatsapp-btn {
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 15px;
-  }
-  
-  .scroll-top-btn {
-    bottom: 90px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
-    font-size: 1.2rem;
-  }
-  
-  .back-button {
-    top: 15px;
-    left: 15px;
-    padding: 8px 15px;
-  }
-  
-  .program-slide {
-    height: 450px;
-  }
-  
-  .program-image {
-    height: 200px;
-  }
-  
-  .program-slide:hover .program-image {
-    height: 120px;
-  }
-  
-  .noticia-slide {
-    height: 400px;
-  }
-  
-  .noticia-image {
-    height: 150px;
-  }
-  
-  .main-container {
-    padding: 5px;
-  }
-}
-
-@media (max-width: 576px) {
-  .player-top-container {
-    height: 320px;
-  }
-  
-  h1 {
-    font-size: 1.8rem;
-  }
-  
-  .slogan {
-    font-size: 1rem;
-  }
-  
-  .whatsapp-btn {
-    padding: 8px 12px;
-    font-size: 0.9rem;
-  }
-  
-  .scroll-top-btn {
-    bottom: 85px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
-  }
-  
-  .back-button {
-    top: 10px;
-    left: 10px;
-    padding: 6px 10px;
-    font-size: 0.9rem;
-  }
-  
-  .program-slide {
-    height: 400px;
-  }
-  
-  .program-image {
-    height: 180px;
-  }
-  
-  .program-slide:hover .program-image {
-    height: 100px;
-  }
-  
-  .program-content h3 {
-    font-size: 1.3rem;
-    min-height: 60px;
-  }
-  
-  .noticia-slide {
-    height: 380px;
-  }
-  
-  .noticia-image {
-    height: 130px;
-  }
-  
-  .noticia-content h3 {
-    font-size: 1.2rem;
-    min-height: 60px;
-  }
-  
-  .network-logo {
-    font-size: 1.8rem;
-  }
-  
-  .main-container {
-    padding: 5px;
-  }
-  
-  .section-title {
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-  }
-}
-
-/* Efecto de partículas */
-.particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background-color: var(--main);
-  border-radius: 50%;
-  box-shadow: 0 0 5px var(--main);
-  opacity: 0;
-}
-
-@keyframes particleFloat {
-  0% {
-    transform: translateY(0) translateX(0);
-    opacity: 0;
-  }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% {
-    transform: translateY(-150px) translateX(30px);
-    opacity: 0;
-  }
-}
-
-/* Estilos específicos para centrar todo en móvil */
-@media (max-width: 768px) {
-  .logo-container {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .player-top-container {
-    width: 95%;
-  }
-  
-  .program-swiper, .noticias-swiper {
-    padding: 30px 0 60px;
-  }
-  
-  .programacion-section, .noticias-section {
-    padding: 40px 10px;
-  }
-  
-  .footer-content {
-    padding: 0 10px;
-  }
-  
-  .copyright {
-    text-align: center;
-    padding: 0 10px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<!-- Botón Atrás -->
-<a href="https://rdcrsound.adcm.club" class="back-button" target="_self">
-  <i class="fas fa-arrow-left"></i> Atrás
-</a>
-
-<!-- Fondo con líneas en movimiento -->
-<div class="lines-background" id="linesBackground"></div>
-
-<!-- Botón flotante WhatsApp abajo a la derecha -->
-<a href="https://wa.me/593XXXXXXXXX?text=Hola%20DCRADIOEC,%20me%20gustaría%20pedir%20una%20canción:" 
-   class="whatsapp-btn" 
-   target="_blank">
-  <i class="fab fa-whatsapp"></i> Pide tu música
-</a>
-
-<!-- Botón "Ir Arriba" -->
-<button class="scroll-top-btn" id="scrollTopBtn">
-  <i class="fas fa-chevron-up"></i>
-</button>
-
-<header>
-  <div class="logo-container">
-    <i class="fas fa-broadcast-tower"></i>
-    <h1>DCRADIOEC</h1>
-  </div>
-  <p class="slogan">"La música que acompaña tu jornada" - Radio Generalista</p>
-</header>
-
-<!-- Reproductor superior -->
-<div class="player-top-container">
-  <!-- Efectos alrededor del reproductor -->
-  <div class="player-effects">
-    <div class="corner-effect corner-tl"></div>
-    <div class="corner-effect corner-tr"></div>
-    <div class="corner-effect corner-bl"></div>
-    <div class="corner-effect corner-br"></div>
-    <div class="scan-line"></div>
-    <div class="glow-effect"></div>
-  </div>
-  
-  <!-- Reproductor -->
-  <iframe 
-    class="player-frame" 
-    name="contenedorPlayer" 
-    allow="autoplay" 
-    frameborder="0" 
-    scrolling="no" 
-    src="https://andydcm.github.io/dcradioec.github.io/" 
-    id="contenedorPlayer">
-  </iframe>
-</div>
-
-<div class="main-container">
-  <!-- Programación DC Radio -->
-  <section class="programacion-section">
-    <h2 class="section-title">Programación DC Radio</h2>
-    
-    <!-- Carrusel de programación -->
-    <div class="swiper program-swiper">
-      <div class="swiper-wrapper">
-        <!-- Programa 1 -->
-        <div class="swiper-slide program-slide">
-          <div class="program-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-          </div>
-          <div class="program-content">
-            <h3>Entretelones con Darío Castellanos</h3>
-            <p>Análisis y conversación sobre los temas más relevantes del día con invitados especiales. Un programa que te mantiene informado con profundidad y rigor periodístico.</p>
-            <span class="program-time">Lun-Vie 7:00 AM</span>
-          </div>
-          <div class="program-info">
-            <h4>Detalles del programa:</h4>
-            <ul>
-              <li>Entrevistas exclusivas</li>
-              <li>Análisis político y económico</li>
-              <li>Debates con expertos</li>
-              <li>Noticias de última hora</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Programa 2 -->
-        <div class="swiper-slide program-slide">
-          <div class="program-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-          </div>
-          <div class="program-content">
-            <h3>DC Noticias Express</h3>
-            <p>Las noticias más importantes en formato breve y directo cada hora. Información al instante para que no te pierdas nada de lo que sucede en el mundo.</p>
-            <span class="program-time">Todos los días cada hora</span>
-          </div>
-          <div class="program-info">
-            <h4>Características:</h4>
-            <ul>
-              <li>Actualizaciones cada 60 minutos</li>
-              <li>Cobertura nacional e internacional</li>
-              <li>Reportes de tráfico y clima</li>
-              <li>Noticias de última hora</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Programa 3 -->
-        <div class="swiper-slide program-slide">
-          <div class="program-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-          </div>
-          <div class="program-content">
-            <h3>Música Sin Pausa</h3>
-            <p>Los mejores éxitos musicales de todos los tiempos sin interrupciones. De los 80s hasta hoy, un viaje sonoro por las mejores canciones de la historia.</p>
-            <span class="program-time">10:00 AM - 2:00 PM</span>
-          </div>
-          <div class="program-info">
-            <h4>Temas destacados:</h4>
-            <ul>
-              <li>Pop de los 80s y 90s</li>
-              <li>Rock clásico</li>
-              <li>Baladas románticas</li>
-              <li>Éxitos actuales</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Programa 4 -->
-        <div class="swiper-slide program-slide">
-          <div class="program-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-          </div>
-          <div class="program-content">
-            <h3>Noche DC</h3>
-            <p>Música relajada y conversación para terminar el día. Con María Rodríguez y Javier López, el acompañamiento perfecto para tus noches.</p>
-            <span class="program-time">Lun-Vie 8:00 PM - 12:00 AM</span>
-          </div>
-          <div class="program-info">
-            <h4>Contenido nocturno:</h4>
-            <ul>
-              <li>Música relajante</li>
-              <li>Historias y anécdotas</li>
-              <li>Poesía y reflexiones</li>
-              <li>Dedicatorias especiales</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Programa 5 -->
-        <div class="swiper-slide program-slide">
-          <div class="program-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-          </div>
-          <div class="program-content">
-            <h3>Rock Legends</h3>
-            <p>Un recorrido por los clásicos del rock de todas las épocas. Con historias y anécdotas detrás de las canciones más emblemáticas.</p>
-            <span class="program-time">Sábados 4:00 PM - 7:00 PM</span>
-          </div>
-          <div class="program-info">
-            <h4>Artistas destacados:</h4>
-            <ul>
-              <li>The Beatles</li>
-              <li>Led Zeppelin</li>
-              <li>Queen</li>
-              <li>Rolling Stones</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Programa 6 -->
-        <div class="swiper-slide program-slide">
-          <div class="program-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-          </div>
-          <div class="program-content">
-            <h3>Urban Flow</h3>
-            <p>Lo último en música urbana, hip hop, reggaetón y tendencias. Con DJ Carlo, la mejor selección para mantenerte al día.</p>
-            <span class="program-time">Viernes 9:00 PM - 2:00 AM</span>
-          </div>
-          <div class="program-info">
-            <h4>Géneros incluidos:</h4>
-            <ul>
-              <li>Reggaetón</li>
-              <li>Hip Hop</li>
-              <li>Trap</li>
-              <li>Dembow</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Programa 7 -->
-        <div class="swiper-slide program-slide">
-          <div class="program-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-          </div>
-          <div class="program-content">
-            <h3>DC Deportes</h3>
-            <p>Toda la actualidad deportiva nacional e internacional. Resultados, análisis y entrevistas con los protagonistas del deporte.</p>
-            <span class="program-time">Lun-Vie 6:00 PM - 7:00 PM</span>
-          </div>
-          <div class="program-info">
-            <h4>Cobertura deportiva:</h4>
-            <ul>
-              <li>Fútbol nacional e internacional</li>
-              <li>Basquetbol</li>
-              <li>Tenis</li>
-              <li>Deportes extremos</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Programa 8 -->
-        <div class="swiper-slide program-slide">
-          <div class="program-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-          </div>
-          <div class="program-content">
-            <h3>Jazz Lounge</h3>
-            <p>Lo mejor del jazz clásico y contemporáneo. Un espacio para relajarse y disfrutar de la sofisticación del jazz.</p>
-            <span class="program-time">Domingos 8:00 PM - 10:00 PM</span>
-          </div>
-          <div class="program-info">
-            <h4>Estilos de jazz:</h4>
-            <ul>
-              <li>Smooth Jazz</li>
-              <li>Bebop</li>
-              <li>Fusion</li>
-              <li>Jazz contemporáneo</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Programa 9 -->
-        <div class="swiper-slide program-slide">
-          <div class="program-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1571974599782-87624638275c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-          </div>
-          <div class="program-content">
-            <h3>Café con Letras</h3>
-            <p>Literatura, poesía y entrevistas con autores. Con la escritora Ana Martínez, un espacio para los amantes de las letras.</p>
-            <span class="program-time">Miércoles 4:00 PM - 5:00 PM</span>
-          </div>
-          <div class="program-info">
-            <h4>Temas literarios:</h4>
-            <ul>
-              <li>Novelas contemporáneas</li>
-              <li>Poesía latinoamericana</li>
-              <li>Entrevistas a escritores</li>
-              <li>Reseñas de libros</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Programa 10 -->
-        <div class="swiper-slide program-slide">
-          <div class="program-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-          </div>
-          <div class="program-content">
-            <h3>Electro Sunrise</h3>
-            <p>Música electrónica para empezar el día con energía. Los mejores DJs nacionales con los ritmos más vibrantes.</p>
-            <span class="program-time">Sábados 6:00 AM - 10:00 AM</span>
-          </div>
-          <div class="program-info">
-            <h4>Subgéneros electrónicos:</h4>
-            <ul>
-              <li>House</li>
-              <li>Techno</li>
-              <li>Trance</li>
-              <li>EDM</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Navegación del carrusel -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-pagination"></div>
-    </div>
-  </section>
-
-  <!-- DC NOTICIAS -->
-  <section class="noticias-section">
-    <h2 class="section-title">DC NOTICIAS</h2>
-    
-    <!-- Carrusel de noticias -->
-    <div class="swiper noticias-swiper">
-      <div class="swiper-wrapper">
-        <!-- Noticia 1 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Actualidad</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia1" class="noticia-link" target="_blank">DC Radio lanza nueva temporada de programas</a></h3>
-            <p>Nueva programación con contenido exclusivo y entrevistas a personalidades relevantes del ámbito cultural y político.</p>
-            <div class="noticia-date">15 Mar 2026</div>
-            <a href="https://ejemplo.com/noticia1" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 2 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Cultura</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia2" class="noticia-link" target="_blank">Festival Internacional de Jazz 2026</a></h3>
-            <p>Cobertura completa del festival con entrevistas exclusivas a los artistas participantes y transmisiones en vivo.</p>
-            <div class="noticia-date">10 Mar 2026</div>
-            <a href="https://ejemplo.com/noticia2" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 3 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Radio</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia3" class="noticia-link" target="_blank">DC Radio alcanza 1 millón de oyentes</a></h3>
-            <p>Marca histórica para la emisora que consolida su liderazgo en radiodifusión digital a nivel nacional.</p>
-            <div class="noticia-date">5 Mar 2026</div>
-            <a href="https://ejemplo.com/noticia3" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 4 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Tecnología</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia4" class="noticia-link" target="_blank">Nueva aplicación de DC Radio</a></h3>
-            <p>Lanzamiento de la app oficial con programación personalizada y contenidos exclusivos para suscriptores.</p>
-            <div class="noticia-date">28 Feb 2026</div>
-            <a href="https://ejemplo.com/noticia4" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 5 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Música</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia5" class="noticia-link" target="_blank">Los 50 éxitos más reproducidos</a></h3>
-            <p>Ranking especial con las canciones más escuchadas por nuestros oyentes en el último año según nuestras estadísticas.</p>
-            <div class="noticia-date">22 Feb 2026</div>
-            <a href="https://ejemplo.com/noticia5" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 6 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Eventos</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia6" class="noticia-link" target="_blank">Concierto exclusivo de DC Radio</a></h3>
-            <p>Transmitiremos en directo el concierto de la banda "Los Herederos" desde el Teatro Nacional este sábado.</p>
-            <div class="noticia-date">15 Feb 2026</div>
-            <a href="https://ejemplo.com/noticia6" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 7 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Tecnología</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia7" class="noticia-link" target="_blank">DC Radio con IA integrada</a></h3>
-            <p>Implementación de inteligencia artificial para recomendaciones personalizadas de música basadas en tus gustos.</p>
-            <div class="noticia-date">10 Feb 2026</div>
-            <a href="https://ejemplo.com/noticia7" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 8 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Deportes</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia8" class="noticia-link" target="_blank">Cobertura especial: Liga Nacional</a></h3>
-            <p>Transmisiones en vivo de los partidos más importantes de la temporada 2026 con comentaristas exclusivos.</p>
-            <div class="noticia-date">5 Feb 2026</div>
-            <a href="https://ejemplo.com/noticia8" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 9 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Cultura</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia9" class="noticia-link" target="_blank">Noche de Jazz en DC Radio</a></h3>
-            <p>Especial de 5 horas con los mejores exponentes del jazz nacional e internacional. Transmisión en vivo desde el estudio.</p>
-            <div class="noticia-date">30 Ene 2026</div>
-            <a href="https://ejemplo.com/noticia9" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 10 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1571974599782-87624638275c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Literatura</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia10" class="noticia-link" target="_blank">Entrevista exclusiva con autor bestseller</a></h3>
-            <p>Conversación con el reconocido escritor Miguel Ángel sobre su nueva novela y su proceso creativo.</p>
-            <div class="noticia-date">25 Ene 2026</div>
-            <a href="https://ejemplo.com/noticia10" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 11 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Economía</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia11" class="noticia-link" target="_blank">Análisis económico con expertos</a></h3>
-            <p>Especialistas analizan las tendencias económicas para el próximo trimestre y sus implicaciones.</p>
-            <div class="noticia-date">20 Ene 2026</div>
-            <a href="https://ejemplo.com/noticia11" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 12 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Medio Ambiente</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia12" class="noticia-link" target="_blank">Iniciativas verdes en la radio</a></h3>
-            <p>DC Radio implementa nuevas tecnologías para reducir su huella de carbono y promover la sostenibilidad.</p>
-            <div class="noticia-date">15 Ene 2026</div>
-            <a href="https://ejemplo.com/noticia12" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 13 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Tecnología</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia13" class="noticia-link" target="_blank">Nueva plataforma streaming</a></h3>
-            <p>Lanzamiento de la plataforma de streaming de DC Radio con contenido exclusivo y archivos históricos.</p>
-            <div class="noticia-date">10 Ene 2026</div>
-            <a href="https://ejemplo.com/noticia13" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 14 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Música</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia14" class="noticia-link" target="_blank">Festival de música independiente</a></h3>
-            <p>Cobertura especial del festival que reúne a las bandas emergentes más prometedoras del país.</p>
-            <div class="noticia-date">5 Ene 2026</div>
-            <a href="https://ejemplo.com/noticia14" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 15 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Cultura</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia15" class="noticia-link" target="_blank">Exposición de arte sonoro</a></h3>
-            <p>DC Radio colabora con museos locales para una exposición única que combina arte visual y sonoro.</p>
-            <div class="noticia-date">30 Dic 2025</div>
-            <a href="https://ejemplo.com/noticia15" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 16 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Salud</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia16" class="noticia-link" target="_blank">Programa especial de bienestar</a></h3>
-            <p>Nueva serie de programas dedicados a la salud mental y el bienestar emocional con expertos en psicología.</p>
-            <div class="noticia-date">25 Dic 2025</div>
-            <a href="https://ejemplo.com/noticia16" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 17 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Educación</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia17" class="noticia-link" target="_blank">Radionovelas educativas</a></h3>
-            <p>Lanzamiento de una serie de radionovelas con contenido educativo para niños y adolescentes.</p>
-            <div class="noticia-date">20 Dic 2025</div>
-            <a href="https://ejemplo.com/noticia17" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 18 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Entretenimiento</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia18" class="noticia-link" target="_blank">Concursos de verano</a></h3>
-            <p>Participa en los concursos de verano de DC Radio con premios exclusivos y experiencias únicas.</p>
-            <div class="noticia-date">15 Dic 2025</div>
-            <a href="https://ejemplo.com/noticia18" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 19 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Actualidad</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia19" class="noticia-link" target="_blank">Premios DC Radio 2025</a></h3>
-            <p>Gala de premiación a los mejores programas y locutores del año según la votación del público.</p>
-            <div class="noticia-date">10 Dic 2025</div>
-            <a href="https://ejemplo.com/noticia19" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 20 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Tecnología</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia20" class="noticia-link" target="_blank">Nuevos estudios de transmisión</a></h3>
-            <p>Inauguración de los nuevos estudios de DC Radio equipados con la última tecnología en audio digital.</p>
-            <div class="noticia-date">5 Dic 2025</div>
-            <a href="https://ejemplo.com/noticia20" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 21 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Música</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia21" class="noticia-link" target="_blank">Especial de música clásica</a></h3>
-            <p>Semana dedicada a la música clásica con interpretaciones en vivo desde el estudio principal.</p>
-            <div class="noticia-date">30 Nov 2025</div>
-            <a href="https://ejemplo.com/noticia21" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 22 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Deportes</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia22" class="noticia-link" target="_blank">Maratón deportivo 24 horas</a></h3>
-            <p>Transmisión continua de 24 horas dedicada a los deportes extremos y aventura.</p>
-            <div class="noticia-date">25 Nov 2025</div>
-            <a href="https://ejemplo.com/noticia22" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 23 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Cultura</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia23" class="noticia-link" target="_blank">Documentales sonoros</a></h3>
-            <p>Nueva serie de documentales sonoros que exploran la historia cultural de la región.</p>
-            <div class="noticia-date">20 Nov 2025</div>
-            <a href="https://ejemplo.com/noticia23" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 24 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Tecnología</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia24" class="noticia-link" target="_blank">Realidad virtual en la radio</a></h3>
-            <p>DC Radio experimenta con experiencias de realidad virtual para sus programas especiales.</p>
-            <div class="noticia-date">15 Nov 2025</div>
-            <a href="https://ejemplo.com/noticia24" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-        
-        <!-- Noticia 25 -->
-        <div class="swiper-slide noticia-slide">
-          <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-            <div class="noticia-category">Actualidad</div>
-          </div>
-          <div class="noticia-content">
-            <h3><a href="https://ejemplo.com/noticia25" class="noticia-link" target="_blank">Especial aniversario 5 años</a></h3>
-            <p>Celebración del 5to aniversario de DC Radio con programación especial y sorpresas para los oyentes.</p>
-            <div class="noticia-date">10 Nov 2025</div>
-            <a href="https://ejemplo.com/noticia25" class="read-more-btn" target="_blank">Leer más</a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Navegación del carrusel -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-pagination"></div>
-    </div>
-  </section>
-</div>
-
-<footer>
-  <div class="footer-content">
-    <div class="network-logo">
-      <i class="fas fa-satellite-dish"></i> DCRADIOEC - Radio Generalista
-    </div>
-    <p style="font-size: 1.2rem; margin-bottom: 10px;">"La música que acompaña tu jornada"</p>
-    
-    <div class="copyright">
-      <p>DCRADIOEC · Radio Generalista 2026</p>
-      <p>Todos los derechos reservados</p>
-    </div>
-  </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const linesBackground = document.getElementById('linesBackground');
-  const scrollTopBtn = document.getElementById('scrollTopBtn');
-  
-  // Función para mostrar/ocultar el botón "Ir Arriba"
-  function toggleScrollTopButton() {
-    if (window.scrollY > 300) {
-      scrollTopBtn.classList.add('show');
-    } else {
-      scrollTopBtn.classList.remove('show');
-    }
-  }
-  
-  // Función para ir al principio de la página
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }
-  
-  // Event listeners para el botón "Ir Arriba"
-  window.addEventListener('scroll', toggleScrollTopButton);
-  scrollTopBtn.addEventListener('click', scrollToTop);
-  
-  // Crear líneas verticales
-  function createVerticalLines(count) {
-    for (let i = 0; i < count; i++) {
-      const line = document.createElement('div');
-      line.className = 'line vertical-line';
-      
-      const left = Math.random() * 100;
-      line.style.left = `${left}%`;
-      
-      line.style.background = `linear-gradient(90deg, 
-        rgba(0, 229, 255, 0) 0%,
-        rgba(0, 229, 255, 0.7) 50%,
-        rgba(0, 229, 255, 0) 100%)`;
-      
-      const duration = 10 + Math.random() * 20;
-      const delay = Math.random() * 15;
-      
-      line.style.animation = `moveVertical ${duration}s linear infinite`;
-      line.style.animationDelay = `${delay}s`;
-      
-      linesBackground.appendChild(line);
-    }
-  }
-  
-  // Crear líneas horizontales
-  function createHorizontalLines(count) {
-    for (let i = 0; i < count; i++) {
-      const line = document.createElement('div');
-      line.className = 'line horizontal-line';
-      
-      const top = Math.random() * 100;
-      line.style.top = `${top}%`;
-      
-      line.style.background = `linear-gradient(90deg, 
-        rgba(0, 229, 255, 0) 0%,
-        rgba(0, 229, 255, 0.6) 50%,
-        rgba(0, 229, 255, 0) 100%)`;
-      
-      const duration = 8 + Math.random() * 15;
-      const delay = Math.random() * 10;
-      
-      line.style.animation = `moveHorizontal ${duration}s linear infinite`;
-      line.style.animationDelay = `${delay}s`;
-      
-      linesBackground.appendChild(line);
-    }
-  }
-  
-  // Crear líneas diagonales
-  function createDiagonalLines(count) {
-    for (let i = 0; i < count; i++) {
-      const line = document.createElement('div');
-      line.className = 'diagonal-line';
-      
-      const left = Math.random() * 100;
-      const top = Math.random() * 100;
-      
-      line.style.left = `${left}%`;
-      line.style.top = `${top}%`;
-      
-      const angle = Math.random() * 360;
-      line.style.transform = `rotate(${angle}deg)`;
-      
-      line.style.background = `linear-gradient(90deg, 
-        rgba(0, 229, 255, 0) 0%,
-        rgba(0, 229, 255, 0.5) 50%,
-        rgba(0, 229, 255, 0) 100%)`;
-      
-      const duration = 15 + Math.random() * 25;
-      const delay = Math.random() * 20;
-      
-      line.style.animation = `moveDiagonal ${duration}s linear infinite`;
-      line.style.animationDelay = `${delay}s`;
-      
-      linesBackground.appendChild(line);
-    }
-  }
-  
-  // Crear líneas pulsantes
-  function createPulseLines(count) {
-    for (let i = 0; i < count; i++) {
-      const line = document.createElement('div');
-      line.className = 'pulse-line';
-      
-      const left = Math.random() * 100;
-      const top = Math.random() * 100;
-      
-      line.style.left = `${left}%`;
-      line.style.top = `${top}%`;
-      
-      const rotation = Math.random() * 360;
-      line.style.transform = `rotate(${rotation}deg)`;
-      
-      const duration = 5 + Math.random() * 8;
-      const delay = Math.random() * 5;
-      
-      line.style.animation = `pulseLine ${duration}s ease-in-out infinite`;
-      line.style.animationDelay = `${delay}s`;
-      
-      linesBackground.appendChild(line);
-    }
-  }
-  
-  // Crear partículas
-  function createParticles(count) {
-    for (let i = 0; i < count; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      
-      const left = Math.random() * 100;
-      const top = Math.random() * 100 + 100;
-      
-      particle.style.left = `${left}%`;
-      particle.style.top = `${top}%`;
-      
-      const size = 1 + Math.random() * 3;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      
-      particle.style.backgroundColor = '#00E5FF';
-      particle.style.boxShadow = '0 0 5px #00E5FF';
-      
-      const duration = 3 + Math.random() * 7;
-      const delay = Math.random() * 5;
-      
-      particle.style.animation = `particleFloat ${duration}s linear infinite`;
-      particle.style.animationDelay = `${delay}s`;
-      
-      linesBackground.appendChild(particle);
-    }
-  }
-  
-  // Inicializar líneas
-  createVerticalLines(15);
-  createHorizontalLines(12);
-  createDiagonalLines(8);
-  createPulseLines(10);
-  createParticles(25);
-  
-  // Swiper para programación
-  const programSwiper = new Swiper('.program-swiper', {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: 3,
-      },
-    },
-  });
-  
-  // Swiper para noticias (más rápido)
-  const noticiasSwiper = new Swiper('.noticias-swiper', {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    loop: true,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: 3,
-      },
-    },
-  });
-  
-  // Efecto de clic en el fondo
-  document.addEventListener('click', function(e) {
-    for (let i = 0; i < 8; i++) {
-      const line = document.createElement('div');
-      line.className = 'line';
-      line.style.width = '1px';
-      line.style.height = '100px';
-      line.style.position = 'absolute';
-      line.style.left = `${e.clientX}px`;
-      line.style.top = `${e.clientY}px`;
-      line.style.background = `linear-gradient(180deg, 
-        rgba(0, 229, 255, 0.8) 0%,
-        rgba(0, 229, 255, 0) 100%)`;
-      line.style.transform = `rotate(${i * 45}deg)`;
-      line.style.transformOrigin = 'center top';
-      line.style.animation = `moveVertical 2s ease-out forwards`;
-      
-      document.body.appendChild(line);
-      
-      setTimeout(() => {
-        if (line.parentNode) {
-          line.remove();
+    <meta charset="UTF-8">
+    <title>DCRADIOEC - Radio Generalista</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+        :root {
+            --main: #00E5FF;
+            --dark: #0F0F0F;
+            --light: #FFFFFF;
+            --gray: #6c757d;
+            --accent: #00B8D4;
+            --live: #FF0000;
         }
-      }, 2000);
-    }
-  });
-  
-  // Inicializar el estado del botón "Ir Arriba"
-  toggleScrollTopButton();
-});
-</script>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--light);
+            line-height: 1.6;
+            background: var(--dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Encabezado con info en vivo */
+        .live-header {
+            background: rgba(15, 15, 15, 0.95);
+            padding: 15px 20px;
+            border-bottom: 2px solid var(--main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00E5FF, #FFFFFF, #00E5FF);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 3s ease infinite;
+        }
+
+        .slogan {
+            font-size: 1.1rem;
+            color: var(--main);
+            font-weight: 300;
+        }
+
+        /* Información en vivo actual */
+        .live-info-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+
+        .live-time {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .live-date {
+            color: #CCCCCC;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .live-badge {
+            background: var(--live);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        /* Reproductor grande */
+        .player-container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 30px auto;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.4);
+            border: 2px solid var(--main);
+            background: #000;
+        }
+
+        .player-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Contenedor principal compacto */
+        .main-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* Navegación de días */
+        .dias-navegacion {
+            display: flex;
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            gap: 5px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .dia-btn {
+            flex: 1;
+            min-width: 100px;
+            background: rgba(40, 40, 40, 0.8);
+            border: 2px solid rgba(0, 229, 255, 0.1);
+            border-radius: 8px;
+            color: var(--light);
+            padding: 12px 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .dia-btn:hover {
+            background: rgba(0, 229, 255, 0.15);
+            border-color: var(--main);
+        }
+
+        .dia-btn.active {
+            background: rgba(0, 229, 255, 0.25);
+            border-color: var(--main);
+            color: var(--main);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+        }
+
+        .dia-btn.hoy {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: var(--live);
+            position: relative;
+        }
+
+        .dia-btn.hoy::after {
+            content: "HOY";
+            position: absolute;
+            top: -8px;
+            right: -5px;
+            background: var(--live);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        /* Contenedor de programación compacto */
+        .programacion-container {
+            background: rgba(20, 20, 25, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            min-height: 500px;
+            margin-bottom: 40px;
+        }
+
+        .programacion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+        }
+
+        .programacion-header h2 {
+            font-size: 1.8rem;
+            color: var(--main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .programacion-dia {
+            display: none;
+        }
+
+        .programacion-dia.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Lista de programas compacta */
+        .lista-programas {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .lista-programas::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .lista-programas::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+
+        .lista-programas::-webkit-scrollbar-thumb {
+            background: var(--main);
+            border-radius: 3px;
+        }
+
+        .programa-item {
+            background: rgba(30, 30, 35, 0.8);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-left: 4px solid var(--main);
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 70px;
+        }
+
+        .programa-item:hover {
+            transform: translateX(5px);
+            background: rgba(40, 40, 45, 0.9);
+        }
+
+        .programa-item.en-vivo {
+            border-left: 4px solid var(--live);
+            background: rgba(255, 0, 0, 0.08);
+            animation: pulseBorder 2s infinite;
+        }
+
+        .programa-hora {
+            min-width: 90px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-right: 15px;
+            border-right: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .programa-hora .duracion {
+            font-size: 0.75rem;
+            color: #999;
+            font-weight: normal;
+            margin-top: 3px;
+        }
+
+        .programa-info {
+            flex: 1;
+            padding-left: 15px;
+        }
+
+        .programa-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--light);
+        }
+
+        .programa-info p {
+            color: #CCCCCC;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .programa-categoria {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.1);
+            color: var(--main);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .programa-live {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--live);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Sección de noticias más compacta */
+        .noticias-section {
+            background: rgba(15, 15, 15, 0.8);
+            border-radius: 15px;
+            padding: 30px 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--light);
+            position: relative;
+            padding-bottom: 15px;
+            font-size: 2rem;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--main), #00B8D4);
+            border-radius: 2px;
+        }
+
+        .noticias-swiper {
+            padding: 10px 5px 40px;
+        }
+
+        .noticia-slide {
+            background: rgba(30, 30, 30, 0.95);
+            border-radius: 12px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+        }
+
+        .noticia-image {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .noticia-category {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--main);
+            color: var(--dark);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        .noticia-content {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .noticia-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--light);
+            min-height: 50px;
+        }
+
+        .noticia-content p {
+            color: #CCCCCC;
+            font-size: 0.85rem;
+            flex-grow: 1;
+        }
+
+        /* Botones flotantes */
+        .floating-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .whatsapp-btn, .back-button {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, var(--main), #00B8D4);
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: auto;
+            bottom: auto;
+        }
+
+        .whatsapp-btn:hover, .back-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 15, 15, 0.95);
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 2px solid var(--main);
+            margin-top: 20px;
+        }
+
+        .network-logo {
+            font-size: 1.5rem;
+            color: var(--main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Animaciones */
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes pulseBorder {
+            0%, 100% { border-left-color: var(--live); }
+            50% { border-left-color: #ff6666; }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .player-container {
+                height: 400px;
+            }
+            
+            .live-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .live-info-container {
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .player-container {
+                height: 300px;
+                width: 98%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .live-time {
+                font-size: 1.5rem;
+            }
+            
+            .dias-navegacion {
+                padding: 8px;
+                gap: 3px;
+            }
+            
+            .dia-btn {
+                min-width: 80px;
+                font-size: 0.9rem;
+                padding: 10px 3px;
+            }
+            
+            .programacion-container {
+                padding: 20px;
+            }
+            
+            .programa-item {
+                padding: 12px;
+                min-height: 65px;
+            }
+            
+            .programa-hora {
+                min-width: 80px;
+                font-size: 1rem;
+            }
+            
+            .programa-info h4 {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .player-container {
+                height: 250px;
+            }
+            
+            .live-time {
+                font-size: 1.3rem;
+            }
+            
+            .dia-btn {
+                min-width: 70px;
+                font-size: 0.8rem;
+                padding: 8px 2px;
+            }
+            
+            .programa-hora {
+                min-width: 70px;
+                font-size: 0.9rem;
+                padding-right: 10px;
+            }
+            
+            .programa-info {
+                padding-left: 10px;
+            }
+            
+            .programa-info h4 {
+                font-size: 0.95rem;
+            }
+            
+            .programa-info p {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado con información en vivo -->
+    <header class="live-header">
+        <div class="logo-container">
+            <i class="fas fa-broadcast-tower"></i>
+            <div>
+                <h1>DCRADIOEC</h1>
+                <p class="slogan">"La música que acompaña tu jornada"</p>
+            </div>
+        </div>
+        
+        <div class="live-info-container">
+            <div class="live-time">
+                <i class="fas fa-clock"></i>
+                <span id="hora-actual">Cargando...</span>
+                <span class="live-badge" id="live-badge">EN VIVO</span>
+            </div>
+            <div class="live-date">
+                <i class="fas fa-calendar-day"></i>
+                <span id="fecha-actual">Cargando...</span>
+                • 
+                <i class="fas fa-microphone-alt"></i>
+                <span id="programa-actual">Seleccionando programa...</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Botón Atrás -->
+    <a href="https://rdcrsound.adcm.club" class="back-button" target="_self">
+        <i class="fas fa-arrow-left"></i> Atrás
+    </a>
+
+    <!-- Reproductor grande -->
+    <div class="player-container">
+        <iframe class="player-frame" name="contenedorPlayer" allow="autoplay" frameborder="0" scrolling="no" 
+                src="https://andydcm.github.io/dcradioec.github.io/" id="contenedorPlayer">
+        </iframe>
+    </div>
+
+    <!-- Contenedor principal compacto -->
+    <div class="main-container">
+        <!-- Navegación de días -->
+        <div class="dias-navegacion" id="dias-navegacion">
+            <!-- Los botones de días se generan dinámicamente -->
+        </div>
+        
+        <!-- Programación -->
+        <div class="programacion-container">
+            <div class="programacion-header">
+                <h2><i class="fas fa-tv"></i> Programación DC Radio</h2>
+                <div class="hoy-indicator" id="hoy-indicator">
+                    <i class="fas fa-circle" style="color: #FF0000; font-size: 0.8rem;"></i>
+                    <span>Programa en vivo ahora</span>
+                </div>
+            </div>
+            
+            <div class="programacion-dia active" id="programacion-lunes">
+                <div class="lista-programas" id="lista-lunes">
+                    <!-- Programas del lunes -->
+                </div>
+            </div>
+            
+            <div class="programacion-dia" id="programacion-martes">
+                <div class="lista-programas" id="lista-martes"></div>
+            </div>
+            
+            <div class="programacion-dia" id="programacion-miercoles">
+                <div class="lista-programas" id="lista-miercoles"></div>
+            </div>
+            
+            <div class="programacion-dia" id="programacion-jueves">
+                <div class="lista-programas" id="lista-jueves"></div>
+            </div>
+            
+            <div class="programacion-dia" id="programacion-viernes">
+                <div class="lista-programas" id="lista-viernes"></div>
+            </div>
+            
+            <div class="programacion-dia" id="programacion-sabado">
+                <div class="lista-programas" id="lista-sabado"></div>
+            </div>
+            
+            <div class="programacion-dia" id="programacion-domingo">
+                <div class="lista-programas" id="lista-domingo"></div>
+            </div>
+        </div>
+        
+        <!-- Noticias -->
+        <section class="noticias-section">
+            <h2 class="section-title">DC NOTICIAS</h2>
+            <div class="swiper noticias-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide noticia-slide">
+                        <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="noticia-category">Actualidad</div>
+                        </div>
+                        <div class="noticia-content">
+                            <h3>DC Radio lanza nueva temporada de programas</h3>
+                            <p>Nueva programación con contenido exclusivo y entrevistas a personalidades relevantes.</p>
+                            <div class="noticia-date">15 Mar 2026</div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide noticia-slide">
+                        <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="noticia-category">Cultura</div>
+                        </div>
+                        <div class="noticia-content">
+                            <h3>Festival Internacional de Jazz 2026</h3>
+                            <p>Cobertura completa del festival con entrevistas exclusivas a los artistas participantes.</p>
+                            <div class="noticia-date">10 Mar 2026</div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide noticia-slide">
+                        <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="noticia-category">Radio</div>
+                        </div>
+                        <div class="noticia-content">
+                            <h3>DC Radio alcanza 1 millón de oyentes</h3>
+                            <p>Marca histórica para la emisora que consolida su liderazgo en radiodifusión digital.</p>
+                            <div class="noticia-date">5 Mar 2026</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Botón WhatsApp -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/593XXXXXXXXX?text=Hola%20DCRADIOEC,%20me%20gustaría%20pedir%20una%20canción:" 
+           class="whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i> Pedir Canción
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="network-logo">
+            <i class="fas fa-satellite-dish"></i> DCRADIOEC - Radio Generalista
+        </div>
+        <p>"La música que acompaña tu jornada"</p>
+        <div class="copyright">
+            <p>DCRADIOEC · Radio Generalista 2026</p>
+            <p>Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // DATOS COMPLETOS DE PROGRAMACIÓN (compactos)
+        const programacionCompleta = {
+            lunes: [
+                { hora: "05:00", duracion: "2h", titulo: "Despertar DC", desc: "Noticias, clima y tráfico matutino.", categoria: "Informativo" },
+                { hora: "07:00", duracion: "2h", titulo: "DC News Morning", desc: "Análisis de noticias nacionales.", categoria: "Noticias" },
+                { hora: "09:00", duracion: "3h", titulo: "Éxitos del Ayer y Hoy", desc: "Viaje musical por las décadas.", categoria: "Música Retro" },
+                { hora: "12:00", duracion: "1h", titulo: "Magazine Informativo", desc: "Entrevistas y reportajes.", categoria: "Magazine" },
+                { hora: "13:00", duracion: "2h", titulo: "Conexión Musical", desc: "Temas populares del momento.", categoria: "Música Actual" },
+                { hora: "15:00", duracion: "1h", titulo: "La Tarde DC", desc: "Conversación amena y noticias.", categoria: "Variedades" },
+                { hora: "16:00", duracion: "2h", titulo: "Radar Musical", desc: "Éxitos para tu tarde.", categoria: "Música" },
+                { hora: "18:00", duracion: "1h", titulo: "Deportes Total", desc: "Resultados y análisis deportivos.", categoria: "Deportes" },
+                { hora: "19:00", duracion: "1h", titulo: "Noticias del Día", desc: "Resumen informativo completo.", categoria: "Noticias" },
+                { hora: "20:00", duracion: "4h", titulo: "Noche DC", desc: "Música relajada para terminar.", categoria: "Música Nocturna" },
+                { hora: "00:00", duracion: "5h", titulo: "DC Through the Night", desc: "Música suave y noticias.", categoria: "Madrugada" }
+            ],
+            martes: [
+                { hora: "05:00", duracion: "2h", titulo: "Despertar DC", desc: "Noticias y clima para comenzar.", categoria: "Informativo" },
+                { hora: "07:00", duracion: "2h", titulo: "Entrevistas Exclusivas", desc: "Conversaciones con personalidades.", categoria: "Entrevistas" },
+                { hora: "09:00", duracion: "3h", titulo: "Música Sin Pausa", desc: "Éxitos musicales sin parar.", categoria: "Música" },
+                { hora: "12:00", duracion: "1h", titulo: "DC Noticias Express", desc: "Actualidad en formato breve.", categoria: "Noticias" },
+                { hora: "13:00", duracion: "2h", titulo: "Baladas Inolvidables", desc: "Canciones románticas hermosas.", categoria: "Música Romántica" },
+                { hora: "15:00", duracion: "1h", titulo: "Tecnología Hoy", desc: "Novedades tecnológicas.", categoria: "Tecnología" },
+                { hora: "16:00", duracion: "2h", titulo: "La Tarde DC", desc: "Compañía musical vespertina.", categoria: "Variedades" },
+                { hora: "18:00", duracion: "1h", titulo: "DC Deportes", desc: "Actualidad deportiva.", categoria: "Deportes" },
+                { hora: "19:00", duracion: "1h", titulo: "Noticias Nocturnas", desc: "Información de última hora.", categoria: "Noticias" },
+                { hora: "20:00", duracion: "4h", titulo: "Noche de Baladas", desc: "Canciones románticas.", categoria: "Música Romántica" },
+                { hora: "00:00", duracion: "5h", titulo: "Música para Dormir", desc: "Melodías para conciliar sueño.", categoria: "Relajación" }
+            ],
+            miercoles: [
+                { hora: "05:00", duracion: "2h", titulo: "Despertar DC", desc: "Información para comenzar.", categoria: "Informativo" },
+                { hora: "07:00", duracion: "2h", titulo: "Hablemos de Cultura", desc: "Arte, cine y espectáculos.", categoria: "Cultura" },
+                { hora: "09:00", duracion: "3h", titulo: "Mix Musical DC", desc: "Variedad de géneros.", categoria: "Música Variada" },
+                { hora: "12:00", duracion: "1h", titulo: "DC Noticias Express", desc: "Actualidad en directo.", categoria: "Noticias" },
+                { hora: "13:00", duracion: "2h", titulo: "Rock Clásico", desc: "Grandes éxitos del rock.", categoria: "Rock" },
+                { hora: "15:00", duracion: "1h", titulo: "Salud y Bienestar", desc: "Consejos saludables.", categoria: "Salud" },
+                { hora: "16:00", duracion: "2h", titulo: "La Tarde DC", desc: "Entretenimiento vespertino.", categoria: "Variedades" },
+                { hora: "18:00", duracion: "1h", titulo: "Deportes Extremos", desc: "Aventura y deportes.", categoria: "Deportes" },
+                { hora: "19:00", duracion: "1h", titulo: "Noticias del Día", desc: "Síntesis informativa.", categoria: "Noticias" },
+                { hora: "20:00", duracion: "4h", titulo: "Jazz Lounge", desc: "Jazz clásico y contemporáneo.", categoria: "Jazz" },
+                { hora: "00:00", duracion: "5h", titulo: "Noche de Paz", desc: "Música instrumental.", categoria: "Relajación" }
+            ],
+            jueves: [
+                { hora: "05:00", duracion: "2h", titulo: "Despertar DC", desc: "Noticias importantes.", categoria: "Informativo" },
+                { hora: "07:00", duracion: "2h", titulo: "Economía y Finanzas", desc: "Análisis del mercado.", categoria: "Economía" },
+                { hora: "09:00", duracion: "3h", titulo: "Pop Internacional", desc: "Éxitos del pop mundial.", categoria: "Pop" },
+                { hora: "12:00", duracion: "1h", titulo: "DC Noticias Express", desc: "Información concisa.", categoria: "Noticias" },
+                { hora: "13:00", duracion: "2h", titulo: "Música Latina", desc: "Lo mejor latinoamericano.", categoria: "Latina" },
+                { hora: "15:00", duracion: "1h", titulo: "Cine y Series", desc: "Críticas audiovisuales.", categoria: "Entretenimiento" },
+                { hora: "16:00", duracion: "2h", titulo: "La Tarde DC", desc: "Compañía musical.", categoria: "Variedades" },
+                { hora: "18:00", duracion: "1h", titulo: "Fútbol Total", desc: "Todo sobre el deporte rey.", categoria: "Fútbol" },
+                { hora: "19:00", duracion: "1h", titulo: "Noticias Nocturnas", desc: "Resumen con perspectiva.", categoria: "Noticias" },
+                { hora: "20:00", duracion: "4h", titulo: "Noche de Soul", desc: "Soul y R&B.", categoria: "Soul/R&B" },
+                { hora: "00:00", duracion: "5h", titulo: "Sonidos del Mundo", desc: "Música étnica.", categoria: "World Music" }
+            ],
+            viernes: [
+                { hora: "05:00", duracion: "2h", titulo: "Despertar DC", desc: "Noticias, clima y tráfico.", categoria: "Informativo" },
+                { hora: "07:00", duracion: "2h", titulo: "DC News Morning", desc: "Noticias nacionales.", categoria: "Noticias" },
+                { hora: "09:00", duracion: "3h", titulo: "Éxitos del Ayer y Hoy", desc: "Viaje por las décadas.", categoria: "Música Retro" },
+                { hora: "12:00", duracion: "1h", titulo: "Magazine Informativo", desc: "Entrevistas especiales.", categoria: "Magazine" },
+                { hora: "13:00", duracion: "2h", titulo: "Conexión Musical", desc: "Temas populares.", categoria: "Música Actual" },
+                { hora: "15:00", duracion: "1h", titulo: "La Tarde DC", desc: "Conversación y noticias.", categoria: "Variedades" },
+                { hora: "16:00", duracion: "2h", titulo: "Radar Musical", desc: "Éxitos para la tarde.", categoria: "Música" },
+                { hora: "18:00", duracion: "1h", titulo: "Deportes Total", desc: "Resultados y análisis.", categoria: "Deportes" },
+                { hora: "19:00", duracion: "1h", titulo: "Noticias Fin de Semana", desc: "Información para el finde.", categoria: "Noticias" },
+                { hora: "20:00", duracion: "4h", titulo: "Fiesta DC", desc: "Música para el fin de semana.", categoria: "Fiesta" },
+                { hora: "00:00", duracion: "5h", titulo: "After Hours", desc: "Música electrónica.", categoria: "Electrónica" }
+            ],
+            sabado: [
+                { hora: "06:00", duracion: "2h", titulo: "Despertar Sabatino", desc: "Noticias y música relajada.", categoria: "Informativo" },
+                { hora: "08:00", duracion: "2h", titulo: "Música para Desayunar", desc: "Temas suaves para comenzar.", categoria: "Música Relajada" },
+                { hora: "10:00", duracion: "3h", titulo: "Top 40 DC", desc: "Los 40 más sonados.", categoria: "Música" },
+                { hora: "13:00", duracion: "1h", titulo: "Deportes Finde", desc: "Resultados deportivos.", categoria: "Deportes" },
+                { hora: "14:00", duracion: "2h", titulo: "Sábado Musical", desc: "Variedad de géneros.", categoria: "Música Variada" },
+                { hora: "16:00", duracion: "1h", titulo: "Cultura y Espectáculos", desc: "Arte y entretenimiento.", categoria: "Cultura" },
+                { hora: "17:00", duracion: "2h", titulo: "Rock Legends", desc: "Clásicos del rock.", categoria: "Rock" },
+                { hora: "19:00", duracion: "1h", titulo: "Noticias del Sábado", desc: "Resumen informativo.", categoria: "Noticias" },
+                { hora: "20:00", duracion: "4h", titulo: "Sábado Noche", desc: "Música para tu noche.", categoria: "Música Nocturna" },
+                { hora: "00:00", duracion: "4h", titulo: "Urban Flow", desc: "Música urbana y hip hop.", categoria: "Urbano" },
+                { hora: "04:00", duracion: "3h", titulo: "Electro Sunrise", desc: "Electrónica para amanecer.", categoria: "Electrónica" }
+            ],
+            domingo: [
+                { hora: "07:00", duracion: "2h", titulo: "Despertar Dominical", desc: "Noticias y música tranquila.", categoria: "Informativo" },
+                { hora: "09:00", duracion: "2h", titulo: "Música Clásica", desc: "Obras de música clásica.", categoria: "Clásica" },
+                { hora: "11:00", duracion: "3h", titulo: "Domingo Familiar", desc: "Contenido para toda la familia.", categoria: "Familiar" },
+                { hora: "14:00", duracion: "1h", titulo: "Resumen Deportivo", desc: "Lo más destacado deportivo.", categoria: "Deportes" },
+                { hora: "15:00", duracion: "2h", titulo: "Baladas Dominicales", desc: "Canciones románticas.", categoria: "Baladas" },
+                { hora: "17:00", duracion: "1h", titulo: "Reflexiones", desc: "Contenido para pensar.", categoria: "Espiritual" },
+                { hora: "18:00", duracion: "2h", titulo: "Jazz & Blues", desc: "Jazz y blues internacional.", categoria: "Jazz/Blues" },
+                { hora: "20:00", duracion: "1h", titulo: "Noticias de la Semana", desc: "Resumen semanal.", categoria: "Noticias" },
+                { hora: "21:00", duracion: "3h", titulo: "Noche de Jazz", desc: "Sesión especial de jazz.", categoria: "Jazz" },
+                { hora: "00:00", duracion: "4h", titulo: "Domingo Tranquilo", desc: "Música suave para dormir.", categoria: "Relajación" },
+                { hora: "04:00", duracion: "3h", titulo: "Amanecer Musical", desc: "Melodías para el nuevo día.", categoria: "Música Suave" }
+            ]
+        };
+
+        // NOMBRES DE DÍAS EN ESPAÑOL
+        const diasSemana = ['DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO'];
+        const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+        // VARIABLES GLOBALES
+        let programaActual = null;
+        let diaActual = '';
+
+        // FUNCIÓN PARA ACTUALIZAR RELOJ EN TIEMPO REAL
+        function actualizarReloj() {
+            const ahora = new Date();
+            const horas = ahora.getHours().toString().padStart(2, '0');
+            const minutos = ahora.getMinutes().toString().padStart(2, '0');
+            const segundos = ahora.getSeconds().toString().padStart(2, '0');
+            
+            document.getElementById('hora-actual').textContent = `${horas}:${minutos}:${segundos}`;
+            
+            const diaNum = ahora.getDate();
+            const mes = meses[ahora.getMonth()];
+            const año = ahora.getFullYear();
+            const diaNombre = diasSemana[ahora.getDay()];
+            
+            document.getElementById('fecha-actual').textContent = `${diaNombre} ${diaNum} de ${mes} ${año}`;
+            
+            // Parpadeo del badge "EN VIVO"
+            const badge = document.getElementById('live-badge');
+            badge.style.opacity = (ahora.getSeconds() % 2 === 0) ? '1' : '0.7';
+            
+            // Actualizar programa actual cada minuto
+            if (minutos === '00' || programaActual === null) {
+                calcularProgramaActual();
+            }
+        }
+
+        // FUNCIÓN PARA CALCULAR QUÉ PROGRAMA ESTÁ EN VIVO
+        function calcularProgramaActual() {
+            const ahora = new Date();
+            const diaIndex = ahora.getDay(); // 0=domingo, 1=lunes...
+            const horaActual = ahora.getHours();
+            const minutoActual = ahora.getMinutes();
+            const tiempoActual = horaActual * 60 + minutoActual;
+            
+            // Convertir índice de día a nombre
+            const diasNombres = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
+            diaActual = diasNombres[diaIndex];
+            
+            const programacionHoy = programacionCompleta[diaActual];
+            if (!programacionHoy) return;
+            
+            programaActual = null;
+            
+            // Buscar programa en vivo
+            for (const programa of programacionHoy) {
+                const horaInicio = parseInt(programa.hora.split(':')[0]);
+                const minutoInicio = parseInt(programa.hora.split(':')[1]) || 0;
+                const tiempoInicio = horaInicio * 60 + minutoInicio;
+                
+                const duracion = parseInt(programa.duracion) || 1;
+                const tiempoFin = tiempoInicio + (duracion * 60);
+                
+                if (tiempoActual >= tiempoInicio && tiempoActual < tiempoFin) {
+                    programaActual = programa;
+                    break;
+                }
+            }
+            
+            // Actualizar UI
+            const programaActualElement = document.getElementById('programa-actual');
+            if (programaActual) {
+                programaActualElement.textContent = `${programaActual.titulo} (${programaActual.hora})`;
+                programaActualElement.style.color = '#00E5FF';
+                programaActualElement.style.fontWeight = 'bold';
+            } else {
+                programaActualElement.textContent = 'Entre programas - Música continua';
+                programaActualElement.style.color = '#CCCCCC';
+                programaActualElement.style.fontWeight = 'normal';
+            }
+            
+            // Resaltar día actual en navegación
+            resaltarDiaActual();
+            
+            // Actualizar programación del día actual
+            if (document.querySelector(`[data-dia="${diaActual}"]`).classList.contains('active')) {
+                generarProgramacion(diaActual);
+            }
+        }
+
+        // FUNCIÓN PARA RESALTAR DÍA ACTUAL EN NAVEGACIÓN
+        function resaltarDiaActual() {
+            const botonesDias = document.querySelectorAll('.dia-btn');
+            botonesDias.forEach(boton => {
+                boton.classList.remove('hoy');
+                if (boton.getAttribute('data-dia') === diaActual) {
+                    boton.classList.add('hoy');
+                }
+            });
+        }
+
+        // FUNCIÓN PARA GENERAR BOTONES DE DÍAS
+        function generarBotonesDias() {
+            const contenedor = document.getElementById('dias-navegacion');
+            const diasNombres = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
+            const diasDisplay = ['LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB', 'DOM'];
+            
+            diasNombres.forEach((dia, index) => {
+                const boton = document.createElement('button');
+                boton.className = 'dia-btn';
+                if (dia === 'lunes') boton.classList.add('active');
+                boton.setAttribute('data-dia', dia);
+                boton.textContent = diasDisplay[index];
+                contenedor.appendChild(boton);
+            });
+        }
+
+        // FUNCIÓN PARA GENERAR PROGRAMACIÓN DE UN DÍA
+        function generarProgramacion(dia) {
+            const contenedor = document.getElementById(`lista-${dia}`);
+            if (!contenedor) return;
+            
+            const datos = programacionCompleta[dia];
+            if (!datos) return;
+            
+            contenedor.innerHTML = '';
+            
+            const ahora = new Date();
+            const diaIndex = ahora.getDay();
+            const diasNombres = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
+            const esHoy = (diasNombres[diaIndex] === dia);
+            const horaActual = ahora.getHours();
+            const minutoActual = ahora.getMinutes();
+            const tiempoActual = horaActual * 60 + minutoActual;
+            
+            datos.forEach(programa => {
+                const programaItem = document.createElement('div');
+                programaItem.className = 'programa-item';
+                
+                const horaInicio = parseInt(programa.hora.split(':')[0]);
+                const minutoInicio = parseInt(programa.hora.split(':')[1]) || 0;
+                const tiempoInicio = horaInicio * 60 + minutoInicio;
+                const duracion = parseInt(programa.duracion) || 1;
+                const tiempoFin = tiempoInicio + (duracion * 60);
+                
+                // Marcar si está en vivo (solo si es hoy)
+                if (esHoy && tiempoActual >= tiempoInicio && tiempoActual < tiempoFin) {
+                    programaItem.classList.add('en-vivo');
+                }
+                
+                const liveHTML = (esHoy && tiempoActual >= tiempoInicio && tiempoActual < tiempoFin) 
+                    ? `<div class="programa-live"><i class="fas fa-circle"></i> EN VIVO</div>` 
+                    : '';
+                
+                programaItem.innerHTML = `
+                    <div class="programa-hora">
+                        ${programa.hora}
+                        <span class="duracion">${programa.duracion}</span>
+                    </div>
+                    <div class="programa-info">
+                        <h4>${programa.titulo}</h4>
+                        <p>${programa.desc}</p>
+                        <span class="programa-categoria">${programa.categoria}</span>
+                    </div>
+                    ${liveHTML}
+                `;
+                
+                contenedor.appendChild(programaItem);
+            });
+        }
+
+        // INICIALIZACIÓN AL CARGAR LA PÁGINA
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generar botones de días
+            generarBotonesDias();
+            
+            // Generar programación inicial (lunes)
+            generarProgramacion('lunes');
+            
+            // Configurar navegación entre días
+            const diasButtons = document.querySelectorAll('.dia-btn');
+            const programacionDias = document.querySelectorAll('.programacion-dia');
+            
+            diasButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const diaSeleccionado = this.getAttribute('data-dia');
+                    
+                    diasButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    programacionDias.forEach(dia => dia.classList.remove('active'));
+                    document.getElementById(`programacion-${diaSeleccionado}`).classList.add('active');
+                    
+                    generarProgramacion(diaSeleccionado);
+                });
+            });
+            
+            // Iniciar reloj en tiempo real
+            actualizarReloj();
+            setInterval(actualizarReloj, 1000);
+            
+            // Calcular programa actual
+            calcularProgramaActual();
+            setInterval(calcularProgramaActual, 60000); // Actualizar cada minuto
+            
+            // Configurar Swiper para noticias
+            new Swiper('.noticias-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 15,
+                loop: true,
+                autoplay: { delay: 4000, disableOnInteraction: false },
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                breakpoints: {
+                    640: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                }
+            });
+            
+            // Efecto de actualización automática cada 30 segundos
+            setInterval(() => {
+                const diaActivo = document.querySelector('.dia-btn.active').getAttribute('data-dia');
+                generarProgramacion(diaActivo);
+            }, 30000);
+        });
+    </script>
 </body>
 </html>
