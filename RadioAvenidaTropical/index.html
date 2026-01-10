@@ -731,7 +731,7 @@
         }
 
         .hora-programa {
-            min-width: 80px;
+            min-width: 100px;
             background: var(--neon-orange);
             color: var(--dark-bg);
             padding: 8px 12px;
@@ -784,147 +784,6 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
-        /* ESPECIALES SALSEROS */
-        .especiales-section {
-            padding: 60px 20px;
-            background-color: var(--darker-bg);
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-        
-        .carousel-container {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .artist-carousel-wrapper {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .artist-carousel {
-            display: flex;
-            transition: transform 0.5s ease;
-            gap: 20px;
-            padding: 10px 0;
-        }
-        
-        .artist-card {
-            flex: 0 0 calc(100% - 40px);
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            border: 2px solid transparent;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.4s ease;
-            aspect-ratio: 1/1;
-        }
-        
-        .artist-img {
-            width: 100%;
-            height: 70%;
-            object-fit: cover;
-        }
-        
-        .artist-content {
-            padding: 15px;
-            text-align: center;
-            height: 30%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .artist-name {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--neon-yellow);
-            text-shadow: 0 0 5px var(--neon-yellow-glow);
-            line-height: 1.2;
-        }
-        
-        .artist-desc {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 10px;
-        }
-        
-        .artist-link {
-            display: inline-block;
-            padding: 6px 15px;
-            background-color: transparent;
-            color: var(--neon-orange);
-            border: 2px solid var(--neon-orange);
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-        
-        .artist-link:hover {
-            background-color: var(--neon-orange);
-            color: var(--dark-bg);
-            box-shadow: 0 0 20px var(--neon-orange-glow);
-        }
-        
-        /* Controles del carrusel */
-        .carousel-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-            gap: 20px;
-        }
-        
-        .carousel-nav-btn {
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid var(--neon-yellow);
-            color: var(--neon-yellow);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .carousel-nav-btn:hover {
-            background: var(--neon-yellow);
-            color: var(--dark-bg);
-            box-shadow: 0 0 20px var(--neon-yellow-glow);
-        }
-        
-        .carousel-dots {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .carousel-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .carousel-dot.active {
-            background: var(--neon-yellow);
-            box-shadow: 0 0 10px var(--neon-yellow-glow);
-            transform: scale(1.2);
-        }
-        
         /* FOOTER */
         footer {
             background-color: rgba(5, 5, 5, 0.98);
@@ -1168,21 +1027,6 @@
                 align-self: flex-start;
             }
             
-            /* ESPECIALES PARA TABLET */
-            .artist-card {
-                flex: 0 0 calc(50% - 20px);
-                aspect-ratio: auto;
-                height: 300px;
-            }
-            
-            .artist-img {
-                height: 65%;
-            }
-            
-            .artist-content {
-                height: 35%;
-            }
-            
             /* FOOTER */
             .network-logo {
                 font-size: 3rem;
@@ -1420,7 +1264,7 @@
             }
             
             .hora-programa {
-                min-width: 100px;
+                min-width: 120px;
                 padding: 10px 15px;
                 font-size: 1.1rem;
                 margin-right: 20px;
@@ -1441,115 +1285,6 @@
             .programa-genero {
                 font-size: 0.85rem;
                 padding: 5px 12px;
-            }
-            
-            /* ESPECIALES - ESCRITORIO */
-            .especiales-section {
-                padding: 80px 40px;
-            }
-            
-            .artist-carousel-wrapper {
-                max-width: 1200px;
-                margin: 0 auto;
-            }
-            
-            .artist-card {
-                flex: 0 0 calc(20% - 20px);
-                aspect-ratio: auto;
-                height: 350px;
-                transition: all 0.4s ease;
-            }
-            
-            .artist-card:hover {
-                transform: translateY(-10px);
-                box-shadow: 0 15px 30px rgba(255, 94, 0, 0.3);
-                border-color: var(--neon-orange);
-            }
-            
-            .artist-img {
-                height: 70%;
-            }
-            
-            .artist-content {
-                height: 30%;
-                padding: 20px;
-            }
-            
-            .artist-name {
-                font-size: 1.3rem;
-            }
-            
-            .artist-link {
-                padding: 8px 20px;
-                font-size: 1rem;
-            }
-            
-            /* CONTROLES DEL CARRUSEL - ESCRITORIO */
-            .carousel-container {
-                position: relative;
-                max-width: 1200px;
-                margin: 0 auto;
-            }
-            
-            .carousel-nav-btn {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                background: rgba(0, 0, 0, 0.7);
-                border: 2px solid var(--neon-yellow);
-                color: var(--neon-yellow);
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                cursor: pointer;
-                z-index: 10;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 1.5rem;
-                transition: all 0.3s ease;
-            }
-            
-            .carousel-nav-btn:hover {
-                background: var(--neon-yellow);
-                color: var(--dark-bg);
-                box-shadow: 0 0 20px var(--neon-yellow-glow);
-            }
-            
-            #artistasPrev {
-                left: -70px;
-            }
-            
-            #artistasNext {
-                right: -70px;
-            }
-            
-            .carousel-controls {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-top: 40px;
-                gap: 20px;
-            }
-            
-            .carousel-dots {
-                display: flex;
-                gap: 10px;
-            }
-            
-            .carousel-dot {
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.3);
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-            
-            .carousel-dot.active {
-                background: var(--neon-yellow);
-                box-shadow: 0 0 10px var(--neon-yellow-glow);
-                transform: scale(1.2);
             }
             
             /* FOOTER - ESCRITORIO */
@@ -1610,16 +1345,6 @@
                 grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
                 gap: 30px;
             }
-            
-            /* ESPECIALES - PANTALLAS GRANDES */
-            .artist-carousel-wrapper {
-                max-width: 1400px;
-            }
-            
-            .artist-card {
-                flex: 0 0 calc(16.666% - 20px);
-                height: 380px;
-            }
         }
         
         /* MEJORAS PARA LA VERSIÓN DE ESCRITORIO - DISEÑO RESPONSIVO AVANZADO */
@@ -1627,19 +1352,6 @@
             .programas-horarios {
                 grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
                 gap: 20px;
-            }
-            
-            .artist-card {
-                flex: 0 0 calc(25% - 20px);
-                height: 320px;
-            }
-            
-            #artistasPrev {
-                left: -50px;
-            }
-            
-            #artistasNext {
-                right: -50px;
             }
         }
         
@@ -1695,7 +1407,7 @@
             }
             
             .hora-programa {
-                min-width: 70px;
+                min-width: 90px;
                 margin-right: 0;
                 margin-bottom: 10px;
             }
@@ -1750,10 +1462,6 @@
             .player-title {
                 font-size: 1.3rem;
             }
-            
-            .artist-card {
-                aspect-ratio: 1/1;
-            }
         }
         
         /* AJUSTES PARA PANTALLAS MUY PEQUEÑAS */
@@ -1797,13 +1505,9 @@
             }
             
             .hora-programa {
-                min-width: 65px;
+                min-width: 80px;
                 padding: 6px 10px;
                 font-size: 0.8rem;
-            }
-            
-            .artist-card {
-                aspect-ratio: 1/1;
             }
         }
         
@@ -1839,7 +1543,6 @@
                 <li><a href="#" class="active">Inicio</a></li>
                 <li><a href="#player">En Vivo</a></li>
                 <li><a href="#programacion">Programación</a></li>
-                <li><a href="#especiales">Especiales</a></li>
             </ul>
         </nav>
     </header>
@@ -1933,8 +1636,6 @@
             <!-- Los programas de cada día se generarán con JavaScript -->
         </div>
     </section>
-
-    
 
     <!-- FOOTER -->
     <footer>
@@ -2104,284 +1805,115 @@
             }, 200);
         }
         
-        // CARRUSEL AUTOMÁTICO MEJORADO
-        class ImprovedCarousel {
-            constructor(carouselId, dotsContainerId, prevBtnId, nextBtnId) {
-                this.carousel = document.getElementById(carouselId);
-                this.dotsContainer = document.getElementById(dotsContainerId);
-                this.prevBtn = document.getElementById(prevBtnId);
-                this.nextBtn = document.getElementById(nextBtnId);
-                this.items = this.carousel.querySelectorAll('.artist-card');
-                this.currentIndex = 0;
-                this.interval = null;
-                this.autoPlayDelay = 4000;
-                this.isTransitioning = false;
-                
-                this.init();
-            }
-            
-            init() {
-                this.calculateItemsPerView();
-                this.createDots();
-                this.setupEvents();
-                this.startAutoPlay();
-                this.updatePosition();
-                
-                window.addEventListener('resize', () => this.handleResize());
-            }
-            
-            calculateItemsPerView() {
-                const width = window.innerWidth;
-                if (width < 768) {
-                    this.itemsPerView = 1;
-                } else if (width < 1024) {
-                    this.itemsPerView = 2;
-                } else if (width < 1440) {
-                    this.itemsPerView = 4;
-                } else {
-                    this.itemsPerView = 5;
-                }
-                return this.itemsPerView;
-            }
-            
-            createDots() {
-                this.dotsContainer.innerHTML = '';
-                const totalGroups = Math.ceil(this.items.length / this.itemsPerView);
-                
-                for (let i = 0; i < totalGroups; i++) {
-                    const dot = document.createElement('div');
-                    dot.classList.add('carousel-dot');
-                    if (i === 0) dot.classList.add('active');
-                    dot.dataset.group = i;
-                    
-                    dot.addEventListener('click', () => {
-                        if (!this.isTransitioning) {
-                            this.goToGroup(i);
-                        }
-                    });
-                    
-                    this.dotsContainer.appendChild(dot);
-                }
-                
-                this.dots = this.dotsContainer.querySelectorAll('.carousel-dot');
-            }
-            
-            setupEvents() {
-                if (this.prevBtn) {
-                    this.prevBtn.addEventListener('click', () => {
-                        if (!this.isTransitioning) {
-                            this.prev();
-                            this.resetAutoPlay();
-                        }
-                    });
-                }
-                
-                if (this.nextBtn) {
-                    this.nextBtn.addEventListener('click', () => {
-                        if (!this.isTransitioning) {
-                            this.next();
-                            this.resetAutoPlay();
-                        }
-                    });
-                }
-                
-                this.carousel.addEventListener('mouseenter', () => this.stopAutoPlay());
-                this.carousel.addEventListener('mouseleave', () => this.startAutoPlay());
-                this.carousel.addEventListener('touchstart', () => this.stopAutoPlay());
-                this.carousel.addEventListener('touchend', () => {
-                    setTimeout(() => this.startAutoPlay(), 3000);
-                });
-            }
-            
-            updatePosition() {
-                if (this.isTransitioning) return;
-                
-                this.isTransitioning = true;
-                const itemWidth = this.items[0].offsetWidth + 20;
-                const translateX = -this.currentIndex * itemWidth;
-                
-                this.carousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-                this.carousel.style.transform = `translateX(${translateX}px)`;
-                
-                const currentGroup = Math.floor(this.currentIndex / this.itemsPerView);
-                this.updateDots(currentGroup);
-                
-                setTimeout(() => {
-                    this.isTransitioning = false;
-                }, 600);
-            }
-            
-            updateDots(currentGroup) {
-                if (!this.dots) return;
-                
-                this.dots.forEach((dot, index) => {
-                    if (index === currentGroup) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-            }
-            
-            next() {
-                const maxIndex = this.items.length - this.itemsPerView;
-                
-                if (this.currentIndex < maxIndex) {
-                    this.currentIndex += this.itemsPerView;
-                } else {
-                    this.carousel.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-                    this.currentIndex = 0;
-                }
-                
-                this.updatePosition();
-            }
-            
-            prev() {
-                if (this.currentIndex > 0) {
-                    this.currentIndex -= this.itemsPerView;
-                } else {
-                    const maxIndex = this.items.length - this.itemsPerView;
-                    this.carousel.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-                    this.currentIndex = maxIndex;
-                }
-                
-                this.updatePosition();
-            }
-            
-            goToGroup(groupIndex) {
-                this.currentIndex = groupIndex * this.itemsPerView;
-                this.updatePosition();
-                this.resetAutoPlay();
-            }
-            
-            startAutoPlay() {
-                this.stopAutoPlay();
-                this.interval = setInterval(() => {
-                    if (!this.isTransitioning && document.visibilityState === 'visible') {
-                        this.next();
-                    }
-                }, this.autoPlayDelay);
-            }
-            
-            stopAutoPlay() {
-                if (this.interval) {
-                    clearInterval(this.interval);
-                    this.interval = null;
-                }
-            }
-            
-            resetAutoPlay() {
-                this.stopAutoPlay();
-                this.startAutoPlay();
-            }
-            
-            handleResize() {
-                const oldItemsPerView = this.itemsPerView;
-                this.calculateItemsPerView();
-                
-                if (oldItemsPerView !== this.itemsPerView) {
-                    const currentGroup = Math.floor(this.currentIndex / oldItemsPerView);
-                    this.currentIndex = currentGroup * this.itemsPerView;
-                    this.createDots();
-                    setTimeout(() => {
-                        this.updatePosition();
-                    }, 100);
-                }
-            }
-        }
-        
-        // SISTEMA DE PROGRAMACIÓN POR DÍAS Y HORAS
+        // SISTEMA DE PROGRAMACIÓN POR DÍAS Y HORAS - ACTUALIZADO CON RANGOS Y DURACIONES
         const programacionSemanal = {
             "lunes": [
-                { hora: "06:00", titulo: "Despertar Salsero", conductor: "DJ Ritmo", descripcion: "Salsa suave para empezar el día con energía", genero: "Salsa Romántica" },
-                { hora: "08:00", titulo: "Salsa Laboral", conductor: "Carlos el Conductor", descripcion: "Los éxitos que te acompañan en el trabajo", genero: "Salsa Clásica" },
-                { hora: "10:00", titulo: "Éxitos del Ayer", conductor: "María la Sonera", descripcion: "Los clásicos que nunca pasan de moda", genero: "Salsa Vintage" },
-                { hora: "12:00", titulo: "Sabor del Mediodía", conductor: "Ricky Sabroso", descripcion: "Lo mejor para tu hora de almuerzo", genero: "Salsa Cubana" },
-                { hora: "14:00", titulo: "Fiesta en la Oficina", conductor: "Orquesta 2024", descripcion: "Ritmos movidos para mantener el ánimo", genero: "Salsa para Bailar" },
-                { hora: "16:00", titulo: "Retro Salsa", conductor: "Vicente Clásico", descripcion: "Viaje a los años 70-80 de la salsa", genero: "Salsa Dura" },
-                { hora: "18:00", titulo: "Hora Pico Salsera", conductor: "Los Hermanos Ritmo", descripcion: "El tráfico se lleva mejor con buena salsa", genero: "Salsa Mix" },
-                { hora: "20:00", titulo: "Noche de Estrellas", conductor: "Estrella Salsera", descripcion: "Los grandes intérpretes de la salsa", genero: "Salsa Romántica" },
-                { hora: "22:00", titulo: "Salsa Nocturna", conductor: "Luna y Son", descripcion: "Para los que trasnochan con estilo", genero: "Salsa para Bailar" },
-                { hora: "00:00", titulo: "Madrugada Salsera", conductor: "DJ Nocturno", descripcion: "Salsa para las horas más tranquilas", genero: "Salsa Vintage" },
-                { hora: "02:00", titulo: "Sueños Salseros", conductor: "Armonía Nocturna", descripcion: "Salsa suave para terminar la noche", genero: "Salsa Romántica" }
+                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa romántica y suave para acompañar la noche", genero: "Salsa Romántica" },
+                { hora: "06:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Salsa ligera para iniciar el día con energía positiva", genero: "Salsa Matutina" },
+                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un artista de la salsa", genero: "Biografía Musical" },
+                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo artista", genero: "Salsa Especial" },
+                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos que mantienen el ritmo", genero: "Salsa Continua" },
+                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y reconocida a nivel mundial", genero: "Salsa Popular" },
+                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección salsera para la tarde", genero: "Salsa Selecta" },
+                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Regresa el artista del día", genero: "Salsa Especial" },
+                { hora: "16:00 - 17:00", titulo: "Parada Tropical", conductor: "Avenida Tropical", descripcion: "Datos curiosos y salsa icónica", genero: "Salsa Informativa" },
+                { hora: "17:00 - 18:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Segunda emisión del artista destacado", genero: "Biografía Musical" },
+                { hora: "18:00 - 19:00", titulo: "Boleros Tropicales", conductor: "Avenida Tropical", descripcion: "Música romántica para el regreso a casa", genero: "Boleros" },
+                { hora: "19:00 - 20:00", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Salsa sentimental y melódica", genero: "Salsa Romántica" },
+                { hora: "20:00 - 21:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Salsa por partida doble", genero: "Salsa Especial" },
+                { hora: "21:00 - 22:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Ritmo elegante para la noche", genero: "Salsa Nocturna" },
+                { hora: "22:00 - 23:00", titulo: "Reflexión al Son del Caribe", conductor: "Avenida Tropical", descripcion: "Mensajes inspiradores con salsa suave", genero: "Salsa Inspiradora" },
+                { hora: "23:00 - 24:00", titulo: "Salsa Suave Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa tranquila", genero: "Salsa Suave" }
             ],
             "martes": [
-                { hora: "06:00", titulo: "Amanecer Tropical", conductor: "Sol Naciente", descripcion: "Salsa para despertar con alegría", genero: "Salsa Romántica" },
-                { hora: "08:00", titulo: "Salsa Matutina", conductor: "Café con Ritmo", descripcion: "El acompañante perfecto del desayuno", genero: "Salsa Clásica" },
-                { hora: "10:00", titulo: "Clásicos Revividos", conductor: "Tradición Viva", descripcion: "Reinterpretaciones de grandes éxitos", genero: "Salsa Vintage" },
-                { hora: "12:00", titulo: "Salsa Picante", conductor: "Chili y Son", descripcion: "Los ritmos más calientes del mediodía", genero: "Salsa Cubana" },
-                { hora: "14:00", titulo: "Energía Salsera", conductor: "Batería Total", descripcion: "Para mantener el ritmo toda la tarde", genero: "Salsa para Bailar" },
-                { hora: "16:00", titulo: "Raíces Salseras", conductor: "Orígenes", descripcion: "La historia de la salsa en canciones", genero: "Salsa Dura" },
-                { hora: "18:30", titulo: "LOS MAXIMOS DE LA SALSA", conductor: "Maximino Rivera Jr", descripcion: "Los mejores éxitos de todos los tiempos", genero: "Salsa Mix" },
-                { hora: "20:00", titulo: "Estrellas en Vivo", conductor: "Concierto Nocturno", descripcion: "Grabaciones en vivo de grandes conciertos", genero: "Salsa Romántica" },
-                { hora: "22:00", titulo: "Fiesta en Casa", conductor: "DJ Hogareño", descripcion: "Salsa para bailar en la sala", genero: "Salsa para Bailar" },
-                { hora: "00:00", titulo: "Serenata Salsera", conductor: "Cantantes Nocturnos", descripcion: "Las baladas salseras más sentidas", genero: "Salsa Vintage" },
-                { hora: "02:00", titulo: "Madrugada con Sabor", conductor: "Sabores Nocturnos", descripcion: "Salsa para acompañar las horas pequeñas", genero: "Salsa Romántica" }
+                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa romántica y suave para acompañar la noche", genero: "Salsa Romántica" },
+                { hora: "06:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Salsa ligera para iniciar el día con energía positiva", genero: "Salsa Matutina" },
+                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un artista de la salsa", genero: "Biografía Musical" },
+                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo artista", genero: "Salsa Especial" },
+                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos que mantienen el ritmo", genero: "Salsa Continua" },
+                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y reconocida a nivel mundial", genero: "Salsa Popular" },
+                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección salsera para la tarde", genero: "Salsa Selecta" },
+                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Regresa el artista del día", genero: "Salsa Especial" },
+                { hora: "16:00 - 17:00", titulo: "Parada Tropical", conductor: "Avenida Tropical", descripcion: "Datos curiosos y salsa icónica", genero: "Salsa Informativa" },
+                { hora: "17:00 - 18:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Segunda emisión del artista destacado", genero: "Biografía Musical" },
+                { hora: "18:00 - 18:30", titulo: "Boleros Tropicales", conductor: "Avenida Tropical", descripcion: "Música romántica para el regreso a casa", genero: "Boleros" },
+                { hora: "18:30 - 19:30", titulo: "Los Máximos de la Salsa", conductor: "Maximino Rivera Jr", descripcion: "Programa dedicado a los grandes éxitos y leyendas de la salsa", genero: "Salsa Legendaria" },
+                { hora: "19:30 - 20:30", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Salsa sentimental y melódica", genero: "Salsa Romántica" },
+                { hora: "20:30 - 21:30", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Ritmo elegante para la noche", genero: "Salsa Nocturna" },
+                { hora: "21:30 - 22:30", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Música para las horas nocturnas", genero: "Salsa Nocturna" },
+                { hora: "22:30 - 24:00", titulo: "Salsa Suave Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa tranquila", genero: "Salsa Suave" }
             ],
             "miércoles": [
-                { hora: "06:00", titulo: "Desayuno Salsero", conductor: "Leche y Ritmo", descripcion: "Salsa ligera para empezar el día", genero: "Salsa Romántica" },
-                { hora: "08:00", titulo: "Camino al Trabajo", conductor: "Tráfico Salsero", descripcion: "Salsa para el viaje matutino", genero: "Salsa Clásica" },
-                { hora: "10:00", titulo: "Joyas Perdidas", conductor: "Tesoro Musical", descripcion: "Salsa poco conocida pero de gran calidad", genero: "Salsa Vintage" },
-                { hora: "12:00", titulo: "Salsa del Caribe", conductor: "Brisa Marina", descripcion: "Ritmos caribeños en su máxima expresión", genero: "Salsa Cubana" },
-                { hora: "14:00", titulo: "Ritmo Continuo", conductor: "Energía Constante", descripcion: "Salsa sin pausa para la tarde", genero: "Salsa para Bailar" },
-                { hora: "16:00", titulo: "Salsa Brava", conductor: "Fuerza Musical", descripcion: "Los temas más potentes de la salsa", genero: "Salsa Dura" },
-                { hora: "18:00", titulo: "Crossover Salsero", conductor: "Fusión Total", descripcion: "Salsa mezclada con otros ritmos", genero: "Salsa Mix" },
-                { hora: "20:00", titulo: "Leyendas Vivas", conductor: "Inmortales", descripcion: "Grandes artistas que siguen vigentes", genero: "Salsa Romántica" },
-                { hora: "22:00", titulo: "Noche de Baile", conductor: "Pista Abierta", descripcion: "Salsa perfecta para practicar pasos", genero: "Salsa para Bailar" },
-                { hora: "00:00", titulo: "Recuerdos Salseros", conductor: "Memoria Musical", descripcion: "Salsa que evoca grandes momentos", genero: "Salsa Vintage" },
-                { hora: "02:00", titulo: "Sueños Tropicales", conductor: "Ensueño Musical", descripcion: "Salsa suave para dormir con ritmo", genero: "Salsa Romántica" }
+                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa romántica y suave para acompañar la noche", genero: "Salsa Romántica" },
+                { hora: "06:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Salsa ligera para iniciar el día con energía positiva", genero: "Salsa Matutina" },
+                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un artista de la salsa", genero: "Biografía Musical" },
+                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo artista", genero: "Salsa Especial" },
+                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos que mantienen el ritmo", genero: "Salsa Continua" },
+                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y reconocida a nivel mundial", genero: "Salsa Popular" },
+                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección salsera para la tarde", genero: "Salsa Selecta" },
+                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Regresa el artista del día", genero: "Salsa Especial" },
+                { hora: "16:00 - 17:00", titulo: "Parada Tropical", conductor: "Avenida Tropical", descripcion: "Datos curiosos y salsa icónica", genero: "Salsa Informativa" },
+                { hora: "17:00 - 18:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Segunda emisión del artista destacado", genero: "Biografía Musical" },
+                { hora: "18:00 - 19:00", titulo: "Boleros Tropicales", conductor: "Avenida Tropical", descripcion: "Música romántica para el regreso a casa", genero: "Boleros" },
+                { hora: "19:00 - 20:00", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Salsa sentimental y melódica", genero: "Salsa Romántica" },
+                { hora: "20:00 - 21:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Salsa por partida doble", genero: "Salsa Especial" },
+                { hora: "21:00 - 22:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Ritmo elegante para la noche", genero: "Salsa Nocturna" },
+                { hora: "22:00 - 23:00", titulo: "Reflexión al Son del Caribe", conductor: "Avenida Tropical", descripcion: "Mensajes inspiradores con salsa suave", genero: "Salsa Inspiradora" },
+                { hora: "23:00 - 24:00", titulo: "Salsa Suave Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa tranquila", genero: "Salsa Suave" }
             ],
             "jueves": [
-                { hora: "06:00", titulo: "Amanecer con Salsa", conductor: "Alba Musical", descripcion: "Salsa para recibir el nuevo día", genero: "Salsa Romántica" },
-                { hora: "08:00", titulo: "Salsa Ejecutiva", conductor: "Oficina Activa", descripcion: "Salsa para la jornada laboral", genero: "Salsa Clásica" },
-                { hora: "10:00", titulo: "Época Dorada", conductor: "Edad de Oro", descripcion: "La mejor salsa de los años dorados", genero: "Salsa Vintage" },
-                { hora: "12:00", titulo: "Salsa Caliente", conductor: "Pimiento Musical", descripcion: "Ritmos ardientes para el mediodía", genero: "Salsa Cubana" },
-                { hora: "14:00", titulo: "Movimiento Salsero", conductor: "Cuerpo en Acción", descripcion: "Salsa que invita a mover el cuerpo", genero: "Salsa para Bailar" },
-                { hora: "16:00", titulo: "Potencia Salsera", conductor: "Energía Pura", descripcion: "Los temas más fuertes y potentes", genero: "Salsa Dura" },
-                { hora: "18:00", titulo: "Mezcla Perfecta", conductor: "DJ Combinación", descripcion: "Variedad salsera para todos los gustos", genero: "Salsa Mix" },
-                { hora: "20:00", titulo: "Ídolos Salseros", conductor: "Adoración Musical", descripcion: "Homenaje a los grandes de la salsa", genero: "Salsa Romántica" },
-                { hora: "22:00", titulo: "Fiesta Nocturna", conductor: "Ritmo de Noche", descripcion: "Salsa para celebrar la noche", genero: "Salsa para Bailar" },
-                { hora: "00:00", titulo: "Antología Salsera", conductor: "Colección Completa", descripcion: "Lo mejor de la historia de la salsa", genero: "Salsa Vintage" },
-                { hora: "02:00", titulo: "Armonía Nocturna", conductor: "Melodías de Noche", descripcion: "Salsa tranquila para finalizar", genero: "Salsa Romántica" }
+                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa romántica y suave para acompañar la noche", genero: "Salsa Romántica" },
+                { hora: "06:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Salsa ligera para iniciar el día con energía positiva", genero: "Salsa Matutina" },
+                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un artista de la salsa", genero: "Biografía Musical" },
+                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo artista", genero: "Salsa Especial" },
+                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos que mantienen el ritmo", genero: "Salsa Continua" },
+                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y reconocida a nivel mundial", genero: "Salsa Popular" },
+                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección salsera para la tarde", genero: "Salsa Selecta" },
+                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Regresa el artista del día", genero: "Salsa Especial" },
+                { hora: "16:00 - 17:00", titulo: "Parada Tropical", conductor: "Avenida Tropical", descripcion: "Datos curiosos y salsa icónica", genero: "Salsa Informativa" },
+                { hora: "17:00 - 18:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Segunda emisión del artista destacado", genero: "Biografía Musical" },
+                { hora: "18:00 - 19:00", titulo: "Boleros Tropicales", conductor: "Avenida Tropical", descripcion: "Música romántica para el regreso a casa", genero: "Boleros" },
+                { hora: "19:00 - 20:00", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Salsa sentimental y melódica", genero: "Salsa Romántica" },
+                { hora: "20:00 - 21:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Salsa por partida doble", genero: "Salsa Especial" },
+                { hora: "21:00 - 22:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Ritmo elegante para la noche", genero: "Salsa Nocturna" },
+                { hora: "22:00 - 23:00", titulo: "Reflexión al Son del Caribe", conductor: "Avenida Tropical", descripcion: "Mensajes inspiradores con salsa suave", genero: "Salsa Inspiradora" },
+                { hora: "23:00 - 24:00", titulo: "Salsa Suave Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa tranquila", genero: "Salsa Suave" }
             ],
             "viernes": [
-                { hora: "06:00", titulo: "Viernes Salsero", conductor: "Fin de Semana", descripcion: "Salsa para empezar el viernes con alegría", genero: "Salsa Romántica" },
-                { hora: "08:00", titulo: "Salsa de Oficina", conductor: "Jornada Final", descripcion: "Último día laboral con buena música", genero: "Salsa Clásica" },
-                { hora: "10:00", titulo: "Tesoros Musicales", conductor: "Cofre del Recuerdo", descripcion: "Salsa que merece ser redescubierta", genero: "Salsa Vintage" },
-                { hora: "12:00", titulo: "Salsa Sabrosa", conductor: "Sabor Caribeño", descripcion: "Los ritmos más sabrosos del Caribe", genero: "Salsa Cubana" },
-                { hora: "14:00", titulo: "Pre-Fiesta", conductor: "Calentamiento", descripcion: "Salsa para ir entrando en ambiente", genero: "Salsa para Bailar" },
-                { hora: "16:00", titulo: "Salsa Fuerte", conductor: "Potencia Máxima", descripcion: "Los temas más potentes para la tarde", genero: "Salsa Dura" },
-                { hora: "18:00", titulo: "Viernes de Salsa", conductor: "Fiesta Inminente", descripcion: "Lo mejor para empezar el fin de semana", genero: "Salsa Mix" },
-                { hora: "19:00", titulo: "El Mensajero de la Salsa", conductor: "Mr Cheo", descripcion: "Los mensajes salseros más importantes", genero: "Salsa Romántica" },
-                { hora: "22:00", titulo: "Fiesta Viernes", conductor: "DJ Fin de Semana", descripcion: "Salsa para bailar toda la noche", genero: "Salsa para Bailar" },
-                { hora: "00:00", titulo: "Madrugada de Fiesta", conductor: "Resistencia Salsera", descripcion: "Salsa para los que aguantan hasta tarde", genero: "Salsa Vintage" },
-                { hora: "02:00", titulo: "Viernes Nocturno", conductor: "Noche Larga", descripcion: "Salsa para acompañar la madrugada", genero: "Salsa Romántica" }
+                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa romántica y suave para acompañar la noche", genero: "Salsa Romántica" },
+                { hora: "06:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Salsa ligera para iniciar el día con energía positiva", genero: "Salsa Matutina" },
+                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un artista de la salsa", genero: "Biografía Musical" },
+                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo artista", genero: "Salsa Especial" },
+                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos que mantienen el ritmo", genero: "Salsa Continua" },
+                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y reconocida a nivel mundial", genero: "Salsa Popular" },
+                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección salsera para la tarde", genero: "Salsa Selecta" },
+                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Regresa el artista del día", genero: "Salsa Especial" },
+                { hora: "16:00 - 17:00", titulo: "Parada Tropical", conductor: "Avenida Tropical", descripcion: "Datos curiosos y salsa icónica", genero: "Salsa Informativa" },
+                { hora: "17:00 - 18:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Segunda emisión del artista destacado", genero: "Biografía Musical" },
+                { hora: "18:00 - 19:00", titulo: "Boleros Tropicales", conductor: "Avenida Tropical", descripcion: "Música romántica para el regreso a casa", genero: "Boleros" },
+                { hora: "19:00 - 21:00", titulo: "El Mensajero de la Salsa", conductor: "Mr Cheo", descripcion: "La salsa con mensaje, contenido y profundidad cultural", genero: "Salsa con Mensaje" },
+                { hora: "21:00 - 22:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Ritmo elegante para la noche", genero: "Salsa Nocturna" },
+                { hora: "22:00 - 23:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Continuación de los ritmos nocturnos", genero: "Salsa Nocturna" },
+                { hora: "23:00 - 24:00", titulo: "Salsa Suave Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre de la semana con salsa tranquila", genero: "Salsa Suave" }
             ],
             "sábado": [
-                { hora: "08:00", titulo: "ENTRETELONES", conductor: "Dario Castellanos", descripcion: "Los secretos detrás de los grandes éxitos", genero: "Salsa Vintage" },
-                { hora: "10:00", titulo: "Sábado Relajado", conductor: "Descanso Musical", descripcion: "Salsa tranquila para el sábado matutino", genero: "Salsa Romántica" },
-                { hora: "12:00", titulo: "++ PRENDIDOS", conductor: "Diego Cheito Grijalva", descripcion: "La salsa más energética del mediodía", genero: "Salsa para Bailar" },
-                { hora: "14:00", titulo: "Salsa Familiar", conductor: "En Familia", descripcion: "Salsa para disfrutar en casa con todos", genero: "Salsa Clásica" },
-                { hora: "16:00", titulo: "Preparando la Noche", conductor: "Calentamiento Nocturno", descripcion: "Salsa para ir entrando en ambiente festivo", genero: "Salsa para Bailar" },
-                { hora: "17:30", titulo: "TIMBA Y SABOR", conductor: "Yvettte", descripcion: "Lo mejor de la timba cubana con sabor único", genero: "Salsa Cubana" },
-                { hora: "19:00", titulo: "Sábado de Fiesta", conductor: "Celebración Total", descripcion: "Salsa para comenzar la noche sabatina", genero: "Salsa Mix" },
-                { hora: "21:00", titulo: "Noche de Estrellas", conductor: "Gala Salsera", descripcion: "Los grandes hits para la noche del sábado", genero: "Salsa Romántica" },
-                { hora: "23:00", titulo: "Baile Sabatino", conductor: "Pista Llena", descripcion: "Salsa para bailar hasta tarde", genero: "Salsa para Bailar" },
-                { hora: "01:00", titulo: "Madrugada del Sábado", conductor: "Resistencia Total", descripcion: "Salsa para los que no quieren que acabe la noche", genero: "Salsa Vintage" },
-                { hora: "03:00", titulo: "Sábado Nocturno", conductor: "Noche Larga", descripcion: "Salsa para las horas más pequeñas", genero: "Salsa Romántica" }
+                { hora: "00:00 - 12:00", titulo: "Programación Musical Continua", conductor: "Avenida Tropical", descripcion: "Salsa y clásicos tropicales durante toda la mañana", genero: "Salsa Continua" },
+                { hora: "12:00 - 13:00", titulo: "++ Prendidos", conductor: "Diego Cheito Grijalva", descripcion: "La salsa más energética del mediodía", genero: "Salsa para Bailar" },
+                { hora: "13:00 - 17:30", titulo: "Programación Musical Continua", conductor: "Avenida Tropical", descripcion: "Salsa y clásicos tropicales para la tarde", genero: "Salsa Continua" },
+                { hora: "17:30 - 18:30", titulo: "Timba y Sabor", conductor: "Ivette", descripcion: "Ritmos intensos, timba y energía caribeña", genero: "Timba Cubana" },
+                { hora: "18:30 - 20:30", titulo: "Salsa Bailable", conductor: "Avenida Tropical", descripcion: "Salsa bailable, especiales y sonidos tropicales para el fin de semana", genero: "Salsa para Bailar" },
+                { hora: "20:30 - 22:30", titulo: "Especiales Fin de Semana", conductor: "Avenida Tropical", descripcion: "Programación especial del sábado por la noche", genero: "Salsa Especial" },
+                { hora: "22:30 - 24:00", titulo: "Sonidos Tropicales", conductor: "Avenida Tropical", descripcion: "Lo mejor de la música tropical para el fin de semana", genero: "Salsa Tropical" }
             ],
             "domingo": [
-                { hora: "06:00", titulo: "Amanecer Dominical", conductor: "Paz Matutina", descripcion: "Salsa tranquila para el domingo temprano", genero: "Salsa Romántica" },
-                { hora: "08:00", titulo: "Desayuno Familiar", conductor: "Familia y Ritmo", descripcion: "Salsa para compartir en el desayuno dominical", genero: "Salsa Clásica" },
-                { hora: "10:00", titulo: "Domingo Retro", conductor: "Nostalgia", descripcion: "Los éxitos que marcaron épocas", genero: "Salsa Vintage" },
-                { hora: "12:00", titulo: "Salsa para el Almuerzo", conductor: "Comida con Ritmo", descripcion: "Acompañamiento perfecto para el almuerzo familiar", genero: "Salsa Cubana" },
-                { hora: "14:00", titulo: "Siesta Salsera", conductor: "Descanso Activo", descripcion: "Salsa suave para la tarde dominical", genero: "Salsa para Bailar" },
-                { hora: "16:00", titulo: "Tarde de Clásicos", conductor: "Esencia Pura", descripcion: "Lo fundamental de la salsa", genero: "Salsa Dura" },
-                { hora: "18:00", titulo: "Atardecer Salsero", conductor: "Ocaso Musical", descripcion: "Salsa para despedir el domingo", genero: "Salsa Mix" },
-                { hora: "20:00", titulo: "Domingo Nocturno", conductor: "Noche Tranquila", descripcion: "Salsa para preparar la nueva semana", genero: "Salsa Romántica" },
-                { hora: "22:00", titulo: "Despedida Dominical", conductor: "Adiós al Fin de Semana", descripcion: "Salsa para cerrar el domingo con estilo", genero: "Salsa para Bailar" },
-                { hora: "00:00", titulo: "Reflexión Salsera", conductor: "Pensamientos Nocturnos", descripcion: "Salsa para reflexionar sobre la semana", genero: "Salsa Vintage" },
-                { hora: "02:00", titulo: "Dulces Sueños", conductor: "Descanso Final", descripcion: "Salsa suave para terminar el domingo", genero: "Salsa Romántica" }
+                { hora: "00:00 - 08:00", titulo: "Salsa Suave y Clásica", conductor: "Avenida Tropical", descripcion: "Salsa Suave y Clásica para iniciar el domingo", genero: "Salsa Clásica" },
+                { hora: "08:00 - 09:00", titulo: "Entretelones", conductor: "Darío Castellanos", descripcion: "Historias, cultura, actualidad y música contada desde dentro", genero: "Cultura Salsera" },
+                { hora: "09:00 - 12:00", titulo: "Programación Especial Dominical", conductor: "Avenida Tropical", descripcion: "Programación especial dominical con salsa clásica", genero: "Salsa Dominical" },
+                { hora: "12:00 - 15:00", titulo: "Programación Especial Dominical", conductor: "Avenida Tropical", descripcion: "Continuación de la programación dominical", genero: "Salsa Dominical" },
+                { hora: "15:00 - 18:00", titulo: "Programación Especial Dominical", conductor: "Avenida Tropical", descripcion: "Tarde de salsa clásica y sonidos relajados", genero: "Salsa Dominical" },
+                { hora: "18:00 - 21:00", titulo: "Programación Especial Dominical", conductor: "Avenida Tropical", descripcion: "Atardecer con lo mejor de la salsa", genero: "Salsa Dominical" },
+                { hora: "21:00 - 23:00", titulo: "Sonidos Relajados", conductor: "Avenida Tropical", descripcion: "Salsa relajada para el domingo por la noche", genero: "Salsa Relajada" },
+                { hora: "23:00 - 24:00", titulo: "Cierre Suave", conductor: "Avenida Tropical", descripcion: "Cierre suave del domingo con salsa tranquila", genero: "Salsa Suave" }
             ]
         };
 
@@ -2402,23 +1934,28 @@
         diaActualIndex = diaActualIndex === 0 ? 6 : diaActualIndex - 1;
         const diaActualNombre = diasSemana[diaActualIndex].nombre;
 
-        // FUNCIÓN PARA DETERMINAR SI UN PROGRAMA ESTÁ EN VIVO
-        function programaEstaEnVivo(horaPrograma, diaNombre) {
+        // FUNCIÓN PARA DETERMINAR SI UN PROGRAMA ESTÁ EN VIVO (CON RANGOS)
+        function programaEstaEnVivo(rangoHora, diaNombre) {
             // Solo verificar para el día actual
             if (diaNombre !== diaActualNombre) return false;
             
             const ahora = new Date();
             const horaActual = ahora.getHours().toString().padStart(2, '0') + ':' + ahora.getMinutes().toString().padStart(2, '0');
             
+            // Extraer hora de inicio y fin del rango
+            const [horaInicio, horaFin] = rangoHora.split(' - ');
+            
             // Convertir a minutos para comparar
-            const [horaProg, minProg] = horaPrograma.split(':').map(Number);
+            const [horaInicioH, minInicio] = horaInicio.split(':').map(Number);
+            const [horaFinH, minFin] = horaFin.split(':').map(Number);
             const [horaAct, minAct] = horaActual.split(':').map(Number);
             
-            const minutosPrograma = horaProg * 60 + minProg;
+            const minutosInicio = horaInicioH * 60 + minInicio;
+            const minutosFin = horaFinH * 60 + minFin;
             const minutosActual = horaAct * 60 + minAct;
             
-            // Considerar que un programa está en vivo si la hora actual está dentro de los 10 minutos siguientes a la hora del programa
-            return minutosActual >= minutosPrograma && minutosActual <= (minutosPrograma + 10);
+            // Considerar que un programa está en vivo si la hora actual está dentro del rango
+            return minutosActual >= minutosInicio && minutosActual <= minutosFin;
         }
 
         // FUNCIÓN PARA INICIALIZAR LA PROGRAMACIÓN SEMANAL CON PESTAÑAS
@@ -2553,26 +2090,6 @@
                 });
             }
             
-            // Inicializar carrusel de especiales
-            setTimeout(() => {
-                const artistasCarousel = new ImprovedCarousel(
-                    'artistasCarousel',
-                    'artistasDots',
-                    'artistasPrev',
-                    'artistasNext'
-                );
-                
-                // Observador de visibilidad para pausar/continuar autoplay
-                document.addEventListener('visibilitychange', function() {
-                    if (document.visibilityState === 'visible') {
-                        artistasCarousel.startAutoPlay();
-                    } else {
-                        artistasCarousel.stopAutoPlay();
-                    }
-                });
-                
-            }, 1500);
-            
             // Actualizar indicadores de programas en vivo cada minuto
             setInterval(() => {
                 const diaActualContainer = document.getElementById(`programas-${diaActualNombre}`);
@@ -2582,8 +2099,8 @@
                     programasItems.forEach(item => {
                         const horaElement = item.querySelector('.hora-programa');
                         if (horaElement) {
-                            const horaPrograma = horaElement.textContent;
-                            const enVivo = programaEstaEnVivo(horaPrograma, diaActualNombre);
+                            const rangoHora = horaElement.textContent;
+                            const enVivo = programaEstaEnVivo(rangoHora, diaActualNombre);
                             
                             if (enVivo && !item.classList.contains('en-vivo')) {
                                 item.classList.add('en-vivo');
