@@ -1098,7 +1098,7 @@
                 top: 30px;
                 left: 40px;
                 width: 60px;
-                height: 60px;
+                height = 60px;
                 font-size: 24px;
             }
             
@@ -1805,115 +1805,108 @@
             }, 200);
         }
         
-        // SISTEMA DE PROGRAMACIÓN POR DÍAS Y HORAS - ACTUALIZADO CON RANGOS Y DURACIONES
+        // SISTEMA DE PROGRAMACIÓN POR DÍAS Y HORAS - ACTUALIZADA
         const programacionSemanal = {
             "lunes": [
-                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa romántica y suave para acompañar la noche", genero: "Salsa Romántica" },
-                { hora: "06:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Salsa ligera para iniciar el día con energía positiva", genero: "Salsa Matutina" },
-                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un artista de la salsa", genero: "Biografía Musical" },
-                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo artista", genero: "Salsa Especial" },
-                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos que mantienen el ritmo", genero: "Salsa Continua" },
-                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y reconocida a nivel mundial", genero: "Salsa Popular" },
-                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección salsera para la tarde", genero: "Salsa Selecta" },
-                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Regresa el artista del día", genero: "Salsa Especial" },
+                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa suave, clásica y romántica para acompañar la noche", genero: "Salsa Romántica" },
+                { hora: "05:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Ritmos ligeros y positivos para iniciar el día", genero: "Salsa Matutina" },
+                { hora: "07:00 - 08:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos reconocidos de la salsa", genero: "Salsa Clásica" },
+                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un gran artista de la salsa", genero: "Biografía Musical" },
+                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo intérprete", genero: "Salsa Especial" },
+                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Programación salsera constante", genero: "Salsa Continua" },
+                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y bailable", genero: "Salsa Popular" },
+                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección equilibrada de salsa clásica y moderna", genero: "Salsa Selecta" },
+                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Segunda emisión diaria", genero: "Salsa Especial" },
                 { hora: "16:00 - 17:00", titulo: "Parada Tropical", conductor: "Avenida Tropical", descripcion: "Datos curiosos y salsa icónica", genero: "Salsa Informativa" },
                 { hora: "17:00 - 18:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Segunda emisión del artista destacado", genero: "Biografía Musical" },
                 { hora: "18:00 - 19:00", titulo: "Boleros Tropicales", conductor: "Avenida Tropical", descripcion: "Música romántica para el regreso a casa", genero: "Boleros" },
-                { hora: "19:00 - 20:00", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Salsa sentimental y melódica", genero: "Salsa Romántica" },
-                { hora: "20:00 - 21:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Salsa por partida doble", genero: "Salsa Especial" },
-                { hora: "21:00 - 22:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Ritmo elegante para la noche", genero: "Salsa Nocturna" },
-                { hora: "22:00 - 23:00", titulo: "Reflexión al Son del Caribe", conductor: "Avenida Tropical", descripcion: "Mensajes inspiradores con salsa suave", genero: "Salsa Inspiradora" },
-                { hora: "23:00 - 24:00", titulo: "Salsa Suave Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa tranquila", genero: "Salsa Suave" }
+                { hora: "19:00 - 21:00", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Melodía y sentimiento para la noche", genero: "Salsa Romántica" },
+                { hora: "21:00 - 22:00", titulo: "Reflexión al Son del Caribe", conductor: "Avenida Tropical", descripcion: "Mensajes y música suave", genero: "Salsa Inspiradora" },
+                { hora: "22:00 - 24:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa elegante", genero: "Salsa Nocturna" }
             ],
             "martes": [
-                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa romántica y suave para acompañar la noche", genero: "Salsa Romántica" },
-                { hora: "06:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Salsa ligera para iniciar el día con energía positiva", genero: "Salsa Matutina" },
-                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un artista de la salsa", genero: "Biografía Musical" },
-                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo artista", genero: "Salsa Especial" },
-                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos que mantienen el ritmo", genero: "Salsa Continua" },
-                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y reconocida a nivel mundial", genero: "Salsa Popular" },
-                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección salsera para la tarde", genero: "Salsa Selecta" },
-                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Regresa el artista del día", genero: "Salsa Especial" },
+                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa suave, clásica y romántica para acompañar la noche", genero: "Salsa Romántica" },
+                { hora: "05:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Ritmos ligeros y positivos para iniciar el día", genero: "Salsa Matutina" },
+                { hora: "07:00 - 08:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos reconocidos de la salsa", genero: "Salsa Clásica" },
+                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un gran artista de la salsa", genero: "Biografía Musical" },
+                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo intérprete", genero: "Salsa Especial" },
+                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Programación salsera constante", genero: "Salsa Continua" },
+                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y bailable", genero: "Salsa Popular" },
+                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección equilibrada de salsa clásica y moderna", genero: "Salsa Selecta" },
+                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Segunda emisión diaria", genero: "Salsa Especial" },
                 { hora: "16:00 - 17:00", titulo: "Parada Tropical", conductor: "Avenida Tropical", descripcion: "Datos curiosos y salsa icónica", genero: "Salsa Informativa" },
                 { hora: "17:00 - 18:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Segunda emisión del artista destacado", genero: "Biografía Musical" },
                 { hora: "18:00 - 18:30", titulo: "Boleros Tropicales", conductor: "Avenida Tropical", descripcion: "Música romántica para el regreso a casa", genero: "Boleros" },
-                { hora: "18:30 - 19:30", titulo: "Los Máximos de la Salsa", conductor: "Maximino Rivera Jr", descripcion: "Programa dedicado a los grandes éxitos y leyendas de la salsa", genero: "Salsa Legendaria" },
-                { hora: "19:30 - 20:30", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Salsa sentimental y melódica", genero: "Salsa Romántica" },
-                { hora: "20:30 - 21:30", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Ritmo elegante para la noche", genero: "Salsa Nocturna" },
-                { hora: "21:30 - 22:30", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Música para las horas nocturnas", genero: "Salsa Nocturna" },
-                { hora: "22:30 - 24:00", titulo: "Salsa Suave Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa tranquila", genero: "Salsa Suave" }
+                { hora: "18:30 - 19:30", titulo: "Los Máximos de la Salsa", conductor: "Maximino Rivera Jr", descripcion: "Programa especial dedicado a los grandes éxitos y leyendas de la salsa", genero: "Salsa Legendaria" },
+                { hora: "19:30 - 21:00", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Melodía y sentimiento para la noche", genero: "Salsa Romántica" },
+                { hora: "21:00 - 22:00", titulo: "Reflexión al Son del Caribe", conductor: "Avenida Tropical", descripcion: "Mensajes y música suave", genero: "Salsa Inspiradora" },
+                { hora: "22:00 - 24:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa elegante", genero: "Salsa Nocturna" }
             ],
             "miércoles": [
-                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa romántica y suave para acompañar la noche", genero: "Salsa Romántica" },
-                { hora: "06:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Salsa ligera para iniciar el día con energía positiva", genero: "Salsa Matutina" },
-                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un artista de la salsa", genero: "Biografía Musical" },
-                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo artista", genero: "Salsa Especial" },
-                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos que mantienen el ritmo", genero: "Salsa Continua" },
-                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y reconocida a nivel mundial", genero: "Salsa Popular" },
-                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección salsera para la tarde", genero: "Salsa Selecta" },
-                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Regresa el artista del día", genero: "Salsa Especial" },
+                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa suave, clásica y romántica para acompañar la noche", genero: "Salsa Romántica" },
+                { hora: "05:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Ritmos ligeros y positivos para iniciar el día", genero: "Salsa Matutina" },
+                { hora: "07:00 - 08:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos reconocidos de la salsa", genero: "Salsa Clásica" },
+                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un gran artista de la salsa", genero: "Biografía Musical" },
+                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo intérprete", genero: "Salsa Especial" },
+                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Programación salsera constante", genero: "Salsa Continua" },
+                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y bailable", genero: "Salsa Popular" },
+                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección equilibrada de salsa clásica y moderna", genero: "Salsa Selecta" },
+                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Segunda emisión diaria", genero: "Salsa Especial" },
                 { hora: "16:00 - 17:00", titulo: "Parada Tropical", conductor: "Avenida Tropical", descripcion: "Datos curiosos y salsa icónica", genero: "Salsa Informativa" },
                 { hora: "17:00 - 18:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Segunda emisión del artista destacado", genero: "Biografía Musical" },
                 { hora: "18:00 - 19:00", titulo: "Boleros Tropicales", conductor: "Avenida Tropical", descripcion: "Música romántica para el regreso a casa", genero: "Boleros" },
-                { hora: "19:00 - 20:00", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Salsa sentimental y melódica", genero: "Salsa Romántica" },
-                { hora: "20:00 - 21:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Salsa por partida doble", genero: "Salsa Especial" },
-                { hora: "21:00 - 22:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Ritmo elegante para la noche", genero: "Salsa Nocturna" },
-                { hora: "22:00 - 23:00", titulo: "Reflexión al Son del Caribe", conductor: "Avenida Tropical", descripcion: "Mensajes inspiradores con salsa suave", genero: "Salsa Inspiradora" },
-                { hora: "23:00 - 24:00", titulo: "Salsa Suave Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa tranquila", genero: "Salsa Suave" }
+                { hora: "19:00 - 21:00", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Melodía y sentimiento para la noche", genero: "Salsa Romántica" },
+                { hora: "21:00 - 22:00", titulo: "Reflexión al Son del Caribe", conductor: "Avenida Tropical", descripcion: "Mensajes y música suave", genero: "Salsa Inspiradora" },
+                { hora: "22:00 - 24:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa elegante", genero: "Salsa Nocturna" }
             ],
             "jueves": [
-                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa romántica y suave para acompañar la noche", genero: "Salsa Romántica" },
-                { hora: "06:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Salsa ligera para iniciar el día con energía positiva", genero: "Salsa Matutina" },
-                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un artista de la salsa", genero: "Biografía Musical" },
-                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo artista", genero: "Salsa Especial" },
-                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos que mantienen el ritmo", genero: "Salsa Continua" },
-                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y reconocida a nivel mundial", genero: "Salsa Popular" },
-                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección salsera para la tarde", genero: "Salsa Selecta" },
-                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Regresa el artista del día", genero: "Salsa Especial" },
+                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa suave, clásica y romántica para acompañar la noche", genero: "Salsa Romántica" },
+                { hora: "05:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Ritmos ligeros y positivos para iniciar el día", genero: "Salsa Matutina" },
+                { hora: "07:00 - 08:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos reconocidos de la salsa", genero: "Salsa Clásica" },
+                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un gran artista de la salsa", genero: "Biografía Musical" },
+                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo intérprete", genero: "Salsa Especial" },
+                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Programación salsera constante", genero: "Salsa Continua" },
+                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y bailable", genero: "Salsa Popular" },
+                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección equilibrada de salsa clásica y moderna", genero: "Salsa Selecta" },
+                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Segunda emisión diaria", genero: "Salsa Especial" },
                 { hora: "16:00 - 17:00", titulo: "Parada Tropical", conductor: "Avenida Tropical", descripcion: "Datos curiosos y salsa icónica", genero: "Salsa Informativa" },
                 { hora: "17:00 - 18:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Segunda emisión del artista destacado", genero: "Biografía Musical" },
                 { hora: "18:00 - 19:00", titulo: "Boleros Tropicales", conductor: "Avenida Tropical", descripcion: "Música romántica para el regreso a casa", genero: "Boleros" },
-                { hora: "19:00 - 20:00", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Salsa sentimental y melódica", genero: "Salsa Romántica" },
-                { hora: "20:00 - 21:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Salsa por partida doble", genero: "Salsa Especial" },
-                { hora: "21:00 - 22:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Ritmo elegante para la noche", genero: "Salsa Nocturna" },
-                { hora: "22:00 - 23:00", titulo: "Reflexión al Son del Caribe", conductor: "Avenida Tropical", descripcion: "Mensajes inspiradores con salsa suave", genero: "Salsa Inspiradora" },
-                { hora: "23:00 - 24:00", titulo: "Salsa Suave Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa tranquila", genero: "Salsa Suave" }
+                { hora: "19:00 - 21:00", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Melodía y sentimiento para la noche", genero: "Salsa Romántica" },
+                { hora: "21:00 - 22:00", titulo: "Reflexión al Son del Caribe", conductor: "Avenida Tropical", descripcion: "Mensajes y música suave", genero: "Salsa Inspiradora" },
+                { hora: "22:00 - 24:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa elegante", genero: "Salsa Nocturna" }
             ],
             "viernes": [
-                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa romántica y suave para acompañar la noche", genero: "Salsa Romántica" },
-                { hora: "06:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Salsa ligera para iniciar el día con energía positiva", genero: "Salsa Matutina" },
-                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un artista de la salsa", genero: "Biografía Musical" },
-                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo artista", genero: "Salsa Especial" },
-                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos que mantienen el ritmo", genero: "Salsa Continua" },
-                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y reconocida a nivel mundial", genero: "Salsa Popular" },
-                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección salsera para la tarde", genero: "Salsa Selecta" },
-                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Regresa el artista del día", genero: "Salsa Especial" },
+                { hora: "00:00 - 05:00", titulo: "Salsa de Madrugada", conductor: "Avenida Tropical", descripcion: "Salsa suave, clásica y romántica para acompañar la noche", genero: "Salsa Romántica" },
+                { hora: "05:00 - 07:00", titulo: "Amanecer Tropical", conductor: "Avenida Tropical", descripcion: "Ritmos ligeros y positivos para iniciar el día", genero: "Salsa Matutina" },
+                { hora: "07:00 - 08:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos reconocidos de la salsa", genero: "Salsa Clásica" },
+                { hora: "08:00 - 09:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Historia y legado de un gran artista de la salsa", genero: "Biografía Musical" },
+                { hora: "09:00 - 10:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Dos canciones consecutivas del mismo intérprete", genero: "Salsa Especial" },
+                { hora: "10:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Programación salsera constante", genero: "Salsa Continua" },
+                { hora: "12:00 - 14:00", titulo: "Salsa del Mediodía", conductor: "Avenida Tropical", descripcion: "Salsa popular y bailable", genero: "Salsa Popular" },
+                { hora: "14:00 - 15:00", titulo: "Salsa en su Punto", conductor: "Avenida Tropical", descripcion: "Selección equilibrada de salsa clásica y moderna", genero: "Salsa Selecta" },
+                { hora: "15:00 - 16:00", titulo: "El Doble de tu Artista Favorito", conductor: "Avenida Tropical", descripcion: "Segunda emisión diaria", genero: "Salsa Especial" },
                 { hora: "16:00 - 17:00", titulo: "Parada Tropical", conductor: "Avenida Tropical", descripcion: "Datos curiosos y salsa icónica", genero: "Salsa Informativa" },
                 { hora: "17:00 - 18:00", titulo: "Biografía Salsera", conductor: "Avenida Tropical", descripcion: "Segunda emisión del artista destacado", genero: "Biografía Musical" },
                 { hora: "18:00 - 19:00", titulo: "Boleros Tropicales", conductor: "Avenida Tropical", descripcion: "Música romántica para el regreso a casa", genero: "Boleros" },
-                { hora: "19:00 - 21:00", titulo: "El Mensajero de la Salsa", conductor: "Mr Cheo", descripcion: "La salsa con mensaje, contenido y profundidad cultural", genero: "Salsa con Mensaje" },
-                { hora: "21:00 - 22:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Ritmo elegante para la noche", genero: "Salsa Nocturna" },
-                { hora: "22:00 - 23:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Continuación de los ritmos nocturnos", genero: "Salsa Nocturna" },
-                { hora: "23:00 - 24:00", titulo: "Salsa Suave Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre de la semana con salsa tranquila", genero: "Salsa Suave" }
+                { hora: "19:00 - 20:00", titulo: "El Mensajero de la Salsa", conductor: "Diego Cheito Grijalva", descripcion: "La salsa con mensaje, contenido y profundidad cultural", genero: "Salsa con Mensaje" },
+                { hora: "20:00 - 21:00", titulo: "Salsa Romántica", conductor: "Avenida Tropical", descripcion: "Melodía y sentimiento para la noche", genero: "Salsa Romántica" },
+                { hora: "21:00 - 22:00", titulo: "Reflexión al Son del Caribe", conductor: "Avenida Tropical", descripcion: "Mensajes y música suave", genero: "Salsa Inspiradora" },
+                { hora: "22:00 - 24:00", titulo: "Salsa Nocturna", conductor: "Avenida Tropical", descripcion: "Cierre del día con salsa elegante", genero: "Salsa Nocturna" }
             ],
             "sábado": [
-                { hora: "00:00 - 12:00", titulo: "Programación Musical Continua", conductor: "Avenida Tropical", descripcion: "Salsa y clásicos tropicales durante toda la mañana", genero: "Salsa Continua" },
-                { hora: "12:00 - 13:00", titulo: "++ Prendidos", conductor: "Diego Cheito Grijalva", descripcion: "La salsa más energética del mediodía", genero: "Salsa para Bailar" },
-                { hora: "13:00 - 17:30", titulo: "Programación Musical Continua", conductor: "Avenida Tropical", descripcion: "Salsa y clásicos tropicales para la tarde", genero: "Salsa Continua" },
-                { hora: "17:30 - 18:30", titulo: "Timba y Sabor", conductor: "Ivette", descripcion: "Ritmos intensos, timba y energía caribeña", genero: "Timba Cubana" },
-                { hora: "18:30 - 20:30", titulo: "Salsa Bailable", conductor: "Avenida Tropical", descripcion: "Salsa bailable, especiales y sonidos tropicales para el fin de semana", genero: "Salsa para Bailar" },
-                { hora: "20:30 - 22:30", titulo: "Especiales Fin de Semana", conductor: "Avenida Tropical", descripcion: "Programación especial del sábado por la noche", genero: "Salsa Especial" },
-                { hora: "22:30 - 24:00", titulo: "Sonidos Tropicales", conductor: "Avenida Tropical", descripcion: "Lo mejor de la música tropical para el fin de semana", genero: "Salsa Tropical" }
+                { hora: "00:00 - 12:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásica, romántica y tradicional", genero: "Salsa Clásica" },
+                { hora: "12:00 - 17:00", titulo: "Mixes de Salsa", conductor: "Avenida Tropical", descripcion: "Salsa dura, clásica y romántica sin interrupciones", genero: "Salsa Mix" },
+                { hora: "17:00 - 18:00", titulo: "Timba y Sabor", conductor: "Ivette", descripcion: "Ritmos intensos, timba y energía caribeña", genero: "Timba Cubana" },
+                { hora: "18:00 - 24:00", titulo: "Mixes Tropicales", conductor: "Avenida Tropical", descripcion: "Salsa bailable y sonidos caribeños", genero: "Salsa Tropical" }
             ],
             "domingo": [
-                { hora: "00:00 - 08:00", titulo: "Salsa Suave y Clásica", conductor: "Avenida Tropical", descripcion: "Salsa Suave y Clásica para iniciar el domingo", genero: "Salsa Clásica" },
+                { hora: "00:00 - 07:00", titulo: "Salsa Suave y Clásica", conductor: "Avenida Tropical", descripcion: "Sonidos tranquilos para la madrugada", genero: "Salsa Clásica" },
+                { hora: "07:00 - 08:00", titulo: "Salsa Clásica", conductor: "Avenida Tropical", descripcion: "Ritmo tradicional para iniciar el día", genero: "Salsa Tradicional" },
                 { hora: "08:00 - 09:00", titulo: "Entretelones", conductor: "Darío Castellanos", descripcion: "Historias, cultura, actualidad y música contada desde dentro", genero: "Cultura Salsera" },
-                { hora: "09:00 - 12:00", titulo: "Programación Especial Dominical", conductor: "Avenida Tropical", descripcion: "Programación especial dominical con salsa clásica", genero: "Salsa Dominical" },
-                { hora: "12:00 - 15:00", titulo: "Programación Especial Dominical", conductor: "Avenida Tropical", descripcion: "Continuación de la programación dominical", genero: "Salsa Dominical" },
-                { hora: "15:00 - 18:00", titulo: "Programación Especial Dominical", conductor: "Avenida Tropical", descripcion: "Tarde de salsa clásica y sonidos relajados", genero: "Salsa Dominical" },
-                { hora: "18:00 - 21:00", titulo: "Programación Especial Dominical", conductor: "Avenida Tropical", descripcion: "Atardecer con lo mejor de la salsa", genero: "Salsa Dominical" },
-                { hora: "21:00 - 23:00", titulo: "Sonidos Relajados", conductor: "Avenida Tropical", descripcion: "Salsa relajada para el domingo por la noche", genero: "Salsa Relajada" },
-                { hora: "23:00 - 24:00", titulo: "Cierre Suave", conductor: "Avenida Tropical", descripcion: "Cierre suave del domingo con salsa tranquila", genero: "Salsa Suave" }
+                { hora: "09:00 - 14:00", titulo: "Salsa Continua", conductor: "Avenida Tropical", descripcion: "Clásicos y éxitos", genero: "Salsa Continua" },
+                { hora: "14:00 - 18:00", titulo: "Mixes de Salsa", conductor: "Avenida Tropical", descripcion: "Programación continua sin cortes", genero: "Salsa Mix" },
+                { hora: "18:00 - 24:00", titulo: "Salsa Romántica y Clásica", conductor: "Avenida Tropical", descripcion: "Cierre relajado del fin de semana", genero: "Salsa Romántica" }
             ]
         };
 
