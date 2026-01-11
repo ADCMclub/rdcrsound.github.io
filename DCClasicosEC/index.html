@@ -719,141 +719,137 @@ section {
   transform: translateX(-50%);
 }
 
-/* Carrusel de Programación optimizado para móviles */
-.programacion-carousel {
+/* Tabla de Programación */
+.programacion-container {
   max-width: 100%;
   margin: 0 auto;
-  position: relative;
-  padding: 0 5px;
-}
-
-.carousel-container {
-  overflow: hidden;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  background-color: rgba(20, 20, 20, 0.9);
-  padding: 15px 0;
-  width: 100%;
-}
-
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s ease;
-  gap: 0;
-  width: 100%;
-}
-
-.carousel-slide {
-  min-width: 100%;
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
-  margin: 0 5px;
-}
-
-.carousel-slide:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
-}
-
-.carousel-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-}
-
-.carousel-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
-  padding: 20px 15px 15px;
-  color: white;
-}
-
-.carousel-overlay h3 {
-  font-size: 1.2rem;
-  margin-bottom: 6px;
-  color: var(--neon-gold);
-  line-height: 1.3;
-}
-
-.carousel-overlay p {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  font-weight: 300;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-
-.carousel-time {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  color: var(--gold);
-  font-weight: 500;
-}
-
-.carousel-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  margin-top: 30px;
   padding: 0 10px;
 }
 
-.carousel-btn {
-  background-color: rgba(255, 215, 0, 0.1);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  color: var(--cream);
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
+.now-playing {
+  background: rgba(20, 20, 20, 0.9);
+  border-radius: 10px;
+  padding: 20px 15px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  text-align: center;
+  animation: neon-pulse 3s infinite alternate;
+}
+
+.now-playing h3 {
+  color: var(--neon-gold);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  touch-action: manipulation;
+  gap: 10px;
 }
 
-.carousel-btn:hover {
-  background-color: rgba(255, 215, 0, 0.2);
-  border-color: var(--neon-gold);
+.now-playing p {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.current-program {
+  font-size: 1.3rem !important;
+  color: var(--neon-gold) !important;
+  font-weight: 600;
+  margin: 10px 0;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.current-time {
+  font-size: 0.8rem !important;
+  color: var(--gold) !important;
+  font-style: italic;
+}
+
+.schedule-section {
+  margin-bottom: 40px;
+}
+
+.schedule-section h3 {
   color: var(--neon-gold);
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
-  transform: scale(1.1);
-}
-
-.carousel-dots {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  border-bottom: 1px solid rgba(255,215,0,0.3);
+  padding-bottom: 10px;
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  gap: 10px;
 }
 
-.carousel-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: none;
-  cursor: pointer;
+.schedule-table {
+  background: rgba(20,20,20,0.9);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255,215,0,0.2);
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  background: rgba(255,215,0,0.1);
+  border-bottom: 1px solid rgba(255,215,0,0.3);
+}
+
+.table-header div {
+  padding: 15px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--neon-gold);
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   transition: all 0.3s ease;
-  touch-action: manipulation;
 }
 
-.carousel-dot.active, .carousel-dot:hover {
-  background-color: var(--neon-gold);
-  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-  transform: scale(1.2);
+.table-row:hover {
+  background: rgba(255,215,0,0.05);
+}
+
+.table-row.current {
+  background: rgba(255,215,0,0.15) !important;
+  border-left: 3px solid var(--neon-gold);
+  border-right: 3px solid var(--neon-gold);
+  position: relative;
+}
+
+.table-row.current::before {
+  content: '🔴 EN VIVO';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 0.6rem;
+  color: var(--neon-gold);
+  font-weight: bold;
+  background: rgba(0,0,0,0.7);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.table-row div {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: var(--text);
+}
+
+.table-row div:last-child {
+  text-align: left;
+  color: var(--text-light);
+}
+
+.table-row.current div {
+  color: var(--neon-gold) !important;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(255,215,0,0.3);
 }
 
 /* Concepto optimizado para móviles */
@@ -1096,20 +1092,6 @@ footer {
     font-size: 2rem;
   }
   
-  .carousel-slide {
-    min-width: calc(100% / 2);
-  }
-  
-  .concept-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  .concept-card:last-child {
-    grid-column: span 2;
-  }
-  
   .nav-btn {
     min-width: 140px;
     padding: 10px 18px;
@@ -1124,6 +1106,12 @@ footer {
     top: 15px;
     left: 15px;
     padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .table-header div,
+  .table-row div {
+    padding: 14px 10px;
     font-size: 0.9rem;
   }
 }
@@ -1163,20 +1151,9 @@ footer {
   }
   
   .concept-container {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
-  }
-  
-  .concept-card:last-child {
-    grid-column: span 1;
-  }
-  
-  .carousel-slide {
-    min-width: calc(100% / 3);
-  }
-  
-  .carousel-image {
-    height: 300px;
   }
   
   .vinyl-record {
@@ -1228,6 +1205,18 @@ footer {
     padding: 12px 25px;
     font-size: 1rem;
   }
+  
+  .programacion-container {
+    max-width: 900px;
+  }
+  
+  .table-header {
+    grid-template-columns: 1fr 3fr;
+  }
+  
+  .table-row {
+    grid-template-columns: 1fr 3fr;
+  }
 }
 
 /* Ajustes para pantallas muy pequeñas (iPhone SE, etc.) */
@@ -1262,10 +1251,6 @@ footer {
     font-size: 0.9rem;
   }
   
-  .carousel-image {
-    height: 180px;
-  }
-  
   .message-slider p {
     font-size: 1rem;
   }
@@ -1274,6 +1259,20 @@ footer {
     min-width: 60px;
     font-size: 0.8rem;
     padding: 5px 8px;
+  }
+  
+  .table-header div,
+  .table-row div {
+    padding: 10px 8px;
+    font-size: 0.8rem;
+  }
+  
+  .now-playing h3 {
+    font-size: 1rem;
+  }
+  
+  .current-program {
+    font-size: 1.1rem !important;
   }
 }
 
@@ -1422,27 +1421,106 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
 <section id="programacion">
   <div class="section-title">
     <h2 class="neon-text">PROGRAMACIÓN</h2>
+    <div class="now-playing" id="nowPlaying">
+      <h3><i class="fas fa-broadcast-tower"></i> AHORA EN EMISIÓN</h3>
+      <p class="current-program" id="currentProgram">Cargando programa actual...</p>
+      <p class="current-time" id="currentTime"></p>
+    </div>
   </div>
   
-  <div class="programacion-carousel">
-    <div class="carousel-container">
-      <div class="carousel-track" id="carouselTrack">
-        <!-- Las diapositivas del carrusel se generarán con JavaScript -->
+  <div class="programacion-container">
+    <!-- Programación Lunes a Viernes -->
+    <div class="schedule-section">
+      <h3><i class="fas fa-calendar-day"></i> LUNES A VIERNES</h3>
+      
+      <div class="schedule-table">
+        <div class="table-header">
+          <div>Horario</div>
+          <div>Programa</div>
+        </div>
+        
+        <div class="table-row" data-day="weekday" data-start="0" data-end="6">
+          <div>00:00 – 06:00</div>
+          <div>Baladas Clásicas Nocturnas</div>
+        </div>
+        
+        <div class="table-row" data-day="weekday" data-start="6" data-end="10">
+          <div>06:00 – 10:00</div>
+          <div>Recuerdos Clásicos</div>
+        </div>
+        
+        <div class="table-row" data-day="weekday" data-start="10" data-end="15">
+          <div>10:00 – 15:00</div>
+          <div>Baladas del Corazón</div>
+        </div>
+        
+        <div class="table-row" data-day="weekday" data-start="15" data-end="20">
+          <div>15:00 – 20:00</div>
+          <div>Clásicos en Inglés y Español</div>
+        </div>
+        
+        <div class="table-row" data-day="weekday" data-start="20" data-end="23">
+          <div>20:00 – 23:00</div>
+          <div>La Voz del Silencio 🎙️ (Darío Castellanos)</div>
+        </div>
+        
+        <div class="table-row" data-day="weekday" data-start="23" data-end="24">
+          <div>23:00 – 00:00</div>
+          <div>Relax Clásico</div>
+        </div>
       </div>
     </div>
     
-    <div class="carousel-controls">
-      <button class="carousel-btn" id="prevCarouselBtn">
-        <i class="fas fa-chevron-left"></i>
-      </button>
+    <!-- Programación Sábado y Domingo -->
+    <div class="schedule-section">
+      <h3><i class="fas fa-calendar-weekend"></i> SÁBADO Y DOMINGO</h3>
       
-      <div class="carousel-dots" id="carouselDots">
-        <!-- Los puntos del carrusel se generarán con JavaScript -->
+      <div class="schedule-table">
+        <div class="table-header">
+          <div>Horario</div>
+          <div>Programa</div>
+        </div>
+        
+        <div class="table-row" data-day="weekend" data-start="0" data-end="8">
+          <div>00:00 – 08:00</div>
+          <div>Baladas Clásicas</div>
+        </div>
+        
+        <div class="table-row" data-day="weekend" data-start="8" data-end="12">
+          <div>08:00 – 12:00</div>
+          <div>Domingo Nostálgico</div>
+        </div>
+        
+        <div class="table-row" data-day="weekend" data-start="12" data-end="13">
+          <div>12:00 – 13:00</div>
+          <div>Clásicos Internacionales 80s / 90s</div>
+        </div>
+        
+        <div class="table-row" data-day="weekend" data-start="13" data-end="14">
+          <div>13:00 – 14:00</div>
+          <div>Global Hits 🎙️ (Armando Plata)</div>
+        </div>
+        
+        <div class="table-row" data-day="weekend" data-start="14" data-end="18">
+          <div>14:00 – 18:00</div>
+          <div>Historias de Canciones</div>
+        </div>
+        
+        <div class="table-row" data-day="weekend" data-start="18" data-end="20">
+          <div>18:00 – 20:00</div>
+          <div>Leyendas de la Balada</div>
+        </div>
+        
+        <div class="table-row" data-day="weekend" data-start="20" data-end="22">
+          <div>20:00 – 22:00</div>
+          <div>Baladas en Vivo</div>
+        </div>
+        
+        <div class="table-row" data-day="weekend" data-start="22" data-end="24">
+          <div>22:00 – 00:00</div>
+          <div>Cierre con Sentimiento</div>
+        </div>
       </div>
-      
-      <button class="carousel-btn" id="nextCarouselBtn">
-        <i class="fas fa-chevron-right"></i>
-      </button>
     </div>
   </div>
 </section>
@@ -1524,12 +1602,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const vinylRecord = document.querySelector('.vinyl-record');
   const decades = document.querySelectorAll('.decade');
   
-  // Elementos del carrusel
-  const carouselTrack = document.getElementById('carouselTrack');
-  const prevCarouselBtn = document.getElementById('prevCarouselBtn');
-  const nextCarouselBtn = document.getElementById('nextCarouselBtn');
-  const carouselDots = document.getElementById('carouselDots');
-  
   // Elementos de mensajes
   const messageControls = document.getElementById('messageControls');
   const messageText = document.getElementById('message-text');
@@ -1538,71 +1610,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const whatsappBtn = document.getElementById('whatsappBtn');
   const scrollTopBtn = document.getElementById('scrollTopBtn');
   
-  // Datos para el carrusel (10 ejemplos)
-  const carouselData = [
-    {
-      image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      title: "Recuerdos Eternos",
-      description: "Las baladas más memorables de los 70s, 80s y 90s.",
-      time: "Lunes a Viernes, 9:00 - 12:00"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      title: "Clásicos de Siempre",
-      description: "Los grandes éxitos del rock suave y pop clásico.",
-      time: "Lunes a Viernes, 16:00 - 19:00"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      title: "Noche de Baladas",
-      description: "Baladas románticas para acompañar tus noches.",
-      time: "Sábados, 20:00 - 00:00"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      title: "Momentos de Amor",
-      description: "Canciones de amor que definieron una generación.",
-      time: "Domingos, 14:00 - 17:00"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      title: "Voces Inolvidables",
-      description: "Los mejores intérpretes de baladas de todos los tiempos.",
-      time: "Martes y Jueves, 20:00 - 22:00"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      title: "Años Dorados",
-      description: "Un viaje por las canciones que hicieron historia.",
-      time: "Miércoles, 10:00 - 13:00"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      title: "Sólo Baladas",
-      description: "Exclusivamente baladas en inglés y español.",
-      time: "Viernes, 21:00 - 00:00"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      title: "Café y Música",
-      description: "Música suave para acompañar tus momentos de relax.",
-      time: "Lunes a Viernes, 7:00 - 9:00"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      title: "Sesiones Acústicas",
-      description: "Versiones acústicas de los grandes clásicos.",
-      time: "Sábados, 14:00 - 16:00"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-      title: "Hits Románticos",
-      description: "Las canciones de amor más populares de siempre.",
-      time: "Domingos, 20:00 - 23:00"
-    }
-  ];
+  // Elementos de programación
+  const nowPlaying = document.getElementById('nowPlaying');
+  const currentProgram = document.getElementById('currentProgram');
+  const currentTime = document.getElementById('currentTime');
   
-  // Lista de mensajes emocionales - 50 MENSAJES COMPLETOS
+  // Lista de mensajes emocionales
   const messages = [
     "La música no se escucha con los oídos, se siente con el alma. Estas canciones son el eco de momentos que nunca se olvidan.",
     "En el silencio entre notas, encontramos los recuerdos más valiosos. DC Clásicos: la banda sonora de tu vida.",
@@ -1657,20 +1670,12 @@ document.addEventListener('DOMContentLoaded', function() {
     "El tiempo pasa, las modas cambian, pero el sentimiento verdadero permanece en estas baladas."
   ];
   
-  // Variables para el carrusel
-  let currentSlide = 0;
-  let slidesPerView = getSlidesPerView();
-  
   // Variables generales
   let currentMessageIndex = 0;
-  let carouselInterval;
   let messageInterval;
   
   // Inicializar líneas de fondo interactivas
   initBackgroundLines();
-  
-  // Inicializar carrusel
-  initCarousel();
   
   // Inicializar reproductor vintage
   initVintagePlayer();
@@ -1683,6 +1688,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Configurar efectos interactivos
   setupInteractiveEffects();
+  
+  // Mostrar programa actual
+  showCurrentProgram();
+  setInterval(showCurrentProgram, 60000); // Actualizar cada minuto
   
   // Inicializar líneas de fondo interactivas
   function initBackgroundLines() {
@@ -1880,99 +1889,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, flashInterval);
   }
   
-  // Inicializar carrusel
-  function initCarousel() {
-    // Limpiar carrusel
-    carouselTrack.innerHTML = '';
-    carouselDots.innerHTML = '';
-    
-    // Crear slides
-    carouselData.forEach((item, index) => {
-      // Crear slide
-      const slide = document.createElement('div');
-      slide.className = 'carousel-slide';
-      slide.dataset.index = index;
-      
-      slide.innerHTML = `
-        <img src="${item.image}" alt="${item.title}" class="carousel-image">
-        <div class="carousel-overlay">
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-          <div class="carousel-time">
-            <i class="far fa-clock"></i> ${item.time}
-          </div>
-        </div>
-      `;
-      
-      carouselTrack.appendChild(slide);
-      
-      // Crear punto para el slide
-      const dot = document.createElement('button');
-      dot.className = 'carousel-dot';
-      if (index === 0) dot.classList.add('active');
-      dot.dataset.index = index;
-      dot.addEventListener('click', () => goToSlide(index));
-      dot.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        goToSlide(index);
-      });
-      
-      carouselDots.appendChild(dot);
-    });
-    
-    // Actualizar carrusel
-    updateCarousel();
-    
-    // Event listeners para los botones del carrusel
-    prevCarouselBtn.addEventListener('click', prevSlide);
-    nextCarouselBtn.addEventListener('click', nextSlide);
-    
-    // Eventos táctiles para móviles
-    prevCarouselBtn.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      prevSlide();
-    });
-    
-    nextCarouselBtn.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      nextSlide();
-    });
-    
-    // Soporte para gestos táctiles en el carrusel
-    let startX = 0;
-    let endX = 0;
-    
-    carouselTrack.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    });
-    
-    carouselTrack.addEventListener('touchend', (e) => {
-      endX = e.changedTouches[0].clientX;
-      handleSwipe();
-    });
-    
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const diff = startX - endX;
-      
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          // Deslizamiento hacia la izquierda (siguiente)
-          nextSlide();
-        } else {
-          // Deslizamiento hacia la derecha (anterior)
-          prevSlide();
-        }
-      }
-    }
-    
-    // Actualizar carrusel en redimensionamiento de ventana
-    window.addEventListener('resize', handleResize);
-    
-    // Iniciar autoavance del carrusel
-    startCarouselAutoAdvance();
-  }
-  
   // Inicializar mensajes emocionales
   function initMessages() {
     // Limpiar controles de mensajes
@@ -2034,80 +1950,6 @@ document.addEventListener('DOMContentLoaded', function() {
     restartMessageAutoAdvance();
   }
   
-  // Obtener número de slides visibles según el ancho de pantalla
-  function getSlidesPerView() {
-    if (window.innerWidth >= 1024) return 3;
-    if (window.innerWidth >= 769) return 3;
-    if (window.innerWidth >= 481) return 2;
-    return 1;
-  }
-  
-  // Actualizar carrusel
-  function updateCarousel() {
-    slidesPerView = getSlidesPerView();
-    const slideWidth = 100 / slidesPerView;
-    const translateX = -currentSlide * slideWidth;
-    carouselTrack.style.transform = `translateX(${translateX}%)`;
-    
-    // Actualizar puntos activos
-    document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-      if (index === currentSlide) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
-      }
-    });
-  }
-  
-  // Ir a slide anterior
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + carouselData.length) % carouselData.length;
-    updateCarousel();
-    
-    // Efecto visual en el botón
-    prevCarouselBtn.classList.add('neon-glow');
-    setTimeout(() => prevCarouselBtn.classList.remove('neon-glow'), 300);
-    
-    // Reiniciar autoavance
-    restartCarouselAutoAdvance();
-  }
-  
-  // Ir a siguiente slide
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % carouselData.length;
-    updateCarousel();
-    
-    // Efecto visual en el botón
-    nextCarouselBtn.classList.add('neon-glow');
-    setTimeout(() => nextCarouselBtn.classList.remove('neon-glow'), 300);
-    
-    // Reiniciar autoavance
-    restartCarouselAutoAdvance();
-  }
-  
-  // Ir a slide específico
-  function goToSlide(index) {
-    currentSlide = index;
-    updateCarousel();
-    
-    // Reiniciar autoavance
-    restartCarouselAutoAdvance();
-  }
-  
-  // Iniciar autoavance del carrusel
-  function startCarouselAutoAdvance() {
-    const interval = window.innerWidth < 768 ? 6000 : 5000;
-    carouselInterval = setInterval(() => {
-      nextSlide();
-    }, interval);
-  }
-  
-  // Reiniciar autoavance del carrusel
-  function restartCarouselAutoAdvance() {
-    clearInterval(carouselInterval);
-    startCarouselAutoAdvance();
-  }
-  
   // Iniciar autoavance de mensajes
   function startMessageAutoAdvance() {
     const interval = window.innerWidth < 768 ? 8000 : 6000;
@@ -2121,16 +1963,6 @@ document.addEventListener('DOMContentLoaded', function() {
   function restartMessageAutoAdvance() {
     clearInterval(messageInterval);
     startMessageAutoAdvance();
-  }
-  
-  // Manejar redimensionamiento de ventana
-  function handleResize() {
-    slidesPerView = getSlidesPerView();
-    updateCarousel();
-    
-    // Reiniciar intervalos con nuevos tiempos
-    restartCarouselAutoAdvance();
-    restartMessageAutoAdvance();
   }
   
   // Inicializar botones flotantes
@@ -2183,6 +2015,95 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollTopBtn.style.visibility = 'hidden';
       }
     });
+  }
+  
+  // Función para mostrar el programa actual
+  function showCurrentProgram() {
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinutes = now.getMinutes();
+    const currentTime = currentHour + (currentMinutes / 60);
+    const dayOfWeek = now.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+    
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+    const dayType = isWeekend ? 'weekend' : 'weekday';
+    const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const currentDayName = daysOfWeek[dayOfWeek];
+    
+    // Formatear hora para mostrar
+    const formattedHour = currentHour.toString().padStart(2, '0');
+    const formattedMinutes = currentMinutes.toString().padStart(2, '0');
+    
+    // Encontrar el programa actual
+    const allRows = document.querySelectorAll('.table-row');
+    let currentProgramName = 'Baladas Clásicas';
+    let currentProgramTime = '00:00 – 06:00';
+    let found = false;
+    
+    // Remover la clase "current" de todas las filas
+    allRows.forEach(row => {
+      row.classList.remove('current');
+      const timeDiv = row.querySelector('div:first-child');
+      const programDiv = row.querySelector('div:last-child');
+      timeDiv.style.color = '';
+      timeDiv.style.fontWeight = '';
+      programDiv.style.color = '';
+      programDiv.style.textShadow = '';
+    });
+    
+    // Buscar el programa actual
+    allRows.forEach(row => {
+      const rowDay = row.getAttribute('data-day');
+      const start = parseFloat(row.getAttribute('data-start'));
+      const end = parseFloat(row.getAttribute('data-end'));
+      
+      if (rowDay === dayType) {
+        // Ajustar para manejar horarios que pasan de medianoche
+        if (end < start) {
+          // Horario que cruza medianoche (ej: 23:00 a 06:00)
+          if (currentTime >= start || currentTime < end) {
+            const timeDiv = row.querySelector('div:first-child');
+            const programDiv = row.querySelector('div:last-child');
+            
+            currentProgramName = programDiv.textContent;
+            currentProgramTime = timeDiv.textContent;
+            found = true;
+            
+            // Marcar como programa actual
+            row.classList.add('current');
+          }
+        } else {
+          // Horario normal
+          if (currentTime >= start && currentTime < end) {
+            const timeDiv = row.querySelector('div:first-child');
+            const programDiv = row.querySelector('div:last-child');
+            
+            currentProgramName = programDiv.textContent;
+            currentProgramTime = timeDiv.textContent;
+            found = true;
+            
+            // Marcar como programa actual
+            row.classList.add('current');
+          }
+        }
+      }
+    });
+    
+    // Si no se encuentra programa (caso borde), usar uno por defecto
+    if (!found) {
+      currentProgramName = 'Baladas Clásicas';
+      currentProgramTime = 'Música continua';
+    }
+    
+    // Actualizar el mensaje "Ahora en emisión"
+    currentProgram.textContent = currentProgramName;
+    currentTime.textContent = `${currentDayName} - ${formattedHour}:${formattedMinutes} | ${currentProgramTime}`;
+    
+    // Efecto de parpadeo en el indicador
+    nowPlaying.style.animation = 'none';
+    setTimeout(() => {
+      nowPlaying.style.animation = 'neon-pulse 3s infinite alternate';
+    }, 10);
   }
   
   // Configurar efectos interactivos
