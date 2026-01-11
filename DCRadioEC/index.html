@@ -31,7 +31,6 @@
             min-height: 100vh;
         }
 
-        /* Encabezado con info en vivo */
         .live-header {
             background: rgba(15, 15, 15, 0.95);
             padding: 15px 20px;
@@ -65,7 +64,6 @@
             font-weight: 300;
         }
 
-        /* Información en vivo actual */
         .live-info-container {
             display: flex;
             flex-direction: column;
@@ -100,7 +98,6 @@
             animation: pulse 2s infinite;
         }
 
-        /* Reproductor grande */
         .player-container {
             width: 95%;
             max-width: 1200px;
@@ -119,14 +116,12 @@
             border: none;
         }
 
-        /* Contenedor principal compacto */
         .main-container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
         }
 
-        /* Navegación de días */
         .dias-navegacion {
             display: flex;
             background: rgba(30, 30, 30, 0.9);
@@ -184,7 +179,6 @@
             font-weight: bold;
         }
 
-        /* Contenedor de programación compacto */
         .programacion-container {
             background: rgba(20, 20, 25, 0.9);
             border-radius: 15px;
@@ -220,7 +214,6 @@
             animation: fadeIn 0.3s ease;
         }
 
-        /* Lista de programas compacta */
         .lista-programas {
             display: flex;
             flex-direction: column;
@@ -329,7 +322,6 @@
             gap: 5px;
         }
 
-        /* Sección de noticias más compacta */
         .noticias-section {
             background: rgba(15, 15, 15, 0.8);
             border-radius: 15px;
@@ -425,7 +417,6 @@
             margin-bottom: 10px;
         }
 
-        /* Botón de enlace en cada noticia */
         .noticia-link {
             background: linear-gradient(135deg, var(--main), #00B8D4);
             color: var(--dark);
@@ -451,7 +442,6 @@
             box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
         }
 
-        /* Botones flotantes */
         .floating-buttons {
             position: fixed;
             bottom: 20px;
@@ -512,7 +502,6 @@
             transform: translateY(-3px) scale(1.05);
         }
 
-        /* Footer */
         footer {
             background: rgba(15, 15, 15, 0.95);
             text-align: center;
@@ -531,7 +520,6 @@
             margin-bottom: 10px;
         }
 
-        /* Animaciones */
         @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -553,142 +541,44 @@
             50% { border-left-color: #ff6666; }
         }
 
-        /* Responsive */
         @media (max-width: 992px) {
-            .player-container {
-                height: 400px;
-            }
-            
-            .live-header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-            
-            .live-info-container {
-                align-items: center;
-            }
-            
-            .noticia-slide {
-                height: 380px;
-            }
+            .player-container { height: 400px; }
+            .live-header { flex-direction: column; gap: 15px; text-align: center; }
+            .live-info-container { align-items: center; }
+            .noticia-slide { height: 380px; }
         }
 
         @media (max-width: 768px) {
-            .player-container {
-                height: 300px;
-                width: 98%;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .live-time {
-                font-size: 1.5rem;
-            }
-            
-            .dias-navegacion {
-                padding: 8px;
-                gap: 3px;
-            }
-            
-            .dia-btn {
-                min-width: 80px;
-                font-size: 0.9rem;
-                padding: 10px 3px;
-            }
-            
-            .programacion-container {
-                padding: 20px;
-            }
-            
-            .programa-item {
-                padding: 12px;
-                min-height: 65px;
-            }
-            
-            .programa-hora {
-                min-width: 80px;
-                font-size: 1rem;
-            }
-            
-            .programa-info h4 {
-                font-size: 1rem;
-            }
-            
-            .floating-buttons {
-                right: 15px;
-                bottom: 15px;
-            }
-            
-            .whatsapp-btn, .scroll-top-btn {
-                padding: 10px 15px;
-                font-size: 0.8rem;
-            }
-            
-            .noticia-slide {
-                height: 360px;
-            }
+            .player-container { height: 300px; width: 98%; }
+            h1 { font-size: 2rem; }
+            .live-time { font-size: 1.5rem; }
+            .dias-navegacion { padding: 8px; gap: 3px; }
+            .dia-btn { min-width: 80px; font-size: 0.9rem; padding: 10px 3px; }
+            .programacion-container { padding: 20px; }
+            .programa-item { padding: 12px; min-height: 65px; }
+            .programa-hora { min-width: 80px; font-size: 1rem; }
+            .programa-info h4 { font-size: 1rem; }
+            .floating-buttons { right: 15px; bottom: 15px; }
+            .whatsapp-btn, .scroll-top-btn { padding: 10px 15px; font-size: 0.8rem; }
+            .noticia-slide { height: 360px; }
         }
 
         @media (max-width: 480px) {
-            .player-container {
-                height: 250px;
-            }
-            
-            .live-time {
-                font-size: 1.3rem;
-            }
-            
-            .dia-btn {
-                min-width: 70px;
-                font-size: 0.8rem;
-                padding: 8px 2px;
-            }
-            
-            .programa-hora {
-                min-width: 70px;
-                font-size: 0.9rem;
-                padding-right: 10px;
-            }
-            
-            .programa-info {
-                padding-left: 10px;
-            }
-            
-            .programa-info h4 {
-                font-size: 0.95rem;
-            }
-            
-            .programa-info p {
-                font-size: 0.8rem;
-            }
-            
-            .floating-buttons {
-                right: 10px;
-                bottom: 10px;
-            }
-            
-            .whatsapp-btn, .scroll-top-btn {
-                padding: 8px 12px;
-                font-size: 0.75rem;
-            }
-            
-            .back-button {
-                top: 15px;
-                left: 15px;
-                padding: 8px 15px;
-            }
-            
-            .noticia-slide {
-                height: 350px;
-            }
+            .player-container { height: 250px; }
+            .live-time { font-size: 1.3rem; }
+            .dia-btn { min-width: 70px; font-size: 0.8rem; padding: 8px 2px; }
+            .programa-hora { min-width: 70px; font-size: 0.9rem; padding-right: 10px; }
+            .programa-info { padding-left: 10px; }
+            .programa-info h4 { font-size: 0.95rem; }
+            .programa-info p { font-size: 0.8rem; }
+            .floating-buttons { right: 10px; bottom: 10px; }
+            .whatsapp-btn, .scroll-top-btn { padding: 8px 12px; font-size: 0.75rem; }
+            .back-button { top: 15px; left: 15px; padding: 8px 15px; }
+            .noticia-slide { height: 350px; }
         }
     </style>
 </head>
 <body>
-    <!-- Encabezado con información en vivo -->
     <header class="live-header">
         <div class="logo-container">
             <i class="fas fa-broadcast-tower"></i>
@@ -714,26 +604,19 @@
         </div>
     </header>
 
-    <!-- Botón Atrás -->
     <a href="https://rdcrsound.adcm.club" class="back-button" target="_self">
         <i class="fas fa-arrow-left"></i> Atrás
     </a>
 
-    <!-- Reproductor grande -->
     <div class="player-container">
         <iframe class="player-frame" name="contenedorPlayer" allow="autoplay" frameborder="0" scrolling="no" 
                 src="https://andydcm.github.io/dcradioec.github.io/" id="contenedorPlayer">
         </iframe>
     </div>
 
-    <!-- Contenedor principal compacto -->
     <div class="main-container">
-        <!-- Navegación de días -->
-        <div class="dias-navegacion" id="dias-navegacion">
-            <!-- Los botones de días se generan dinámicamente -->
-        </div>
+        <div class="dias-navegacion" id="dias-navegacion"></div>
         
-        <!-- Programación -->
         <div class="programacion-container">
             <div class="programacion-header">
                 <h2><i class="fas fa-tv"></i> Programación DC Radio</h2>
@@ -744,9 +627,7 @@
             </div>
             
             <div class="programacion-dia active" id="programacion-lunes">
-                <div class="lista-programas" id="lista-lunes">
-                    <!-- Programas del lunes -->
-                </div>
+                <div class="lista-programas" id="lista-lunes"></div>
             </div>
             
             <div class="programacion-dia" id="programacion-martes">
@@ -774,12 +655,10 @@
             </div>
         </div>
         
-        <!-- Noticias - Carrusel con 6 noticias -->
         <section class="noticias-section">
             <h2 class="section-title">DC NOTICIAS</h2>
             <div class="swiper noticias-swiper">
                 <div class="swiper-wrapper">
-                    <!-- Noticia 1 -->
                     <div class="swiper-slide noticia-slide">
                         <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
                             <div class="noticia-category">Radio</div>
@@ -794,7 +673,6 @@
                         </div>
                     </div>
                     
-                    <!-- Noticia 2 -->
                     <div class="swiper-slide noticia-slide">
                         <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
                             <div class="noticia-category">Música</div>
@@ -809,7 +687,6 @@
                         </div>
                     </div>
                     
-                    <!-- Noticia 3 -->
                     <div class="swiper-slide noticia-slide">
                         <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
                             <div class="noticia-category">Tecnología</div>
@@ -824,7 +701,6 @@
                         </div>
                     </div>
                     
-                    <!-- Noticia 4 -->
                     <div class="swiper-slide noticia-slide">
                         <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1561489396-888724a1543d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
                             <div class="noticia-category">Espectáculos</div>
@@ -839,7 +715,6 @@
                         </div>
                     </div>
                     
-                    <!-- Noticia 5 -->
                     <div class="swiper-slide noticia-slide">
                         <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
                             <div class="noticia-category">Cultura</div>
@@ -854,7 +729,6 @@
                         </div>
                     </div>
                     
-                    <!-- Noticia 6 -->
                     <div class="swiper-slide noticia-slide">
                         <div class="noticia-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
                             <div class="noticia-category">Actualidad</div>
@@ -876,21 +750,17 @@
         </section>
     </div>
 
-    <!-- Botones flotantes -->
     <div class="floating-buttons">
-        <!-- Botón Ir Arriba -->
         <button class="scroll-top-btn" id="scrollTopBtn">
             <i class="fas fa-chevron-up"></i> Arriba
         </button>
         
-        <!-- Botón WhatsApp -->
         <a href="https://wa.me/593XXXXXXXXX?text=Hola%20DCRADIOEC,%20me%20gustaría%20pedir%20una%20canción:" 
            class="whatsapp-btn" target="_blank">
             <i class="fab fa-whatsapp"></i> Pedir Canción
         </a>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="network-logo">
             <i class="fas fa-satellite-dish"></i> DCRADIOEC - Radio Generalista
@@ -904,106 +774,99 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // DATOS COMPLETOS DE PROGRAMACIÓN (actualizada - sin Especial DC, Sabías Que, Ranking DC, Domingo en Familia)
+        // DATOS DE PROGRAMACIÓN (actualizada)
         const programacionCompleta = {
             lunes: [
-                { hora: "00:00", duracion: "5h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
-                { hora: "05:00", duracion: "1h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "00:00", duracion: "6h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
                 { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
-                { hora: "09:00", duracion: "2h", titulo: "Hits y Tendencias", desc: "Pop latino, pop anglo, reguetón comercial light", categoria: "Música Actual" },
-                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Pop & soft rock 2000–2025", categoria: "Música Variada" },
-                { hora: "12:00", duracion: "2h", titulo: "Mediodía en Compañía", desc: "Baladas pop, latin pop, tropical suave", categoria: "Variedades" },
-                { hora: "14:00", duracion: "3h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
-                { hora: "17:00", duracion: "2h", titulo: "Drive Time DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
-                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas variados para tu noche", categoria: "Música Variada" },
-                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "09:00", duracion: "3h", titulo: "Hits DC", desc: "Los éxitos más sonados del momento", categoria: "Música Actual" },
+                { hora: "12:00", duracion: "3h", titulo: "DC en Compañía", desc: "Música para acompañar tu mediodía", categoria: "Variedades" },
+                { hora: "15:00", duracion: "2h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
+                { hora: "17:00", duracion: "2h", titulo: "Drive DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
+                { hora: "19:00", duracion: "1h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
+                { hora: "20:00", duracion: "3h", titulo: "La Voz del Silencio", desc: "Con Darío Castellanos - Reflexiones y música suave", categoria: "Reflexión" },
+                { hora: "23:00", duracion: "1h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             martes: [
-                { hora: "00:00", duracion: "5h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
-                { hora: "05:00", duracion: "1h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "00:00", duracion: "6h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
                 { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
-                { hora: "09:00", duracion: "2h", titulo: "Hits y Tendencias", desc: "Pop latino, pop anglo, reguetón comercial light", categoria: "Música Actual" },
-                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Pop & soft rock 2000–2025", categoria: "Música Variada" },
-                { hora: "12:00", duracion: "2h", titulo: "Mediodía en Compañía", desc: "Baladas pop, latin pop, tropical suave", categoria: "Variedades" },
-                { hora: "14:00", duracion: "3h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
-                { hora: "17:00", duracion: "2h", titulo: "Drive Time DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
-                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas variados para tu noche", categoria: "Música Variada" },
-                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "09:00", duracion: "3h", titulo: "Hits DC", desc: "Los éxitos más sonados del momento", categoria: "Música Actual" },
+                { hora: "12:00", duracion: "3h", titulo: "DC en Compañía", desc: "Música para acompañar tu mediodía", categoria: "Variedades" },
+                { hora: "15:00", duracion: "2h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
+                { hora: "17:00", duracion: "2h", titulo: "Drive DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
+                { hora: "19:00", duracion: "1h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
+                { hora: "20:00", duracion: "3h", titulo: "La Voz del Silencio", desc: "Con Darío Castellanos - Reflexiones y música suave", categoria: "Reflexión" },
+                { hora: "23:00", duracion: "1h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             miercoles: [
-                { hora: "00:00", duracion: "5h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
-                { hora: "05:00", duracion: "1h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "00:00", duracion: "6h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
                 { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
-                { hora: "09:00", duracion: "2h", titulo: "Hits y Tendencias", desc: "Pop latino, pop anglo, reguetón comercial light", categoria: "Música Actual" },
-                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Pop & soft rock 2000–2025", categoria: "Música Variada" },
-                { hora: "12:00", duracion: "2h", titulo: "Mediodía en Compañía", desc: "Baladas pop, latin pop, tropical suave", categoria: "Variedades" },
-                { hora: "14:00", duracion: "3h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
-                { hora: "17:00", duracion: "2h", titulo: "Drive Time DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
-                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas variados para tu noche", categoria: "Música Variada" },
-                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "09:00", duracion: "3h", titulo: "Hits DC", desc: "Los éxitos más sonados del momento", categoria: "Música Actual" },
+                { hora: "12:00", duracion: "3h", titulo: "DC en Compañía", desc: "Música para acompañar tu mediodía", categoria: "Variedades" },
+                { hora: "15:00", duracion: "2h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
+                { hora: "17:00", duracion: "2h", titulo: "Drive DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
+                { hora: "19:00", duracion: "1h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
+                { hora: "20:00", duracion: "3h", titulo: "La Voz del Silencio", desc: "Con Darío Castellanos - Reflexiones y música suave", categoria: "Reflexión" },
+                { hora: "23:00", duracion: "1h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             jueves: [
-                { hora: "00:00", duracion: "5h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
-                { hora: "05:00", duracion: "1h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "00:00", duracion: "6h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
                 { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
-                { hora: "09:00", duracion: "2h", titulo: "Hits y Tendencias", desc: "Pop latino, pop anglo, reguetón comercial light", categoria: "Música Actual" },
-                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Pop & soft rock 2000–2025", categoria: "Música Variada" },
-                { hora: "12:00", duracion: "2h", titulo: "Mediodía en Compañía", desc: "Baladas pop, latin pop, tropical suave", categoria: "Variedades" },
-                { hora: "14:00", duracion: "3h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
-                { hora: "17:00", duracion: "2h", titulo: "Drive Time DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
-                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas variados para tu noche", categoria: "Música Variada" },
-                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "09:00", duracion: "3h", titulo: "Hits DC", desc: "Los éxitos más sonados del momento", categoria: "Música Actual" },
+                { hora: "12:00", duracion: "3h", titulo: "DC en Compañía", desc: "Música para acompañar tu mediodía", categoria: "Variedades" },
+                { hora: "15:00", duracion: "2h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
+                { hora: "17:00", duracion: "2h", titulo: "Drive DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
+                { hora: "19:00", duracion: "1h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
+                { hora: "20:00", duracion: "3h", titulo: "La Voz del Silencio", desc: "Con Darío Castellanos - Reflexiones y música suave", categoria: "Reflexión" },
+                { hora: "23:00", duracion: "1h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             viernes: [
-                { hora: "00:00", duracion: "5h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
-                { hora: "05:00", duracion: "1h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
+                { hora: "00:00", duracion: "6h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
                 { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
-                { hora: "09:00", duracion: "2h", titulo: "Hits y Tendencias", desc: "Pop latino, pop anglo, reguetón comercial light", categoria: "Música Actual" },
-                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Pop & soft rock 2000–2025", categoria: "Música Variada" },
-                { hora: "12:00", duracion: "2h", titulo: "Mediodía en Compañía", desc: "Baladas pop, latin pop, tropical suave", categoria: "Variedades" },
-                { hora: "14:00", duracion: "3h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
-                { hora: "17:00", duracion: "2h", titulo: "Drive Time DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
+                { hora: "09:00", duracion: "3h", titulo: "Hits DC", desc: "Los éxitos más sonados del momento", categoria: "Música Actual" },
+                { hora: "12:00", duracion: "3h", titulo: "DC en Compañía", desc: "Música para acompañar tu mediodía", categoria: "Variedades" },
+                { hora: "15:00", duracion: "2h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
+                { hora: "17:00", duracion: "2h", titulo: "Drive DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
                 { hora: "19:00", duracion: "2h", titulo: "El Mensajero de la Salsa", desc: "Con Mr Cheo – salsa, historia y sentimiento", categoria: "Salsa" },
-                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "21:00", duracion: "2h", titulo: "La Voz del Silencio", desc: "Con Darío Castellanos - Reflexiones y música suave", categoria: "Reflexión" },
+                { hora: "23:00", duracion: "1h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             sabado: [
-                { hora: "00:00", duracion: "4h", titulo: "DC Mix Night", desc: "Mixes crossover suaves (sin locución)", categoria: "Música Mix" },
-                { hora: "04:00", duracion: "2h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
-                { hora: "06:00", duracion: "2h", titulo: "Amanecer DC Weekend", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
-                { hora: "08:00", duracion: "1h", titulo: "Entretelones", desc: "Con Darío Castellanos", categoria: "Entrevistas" },
-                { hora: "09:00", duracion: "2h", titulo: "Clásicos DC", desc: "Pop 90s, 2000s, baladas memorables", categoria: "Retro" },
-                { hora: "11:00", duracion: "1h", titulo: "Música Continua", desc: "Los mejores temas de la semana", categoria: "Música Variada" },
-                { hora: "12:00", duracion: "1h", titulo: "++ Prendidos", desc: "Con Diego Cheíto Grijalva", categoria: "Variedades" },
-                { hora: "13:00", duracion: "2h", titulo: "Tarde DC Weekend", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
-                { hora: "15:00", duracion: "2h", titulo: "Música Continua", desc: "Variedad musical para tu tarde", categoria: "Música Variada" },
-                { hora: "17:00", duracion: "2h", titulo: "Salsa & Más DC", desc: "Salsa clásica y moderna", categoria: "Salsa" },
-                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas especiales para tu noche", categoria: "Música Variada" },
+                { hora: "00:00", duracion: "6h", titulo: "DC Mix Night", desc: "Mixes crossover suaves (sin locución)", categoria: "Música Mix" },
+                { hora: "06:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
+                { hora: "09:00", duracion: "3h", titulo: "Clásicos DC", desc: "Éxitos de los 80s, 90s y 2000s", categoria: "Retro" },
+                { hora: "12:00", duracion: "1h", titulo: "++ Prendidos", desc: "Con Diego Cheíto Grijalva - Entrevistas y música", categoria: "Entretenimiento" },
+                { hora: "13:00", duracion: "4h", titulo: "Tarde DC Weekend", desc: "Música variada para tu sábado", categoria: "Música Variada" },
+                { hora: "17:00", duracion: "2h", titulo: "Salsa DC", desc: "Lo mejor de la salsa clásica y moderna", categoria: "Salsa" },
+                { hora: "19:00", duracion: "2h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
                 { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ],
             domingo: [
-                { hora: "00:00", duracion: "5h", titulo: "DC Mix Night", desc: "Mixes crossover suaves (sin locución)", categoria: "Música Mix" },
-                { hora: "05:00", duracion: "2h", titulo: "Amanecer DC", desc: "Pop suave, baladas modernas", categoria: "Música Matutina" },
-                { hora: "07:00", duracion: "1h", titulo: "Música Continua", desc: "Temas variados para comenzar el día", categoria: "Música Variada" },
-                { hora: "08:00", duracion: "1h", titulo: "Entretelones", desc: "Con Darío Castellanos", categoria: "Entrevistas" },
-                { hora: "09:00", duracion: "2h", titulo: "Recuerdos DC", desc: "Éxitos de los 80s y 90s", categoria: "Retro" },
-                { hora: "11:00", duracion: "2h", titulo: "Música Continua", desc: "Variedad musical dominical", categoria: "Música Variada" },
-                { hora: "13:00", duracion: "2h", titulo: "Tarde DC Relax", desc: "Música suave para el domingo", categoria: "Relajación" },
-                { hora: "15:00", duracion: "2h", titulo: "Música Continua", desc: "Selección especial dominical", categoria: "Música Variada" },
-                { hora: "17:00", duracion: "2h", titulo: "Salsa & Pop DC", desc: "Mezcla de salsa y pop latino", categoria: "Salsa/Pop" },
-                { hora: "19:00", duracion: "2h", titulo: "Música Continua", desc: "Temas variados para terminar el día", categoria: "Música Variada" },
+                { hora: "00:00", duracion: "6h", titulo: "DC Mix Night", desc: "Mixes crossover suaves (sin locución)", categoria: "Música Mix" },
+                { hora: "06:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
+                { hora: "09:00", duracion: "4h", titulo: "Recuerdos DC", desc: "Los grandes éxitos de todas las épocas", categoria: "Retro" },
+                { hora: "13:00", duracion: "4h", titulo: "Domingo Relax DC", desc: "Música suave para relajar el domingo", categoria: "Relajación" },
+                { hora: "17:00", duracion: "2h", titulo: "Salsa DC", desc: "Salsa para animar tu tarde dominical", categoria: "Salsa" },
+                { hora: "19:00", duracion: "2h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
                 { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
             ]
         };
 
-        // NOMBRES DE DÍAS EN ESPAÑOL
         const diasSemana = ['DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO'];
         const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-        // VARIABLES GLOBALES
         let programaActual = null;
         let diaActual = '';
 
-        // FUNCIÓN PARA ACTUALIZAR RELOJ EN TIEMPO REAL
+        // FUNCIÓN PARA OBTENER EL DÍA ACTUAL
+        function obtenerDiaActual() {
+            const ahora = new Date();
+            const diaIndex = ahora.getDay();
+            const diasNombres = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
+            return diasNombres[diaIndex];
+        }
+
+        // FUNCIÓN PARA ACTUALIZAR RELOJ
         function actualizarReloj() {
             const ahora = new Date();
             const horas = ahora.getHours().toString().padStart(2, '0');
@@ -1019,34 +882,26 @@
             
             document.getElementById('fecha-actual').textContent = `${diaNombre} ${diaNum} de ${mes} ${año}`;
             
-            // Parpadeo del badge "EN VIVO"
             const badge = document.getElementById('live-badge');
             badge.style.opacity = (ahora.getSeconds() % 2 === 0) ? '1' : '0.7';
             
-            // Actualizar programa actual cada minuto
             if (minutos === '00' || programaActual === null) {
                 calcularProgramaActual();
             }
         }
 
-        // FUNCIÓN PARA CALCULAR QUÉ PROGRAMA ESTÁ EN VIVO
+        // FUNCIÓN PARA CALCULAR PROGRAMA ACTUAL
         function calcularProgramaActual() {
             const ahora = new Date();
-            const diaIndex = ahora.getDay(); // 0=domingo, 1=lunes...
             const horaActual = ahora.getHours();
             const minutoActual = ahora.getMinutes();
             const tiempoActual = horaActual * 60 + minutoActual;
-            
-            // Convertir índice de día a nombre
-            const diasNombres = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
-            diaActual = diasNombres[diaIndex];
             
             const programacionHoy = programacionCompleta[diaActual];
             if (!programacionHoy) return;
             
             programaActual = null;
             
-            // Buscar programa en vivo
             for (const programa of programacionHoy) {
                 const horaInicio = parseInt(programa.hora.split(':')[0]);
                 const minutoInicio = parseInt(programa.hora.split(':')[1]) || 0;
@@ -1061,7 +916,6 @@
                 }
             }
             
-            // Actualizar UI
             const programaActualElement = document.getElementById('programa-actual');
             if (programaActual) {
                 programaActualElement.textContent = `${programaActual.titulo} (${programaActual.hora})`;
@@ -1073,16 +927,14 @@
                 programaActualElement.style.fontWeight = 'normal';
             }
             
-            // Resaltar día actual en navegación
             resaltarDiaActual();
             
-            // Actualizar programación del día actual
             if (document.querySelector(`[data-dia="${diaActual}"]`).classList.contains('active')) {
                 generarProgramacion(diaActual);
             }
         }
 
-        // FUNCIÓN PARA RESALTAR DÍA ACTUAL EN NAVEGACIÓN
+        // FUNCIÓN PARA RESALTAR DÍA ACTUAL
         function resaltarDiaActual() {
             const botonesDias = document.querySelectorAll('.dia-btn');
             botonesDias.forEach(boton => {
@@ -1102,14 +954,16 @@
             diasNombres.forEach((dia, index) => {
                 const boton = document.createElement('button');
                 boton.className = 'dia-btn';
-                if (dia === 'lunes') boton.classList.add('active');
+                if (dia === diaActual) {
+                    boton.classList.add('active');
+                }
                 boton.setAttribute('data-dia', dia);
                 boton.textContent = diasDisplay[index];
                 contenedor.appendChild(boton);
             });
         }
 
-        // FUNCIÓN PARA GENERAR PROGRAMACIÓN DE UN DÍA
+        // FUNCIÓN PARA GENERAR PROGRAMACIÓN
         function generarProgramacion(dia) {
             const contenedor = document.getElementById(`lista-${dia}`);
             if (!contenedor) return;
@@ -1137,7 +991,6 @@
                 const duracion = parseInt(programa.duracion) || 1;
                 const tiempoFin = tiempoInicio + (duracion * 60);
                 
-                // Marcar si está en vivo (solo si es hoy)
                 if (esHoy && tiempoActual >= tiempoInicio && tiempoActual < tiempoFin) {
                     programaItem.classList.add('en-vivo');
                 }
@@ -1163,11 +1016,10 @@
             });
         }
 
-        // FUNCIÓN PARA EL BOTÓN "IR ARRIBA"
+        // FUNCIÓN BOTÓN "IR ARRIBA"
         function configurarBotonArriba() {
             const scrollTopBtn = document.getElementById('scrollTopBtn');
             
-            // Mostrar/ocultar botón al hacer scroll
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 300) {
                     scrollTopBtn.classList.add('show');
@@ -1176,7 +1028,6 @@
                 }
             });
             
-            // Evento para ir al inicio
             scrollTopBtn.addEventListener('click', () => {
                 window.scrollTo({
                     top: 0,
@@ -1185,15 +1036,21 @@
             });
         }
 
-        // INICIALIZACIÓN AL CARGAR LA PÁGINA
+        // INICIALIZACIÓN
         document.addEventListener('DOMContentLoaded', function() {
-            // Generar botones de días
+            // 1. Obtener día actual
+            diaActual = obtenerDiaActual();
+            
+            // 2. Generar botones de días
             generarBotonesDias();
             
-            // Generar programación inicial (lunes)
-            generarProgramacion('lunes');
+            // 3. Generar programación del día actual
+            generarProgramacion(diaActual);
             
-            // Configurar navegación entre días
+            // 4. Mostrar contenedor del día actual
+            document.getElementById(`programacion-${diaActual}`).classList.add('active');
+            
+            // 5. Configurar navegación entre días
             const diasButtons = document.querySelectorAll('.dia-btn');
             const programacionDias = document.querySelectorAll('.programacion-dia');
             
@@ -1211,18 +1068,18 @@
                 });
             });
             
-            // Configurar botón "Ir arriba"
+            // 6. Configurar botón "Ir arriba"
             configurarBotonArriba();
             
-            // Iniciar reloj en tiempo real
+            // 7. Iniciar reloj
             actualizarReloj();
             setInterval(actualizarReloj, 1000);
             
-            // Calcular programa actual
+            // 8. Calcular programa actual
             calcularProgramaActual();
-            setInterval(calcularProgramaActual, 60000); // Actualizar cada minuto
+            setInterval(calcularProgramaActual, 60000);
             
-            // Configurar Swiper para noticias (6 noticias)
+            // 9. Configurar Swiper
             new Swiper('.noticias-swiper', {
                 slidesPerView: 1,
                 spaceBetween: 15,
@@ -1236,7 +1093,7 @@
                 }
             });
             
-            // Efecto de actualización automática cada 30 segundos
+            // 10. Actualización automática
             setInterval(() => {
                 const diaActivo = document.querySelector('.dia-btn.active').getAttribute('data-dia');
                 generarProgramacion(diaActivo);
