@@ -846,7 +846,7 @@ nav a:hover::after {
   100% { transform: scale(4); opacity: 0; }
 }
 
-/* Programas Section */
+/* Programs Section */
 .programs {
   padding: 80px 20px;
   background-color: var(--black);
@@ -877,223 +877,327 @@ nav a:hover::after {
   text-shadow: 0 0 5px var(--neon-green);
 }
 
-/* Carrusel de programas */
-.carousel-container {
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
-}
+/* ESTILOS NUEVOS PARA PROGRAMACIÓN SEMANAL */
 
-.carousel-track {
+/* Selector de día */
+.day-selector {
   display: flex;
-  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  height: 500px;
-}
-
-.carousel-slide {
-  min-width: 100%;
-  height: 100%;
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.7);
-  transition: transform 0.5s;
-}
-
-.carousel-slide:hover img {
-  transform: scale(1.05);
-}
-
-.carousel-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 40px;
-  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-  border-radius: 0 0 20px 20px;
-}
-
-.carousel-content h3 {
-  font-size: 2.2rem;
-  margin-bottom: 10px;
-  color: var(--neon-pink);
-  text-shadow: 0 0 10px var(--neon-pink);
-}
-
-.carousel-content p {
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-  color: var(--white);
-  max-width: 600px;
-  font-weight: 300;
-}
-
-.program-time {
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 15px;
-  color: var(--neon-green);
-  font-weight: 700;
-  font-size: 1.2rem;
-  text-shadow: 0 0 5px var(--neon-green);
+  margin-bottom: 40px;
+  padding: 20px;
+  background: rgba(10, 10, 20, 0.6);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 0, 255, 0.2);
+  backdrop-filter: blur(10px);
 }
 
-/* Botones del carrusel */
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.7);
+.day-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.day-tab {
+  background: rgba(0, 0, 0, 0.4);
   border: 2px solid var(--neon-blue);
   color: var(--neon-blue);
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  font-size: 1.8rem;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-transform: uppercase;
+}
+
+.day-tab:hover {
+  background: rgba(0, 255, 255, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+}
+
+.day-tab.active {
+  background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 5px 20px rgba(255, 0, 255, 0.5);
+}
+
+.current-day-indicator {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.current-show {
+  background: rgba(255, 0, 255, 0.15);
+  padding: 12px 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 0, 255, 0.4);
+  text-align: center;
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { 
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+  }
+}
+
+.current-show-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  color: var(--neon-green);
+  margin-bottom: 5px;
+}
+
+.current-show-time {
+  font-size: 0.9rem;
+  color: var(--neon-blue);
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 77, 77, 0.15);
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 77, 77, 0.4);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Contenedor de horarios */
+.schedule-container {
+  position: relative;
+}
+
+.day-schedule {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.day-schedule.active {
+  display: block;
+}
+
+.day-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(255, 0, 255, 0.3);
+}
+
+.day-header h3 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.day-subtitle {
+  color: var(--neon-green);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Grid de horarios */
+.time-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.time-slot {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+  background: rgba(20, 20, 30, 0.6);
+  border-radius: 15px;
+  padding: 20px;
+  border-left: 5px solid var(--neon-pink);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  position: relative;
+}
+
+.time-slot:hover {
+  transform: translateX(10px);
+  background: rgba(30, 30, 40, 0.8);
+  box-shadow: 0 10px 25px rgba(255, 0, 255, 0.2);
+}
+
+.time-slot.dj-session {
+  border-left-color: var(--neon-green);
+  background: rgba(20, 30, 20, 0.6);
+}
+
+.time-slot.dj-session:hover {
+  background: rgba(30, 40, 30, 0.8);
+}
+
+/* ESTILO PARA SEGMENTO ACTUAL */
+.time-slot.now-playing {
+  background: linear-gradient(90deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
+  border-left: 5px solid #FF4D4D;
+  animation: nowPlayingGlow 2s infinite alternate;
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+}
+
+@keyframes nowPlayingGlow {
+  0% { 
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+    transform: translateX(0);
+  }
+  100% { 
+    box-shadow: 0 0 40px rgba(255, 0, 255, 0.7);
+    transform: translateX(5px);
+  }
+}
+
+.now-playing-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #FF4D4D;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.time-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-right: 20px;
+  border-right: 1px solid rgba(255, 0, 255, 0.3);
+}
+
+.time-hours {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--neon-blue);
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.time-icon {
+  font-size: 1.5rem;
+  color: var(--neon-pink);
+}
+
+.program-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.program-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.program-desc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.program-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: rgba(255, 0, 255, 0.1);
+  color: var(--neon-pink);
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border: 1px solid rgba(255, 0, 255, 0.3);
+}
+
+/* Estilo para sesiones de DJ */
+.dj-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.dj-avatar-small {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  font-size: 1.2rem;
 }
 
-.carousel-btn:hover {
-  background: rgba(255, 0, 255, 0.3);
-  color: var(--neon-pink);
-  border: 2px solid var(--neon-pink);
-  box-shadow: 0 0 25px var(--neon-pink);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-btn:active {
-  transform: translateY(-50%) scale(1.05);
-  transition: transform 0.1s;
-}
-
-.carousel-btn.prev {
-  left: 20px;
-}
-
-.carousel-btn.next {
-  right: 20px;
-}
-
-/* Indicadores del carrusel */
-.carousel-indicators {
+.dj-name {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 30px;
+  flex-direction: column;
 }
 
-.carousel-indicator {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: var(--gray);
-  cursor: pointer;
-  transition: all 0.3s;
-  border: 2px solid transparent;
+.dj-alias {
+  font-size: 0.8rem;
+  color: var(--neon-green);
+  opacity: 0.8;
+  margin-top: -5px;
 }
 
-.carousel-indicator:hover {
-  background-color: var(--neon-blue);
-  transform: scale(1.2);
-}
-
-.carousel-indicator.active {
-  background-color: var(--neon-pink);
-  transform: scale(1.3);
-  box-shadow: 0 0 10px var(--neon-pink);
-}
-
-/* DJs Section */
-.djs {
-  padding: 80px 20px;
-  background-color: var(--black-dark);
-}
-
-.djs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 30px;
+/* Pie de día */
+.day-footer {
   margin-top: 40px;
-}
-
-.dj-card {
-  background: rgba(30, 30, 30, 0.8);
-  border-radius: 15px;
-  padding: 25px;
+  padding: 20px;
   text-align: center;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid transparent;
-  position: relative;
-  overflow: hidden;
-}
-
-.dj-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
-}
-
-.dj-card:hover {
-  transform: translateY(-15px) scale(1.03);
-  border: 1px solid var(--neon-green);
-  box-shadow: 0 15px 30px rgba(0, 255, 0, 0.2);
-}
-
-.dj-avatar {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto 20px;
-  border: 3px solid var(--neon-blue);
-  box-shadow: 0 0 20px var(--neon-blue);
-  transition: all 0.3s;
-}
-
-.dj-card:hover .dj-avatar {
-  border: 3px solid var(--neon-pink);
-  box-shadow: 0 0 25px var(--neon-pink);
-  transform: rotate(5deg);
-}
-
-.dj-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: var(--neon-pink);
-}
-
-.dj-card p {
-  color: var(--white);
-  margin-bottom: 15px;
-  font-size: 0.9rem;
-  font-weight: 300;
-}
-
-.dj-social {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 15px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 0, 255, 0.2);
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 /* Footer */
@@ -1295,14 +1399,6 @@ footer::before {
     font-size: 2.3rem;
   }
   
-  .carousel-slide {
-    height: 450px;
-  }
-  
-  .carousel-content h3 {
-    font-size: 1.8rem;
-  }
-  
   .floating-buttons {
     bottom: 20px;
     right: 20px;
@@ -1362,28 +1458,6 @@ footer::before {
     text-align: center;
   }
   
-  .carousel-slide {
-    height: 400px;
-  }
-  
-  .carousel-content {
-    padding: 25px;
-  }
-  
-  .carousel-content h3 {
-    font-size: 1.5rem;
-  }
-  
-  .carousel-content p {
-    font-size: 1rem;
-  }
-  
-  .carousel-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
-  }
-  
   .floating-buttons {
     bottom: 15px;
     right: 15px;
@@ -1402,12 +1476,12 @@ footer::before {
   
   /* MEJORAS PARA EL REPRODUCTOR EN MÓVIL */
   .reproductor-container {
-    width: 98%; /* Más ancho para móvil */
+    width: 98%;
     padding: 20px;
-    margin: 0 auto; /* Centrado */
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrar contenido */
+    align-items: center;
   }
   
   .station-logo {
@@ -1459,7 +1533,61 @@ footer::before {
     left: 15px;
     padding: 8px 15px;
     font-size: 0.8rem;
-    z-index: 1002; /* Más alto para móviles */
+    z-index: 1002;
+  }
+  
+  /* Responsive para programación */
+  .day-selector {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .day-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .day-tab {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
+  
+  .day-header h3 {
+    font-size: 1.8rem;
+  }
+  
+  .time-slot {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .time-label {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 0, 255, 0.3);
+    padding-right: 0;
+    padding-bottom: 15px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .time-hours {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+  }
+  
+  .program-title {
+    font-size: 1.3rem;
+  }
+  
+  .current-day-indicator {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .day-footer {
+    padding: 15px;
+    font-size: 0.9rem;
   }
 }
 
@@ -1479,42 +1607,8 @@ footer::before {
     text-align: center;
   }
   
-  .djs-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  
-  .platforms {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .platform {
-    width: 100%;
-    max-width: 300px;
-  }
-  
   .logo-text h1 {
     font-size: 1.5rem;
-  }
-  
-  .carousel-slide {
-    height: 350px;
-  }
-  
-  .carousel-content h3 {
-    font-size: 1.3rem;
-    text-align: center;
-  }
-  
-  .carousel-content p {
-    font-size: 0.9rem;
-    text-align: center;
-  }
-  
-  .program-time {
-    font-size: 1rem;
-    justify-content: center;
   }
   
   .floating-buttons {
@@ -1581,6 +1675,46 @@ footer::before {
     flex-direction: column;
     align-items: center;
   }
+  
+  /* Responsive para programación */
+  .day-header h3 {
+    font-size: 1.5rem;
+  }
+  
+  .time-hours {
+    font-size: 1rem;
+  }
+  
+  .program-title {
+    font-size: 1.2rem;
+  }
+  
+  .program-desc {
+    font-size: 0.9rem;
+  }
+  
+  .tag {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+  }
+  
+  .current-show {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+  
+  .current-show-title {
+    font-size: 1rem;
+  }
+  
+  .day-footer {
+    padding: 12px;
+    font-size: 0.8rem;
+  }
+  
+  .day-subtitle {
+    font-size: 1rem;
+  }
 }
 
 /* Mejoras adicionales para orientación horizontal en móviles */
@@ -1600,6 +1734,10 @@ footer::before {
   
   .player-area {
     min-height: 140px;
+  }
+  
+  .programs {
+    padding: 40px 20px;
   }
 }
 </style>
@@ -1650,8 +1788,7 @@ footer::before {
         <ul id="navMenu">
           <li><a href="#home">INICIO</a></li>
           <li><a href="#player">EN VIVO</a></li>
-          <li><a href="#programs">MEZCLAS</a></li>
-          <li><a href="#djs">DJs</a></li>
+          <li><a href="#programs">PROGRAMACIÓN</a></li>
         </ul>
       </nav>
     </div>
@@ -1768,164 +1905,84 @@ footer::before {
     </div>
   </section>
 
-  <!-- Programs Section con Carrusel -->
+  <!-- Programs Section con Programación Semanal -->
   <section class="programs" id="programs">
     <div class="container">
       <div class="section-title">
-        <h2>MEZCLAS POR HORARIO</h2>
-        <p>Programas especiales diseñados para cada momento del día y de la noche. El ritmo nunca para en DC Mix.</p>
+        <h2>PROGRAMACIÓN SEMANAL DC MIX</h2>
+        <p>La energía nunca se detiene. Descubre qué está sonando ahora mismo en DC Mix.</p>
       </div>
       
-      <div class="carousel-container">
-        <div class="carousel-track" id="carouselTrack">
-          <!-- Slide 1 -->
-          <div class="carousel-slide active">
-            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Energy Wake-Up">
-            <div class="carousel-content">
-              <h3>ENERGY WAKE-UP</h3>
-              <p>Comienza tu día con energía. Mezclas progresivas y motivadoras para activar tu mañana y prepararte para el día.</p>
-              <div class="program-time">
-                <i class="far fa-clock"></i>
-                <span>06:00 - 10:00 · DANCE & PROGRESSIVE</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Slide 2 -->
-          <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Daylight Flow">
-            <div class="carousel-content">
-              <h3>DAYLIGHT FLOW</h3>
-              <p>Ritmo constante para mantener tu productividad y energía durante el día. Perfecto para trabajar, estudiar o hacer ejercicio.</p>
-              <div class="program-time">
-                <i class="far fa-clock"></i>
-                <span>10:00 - 16:00 · HOUSE & URBAN REMIXES</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Slide 3 -->
-          <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Afterwork Boost">
-            <div class="carousel-content">
-              <h3>AFTERWORK BOOST</h3>
-              <p>La transición perfecta del trabajo a la noche. Mezclas vibrantes para liberar energía acumulada y prepararte para la fiesta.</p>
-              <div class="program-time">
-                <i class="far fa-clock"></i>
-                <span>16:00 - 20:00 · ELECTRO & GLOBAL TRENDS</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Slide 4 -->
-          <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Neon Night Mix">
-            <div class="carousel-content">
-              <h3>NEON NIGHT MIX</h3>
-              <p>El programa estelar de DC Mix. Sonidos profundos y energéticos para la noche. La energía máxima para tus fiestas nocturnas.</p>
-              <div class="program-time">
-                <i class="far fa-clock"></i>
-                <span>20:00 - 02:00 · DEEP TECHNO & HARD GROOVE</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Slide 5 -->
-          <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Late Night Sessions">
-            <div class="carousel-content">
-              <h3>LATE NIGHT SESSIONS</h3>
-              <p>Para los noctámbulos. Mezclas intensas que mantienen viva la energía hasta el amanecer. Sesiones extendidas sin interrupciones.</p>
-              <div class="program-time">
-                <i class="far fa-clock"></i>
-                <span>02:00 - 06:00 · DEEP HOUSE & AMBIENT TECHNO</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Slide 6 -->
-          <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Weekend Special">
-            <div class="carousel-content">
-              <h3>WEEKEND SPECIAL</h3>
-              <p>Mezclas exclusivas de fin de semana con DJs invitados y sesiones extendidas sin interrupciones. El ritmo máximo del viernes al domingo.</p>
-              <div class="program-time">
-                <i class="far fa-clock"></i>
-                <span>SÁBADO & DOMINGO · DJ INVITADOS & SETS ESPECIALES</span>
-              </div>
-            </div>
-          </div>
+      <!-- Selector de día con programa actual -->
+      <div class="day-selector">
+        <div class="day-tabs">
+          <button class="day-tab active" data-day="weekdays">LUNES A VIERNES</button>
+          <button class="day-tab" data-day="saturday">SÁBADO</button>
+          <button class="day-tab" data-day="sunday">DOMINGO</button>
         </div>
         
-        <button class="carousel-btn prev" id="prevSlide">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="carousel-btn next" id="nextSlide">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-        
-        <div class="carousel-indicators" id="carouselIndicators">
-          <div class="carousel-indicator active" data-slide="0"></div>
-          <div class="carousel-indicator" data-slide="1"></div>
-          <div class="carousel-indicator" data-slide="2"></div>
-          <div class="carousel-indicator" data-slide="3"></div>
-          <div class="carousel-indicator" data-slide="4"></div>
-          <div class="carousel-indicator" data-slide="5"></div>
+        <div class="current-day-indicator">
+          <!-- Programa actual dinámico -->
+          <div class="current-show" id="currentShow">
+            <div class="current-show-title">EN ESTE MOMENTO</div>
+            <div class="current-show-time" id="currentShowTime">Cargando...</div>
+          </div>
+          
+          <div class="live-indicator">
+            <span class="live-dot"></span>
+            <span>EN VIVO</span>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DJs Section -->
-  <section class="djs" id="djs">
-    <div class="container">
-      <div class="section-title">
-        <h2>DJs RESIDENTES</h2>
-        <p>Los talentos que mantienen el ritmo 24/7 con mezclas innovadoras y energía constante.</p>
       </div>
       
-      <div class="djs-grid">
-        <div class="dj-card">
-          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1780&q=80" alt="DJ PULSE" class="dj-avatar">
-          <h3>DJ PULSE</h3>
-          <p>Especialista en techno energético y sesiones extendidas. Maestro del ritmo constante.</p>
-          <div class="dj-social">
-            <a href="#"><i class="fab fa-soundcloud"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-spotify"></i></a>
+      <!-- Contenedor de horarios -->
+      <div class="schedule-container">
+        
+        <!-- LUNES A VIERNES -->
+        <div class="day-schedule active" id="weekdays">
+          <div class="day-header">
+            <h3><span class="neon-blue">LUNES</span> · <span class="neon-blue">MARTES</span> · <span class="neon-blue">MIÉRCOLES</span> · <span class="neon-blue">JUEVES</span> · <span class="neon-blue">VIERNES</span></h3>
+            <p class="day-subtitle">MODO AUTOMÁTICO + DROPS PROFESIONALES</p>
+          </div>
+          
+          <div class="time-grid" id="weekdaysGrid">
+            <!-- Los horarios se generan dinámicamente -->
+          </div>
+          
+          <div class="day-footer">
+            <p><span class="neon-blue">AUTOMATIZADO:</span> DROPS PROFESIONALES + ENERGÍA CONTINUA SIN DJs FIJOS</p>
           </div>
         </div>
         
-        <div class="dj-card">
-          <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" alt="DJ NEON" class="dj-avatar">
-          <h3>DJ NEON</h3>
-          <p>Reina del night mix. Especializada en melodic techno y sesiones con energía vibrante.</p>
-          <div class="dj-social">
-            <a href="#"><i class="fab fa-soundcloud"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-spotify"></i></a>
+        <!-- SÁBADO -->
+        <div class="day-schedule" id="saturday">
+          <div class="day-header">
+            <h3><span class="neon-pink">SÁBADO - EL DÍA DEL STAFF</span></h3>
+            <p class="day-subtitle">LOS DJs TOMAN EL CONTROL TOTAL</p>
+          </div>
+          
+          <div class="time-grid" id="saturdayGrid">
+            <!-- Los horarios se generan dinámicamente -->
+          </div>
+          
+          <div class="day-footer">
+            <p><span class="neon-pink">FIN DE SEMANA:</span> LOS DJs DEL STAFF BRILLAN CON SESIONES EXCLUSIVAS</p>
           </div>
         </div>
         
-        <div class="dj-card">
-          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="DJ VOLT" class="dj-avatar">
-          <h3>DJ VOLT</h3>
-          <p>Energía pura. Mezclas de high energy techno y progressive para mantener el ritmo elevado.</p>
-          <div class="dj-social">
-            <a href="#"><i class="fab fa-soundcloud"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-spotify"></i></a>
+        <!-- DOMINGO -->
+        <div class="day-schedule" id="sunday">
+          <div class="day-header">
+            <h3><span class="neon-blue">DOMINGO - ENERGÍA HASTA EL FINAL</span></h3>
+            <p class="day-subtitle">CIERRE DE SEMANA CON LO MEJOR DEL STAFF</p>
           </div>
-        </div>
-        
-        <div class="dj-card">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" alt="DJ FLUX" class="dj-avatar">
-          <h3>DJ FLUX</h3>
-          <p>Experto en transiciones fluidas y sesiones continuas. El ritmo nunca se detiene con Flux.</p>
-          <div class="dj-social">
-            <a href="#"><i class="fab fa-soundcloud"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-spotify"></i></a>
+          
+          <div class="time-grid" id="sundayGrid">
+            <!-- Los horarios se generan dinámicamente -->
+          </div>
+          
+          <div class="day-footer">
+            <p><span class="neon-blue">CIERRE DE SEMANA:</span> ENERGÍA HASTA EL ÚLTIMO MINUTO CON EL MEJOR DEL STAFF</p>
           </div>
         </div>
       </div>
@@ -1954,8 +2011,7 @@ footer::before {
           <ul>
             <li><a href="#home">Inicio</a></li>
             <li><a href="#player">En Vivo</a></li>
-            <li><a href="#programs">Mezclas</a></li>
-            <li><a href="#djs">DJs</a></li>
+            <li><a href="#programs">Programación</a></li>
           </ul>
         </div>
       </div>
@@ -2023,7 +2079,240 @@ footer::before {
       });
     });
     
-    // Reproductor Functionality
+    // ============================================
+    // SISTEMA DE PROGRAMACIÓN SEMANAL EN TIEMPO REAL
+    // ============================================
+    
+    // Datos de programación semanal
+    const scheduleData = {
+      weekdays: [
+        { start: "00:00", end: "09:00", title: "MIX TOTAL 24/7", desc: "Energía continua sin interrupciones. La base de DC Mix.", tags: ["AUTOMATIZADO", "ENERGÍA CONSTANTE"], icon: "fa-infinity" },
+        { start: "09:00", end: "12:00", title: "MORNING ENERGY MIX", desc: "Activa tu día con beats energéticos y voces motivadoras.", tags: ["WAKE-UP", "PROGRESSIVE"], icon: "fa-sun" },
+        { start: "12:00", end: "15:00", title: "MIDDAY VIBES", desc: "Ritmo perfecto para mantener la energía durante el día.", tags: ["DAYTIME", "VIBES"], icon: "fa-clock" },
+        { start: "15:00", end: "18:00", title: "DRIVE MIX SHOW", desc: "La mezcla perfecta para el trayecto de regreso a casa.", tags: ["DRIVE", "URBAN"], icon: "fa-car" },
+        { start: "18:00", end: "21:00", title: "PRIME TIME MIX", desc: "La hora dorada de DC Mix. Energía pura para el afterwork.", tags: ["PRIME TIME", "ELECTRO"], icon: "fa-crown" },
+        { start: "21:00", end: "00:00", title: "NIGHT DANCE MIX", desc: "La noche despierta con beats intensos para preparar el fin de semana.", tags: ["NIGHT", "DANCE"], icon: "fa-moon" }
+      ],
+      
+      saturday: [
+        { start: "06:00", end: "10:00", title: "WEEKEND WARM-UP", desc: "Despierta el sábado con beats suaves que preparan para la energía del día.", tags: ["WARM-UP", "CHILL"], icon: "fa-coffee" },
+        { start: "10:00", end: "14:00", title: "HOUSE & ELECTRO BLOCKS", desc: "4 horas de los mejores bloques de House y Electro seleccionados.", tags: ["HOUSE", "ELECTRO"], icon: "fa-compact-disc" },
+        { start: "14:00", end: "15:00", title: "GLOBAL BEATS", desc: "Un viaje sonoro por los ritmos trending a nivel mundial.", tags: ["GLOBAL", "TRENDS"], icon: "fa-globe-americas" },
+        { start: "15:00", end: "18:00", title: "WEEKEND SESSION", desc: "3 horas de pura energía con el sonido característico de Hoxx.", tags: ["TECH HOUSE", "EXTENDED SET"], icon: "fa-user", dj: "DJ HOXX", djAlias: "HENRY LOOR" },
+        { start: "18:00", end: "20:00", title: "CLUB SELECTION", desc: "Lo mejor de la música club seleccionada por Giam para el sábado.", tags: ["CLUB", "SELECTION"], icon: "fa-user", dj: "DJ GIAM", djAlias: "STAFF RESIDENT" },
+        { start: "20:00", end: "22:00", title: "TECH & GROOVE", desc: "Tecnología aplicada al groove. Una sesión para los amantes del sonido preciso.", tags: ["TECHNO", "GROOVE"], icon: "fa-user", dj: "DJ FERNANDO TAPIA", djAlias: "TECH SPECIALIST" },
+        { start: "22:00", end: "00:00", title: "CLUB NIGHT MIX", desc: "La hora máxima del sábado. Energía pura para las noches de fiesta.", tags: ["CLUB", "NIGHT"], icon: "fa-fire" }
+      ],
+      
+      sunday: [
+        { start: "06:00", end: "10:00", title: "WEEKEND WARM-UP", desc: "Despierta suave, energía progresiva para el domingo.", tags: ["WARM-UP", "SUNDAY"], icon: "fa-coffee" },
+        { start: "10:00", end: "14:00", title: "HOUSE & ELECTRO BLOCKS", desc: "Selección especial dominical de los mejores tracks.", tags: ["HOUSE", "ELECTRO"], icon: "fa-compact-disc" },
+        { start: "14:00", end: "15:00", title: "GLOBAL BEATS", desc: "El último viaje global de la semana con los sonidos del momento.", tags: ["GLOBAL", "CLOSING"], icon: "fa-globe-americas" },
+        { start: "15:00", end: "18:00", title: "WEEKEND SESSION", desc: "Última sesión del fin de semana con el sonido de Hoxx.", tags: ["TECH HOUSE", "CLOSING"], icon: "fa-user", dj: "DJ HOXX", djAlias: "HENRY LOOR" },
+        { start: "18:00", end: "20:00", title: "STAFF MIX", desc: "Selección especial del staff para cerrar el domingo.", tags: ["STAFF", "SPECIAL"], icon: "fa-user", dj: "DJ LOBO AZUL", djAlias: "STAFF RESIDENT" },
+        { start: "20:00", end: "22:00", title: "NIGHT FLOW", desc: "Transición perfecta hacia la noche con beats fluidos.", tags: ["FLOW", "NIGHT"], icon: "fa-user", dj: "DJ GIAM", djAlias: "STAFF RESIDENT" },
+        { start: "22:00", end: "00:00", title: "LATE NIGHT ENERGY", desc: "Última descarga de energía antes de comenzar la nueva semana.", tags: ["LATE NIGHT", "ENERGY"], icon: "fa-bolt" }
+      ]
+    };
+    
+    // Función para convertir hora "HH:MM" a minutos desde medianoche
+    function timeToMinutes(timeStr) {
+      const [hours, minutes] = timeStr.split(':').map(Number);
+      return hours * 60 + minutes;
+    }
+    
+    // Función para obtener el segmento actual basado en día y hora
+    function getCurrentSegment(daySchedule, currentMinutes) {
+      for (let segment of daySchedule) {
+        const startMinutes = timeToMinutes(segment.start);
+        const endMinutes = segment.end === "00:00" ? 24 * 60 : timeToMinutes(segment.end);
+        
+        // Manejar segmentos que cruzan medianoche
+        if (endMinutes < startMinutes) {
+          // Segmento cruza medianoche (ej: 22:00 - 02:00)
+          if (currentMinutes >= startMinutes || currentMinutes < endMinutes) {
+            return segment;
+          }
+        } else {
+          // Segmento normal
+          if (currentMinutes >= startMinutes && currentMinutes < endMinutes) {
+            return segment;
+          }
+        }
+      }
+      return null; // No hay segmento encontrado (no debería pasar)
+    }
+    
+    // Función para renderizar la programación de un día
+    function renderDaySchedule(dayId, schedule) {
+      const grid = document.getElementById(`${dayId}Grid`);
+      if (!grid) return;
+      
+      grid.innerHTML = '';
+      
+      const now = new Date();
+      const currentDay = now.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+      
+      // Determinar si este es el día actual
+      let isCurrentDay = false;
+      if (dayId === 'weekdays' && currentDay >= 1 && currentDay <= 5) {
+        isCurrentDay = true;
+      } else if (dayId === 'saturday' && currentDay === 6) {
+        isCurrentDay = true;
+      } else if (dayId === 'sunday' && currentDay === 0) {
+        isCurrentDay = true;
+      }
+      
+      // Obtener el segmento actual si es el día actual
+      let currentSegment = null;
+      if (isCurrentDay) {
+        currentSegment = getCurrentSegment(schedule, currentMinutes);
+      }
+      
+      schedule.forEach((segment, index) => {
+        const isNowPlaying = isCurrentDay && currentSegment && 
+          segment.start === currentSegment.start && 
+          segment.title === currentSegment.title;
+        
+        const timeSlot = document.createElement('div');
+        timeSlot.className = `time-slot ${segment.dj ? 'dj-session' : ''} ${isNowPlaying ? 'now-playing' : ''}`;
+        
+        // Si es el segmento actual, añadir badge
+        if (isNowPlaying) {
+          timeSlot.innerHTML += '<div class="now-playing-badge">EN VIVO</div>';
+        }
+        
+        timeSlot.innerHTML += `
+          <div class="time-label">
+            <span class="time-hours">${segment.start} – ${segment.end}</span>
+            <div class="time-icon"><i class="fas ${segment.icon}"></i></div>
+          </div>
+          <div class="program-info">
+            ${segment.dj ? `
+              <div class="dj-header">
+                <div class="dj-avatar-small">
+                  <i class="fas fa-headphones"></i>
+                </div>
+                <div class="dj-name">
+                  <h4 class="program-title neon-pink">${segment.dj}</h4>
+                  <p class="dj-alias">${segment.djAlias}</p>
+                </div>
+              </div>
+              <h5 class="program-title">${segment.title}</h5>
+            ` : `
+              <h4 class="program-title ${index % 2 === 0 ? 'neon-pink' : 'neon-green'}">${segment.title}</h4>
+            `}
+            <p class="program-desc">${segment.desc}</p>
+            <div class="program-tags">
+              ${segment.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+          </div>
+        `;
+        
+        grid.appendChild(timeSlot);
+      });
+    }
+    
+    // Función para actualizar el programa actual en tiempo real
+    function updateCurrentShow() {
+      const now = new Date();
+      const currentDay = now.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+      const currentHour = now.getHours().toString().padStart(2, '0');
+      const currentMinute = now.getMinutes().toString().padStart(2, '0');
+      const currentTime = `${currentHour}:${currentMinute}`;
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+      
+      // Determinar qué día es hoy
+      let daySchedule;
+      let dayName;
+      
+      if (currentDay >= 1 && currentDay <= 5) { // Lunes a Viernes
+        daySchedule = scheduleData.weekdays;
+        dayName = "Lunes a Viernes";
+      } else if (currentDay === 6) { // Sábado
+        daySchedule = scheduleData.saturday;
+        dayName = "Sábado";
+      } else { // Domingo
+        daySchedule = scheduleData.sunday;
+        dayName = "Domingo";
+      }
+      
+      // Obtener el segmento actual
+      const currentSegment = getCurrentSegment(daySchedule, currentMinutes);
+      
+      // Actualizar el display del programa actual
+      const currentShowTime = document.getElementById('currentShowTime');
+      if (currentShowTime && currentSegment) {
+        currentShowTime.innerHTML = `
+          <strong>${currentSegment.title}</strong><br>
+          ${currentSegment.start} - ${currentSegment.end} · ${dayName}
+        `;
+      }
+      
+      // Actualizar los horarios renderizados
+      renderDaySchedule('weekdays', scheduleData.weekdays);
+      renderDaySchedule('saturday', scheduleData.saturday);
+      renderDaySchedule('sunday', scheduleData.sunday);
+      
+      // Cambiar automáticamente a la pestaña del día actual
+      let targetTab;
+      if (currentDay >= 1 && currentDay <= 5) {
+        targetTab = 'weekdays';
+      } else if (currentDay === 6) {
+        targetTab = 'saturday';
+      } else {
+        targetTab = 'sunday';
+      }
+      
+      // Cambiar pestaña si no está activa
+      const activeTab = document.querySelector('.day-tab.active');
+      if (activeTab && activeTab.getAttribute('data-day') !== targetTab) {
+        const tabToClick = document.querySelector(`.day-tab[data-day="${targetTab}"]`);
+        if (tabToClick) {
+          tabToClick.click();
+        }
+      }
+    }
+    
+    // Funcionalidad para los tabs de programación semanal
+    function initScheduleTabs() {
+      const dayTabs = document.querySelectorAll('.day-tab');
+      const daySchedules = document.querySelectorAll('.day-schedule');
+      
+      if (dayTabs.length === 0) return;
+      
+      dayTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          const targetDay = this.getAttribute('data-day');
+          
+          // Remover clase active de todos los tabs
+          dayTabs.forEach(t => t.classList.remove('active'));
+          // Añadir clase active al tab clickeado
+          this.classList.add('active');
+          
+          // Ocultar todos los schedules
+          daySchedules.forEach(schedule => {
+            schedule.classList.remove('active');
+            schedule.style.display = 'none';
+          });
+          
+          // Mostrar el schedule correspondiente
+          const targetSchedule = document.getElementById(targetDay);
+          if (targetSchedule) {
+            targetSchedule.style.display = 'block';
+            setTimeout(() => {
+              targetSchedule.classList.add('active');
+            }, 10);
+          }
+        });
+      });
+    }
+    
+    // ============================================
+    // REPRODUCTOR FUNCTIONALITY
+    // ============================================
+    
     // Crear partículas dinámicas
     function createParticles() {
       const container = document.getElementById('particlesBg');
@@ -2087,7 +2376,7 @@ footer::before {
         if (loading) {
           loading.innerHTML = `
             <div style="color: var(--neon-pink); text-align: center;">
-              <p style="margin-bottom: 10px;">🔧 SINCRONIZANDO...</p>
+              <p style="margin-bottom: 10px;">SINCRONIZANDO...</p>
               <p style="font-size: 0.8rem; opacity: 0.8;">Reconectando al mix infinito</p>
             </div>
           `;
@@ -2257,91 +2546,31 @@ footer::before {
       }
     }
     
-    // Carousel functionality
-    const carouselTrack = document.getElementById('carouselTrack');
-    const carouselSlides = document.querySelectorAll('.carousel-slide');
-    const prevSlideBtn = document.getElementById('prevSlide');
-    const nextSlideBtn = document.getElementById('nextSlide');
-    const carouselIndicators = document.querySelectorAll('.carousel-indicator');
-    let currentSlide = 0;
+    // ============================================
+    // INICIALIZACIÓN DE TODO
+    // ============================================
     
-    function updateCarousel() {
-      if (!carouselTrack) return;
-      
-      // Move the carousel
-      carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-      
-      // Update indicators
-      carouselIndicators.forEach((indicator, index) => {
-        if (index === currentSlide) {
-          indicator.classList.add('active');
-        } else {
-          indicator.classList.remove('active');
-        }
-      });
-      
-      // Update slides
-      carouselSlides.forEach((slide, index) => {
-        if (index === currentSlide) {
-          slide.classList.add('active');
-        } else {
-          slide.classList.remove('active');
-        }
-      });
-    }
-    
-    // Carousel navigation buttons
-    if (prevSlideBtn && nextSlideBtn) {
-      prevSlideBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide === 0) ? carouselSlides.length - 1 : currentSlide - 1;
-        updateCarousel();
-      });
-      
-      nextSlideBtn.addEventListener('click', () => {
-        currentSlide = (currentSlide === carouselSlides.length - 1) ? 0 : currentSlide + 1;
-        updateCarousel();
-      });
-    }
-    
-    // Carousel indicators
-    if (carouselIndicators.length > 0) {
-      carouselIndicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-          currentSlide = index;
-          updateCarousel();
-        });
-      });
-    }
-    
-    // Auto-carousel every 8 seconds
-    let carouselInterval;
-    if (carouselTrack) {
-      carouselInterval = setInterval(() => {
-        currentSlide = (currentSlide === carouselSlides.length - 1) ? 0 : currentSlide + 1;
-        updateCarousel();
-      }, 8000);
-      
-      // Pause auto-carousel on interaction
-      carouselTrack.addEventListener('mouseenter', () => {
-        clearInterval(carouselInterval);
-      });
-      
-      carouselTrack.addEventListener('mouseleave', () => {
-        carouselInterval = setInterval(() => {
-          currentSlide = (currentSlide === carouselSlides.length - 1) ? 0 : currentSlide + 1;
-          updateCarousel();
-        }, 8000);
-      });
-    }
-    
-    // Initialize everything when DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
+      // Inicializar efectos visuales
       createParticles();
       initPlayer();
       advancedBPMMetronome();
       setupTouchInteractions();
       animateEqualizer();
-      updateCarousel();
+      
+      // Inicializar sistema de programación
+      initScheduleTabs();
+      
+      // Renderizar programación inicial
+      renderDaySchedule('weekdays', scheduleData.weekdays);
+      renderDaySchedule('saturday', scheduleData.saturday);
+      renderDaySchedule('sunday', scheduleData.sunday);
+      
+      // Actualizar programa actual inmediatamente
+      updateCurrentShow();
+      
+      // Actualizar cada minuto
+      setInterval(updateCurrentShow, 60000);
       
       // Add glow effect to navigation on scroll
       window.addEventListener('scroll', () => {
