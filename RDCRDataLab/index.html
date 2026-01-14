@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDCR DataLab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2d6bc4;
+            --accent-color: #00a8cc;
+            --light-color: #e6f2ff;
+            --dark-color: #0d1b2a;
+            --gray-color: #8d99ae;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .back-btn-header {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            padding: 8px 16px 8px 12px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            z-index: 10;
+        }
+        
+        .back-btn-header:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-50%) translateX(-5px);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .logo-icon {
+            background-color: var(--accent-color);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 22px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-main {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .logo-sub {
+            font-size: 14px;
+            color: var(--light-color);
+            letter-spacing: 2px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 17px;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: #0088aa;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Sections */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--light-color);
+        }
+        
+        /* Análisis Section */
+        .analysis-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-icon {
+            background-color: var(--primary-color);
+            color: var(--white);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        /* Visualizaciones Section */
+        .visualization-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .visualization-img {
+            background-color: var(--secondary-color);
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .visualization-img:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .visualization-img:hover:before {
+            animation: shine 1.5s;
+        }
+        
+        @keyframes shine {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        /* Proyectos Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .project-img {
+            height: 200px;
+            background-color: var(--gray-color);
+            position: relative;
+        }
+        
+        .project-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        /* Medios Section */
+        .media-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .media-list {
+            list-style: none;
+        }
+        
+        .media-list li {
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .media-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo .logo-main {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .footer-logo .logo-sub {
+            color: var(--gray-color);
+        }
+        
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+        
+        /* Botón flotante arriba */
+        .floating-btn-up {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            z-index: 1000;
+        }
+        
+        .floating-btn-up.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .floating-btn-up:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .floating-btn-up::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .floating-btn-up:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        .tooltip {
+            position: absolute;
+            right: 70px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .floating-btn-up:hover .tooltip {
+            opacity: 1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .floating-btn-up {
+                right: 20px;
+                bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .back-btn-header {
+                padding: 6px 12px 6px 10px;
+                font-size: 14px;
+            }
+            
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                padding: 20px;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .floating-btn-up {
+                width: 55px;
+                height: 55px;
+                font-size: 20px;
+            }
+            
+            .header-container {
+                justify-content: center;
+            }
+            
+            .logo {
+                margin-left: 40px; /* Para evitar solapamiento con el botón de atrás */
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 70px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .card, .project-card {
+                margin: 0 10px;
+            }
+            
+            .floating-btn-up {
+                right: 15px;
+                bottom: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+            
+            .tooltip {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            
+            .back-btn-header {
+                padding: 5px 10px 5px 8px;
+                font-size: 13px;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+            
+            .logo-main {
+                font-size: 20px;
+            }
+            
+            .logo-sub {
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .back-btn-header span {
+                display: none; /* Ocultar el texto "Atrás" en pantallas muy pequeñas */
+            }
+            
+            .back-btn-header {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header con botón atrás -->
+    <header>
+        <div class="container header-container">
+            <button class="back-btn-header" id="backBtnHeader">
+                <i class="fas fa-arrow-left"></i>
+                <span>Atrás</span>
+            </button>
+            
+            <div class="logo">
+                <div class="logo-icon">Au</div>
+                <div class="logo-text">
+                    <div class="logo-main">RDCR</div>
+                    <div class="logo-sub">DataLab</div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#analisis">Análisis</a></li>
+                    <li><a href="#visualizaciones">Visualizaciones</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#medios">Data aplicada a medios</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Transformamos datos en conocimiento accionable</h1>
+            <p>RDCR DataLab es un laboratorio especializado en análisis de datos, visualización avanzada y proyectos de ciencia de datos aplicados a diferentes industrias y medios.</p>
+            <a href="#proyectos" class="cta-button">Ver nuestros proyectos</a>
+        </div>
+    </section>
+
+    <!-- Análisis Section -->
+    <section id="analisis">
+        <div class="container">
+            <div class="section-title">
+                <h2>Análisis</h2>
+            </div>
+            
+            <div class="analysis-cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Análisis Predictivo</h3>
+                        <p>Utilizamos modelos avanzados de machine learning para predecir tendencias y comportamientos futuros, ayudando en la toma de decisiones estratégicas.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Minería de Datos</h3>
+                        <p>Extraemos patrones y conocimiento valioso de grandes volúmenes de datos estructurados y no estructurados para descubrir insights ocultos.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Análisis Exploratorio</h3>
+                        <p>Realizamos investigaciones exhaustivas de datos para entender su estructura, detectar anomalías y prepararlos para análisis más avanzados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualizaciones Section -->
+    <section id="visualizaciones">
+        <div class="container">
+            <div class="section-title">
+                <h2>Visualizaciones</h2>
+            </div>
+            
+            <div class="visualization-container">
+                <div class="visualization-img">
+                    <div>
+                        <i class="fas fa-chart-pie" style="font-size: 48px; margin-bottom: 15px;"></i>
+                        <p>Visualizaciones interactivas y dashboards</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px; font-size: 1.8rem;">Transformamos datos complejos en visualizaciones claras</h3>
+                    <p>Creamos representaciones gráficas e interactivas que facilitan la comprensión de datos complejos, permitiendo identificar patrones y tendencias de manera intuitiva.</p>
+                    <p style="margin-top: 15px;">Nuestras herramientas incluyen dashboards en tiempo real, gráficos interactivos, mapas de calor y visualizaciones 3D adaptadas a las necesidades específicas de cada proyecto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos Section -->
+    <section id="proyectos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Proyectos</h2>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img" style="background-color: #4a6fa5;">
+                        <div class="project-tag">Análisis</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Predicción de demanda energética</h3>
+                        <p>Desarrollo de modelos predictivos para optimizar la distribución de energía en ciudades inteligentes, reduciendo costos en un 15%.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img" style="background-color: #166088;">
+                        <div class="project-tag">Visualización</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Dashboard de métricas financieras</h3>
+                        <p>Creación de un panel de control interactivo para el monitoreo en tiempo real de indicadores financieros y de riesgo.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img" style="background-color: #2d6bc4;">
+                        <div class="project-tag">Medios</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Análisis de audiencias digitales</h3>
+                        <p>Estudio del comportamiento de usuarios en plataformas digitales para optimizar estrategias de contenido y engagement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data aplicada a medios Section -->
+    <section id="medios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Data aplicada a medios</h2>
+            </div>
+            
+            <div class="media-container">
+                <div>
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px; font-size: 1.8rem;">Datos que transforman la industria mediática</h3>
+                    <p>Aplicamos técnicas avanzadas de análisis de datos para entender audiencias, optimizar contenidos y medir el impacto de las estrategias de comunicación.</p>
+                    <p style="margin-top: 15px;">Nuestro enfoque permite a medios de comunicación, agencias y creadores de contenido tomar decisiones basadas en datos concretos.</p>
+                </div>
+                
+                <div>
+                    <ul class="media-list">
+                        <li><strong>Análisis de audiencias:</strong> Segmentación y comprensión del comportamiento de los consumidores de medios.</li>
+                        <li><strong>Optimización de contenido:</strong> Identificación de temas y formatos con mayor potencial de engagement.</li>
+                        <li><strong>Medición de impacto:</strong> Evaluación del retorno de inversión en campañas y estrategias de comunicación.</li>
+                        <li><strong>Predicción de tendencias:</strong> Anticipación de temas virales y cambios en las preferencias del público.</li>
+                        <li><strong>Personalización:</strong> Desarrollo de recomendadores de contenido adaptados a perfiles de usuario.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <div class="logo-main">RDCR DataLab</div>
+                    <div class="logo-sub">Transformando datos en conocimiento</div>
+                    <p style="margin-top: 20px; color: #ccc;">Laboratorio especializado en análisis, visualización y aplicaciones de datos para la toma de decisiones estratégicas.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Enlaces rápidos</h3>
+                    <ul>
+                        <li><a href="#analisis">Análisis</a></li>
+                        <li><a href="#visualizaciones">Visualizaciones</a></li>
+                        <li><a href="#proyectos">Proyectos</a></li>
+                        <li><a href="#medios">Data aplicada a medios</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contacto</h3>
+                    <p style="margin-bottom: 10px; color: #ccc;"><i class="fas fa-envelope" style="margin-right: 10px;"></i> info@rdcrdatalab.com</p>
+                    <p style="margin-bottom: 10px; color: #ccc;"><i class="fas fa-phone" style="margin-right: 10px;"></i> +34 912 345 678</p>
+                    <p style="color: #ccc;"><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Madrid, España</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 RDCR DataLab. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón flotante para subir -->
+    <button class="floating-btn-up" id="upBtn">
+        <i class="fas fa-arrow-up"></i>
+        <span class="tooltip">Subir al inicio</span>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Botón para volver a RDCR Sound (en el header)
+        const backBtnHeader = document.getElementById('backBtnHeader');
+        backBtnHeader.addEventListener('click', function() {
+            window.location.href = 'https://rdcrsound.adcm.club/';
+        });
+        
+        // Botón para subir al inicio
+        const upBtn = document.getElementById('upBtn');
+        
+        // Mostrar/ocultar botón de subir según el scroll
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                upBtn.classList.add('visible');
+            } else {
+                upBtn.classList.remove('visible');
+            }
+        });
+        
+        // Función para subir al inicio
+        upBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Efecto de ripple en el botón de subir
+        upBtn.addEventListener('click', function(e) {
+            // Crear efecto de ripple
+            const ripple = document.createElement('span');
+            const rect = upBtn.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.7);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                width: ${size}px;
+                height: ${size}px;
+                top: ${y}px;
+                left: ${x}px;
+                pointer-events: none;
+            `;
+            
+            upBtn.appendChild(ripple);
+            
+            // Eliminar el elemento después de la animación
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+        
+        // Añadir estilo para la animación ripple
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Efecto hover sutil para el botón de atrás en header
+        backBtnHeader.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-50%) translateX(-5px)';
+        });
+        
+        backBtnHeader.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(-50%)';
+        });
+    </script>
+</body>
+</html>
