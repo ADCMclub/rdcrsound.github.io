@@ -34,18 +34,15 @@
             overflow-x: hidden;
         }
         
-        /* Botones de navegación fijos */
-        .nav-buttons {
+        /* Botón "Atrás" fijo en la parte superior izquierda */
+        .back-btn-container {
             position: fixed;
             top: 20px;
             left: 20px;
             z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
         }
         
-        .nav-btn {
+        .back-btn {
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -64,13 +61,13 @@
             overflow: hidden;
         }
         
-        .nav-btn:hover {
+        .back-btn:hover {
             background: var(--accent-light);
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(255, 107, 53, 0.4);
         }
         
-        .nav-btn::after {
+        .back-btn::after {
             content: '';
             position: absolute;
             top: 0;
@@ -82,11 +79,11 @@
             transition: transform 0.5s;
         }
         
-        .nav-btn:hover::after {
+        .back-btn:hover::after {
             transform: translateX(100%);
         }
         
-        .nav-btn span {
+        .back-btn span {
             position: absolute;
             left: 60px;
             background: var(--primary-blue);
@@ -103,24 +100,89 @@
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
         }
         
-        .nav-btn:hover span {
+        .back-btn:hover span {
             opacity: 1;
             transform: translateX(0);
         }
         
-        .nav-btn.up-btn {
+        /* Botón "Arriba" fijo en la parte inferior derecha */
+        .up-btn-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+        
+        .up-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: var(--primary-blue);
-        }
-        
-        .nav-btn.up-btn:hover {
-            background: var(--secondary-blue);
-        }
-        
-        /* Animación para el botón de arriba cuando se hace scroll */
-        .up-btn.hidden {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-decoration: none;
+            border: none;
+            position: relative;
+            overflow: hidden;
             opacity: 0;
-            transform: translateY(-20px);
+            transform: translateY(20px);
             pointer-events: none;
+        }
+        
+        .up-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+        
+        .up-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(10, 36, 99, 0.4);
+        }
+        
+        .up-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-100%);
+            transition: transform 0.5s;
+        }
+        
+        .up-btn:hover::after {
+            transform: translateY(100%);
+        }
+        
+        .up-btn span {
+            position: absolute;
+            right: 60px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: var(--transition);
+            pointer-events: none;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .up-btn:hover span {
+            opacity: 1;
+            transform: translateX(0);
         }
         
         /* Header & Navigation */
@@ -604,21 +666,33 @@
         }
         
         @media (max-width: 768px) {
-            .nav-buttons {
+            .back-btn-container {
                 top: 15px;
                 left: 15px;
             }
             
-            .nav-btn {
+            .up-btn-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .back-btn, .up-btn {
                 width: 45px;
                 height: 45px;
                 font-size: 1.1rem;
             }
             
-            .nav-btn span {
+            .back-btn span, .up-btn span {
                 font-size: 0.8rem;
-                left: 55px;
                 padding: 4px 10px;
+            }
+            
+            .back-btn span {
+                left: 55px;
+            }
+            
+            .up-btn span {
+                right: 55px;
             }
             
             .nav-links {
@@ -659,19 +733,28 @@
         }
         
         @media (max-width: 480px) {
-            .nav-buttons {
+            .back-btn-container {
                 top: 10px;
                 left: 10px;
             }
             
-            .nav-btn {
+            .up-btn-container {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .back-btn, .up-btn {
                 width: 40px;
                 height: 40px;
                 font-size: 1rem;
             }
             
-            .nav-btn span {
+            .back-btn span {
                 left: 50px;
+            }
+            
+            .up-btn span {
+                right: 50px;
             }
             
             .hero h1 {
@@ -685,13 +768,17 @@
     </style>
 </head>
 <body>
-    <!-- Botones de navegación fijos -->
-    <div class="nav-buttons">
-        <a href="https://rdcrsound.adcm.club/" class="nav-btn back-btn" title="Ir a RDCR Sound">
+    <!-- Botón "Atrás" fijo en la parte superior izquierda -->
+    <div class="back-btn-container">
+        <a href="https://rdcrsound.adcm.club/" class="back-btn" title="Ir a RDCR Sound">
             <i class="fas fa-arrow-left"></i>
             <span>Volver a RDCR Sound</span>
         </a>
-        <button class="nav-btn up-btn hidden" id="upBtn" title="Ir al inicio">
+    </div>
+
+    <!-- Botón "Arriba" fijo en la parte inferior derecha -->
+    <div class="up-btn-container">
+        <button class="up-btn" id="upBtn" title="Ir al inicio">
             <i class="fas fa-arrow-up"></i>
             <span>Ir arriba</span>
         </button>
@@ -975,15 +1062,15 @@
             });
         });
         
-        // Botón "Arriba" dinámico
+        // Botón "Arriba" dinámico en la parte inferior derecha
         const upBtn = document.getElementById('upBtn');
         
         window.addEventListener('scroll', () => {
             // Mostrar/ocultar botón "Arriba" según la posición del scroll
             if (window.scrollY > 300) {
-                upBtn.classList.remove('hidden');
+                upBtn.classList.add('visible');
             } else {
-                upBtn.classList.add('hidden');
+                upBtn.classList.remove('visible');
             }
         });
         
@@ -995,22 +1082,10 @@
             });
         });
         
-        // Efecto de animación para el botón "Arriba" cuando aparece
-        const observerOptions = {
-            threshold: 0.1
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    upBtn.classList.add('hidden');
-                }
-            });
-        }, observerOptions);
-        
-        // Observar la sección hero para ocultar el botón cuando esté visible
-        const heroSection = document.querySelector('.hero');
-        observer.observe(heroSection);
+        // Mostrar/ocultar botón "Arriba" al cargar la página
+        if (window.scrollY > 300) {
+            upBtn.classList.add('visible');
+        }
     </script>
 </body>
 </html>
