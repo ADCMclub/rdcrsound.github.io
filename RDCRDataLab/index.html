@@ -75,6 +75,7 @@
             gap: 8px;
             transition: var(--transition);
             z-index: 10;
+            text-decoration: none;
         }
         
         .back-btn-header:hover {
@@ -649,10 +650,10 @@
     <!-- Header con botón atrás -->
     <header>
         <div class="container header-container">
-            <button class="back-btn-header" id="backBtnHeader">
+            <a href="https://rdcrsound.adcm.club/" class="back-btn-header" id="backBtnHeader">
                 <i class="fas fa-arrow-left"></i>
                 <span>Atrás</span>
-            </button>
+            </a>
             
             <div class="logo">
                 <div class="logo-icon">Au</div>
@@ -898,12 +899,6 @@
             });
         });
         
-        // Botón para volver a RDCR Sound (en el header)
-        const backBtnHeader = document.getElementById('backBtnHeader');
-        backBtnHeader.addEventListener('click', function() {
-            window.location.href = 'https://rdcrsound.adcm.club/';
-        });
-        
         // Botón para subir al inicio
         const upBtn = document.getElementById('upBtn');
         
@@ -967,12 +962,19 @@
         document.head.appendChild(style);
         
         // Efecto hover sutil para el botón de atrás en header
+        const backBtnHeader = document.getElementById('backBtnHeader');
         backBtnHeader.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-50%) translateX(-5px)';
         });
         
         backBtnHeader.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(-50%)';
+        });
+        
+        // Asegurar que el botón "Atrás" redirija a la página correcta
+        backBtnHeader.addEventListener('click', function(e) {
+            // Ya está configurado como enlace, no es necesario código adicional
+            console.log('Redirigiendo a RDCR Sound...');
         });
     </script>
 </body>
