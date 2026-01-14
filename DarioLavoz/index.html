@@ -616,7 +616,7 @@
         }
         
         .testimonial:before {
-            content: """;
+            content: "";
             position: absolute;
             top: 10px;
             left: 20px;
@@ -1271,7 +1271,7 @@
             }
         }
         
-        // Botón Atrás Interactivo
+        // Botón Atrás Interactivo - MODIFICADO PARA REDIRIGIR
         const backButton = document.getElementById('backButton');
         
         // Efecto de clic para el botón Atrás
@@ -1282,9 +1282,9 @@
             // Agregar efecto de sonido (opcional)
             const clickSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ');
             
-            // Regresar a la página anterior
+            // Redirigir a la página https://rdcrsound.adcm.club/ en la misma pestaña
             setTimeout(() => {
-                window.history.back();
+                window.location.href = "https://rdcrsound.adcm.club/";
             }, 200);
             
             // Quitar clase después de la animación
