@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDCR OratoriaLab - Excelencia en Comunicación</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0a2463;
+            --secondary-blue: #1e3a8a;
+            --accent-orange: #ff6b35;
+            --accent-light: #ff9e6d;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #343a40;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+        
+        /* Botones de navegación fijos */
+        .nav-buttons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-orange);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-decoration: none;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+        
+        .nav-btn:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .nav-btn span {
+            position: absolute;
+            left: 60px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: var(--transition);
+            pointer-events: none;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-btn:hover span {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .nav-btn.up-btn {
+            background: var(--primary-blue);
+        }
+        
+        .nav-btn.up-btn:hover {
+            background: var(--secondary-blue);
+        }
+        
+        /* Animación para el botón de arriba cuando se hace scroll */
+        .up-btn.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo-part1 {
+            color: var(--primary-blue);
+        }
+        
+        .logo-part2 {
+            color: var(--accent-orange);
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--accent-orange);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-orange);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-orange);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="%23ff6b35" opacity="0.1"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-highlight {
+            color: var(--accent-light);
+            font-weight: 800;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-orange);
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--dark-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid transparent;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card.oratoria {
+            border-top-color: var(--primary-blue);
+        }
+        
+        .service-card.neuro {
+            border-top-color: var(--accent-orange);
+        }
+        
+        .service-card.voz {
+            border-top-color: var(--secondary-blue);
+        }
+        
+        .service-card.comunicacion {
+            border-top-color: var(--accent-light);
+        }
+        
+        .service-card.contenido {
+            border-top-color: #4d96ff;
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .oratoria .service-icon {
+            color: var(--primary-blue);
+        }
+        
+        .neuro .service-icon {
+            color: var(--accent-orange);
+        }
+        
+        .voz .service-icon {
+            color: var(--secondary-blue);
+        }
+        
+        .comunicacion .service-icon {
+            color: var(--accent-light);
+        }
+        
+        .contenido .service-icon {
+            color: #4d96ff;
+        }
+        
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+        
+        .service-card p {
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+        }
+        
+        .service-link {
+            color: var(--accent-orange);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+        
+        .service-link:hover {
+            gap: 10px;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: var(--medium-gray);
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            display: none;
+        }
+        
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--medium-gray);
+            border: 2px solid var(--primary-blue);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .slider-dot.active {
+            background-color: var(--accent-orange);
+            border-color: var(--accent-orange);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 70px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .footer-about p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent-light);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 10px;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-orange);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-buttons {
+                top: 15px;
+                left: 15px;
+            }
+            
+            .nav-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+            
+            .nav-btn span {
+                font-size: 0.8rem;
+                left: 55px;
+                padding: 4px 10px;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-buttons {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .nav-btn span {
+                left: 50px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .service-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botones de navegación fijos -->
+    <div class="nav-buttons">
+        <a href="https://rdcrsound.adcm.club/" class="nav-btn back-btn" target="_blank" title="Ir a RDCR Sound">
+            <i class="fas fa-arrow-left"></i>
+            <span>Volver a RDCR Sound</span>
+        </a>
+        <button class="nav-btn up-btn hidden" id="upBtn" title="Ir al inicio">
+            <i class="fas fa-arrow-up"></i>
+            <span>Ir arriba</span>
+        </button>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-microphone-alt logo-icon"></i>
+                    <div class="logo-text">
+                        <span class="logo-part1">RDCR</span>
+                        <span class="logo-part2">OratoriaLab</span>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transformamos tu <span class="hero-highlight">comunicación</span> en una herramienta de poder</h1>
+                <p>En RDCR OratoriaLab combinamos neurociencia, técnica vocal y estrategias de comunicación profesional para potenciar tu impacto personal y profesional.</p>
+                <a href="#servicios" class="cta-button">Descubre nuestros programas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Programas Especializados</h2>
+                <p>Desarrollamos habilidades de comunicación integrales para líderes, profesionales y organizaciones</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card oratoria">
+                    <i class="fas fa-bullhorn service-icon"></i>
+                    <h3>/oratorialab</h3>
+                    <p>Programa integral de formación en oratoria moderna. Técnicas avanzadas para hablar en público con confianza, claridad y persuasión.</p>
+                    <a href="#" class="service-link">Ver programa <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card neuro">
+                    <i class="fas fa-brain service-icon"></i>
+                    <h3>Neuro-oratoria</h3>
+                    <p>Aplicación de principios de neurociencia a la comunicación. Conecta con la mente de tu audiencia y maximiza tu impacto persuasivo.</p>
+                    <a href="#" class="service-link">Descubrir más <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card voz">
+                    <i class="fas fa-volume-up service-icon"></i>
+                    <h3>Voz</h3>
+                    <p>Entrenamiento vocal profesional. Desarrolla una voz poderosa, clara y saludable para comunicar con autoridad y credibilidad.</p>
+                    <a href="#" class="service-link">Explorar técnicas <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card comunicacion">
+                    <i class="fas fa-handshake service-icon"></i>
+                    <h3>Comunicación profesional</h3>
+                    <p>Estrategias de comunicación efectiva para entornos corporativos. Negociación, presentaciones ejecutivas y comunicación de liderazgo.</p>
+                    <a href="#" class="service-link">Ver cursos <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card contenido">
+                    <i class="fas fa-graduation-cap service-icon"></i>
+                    <h3>Contenido educativo</h3>
+                    <p>Materiales formativos especializados, workshops y recursos digitales para el desarrollo continuo de tus habilidades comunicativas.</p>
+                    <a href="#" class="service-link">Acceder a recursos <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>¿Por qué elegir RDCR OratoriaLab?</h2>
+                    <p>Somos un laboratorio especializado en el desarrollo de habilidades comunicativas, donde combinamos metodologías innovadoras con fundamentos científicos.</p>
+                    <p>Nuestro enfoque integral aborda la comunicación desde múltiples dimensiones: cognitiva, emocional, vocal y estratégica.</p>
+                    <p>Con más de 10 años de experiencia, hemos formado a más de 2,000 profesionales, ejecutivos y líderes, transformando su forma de comunicar y conectarse con sus audiencias.</p>
+                    <a href="#contacto" class="cta-button">Contáctanos</a>
+                </div>
+                <div class="about-image">
+                    <!-- Imagen representativa de oratoria -->
+                    <div style="width:100%; height:400px; background:linear-gradient(to right, var(--primary-blue), var(--secondary-blue)); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">
+                        <div style="text-align:center; padding:20px;">
+                            <i class="fas fa-microphone" style="font-size:4rem; margin-bottom:20px;"></i>
+                            <p>Comunicación que transforma</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lo que dicen nuestros participantes</h2>
+                <p>Historias de transformación y éxito en comunicación</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial active" id="testimonial1">
+                    <p class="testimonial-text">"El programa de Neuro-oratoria cambió completamente mi forma de preparar presentaciones. Ahora conecto mucho mejor con mi audiencia y mis mensajes tienen mayor impacto."</p>
+                    <p class="testimonial-author">- María González, Directora de Marketing</p>
+                </div>
+                
+                <div class="testimonial" id="testimonial2">
+                    <p class="testimonial-text">"El entrenamiento vocal me dio la confianza que necesitaba para liderar reuniones importantes. Mi voz ahora proyecta autoridad y claridad."</p>
+                    <p class="testimonial-author">- Carlos Mendoza, Gerente Regional</p>
+                </div>
+                
+                <div class="testimonial" id="testimonial3">
+                    <p class="testimonial-text">"Los recursos de contenido educativo son excelentes. Me han permitido seguir desarrollándome incluso después de terminar el programa principal."</p>
+                    <p class="testimonial-author">- Ana Torres, Emprendedora</p>
+                </div>
+                
+                <div class="slider-controls">
+                    <span class="slider-dot active" data-slide="0"></span>
+                    <span class="slider-dot" data-slide="1"></span>
+                    <span class="slider-dot" data-slide="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <span style="color:white">RDCR</span>
+                        <span style="color:var(--accent-light)">OratoriaLab</span>
+                    </div>
+                    <p>Transformamos la comunicación en una ventaja competitiva para profesionales y organizaciones.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Programas</h3>
+                    <ul>
+                        <li><a href="#">/oratorialab</a></li>
+                        <li><a href="#">Neuro-oratoria</a></li>
+                        <li><a href="#">Voz</a></li>
+                        <li><a href="#">Comunicación profesional</a></li>
+                        <li><a href="#">Contenido educativo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Ciudad</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                    <p><i class="fas fa-envelope"></i> info@rdcroratorialab.com</p>
+                    <p><i class="fas fa-clock"></i> Lunes a Viernes: 9am - 6pm</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 RDCR OratoriaLab. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Testimonial slider
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentTestimonial = 0;
+        
+        function showTestimonial(index) {
+            testimonials.forEach(testimonial => {
+                testimonial.classList.remove('active');
+            });
+            
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            testimonials[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentTestimonial = index;
+        }
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showTestimonial(index);
+            });
+        });
+        
+        // Auto slide testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add active class to nav links based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if(scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Botón "Arriba" dinámico
+        const upBtn = document.getElementById('upBtn');
+        
+        window.addEventListener('scroll', () => {
+            // Mostrar/ocultar botón "Arriba" según la posición del scroll
+            if (window.scrollY > 300) {
+                upBtn.classList.remove('hidden');
+            } else {
+                upBtn.classList.add('hidden');
+            }
+        });
+        
+        // Función para ir al inicio de la página
+        upBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Efecto de animación para el botón "Arriba" cuando aparece
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    upBtn.classList.add('hidden');
+                }
+            });
+        }, observerOptions);
+        
+        // Observar la sección hero para ocultar el botón cuando esté visible
+        const heroSection = document.querySelector('.hero');
+        observer.observe(heroSection);
+    </script>
+</body>
+</html>
