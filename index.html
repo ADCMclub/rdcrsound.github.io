@@ -263,7 +263,7 @@ header.scrolled {
 }
 
 /* =====================
-   SECCIONES DE SERVICIOS CON ENLACES
+   SECCIONES DE SERVICIOS CON IMÁGENES Y EFECTO HOVER
 ===================== */
 .services-section {
   padding: 40px 20px;
@@ -294,113 +294,146 @@ header.scrolled {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   margin-top: 25px;
 }
 
 .service-card {
-  background: var(--gris-oscuro);
-  padding: 20px;
+  position: relative;
+  height: 250px;
   border-radius: 12px;
-  border: 1px solid;
-  transition: all 0.3s ease;
-  text-align: center;
+  overflow: hidden;
   cursor: pointer;
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.service-image {
+  width: 100%;
   height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: all 0.4s ease;
+}
+
+.service-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 15, 0.95);
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+  border-radius: 12px;
 }
 
-.service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+.service-card:hover .service-info {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.service-icon {
-  font-size: 2.5em;
-  margin-bottom: 15px;
+.service-card:hover .service-image {
+  filter: blur(2px) brightness(0.6);
+  transform: scale(1.05);
 }
 
-.service-card h3 {
-  color: var(--blanco-limpio);
+.service-info h3 {
+  font-size: 1.3em;
   margin-bottom: 10px;
-  font-size: 1.2em;
+  color: var(--blanco-limpio);
 }
 
-.service-card p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9em;
+.service-info p {
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: 15px;
-  flex-grow: 1;
+  line-height: 1.4;
+  font-size: 0.9em;
 }
 
 .btn-service {
-  background: transparent;
-  border: 1.5px solid;
-  color: var(--blanco-limpio);
+  position: relative;
   padding: 8px 16px;
+  border: none;
+  font-weight: 600;
   font-size: 0.85em;
-  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
   transition: all 0.3s ease;
-  margin-top: auto;
-  display: flex;
+  z-index: 1;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  margin-top: auto;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Colores para cada servicio */
 .service-card.audiolab {
   border-color: var(--cian-electrico);
 }
 
-.service-card.audiolab .service-icon {
-  color: var(--cian-electrico);
+.service-card.audiolab .service-image {
+  background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
 }
 
 .service-card.audiolab .btn-service {
-  border-color: var(--cian-electrico);
+  background: var(--cian-electrico);
+  color: var(--negro-profundo);
 }
 
 .service-card.audiolab:hover .btn-service {
-  background: var(--cian-electrico);
-  color: var(--negro-profundo);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
 }
 
 .service-card.oratorialab {
   border-color: #FF9800;
 }
 
-.service-card.oratorialab .service-icon {
-  color: #FF9800;
+.service-card.oratorialab .service-image {
+  background-image: url('https://images.unsplash.com/photo-1553484771-8e6b6b6b8b0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
 }
 
 .service-card.oratorialab .btn-service {
-  border-color: #FF9800;
+  background: #FF9800;
+  color: var(--negro-profundo);
 }
 
 .service-card.oratorialab:hover .btn-service {
-  background: #FF9800;
-  color: var(--negro-profundo);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
 }
 
 .service-card.datalab {
   border-color: #4CAF50;
 }
 
-.service-card.datalab .service-icon {
-  color: #4CAF50;
+.service-card.datalab .service-image {
+  background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
 }
 
 .service-card.datalab .btn-service {
-  border-color: #4CAF50;
+  background: #4CAF50;
+  color: var(--negro-profundo);
 }
 
 .service-card.datalab:hover .btn-service {
-  background: #4CAF50;
-  color: var(--negro-profundo);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 /* =====================
@@ -1354,7 +1387,7 @@ footer {
           <i class="fas fa-headphones-alt"></i> Sintonizar
         </a>
       </div>
-</div>
+    </div>
     
     <!-- AVENIDA TROPICAL -->
     <div class="radio-card avenida-tropical">
@@ -1370,41 +1403,41 @@ footer {
   </div>
 </section>
 
-<!-- SECCIÓN 3: SERVICIOS GENERALES -->
+<!-- SECCIÓN 3: SERVICIOS GENERALES CON IMÁGENES -->
 <section class="services-section" id="servicios">
   <h2>Nuestros Servicios</h2>
   <div class="services-grid">
-    <div class="service-card audiolab" onclick="window.open('https://rdcrsound.adcm.club/RDCRAudioLab/', '_blank')">
-      <div class="service-icon">
-        <i class="fas fa-wave-square"></i>
+    <div class="service-card audiolab" onclick="window.location.href='https://rdcrsound.adcm.club/RDCRAudioLab/'">
+      <div class="service-image"></div>
+      <div class="service-info">
+        <h3>RDCR AudioLab</h3>
+        <p>Producción de audio profesional, edición y postproducción para proyectos sonoros de impacto.</p>
+        <button class="btn-service">
+          <i class="fas fa-external-link-alt"></i> Conocer más
+        </button>
       </div>
-      <h3>RDCR AudioLab</h3>
-      <p>Producción de audio profesional, edición y postproducción para proyectos sonoros de impacto.</p>
-      <button class="btn-service">
-        <i class="fas fa-external-link-alt"></i> Conocer más
-      </button>
     </div>
     
-    <div class="service-card oratorialab" onclick="window.open('https://rdcrsound.adcm.club/RDCROratoriaLab/', '_blank')">
-      <div class="service-icon">
-        <i class="fas fa-microphone-alt"></i>
+    <div class="service-card oratorialab" onclick="window.location.href='https://rdcrsound.adcm.club/RDCROratoriaLab/'">
+      <div class="service-image"></div>
+      <div class="service-info">
+        <h3>RDCR OratoriaLab</h3>
+        <p>Entrenamiento de voz y comunicación efectiva. Potencia tu discurso y conexión con audiencias.</p>
+        <button class="btn-service">
+          <i class="fas fa-external-link-alt"></i> Conocer más
+        </button>
       </div>
-      <h3>RDCR OratoriaLab</h3>
-      <p>Entrenamiento de voz y comunicación efectiva. Potencia tu discurso y conexión con audiencias.</p>
-      <button class="btn-service">
-        <i class="fas fa-external-link-alt"></i> Conocer más
-      </button>
     </div>
     
-    <div class="service-card datalab" onclick="window.open('https://rdcrsound.adcm.club/RDCRDataLab/', '_blank')">
-      <div class="service-icon">
-        <i class="fas fa-chart-bar"></i>
+    <div class="service-card datalab" onclick="window.location.href='https://rdcrsound.adcm.club/RDCRDataLab/'">
+      <div class="service-image"></div>
+      <div class="service-info">
+        <h3>RDCR DataLab</h3>
+        <p>Análisis y visualización de datos para medios. Toma decisiones basadas en datos reales.</p>
+        <button class="btn-service">
+          <i class="fas fa-external-link-alt"></i> Conocer más
+        </button>
       </div>
-      <h3>RDCR DataLab</h3>
-      <p>Análisis y visualización de datos para medios. Toma decisiones basadas en datos reales.</p>
-      <button class="btn-service">
-        <i class="fas fa-external-link-alt"></i> Conocer más
-      </button>
     </div>
   </div>
 </section>
@@ -1418,7 +1451,7 @@ footer {
     <br><br>
     Con más de 5 años de experiencia en locución y producción de audio, ofrezco soluciones personalizadas para cada proyecto.
   </div>
-  <button class="btn-dario-voz" onclick="window.open('https://rdcrsound.adcm.club/DarioLavoz/', '_blank')">
+  <button class="btn-dario-voz" onclick="window.location.href='https://rdcrsound.adcm.club/DarioLavoz/'">
     <i class="fas fa-external-link-alt"></i> Conocer Más
   </button>
 </section>
@@ -1591,16 +1624,27 @@ footer {
     <div class="modal-body">
       <p><strong>RDCR Sound Network</strong> nace de una visión clara: crear radio online con identidad, criterio y propósito.</p>
       
-      <p>Desde el lanzamiento de Avenida Tropical en septiembre de 2020, el proyecto creció con pasión y convicción, apostando por una radio digital hecha con carácter y calidad.</p>
+      <p>Desde el lanzamiento de Avenida Tropical en septiembre de 2020, el proyecto creció con pasión y convicción, apostando por una radio digital hecha con carácter, calidad y sentido cultural.</p>
       
-      <p>En julio de 2021, este camino dio un paso decisivo con la creación de RDCR, entendiendo que el futuro no era una sola emisora, sino la construcción de una red sólida y en constante evolución. Así surge RDCR Sound Network, una propuesta que integra música, contenido y tecnología bajo una misma visión.</p>
+      <p>En julio de 2021, este camino dio un paso decisivo con la creación de RDCR, comprendiendo que el futuro no era una sola emisora, sino la construcción de una red sólida y en constante evolución. Así surge RDCR Sound Network, una propuesta que integra música, contenido, tecnología y pensamiento estratégico bajo una misma visión.</p>
       
-      <p>Hoy presentamos una nueva etapa: imagen renovada, nuevos talentos, programación actualizada y una estructura pensada para el presente y proyectada al futuro. Nuestra historia no se deja atrás; se transforma en experiencia y aprendizaje.</p>
+      <p>Hoy, RDCR Sound Network entra en una nueva etapa. La radio sigue siendo nuestro origen, pero el proyecto evoluciona hacia una red de conocimiento y medios, donde la experiencia sonora se complementa con nuevas áreas especializadas:</p>
       
-      <p><strong>DARIO CASTELLANOS</strong></p>
+      <ul>
+        <li><strong>RDCR AudioLab</strong>, enfocado en la producción y edición profesional de audio;</li>
+        <li><strong>RDCR OratoriaLab</strong>, dedicado al desarrollo de la voz, la comunicación y la neuro-oratoria;</li>
+        <li><strong>RDCR DataLab</strong>, orientado al análisis y visualización de datos aplicados a medios y contenidos digitales.</li>
+      </ul>
+      
+      <p>Esta transformación se expresa en una imagen renovada, nuevos talentos, programación actualizada y una estructura pensada para el presente y proyectada al futuro. Nuestra historia no se deja atrás; se convierte en experiencia, método y aprendizaje.</p>
+      
+      <p><strong>RDCR Sound Network no es solo radio online.<br>
+      Es una plataforma que crea, comunica, analiza y forma.</strong></p>
+      
+      <p><strong>DARÍO CASTELLANOS</strong></p>
       <p>Radios online con visión.<br>
          Contenido con identidad.<br>
-         La radio online se transforma.</p>
+         Conocimiento que evoluciona.</p>
     </div>
   </div>
 </div>
