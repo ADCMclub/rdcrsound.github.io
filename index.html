@@ -99,28 +99,13 @@
         @keyframes modalSlideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .modal-header { background: var(--gris-oscuro); padding: 15px 20px; border-bottom: 2px solid var(--cian-electrico); display: flex; justify-content: space-between; align-items: center; border-radius: 12px 12px 0 0; position: sticky; top: 0; z-index: 10; }
         .close-modal { background: var(--cian-electrico); border: 2px solid var(--blanco-limpio); color: var(--negro-profundo); font-size: 1.2em; cursor: pointer; transition: all 0.3s ease; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        .podcast-modal-content { background: var(--negro-profundo); border-radius: 12px; width: 95%; max-width: 800px; max-height: 500px; overflow-y: auto; border: 2px solid var(--cian-electrico); box-shadow: 0 0 30px rgba(0, 229, 255, 0.5); position: relative; animation: modalSlideUp 0.4s ease; }
-        .podcast-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
-        .podcast-item { background: var(--gris-oscuro); padding: 15px; border-radius: 10px; border-left: 4px solid var(--cian-electrico); }
-        .podcast-item h3 { color: var(--cian-electrico); margin-bottom: 10px; font-size: 1.1em; text-align: center; }
-        .podcast-embed { width: 100%; height: 150px; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
-        .podcast-back-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: linear-gradient(45deg, var(--cian-electrico), #00B8D4); border: none; border-radius: 8px; color: var(--negro-profundo); font-weight: bold; cursor: pointer; margin: 15px auto; transition: all 0.3s ease; grid-column: 1/-1; }
+        .podcast-modal-content { background: var(--negro-profundo); border-radius: 12px; width: 95%; max-width: 1000px; max-height: 80vh; overflow-y: auto; border: 2px solid var(--cian-electrico); box-shadow: 0 0 30px rgba(0, 229, 255, 0.5); position: relative; animation: modalSlideUp 0.4s ease; }
+        .podcast-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
         footer { background: rgba(15, 15, 15, 0.98); padding: 40px 20px 20px; margin-top: 40px; border-top: 1px solid rgba(0, 229, 255, 0.2); }
         .social-icons { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
         .social-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--gris-oscuro); display: flex; align-items: center; justify-content: center; color: var(--cian-electrico); text-decoration: none; border: 1px solid var(--cian-electrico); transition: all 0.3s ease; }
         @media (max-width: 1200px) { .radios-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; margin: 0 auto; } }
-        @media (max-width: 768px) { 
-            header { padding: 12px 20px; flex-wrap: wrap; } 
-            .nav-buttons { flex-direction: column; width: 100%; margin-top: 15px; display: none; gap: 8px; } 
-            .nav-buttons.active { display: flex; } 
-            .nav-btn { width: 100%; justify-content: center; padding: 12px; } 
-            .radios-grid { grid-template-columns: 1fr; max-width: 400px; } 
-            .services-grid, .podcasts-grid { grid-template-columns: 1fr; } 
-            .podcast-modal-content { max-height: 80vh; max-width: 95%; }
-            .podcast-container { grid-template-columns: 1fr; padding: 15px; }
-            .podcast-embed { height: 120px; }
-            .podcast-item h3 { font-size: 1em; }
-        }
+        @media (max-width: 768px) { header { padding: 12px 20px; flex-wrap: wrap; } .nav-buttons { flex-direction: column; width: 100%; margin-top: 15px; display: none; gap: 8px; } .nav-buttons.active { display: flex; } .nav-btn { width: 100%; justify-content: center; padding: 12px; } .radios-grid { grid-template-columns: 1fr; max-width: 400px; } .services-grid, .podcasts-grid { grid-template-columns: 1fr; } .podcast-container { grid-template-columns: 1fr; padding: 15px; } }
     </style>
 </head>
 <body>
@@ -325,15 +310,15 @@
         <div class="podcast-modal-content">
             <div class="modal-header"><h2>Podcasts en Spotify</h2><button class="close-modal" onclick="closeModal('podcastSpotify')">&times;</button></div>
             <div class="podcast-container">
-                <div class="podcast-item">
-                    <h3>Entretelones Radio Show Podcast</h3>
-                    <div class="podcast-embed"><iframe style="border-radius:8px" src="https://open.spotify.com/embed/show/6esb0xUeklWFNoqCWSorpa?utm_source=generator" width="100%" height="100%" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Entretelones Radio Show Podcast</h3>
+                    <div class="podcast-embed" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-bottom:15px;"><iframe style="border-radius:8px" src="https://open.spotify.com/embed/show/6esb0xUeklWFNoqCWSorpa?utm_source=generator" width="100%" height="100%" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
                 </div>
-                <div class="podcast-item">
-                    <h3>Mano a Mano con Darío</h3>
-                    <div class="podcast-embed"><iframe style="border-radius:8px" src="https://open.spotify.com/embed/show/4fqSdu2l8WuOkoTKT67r9n?utm_source=generator" width="100%" height="100%" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Mano a Mano con Darío</h3>
+                    <div class="podcast-embed" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-bottom:15px;"><iframe style="border-radius:8px" src="https://open.spotify.com/embed/show/4fqSdu2l8WuOkoTKT67r9n?utm_source=generator" width="100%" height="100%" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
                 </div>
-                <button class="podcast-back-btn" onclick="closeModal('podcastSpotify')"><i class="fas fa-arrow-left"></i> Volver a Podcasts</button>
+                <button class="podcast-back-btn" onclick="closeModal('podcastSpotify')" style="display:flex;align-items:center;gap:8px;padding:10px 20px;background:linear-gradient(45deg,var(--cian-electrico),#00B8D4);border:none;border-radius:8px;color:var(--negro-profundo);font-weight:bold;cursor:pointer;margin:15px auto;transition:all 0.3s ease;grid-column:1/-1;"><i class="fas fa-arrow-left"></i> Volver a Podcasts</button>
             </div>
         </div>
     </div>
@@ -341,15 +326,15 @@
         <div class="podcast-modal-content">
             <div class="modal-header"><h2>Podcasts en Apple Podcasts</h2><button class="close-modal" onclick="closeModal('podcastApple')">&times;</button></div>
             <div class="podcast-container">
-                <div class="podcast-item">
-                    <h3>Entretelones Radio Show Podcast</h3>
-                    <div class="podcast-embed"><iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="100%" style="width:100%;overflow:hidden;border-radius:8px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/ec/podcast/entretelones-radio-show-podcast/id1819687775"></iframe></div>
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Entretelones Radio Show Podcast</h3>
+                    <div class="podcast-embed" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-bottom:15px;"><iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="100%" style="width:100%;overflow:hidden;border-radius:8px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/ec/podcast/entretelones-radio-show-podcast/id1819687775"></iframe></div>
                 </div>
-                <div class="podcast-item">
-                    <h3>Mano a Mano con Darío</h3>
-                    <div class="podcast-embed"><iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="100%" style="width:100%;overflow:hidden;border-radius:8px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/ec/podcast/mano-a-mano-con-dar%C3%ADo/id1819685664"></iframe></div>
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Mano a Mano con Darío</h3>
+                    <div class="podcast-embed" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-bottom:15px;"><iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="100%" style="width:100%;overflow:hidden;border-radius:8px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/ec/podcast/mano-a-mano-con-dar%C3%ADo/id1819685664"></iframe></div>
                 </div>
-                <button class="podcast-back-btn" onclick="closeModal('podcastApple')"><i class="fas fa-arrow-left"></i> Volver a Podcasts</button>
+                <button class="podcast-back-btn" onclick="closeModal('podcastApple')" style="display:flex;align-items:center;gap:8px;padding:10px 20px;background:linear-gradient(45deg,var(--cian-electrico),#00B8D4);border:none;border-radius:8px;color:var(--negro-profundo);font-weight:bold;cursor:pointer;margin:15px auto;transition:all 0.3s ease;grid-column:1/-1;"><i class="fas fa-arrow-left"></i> Volver a Podcasts</button>
             </div>
         </div>
     </div>
@@ -357,19 +342,19 @@
         <div class="podcast-modal-content">
             <div class="modal-header"><h2>Podcasts en TuneIn</h2><button class="close-modal" onclick="closeModal('podcastTunein')">&times;</button></div>
             <div class="podcast-container">
-                <div class="podcast-item">
-                    <h3>Entretelones Radio Show Podcast</h3>
-                    <div class="podcast-embed">
-                        <iframe src="https://tunein.com/embed/player/p4634508/" style="width:100%; height:100%;" scrolling="no" frameborder="no"></iframe>
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Entretelones Radio Show Podcast</h3>
+                    <div class="podcast-embed" style="width:100%;height:120px;border-radius:8px;overflow:hidden;margin-bottom:15px;">
+                        <iframe src="https://tunein.com/embed/player/p4634508/" style="width:100%; height:100px;" scrolling="no" frameborder="no"></iframe>
                     </div>
                 </div>
-                <div class="podcast-item">
-                    <h3>Mano a Mano con Darío</h3>
-                    <div class="podcast-embed">
-                        <iframe src="https://tunein.com/embed/player/p4643902/" style="width:100%; height:100%;" scrolling="no" frameborder="no"></iframe>
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Mano a Mano con Darío</h3>
+                    <div class="podcast-embed" style="width:100%;height:120px;border-radius:8px;overflow:hidden;margin-bottom:15px;">
+                        <iframe src="https://tunein.com/embed/player/p4643902/" style="width:100%; height:100px;" scrolling="no" frameborder="no"></iframe>
                     </div>
                 </div>
-                <button class="podcast-back-btn" onclick="closeModal('podcastTunein')"><i class="fas fa-arrow-left"></i> Volver a Podcasts</button>
+                <button class="podcast-back-btn" onclick="closeModal('podcastTunein')" style="display:flex;align-items:center;gap:8px;padding:10px 20px;background:linear-gradient(45deg,var(--cian-electrico),#00B8D4);border:none;border-radius:8px;color:var(--negro-profundo);font-weight:bold;cursor:pointer;margin:15px auto;transition:all 0.3s ease;grid-column:1/-1;"><i class="fas fa-arrow-left"></i> Volver a Podcasts</button>
             </div>
         </div>
     </div>
@@ -377,15 +362,15 @@
         <div class="podcast-modal-content">
             <div class="modal-header"><h2>Podcasts en IVOOX</h2><button class="close-modal" onclick="closeModal('podcastIvoxx')">&times;</button></div>
             <div class="podcast-container">
-                <div class="podcast-item">
-                    <h3>Entretelones Radio Show Podcast</h3>
-                    <div class="podcast-embed"><iframe src="https://www.ivoox.com/player_es_podcast_1255565_zp_1.html?c1=6b4638" width="100%" height="100%" frameborder="0" allowfullscreen="" scrolling="no" loading="lazy"></iframe></div>
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Entretelones Radio Show Podcast</h3>
+                    <div class="podcast-embed" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-bottom:15px;"><iframe src="https://www.ivoox.com/player_es_podcast_1255565_zp_1.html?c1=6b4638" width="100%" height="100%" frameborder="0" allowfullscreen="" scrolling="no" loading="lazy"></iframe></div>
                 </div>
-                <div class="podcast-item">
-                    <h3>Mano a Mano con Darío</h3>
-                    <div class="podcast-embed"><iframe src="https://www.ivoox.com/player_es_podcast_2390635_zp_1.html?c1=0a334c" width="100%" height="100%" frameborder="0" allowfullscreen="" scrolling="no" loading="lazy"></iframe></div>
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Mano a Mano con Darío</h3>
+                    <div class="podcast-embed" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-bottom:15px;"><iframe src="https://www.ivoox.com/player_es_podcast_2390635_zp_1.html?c1=0a334c" width="100%" height="100%" frameborder="0" allowfullscreen="" scrolling="no" loading="lazy"></iframe></div>
                 </div>
-                <button class="podcast-back-btn" onclick="closeModal('podcastIvoxx')"><i class="fas fa-arrow-left"></i> Volver a Podcasts</button>
+                <button class="podcast-back-btn" onclick="closeModal('podcastIvoxx')" style="display:flex;align-items:center;gap:8px;padding:10px 20px;background:linear-gradient(45deg,var(--cian-electrico),#00B8D4);border:none;border-radius:8px;color:var(--negro-profundo);font-weight:bold;cursor:pointer;margin:15px auto;transition:all 0.3s ease;grid-column:1/-1;"><i class="fas fa-arrow-left"></i> Volver a Podcasts</button>
             </div>
         </div>
     </div>
@@ -396,19 +381,19 @@
                 <button class="close-modal" onclick="closeModal('podcastIheart')">&times;</button>
             </div>
             <div class="podcast-container">
-                <div class="podcast-item">
-                    <h3>Entretelones Radio Show Podcast</h3>
-                    <div class="podcast-embed">
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Entretelones Radio Show Podcast</h3>
+                    <div class="podcast-embed" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-bottom:15px;">
                         <iframe allow="autoplay" width="100%" height="100%" src="https://iheart.com/podcast/318417098/?embed=true&sc=widget&pname=submityourpodcast" frameborder="0" style="border-radius:8px;"></iframe>
                     </div>
                 </div>
-                <div class="podcast-item">
-                    <h3>Mano a Mano con Darío</h3>
-                    <div class="podcast-embed">
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Mano a Mano con Darío</h3>
+                    <div class="podcast-embed" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-bottom:15px;">
                         <iframe allow="autoplay" width="100%" height="100%" src="https://iheart.com/podcast/318417066/?embed=true&sc=widget&pname=submityourpodcast" frameborder="0" style="border-radius:8px;"></iframe>
                     </div>
                 </div>
-                <button class="podcast-back-btn" onclick="closeModal('podcastIheart')">
+                <button class="podcast-back-btn" onclick="closeModal('podcastIheart')" style="display:flex;align-items:center;gap:8px;padding:10px 20px;background:linear-gradient(45deg,var(--cian-electrico),#00B8D4);border:none;border-radius:8px;color:var(--negro-profundo);font-weight:bold;cursor:pointer;margin:15px auto;transition:all 0.3s ease;grid-column:1/-1;">
                     <i class="fas fa-arrow-left"></i> Volver a Podcasts
                 </button>
             </div>
