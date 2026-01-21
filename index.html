@@ -61,6 +61,26 @@
         @keyframes pulseDario { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
         .podcasts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 25px; }
         .podcast-card { background: var(--gris-oscuro); border-radius: 10px; padding: 15px; text-align: center; transition: all 0.3s ease; border: 1px solid transparent; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 140px; }
+        .podcast-card.spotify { border-color: #1DB954; }
+        .podcast-card.spotify:hover { background: #1DB954; color: white; transform: translateY(-5px); box-shadow: 0 8px 20px rgba(29, 185, 84, 0.3); }
+        .podcast-card.spotify i { color: #1DB954; font-size: 2em; margin-bottom: 10px; }
+        .podcast-card.spotify:hover i { color: white; }
+        .podcast-card.apple { border-color: #A2AAAD; }
+        .podcast-card.apple:hover { background: #A2AAAD; color: white; transform: translateY(-5px); box-shadow: 0 8px 20px rgba(162, 170, 173, 0.3); }
+        .podcast-card.apple i { color: #A2AAAD; font-size: 2em; margin-bottom: 10px; }
+        .podcast-card.apple:hover i { color: white; }
+        .podcast-card.tunein { border-color: #1ED760; }
+        .podcast-card.tunein:hover { background: #1ED760; color: white; transform: translateY(-5px); box-shadow: 0 8px 20px rgba(30, 215, 96, 0.3); }
+        .podcast-card.tunein i { color: #1ED760; font-size: 2em; margin-bottom: 10px; }
+        .podcast-card.tunein:hover i { color: white; }
+        .podcast-card.ivoxx { border-color: #FF6600; }
+        .podcast-card.ivoxx:hover { background: #FF6600; color: white; transform: translateY(-5px); box-shadow: 0 8px 20px rgba(255, 102, 0, 0.3); }
+        .podcast-card.ivoxx i { color: #FF6600; font-size: 2em; margin-bottom: 10px; }
+        .podcast-card.ivoxx:hover i { color: white; }
+        .podcast-card.iheart { border-color: #c7004c; }
+        .podcast-card.iheart:hover { background: #c7004c; color: white; transform: translateY(-5px); box-shadow: 0 8px 20px rgba(199, 0, 76, 0.3); }
+        .podcast-card.iheart i { color: #c7004c; font-size: 2em; margin-bottom: 10px; }
+        .podcast-card.iheart:hover i { color: white; }
         .publicidad-carousel { position: relative; width: 100%; max-width: 700px; margin: 15px auto 0; overflow: hidden; border-radius: 12px; box-shadow: 0 6px 18px rgba(0, 229, 255, 0.15); border: 1.5px solid var(--cian-electrico); }
         .carousel-track { display: flex; transition: transform 0.5s ease-in-out; height: 150px; }
         .carousel-slide { min-width: 100%; height: 100%; position: relative; }
@@ -161,8 +181,9 @@
         <div class="podcasts-grid">
             <div class="podcast-card spotify" onclick="openPodcastModal('spotify')"><i class="fab fa-spotify"></i><h3>Spotify</h3><p>Todos nuestros programas</p></div>
             <div class="podcast-card apple" onclick="openPodcastModal('apple')"><i class="fab fa-apple"></i><h3>Apple Podcasts</h3><p>Contenido exclusivo</p></div>
-            <div class="podcast-card youtube" onclick="openPodcastModal('youtube')"><i class="fab fa-youtube"></i><h3>YouTube</h3><p>Programas con video</p></div>
+            <div class="podcast-card tunein" onclick="openPodcastModal('tunein')"><i class="fas fa-podcast"></i><h3>TuneIn</h3><p>Escucha en TuneIn</p></div>
             <div class="podcast-card ivoxx" onclick="openPodcastModal('ivoxx')"><i class="fas fa-podcast"></i><h3>IVOOX</h3><p>Escucha nuestros podcasts</p></div>
+            <div class="podcast-card iheart" onclick="openPodcastModal('iheart')"><i class="fas fa-heart"></i><h3>iHeart Podcasts</h3><p>Contenido en iHeart</p></div>
         </div>
     </section>
     <section class="compact-section" id="publicidad">
@@ -317,18 +338,23 @@
             </div>
         </div>
     </div>
-    <div id="podcastYoutube" class="modal">
+    <div id="podcastTunein" class="modal">
         <div class="podcast-modal-content">
-            <div class="modal-header"><h2>Podcasts en YouTube</h2><button class="close-modal" onclick="closeModal('podcastYoutube')">&times;</button></div>
+            <div class="modal-header"><h2>Podcasts en TuneIn</h2><button class="close-modal" onclick="closeModal('podcastTunein')">&times;</button></div>
             <div class="podcast-container">
                 <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
-                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Canales de YouTube</h3>
-                    <div class="youtube-buttons" style="display:flex;flex-direction:column;gap:15px;margin-top:15px;">
-                        <a href="https://youtube.com/@chullavidadetres?si=XQz2qagde-Dv0Ozl" target="_blank" class="youtube-btn" style="display:flex;align-items:center;gap:12px;padding:12px 20px;background:var(--gris-oscuro);border:2px solid #FF0000;border-radius:8px;color:var(--blanco-limpio);text-decoration:none;transition:all 0.3s ease;"><i class="fab fa-youtube"></i><div><strong>Chulla Vida de Tres</strong><p style="font-size:0.85em;opacity:0.8;margin-top:5px;">Canal de YouTube</p></div></a>
-                        <a href="https://youtube.com/@canalrdcrtv?si=GnXf-E1i2ohZxPvb" target="_blank" class="youtube-btn" style="display:flex;align-items:center;gap:12px;padding:12px 20px;background:var(--gris-oscuro);border:2px solid #FF0000;border-radius:8px;color:var(--blanco-limpio);text-decoration:none;transition:all 0.3s ease;"><i class="fab fa-youtube"></i><div><strong>Canal RDCR TV</strong><p style="font-size:0.85em;opacity:0.8;margin-top:5px;">Canal oficial RDCR</p></div></a>
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Entretelones Radio Show Podcast</h3>
+                    <div class="podcast-embed" style="width:100%;height:120px;border-radius:8px;overflow:hidden;margin-bottom:15px;">
+                        <iframe src="https://tunein.com/embed/player/p4634508/" style="width:100%; height:100px;" scrolling="no" frameborder="no"></iframe>
                     </div>
                 </div>
-                <button class="podcast-back-btn" onclick="closeModal('podcastYoutube')" style="display:flex;align-items:center;gap:8px;padding:10px 20px;background:linear-gradient(45deg,var(--cian-electrico),#00B8D4);border:none;border-radius:8px;color:var(--negro-profundo);font-weight:bold;cursor:pointer;margin:15px auto;transition:all 0.3s ease;grid-column:1/-1;"><i class="fas fa-arrow-left"></i> Volver a Podcasts</button>
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Mano a Mano con Darío</h3>
+                    <div class="podcast-embed" style="width:100%;height:120px;border-radius:8px;overflow:hidden;margin-bottom:15px;">
+                        <iframe src="https://tunein.com/embed/player/p4643902/" style="width:100%; height:100px;" scrolling="no" frameborder="no"></iframe>
+                    </div>
+                </div>
+                <button class="podcast-back-btn" onclick="closeModal('podcastTunein')" style="display:flex;align-items:center;gap:8px;padding:10px 20px;background:linear-gradient(45deg,var(--cian-electrico),#00B8D4);border:none;border-radius:8px;color:var(--negro-profundo);font-weight:bold;cursor:pointer;margin:15px auto;transition:all 0.3s ease;grid-column:1/-1;"><i class="fas fa-arrow-left"></i> Volver a Podcasts</button>
             </div>
         </div>
     </div>
@@ -345,6 +371,31 @@
                     <div class="podcast-embed" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-bottom:15px;"><iframe src="https://www.ivoox.com/player_es_podcast_2390635_zp_1.html?c1=0a334c" width="100%" height="100%" frameborder="0" allowfullscreen="" scrolling="no" loading="lazy"></iframe></div>
                 </div>
                 <button class="podcast-back-btn" onclick="closeModal('podcastIvoxx')" style="display:flex;align-items:center;gap:8px;padding:10px 20px;background:linear-gradient(45deg,var(--cian-electrico),#00B8D4);border:none;border-radius:8px;color:var(--negro-profundo);font-weight:bold;cursor:pointer;margin:15px auto;transition:all 0.3s ease;grid-column:1/-1;"><i class="fas fa-arrow-left"></i> Volver a Podcasts</button>
+            </div>
+        </div>
+    </div>
+    <div id="podcastIheart" class="modal">
+        <div class="podcast-modal-content">
+            <div class="modal-header">
+                <h2>Podcasts en iHeart</h2>
+                <button class="close-modal" onclick="closeModal('podcastIheart')">&times;</button>
+            </div>
+            <div class="podcast-container">
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Entretelones Radio Show Podcast</h3>
+                    <div class="podcast-embed" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-bottom:15px;">
+                        <iframe allow="autoplay" width="100%" height="100%" src="https://iheart.com/podcast/318417098/?embed=true&sc=widget&pname=submityourpodcast" frameborder="0" style="border-radius:8px;"></iframe>
+                    </div>
+                </div>
+                <div class="podcast-item" style="background:var(--gris-oscuro);padding:20px;border-radius:10px;border-left:4px solid var(--cian-electrico);">
+                    <h3 style="color:var(--cian-electrico);margin-bottom:15px;font-size:1.2em;text-align:center;">Mano a Mano con Darío</h3>
+                    <div class="podcast-embed" style="width:100%;height:200px;border-radius:8px;overflow:hidden;margin-bottom:15px;">
+                        <iframe allow="autoplay" width="100%" height="100%" src="https://iheart.com/podcast/318417066/?embed=true&sc=widget&pname=submityourpodcast" frameborder="0" style="border-radius:8px;"></iframe>
+                    </div>
+                </div>
+                <button class="podcast-back-btn" onclick="closeModal('podcastIheart')" style="display:flex;align-items:center;gap:8px;padding:10px 20px;background:linear-gradient(45deg,var(--cian-electrico),#00B8D4);border:none;border-radius:8px;color:var(--negro-profundo);font-weight:bold;cursor:pointer;margin:15px auto;transition:all 0.3s ease;grid-column:1/-1;">
+                    <i class="fas fa-arrow-left"></i> Volver a Podcasts
+                </button>
             </div>
         </div>
     </div>
