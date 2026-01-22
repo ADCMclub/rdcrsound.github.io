@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página No Encontrada - RDCR Sound Network</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Mantener los mismos estilos de la página principal */
+        :root {
+            --negro-profundo: #0F0F0F;
+            --cian-electrico: #00E5FF;
+            --blanco-limpio: #FFFFFF;
+            --gris-oscuro: #2A2A2A;
+            --rosa-voz: #E91E63;
+            --naranja-voz: #FF9800;
+            --morado-voz: #9C27B0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            color: var(--blanco-limpio); 
+            background: var(--negro-profundo); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+        
+        /* Header (igual que en la página principal) */
+        header { 
+            background: rgba(15, 15, 15, 0.98); 
+            backdrop-filter: blur(15px); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid rgba(0, 229, 255, 0.4); 
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+            position: relative;
+            z-index: 1000;
+        }
+        
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo h2 { 
+            margin: 0; 
+            font-size: 1.5em; 
+            background: linear-gradient(45deg, var(--cian-electrico), #00B8D4); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            font-weight: 800; 
+        }
+        
+        /* Contenido principal de la página 404 */
+        .error-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .error-container {
+            max-width: 800px;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .error-code {
+            font-size: 180px;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--cian-electrico), #00B8D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+            animation: pulseError 3s infinite alternate;
+        }
+        
+        @keyframes pulseError {
+            0% { text-shadow: 0 0 20px rgba(0, 229, 255, 0.3); }
+            100% { text-shadow: 0 0 40px rgba(0, 229, 255, 0.6); }
+        }
+        
+        .error-title {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: var(--blanco-limpio);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .error-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cian-electrico), transparent);
+            border-radius: 2px;
+        }
+        
+        .error-message {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        /* Animación de audio visual */
+        .audio-visualizer {
+            width: 100%;
+            max-width: 400px;
+            height: 80px;
+            margin: 30px auto;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+        }
+        
+        .bar {
+            width: 6px;
+            background: linear-gradient(to top, var(--cian-electrico), transparent);
+            border-radius: 3px 3px 0 0;
+            animation: audioWave 1.5s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+        
+        @keyframes audioWave {
+            0%, 100% { height: 20%; }
+            50% { height: 80%; }
+        }
+        
+        /* Botones de acción */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--cian-electrico), #00B8D4);
+            color: var(--negro-profundo);
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 229, 255, 0.5);
+            border-color: var(--blanco-limpio);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--blanco-limpio);
+            border: 2px solid var(--cian-electrico);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 229, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        /* Navegación rápida */
+        .quick-links {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .quick-links h3 {
+            color: var(--cian-electrico);
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .link-card {
+            background: var(--gris-oscuro);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--blanco-limpio);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .link-card:hover {
+            border-color: var(--cian-electrico);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.2);
+        }
+        
+        .link-card i {
+            font-size: 1.5em;
+            color: var(--cian-electrico);
+        }
+        
+        /* Elementos decorativos */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--cian-electrico);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: floatElement 20s infinite linear;
+        }
+        
+        @keyframes floatElement {
+            0% { transform: translateY(100vh) translateX(0); }
+            100% { transform: translateY(-100px) translateX(100px); }
+        }
+        
+        /* Footer (igual que en la página principal) */
+        footer { 
+            background: rgba(15, 15, 15, 0.98); 
+            padding: 30px 20px 20px; 
+            border-top: 1px solid rgba(0, 229, 255, 0.2);
+            text-align: center;
+        }
+        
+        .social-icons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            margin-bottom: 25px; 
+            flex-wrap: wrap; 
+        }
+        
+        .social-icon { 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            background: var(--gris-oscuro); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--cian-electrico); 
+            text-decoration: none; 
+            border: 1px solid var(--cian-electrico); 
+            transition: all 0.3s ease; 
+        }
+        
+        .social-icon:hover {
+            background: var(--cian-electrico);
+            color: var(--negro-profundo);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85em;
+            margin-top: 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .error-code { font-size: 120px; }
+            .error-title { font-size: 1.8em; }
+            .error-message { font-size: 1em; }
+            .action-buttons { flex-direction: column; align-items: center; }
+            .action-btn { width: 100%; max-width: 300px; justify-content: center; }
+            .links-grid { grid-template-columns: repeat(2, 1fr); }
+            header { flex-wrap: wrap; }
+        }
+        
+        @media (max-width: 480px) {
+            .error-code { font-size: 90px; }
+            .error-title { font-size: 1.5em; }
+            .links-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <!-- Usar la misma imagen de logo de tu página principal -->
+            <img src="/img_radio/RDCR SOUND NETWORK/10.png" alt="RDCR Sound Network" style="height:40px;width:auto;">
+            <h2>RDCR SOUND</h2>
+        </div>
+    </header>
+
+    <main class="error-main">
+        <!-- Elementos decorativos flotantes -->
+        <div class="floating-elements" id="floatingElements"></div>
+        
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <h1 class="error-title">¡SEÑAL PERDIDA!</h1>
+            
+            <p class="error-message">
+                La página que buscas ha desaparecido de nuestra frecuencia.<br>
+                Parece que el enlace está dañado o la página ha sido movida a otra ubicación.
+            </p>
+            
+            <!-- Visualizador de audio animado -->
+            <div class="audio-visualizer">
+                <!-- Las barras se generan con JavaScript -->
+            </div>
+            
+            <p class="error-message">
+                No te preocupes, aún puedes sintonizar nuestras emisoras o regresar a la página principal.
+            </p>
+            
+            <!-- Botones de acción -->
+            <div class="action-buttons">
+                <a href="/" class="action-btn btn-primary">
+                    <i class="fas fa-home"></i> Volver al Inicio
+                </a>
+                <a href="#radios" class="action-btn btn-secondary" onclick="smoothScrollToRadios(event)">
+                    <i class="fas fa-radio"></i> Escuchar Radio
+                </a>
+            </div>
+            
+            <!-- Navegación rápida -->
+            <div class="quick-links">
+                <h3>Enlaces Rápidos</h3>
+                <div class="links-grid">
+                    <a href="/DCRadioEC/" class="link-card">
+                        <i class="fas fa-music"></i>
+                        <span>DC Radio</span>
+                    </a>
+                    <a href="/DCClasicosEC/" class="link-card">
+                        <i class="fas fa-headphones"></i>
+                        <span>DC Clásicos</span>
+                    </a>
+                    <a href="/DCMixEC/" class="link-card">
+                        <i class="fas fa-sliders-h"></i>
+                        <span>DC Mix</span>
+                    </a>
+                    <a href="/RadioAvenidaTropical/" class="link-card">
+                        <i class="fas fa-tropical-drink"></i>
+                        <span>Avenida Tropical</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/rdcdrsound" target="_blank" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://x.com/DCradioEc" target="_blank" class="social-icon">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.youtube.com/@CanalRDCRTv" target="_blank" class="social-icon">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        <div class="copyright">
+            <p>© 2026 RDCR Sound Network · Todos los derechos reservados</p>
+            <p>Quito, Ecuador</p>
+        </div>
+    </footer>
+
+    <script>
+        // Crear elementos flotantes decorativos
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            const colors = ['#00E5FF', '#E91E63', '#FF9800', '#9C27B0'];
+            
+            for (let i = 0; i < 15; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                
+                // Propiedades aleatorias
+                const size = Math.random() * 10 + 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const delay = Math.random() * 20;
+                const duration = 15 + Math.random() * 15;
+                
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.background = color;
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${delay}s`;
+                element.style.animationDuration = `${duration}s`;
+                element.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                container.appendChild(element);
+            }
+        }
+        
+        // Crear visualizador de audio
+        function createAudioVisualizer() {
+            const container = document.querySelector('.audio-visualizer');
+            
+            for (let i = 0; i < 20; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.style.setProperty('--i', i);
+                bar.style.height = `${Math.random() * 100}%`;
+                container.appendChild(bar);
+            }
+        }
+        
+        // Simular búsqueda automática de frecuencia
+        function startFrequencySearch() {
+            const title = document.querySelector('.error-title');
+            const originalText = title.textContent;
+            
+            const frequencies = [
+                "BUSCANDO SEÑAL...",
+                "SINTONIZANDO FRECUENCIA...",
+                "CONECTANDO CON EL SERVIDOR...",
+                "¡SEÑAL PERDIDA!"
+            ];
+            
+            let currentIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            
+            function typeEffect() {
+                const currentText = frequencies[currentIndex];
+                
+                if (!isDeleting && charIndex <= currentText.length) {
+                    title.textContent = currentText.substring(0, charIndex);
+                    charIndex++;
+                    setTimeout(typeEffect, 100);
+                } else if (isDeleting && charIndex >= 0) {
+                    title.textContent = currentText.substring(0, charIndex);
+                    charIndex--;
+                    setTimeout(typeEffect, 50);
+                } else {
+                    isDeleting = !isDeleting;
+                    if (!isDeleting) {
+                        currentIndex = (currentIndex + 1) % frequencies.length;
+                    }
+                    setTimeout(typeEffect, 1000);
+                }
+            }
+            
+            // Comenzar después de 2 segundos
+            setTimeout(() => {
+                typeEffect();
+            }, 2000);
+        }
+        
+        // Contador de intentos de reconexión
+        function startReconnectionCounter() {
+            let count = 0;
+            const counterElement = document.createElement('div');
+            counterElement.style.cssText = `
+                color: rgba(255,255,255,0.6);
+                font-size: 0.9em;
+                margin-top: 10px;
+                font-family: monospace;
+            `;
+            
+            document.querySelector('.audio-visualizer').parentNode.insertBefore(
+                counterElement, 
+                document.querySelector('.audio-visualizer').nextSibling
+            );
+            
+            setInterval(() => {
+                count++;
+                counterElement.textContent = `Intentos de reconexión: ${count}`;
+                
+                // Cambiar color cada 5 intentos
+                if (count % 5 === 0) {
+                    counterElement.style.color = '#00E5FF';
+                    setTimeout(() => {
+                        counterElement.style.color = 'rgba(255,255,255,0.6)';
+                    }, 500);
+                }
+            }, 3000);
+        }
+        
+        // Función para scroll suave (si el usuario hace clic en "Escuchar Radio")
+        function smoothScrollToRadios(event) {
+            event.preventDefault();
+            
+            // Simular que estamos redirigiendo a la página principal en la sección de radios
+            const message = document.querySelector('.error-message');
+            const originalMessage = message.textContent;
+            
+            message.textContent = "Redirigiendo a nuestras emisoras...";
+            message.style.color = '#00E5FF';
+            
+            setTimeout(() => {
+                window.location.href = "/#radios";
+            }, 1500);
+            
+            return false;
+        }
+        
+        // Inicializar cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            createFloatingElements();
+            createAudioVisualizer();
+            startFrequencySearch();
+            startReconnectionCounter();
+            
+            // Efecto de entrada
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.8s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+            
+            // Efecto de error intermitente
+            setInterval(() => {
+                const errorCode = document.querySelector('.error-code');
+                errorCode.style.textShadow = '0 0 50px rgba(255, 0, 0, 0.5)';
+                
+                setTimeout(() => {
+                    errorCode.style.textShadow = '0 0 30px rgba(0, 229, 255, 0.3)';
+                }, 300);
+            }, 5000);
+        });
+        
+        // Detectar si el usuario intenta usar el botón de retroceso
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                // La página se cargó desde cache, recargar
+                window.location.reload();
+            }
+        });
+    </script>
+</body>
+</html>
