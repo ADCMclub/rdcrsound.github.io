@@ -52,6 +52,170 @@
             z-index: -1;
         }
         
+        /* MODAL DE PEDIR CANCIÓN */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 0 30px var(--neon-green-glow);
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.4s ease;
+        }
+        
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-icon {
+            font-size: 2.5rem;
+            color: var(--neon-green);
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px var(--neon-green-glow);
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 10px var(--neon-yellow-glow);
+            margin-bottom: 10px;
+        }
+        
+        .modal-subtitle {
+            color: var(--neon-orange);
+            font-size: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--neon-yellow);
+            font-weight: 600;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 240, 31, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--neon-yellow);
+            box-shadow: 0 0 15px var(--neon-yellow-glow);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn-modal {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
+        
+        .btn-send {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-green-glow);
+        }
+        
+        .btn-send:hover {
+            background: #2de20d;
+            box-shadow: 0 0 25px var(--neon-green-glow);
+            transform: translateY(-3px);
+        }
+        
+        .btn-cancel {
+            background: transparent;
+            color: var(--neon-orange);
+            border: 2px solid var(--neon-orange);
+            box-shadow: 0 0 10px var(--neon-orange-glow);
+        }
+        
+        .btn-cancel:hover {
+            background: var(--neon-orange);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: var(--neon-orange);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 94, 0, 0.2);
+            transform: rotate(90deg);
+        }
+        
         /* BOTÓN VOLVER */
         .back-button {
             position: fixed;
@@ -937,6 +1101,15 @@
         
         /* MEDIA QUERIES PARA TABLET */
         @media (min-width: 768px) {
+            /* MODAL */
+            .modal-container {
+                padding: 40px;
+            }
+            
+            .modal-title {
+                font-size: 2.2rem;
+            }
+            
             /* HEADER */
             header {
                 flex-direction: row;
@@ -1046,6 +1219,11 @@
                 position: relative;
             }
             
+            /* MODAL */
+            .modal-container {
+                max-width: 550px;
+            }
+            
             /* HEADER - ESCRITORIO */
             header {
                 padding: 15px 40px;
@@ -1098,7 +1276,7 @@
                 top: 30px;
                 left: 40px;
                 width: 60px;
-                height = 60px;
+                height: 60px;
                 font-size: 24px;
             }
             
@@ -1357,6 +1535,18 @@
         
         /* MEJORAS ESPECÍFICAS PARA DISPOSITIVOS PEQUEÑOS */
         @media (max-width: 480px) {
+            .modal-container {
+                padding: 25px 20px;
+            }
+            
+            .modal-title {
+                font-size: 1.6rem;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
             .hero {
                 padding: 160px 15px 60px;
             }
@@ -1524,6 +1714,47 @@
     </style>
 </head>
 <body>
+    <!-- MODAL PARA PEDIR CANCIÓN -->
+    <div class="modal-overlay" id="songRequestModal">
+        <div class="modal-container">
+            <button class="close-modal" id="closeModalBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h2 class="modal-title">Pedir una Canción</h2>
+                <p class="modal-subtitle">Envía tu petición directamente a WhatsApp</p>
+            </div>
+            
+            <form id="songRequestForm">
+                <div class="form-group">
+                    <label class="form-label" for="nombreCompleto">Nombre y Apellido</label>
+                    <input type="text" id="nombreCompleto" class="form-input" placeholder="Ej: Juan Pérez" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="cancion">Canción que quieres escuchar</label>
+                    <input type="text" id="cancion" class="form-input" placeholder="Ej: Vivir Mi Vida - Marc Anthony" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="comentario">Comentario (opcional)</label>
+                    <textarea id="comentario" class="form-input textarea" placeholder="Añade un mensaje o dedicatoria..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-modal btn-send">
+                        <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+                    </button>
+                    <button type="button" class="btn-modal btn-cancel" id="cancelFormBtn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- BOTÓN VOLVER -->
     <div class="back-button" id="backButton">
         <i class="fas fa-arrow-left"></i>
@@ -1560,7 +1791,18 @@
     <!-- HERO -->
     <section class="hero" id="inicio">
         <div class="hero-content">
-            <h2>Salsa. Solo salsa</h2>            
+            <h2>Salsa. Solo salsa</h2>
+            <div class="hero-tagline">La calle de la salsa online</div>
+            <div class="hero-subtitle">Una emisora dedicada exclusivamente a la salsa en todas sus formas</div>
+            <div class="hero-year">Desde 2020</div>
+            
+            <div class="hero-btns">
+                <a href="#player" class="btn btn-primary">
+                    <i class="fas fa-play-circle"></i> Escuchar en vivo
+                </a>
+                <a href="#programacion" class="btn btn-secondary">
+                    <i class="fas fa-calendar-alt"></i> Ver programación
+                </a>
             </div>
         </div>
     </section>
@@ -1650,6 +1892,74 @@
     </footer>
 
     <script>
+        // FUNCIONALIDAD DEL MODAL DE PEDIR CANCIÓN
+        const songRequestModal = document.getElementById('songRequestModal');
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelFormBtn = document.getElementById('cancelFormBtn');
+        const songRequestForm = document.getElementById('songRequestForm');
+        
+        // Abrir modal al hacer clic en el botón de WhatsApp
+        whatsappBtn.addEventListener('click', function() {
+            songRequestModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevenir scroll
+        });
+        
+        // Cerrar modal
+        function closeModal() {
+            songRequestModal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+        }
+        
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelFormBtn.addEventListener('click', closeModal);
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        songRequestModal.addEventListener('click', function(e) {
+            if (e.target === songRequestModal) {
+                closeModal();
+            }
+        });
+        
+        // Manejar envío del formulario
+        songRequestForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obtener valores del formulario
+            const nombreCompleto = document.getElementById('nombreCompleto').value.trim();
+            const cancion = document.getElementById('cancion').value.trim();
+            const comentario = document.getElementById('comentario').value.trim();
+            
+            // Construir mensaje para WhatsApp
+            let mensaje = `*PEDIDO DE CANCIÓN - AVENIDA TROPICAL*%0A`;
+            mensaje += `%0A*Nombre:* ${nombreCompleto}`;
+            mensaje += `%0A*Canción solicitada:* ${cancion}`;
+            
+            if (comentario) {
+                mensaje += `%0A*Comentario:* ${comentario}`;
+            }
+            
+            mensaje += `%0A%0A_Enviado desde Avenida Tropical RDCR Sound Network_`;
+            
+            // Número de WhatsApp proporcionado
+            const phoneNumber = '593961480654';
+            
+            // Crear URL de WhatsApp
+            const url = `https://wa.me/${phoneNumber}?text=${mensaje}`;
+            
+            // Abrir WhatsApp en una nueva pestaña
+            window.open(url, '_blank');
+            
+            // Cerrar modal
+            closeModal();
+            
+            // Resetear formulario
+            songRequestForm.reset();
+            
+            // Mostrar confirmación visual (opcional)
+            alert('Redirigiendo a WhatsApp con tu pedido de canción...');
+        });
+        
         // HEADER OCULTABLE AL BAJAR
         const mainHeader = document.getElementById('mainHeader');
         let lastScrollTop = 0;
@@ -1670,15 +1980,6 @@
         const backButton = document.getElementById('backButton');
         backButton.addEventListener('click', function() {
             window.location.href = 'https://rdcrsound.adcm.club';
-        });
-        
-        // BOTÓN WHATSAPP
-        const whatsappBtn = document.getElementById('whatsappBtn');
-        whatsappBtn.addEventListener('click', function() {
-            const phoneNumber = '1234567890';
-            const message = 'Hola Avenida Tropical, quisiera solicitar la canción: ';
-            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
         });
         
         // BOTÓN IR ARRIBA
@@ -2098,6 +2399,4 @@
         });
     </script>
 </body>
-
 </html>
-<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
