@@ -104,12 +104,95 @@
         footer { background: rgba(15, 15, 15, 0.98); padding: 40px 20px 20px; margin-top: 40px; border-top: 1px solid rgba(0, 229, 255, 0.2); }
         .social-icons { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
         .social-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--gris-oscuro); display: flex; align-items: center; justify-content: center; color: var(--cian-electrico); text-decoration: none; border: 1px solid var(--cian-electrico); transition: all 0.3s ease; }
+        
+        /* Estilos para el formulario de WhatsApp */
+        #whatsappFormModal .modal-content {
+            max-width: 450px;
+        }
+        
+        .whatsapp-form-container {
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--cian-electrico);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--gris-oscuro);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 6px;
+            color: var(--blanco-limpio);
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--cian-electrico);
+            box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .btn-whatsapp-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .btn-whatsapp-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-note {
+            text-align: center;
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
         @media (max-width: 1200px) { .radios-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; margin: 0 auto; } }
         @media (max-width: 768px) { header { padding: 12px 20px; flex-wrap: wrap; } .nav-buttons { flex-direction: column; width: 100%; margin-top: 15px; display: none; gap: 8px; } .nav-buttons.active { display: flex; } .nav-btn { width: 100%; justify-content: center; padding: 12px; } .radios-grid { grid-template-columns: 1fr; max-width: 400px; } .services-grid, .podcasts-grid { grid-template-columns: 1fr; } .podcast-container { grid-template-columns: 1fr; padding: 15px; } }
     </style>
 </head>
 <body>
-    <a href="https://wa.me/593961480654" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+    <!-- Botón flotante de WhatsApp - Ahora abre formulario -->
+    <div class="whatsapp-float" onclick="openModal('whatsappFormModal')">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+    
     <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
     <header id="mainHeader">
         <div class="logo"><img src="/img_radio/RDCR SOUND NETWORK/10.png" alt="RDCR Sound Network" style="height:40px;width:auto;"><h2>RDCR SOUND</h2></div>
@@ -260,6 +343,44 @@
             <p style="margin-top:5px;">Quito, Ecuador</p>
         </div>
     </footer>
+    
+    <!-- Modal de Formulario de WhatsApp -->
+    <div id="whatsappFormModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Contactar por WhatsApp</h2>
+                <button class="close-modal" onclick="closeModal('whatsappFormModal')">&times;</button>
+            </div>
+            <div class="whatsapp-form-container">
+                <form id="whatsappContactForm">
+                    <div class="form-group">
+                        <label for="whatsappName"><i class="fas fa-user"></i> NOMBRE Y APELLIDO</label>
+                        <input type="text" id="whatsappName" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="whatsappContact"><i class="fas fa-phone-alt"></i> TELÉFONO O EMAIL</label>
+                        <input type="text" id="whatsappContact" placeholder="Ej: +593 99 999 9999 o email@ejemplo.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="whatsappMessage"><i class="fas fa-comment"></i> COMENTARIO O MENSAJE</label>
+                        <textarea id="whatsappMessage" placeholder="Escribe tu consulta, comentario o solicitud..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-whatsapp-submit">
+                        <i class="fab fa-whatsapp"></i> ENVIAR POR WHATSAPP
+                    </button>
+                    
+                    <div class="whatsapp-note">
+                        Serás redirigido a WhatsApp con tu mensaje prellenado
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Resto de modales existentes (se mantienen igual) -->
     <div id="quienesSomos" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h2>QUIÉNES SOMOS</h2><button class="close-modal" onclick="closeModal('quienesSomos')">&times;</button></div>
@@ -399,47 +520,114 @@
             </div>
         </div>
     </div>
+    
     <script>
-        function scrollToSection(sectionId) { const section = document.getElementById(sectionId); if (section) section.scrollIntoView({ behavior: 'smooth' }); }
-        function openModal(modalId) { document.getElementById(modalId).style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-        function closeModal(modalId) { document.getElementById(modalId).style.display = 'none'; document.body.style.overflow = 'auto'; }
-        function openPodcastModal(platform) { openModal('podcast' + platform.charAt(0).toUpperCase() + platform.slice(1)); }
-        window.addEventListener('click', (e) => { if (e.target.classList.contains('modal')) { e.target.style.display = 'none'; document.body.style.overflow = 'auto'; } });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { document.querySelectorAll('.modal').forEach(modal => modal.style.display = 'none'); document.body.style.overflow = 'auto'; } });
+        function scrollToSection(sectionId) { 
+            const section = document.getElementById(sectionId); 
+            if (section) section.scrollIntoView({ behavior: 'smooth' }); 
+        }
+        
+        function openModal(modalId) { 
+            document.getElementById(modalId).style.display = 'flex'; 
+            document.body.style.overflow = 'hidden'; 
+        }
+        
+        function closeModal(modalId) { 
+            document.getElementById(modalId).style.display = 'none'; 
+            document.body.style.overflow = 'auto'; 
+        }
+        
+        function openPodcastModal(platform) { 
+            openModal('podcast' + platform.charAt(0).toUpperCase() + platform.slice(1)); 
+        }
+        
+        window.addEventListener('click', (e) => { 
+            if (e.target.classList.contains('modal')) { 
+                e.target.style.display = 'none'; 
+                document.body.style.overflow = 'auto'; 
+            } 
+        });
+        
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === 'Escape') { 
+                document.querySelectorAll('.modal').forEach(modal => modal.style.display = 'none'); 
+                document.body.style.overflow = 'auto'; 
+            } 
+        });
+        
         const carouselTrack = document.querySelector('.carousel-track');
         const carouselSlides = document.querySelectorAll('.carousel-slide');
         const prevBtn = document.querySelector('.prev-btn');
         const nextBtn = document.querySelector('.next-btn');
         let currentSlide = 0;
         let autoSlideInterval;
-        function updateCarousel() { carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`; }
-        function nextSlide() { currentSlide = (currentSlide + 1) % carouselSlides.length; updateCarousel(); }
-        function prevSlide() { currentSlide = (currentSlide - 1 + carouselSlides.length) % carouselSlides.length; updateCarousel(); }
-        function startAutoSlide() { autoSlideInterval = setInterval(nextSlide, 4000); }
-        nextBtn.addEventListener('click', () => { nextSlide(); clearInterval(autoSlideInterval); startAutoSlide(); });
-        prevBtn.addEventListener('click', () => { prevSlide(); clearInterval(autoSlideInterval); startAutoSlide(); });
+        
+        function updateCarousel() { 
+            carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`; 
+        }
+        
+        function nextSlide() { 
+            currentSlide = (currentSlide + 1) % carouselSlides.length; 
+            updateCarousel(); 
+        }
+        
+        function prevSlide() { 
+            currentSlide = (currentSlide - 1 + carouselSlides.length) % carouselSlides.length; 
+            updateCarousel(); 
+        }
+        
+        function startAutoSlide() { 
+            autoSlideInterval = setInterval(nextSlide, 4000); 
+        }
+        
+        nextBtn.addEventListener('click', () => { 
+            nextSlide(); 
+            clearInterval(autoSlideInterval); 
+            startAutoSlide(); 
+        });
+        
+        prevBtn.addEventListener('click', () => { 
+            prevSlide(); 
+            clearInterval(autoSlideInterval); 
+            startAutoSlide(); 
+        });
+        
         const carouselContainer = document.querySelector('.publicidad-carousel');
         carouselContainer.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
         carouselContainer.addEventListener('mouseleave', startAutoSlide);
+        
         function iniciarContadores() {
             const contadores = document.querySelectorAll('.contador-numero');
-            const baseValues = { contadorVisitas: 15842, contadorOyentes: 3256, contadorDescargas: 8742 };
+            const baseValues = { 
+                contadorVisitas: 15842, 
+                contadorOyentes: 3256, 
+                contadorDescargas: 8742 
+            };
+            
             contadores.forEach(contador => {
                 const id = contador.id;
                 const baseValue = baseValues[id];
                 const multiplier = 1.10 + Math.random() * 0.20;
                 const newValue = Math.floor(baseValue * multiplier);
-                if (!localStorage.getItem(id)) localStorage.setItem(id, newValue.toString());
+                
+                if (!localStorage.getItem(id)) {
+                    localStorage.setItem(id, newValue.toString());
+                }
+                
                 const finalValue = parseInt(localStorage.getItem(id));
                 const incremento = finalValue / 100;
                 let valorActual = 0;
+                
                 const actualizarContador = () => {
                     valorActual += incremento;
                     if (valorActual < finalValue) {
                         contador.textContent = Math.floor(valorActual).toLocaleString();
                         setTimeout(actualizarContador, 20);
-                    } else contador.textContent = finalValue.toLocaleString();
+                    } else {
+                        contador.textContent = finalValue.toLocaleString();
+                    }
                 };
+                
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
@@ -448,22 +636,39 @@
                         }
                     });
                 }, { threshold: 0.5 });
+                
                 observer.observe(contador);
             });
         }
+        
         const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) backToTop.classList.add('show');
-            else backToTop.classList.remove('show');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+            
             const header = document.getElementById('mainHeader');
-            if (window.scrollY > 50) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
-        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
+        
         if (menuToggle && mainNav) {
-            menuToggle.addEventListener('click', () => mainNav.classList.toggle('active'));
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+            });
+            
             function checkWindowSize() {
                 if (window.innerWidth <= 768) {
                     menuToggle.style.display = 'flex';
@@ -473,14 +678,40 @@
                     mainNav.style.display = 'flex';
                 }
             }
+            
             checkWindowSize();
             window.addEventListener('resize', checkWindowSize);
+            
             document.querySelectorAll('.nav-btn').forEach(button => {
                 button.addEventListener('click', () => {
-                    if(window.innerWidth <= 768) mainNav.classList.remove('active');
+                    if(window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                    }
                 });
             });
         }
+        
+        // Formulario de WhatsApp
+        document.getElementById('whatsappContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('whatsappName').value;
+            const contacto = document.getElementById('whatsappContact').value;
+            const mensaje = document.getElementById('whatsappMessage').value;
+            
+            const mensajeWhatsapp = `*CONSULTA DESDE RDCR SOUND NETWORK*%0A%0A` +
+                                   `*Nombre:* ${nombre}%0A` +
+                                   `*Contacto:* ${contacto}%0A` +
+                                   `*Mensaje:* ${mensaje}%0A%0A` +
+                                   `_Este mensaje fue enviado desde el formulario de contacto de RDCR Sound Network_`;
+            
+            closeModal('whatsappFormModal');
+            
+            window.open(`https://wa.me/593961480654?text=${mensajeWhatsapp}`, '_blank');
+            
+            document.getElementById('whatsappContactForm').reset();
+        });
+        
         document.addEventListener('DOMContentLoaded', () => {
             document.body.style.opacity = '0';
             document.body.style.transition = 'opacity 0.4s ease';
@@ -490,6 +721,7 @@
             iniciarContadores();
         });
     </script>
+    
     <script>
         function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}
         loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});
