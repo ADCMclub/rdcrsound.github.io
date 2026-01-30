@@ -490,6 +490,158 @@
             transform: translateY(-3px) scale(1.05);
         }
 
+        /* Estilos para el Modal de WhatsApp */
+        .whatsapp-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .whatsapp-modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            border: 2px solid var(--main);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--main), #00B8D4);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            color: var(--dark);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(0, 0, 0, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--main);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(40, 40, 45, 0.8);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 8px;
+            color: var(--light);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--main);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #888;
+        }
+
+        .form-footer {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .submit-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .cancel-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--gray);
+        }
+
         footer {
             background: rgba(15, 15, 15, 0.95);
             text-align: center;
@@ -564,6 +716,24 @@
             .lista-programas {
                 grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
                 gap: 12px;
+            }
+            /* Responsive para el modal */
+            .modal-content {
+                width: 95%;
+                margin: 10px;
+            }
+            
+            .modal-header h3 {
+                font-size: 1.1rem;
+            }
+            
+            .form-footer {
+                flex-direction: column;
+            }
+            
+            .submit-btn,
+            .cancel-btn {
+                width: 100%;
             }
         }
 
@@ -770,15 +940,49 @@
         </section>
     </div>
 
+    <!-- Modal Formulario WhatsApp -->
+    <div class="whatsapp-modal" id="whatsappModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fab fa-whatsapp"></i> Pedir Canción por WhatsApp</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="whatsappForm">
+                    <div class="form-group">
+                        <label for="nombre"><i class="fas fa-user"></i> Nombre y Apellido *</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cancion"><i class="fas fa-music"></i> Canción *</label>
+                        <input type="text" id="cancion" name="cancion" placeholder="Ej: Artista - Título" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comentario"><i class="fas fa-comment"></i> Comentario/Dedicatoria</label>
+                        <textarea id="comentario" name="comentario" placeholder="Opcional: dedicatoria o mensaje..." rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <button type="submit" class="submit-btn">
+                            <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+                        </button>
+                        <button type="button" class="cancel-btn" id="cancelBtn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="floating-buttons">
         <button class="scroll-top-btn" id="scrollTopBtn">
             <i class="fas fa-chevron-up"></i> Arriba
         </button>
         
-        <a href="https://wa.me/593XXXXXXXXX?text=Hola%20DCRADIOEC,%20me%20gustaría%20pedir%20una%20canción:" 
-           class="whatsapp-btn" target="_blank">
+        <button class="whatsapp-btn" id="openFormBtn">
             <i class="fab fa-whatsapp"></i> Pedir Canción
-        </a>
+        </button>
     </div>
 
     <footer>
@@ -1056,6 +1260,77 @@
             });
         }
 
+        // FUNCIÓN PARA MANEJAR EL FORMULARIO DE WHATSAPP
+        function configurarFormularioWhatsApp() {
+            const modal = document.getElementById('whatsappModal');
+            const openBtn = document.getElementById('openFormBtn');
+            const closeBtn = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const form = document.getElementById('whatsappForm');
+            
+            // Abrir modal
+            openBtn.addEventListener('click', () => {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden'; // Prevenir scroll
+            });
+            
+            // Cerrar modal
+            const closeModal = () => {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto'; // Restaurar scroll
+            };
+            
+            closeBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+            
+            // Cerrar al hacer clic fuera del modal
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Manejar envío del formulario
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Obtener valores del formulario
+                const nombre = document.getElementById('nombre').value.trim();
+                const cancion = document.getElementById('cancion').value.trim();
+                const comentario = document.getElementById('comentario').value.trim();
+                
+                if (!nombre || !cancion) {
+                    alert('Por favor completa los campos obligatorios: Nombre y Canción');
+                    return;
+                }
+                
+                // Construir mensaje
+                let mensaje = `*SOLICITUD DE CANCIÓN - DCRADIOEC*\n\n`;
+                mensaje += `*Nombre:* ${nombre}\n`;
+                mensaje += `*Canción solicitada:* ${cancion}\n`;
+                
+                if (comentario) {
+                    mensaje += `*Comentario/Dedicatoria:* ${comentario}\n`;
+                }
+                
+                mensaje += `\n---\n_Enviado desde la web de DCRADIOEC_`;
+                
+                // Codificar para URL
+                const mensajeCodificado = encodeURIComponent(mensaje);
+                
+                // Número de WhatsApp
+                const telefono = '593961480654';
+                
+                // Redirigir a WhatsApp
+                const urlWhatsApp = `https://wa.me/${telefono}?text=${mensajeCodificado}`;
+                window.open(urlWhatsApp, '_blank');
+                
+                // Cerrar modal y resetear formulario
+                closeModal();
+                form.reset();
+            });
+        }
+
         // INICIALIZACIÓN
         document.addEventListener('DOMContentLoaded', function() {
             // 1. Obtener día actual
@@ -1091,15 +1366,18 @@
             // 6. Configurar botón "Ir arriba"
             configurarBotonArriba();
             
-            // 7. Iniciar reloj
+            // 7. Configurar formulario de WhatsApp
+            configurarFormularioWhatsApp();
+            
+            // 8. Iniciar reloj
             actualizarReloj();
             setInterval(actualizarReloj, 1000);
             
-            // 8. Calcular programa actual
+            // 9. Calcular programa actual
             calcularProgramaActual();
             setInterval(calcularProgramaActual, 60000);
             
-            // 9. Configurar Swiper
+            // 10. Configurar Swiper
             new Swiper('.noticias-swiper', {
                 slidesPerView: 1,
                 spaceBetween: 15,
@@ -1113,7 +1391,7 @@
                 }
             });
             
-            // 10. Actualización automática
+            // 11. Actualización automática
             setInterval(() => {
                 const diaActivo = document.querySelector('.dia-btn.active').getAttribute('data-dia');
                 generarProgramacion(diaActivo);
