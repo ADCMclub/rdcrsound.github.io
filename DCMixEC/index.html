@@ -1383,6 +1383,144 @@ footer::before {
   visibility: visible;
 }
 
+/* Modal de WhatsApp */
+.whatsapp-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.whatsapp-modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, var(--black-light), var(--black-dark));
+  width: 90%;
+  max-width: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid var(--neon-green);
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+  animation: modalSlideUp 0.4s ease;
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+  background: rgba(10, 10, 20, 0.9);
+  padding: 20px;
+  border-bottom: 1px solid var(--neon-green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  color: var(--neon-green);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  color: var(--neon-green);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.close-modal:hover {
+  color: #FF4D4D;
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  padding: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--neon-blue);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+  color: white;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--neon-green);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
 /* Responsive Design - MEJORADO PARA CELULAR */
 @media (max-width: 1200px) {
   .reproductor-container {
@@ -1589,6 +1727,16 @@ footer::before {
     padding: 15px;
     font-size: 0.9rem;
   }
+  
+  /* Modal responsive */
+  .modal-content {
+    width: 95%;
+    margin: 10px;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -1715,6 +1863,22 @@ footer::before {
   .day-subtitle {
     font-size: 1rem;
   }
+  
+  /* Modal más pequeño */
+  .modal-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .submit-btn {
+    padding: 12px;
+    font-size: 1rem;
+  }
 }
 
 /* Mejoras adicionales para orientación horizontal en móviles */
@@ -1739,6 +1903,11 @@ footer::before {
   .programs {
     padding: 40px 20px;
   }
+  
+  .whatsapp-modal {
+    align-items: flex-start;
+    padding-top: 20px;
+  }
 }
 </style>
 </head>
@@ -1749,16 +1918,44 @@ footer::before {
     <i class="fas fa-arrow-left"></i> ATRÁS
   </a>
 
+  <!-- Modal de WhatsApp -->
+  <div class="whatsapp-modal" id="whatsappModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fab fa-whatsapp"></i> PEDIR CANCIÓN</h3>
+        <button class="close-modal" id="closeModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="whatsappForm">
+          <div class="form-group">
+            <label for="nombre"><i class="fas fa-user"></i> NOMBRE Y APELLIDO</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+          </div>
+          <div class="form-group">
+            <label for="cancion"><i class="fas fa-music"></i> CANCIÓN</label>
+            <input type="text" id="cancion" name="cancion" placeholder="Ej: Artista - Nombre de la canción" required>
+          </div>
+          <div class="form-group">
+            <label for="comentario"><i class="fas fa-comment"></i> COMENTARIO (opcional)</label>
+            <textarea id="comentario" name="comentario" placeholder="Dedicatoria, saludo o mensaje especial..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">
+            <i class="fab fa-whatsapp"></i> ENVIAR POR WHATSAPP
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Botones Flotantes -->
   <div class="floating-buttons">
-    <!-- Botón de WhatsApp -->
-    <a href="https://wa.me/1234567890?text=¡Hola%20DC%20Mix!%20Me%20gustaría%20solicitar%20una%20canción%20para%20la%20mezcla%20continua." 
-       class="floating-btn whatsapp-btn" 
-       target="_blank"
-       title="Solicitar tu canción">
+    <!-- Botón de WhatsApp - AHORA ABRE EL MODAL -->
+    <button class="floating-btn whatsapp-btn" id="openWhatsappModal" title="Solicitar tu canción">
       <i class="fab fa-whatsapp"></i>
       <span class="tooltip">Solicita tu canción</span>
-    </a>
+    </button>
     
     <!-- Botón para ir arriba -->
     <button class="floating-btn scroll-top-btn" id="scrollTopBtn">
@@ -2073,6 +2270,84 @@ footer::before {
         top: 0,
         behavior: 'smooth'
       });
+    });
+    
+    // ============================================
+    // WHATSAPP FORM MODAL FUNCTIONALITY
+    // ============================================
+    
+    const whatsappModal = document.getElementById('whatsappModal');
+    const openWhatsappModal = document.getElementById('openWhatsappModal');
+    const closeModal = document.getElementById('closeModal');
+    const whatsappForm = document.getElementById('whatsappForm');
+    
+    // Open modal
+    openWhatsappModal.addEventListener('click', () => {
+      whatsappModal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    });
+    
+    // Close modal
+    closeModal.addEventListener('click', () => {
+      whatsappModal.classList.remove('active');
+      document.body.style.overflow = 'auto'; // Restore scrolling
+    });
+    
+    // Close modal when clicking outside
+    whatsappModal.addEventListener('click', (e) => {
+      if (e.target === whatsappModal) {
+        whatsappModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && whatsappModal.classList.contains('active')) {
+        whatsappModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // Handle form submission
+    whatsappForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Get form values
+      const nombre = document.getElementById('nombre').value;
+      const cancion = document.getElementById('cancion').value;
+      const comentario = document.getElementById('comentario').value;
+      
+      // Create the WhatsApp message
+      let mensaje = `¡Hola DC Mix! Me gustaría solicitar una canción.%0A%0A`;
+      mensaje += `*Nombre:* ${nombre}%0A`;
+      mensaje += `*Canción:* ${cancion}%0A`;
+      
+      if (comentario.trim() !== '') {
+        mensaje += `*Comentario:* ${comentario}%0A`;
+      }
+      
+      mensaje += `%0A¡Gracias por la increíble energía sin pausa! 🎧⚡`;
+      
+      // Encode the message for URL
+      const mensajeCodificado = encodeURIComponent(mensaje);
+      
+      // Create WhatsApp URL
+      const phoneNumber = '593961480654';
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${mensajeCodificado}`;
+      
+      // Close modal
+      whatsappModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      
+      // Clear form
+      whatsappForm.reset();
+      
+      // Open WhatsApp in a new tab
+      window.open(whatsappUrl, '_blank');
+      
+      // Optional: Show a confirmation message
+      alert('Redirigiendo a WhatsApp para enviar tu solicitud. ¡Gracias por tu petición!');
     });
     
     // ============================================
