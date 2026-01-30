@@ -1521,6 +1521,46 @@ footer::before {
   transform: translateY(0);
 }
 
+/* Notificaciones */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+  color: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  z-index: 10001;
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 600;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  animation: notificationSlideIn 0.5s ease forwards;
+  max-width: 300px;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+@keyframes notificationSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes notificationSlideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
 /* Responsive Design - MEJORADO PARA CELULAR */
 @media (max-width: 1200px) {
   .reproductor-container {
@@ -2273,7 +2313,7 @@ footer::before {
     });
     
     // ============================================
-    // WHATSAPP FORM MODAL FUNCTIONALITY
+    // WHATSAPP FORM MODAL FUNCTIONALITY - VERSIÓN CORREGIDA
     // ============================================
     
     const whatsappModal = document.getElementById('whatsappModal');
@@ -2284,13 +2324,13 @@ footer::before {
     // Open modal
     openWhatsappModal.addEventListener('click', () => {
       whatsappModal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
+      document.body.style.overflow = 'hidden';
     });
     
     // Close modal
     closeModal.addEventListener('click', () => {
       whatsappModal.classList.remove('active');
-      document.body.style.overflow = 'auto'; // Restore scrolling
+      document.body.style.overflow = 'auto';
     });
     
     // Close modal when clicking outside
@@ -2309,46 +2349,83 @@ footer::before {
       }
     });
     
-    // Handle form submission
+    // Handle form submission - VERSIÓN CORREGIDA
     whatsappForm.addEventListener('submit', (e) => {
       e.preventDefault();
       
       // Get form values
-      const nombre = document.getElementById('nombre').value;
-      const cancion = document.getElementById('cancion').value;
-      const comentario = document.getElementById('comentario').value;
+      const nombre = document.getElementById('nombre').value.trim();
+      const cancion = document.getElementById('cancion').value.trim();
+      const comentario = document.getElementById('comentario').value.trim();
       
-      // Create the WhatsApp message
-      let mensaje = `¡Hola DC Mix! Me gustaría solicitar una canción.%0A%0A`;
-      mensaje += `*Nombre:* ${nombre}%0A`;
-      mensaje += `*Canción:* ${cancion}%0A`;
-      
-      if (comentario.trim() !== '') {
-        mensaje += `*Comentario:* ${comentario}%0A`;
+      // Validar campos requeridos
+      if (!nombre || !cancion) {
+        alert('Por favor completa los campos Nombre y Canción');
+        return;
       }
       
-      mensaje += `%0A¡Gracias por la increíble energía sin pausa! 🎧⚡`;
+      // Crear mensaje para WhatsApp
+      let mensaje = "¡Hola DC Mix! Me gustaría solicitar una canción.\n\n";
+      mensaje += `*Nombre:* ${nombre}\n`;
+      mensaje += `*Canción:* ${cancion}\n`;
       
-      // Encode the message for URL
+      if (comentario) {
+        mensaje += `*Comentario:* ${comentario}\n`;
+      }
+      
+      mensaje += "\n¡Gracias por la increíble energía sin pausa! 🎧⚡";
+      
+      // Codificar el mensaje para URL
       const mensajeCodificado = encodeURIComponent(mensaje);
       
-      // Create WhatsApp URL
+      // Crear URL de WhatsApp con el número 593961480654
       const phoneNumber = '593961480654';
       const whatsappUrl = `https://wa.me/${phoneNumber}?text=${mensajeCodificado}`;
       
-      // Close modal
+      // Cerrar modal
       whatsappModal.classList.remove('active');
       document.body.style.overflow = 'auto';
       
-      // Clear form
+      // Limpiar formulario
       whatsappForm.reset();
       
-      // Open WhatsApp in a new tab
-      window.open(whatsappUrl, '_blank');
-      
-      // Optional: Show a confirmation message
-      alert('Redirigiendo a WhatsApp para enviar tu solicitud. ¡Gracias por tu petición!');
+      // Esperar un momento antes de abrir WhatsApp
+      setTimeout(() => {
+        // Abrir WhatsApp en nueva pestaña
+        window.open(whatsappUrl, '_blank');
+        
+        // Mostrar notificación de confirmación
+        showNotification('¡Solicitud enviada! Redirigiendo a WhatsApp...');
+      }, 300);
     });
+    
+    // Función para mostrar notificación
+    function showNotification(message) {
+      // Crear elemento de notificación
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <i class="fab fa-whatsapp" style="font-size: 1.8rem; color: #25D366;"></i>
+          <div style="font-size: 0.9rem;">
+            <strong style="display: block; margin-bottom: 5px; font-size: 1rem;">${message}</strong>
+            <div style="opacity: 0.9; font-size: 0.8rem;">Tu solicitud está siendo procesada</div>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // Remover después de 3 segundos
+      setTimeout(() => {
+        notification.style.animation = 'notificationSlideOut 0.5s ease forwards';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            document.body.removeChild(notification);
+          }
+        }, 500);
+      }, 3000);
+    }
     
     // ============================================
     // SISTEMA DE PROGRAMACIÓN SEMANAL EN TIEMPO REAL
@@ -2870,5 +2947,3 @@ footer::before {
   </script>
 </body>
 </html>
-
-<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
