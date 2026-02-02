@@ -38,7 +38,6 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Modal para formulario de WhatsApp */
 .whatsapp-modal {
   display: none;
   position: fixed;
@@ -215,7 +214,6 @@ textarea.form-control {
   font-style: italic;
 }
 
-/* Botón Atrás - Mejorado para móviles */
 .back-button {
   position: fixed;
   top: 10px;
@@ -248,7 +246,6 @@ textarea.form-control {
   color: var(--dark);
 }
 
-/* Líneas de fondo animadas */
 .background-lines {
   position: fixed;
   top: 0;
@@ -317,7 +314,6 @@ h1, h2, h3, h4 {
   font-weight: 700;
 }
 
-/* Efectos de neón */
 .neon-text {
   color: var(--neon-gold);
   text-shadow: 
@@ -352,7 +348,6 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Header - Optimizado para móviles */
 header {
   background-color: rgba(10, 10, 10, 0.95);
   color: var(--cream);
@@ -388,7 +383,6 @@ header .tagline {
   font-weight: 300;
 }
 
-/* Navegación optimizada para móviles */
 nav {
   margin-top: 15px;
   display: flex;
@@ -444,7 +438,6 @@ nav {
   transform: translateY(-3px);
 }
 
-/* Botones flotantes optimizados para móviles */
 .floating-buttons {
   position: fixed;
   bottom: 15px;
@@ -516,7 +509,6 @@ nav {
   opacity: 1;
 }
 
-/* Hero Section optimizada para móviles */
 .hero {
   background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1571974599782-87624638275b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
   background-size: cover;
@@ -570,7 +562,6 @@ nav {
   padding: 0 10px;
 }
 
-/* Reproductor Vintage optimizado para móviles */
 .vintage-player-section {
   background-color: rgba(10, 10, 10, 0.8);
   padding: 30px 15px;
@@ -863,7 +854,6 @@ nav {
   100% { transform: scale(2); opacity: 0; }
 }
 
-/* Secciones optimizadas para móviles */
 section {
   padding: 50px 15px;
   width: 100%;
@@ -896,7 +886,6 @@ section {
   transform: translateX(-50%);
 }
 
-/* Tabla de Programación */
 .programacion-container {
   max-width: 100%;
   margin: 0 auto;
@@ -1029,7 +1018,6 @@ section {
   text-shadow: 0 0 5px rgba(255,215,0,0.3);
 }
 
-/* Concepto optimizado para móviles */
 .concept-container {
   max-width: 100%;
   margin: 0 auto;
@@ -1076,7 +1064,6 @@ section {
   font-size: 0.95rem;
 }
 
-/* Mensajes emocionales optimizados para móviles */
 .messages-container {
   max-width: 100%;
   margin: 0 auto;
@@ -1144,7 +1131,6 @@ section {
   transform: scale(1.2);
 }
 
-/* Footer optimizado para móviles */
 footer {
   background-color: rgba(10, 10, 10, 0.95);
   color: var(--cream);
@@ -1199,7 +1185,6 @@ footer {
   color: var(--neon-gold);
 }
 
-/* Botones interactivos optimizados para móviles */
 .btn-neon {
   background: transparent;
   color: var(--neon-gold);
@@ -1247,7 +1232,6 @@ footer {
   transform: translateY(-3px) scale(1.05);
 }
 
-/* Media Queries adicionales para tabletas */
 @media (min-width: 481px) and (max-width: 768px) {
   header h1 {
     font-size: 2.2rem;
@@ -1301,7 +1285,6 @@ footer {
   }
 }
 
-/* Media Queries para escritorio */
 @media (min-width: 769px) {
   header {
     padding: 25px 20px;
@@ -1404,7 +1387,6 @@ footer {
   }
 }
 
-/* Ajustes para pantallas muy pequeñas (iPhone SE, etc.) */
 @media (max-width: 360px) {
   header h1 {
     font-size: 1.8rem;
@@ -1473,12 +1455,10 @@ footer {
   }
 }
 
-/* Prevenir zoom en inputs en iOS */
 input, select, textarea {
   font-size: 16px !important;
 }
 
-/* Mejoras de accesibilidad y usabilidad táctil */
 button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1486,7 +1466,6 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
   user-select: none;
 }
 
-/* Optimización de animaciones para dispositivos móviles */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -1499,7 +1478,6 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
 
 <body>
 
-<!-- Modal para formulario de WhatsApp -->
 <div class="whatsapp-modal" id="whatsappModal">
   <div class="modal-content">
     <button class="close-modal" id="closeModal">
@@ -1537,12 +1515,10 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
   </div>
 </div>
 
-<!-- Botón Atrás -->
 <a href="https://rdcrsound.adcm.club" class="back-button" target="_self">
   <i class="fas fa-arrow-left"></i> Volver
 </a>
 
-<!-- Líneas de fondo interactivas -->
 <div class="background-lines" id="backgroundLines">
   <div class="line line-1"></div>
   <div class="line line-2"></div>
@@ -1551,7 +1527,6 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
   <div class="line line-5"></div>
 </div>
 
-<!-- Botones flotantes -->
 <div class="floating-buttons">
   <button class="whatsapp-btn" id="whatsappBtn">
     <i class="fab fa-whatsapp"></i>
@@ -1581,18 +1556,15 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
   <div class="vintage-player-container">
     <div class="vintage-overlay"></div>
     
-    <!-- Vinilo animado (solo visible en escritorio) -->
     <div class="vinyl-record">
       <div class="vinyl-center"></div>
     </div>
     
-    <!-- Líneas de tiempo -->
     <div class="timeline"></div>
     <div class="timeline"></div>
     <div class="timeline"></div>
     <div class="timeline"></div>
     
-    <!-- Reproductor vintage -->
     <div class="vintage-player">
       <div class="player-header">
         <h1 class="station-title">DC CLÁSICOS</h1>
@@ -1600,7 +1572,6 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
       </div>
       
       <div class="player-area">
-        <!-- Estado de carga vintage -->
         <div class="vintage-loading" id="loadingState">
           <div class="record-spinner"></div>
           <p style="color: #D9A05B; font-style: italic; margin-top: 10px;">
@@ -1608,7 +1579,6 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
           </p>
         </div>
         
-        <!-- Reproductor de Caster.fm -->
         <div data-type="newStreamPlayer" 
              data-publicToken="483de68b-f9e5-4fa3-b5ee-b27252721c33" 
              data-theme="dark" 
@@ -1622,13 +1592,11 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
           <a href="https://www.caster.fm">Radio Server Hosting</a>
         </div>
         
-        <!-- Medidor vintage -->
         <div class="vintage-meter">
           <div class="meter-level"></div>
         </div>
       </div>
       
-      <!-- Indicadores de década -->
       <div class="decade-indicators">
         <div class="decade active" data-decade="80">80's</div>
         <div class="decade" data-decade="90">90's</div>
@@ -1636,7 +1604,6 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
         <div class="decade" data-decade="10">10's</div>
       </div>
       
-      <!-- Información del stream -->
       <div class="player-footer">
         <p>Música que trasciende el tiempo • Streaming en alta fidelidad</p>
         <p style="margin-top: 8px; font-size: 0.7rem;">Revive tus mejores momentos con nosotros</p>
@@ -1656,7 +1623,6 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
   </div>
   
   <div class="programacion-container">
-    <!-- Programación Lunes a Viernes -->
     <div class="schedule-section">
       <h3><i class="fas fa-calendar-day"></i> LUNES A VIERNES</h3>
       
@@ -1667,38 +1633,37 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
         </div>
         
         <div class="table-row" data-day="weekday" data-start="0" data-end="6">
-          <div>00:00 – 06:00</div>
+          <div>12:00 AM – 6:00 AM</div>
           <div>Baladas Clásicas Nocturnas</div>
         </div>
         
         <div class="table-row" data-day="weekday" data-start="6" data-end="10">
-          <div>06:00 – 10:00</div>
+          <div>6:00 AM – 10:00 AM</div>
           <div>Recuerdos Clásicos</div>
         </div>
         
         <div class="table-row" data-day="weekday" data-start="10" data-end="15">
-          <div>10:00 – 15:00</div>
+          <div>10:00 AM – 3:00 PM</div>
           <div>Baladas del Corazón</div>
         </div>
         
         <div class="table-row" data-day="weekday" data-start="15" data-end="20">
-          <div>15:00 – 20:00</div>
+          <div>3:00 PM – 8:00 PM</div>
           <div>Clásicos en Inglés y Español</div>
         </div>
         
         <div class="table-row" data-day="weekday" data-start="20" data-end="23">
-          <div>20:00 – 23:00</div>
+          <div>8:00 PM – 11:00 PM</div>
           <div>La Voz del Silencio 🎙️ (Darío Castellanos)</div>
         </div>
         
         <div class="table-row" data-day="weekday" data-start="23" data-end="24">
-          <div>23:00 – 00:00</div>
+          <div>11:00 PM – 12:00 AM</div>
           <div>Relax Clásico</div>
         </div>
       </div>
     </div>
     
-    <!-- Programación Sábado y Domingo -->
     <div class="schedule-section">
       <h3><i class="fas fa-calendar-weekend"></i> SÁBADO Y DOMINGO</h3>
       
@@ -1709,42 +1674,47 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
         </div>
         
         <div class="table-row" data-day="weekend" data-start="0" data-end="8">
-          <div>00:00 – 08:00</div>
+          <div>12:00 AM – 8:00 AM</div>
           <div>Baladas Clásicas</div>
         </div>
         
         <div class="table-row" data-day="weekend" data-start="8" data-end="12">
-          <div>08:00 – 12:00</div>
+          <div>8:00 AM – 12:00 PM</div>
           <div>Domingo Nostálgico</div>
         </div>
         
         <div class="table-row" data-day="weekend" data-start="12" data-end="13">
-          <div>12:00 – 13:00</div>
+          <div>12:00 PM – 1:00 PM</div>
           <div>Clásicos Internacionales 80s / 90s</div>
         </div>
         
         <div class="table-row" data-day="weekend" data-start="13" data-end="14">
-          <div>13:00 – 14:00</div>
-          <div>Global Hits 🎙️ (Armando Plata)</div>
+          <div>1:00 PM – 2:00 PM</div>
+          <div>Baladas del Recuerdo</div>
         </div>
         
         <div class="table-row" data-day="weekend" data-start="14" data-end="18">
-          <div>14:00 – 18:00</div>
+          <div>2:00 PM – 6:00 PM</div>
           <div>Historias de Canciones</div>
         </div>
         
-        <div class="table-row" data-day="weekend" data-start="18" data-end="20">
-          <div>18:00 – 20:00</div>
+        <div class="table-row" data-day="weekend" data-start="18" data-end="19">
+          <div>6:00 PM – 7:00 PM</div>
+          <div>Global Hits 🎙️ (Armando Plata)</div>
+        </div>
+        
+        <div class="table-row" data-day="weekend" data-start="19" data-end="20">
+          <div>7:00 PM – 8:00 PM</div>
           <div>Leyendas de la Balada</div>
         </div>
         
         <div class="table-row" data-day="weekend" data-start="20" data-end="22">
-          <div>20:00 – 22:00</div>
+          <div>8:00 PM – 10:00 PM</div>
           <div>Baladas en Vivo</div>
         </div>
         
         <div class="table-row" data-day="weekend" data-start="22" data-end="24">
-          <div>22:00 – 00:00</div>
+          <div>10:00 PM – 12:00 AM</div>
           <div>Cierre con Sentimiento</div>
         </div>
       </div>
@@ -1799,9 +1769,7 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
     <div class="message-slider">
       <p id="message-text">La música no se escucha con los oídos, se siente con el alma. Estas canciones son el eco de momentos que nunca se olvidan.</p>
     </div>
-    <div class="message-controls" id="messageControls">
-      <!-- Los puntos se generarán con JavaScript -->
-    </div>
+    <div class="message-controls" id="messageControls"></div>
   </div>
 </section>
 
@@ -1823,31 +1791,21 @@ button, .nav-btn, .carousel-btn, .carousel-dot, .message-dot, .decade {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Elementos del reproductor vintage
   const loadingState = document.getElementById('loadingState');
   const cstrEmbed = document.querySelector('.cstrEmbed');
   const vinylRecord = document.querySelector('.vinyl-record');
   const decades = document.querySelectorAll('.decade');
-  
-  // Elementos de mensajes
   const messageControls = document.getElementById('messageControls');
   const messageText = document.getElementById('message-text');
-  
-  // Botones flotantes
   const whatsappBtn = document.getElementById('whatsappBtn');
   const scrollTopBtn = document.getElementById('scrollTopBtn');
-  
-  // Elementos del modal de WhatsApp
   const whatsappModal = document.getElementById('whatsappModal');
   const closeModal = document.getElementById('closeModal');
   const whatsappForm = document.getElementById('whatsappForm');
-  
-  // Elementos de programación
   const nowPlaying = document.getElementById('nowPlaying');
   const currentProgram = document.getElementById('currentProgram');
   const currentTime = document.getElementById('currentTime');
   
-  // Lista de mensajes emocionales
   const messages = [
     "La música no se escucha con los oídos, se siente con el alma. Estas canciones son el eco de momentos que nunca se olvidan.",
     "En el silencio entre notas, encontramos los recuerdos más valiosos. DC Clásicos: la banda sonora de tu vida.",
@@ -1902,63 +1860,36 @@ document.addEventListener('DOMContentLoaded', function() {
     "El tiempo pasa, las modas cambian, pero el sentimiento verdadero permanece en estas baladas."
   ];
   
-  // Variables generales
   let currentMessageIndex = 0;
   let messageInterval;
   
-  // Inicializar líneas de fondo interactivas
   initBackgroundLines();
-  
-  // Inicializar reproductor vintage
   initVintagePlayer();
-  
-  // Inicializar botones flotantes
   initFloatingButtons();
-  
-  // Inicializar modal de WhatsApp
   initWhatsAppModal();
-  
-  // Inicializar mensajes emocionales
   initMessages();
-  
-  // Configurar efectos interactivos
   setupInteractiveEffects();
-  
-  // Mostrar programa actual
   showCurrentProgram();
-  setInterval(showCurrentProgram, 60000); // Actualizar cada minuto
+  setInterval(showCurrentProgram, 60000);
   
-  // Inicializar líneas de fondo interactivas
   function initBackgroundLines() {
     const backgroundLines = document.getElementById('backgroundLines');
-    
-    // Crear partículas adicionales (menos en móviles para mejor rendimiento)
     const particleCount = window.innerWidth < 768 ? 15 : 30;
     
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
       particle.classList.add('particle');
-      
-      // Posición aleatoria
       particle.style.left = `${Math.random() * 100}%`;
       particle.style.top = `${Math.random() * 100}%`;
-      
-      // Tamaño aleatorio
       const size = Math.random() * 2 + 1;
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
-      
-      // Opacidad aleatoria
       particle.style.opacity = `${Math.random() * 0.3 + 0.1}`;
-      
-      // Animación
       particle.style.animation = `moveLine ${Math.random() * 30 + 15}s linear infinite`;
       particle.style.animationDirection = Math.random() > 0.5 ? 'normal' : 'reverse';
-      
       backgroundLines.appendChild(particle);
     }
     
-    // Hacer que las líneas reaccionen al movimiento del mouse (solo en escritorio)
     if (window.innerWidth > 768) {
       document.addEventListener('mousemove', function(e) {
         const lines = document.querySelectorAll('.line');
@@ -1974,39 +1905,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  // Inicializar reproductor vintage
   function initVintagePlayer() {
-    // Crear efectos de memoria al tocar
     function createMemoryFlash(x, y) {
       const flash = document.createElement('div');
       flash.className = 'memory-flash';
       flash.style.left = `${x}px`;
       flash.style.top = `${y}px`;
-      
       document.body.appendChild(flash);
-      
-      setTimeout(() => {
-        flash.remove();
-      }, 1000);
+      setTimeout(() => { flash.remove(); }, 1000);
     }
     
-    // Cargar el script de Caster.fm
     const script = document.createElement('script');
     script.src = '//cdn.cloud.caster.fm/widgets/embed.js';
     
     script.onload = function() {
-      console.log('Reproductor DC Clásicos cargado');
-      
-      // Ocultar estado de carga después de 2 segundos
       setTimeout(() => {
-        if (loadingState) {
-          loadingState.style.display = 'none';
-        }
-        if (cstrEmbed) {
-          cstrEmbed.style.display = 'flex';
-        }
-        
-        // Animar el vinilo (solo en escritorio)
+        if (loadingState) loadingState.style.display = 'none';
+        if (cstrEmbed) cstrEmbed.style.display = 'flex';
         if (vinylRecord && window.innerWidth > 768) {
           vinylRecord.style.animationDuration = '15s';
           vinylRecord.style.opacity = '0.15';
@@ -2015,7 +1930,6 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     script.onerror = function() {
-      console.error('Error al cargar el reproductor');
       if (loadingState) {
         loadingState.innerHTML = `
           <div style="color: #D9A05B; text-align: center; font-style: italic;">
@@ -2028,26 +1942,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.body.appendChild(script);
     
-    // Simular cambio de década
     decades.forEach(decade => {
       decade.addEventListener('click', function() {
-        // Remover clase active de todos
         decades.forEach(d => d.classList.remove('active'));
-        
-        // Añadir al seleccionado
         this.classList.add('active');
-        
-        // Crear efecto visual
         const rect = this.getBoundingClientRect();
-        createMemoryFlash(
-          rect.left + rect.width / 2,
-          rect.top + rect.height / 2
-        );
-        
-        // Cambiar texto del subtítulo temporalmente
+        createMemoryFlash(rect.left + rect.width / 2, rect.top + rect.height / 2);
         const subtitle = document.querySelector('.station-subtitle');
         const originalText = subtitle.textContent;
-        
         const decadeText = this.getAttribute('data-decade');
         const decadeNames = {
           '80': 'Revive los 80s',
@@ -2055,28 +1957,16 @@ document.addEventListener('DOMContentLoaded', function() {
           '00': 'Los clásicos 2000',
           '10': 'Baladas recientes'
         };
-        
         subtitle.textContent = decadeNames[decadeText] || originalText;
-        
-        // Restaurar después de 3 segundos
-        setTimeout(() => {
-          subtitle.textContent = originalText;
-        }, 3000);
+        setTimeout(() => { subtitle.textContent = originalText; }, 3000);
       });
-      
-      // Añadir evento táctil para móviles
-      decade.addEventListener('touchend', function(e) {
-        e.preventDefault();
-        this.click();
-      });
+      decade.addEventListener('touchend', function(e) { e.preventDefault(); this.click(); });
     });
     
-    // Animar el medidor de señal
     const meterLevel = document.querySelector('.meter-level');
     if (meterLevel) {
       let direction = 1;
       let width = 40;
-      
       setInterval(() => {
         if (direction === 1) {
           width += Math.random() * 4;
@@ -2085,18 +1975,15 @@ document.addEventListener('DOMContentLoaded', function() {
           width -= Math.random() * 4;
           if (width < 35) direction = 1;
         }
-        
         meterLevel.style.width = `${width}%`;
         meterLevel.style.opacity = 0.7 + (width / 100) * 0.3;
       }, 200);
     }
     
-    // Efecto de texto parpadeante
     const title = document.querySelector('.station-title');
     if (title) {
       let glowIntensity = 0.3;
       let increasing = true;
-      
       setInterval(() => {
         if (increasing) {
           glowIntensity += 0.015;
@@ -2105,7 +1992,6 @@ document.addEventListener('DOMContentLoaded', function() {
           glowIntensity -= 0.015;
           if (glowIntensity <= 0.2) increasing = true;
         }
-        
         title.style.textShadow = `
           0 2px 4px rgba(0, 0, 0, 0.8),
           0 0 ${20 * glowIntensity}px rgba(255, 215, 0, ${glowIntensity})
@@ -2113,7 +1999,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 100);
     }
     
-    // Crear flashes aleatorios de memoria (menos frecuentes en móviles)
     const flashInterval = window.innerWidth < 768 ? 5000 : 3000;
     setInterval(() => {
       if (Math.random() > 0.7) {
@@ -2124,12 +2009,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }, flashInterval);
   }
   
-  // Inicializar mensajes emocionales
   function initMessages() {
-    // Limpiar controles de mensajes
     messageControls.innerHTML = '';
-    
-    // Crear puntos para cada mensaje (máximo 10 puntos en móviles para no saturar)
     const maxDots = window.innerWidth < 768 ? 10 : 15;
     const step = Math.ceil(messages.length / maxDots);
     
@@ -2141,37 +2022,26 @@ document.addEventListener('DOMContentLoaded', function() {
       dot.addEventListener('click', function() {
         const index = parseInt(this.getAttribute('data-index'));
         changeMessage(index);
-        
-        // Efecto visual
         this.style.transform = 'scale(0.8)';
-        setTimeout(() => {
-          this.style.transform = '';
-        }, 200);
+        setTimeout(() => { this.style.transform = ''; }, 200);
       });
-      
       dot.addEventListener('touchend', (e) => {
         e.preventDefault();
         const index = parseInt(dot.getAttribute('data-index'));
         changeMessage(index);
       });
-      
       messageControls.appendChild(dot);
     }
     
-    // Mostrar primer mensaje
     changeMessage(0);
-    
-    // Iniciar cambio automático de mensajes
     startMessageAutoAdvance();
   }
   
-  // Cambiar mensaje emocional
   function changeMessage(index) {
     if (index >= messages.length) index = 0;
     messageText.textContent = messages[index];
     currentMessageIndex = index;
     
-    // Actualizar puntos activos
     document.querySelectorAll('.message-dot').forEach(dot => {
       const dotIndex = parseInt(dot.getAttribute('data-index'));
       if (dotIndex === index) {
@@ -2181,11 +2051,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    // Reiniciar intervalo de autoavance
     restartMessageAutoAdvance();
   }
   
-  // Iniciar autoavance de mensajes
   function startMessageAutoAdvance() {
     const interval = window.innerWidth < 768 ? 8000 : 6000;
     messageInterval = setInterval(() => {
@@ -2194,24 +2062,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }, interval);
   }
   
-  // Reiniciar autoavance de mensajes
   function restartMessageAutoAdvance() {
     clearInterval(messageInterval);
     startMessageAutoAdvance();
   }
   
-  // Inicializar botones flotantes
   function initFloatingButtons() {
-    // Botón de WhatsApp
     whatsappBtn.addEventListener('click', function() {
       whatsappModal.classList.add('active');
       document.body.style.overflow = 'hidden';
-      
-      // Efecto visual
       this.style.transform = 'scale(0.9)';
-      setTimeout(() => {
-        this.style.transform = '';
-      }, 200);
+      setTimeout(() => { this.style.transform = ''; }, 200);
     });
     
     whatsappBtn.addEventListener('touchend', function(e) {
@@ -2219,18 +2080,10 @@ document.addEventListener('DOMContentLoaded', function() {
       this.click();
     });
     
-    // Botón para subir
     scrollTopBtn.addEventListener('click', function() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-      
-      // Efecto visual
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       this.style.transform = 'scale(0.9)';
-      setTimeout(() => {
-        this.style.transform = '';
-      }, 200);
+      setTimeout(() => { this.style.transform = ''; }, 200);
     });
     
     scrollTopBtn.addEventListener('touchend', function(e) {
@@ -2238,7 +2091,6 @@ document.addEventListener('DOMContentLoaded', function() {
       this.click();
     });
     
-    // Mostrar/ocultar botón de subir según scroll
     window.addEventListener('scroll', function() {
       if (window.scrollY > 500) {
         scrollTopBtn.style.opacity = '1';
@@ -2250,15 +2102,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Inicializar modal de WhatsApp
   function initWhatsAppModal() {
-    // Cerrar modal al hacer clic en la X
     closeModal.addEventListener('click', function() {
       whatsappModal.classList.remove('active');
       document.body.style.overflow = 'auto';
     });
     
-    // Cerrar modal al hacer clic fuera del contenido
     whatsappModal.addEventListener('click', function(e) {
       if (e.target === whatsappModal) {
         whatsappModal.classList.remove('active');
@@ -2266,42 +2115,26 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    // Manejar el envío del formulario
     whatsappForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      
-      // Obtener valores del formulario
       const nombre = document.getElementById('nombre').value.trim();
       const cancion = document.getElementById('cancion').value.trim();
       const comentario = document.getElementById('comentario').value.trim();
       
-      // Validar que todos los campos estén completos
       if (!nombre || !cancion || !comentario) {
         alert('Por favor, completa todos los campos del formulario.');
         return;
       }
       
-      // Crear el mensaje para WhatsApp
       const mensaje = `*SOLICITUD DE CANCIÓN - DC CLÁSICOS*%0A%0A*Nombre y Apellido:* ${nombre}%0A*Canción solicitada:* ${cancion}%0A*Comentario:* ${comentario}%0A%0A¡Gracias por tu solicitud! La transmitiremos pronto en DC Clásicos.`;
-      
-      // Redirigir a WhatsApp con el número especificado
       const whatsappURL = `https://wa.me/593961480654?text=${mensaje}`;
-      
-      // Abrir WhatsApp en una nueva pestaña
       window.open(whatsappURL, '_blank');
-      
-      // Cerrar el modal
       whatsappModal.classList.remove('active');
       document.body.style.overflow = 'auto';
-      
-      // Limpiar el formulario
       whatsappForm.reset();
-      
-      // Mostrar mensaje de confirmación
       alert('¡Gracias por tu solicitud! Se ha abierto WhatsApp para que completes el envío.');
     });
     
-    // Cerrar modal con la tecla Escape
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && whatsappModal.classList.contains('active')) {
         whatsappModal.classList.remove('active');
@@ -2310,30 +2143,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Función para mostrar el programa actual
   function showCurrentProgram() {
     const now = new Date();
     const currentHour = now.getHours();
     const currentMinutes = now.getMinutes();
-    const currentTime = currentHour + (currentMinutes / 60);
-    const dayOfWeek = now.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
-    
+    const currentTimeValue = currentHour + (currentMinutes / 60);
+    const dayOfWeek = now.getDay();
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
     const dayType = isWeekend ? 'weekend' : 'weekday';
     const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     const currentDayName = daysOfWeek[dayOfWeek];
     
-    // Formatear hora para mostrar
-    const formattedHour = currentHour.toString().padStart(2, '0');
+    const formattedHour = currentHour % 12 || 12;
+    const ampm = currentHour >= 12 ? 'PM' : 'AM';
     const formattedMinutes = currentMinutes.toString().padStart(2, '0');
+    const displayTime = `${formattedHour}:${formattedMinutes} ${ampm}`;
     
-    // Encontrar el programa actual
     const allRows = document.querySelectorAll('.table-row');
     let currentProgramName = 'Baladas Clásicas';
-    let currentProgramTime = '00:00 – 06:00';
+    let currentProgramTime = '12:00 AM – 6:00 AM';
     let found = false;
     
-    // Remover la clase "current" de todas las filas
     allRows.forEach(row => {
       row.classList.remove('current');
       const timeDiv = row.querySelector('div:first-child');
@@ -2344,73 +2174,56 @@ document.addEventListener('DOMContentLoaded', function() {
       programDiv.style.textShadow = '';
     });
     
-    // Buscar el programa actual
     allRows.forEach(row => {
       const rowDay = row.getAttribute('data-day');
       const start = parseFloat(row.getAttribute('data-start'));
       const end = parseFloat(row.getAttribute('data-end'));
       
       if (rowDay === dayType) {
-        // Ajustar para manejar horarios que pasan de medianoche
         if (end < start) {
-          // Horario que cruza medianoche (ej: 23:00 a 06:00)
-          if (currentTime >= start || currentTime < end) {
+          if (currentTimeValue >= start || currentTimeValue < end) {
             const timeDiv = row.querySelector('div:first-child');
             const programDiv = row.querySelector('div:last-child');
-            
             currentProgramName = programDiv.textContent;
             currentProgramTime = timeDiv.textContent;
             found = true;
-            
-            // Marcar como programa actual
             row.classList.add('current');
           }
         } else {
-          // Horario normal
-          if (currentTime >= start && currentTime < end) {
+          if (currentTimeValue >= start && currentTimeValue < end) {
             const timeDiv = row.querySelector('div:first-child');
             const programDiv = row.querySelector('div:last-child');
-            
             currentProgramName = programDiv.textContent;
             currentProgramTime = timeDiv.textContent;
             found = true;
-            
-            // Marcar como programa actual
             row.classList.add('current');
           }
         }
       }
     });
     
-    // Si no se encuentra programa (caso borde), usar uno por defecto
     if (!found) {
       currentProgramName = 'Baladas Clásicas';
       currentProgramTime = 'Música continua';
     }
     
-    // Actualizar el mensaje "Ahora en emisión"
     currentProgram.textContent = currentProgramName;
-    currentTime.textContent = `${currentDayName} - ${formattedHour}:${formattedMinutes} | ${currentProgramTime}`;
+    currentTime.textContent = `${currentDayName} - ${displayTime} | ${currentProgramTime}`;
     
-    // Efecto de parpadeo en el indicador
     nowPlaying.style.animation = 'none';
     setTimeout(() => {
       nowPlaying.style.animation = 'neon-pulse 3s infinite alternate';
     }, 10);
   }
   
-  // Configurar efectos interactivos
   function setupInteractiveEffects() {
-    // Navegación suave
     document.querySelectorAll('nav a, .btn-neon').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
-        
         if (href.startsWith('#')) {
           e.preventDefault();
           const targetId = href.substring(1);
           const targetElement = document.getElementById(targetId);
-          
           if (targetElement) {
             window.scrollTo({
               top: targetElement.offsetTop - 80,
@@ -2420,15 +2233,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
       
-      // Añadir evento táctil para móviles
       anchor.addEventListener('touchend', function(e) {
         const href = this.getAttribute('href');
-        
         if (href.startsWith('#')) {
           e.preventDefault();
           const targetId = href.substring(1);
           const targetElement = document.getElementById(targetId);
-          
           if (targetElement) {
             window.scrollTo({
               top: targetElement.offsetTop - 80,
@@ -2439,29 +2249,20 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Efecto de neón en los botones de navegación al pasar el mouse (solo escritorio)
     if (window.innerWidth > 768) {
       document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.addEventListener('mouseenter', function() {
-          this.classList.add('neon-glow');
-        });
-        
-        btn.addEventListener('mouseleave', function() {
-          if (!this.classList.contains('active')) {
-            this.classList.remove('neon-glow');
-          }
+        btn.addEventListener('mouseenter', function() { this.classList.add('neon-glow'); });
+        btn.addEventListener('mouseleave', function() { 
+          if (!this.classList.contains('active')) this.classList.remove('neon-glow'); 
         });
       });
     }
     
-    // Prevenir zoom en doble toque en botones
     document.querySelectorAll('button, .nav-btn, .btn-neon').forEach(element => {
       let lastTouchEnd = 0;
       element.addEventListener('touchend', function(e) {
         const now = Date.now();
-        if (now - lastTouchEnd <= 300) {
-          e.preventDefault();
-        }
+        if (now - lastTouchEnd <= 300) e.preventDefault();
         lastTouchEnd = now;
       }, { passive: false });
     });
