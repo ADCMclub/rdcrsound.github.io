@@ -2,32 +2,42 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>DC MIX | Energía Sin Pausa</title>
+<title>DCMix | El Flow Latino Que No Se Detiene</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DC Mix - Mezclas que no se detienen. Música mezclada 24 horas. Dance, House, Urban remixes y música electrónica.">
+<meta name="description" content="DCMix - El flow latino que no se detiene. Una radio online de mezclas continuas que combina electrónica y ritmos latinos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root {
-  --black: #000000;
-  --black-dark: #0a0a0a;
-  --black-light: #1a1a1a;
-  /* Colores neón sutiles pero llamativos */
-  --neon-pink: #ff2a8a;
-  --neon-pink-glow: rgba(255, 42, 138, 0.4);
-  --neon-pink-light: #ff66b3;
-  --neon-green: #2aff8a;
-  --neon-green-glow: rgba(42, 255, 138, 0.4);
-  --neon-green-light: #66ffb3;
-  --neon-blue: #2a8aff;
-  --neon-blue-glow: rgba(42, 138, 255, 0.4);
-  --neon-blue-light: #66b3ff;
+  --black: #0A0A0A;
+  --black-dark: #1a1a1a;
+  --black-light: #2A2A2A;
+  
+  /* PALETA DE COLORES NEÓN MANTENIENDO LA ESENCIA DEL DCMIX */
+  --neon-orange: #FF8C42;  /* Naranja neón principal */
+  --neon-orange-glow: rgba(255, 140, 66, 0.7);
+  --neon-orange-light: #FFA85C;
+  --neon-orange-dark: #D27A2C;  /* Color acento original */
+  
+  --neon-green: #8BFF42;   /* Verde neón */
+  --neon-green-glow: rgba(139, 255, 66, 0.5);
+  --neon-green-light: #A8FF5C;
+  
+  --neon-blue: #428BFF;    /* Azul neón */
+  --neon-blue-glow: rgba(66, 139, 255, 0.5);
+  --neon-blue-light: #5CA8FF;
+  
+  /* Colores de la paleta original DCMix adaptados a neón */
+  --primary-dark: #1E241C;     /* Versión más oscura de #3F4A3C */
+  --secondary-light: #F0EBD8;  /* Versión más clara de #E9E3D5 */
+  --off-white: #F6F5F1;
+  --dark-brown: #3A2E24;       /* Versión más oscura de #4A3B2F */
+  
   --white: #ffffff;
   --gray: #222222;
   --gray-light: #333333;
-  --accent-purple: #8a2aff;
 }
 
 * {
@@ -38,14 +48,14 @@
 
 body {
   font-family: 'Exo 2', sans-serif;
-  color: var(--white);
-  background-color: var(--black);
+  color: var(--off-white);
+  background-color: var(--primary-dark);
   line-height: 1.6;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(circle at 10% 20%, rgba(255, 42, 138, 0.03) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(42, 138, 255, 0.03) 0%, transparent 20%),
-    radial-gradient(circle at 50% 50%, rgba(42, 255, 138, 0.02) 0%, transparent 30%);
+    radial-gradient(circle at 10% 20%, rgba(255, 140, 66, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(66, 139, 255, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(139, 255, 66, 0.03) 0%, transparent 30%);
   background-attachment: fixed;
 }
 
@@ -77,85 +87,103 @@ a {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(30, 36, 28, 0.9);
   color: var(--neon-green);
   padding: 10px 20px;
   border-radius: 25px;
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 1px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(42, 255, 138, 0.5);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid rgba(139, 255, 66, 0.5);
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(139, 255, 66, 0.3);
+  overflow: hidden;
+}
+
+.back-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(139, 255, 66, 0.2), transparent);
+  transition: left 0.7s ease;
+  z-index: -1;
 }
 
 .back-button:hover {
-  background: rgba(42, 255, 138, 0.15);
+  background: rgba(139, 255, 66, 0.15);
   color: var(--white);
-  box-shadow: 0 0 10px rgba(42, 255, 138, 0.5);
-  transform: translateX(-5px);
+  box-shadow: 0 0 15px rgba(139, 255, 66, 0.5), 0 0 25px rgba(139, 255, 66, 0.3);
+  transform: translateX(-5px) scale(1.05);
   border-color: var(--neon-green);
 }
 
-/* Efectos de neón sutiles */
-.neon-pink {
-  color: var(--neon-pink);
+.back-button:hover::before {
+  left: 100%;
+}
+
+/* Efectos de neón mejorados */
+.neon-orange {
+  color: var(--neon-orange);
   text-shadow: 
-    0 0 3px var(--neon-pink),
-    0 0 7px var(--neon-pink-glow),
-    0 0 12px var(--neon-pink-glow);
+    0 0 5px var(--neon-orange),
+    0 0 10px var(--neon-orange-glow),
+    0 0 15px var(--neon-orange-glow);
 }
 
 .neon-green {
   color: var(--neon-green);
   text-shadow: 
-    0 0 3px var(--neon-green),
-    0 0 7px var(--neon-green-glow),
-    0 0 12px var(--neon-green-glow);
+    0 0 5px var(--neon-green),
+    0 0 10px var(--neon-green-glow),
+    0 0 15px var(--neon-green-glow);
 }
 
 .neon-blue {
   color: var(--neon-blue);
   text-shadow: 
-    0 0 3px var(--neon-blue),
-    0 0 7px var(--neon-blue-glow),
-    0 0 12px var(--neon-blue-glow);
+    0 0 5px var(--neon-blue),
+    0 0 10px var(--neon-blue-glow),
+    0 0 15px var(--neon-blue-glow);
 }
 
-.neon-border-pink {
-  border: 2px solid var(--neon-pink);
+.neon-border-orange {
+  border: 2px solid var(--neon-orange);
   box-shadow: 
-    0 0 4px var(--neon-pink),
-    0 0 8px var(--neon-pink-glow),
-    inset 0 0 4px var(--neon-pink-glow);
+    0 0 8px var(--neon-orange),
+    0 0 12px var(--neon-orange-glow),
+    inset 0 0 8px rgba(255, 140, 66, 0.2);
 }
 
 .neon-border-green {
   border: 2px solid var(--neon-green);
   box-shadow: 
-    0 0 4px var(--neon-green),
-    0 0 8px var(--neon-green-glow),
-    inset 0 0 4px var(--neon-green-glow);
+    0 0 8px var(--neon-green),
+    0 0 12px var(--neon-green-glow),
+    inset 0 0 8px rgba(139, 255, 66, 0.2);
 }
 
 .neon-border-blue {
   border: 2px solid var(--neon-blue);
   box-shadow: 
-    0 0 4px var(--neon-blue),
-    0 0 8px var(--neon-blue-glow),
-    inset 0 0 4px var(--neon-blue-glow);
+    0 0 8px var(--neon-blue),
+    0 0 12px var(--neon-blue-glow),
+    inset 0 0 8px rgba(66, 139, 255, 0.2);
 }
 
 /* Header */
 header {
-  background-color: rgba(10, 10, 10, 0.97);
+  background-color: rgba(30, 36, 28, 0.97);
   padding: 15px 0;
   position: fixed;
   width: 100%;
   z-index: 1000;
   backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(255, 42, 138, 0.3);
+  border-bottom: 1px solid rgba(255, 140, 66, 0.3);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
 .header-content {
@@ -175,9 +203,15 @@ header {
 }
 
 .logo-icon {
-  color: var(--neon-pink);
+  color: var(--neon-orange);
   font-size: 2rem;
-  filter: drop-shadow(0 0 3px var(--neon-pink));
+  filter: drop-shadow(0 0 5px var(--neon-orange));
+  animation: pulse-logo 2s infinite alternate;
+}
+
+@keyframes pulse-logo {
+  0% { filter: drop-shadow(0 0 5px var(--neon-orange)); }
+  100% { filter: drop-shadow(0 0 10px var(--neon-orange), 0 0 15px rgba(255, 140, 66, 0.5)); }
 }
 
 .logo-text {
@@ -187,11 +221,11 @@ header {
 
 .logo-text h1 {
   font-size: 2rem;
-  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+  background: linear-gradient(to right, var(--neon-orange), var(--neon-green));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 0 8px rgba(255, 42, 138, 0.4);
+  text-shadow: 0 0 10px rgba(255, 140, 66, 0.4);
   line-height: 1;
 }
 
@@ -199,7 +233,7 @@ header {
   font-size: 0.7rem;
   color: var(--neon-green);
   letter-spacing: 3px;
-  text-shadow: 0 0 3px var(--neon-green);
+  text-shadow: 0 0 5px var(--neon-green);
 }
 
 nav ul {
@@ -211,14 +245,20 @@ nav ul {
 nav a {
   font-weight: 600;
   font-size: 1rem;
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   padding: 5px 10px;
+  background: rgba(30, 36, 28, 0.7);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 140, 66, 0.2);
 }
 
 nav a:hover {
-  color: var(--neon-pink);
-  text-shadow: 0 0 3px var(--neon-pink);
+  color: var(--neon-orange);
+  text-shadow: 0 0 5px var(--neon-orange);
+  background: rgba(255, 140, 66, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 140, 66, 0.2);
 }
 
 nav a::after {
@@ -229,7 +269,7 @@ nav a::after {
   bottom: 0;
   left: 0;
   background-color: var(--neon-green);
-  box-shadow: 0 0 3px var(--neon-green);
+  box-shadow: 0 0 5px var(--neon-green);
   transition: width 0.3s;
 }
 
@@ -241,7 +281,7 @@ nav a:hover::after {
   display: none;
   background: none;
   border: none;
-  color: var(--white);
+  color: var(--off-white);
   font-size: 1.5rem;
   cursor: pointer;
 }
@@ -252,7 +292,7 @@ nav a:hover::after {
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0.98));
+  background: linear-gradient(to bottom, rgba(30, 36, 28, 0.95), rgba(20, 25, 20, 0.98));
 }
 
 .hero::before {
@@ -263,9 +303,9 @@ nav a:hover::after {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 20% 30%, rgba(255, 42, 138, 0.07) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(42, 138, 255, 0.07) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(42, 255, 138, 0.04) 0%, transparent 50%);
+    radial-gradient(circle at 20% 30%, rgba(255, 140, 66, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(66, 139, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(139, 255, 66, 0.05) 0%, transparent 50%);
   animation: pulse 10s infinite alternate;
 }
 
@@ -278,32 +318,33 @@ nav a:hover::after {
   font-size: 3.5rem;
   margin-bottom: 15px;
   letter-spacing: 3px;
-  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue), var(--neon-green));
+  background: linear-gradient(to right, var(--neon-orange), var(--neon-blue), var(--neon-green));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 0 10px rgba(255, 42, 138, 0.3);
+  text-shadow: 0 0 15px rgba(255, 140, 66, 0.4);
   animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
-  0% { text-shadow: 0 0 8px rgba(255, 42, 138, 0.3), 0 0 15px rgba(42, 138, 255, 0.2); }
-  100% { text-shadow: 0 0 15px rgba(255, 42, 138, 0.5), 0 0 25px rgba(42, 138, 255, 0.3), 0 0 35px rgba(42, 255, 138, 0.2); }
+  0% { text-shadow: 0 0 10px rgba(255, 140, 66, 0.4), 0 0 20px rgba(66, 139, 255, 0.3); }
+  100% { text-shadow: 0 0 20px rgba(255, 140, 66, 0.7), 0 0 35px rgba(66, 139, 255, 0.5), 0 0 45px rgba(139, 255, 66, 0.3); }
 }
 
 .hero .tagline {
-  font-size: 1.5rem;
-  color: var(--neon-pink);
+  font-size: 1.8rem;
+  color: var(--neon-green);
   margin-bottom: 25px;
-  text-shadow: 0 0 7px var(--neon-pink);
+  text-shadow: 0 0 8px var(--neon-green);
   font-weight: 700;
+  font-style: italic;
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   max-width: 800px;
   margin: 0 auto 40px;
-  color: var(--white);
+  color: var(--off-white);
   font-weight: 300;
 }
 
@@ -315,11 +356,11 @@ nav a:hover::after {
   text-shadow: 0 0 6px var(--neon-blue);
 }
 
-/* Botones mejorados */
+/* Botones mejorados con efectos neón */
 .cta-button {
   display: inline-block;
   background-color: transparent;
-  color: var(--neon-pink);
+  color: var(--neon-orange);
   padding: 18px 45px;
   border-radius: 50px;
   font-weight: 800;
@@ -328,10 +369,10 @@ nav a:hover::after {
   text-transform: uppercase;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   margin-top: 20px;
-  border: 2px solid var(--neon-pink);
+  border: 2px solid var(--neon-orange);
   box-shadow: 
-    0 0 10px var(--neon-pink-glow),
-    inset 0 0 8px rgba(255, 42, 138, 0.1);
+    0 0 15px var(--neon-orange-glow),
+    inset 0 0 10px rgba(255, 140, 66, 0.1);
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -346,7 +387,7 @@ nav a:hover::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 42, 138, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 140, 66, 0.3), transparent);
   transition: left 0.7s;
   z-index: -1;
 }
@@ -355,9 +396,9 @@ nav a:hover::after {
   color: var(--white);
   background-color: transparent;
   box-shadow: 
-    0 0 20px var(--neon-pink),
-    0 0 30px var(--neon-pink-glow),
-    inset 0 0 12px rgba(255, 255, 255, 0.1);
+    0 0 25px var(--neon-orange),
+    0 0 40px var(--neon-orange-glow),
+    inset 0 0 15px rgba(255, 255, 255, 0.1);
   transform: translateY(-5px) scale(1.05);
   letter-spacing: 3px;
 }
@@ -366,10 +407,10 @@ nav a:hover::after {
   left: 100%;
 }
 
-/* Reproductor Section - MODIFICADO */
+/* Reproductor Section - CON NUEVA PALETA */
 .player-section {
   padding: 80px 0;
-  background-color: var(--black-dark);
+  background-color: var(--dark-brown);
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -385,30 +426,59 @@ nav a:hover::after {
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue), var(--neon-green));
-  box-shadow: 0 0 8px rgba(255, 42, 138, 0.5);
+  background: linear-gradient(to right, var(--neon-orange), var(--neon-blue), var(--neon-green));
+  box-shadow: 0 0 10px rgba(255, 140, 66, 0.6);
 }
 
-/* Contenedor del reproductor - ANCHO COMPLETO */
+/* Contenedor del reproductor */
 .reproductor-container {
   position: relative;
   z-index: 10;
   width: 95%;
-  max-width: 1400px; /* Más ancho */
+  max-width: 1400px;
   margin: 0 auto;
-  background: rgba(15, 15, 25, 0.9);
+  background: rgba(30, 36, 28, 0.9);
   backdrop-filter: blur(20px);
   border-radius: 25px;
   padding: 30px;
-  border: 1px solid rgba(255, 42, 138, 0.3);
+  border: 2px solid rgba(255, 140, 66, 0.4);
   box-shadow: 
     0 15px 40px rgba(0, 0, 0, 0.9),
-    0 0 60px rgba(255, 42, 138, 0.15),
+    0 0 60px rgba(255, 140, 66, 0.2),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   overflow: hidden;
   min-height: 500px;
   display: flex;
   flex-direction: column;
+}
+
+/* Efecto de borde neón para el reproductor */
+.reproductor-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    var(--neon-orange), 
+    var(--neon-blue), 
+    var(--neon-green),
+    var(--neon-orange));
+  border-radius: 27px;
+  z-index: -1;
+  animation: neonBorder 3s linear infinite;
+  opacity: 0.5;
+  filter: blur(6px);
+}
+
+@keyframes neonBorder {
+  0% {
+    filter: hue-rotate(0deg) blur(6px);
+  }
+  100% {
+    filter: hue-rotate(360deg) blur(6px);
+  }
 }
 
 /* Fondo con efectos detrás del contenido */
@@ -418,7 +488,7 @@ nav a:hover::after {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1; /* Detrás del contenido */
+  z-index: 1;
   pointer-events: none;
   overflow: hidden;
   border-radius: 25px;
@@ -433,7 +503,7 @@ nav a:hover::after {
   height: 2px;
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(255, 42, 138, 0.6), 
+    rgba(255, 140, 66, 0.8), 
     transparent);
   animation: scan 3s linear infinite;
   z-index: 1;
@@ -477,20 +547,20 @@ nav a:hover::after {
 /* Contenido del reproductor (encima de los efectos) */
 .player-content {
   position: relative;
-  z-index: 10; /* Encima de los efectos */
+  z-index: 10;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-/* Encabezado del reproductor - REDISEÑADO */
+/* Encabezado del reproductor */
 .player-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 42, 138, 0.2);
+  border-bottom: 1px solid rgba(255, 140, 66, 0.3);
 }
 
 .station-info {
@@ -500,24 +570,24 @@ nav a:hover::after {
 .station-logo {
   font-size: 3.5rem;
   font-weight: 900;
-  background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue), var(--neon-green));
+  background: linear-gradient(45deg, var(--neon-orange), var(--neon-blue), var(--neon-green));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: 2px;
   margin-bottom: 5px;
-  text-shadow: 0 0 20px rgba(255, 42, 138, 0.3);
+  text-shadow: 0 0 20px rgba(255, 140, 66, 0.4);
   animation: logoGlow 3s ease-in-out infinite;
 }
 
 @keyframes logoGlow {
   0%, 100% { 
-    text-shadow: 0 0 15px rgba(255, 42, 138, 0.3),
-                0 0 30px rgba(255, 42, 138, 0.2);
+    text-shadow: 0 0 15px rgba(255, 140, 66, 0.4),
+                0 0 30px rgba(255, 140, 66, 0.3);
   }
   50% { 
-    text-shadow: 0 0 25px rgba(255, 42, 138, 0.5),
-                0 0 45px rgba(255, 42, 138, 0.3);
+    text-shadow: 0 0 25px rgba(255, 140, 66, 0.6),
+                0 0 45px rgba(255, 140, 66, 0.4);
   }
 }
 
@@ -534,28 +604,30 @@ nav a:hover::after {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 42, 138, 0.12);
+  background: rgba(255, 140, 66, 0.15);
   padding: 8px 20px;
   border-radius: 25px;
-  border: 1px solid rgba(255, 42, 138, 0.3);
+  border: 1px solid rgba(255, 140, 66, 0.4);
+  box-shadow: 0 0 10px rgba(255, 140, 66, 0.3);
 }
 
 .live-dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   background: #FF4D4D;
   border-radius: 50%;
   animation: livePulse 1s infinite;
+  box-shadow: 0 0 10px #FF4D4D;
 }
 
 @keyframes livePulse {
   0%, 100% { 
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.5);
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7);
   }
   50% { 
-    transform: scale(1.2);
-    box-shadow: 0 0 0 4px rgba(255, 77, 77, 0);
+    transform: scale(1.3);
+    box-shadow: 0 0 0 6px rgba(255, 77, 77, 0);
   }
 }
 
@@ -577,9 +649,9 @@ nav a:hover::after {
 /* Área del reproductor de audio */
 .player-area {
   position: relative;
-  background: rgba(10, 10, 15, 0.4);
+  background: rgba(20, 25, 20, 0.5);
   border-radius: 20px;
-  border: 1px solid rgba(255, 42, 138, 0.15);
+  border: 1px solid rgba(255, 140, 66, 0.2);
   padding: 25px;
   overflow: hidden;
   min-height: 200px;
@@ -589,12 +661,12 @@ nav a:hover::after {
   backdrop-filter: blur(5px);
 }
 
-/* Información de mezcla - SIMPLIFICADA */
+/* Información de mezcla */
 .mix-info {
-  background: rgba(255, 42, 138, 0.06);
+  background: rgba(255, 140, 66, 0.08);
   border-radius: 15px;
   padding: 20px;
-  border: 1px solid rgba(255, 42, 138, 0.12);
+  border: 1px solid rgba(255, 140, 66, 0.2);
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -608,18 +680,19 @@ nav a:hover::after {
   padding: 15px;
   background: rgba(0, 0, 0, 0.4);
   border-radius: 12px;
-  border: 1px solid rgba(42, 138, 255, 0.15);
+  border: 1px solid rgba(66, 139, 255, 0.2);
   width: 100%;
   max-width: 200px;
+  box-shadow: 0 0 15px rgba(255, 140, 66, 0.2);
 }
 
 .bpm-value {
   font-size: 3rem;
   font-weight: 900;
-  color: var(--neon-pink);
+  color: var(--neon-orange);
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 2px;
-  text-shadow: 0 0 7px var(--neon-pink);
+  text-shadow: 0 0 10px var(--neon-orange);
   transition: all 0.1s ease;
 }
 
@@ -639,24 +712,25 @@ nav a:hover::after {
 }
 
 .temperature-bar {
-  height: 8px;
+  height: 10px;
   background: linear-gradient(to right, 
     var(--neon-green), 
     var(--neon-blue), 
-    var(--neon-pink), 
+    var(--neon-orange), 
     #FF4D4D);
-  border-radius: 4px;
+  border-radius: 5px;
   margin-top: 5px;
   position: relative;
   overflow: hidden;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .temperature-indicator {
   position: absolute;
   height: 100%;
-  width: 4px;
+  width: 5px;
   background: white;
-  box-shadow: 0 0 8px white;
+  box-shadow: 0 0 10px white;
   border-radius: 2px;
   left: 0%;
   transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -667,7 +741,7 @@ nav a:hover::after {
   justify-content: space-between;
   font-size: 0.7rem;
   color: var(--neon-green);
-  margin-top: 3px;
+  margin-top: 5px;
 }
 
 /* Estado de carga */
@@ -685,11 +759,12 @@ nav a:hover::after {
 .mix-spinner {
   width: 60px;
   height: 60px;
-  border: 3px solid rgba(255, 42, 138, 0.15);
-  border-top: 3px solid var(--neon-pink);
+  border: 3px solid rgba(255, 140, 66, 0.2);
+  border-top: 3px solid var(--neon-orange);
   border-radius: 50%;
   margin: 0 auto 20px;
   animation: spin 1s linear infinite;
+  box-shadow: 0 0 15px rgba(255, 140, 66, 0.3);
 }
 
 @keyframes spin {
@@ -698,44 +773,16 @@ nav a:hover::after {
 }
 
 .loading-text {
-  color: var(--neon-pink);
+  color: var(--neon-orange);
   font-size: 1rem;
   letter-spacing: 2px;
   animation: fadeInOut 2s infinite;
+  text-shadow: 0 0 5px var(--neon-orange);
 }
 
 @keyframes fadeInOut {
   0%, 100% { opacity: 0.7; }
   50% { opacity: 1; }
-}
-
-/* Efecto de borde neón para el reproductor */
-.reproductor-container::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, 
-    var(--neon-pink), 
-    var(--neon-blue), 
-    var(--neon-green),
-    var(--neon-pink));
-  border-radius: 27px;
-  z-index: -1;
-  animation: neonBorder 3s linear infinite;
-  opacity: 0.5;
-  filter: blur(6px);
-}
-
-@keyframes neonBorder {
-  0% {
-    filter: hue-rotate(0deg) blur(6px);
-  }
-  100% {
-    filter: hue-rotate(360deg) blur(6px);
-  }
 }
 
 /* Visualizador de mezcla */
@@ -746,13 +793,13 @@ nav a:hover::after {
   width: 100%;
   height: 4px;
   background: linear-gradient(90deg, 
-    var(--neon-pink), 
+    var(--neon-orange), 
     var(--neon-blue), 
     var(--neon-green), 
-    var(--neon-pink));
+    var(--neon-orange));
   background-size: 200% 100%;
   animation: gradientShift 2s linear infinite;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 @keyframes gradientShift {
@@ -764,7 +811,7 @@ nav a:hover::after {
 .particle {
   position: absolute;
   border-radius: 50%;
-  background: rgba(255, 42, 138, 0.15);
+  background: rgba(255, 140, 66, 0.2);
   filter: blur(1px);
   animation: floatParticle 20s infinite linear;
 }
@@ -775,10 +822,10 @@ nav a:hover::after {
     opacity: 0;
   }
   10% {
-    opacity: 0.3;
+    opacity: 0.5;
   }
   90% {
-    opacity: 0.3;
+    opacity: 0.5;
   }
   100% {
     transform: translateY(-100px) translateX(100px) rotate(360deg);
@@ -789,7 +836,7 @@ nav a:hover::after {
 /* Barras de equalizador */
 .eq-bar-bg {
   width: 10px;
-  background: linear-gradient(to top, rgba(255, 42, 138, 0.6), rgba(42, 138, 255, 0.6));
+  background: linear-gradient(to top, rgba(255, 140, 66, 0.8), rgba(66, 139, 255, 0.8));
   border-radius: 5px 5px 0 0;
   animation: eqPulse 1.5s infinite ease-in-out;
 }
@@ -810,7 +857,7 @@ nav a:hover::after {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 2px solid rgba(42, 138, 255, 0.3);
+  border: 2px solid rgba(66, 139, 255, 0.4);
   border-radius: 50%;
   animation: waveExpand 3s infinite ease-out;
 }
@@ -822,7 +869,7 @@ nav a:hover::after {
   0% {
     width: 0;
     height: 0;
-    opacity: 0.6;
+    opacity: 0.8;
   }
   100% {
     width: 400px;
@@ -835,21 +882,21 @@ nav a:hover::after {
 .energy-pulse {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 42, 138, 0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 140, 66, 0.4) 0%, transparent 70%);
   pointer-events: none;
   z-index: 5;
   animation: energyExpand 0.8s ease-out;
 }
 
 @keyframes energyExpand {
-  0% { transform: scale(0); opacity: 0.6; }
+  0% { transform: scale(0); opacity: 0.8; }
   100% { transform: scale(4); opacity: 0; }
 }
 
 /* Programs Section */
 .programs {
   padding: 80px 20px;
-  background-color: var(--black);
+  background-color: var(--primary-dark);
   position: relative;
   overflow: hidden;
 }
@@ -862,11 +909,11 @@ nav a:hover::after {
 .section-title h2 {
   font-size: 2.8rem;
   margin-bottom: 15px;
-  background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+  background: linear-gradient(to right, var(--neon-orange), var(--neon-green));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 0 8px rgba(255, 42, 138, 0.3);
+  text-shadow: 0 0 10px rgba(255, 140, 66, 0.4);
 }
 
 .section-title p {
@@ -874,10 +921,8 @@ nav a:hover::after {
   font-size: 1.2rem;
   max-width: 700px;
   margin: 0 auto;
-  text-shadow: 0 0 4px var(--neon-green);
+  text-shadow: 0 0 5px var(--neon-green);
 }
-
-/* ESTILOS NUEVOS PARA PROGRAMACIÓN SEMANAL */
 
 /* Selector de día */
 .day-selector {
@@ -886,10 +931,11 @@ nav a:hover::after {
   align-items: center;
   margin-bottom: 40px;
   padding: 20px;
-  background: rgba(10, 10, 15, 0.7);
+  background: rgba(20, 25, 20, 0.8);
   border-radius: 15px;
-  border: 1px solid rgba(255, 42, 138, 0.15);
+  border: 1px solid rgba(255, 140, 66, 0.2);
   backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .day-tabs {
@@ -899,7 +945,7 @@ nav a:hover::after {
 }
 
 .day-tab {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   border: 2px solid var(--neon-blue);
   color: var(--neon-blue);
   padding: 12px 25px;
@@ -911,19 +957,36 @@ nav a:hover::after {
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.day-tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(66, 139, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+.day-tab:hover::before {
+  left: 100%;
 }
 
 .day-tab:hover {
-  background: rgba(42, 138, 255, 0.08);
-  transform: translateY(-3px);
-  box-shadow: 0 5px 12px rgba(42, 138, 255, 0.2);
+  background: rgba(66, 139, 255, 0.1);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(66, 139, 255, 0.3);
 }
 
 .day-tab.active {
-  background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+  background: linear-gradient(45deg, var(--neon-orange), var(--neon-blue));
   color: white;
   border-color: transparent;
-  box-shadow: 0 5px 15px rgba(255, 42, 138, 0.4);
+  box-shadow: 0 5px 20px rgba(255, 140, 66, 0.5);
 }
 
 .current-day-indicator {
@@ -935,20 +998,21 @@ nav a:hover::after {
 }
 
 .current-show {
-  background: rgba(255, 42, 138, 0.12);
+  background: rgba(255, 140, 66, 0.15);
   padding: 12px 20px;
   border-radius: 15px;
-  border: 1px solid rgba(255, 42, 138, 0.3);
+  border: 1px solid rgba(255, 140, 66, 0.4);
   text-align: center;
   animation: pulseGlow 2s infinite;
+  box-shadow: 0 0 10px rgba(255, 140, 66, 0.3);
 }
 
 @keyframes pulseGlow {
   0%, 100% { 
-    box-shadow: 0 0 8px rgba(255, 42, 138, 0.2);
+    box-shadow: 0 0 10px rgba(255, 140, 66, 0.3);
   }
   50% { 
-    box-shadow: 0 0 15px rgba(255, 42, 138, 0.4);
+    box-shadow: 0 0 20px rgba(255, 140, 66, 0.5);
   }
 }
 
@@ -968,12 +1032,13 @@ nav a:hover::after {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 77, 77, 0.12);
+  background: rgba(255, 77, 77, 0.15);
   padding: 8px 15px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 77, 77, 0.3);
+  border: 1px solid rgba(255, 77, 77, 0.4);
   font-size: 0.9rem;
   font-weight: 600;
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
 }
 
 /* Contenedor de horarios */
@@ -1003,13 +1068,14 @@ nav a:hover::after {
   text-align: center;
   margin-bottom: 40px;
   padding-bottom: 20px;
-  border-bottom: 2px solid rgba(255, 42, 138, 0.2);
+  border-bottom: 2px solid rgba(255, 140, 66, 0.3);
 }
 
 .day-header h3 {
   font-size: 2.2rem;
   margin-bottom: 10px;
   letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 140, 66, 0.3);
 }
 
 .day-subtitle {
@@ -1033,45 +1099,46 @@ nav a:hover::after {
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: 20px;
-  background: rgba(15, 15, 25, 0.7);
+  background: rgba(20, 25, 20, 0.8);
   border-radius: 15px;
   padding: 20px;
-  border-left: 5px solid var(--neon-pink);
-  transition: all 0.3s ease;
+  border-left: 5px solid var(--neon-orange);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   backdrop-filter: blur(5px);
   position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .time-slot:hover {
-  transform: translateX(10px);
-  background: rgba(25, 25, 35, 0.9);
-  box-shadow: 0 10px 20px rgba(255, 42, 138, 0.15);
+  transform: translateX(10px) translateY(-5px);
+  background: rgba(30, 35, 30, 0.9);
+  box-shadow: 0 15px 30px rgba(255, 140, 66, 0.2);
 }
 
 .time-slot.dj-session {
   border-left-color: var(--neon-green);
-  background: rgba(15, 25, 15, 0.7);
+  background: rgba(20, 30, 20, 0.8);
 }
 
 .time-slot.dj-session:hover {
-  background: rgba(25, 35, 25, 0.9);
+  background: rgba(30, 40, 30, 0.9);
 }
 
 /* ESTILO PARA SEGMENTO ACTUAL */
 .time-slot.now-playing {
-  background: linear-gradient(90deg, rgba(255, 42, 138, 0.15), rgba(42, 138, 255, 0.15));
+  background: linear-gradient(90deg, rgba(255, 140, 66, 0.2), rgba(66, 139, 255, 0.2));
   border-left: 5px solid #FF4D4D;
   animation: nowPlayingGlow 2s infinite alternate;
-  box-shadow: 0 0 25px rgba(255, 42, 138, 0.3);
+  box-shadow: 0 0 30px rgba(255, 140, 66, 0.4);
 }
 
 @keyframes nowPlayingGlow {
   0% { 
-    box-shadow: 0 0 15px rgba(255, 42, 138, 0.2);
+    box-shadow: 0 0 20px rgba(255, 140, 66, 0.3);
     transform: translateX(0);
   }
   100% { 
-    box-shadow: 0 0 30px rgba(255, 42, 138, 0.5);
+    box-shadow: 0 0 35px rgba(255, 140, 66, 0.6);
     transform: translateX(5px);
   }
 }
@@ -1089,11 +1156,12 @@ nav a:hover::after {
   text-transform: uppercase;
   letter-spacing: 1px;
   animation: pulse 1.5s infinite;
+  box-shadow: 0 0 10px #FF4D4D;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
 }
 
 .time-label {
@@ -1103,7 +1171,7 @@ nav a:hover::after {
   justify-content: center;
   text-align: center;
   padding-right: 20px;
-  border-right: 1px solid rgba(255, 42, 138, 0.2);
+  border-right: 1px solid rgba(255, 140, 66, 0.3);
 }
 
 .time-hours {
@@ -1112,12 +1180,12 @@ nav a:hover::after {
   font-weight: 700;
   color: var(--neon-blue);
   margin-bottom: 10px;
-  text-shadow: 0 0 7px var(--neon-blue);
+  text-shadow: 0 0 8px var(--neon-blue);
 }
 
 .time-icon {
   font-size: 1.5rem;
-  color: var(--neon-pink);
+  color: var(--neon-orange);
 }
 
 .program-info {
@@ -1131,10 +1199,11 @@ nav a:hover::after {
   font-size: 1.5rem;
   margin-bottom: 8px;
   letter-spacing: 1px;
+  text-shadow: 0 0 5px rgba(255, 140, 66, 0.3);
 }
 
 .program-desc {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.95rem;
   margin-bottom: 12px;
   line-height: 1.5;
@@ -1147,14 +1216,15 @@ nav a:hover::after {
 }
 
 .tag {
-  background: rgba(255, 42, 138, 0.08);
-  color: var(--neon-pink);
+  background: rgba(255, 140, 66, 0.1);
+  color: var(--neon-orange);
   padding: 5px 12px;
   border-radius: 15px;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 1px;
-  border: 1px solid rgba(255, 42, 138, 0.2);
+  border: 1px solid rgba(255, 140, 66, 0.3);
+  box-shadow: 0 0 5px rgba(255, 140, 66, 0.2);
 }
 
 /* Estilo para sesiones de DJ */
@@ -1169,11 +1239,12 @@ nav a:hover::after {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+  background: linear-gradient(45deg, var(--neon-orange), var(--neon-blue));
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
+  box-shadow: 0 0 10px rgba(255, 140, 66, 0.5);
 }
 
 .dj-name {
@@ -1184,8 +1255,9 @@ nav a:hover::after {
 .dj-alias {
   font-size: 0.8rem;
   color: var(--neon-green);
-  opacity: 0.8;
+  opacity: 0.9;
   margin-top: -5px;
+  text-shadow: 0 0 3px var(--neon-green);
 }
 
 /* Pie de día */
@@ -1195,16 +1267,17 @@ nav a:hover::after {
   text-align: center;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 15px;
-  border: 1px solid rgba(255, 42, 138, 0.15);
+  border: 1px solid rgba(255, 140, 66, 0.2);
   font-weight: 600;
   letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(255, 140, 66, 0.2);
 }
 
 /* Footer */
 footer {
-  background-color: var(--black-dark);
+  background-color: var(--dark-brown);
   padding: 60px 20px 30px;
-  border-top: 1px solid rgba(255, 42, 138, 0.3);
+  border-top: 1px solid rgba(255, 140, 66, 0.3);
   position: relative;
 }
 
@@ -1215,8 +1288,8 @@ footer::before {
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(to right, var(--neon-pink), var(--neon-green), var(--neon-blue));
-  box-shadow: 0 0 8px rgba(255, 42, 138, 0.5);
+  background: linear-gradient(to right, var(--neon-orange), var(--neon-green), var(--neon-blue));
+  box-shadow: 0 0 10px rgba(255, 140, 66, 0.6);
 }
 
 .footer-content {
@@ -1234,6 +1307,7 @@ footer::before {
   font-size: 1.3rem;
   margin-bottom: 20px;
   color: var(--neon-blue);
+  text-shadow: 0 0 5px var(--neon-blue);
 }
 
 .footer-links ul {
@@ -1245,8 +1319,8 @@ footer::before {
 }
 
 .footer-links a {
-  color: var(--white);
-  transition: all 0.3s;
+  color: var(--off-white);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-weight: 300;
   padding: 5px 0;
   display: inline-block;
@@ -1259,14 +1333,15 @@ footer::before {
   bottom: 0;
   left: 0;
   width: 0;
-  height: 1px;
-  background: var(--neon-pink);
+  height: 2px;
+  background: var(--neon-orange);
+  box-shadow: 0 0 5px var(--neon-orange);
   transition: width 0.3s;
 }
 
 .footer-links a:hover {
-  color: var(--neon-pink);
-  text-shadow: 0 0 3px var(--neon-pink);
+  color: var(--neon-orange);
+  text-shadow: 0 0 5px var(--neon-orange);
   padding-left: 10px;
 }
 
@@ -1277,10 +1352,10 @@ footer::before {
 .copyright {
   text-align: center;
   padding-top: 30px;
-  border-top: 1px solid var(--gray);
+  border-top: 1px solid rgba(255, 140, 66, 0.2);
   color: var(--neon-green);
   font-size: 0.9rem;
-  text-shadow: 0 0 4px var(--neon-green);
+  text-shadow: 0 0 5px var(--neon-green);
 }
 
 /* Botones Flotantes */
@@ -1295,35 +1370,35 @@ footer::before {
 }
 
 .floating-btn {
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.8rem;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: none;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 .floating-btn::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
+  left: -100%;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.7s ease;
   z-index: 1;
-  transition: transform 0.3s;
 }
 
 .floating-btn:hover::before {
-  transform: scale(1.1);
+  left: 100%;
 }
 
 .floating-btn i {
@@ -1334,21 +1409,21 @@ footer::before {
 .whatsapp-btn {
   background: linear-gradient(135deg, #25D366, #128C7E);
   color: white;
-  box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
 }
 
 .whatsapp-btn:hover {
-  transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 0 25px rgba(37, 211, 102, 0.7);
+  transform: translateY(-5px) scale(1.15);
+  box-shadow: 0 0 30px rgba(37, 211, 102, 0.8);
 }
 
 .scroll-top-btn {
-  background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+  background: linear-gradient(135deg, var(--neon-orange), var(--neon-blue));
   color: white;
-  box-shadow: 0 0 15px rgba(255, 42, 138, 0.4);
+  box-shadow: 0 0 20px rgba(255, 140, 66, 0.5);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
 }
 
 .scroll-top-btn.visible {
@@ -1357,15 +1432,15 @@ footer::before {
 }
 
 .scroll-top-btn:hover {
-  transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 0 25px rgba(255, 42, 138, 0.7);
+  transform: translateY(-5px) scale(1.15);
+  box-shadow: 0 0 30px rgba(255, 140, 66, 0.8);
 }
 
 /* Tooltip para botones flotantes */
 .tooltip {
   position: absolute;
-  right: 70px;
-  background: rgba(0, 0, 0, 0.85);
+  right: 75px;
+  background: rgba(20, 25, 20, 0.9);
   color: white;
   padding: 8px 15px;
   border-radius: 10px;
@@ -1374,8 +1449,9 @@ footer::before {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s, visibility 0.3s;
-  border: 1px solid var(--neon-pink);
-  box-shadow: 0 0 8px rgba(255, 42, 138, 0.2);
+  border: 1px solid var(--neon-orange);
+  box-shadow: 0 0 10px rgba(255, 140, 66, 0.3);
+  z-index: 100;
 }
 
 .floating-btn:hover .tooltip {
@@ -1391,7 +1467,7 @@ footer::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.95);
   z-index: 10000;
   justify-content: center;
   align-items: center;
@@ -1408,13 +1484,13 @@ footer::before {
 }
 
 .modal-content {
-  background: linear-gradient(135deg, var(--black-light), var(--black-dark));
+  background: linear-gradient(135deg, var(--primary-dark), var(--black-dark));
   width: 90%;
   max-width: 500px;
   border-radius: 20px;
   overflow: hidden;
   border: 2px solid var(--neon-green);
-  box-shadow: 0 0 25px rgba(42, 255, 138, 0.4);
+  box-shadow: 0 0 30px rgba(139, 255, 66, 0.5);
   animation: modalSlideUp 0.4s ease;
 }
 
@@ -1424,7 +1500,7 @@ footer::before {
 }
 
 .modal-header {
-  background: rgba(10, 10, 15, 0.95);
+  background: rgba(20, 25, 20, 0.95);
   padding: 20px;
   border-bottom: 1px solid var(--neon-green);
   display: flex;
@@ -1437,6 +1513,7 @@ footer::before {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.5rem;
   letter-spacing: 1px;
+  text-shadow: 0 0 5px var(--neon-green);
 }
 
 .close-modal {
@@ -1445,12 +1522,13 @@ footer::before {
   color: var(--neon-green);
   font-size: 1.5rem;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .close-modal:hover {
   color: #FF4D4D;
-  transform: rotate(90deg);
+  transform: rotate(90deg) scale(1.1);
+  text-shadow: 0 0 5px #FF4D4D;
 }
 
 .modal-body {
@@ -1468,26 +1546,28 @@ footer::before {
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 1px;
+  text-shadow: 0 0 3px var(--neon-blue);
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
   padding: 12px 15px;
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(42, 138, 255, 0.2);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(66, 139, 255, 0.3);
   border-radius: 10px;
   color: white;
   font-family: 'Exo 2', sans-serif;
   font-size: 1rem;
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
   border-color: var(--neon-green);
-  box-shadow: 0 0 8px rgba(42, 255, 138, 0.2);
+  box-shadow: 0 0 10px rgba(139, 255, 66, 0.3);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .form-group textarea {
@@ -1507,14 +1587,31 @@ footer::before {
   font-size: 1.1rem;
   letter-spacing: 2px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   margin-top: 10px;
-  box-shadow: 0 5px 12px rgba(37, 211, 102, 0.2);
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.7s ease;
 }
 
 .submit-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 15px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+}
+
+.submit-btn:hover::before {
+  left: 100%;
 }
 
 .submit-btn:active {
@@ -1533,7 +1630,7 @@ footer::before {
   z-index: 10001;
   font-family: 'Exo 2', sans-serif;
   font-weight: 600;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
   animation: notificationSlideIn 0.5s ease forwards;
   max-width: 300px;
   border: 2px solid rgba(255,255,255,0.1);
@@ -1583,9 +1680,9 @@ footer::before {
   }
   
   .floating-btn {
-    width: 55px;
-    height: 55px;
-    font-size: 1.6rem;
+    width: 60px;
+    height: 60px;
+    font-size: 1.7rem;
   }
   
   .station-logo {
@@ -1607,16 +1704,16 @@ footer::before {
     top: 70px;
     left: 0;
     width: 100%;
-    background-color: rgba(10, 10, 10, 0.98);
+    background-color: rgba(30, 36, 28, 0.98);
     flex-direction: column;
     padding: 20px;
     gap: 15px;
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     backdrop-filter: blur(10px);
-    border-top: 1px solid var(--neon-pink);
+    border-top: 1px solid var(--neon-orange);
     border-bottom: 1px solid var(--neon-blue);
     z-index: 999;
   }
@@ -1642,14 +1739,15 @@ footer::before {
   }
   
   .floating-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
+    width: 55px;
+    height: 55px;
+    font-size: 1.6rem;
   }
   
   .tooltip {
     font-size: 0.8rem;
     padding: 6px 12px;
+    right: 65px;
   }
   
   /* MEJORAS PARA EL REPRODUCTOR EN MÓVIL */
@@ -1742,7 +1840,7 @@ footer::before {
   
   .time-label {
     border-right: none;
-    border-bottom: 1px solid rgba(255, 42, 138, 0.2);
+    border-bottom: 1px solid rgba(255, 140, 66, 0.3);
     padding-right: 0;
     padding-bottom: 15px;
     flex-direction: row;
@@ -1790,6 +1888,10 @@ footer::before {
     text-align: center;
   }
   
+  .hero .tagline {
+    font-size: 1.5rem;
+  }
+  
   .section-title h2 {
     font-size: 1.8rem;
     text-align: center;
@@ -1805,9 +1907,9 @@ footer::before {
   }
   
   .floating-btn {
-    width: 45px;
-    height: 45px;
-    font-size: 1.3rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
   }
   
   /* MÁS MEJORAS PARA MÓVIL PEQUEÑO */
@@ -1992,7 +2094,7 @@ footer::before {
   <!-- Botones Flotantes -->
   <div class="floating-buttons">
     <!-- Botón de WhatsApp - AHORA ABRE EL MODAL -->
-    <button class="floating-btn whatsapp-btn" id="openWhatsappModal" title="Solicitar tu canción">
+    <button class="floating-btn whatsapp-btn" id="openWhatsappModal">
       <i class="fab fa-whatsapp"></i>
       <span class="tooltip">Solicita tu canción</span>
     </button>
@@ -2009,11 +2111,11 @@ footer::before {
     <div class="container header-content">
       <div class="logo">
         <div class="logo-icon">
-          <i class="fas fa-bolt"></i>
+          <i class="fas fa-satellite-dish"></i>
         </div>
         <div class="logo-text">
-          <h1>DC MIX</h1>
-          <p>ENERGÍA SIN PAUSA</p>
+          <h1>DCMix</h1>
+          <p>El flow latino que no se detiene</p>
         </div>
       </div>
       
@@ -2034,7 +2136,19 @@ footer::before {
   <!-- Hero Section -->
   <section class="hero" id="home">
     <div class="container">
-      <h2>MEZCLAS QUE NO SE DETIENEN</h2>    
+      <h2>DCMix</h2>
+      <div class="tagline">El flow latino que no se detiene</div>
+      <p>Una radio online de mezclas continuas que combina electrónica y ritmos latinos</p>
+      <div class="concept">Desde 2020</div>
+      
+      <div class="hero-buttons">
+        <a href="#player" class="cta-button">
+          <i class="fas fa-play-circle"></i> Escuchar en vivo
+        </a>
+        <a href="#programs" class="cta-button" style="border-color: var(--neon-green); color: var(--neon-green); box-shadow: 0 0 15px rgba(139, 255, 66, 0.4);">
+          <i class="fas fa-calendar-alt"></i> Ver programación
+        </a>
+      </div>
     </div>
   </section>
 
@@ -2076,8 +2190,8 @@ footer::before {
         <!-- Encabezado del reproductor -->
         <div class="player-header">
           <div class="station-info">
-            <h1 class="station-logo">DC MIX</h1>
-            <p class="station-tagline">¡La mezcla que nunca duerme!</p>
+            <h1 class="station-logo">DCMIX</h1>
+            <p class="station-tagline">Streaming en vivo • 24/7</p>
           </div>
           
           <div class="status-indicator">
@@ -2092,15 +2206,15 @@ footer::before {
             <!-- Estado de carga -->
             <div class="mix-loading" id="loadingState">
               <div class="mix-spinner"></div>
-              <div class="loading-text">MEZCLANDO FRECUENCIAS...</div>
+              <div class="loading-text">CONECTANDO A LA RADIO...</div>
             </div>
             
             <!-- Reproductor de Caster.fm - MANTENIDO -->
             <div data-type="newStreamPlayer" 
-                 data-publicToken="ada751f2-b23d-4c05-8abb-1430e3e51c53" 
+                 data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" 
                  data-theme="dark" 
-                 data-color="49D3F2" 
-                 data-channelId="" 
+                 data-color="FF8C42" 
+                 data-channelId="a012d2d4-4ab4-4550-b184-3ae00c951cad" 
                  data-rendered="false" 
                  class="cstrEmbed" 
                  style="display: none; width: 100%; min-height: 150px; align-items: center; justify-content: center;">
@@ -2142,8 +2256,8 @@ footer::before {
   <section class="programs" id="programs">
     <div class="container">
       <div class="section-title">
-        <h2>PROGRAMACIÓN SEMANAL DC MIX</h2>
-        <p>La energía nunca se detiene. Descubre qué está sonando ahora mismo en DC Mix.</p>
+        <h2>PROGRAMACIÓN SEMANAL DCMIX</h2>
+        <p>Ritmo latino en mezcla continua. (Hoy es <span id="dia-actual-text"></span>)</p>
       </div>
       
       <!-- Selector de día con programa actual -->
@@ -2174,8 +2288,8 @@ footer::before {
         <!-- LUNES A VIERNES -->
         <div class="day-schedule active" id="weekdays">
           <div class="day-header">
-            <h3><span class="neon-blue">LUNES</span> · <span class="neon-blue">MARTES</span> · <span class="neon-blue">MIÉRCOLES</span> · <span class="neon-blue">JUEVES</span> · <span class="neon-blue">VIERNES</span></h3>
-            <p class="day-subtitle">MODO AUTOMÁTICO + DROPS PROFESIONALES</p>
+            <h3><span class="neon-orange">LUNES</span> · <span class="neon-orange">MARTES</span> · <span class="neon-orange">MIÉRCOLES</span> · <span class="neon-orange">JUEVES</span> · <span class="neon-orange">VIERNES</span></h3>
+            <p class="day-subtitle">MODO AUTOMÁTICO • MEZCLAS CONTINUAS</p>
           </div>
           
           <div class="time-grid" id="weekdaysGrid">
@@ -2183,14 +2297,14 @@ footer::before {
           </div>
           
           <div class="day-footer">
-            <p><span class="neon-blue">AUTOMATIZADO:</span> DROPS PROFESIONALES + ENERGÍA CONTINUA SIN DJs FIJOS</p>
+            <p><span class="neon-orange">AUTOMATIZADO:</span> DROPS PROFESIONALES + ENERGÍA CONTINUA SIN DJs FIJOS</p>
           </div>
         </div>
         
         <!-- SÁBADO -->
         <div class="day-schedule" id="saturday">
           <div class="day-header">
-            <h3><span class="neon-pink">SÁBADO - EL DÍA DEL STAFF</span></h3>
+            <h3><span class="neon-green">SÁBADO - EL DÍA DEL STAFF</span></h3>
             <p class="day-subtitle">LOS DJs TOMAN EL CONTROL TOTAL</p>
           </div>
           
@@ -2199,7 +2313,7 @@ footer::before {
           </div>
           
           <div class="day-footer">
-            <p><span class="neon-pink">FIN DE SEMANA:</span> LOS DJs DEL STAFF BRILLAN CON SESIONES EXCLUSIVAS</p>
+            <p><span class="neon-green">FIN DE SEMANA:</span> LOS DJs DEL STAFF BRILLAN CON SESIONES EXCLUSIVAS</p>
           </div>
         </div>
         
@@ -2229,14 +2343,14 @@ footer::before {
         <div class="footer-logo">
           <div class="logo">
             <div class="logo-icon">
-              <i class="fas fa-bolt"></i>
+              <i class="fas fa-satellite-dish"></i>
             </div>
             <div class="logo-text">
-              <h1>DC MIX</h1>
-              <p>ENERGÍA SIN PAUSA</p>
+              <h1>DCMix</h1>
+              <p>El flow latino que no se detiene</p>
             </div>
           </div>
-          <p style="margin-top: 15px; font-weight: 300;">Mezclas que no se detienen. Música mezclada 24 horas.</p>
+          <p style="margin-top: 15px; font-weight: 300;">Una radio online de mezclas continuas que combina electrónica y ritmos latinos</p>
         </div>
         
         <div class="footer-links">
@@ -2250,8 +2364,9 @@ footer::before {
       </div>
       
       <div class="copyright">
-        <p>DC MIX · MEZCLAS QUE NO SE DETIENEN © 2026 · ENERGÍA CONSTANTE, RITMO CONTINUO</p>
-        <p style="margin-top: 10px; font-size: 0.8rem;">DANCE · HOUSE · URBAN REMIXES · MÚSICA ELECTRÓNICA</p>
+        <p>DCMix · RDCR Sound Network 2026</p>
+        <p>"Ritmo latino en mezcla continua"</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Cultura y pasión musical desde 2020</p>
       </div>
     </div>
   </footer>
@@ -2365,7 +2480,7 @@ footer::before {
       }
       
       // Crear mensaje para WhatsApp
-      let mensaje = "¡Hola DC Mix! Me gustaría solicitar una canción.\n\n";
+      let mensaje = "¡Hola DCMix! Me gustaría solicitar una canción.\n\n";
       mensaje += `*Nombre:* ${nombre}\n`;
       mensaje += `*Canción:* ${cancion}\n`;
       
@@ -2373,7 +2488,7 @@ footer::before {
         mensaje += `*Comentario:* ${comentario}\n`;
       }
       
-      mensaje += "\n¡Gracias por la increíble energía sin pausa! 🎧⚡";
+      mensaje += "\n¡Gracias por el flow latino que no se detiene! 🎧⚡";
       
       // Codificar el mensaje para URL
       const mensajeCodificado = encodeURIComponent(mensaje);
@@ -2462,38 +2577,33 @@ footer::before {
       return `${formatTimeToAMPM(start)} – ${formatTimeToAMPM(end)}`;
     }
     
-    // Datos de programación semanal ACTUALIZADA
+    // Datos de programación semanal ACTUALIZADA - USANDO LA PROGRAMACIÓN DEL CÓDIGO ANTERIOR
     const scheduleData = {
       weekdays: [
-        { start: "00:00", end: "06:00", title: "NIGHT FLOW", desc: "Música suave y ambiente para las primeras horas de la mañana.", tags: ["CHILL", "AMBIENT"], icon: "fa-moon" },
-        { start: "06:00", end: "09:00", title: "MORNING ENERGY MIX", desc: "Activa tu día con beats energéticos y voces motivadoras.", tags: ["WAKE-UP", "PROGRESSIVE"], icon: "fa-sun" },
-        { start: "09:00", end: "12:00", title: "DAYTIME VIBES", desc: "Ritmo perfecto para mantener la energía durante el día.", tags: ["DAYTIME", "VIBES"], icon: "fa-clock" },
-        { start: "12:00", end: "15:00", title: "MIDDAY POWER", desc: "Energía máxima para la hora del almuerzo.", tags: ["ENERGY", "POWER"], icon: "fa-bolt" },
-        { start: "15:00", end: "18:00", title: "AFTERNOON MIX", desc: "Transición perfecta hacia la tarde.", tags: ["AFTERNOON", "TRANSITION"], icon: "fa-cloud-sun" },
-        { start: "18:00", end: "21:00", title: "PRIME TIME MIX", desc: "La hora dorada de DC Mix. Energía pura para el afterwork.", tags: ["PRIME TIME", "ELECTRO"], icon: "fa-crown" },
-        { start: "21:00", end: "00:00", title: "NIGHT DANCE MIX", desc: "La noche despierta con beats intensos.", tags: ["NIGHT", "DANCE"], icon: "fa-star" }
+        { start: "06:00", end: "10:00", title: "ELEGANTE & ACTIVO", desc: "Salsa romántica mix y mambo suave.", tags: ["SALSA ROMÁNTICA", "MAMBO"], icon: "fa-sun" },
+        { start: "10:00", end: "14:00", title: "RAÍZ LATINA", desc: "Salsa clásica mix y mambo.", tags: ["SALSA CLÁSICA", "MAMBO"], icon: "fa-music" },
+        { start: "14:00", end: "18:00", title: "FLOW MODERNO", desc: "Electrónica / electro house y house latino.", tags: ["ELECTRÓNICA", "HOUSE LATINO"], icon: "fa-bolt" },
+        { start: "18:00", end: "22:00", title: "ENERGÍA ALTA LATINA", desc: "Merengue mix y reggaeton mix.", tags: ["MERENGUE", "REGGAETON"], icon: "fa-fire" },
+        { start: "22:00", end: "02:00", title: "NOCHE HÍBRIDA", desc: "Electrónica y party mix.", tags: ["ELECTRÓNICA", "PARTY MIX"], icon: "fa-moon" },
+        { start: "02:00", end: "06:00", title: "RESET NOCTURNO", desc: "Salsa romántica y electrónica suave.", tags: ["SALSA ROMÁNTICA", "ELECTRÓNICA"], icon: "fa-star" }
       ],
       
       saturday: [
-        { start: "00:00", end: "06:00", title: "AFTER HOURS", desc: "Música continua para las primeras horas del sábado.", tags: ["LATE NIGHT", "CONTINUOUS"], icon: "fa-moon" },
-        { start: "06:00", end: "10:00", title: "WEEKEND WARM-UP", desc: "Despierta el sábado con beats suaves que preparan para la energía del día.", tags: ["WARM-UP", "CHILL"], icon: "fa-coffee" },
-        { start: "10:00", end: "14:00", title: "DAY SESSION", desc: "4 horas de los mejores beats para el día del fin de semana.", tags: ["DAY", "SESSION"], icon: "fa-sun" },
-        { start: "14:00", end: "16:00", title: "WEEKEND VIBES", desc: "La energía comienza a subir para la tarde del sábado.", tags: ["WEEKEND", "VIBES"], icon: "fa-music" },
-        { start: "16:00", end: "18:00", title: "PRE-PEAK MIX", desc: "Preparación para la hora pico del sábado.", tags: ["PRE-PEAK", "BUILD-UP"], icon: "fa-chart-line" },
-        { start: "18:00", end: "20:00", title: "DJ HOXX", desc: "Hora pico del sábado con el mejor sonido.", tags: ["PEAK TIME", "ENERGY"], icon: "fa-user", dj: "DJ HOXX", djAlias: "HENRY LOOR" },
-        { start: "20:00", end: "22:00", title: "DJ GIAM", desc: "Sesión nocturna para mantener la energía.", tags: ["NIGHT", "SESSION"], icon: "fa-user", dj: "DJ GIAM", djAlias: "STAFF RESIDENT" },
-        { start: "22:00", end: "00:00", title: "DJ FERNANDO TAPIA", desc: "Cierre perfecto para la noche del sábado.", tags: ["LATE", "FLOW"], icon: "fa-user", dj: "DJ FERNANDO TAPIA", djAlias: "TECH SPECIALIST" }
+        { start: "06:00", end: "12:00", title: "SALSA & MAMBO", desc: "Salsa romántica y mambo.", tags: ["SALSA ROMÁNTICA", "MAMBO"], icon: "fa-sun" },
+        { start: "12:00", end: "18:00", title: "CLÁSICA & ELECTRÓNICA", desc: "Salsa clásica y electrónica light.", tags: ["SALSA CLÁSICA", "ELECTRÓNICA"], icon: "fa-music" },
+        { start: "18:00", end: "21:00", title: "DJ HOXX", desc: "Set libre latino + electrónico.", tags: ["DJ SET", "LATINO"], icon: "fa-user", dj: "DJ HOXX", djAlias: "STAFF DCMIX" },
+        { start: "20:00", end: "22:00", title: "DJ GIAM", desc: "Sonido oficial DCMix.", tags: ["DJ SET", "OFICIAL"], icon: "fa-user", dj: "DJ GIAM", djAlias: "STAFF DCMIX" },
+        { start: "22:00", end: "00:00", title: "DJ FERNANDO TAPIA", desc: "Electrónica + fusiones técnicas con invitados.", tags: ["ELECTRÓNICA", "FUSIONES"], icon: "fa-user", dj: "DJ FERNANDO TAPIA", djAlias: "TECH SPECIALIST" },
+        { start: "00:00", end: "06:00", title: "PARTY MIX", desc: "Party mix y electrónica suave.", tags: ["PARTY MIX", "ELECTRÓNICA"], icon: "fa-star" }
       ],
       
       sunday: [
-        { start: "00:00", end: "06:00", title: "SUNDAY NIGHT", desc: "Música continua para cerrar la noche del domingo.", tags: ["NIGHT", "CONTINUOUS"], icon: "fa-moon" },
-        { start: "06:00", end: "10:00", title: "SUNDAY MORNING", desc: "Despierta suave, energía progresiva para el domingo.", tags: ["MORNING", "CHILL"], icon: "fa-coffee" },
-        { start: "10:00", end: "14:00", title: "DAY VIBES", desc: "Selección especial dominical de los mejores tracks.", tags: ["DAY", "VIBES"], icon: "fa-sun" },
-        { start: "14:00", end: "16:00", title: "SUNDAY SESSION", desc: "Tarde de domingo con buena música.", tags: ["SUNDAY", "SESSION"], icon: "fa-cloud-sun" },
-        { start: "16:00", end: "18:00", title: "WEEKEND CLOSING", desc: "Preparación para el cierre del fin de semana.", tags: ["CLOSING", "WEEKEND"], icon: "fa-wind" },
-        { start: "18:00", end: "20:00", title: "DJ HOXX", desc: "Hora pico del domingo con el sonido característico.", tags: ["PEAK", "SUNDAY"], icon: "fa-user", dj: "DJ HOXX", djAlias: "HENRY LOOR" },
-        { start: "20:00", end: "22:00", title: "DJ LOBO AZUL", desc: "Transición perfecta hacia la noche con beats fluidos.", tags: ["FLOW", "NIGHT"], icon: "fa-user", dj: "DJ LOBO AZUL", djAlias: "STAFF RESIDENT" },
-        { start: "22:00", end: "00:00", title: "DJ GIAM", desc: "Última descarga de energía antes de comenzar la nueva semana.", tags: ["FINAL", "ENERGY"], icon: "fa-user", dj: "DJ GIAM", djAlias: "STAFF RESIDENT" }
+        { start: "06:00", end: "12:00", title: "SALSA & MAMBO", desc: "Salsa romántica y mambo.", tags: ["SALSA ROMÁNTICA", "MAMBO"], icon: "fa-sun" },
+        { start: "12:00", end: "18:00", title: "CLÁSICA & ELECTRÓNICA", desc: "Salsa clásica y electrónica light.", tags: ["SALSA CLÁSICA", "ELECTRÓNICA"], icon: "fa-music" },
+        { start: "18:00", end: "21:00", title: "DJ HOXX", desc: "Set libre latino + electrónico.", tags: ["DJ SET", "LATINO"], icon: "fa-user", dj: "DJ HOXX", djAlias: "STAFF DCMIX" },
+        { start: "20:00", end: "22:00", title: "DJ GIAM", desc: "Sonido oficial DCMix.", tags: ["DJ SET", "OFICIAL"], icon: "fa-user", dj: "DJ GIAM", djAlias: "STAFF DCMIX" },
+        { start: "22:00", end: "00:00", title: "DJ FERNANDO TAPIA", desc: "Electrónica + fusiones técnicas con invitados.", tags: ["ELECTRÓNICA", "FUSIONES"], icon: "fa-user", dj: "DJ FERNANDO TAPIA", djAlias: "TECH SPECIALIST" },
+        { start: "00:00", end: "06:00", title: "PARTY MIX", desc: "Party mix y electrónica suave.", tags: ["PARTY MIX", "ELECTRÓNICA"], icon: "fa-star" }
       ]
     };
     
@@ -2577,13 +2687,13 @@ footer::before {
                   <i class="fas fa-headphones"></i>
                 </div>
                 <div class="dj-name">
-                  <h4 class="program-title neon-pink">${segment.dj}</h4>
+                  <h4 class="program-title neon-green">${segment.dj}</h4>
                   <p class="dj-alias">${segment.djAlias}</p>
                 </div>
               </div>
               <h5 class="program-title">${segment.title}</h5>
             ` : `
-              <h4 class="program-title ${index % 2 === 0 ? 'neon-pink' : 'neon-green'}">${segment.title}</h4>
+              <h4 class="program-title ${index % 2 === 0 ? 'neon-orange' : 'neon-green'}">${segment.title}</h4>
             `}
             <p class="program-desc">${segment.desc}</p>
             <div class="program-tags">
@@ -2657,6 +2767,11 @@ footer::before {
           tabToClick.click();
         }
       }
+      
+      // Actualizar texto del día actual
+      const diaActualText = document.getElementById('dia-actual-text');
+      const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+      diaActualText.textContent = dias[currentDay].toLowerCase();
     }
     
     // Funcionalidad para los tabs de programación semanal
@@ -2700,10 +2815,10 @@ footer::before {
     // Crear partículas dinámicas
     function createParticles() {
       const container = document.getElementById('particlesBg');
-      const colors = [getComputedStyle(document.documentElement).getPropertyValue('--neon-pink').trim(), 
+      const colors = [getComputedStyle(document.documentElement).getPropertyValue('--neon-orange').trim(), 
                      getComputedStyle(document.documentElement).getPropertyValue('--neon-blue').trim(), 
                      getComputedStyle(document.documentElement).getPropertyValue('--neon-green').trim(), 
-                     '#a0e6ff'];
+                     '#FFA85C'];
       
       for (let i = 0; i < 25; i++) {
         const particle = document.createElement('div');
@@ -2719,7 +2834,7 @@ footer::before {
         
         // Color aleatorio
         const color = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.background = `radial-gradient(circle, ${color}20, transparent)`;
+        particle.style.background = `radial-gradient(circle, ${color}30, transparent)`;
         
         // Animación personalizada
         const duration = Math.random() * 25 + 15;
@@ -2740,7 +2855,7 @@ footer::before {
       script.src = '//cdn.cloud.caster.fm/widgets/embed.js';
       
       script.onload = function() {
-        console.log('Reproductor DC MIX cargado');
+        console.log('Reproductor DCMIX cargado');
         
         setTimeout(() => {
           if (loading) {
@@ -2759,8 +2874,8 @@ footer::before {
         console.error('Error al cargar el reproductor');
         if (loading) {
           loading.innerHTML = `
-            <div style="color: var(--neon-pink); text-align: center;">
-              <p style="margin-bottom: 10px;">SINCRONIZANDO...</p>
+            <div style="color: var(--neon-orange); text-align: center;">
+              <p style="margin-bottom: 10px; text-shadow: 0 0 5px var(--neon-orange);">SINCRONIZANDO...</p>
               <p style="font-size: 0.8rem; opacity: 0.8;">Reconectando al mix infinito</p>
             </div>
           `;
@@ -2838,7 +2953,7 @@ footer::before {
         } else if (currentBPM < 130) {
           tempIndicator.style.background = 'var(--neon-blue)';
         } else if (currentBPM < 160) {
-          tempIndicator.style.background = 'var(--neon-pink)';
+          tempIndicator.style.background = 'var(--neon-orange)';
         } else {
           tempIndicator.style.background = '#FF4D4D';
         }
@@ -2846,7 +2961,7 @@ footer::before {
         // Efecto de pulso en el BPM
         setTimeout(() => {
           bpmValue.style.transform = 'scale(1)';
-          bpmValue.style.color = 'var(--neon-pink)';
+          bpmValue.style.color = 'var(--neon-orange)';
         }, 100);
         
         // Crear partícula aleatoria
@@ -2960,11 +3075,11 @@ footer::before {
       window.addEventListener('scroll', () => {
         const header = document.querySelector('header');
         if (window.scrollY > 50) {
-          header.style.boxShadow = '0 0 15px rgba(255, 42, 138, 0.3)';
-          header.style.borderBottom = '1px solid rgba(255, 42, 138, 0.3)';
+          header.style.boxShadow = '0 0 20px rgba(255, 140, 66, 0.4)';
+          header.style.borderBottom = '1px solid rgba(255, 140, 66, 0.4)';
         } else {
           header.style.boxShadow = 'none';
-          header.style.borderBottom = '1px solid rgba(255, 42, 138, 0.3)';
+          header.style.borderBottom = '1px solid rgba(255, 140, 66, 0.3)';
         }
       });
     });
