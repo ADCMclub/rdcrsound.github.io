@@ -344,8 +344,9 @@ nav a:hover::after {
   font-size: 1.3rem;
   max-width: 800px;
   margin: 0 auto 40px;
-  color: var(--off-white);
-  font-weight: 300;
+  color: var(--white); /* Cambiado a blanco puro para mejor contraste */
+  font-weight: 400; /* Más grueso para mejor legibilidad */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .hero .concept {
@@ -593,10 +594,11 @@ nav a:hover::after {
 
 .station-tagline {
   font-size: 1.1rem;
-  color: var(--neon-green);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   text-transform: uppercase;
   letter-spacing: 3px;
-  font-weight: 300;
+  font-weight: 400; /* Más grueso para mejor legibilidad */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Indicador de estado 24/7 */
@@ -661,6 +663,18 @@ nav a:hover::after {
   backdrop-filter: blur(5px);
 }
 
+/* NUEVO REPRODUCTOR INTEGRADO */
+.cstrEmbed {
+  width: 100% !important;
+  min-height: 150px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
 /* Información de mezcla */
 .mix-info {
   background: rgba(255, 140, 66, 0.08);
@@ -698,10 +712,11 @@ nav a:hover::after {
 
 .bpm-label {
   font-size: 0.9rem;
-  color: var(--neon-blue);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-top: 5px;
+  font-weight: 500;
 }
 
 /* BPM Temperature Indicator */
@@ -740,8 +755,9 @@ nav a:hover::after {
   display: flex;
   justify-content: space-between;
   font-size: 0.7rem;
-  color: var(--neon-green);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   margin-top: 5px;
+  font-weight: 500;
 }
 
 /* Estado de carga */
@@ -917,11 +933,11 @@ nav a:hover::after {
 }
 
 .section-title p {
-  color: var(--neon-green);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   font-size: 1.2rem;
   max-width: 700px;
   margin: 0 auto;
-  text-shadow: 0 0 5px var(--neon-green);
+  font-weight: 400;
 }
 
 /* Selector de día */
@@ -947,7 +963,7 @@ nav a:hover::after {
 .day-tab {
   background: rgba(0, 0, 0, 0.6);
   border: 2px solid var(--neon-blue);
-  color: var(--neon-blue);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   padding: 12px 25px;
   border-radius: 30px;
   font-family: 'Orbitron', sans-serif;
@@ -1025,7 +1041,8 @@ nav a:hover::after {
 
 .current-show-time {
   font-size: 0.9rem;
-  color: var(--neon-blue);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
+  font-weight: 500;
 }
 
 .live-indicator {
@@ -1079,7 +1096,7 @@ nav a:hover::after {
 }
 
 .day-subtitle {
-  color: var(--neon-green);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 2px;
@@ -1200,6 +1217,7 @@ nav a:hover::after {
   margin-bottom: 8px;
   letter-spacing: 1px;
   text-shadow: 0 0 5px rgba(255, 140, 66, 0.3);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
 }
 
 .program-desc {
@@ -1207,6 +1225,7 @@ nav a:hover::after {
   font-size: 0.95rem;
   margin-bottom: 12px;
   line-height: 1.5;
+  font-weight: 400; /* Más grueso para mejor legibilidad */
 }
 
 .program-tags {
@@ -1217,7 +1236,7 @@ nav a:hover::after {
 
 .tag {
   background: rgba(255, 140, 66, 0.1);
-  color: var(--neon-orange);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   padding: 5px 12px;
   border-radius: 15px;
   font-size: 0.75rem;
@@ -1254,10 +1273,10 @@ nav a:hover::after {
 
 .dj-alias {
   font-size: 0.8rem;
-  color: var(--neon-green);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   opacity: 0.9;
   margin-top: -5px;
-  text-shadow: 0 0 3px var(--neon-green);
+  font-weight: 500;
 }
 
 /* Pie de día */
@@ -1271,6 +1290,7 @@ nav a:hover::after {
   font-weight: 600;
   letter-spacing: 1px;
   box-shadow: 0 0 15px rgba(255, 140, 66, 0.2);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
 }
 
 /* Footer */
@@ -1319,9 +1339,9 @@ footer::before {
 }
 
 .footer-links a {
-  color: var(--off-white);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  font-weight: 300;
+  font-weight: 400; /* Más grueso para mejor legibilidad */
   padding: 5px 0;
   display: inline-block;
   position: relative;
@@ -1353,9 +1373,9 @@ footer::before {
   text-align: center;
   padding-top: 30px;
   border-top: 1px solid rgba(255, 140, 66, 0.2);
-  color: var(--neon-green);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   font-size: 0.9rem;
-  text-shadow: 0 0 5px var(--neon-green);
+  font-weight: 400;
 }
 
 /* Botones Flotantes */
@@ -1452,6 +1472,7 @@ footer::before {
   border: 1px solid var(--neon-orange);
   box-shadow: 0 0 10px rgba(255, 140, 66, 0.3);
   z-index: 100;
+  font-weight: 500;
 }
 
 .floating-btn:hover .tooltip {
@@ -1509,11 +1530,11 @@ footer::before {
 }
 
 .modal-header h3 {
-  color: var(--neon-green);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   font-family: 'Orbitron', sans-serif;
   font-size: 1.5rem;
   letter-spacing: 1px;
-  text-shadow: 0 0 5px var(--neon-green);
+  font-weight: 700;
 }
 
 .close-modal {
@@ -1542,11 +1563,10 @@ footer::before {
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: var(--neon-blue);
+  color: var(--white); /* Cambiado a blanco para mejor contraste */
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 1px;
-  text-shadow: 0 0 3px var(--neon-blue);
 }
 
 .form-group input,
@@ -1560,6 +1580,7 @@ footer::before {
   font-family: 'Exo 2', sans-serif;
   font-size: 1rem;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-weight: 400; /* Más grueso para mejor legibilidad */
 }
 
 .form-group input:focus,
@@ -2191,12 +2212,12 @@ footer::before {
         <div class="player-header">
           <div class="station-info">
             <h1 class="station-logo">DCMIX</h1>
-            <p class="station-tagline">Streaming en vivo • 24/7</p>
+            <p class="station-tagline">Streaming en vivo - 24/7</p>
           </div>
           
           <div class="status-indicator">
             <span class="live-dot"></span>
-            <span style="color: var(--neon-green); font-size: 0.9rem; font-weight: 600;">TRANSMISIÓN 24/7</span>
+            <span style="color: var(--neon-green); font-size: 0.9rem; font-weight: 600;">TRANSMISION 24/7</span>
           </div>
         </div>
         
@@ -2209,17 +2230,16 @@ footer::before {
               <div class="loading-text">CONECTANDO A LA RADIO...</div>
             </div>
             
-            <!-- Reproductor de Caster.fm - MANTENIDO -->
-            <div data-type="newStreamPlayer" 
-                 data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" 
+            <!-- NUEVO REPRODUCTOR INTEGRADO -->
+            <div class="cstrEmbed" 
+                 data-type="newStreamPlayer" 
+                 data-publicToken="ada751f2-b23d-4c05-8abb-1430e3e51c53" 
                  data-theme="dark" 
-                 data-color="FF8C42" 
-                 data-channelId="a012d2d4-4ab4-4550-b184-3ae00c951cad" 
-                 data-rendered="false" 
-                 class="cstrEmbed" 
-                 style="display: none; width: 100%; min-height: 150px; align-items: center; justify-content: center;">
-              <a href="https://www.caster.fm">Shoutcast Hosting</a>
-              <a href="https://www.caster.fm">Stream Hosting</a>
+                 data-color="00B9F4" 
+                 data-channelId="" 
+                 data-rendered="false">
+              <a href="https://www.caster.fm">Shoutcast Hosting</a> 
+              <a href="https://www.caster.fm">Stream Hosting</a> 
               <a href="https://www.caster.fm">Radio Server Hosting</a>
             </div>
             
@@ -2264,7 +2284,7 @@ footer::before {
       <div class="day-selector">
         <div class="day-tabs">
           <button class="day-tab active" data-day="weekdays">LUNES A VIERNES</button>
-          <button class="day-tab" data-day="saturday">SÁBADO</button>
+          <button class="day-tab" data-day="saturday">SABADO</button>
           <button class="day-tab" data-day="sunday">DOMINGO</button>
         </div>
         
@@ -2288,8 +2308,8 @@ footer::before {
         <!-- LUNES A VIERNES -->
         <div class="day-schedule active" id="weekdays">
           <div class="day-header">
-            <h3><span class="neon-orange">LUNES</span> · <span class="neon-orange">MARTES</span> · <span class="neon-orange">MIÉRCOLES</span> · <span class="neon-orange">JUEVES</span> · <span class="neon-orange">VIERNES</span></h3>
-            <p class="day-subtitle">MODO AUTOMÁTICO • MEZCLAS CONTINUAS</p>
+            <h3><span class="neon-orange">LUNES</span> - <span class="neon-orange">MARTES</span> - <span class="neon-orange">MIERCOLES</span> - <span class="neon-orange">JUEVES</span> - <span class="neon-orange">VIERNES</span></h3>
+            <p class="day-subtitle">MODO AUTOMATICO - MEZCLAS CONTINUAS</p>
           </div>
           
           <div class="time-grid" id="weekdaysGrid">
@@ -2297,14 +2317,14 @@ footer::before {
           </div>
           
           <div class="day-footer">
-            <p><span class="neon-orange">AUTOMATIZADO:</span> DROPS PROFESIONALES + ENERGÍA CONTINUA SIN DJs FIJOS</p>
+            <p><span class="neon-orange">AUTOMATIZADO:</span> DROPS PROFESIONALES + ENERGIA CONTINUA SIN DJs FIJOS</p>
           </div>
         </div>
         
-        <!-- SÁBADO -->
+        <!-- SABADO -->
         <div class="day-schedule" id="saturday">
           <div class="day-header">
-            <h3><span class="neon-green">SÁBADO - EL DÍA DEL STAFF</span></h3>
+            <h3><span class="neon-green">SABADO - EL DIA DEL STAFF</span></h3>
             <p class="day-subtitle">LOS DJs TOMAN EL CONTROL TOTAL</p>
           </div>
           
@@ -2320,7 +2340,7 @@ footer::before {
         <!-- DOMINGO -->
         <div class="day-schedule" id="sunday">
           <div class="day-header">
-            <h3><span class="neon-blue">DOMINGO - ENERGÍA HASTA EL FINAL</span></h3>
+            <h3><span class="neon-blue">DOMINGO - ENERGIA HASTA EL FINAL</span></h3>
             <p class="day-subtitle">CIERRE DE SEMANA CON LO MEJOR DEL STAFF</p>
           </div>
           
@@ -2329,7 +2349,7 @@ footer::before {
           </div>
           
           <div class="day-footer">
-            <p><span class="neon-blue">CIERRE DE SEMANA:</span> ENERGÍA HASTA EL ÚLTIMO MINUTO CON EL MEJOR DEL STAFF</p>
+            <p><span class="neon-blue">CIERRE DE SEMANA:</span> ENERGIA HASTA EL ULTIMO MINUTO CON EL MEJOR DEL STAFF</p>
           </div>
         </div>
       </div>
@@ -2350,7 +2370,7 @@ footer::before {
               <p>El flow latino que no se detiene</p>
             </div>
           </div>
-          <p style="margin-top: 15px; font-weight: 300;">Una radio online de mezclas continuas que combina electrónica y ritmos latinos</p>
+          <p style="margin-top: 15px; font-weight: 400; color: var(--white);">Una radio online de mezclas continuas que combina electronica y ritmos latinos</p>
         </div>
         
         <div class="footer-links">
@@ -2358,15 +2378,15 @@ footer::before {
           <ul>
             <li><a href="#home">Inicio</a></li>
             <li><a href="#player">En Vivo</a></li>
-            <li><a href="#programs">Programación</a></li>
+            <li><a href="#programs">Programacion</a></li>
           </ul>
         </div>
       </div>
       
       <div class="copyright">
-        <p>DCMix · RDCR Sound Network 2026</p>
+        <p>DCMix - RDCR Sound Network 2026</p>
         <p>"Ritmo latino en mezcla continua"</p>
-        <p style="margin-top: 10px; font-size: 0.8rem;">Cultura y pasión musical desde 2020</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Cultura y pasion musical desde 2020</p>
       </div>
     </div>
   </footer>
@@ -2428,7 +2448,7 @@ footer::before {
     });
     
     // ============================================
-    // WHATSAPP FORM MODAL FUNCTIONALITY - VERSIÓN CORREGIDA
+    // WHATSAPP FORM MODAL FUNCTIONALITY - VERSION CORREGIDA
     // ============================================
     
     const whatsappModal = document.getElementById('whatsappModal');
@@ -2464,7 +2484,7 @@ footer::before {
       }
     });
     
-    // Handle form submission - VERSIÓN MODIFICADA PARA ENVÍO DIRECTO
+    // Handle form submission - VERSION MODIFICADA PARA ENVIO DIRECTO
     whatsappForm.addEventListener('submit', (e) => {
       e.preventDefault();
       
@@ -2475,31 +2495,31 @@ footer::before {
       
       // Validar campos requeridos
       if (!nombre || !cancion) {
-        showNotification('Por favor completa los campos Nombre y Canción', 'error');
+        showNotification('Por favor completa los campos Nombre y Cancion', 'error');
         return;
       }
       
       // Crear mensaje para WhatsApp
-      let mensaje = "¡Hola DCMix! Me gustaría solicitar una canción.\n\n";
-      mensaje += `*Nombre:* ${nombre}\n`;
-      mensaje += `*Canción:* ${cancion}\n`;
+      let mensaje = "Hola DCMix! Me gustaria solicitar una cancion.\n\n";
+      mensaje += `Nombre: ${nombre}\n`;
+      mensaje += `Cancion: ${cancion}\n`;
       
       if (comentario) {
-        mensaje += `*Comentario:* ${comentario}\n`;
+        mensaje += `Comentario: ${comentario}\n`;
       }
       
-      mensaje += "\n¡Gracias por el flow latino que no se detiene! 🎧⚡";
+      mensaje += "\nGracias por el flow latino que no se detiene!";
       
       // Codificar el mensaje para URL
       const mensajeCodificado = encodeURIComponent(mensaje);
       
-      // Número de teléfono para WhatsApp
+      // Numero de telefono para WhatsApp
       const phoneNumber = '593961480654';
       
       // Crear URL de WhatsApp (web o app)
       let whatsappUrl;
       if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        // Dispositivo móvil - abrir app de WhatsApp
+        // Dispositivo movil - abrir app de WhatsApp
         whatsappUrl = `whatsapp://send?phone=${phoneNumber}&text=${mensajeCodificado}`;
       } else {
         // Escritorio - abrir web de WhatsApp
@@ -2513,7 +2533,7 @@ footer::before {
       // Limpiar formulario
       whatsappForm.reset();
       
-      // Mostrar notificación de confirmación
+      // Mostrar notificacion de confirmacion
       showNotification('Redirigiendo a WhatsApp...', 'success');
       
       // Abrir WhatsApp directamente sin intermediarios
@@ -2522,14 +2542,14 @@ footer::before {
       }, 1000);
     });
     
-    // Función para mostrar notificación
+    // Funcion para mostrar notificacion
     function showNotification(message, type = 'success') {
-      // Crear elemento de notificación
+      // Crear elemento de notificacion
       const notification = document.createElement('div');
       notification.className = 'notification';
       
       let icon = 'fa-check-circle';
-      let title = '¡Éxito!';
+      let title = 'Exito';
       
       if (type === 'error') {
         icon = 'fa-exclamation-circle';
@@ -2549,7 +2569,7 @@ footer::before {
       
       document.body.appendChild(notification);
       
-      // Remover después de 3 segundos
+      // Remover despues de 3 segundos
       setTimeout(() => {
         notification.style.animation = 'notificationSlideOut 0.5s ease forwards';
         setTimeout(() => {
@@ -2561,10 +2581,10 @@ footer::before {
     }
     
     // ============================================
-    // SISTEMA DE PROGRAMACIÓN SEMANAL EN TIEMPO REAL
+    // SISTEMA DE PROGRAMACION SEMANAL EN TIEMPO REAL
     // ============================================
     
-    // Función para convertir formato 24h a AM/PM
+    // Funcion para convertir formato 24h a AM/PM
     function formatTimeToAMPM(time24) {
       const [hours, minutes] = time24.split(':').map(Number);
       const period = hours >= 12 ? 'PM' : 'AM';
@@ -2572,48 +2592,48 @@ footer::before {
       return `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
     }
     
-    // Función para mostrar horas en formato AM/PM
+    // Funcion para mostrar horas en formato AM/PM
     function formatTimeRange(start, end) {
-      return `${formatTimeToAMPM(start)} – ${formatTimeToAMPM(end)}`;
+      return `${formatTimeToAMPM(start)} - ${formatTimeToAMPM(end)}`;
     }
     
-    // Datos de programación semanal ACTUALIZADA - USANDO LA PROGRAMACIÓN DEL CÓDIGO ANTERIOR
+    // Datos de programacion semanal ACTUALIZADA - USANDO LA PROGRAMACION DEL CODIGO ANTERIOR
     const scheduleData = {
       weekdays: [
-        { start: "06:00", end: "10:00", title: "ELEGANTE & ACTIVO", desc: "Salsa romántica mix y mambo suave.", tags: ["SALSA ROMÁNTICA", "MAMBO"], icon: "fa-sun" },
-        { start: "10:00", end: "14:00", title: "RAÍZ LATINA", desc: "Salsa clásica mix y mambo.", tags: ["SALSA CLÁSICA", "MAMBO"], icon: "fa-music" },
-        { start: "14:00", end: "18:00", title: "FLOW MODERNO", desc: "Electrónica / electro house y house latino.", tags: ["ELECTRÓNICA", "HOUSE LATINO"], icon: "fa-bolt" },
-        { start: "18:00", end: "22:00", title: "ENERGÍA ALTA LATINA", desc: "Merengue mix y reggaeton mix.", tags: ["MERENGUE", "REGGAETON"], icon: "fa-fire" },
-        { start: "22:00", end: "02:00", title: "NOCHE HÍBRIDA", desc: "Electrónica y party mix.", tags: ["ELECTRÓNICA", "PARTY MIX"], icon: "fa-moon" },
-        { start: "02:00", end: "06:00", title: "RESET NOCTURNO", desc: "Salsa romántica y electrónica suave.", tags: ["SALSA ROMÁNTICA", "ELECTRÓNICA"], icon: "fa-star" }
+        { start: "06:00", end: "10:00", title: "ELEGANTE Y ACTIVO", desc: "Salsa romantica mix y mambo suave.", tags: ["SALSA ROMANTICA", "MAMBO"], icon: "fa-sun" },
+        { start: "10:00", end: "14:00", title: "RAIZ LATINA", desc: "Salsa clasica mix y mambo.", tags: ["SALSA CLASICA", "MAMBO"], icon: "fa-music" },
+        { start: "14:00", end: "18:00", title: "FLOW MODERNO", desc: "Electronica, electro house y house latino.", tags: ["ELECTRONICA", "HOUSE LATINO"], icon: "fa-bolt" },
+        { start: "18:00", end: "22:00", title: "ENERGIA ALTA LATINA", desc: "Merengue mix y reggaeton mix.", tags: ["MERENGUE", "REGGAETON"], icon: "fa-fire" },
+        { start: "22:00", end: "02:00", title: "NOCHE HIBRIDA", desc: "Electronica y party mix.", tags: ["ELECTRONICA", "PARTY MIX"], icon: "fa-moon" },
+        { start: "02:00", end: "06:00", title: "RESET NOCTURNO", desc: "Salsa romantica y electronica suave.", tags: ["SALSA ROMANTICA", "ELECTRONICA"], icon: "fa-star" }
       ],
       
       saturday: [
-        { start: "06:00", end: "12:00", title: "SALSA & MAMBO", desc: "Salsa romántica y mambo.", tags: ["SALSA ROMÁNTICA", "MAMBO"], icon: "fa-sun" },
-        { start: "12:00", end: "18:00", title: "CLÁSICA & ELECTRÓNICA", desc: "Salsa clásica y electrónica light.", tags: ["SALSA CLÁSICA", "ELECTRÓNICA"], icon: "fa-music" },
-        { start: "18:00", end: "21:00", title: "DJ HOXX", desc: "Set libre latino + electrónico.", tags: ["DJ SET", "LATINO"], icon: "fa-user", dj: "DJ HOXX", djAlias: "STAFF DCMIX" },
+        { start: "06:00", end: "12:00", title: "SALSA Y MAMBO", desc: "Salsa romantica y mambo.", tags: ["SALSA ROMANTICA", "MAMBO"], icon: "fa-sun" },
+        { start: "12:00", end: "18:00", title: "CLASICA Y ELECTRONICA", desc: "Salsa clasica y electronica light.", tags: ["SALSA CLASICA", "ELECTRONICA"], icon: "fa-music" },
+        { start: "18:00", end: "21:00", title: "DJ HOXX", desc: "Set libre latino y electronico.", tags: ["DJ SET", "LATINO"], icon: "fa-user", dj: "DJ HOXX", djAlias: "STAFF DCMIX" },
         { start: "20:00", end: "22:00", title: "DJ GIAM", desc: "Sonido oficial DCMix.", tags: ["DJ SET", "OFICIAL"], icon: "fa-user", dj: "DJ GIAM", djAlias: "STAFF DCMIX" },
-        { start: "22:00", end: "00:00", title: "DJ FERNANDO TAPIA", desc: "Electrónica + fusiones técnicas con invitados.", tags: ["ELECTRÓNICA", "FUSIONES"], icon: "fa-user", dj: "DJ FERNANDO TAPIA", djAlias: "TECH SPECIALIST" },
-        { start: "00:00", end: "06:00", title: "PARTY MIX", desc: "Party mix y electrónica suave.", tags: ["PARTY MIX", "ELECTRÓNICA"], icon: "fa-star" }
+        { start: "22:00", end: "00:00", title: "DJ FERNANDO TAPIA", desc: "Electronica y fusiones tecnicas con invitados.", tags: ["ELECTRONICA", "FUSIONES"], icon: "fa-user", dj: "DJ FERNANDO TAPIA", djAlias: "TECH SPECIALIST" },
+        { start: "00:00", end: "06:00", title: "PARTY MIX", desc: "Party mix y electronica suave.", tags: ["PARTY MIX", "ELECTRONICA"], icon: "fa-star" }
       ],
       
       sunday: [
-        { start: "06:00", end: "12:00", title: "SALSA & MAMBO", desc: "Salsa romántica y mambo.", tags: ["SALSA ROMÁNTICA", "MAMBO"], icon: "fa-sun" },
-        { start: "12:00", end: "18:00", title: "CLÁSICA & ELECTRÓNICA", desc: "Salsa clásica y electrónica light.", tags: ["SALSA CLÁSICA", "ELECTRÓNICA"], icon: "fa-music" },
-        { start: "18:00", end: "21:00", title: "DJ HOXX", desc: "Set libre latino + electrónico.", tags: ["DJ SET", "LATINO"], icon: "fa-user", dj: "DJ HOXX", djAlias: "STAFF DCMIX" },
+        { start: "06:00", end: "12:00", title: "SALSA Y MAMBO", desc: "Salsa romantica y mambo.", tags: ["SALSA ROMANTICA", "MAMBO"], icon: "fa-sun" },
+        { start: "12:00", end: "18:00", title: "CLASICA Y ELECTRONICA", desc: "Salsa clasica y electronica light.", tags: ["SALSA CLASICA", "ELECTRONICA"], icon: "fa-music" },
+        { start: "18:00", end: "21:00", title: "DJ HOXX", desc: "Set libre latino y electronico.", tags: ["DJ SET", "LATINO"], icon: "fa-user", dj: "DJ HOXX", djAlias: "STAFF DCMIX" },
         { start: "20:00", end: "22:00", title: "DJ GIAM", desc: "Sonido oficial DCMix.", tags: ["DJ SET", "OFICIAL"], icon: "fa-user", dj: "DJ GIAM", djAlias: "STAFF DCMIX" },
-        { start: "22:00", end: "00:00", title: "DJ FERNANDO TAPIA", desc: "Electrónica + fusiones técnicas con invitados.", tags: ["ELECTRÓNICA", "FUSIONES"], icon: "fa-user", dj: "DJ FERNANDO TAPIA", djAlias: "TECH SPECIALIST" },
-        { start: "00:00", end: "06:00", title: "PARTY MIX", desc: "Party mix y electrónica suave.", tags: ["PARTY MIX", "ELECTRÓNICA"], icon: "fa-star" }
+        { start: "22:00", end: "00:00", title: "DJ FERNANDO TAPIA", desc: "Electronica y fusiones tecnicas con invitados.", tags: ["ELECTRONICA", "FUSIONES"], icon: "fa-user", dj: "DJ FERNANDO TAPIA", djAlias: "TECH SPECIALIST" },
+        { start: "00:00", end: "06:00", title: "PARTY MIX", desc: "Party mix y electronica suave.", tags: ["PARTY MIX", "ELECTRONICA"], icon: "fa-star" }
       ]
     };
     
-    // Función para convertir hora "HH:MM" a minutos desde medianoche
+    // Funcion para convertir hora "HH:MM" a minutos desde medianoche
     function timeToMinutes(timeStr) {
       const [hours, minutes] = timeStr.split(':').map(Number);
       return hours * 60 + minutes;
     }
     
-    // Función para obtener el segmento actual basado en día y hora
+    // Funcion para obtener el segmento actual basado en dia y hora
     function getCurrentSegment(daySchedule, currentMinutes) {
       for (let segment of daySchedule) {
         const startMinutes = timeToMinutes(segment.start);
@@ -2632,10 +2652,10 @@ footer::before {
           }
         }
       }
-      return null; // No hay segmento encontrado (no debería pasar)
+      return null; // No hay segmento encontrado (no deberia pasar)
     }
     
-    // Función para renderizar la programación de un día
+    // Funcion para renderizar la programacion de un dia
     function renderDaySchedule(dayId, schedule) {
       const grid = document.getElementById(`${dayId}Grid`);
       if (!grid) return;
@@ -2643,10 +2663,10 @@ footer::before {
       grid.innerHTML = '';
       
       const now = new Date();
-      const currentDay = now.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+      const currentDay = now.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sabado
       const currentMinutes = now.getHours() * 60 + now.getMinutes();
       
-      // Determinar si este es el día actual
+      // Determinar si este es el dia actual
       let isCurrentDay = false;
       if (dayId === 'weekdays' && currentDay >= 1 && currentDay <= 5) {
         isCurrentDay = true;
@@ -2656,7 +2676,7 @@ footer::before {
         isCurrentDay = true;
       }
       
-      // Obtener el segmento actual si es el día actual
+      // Obtener el segmento actual si es el dia actual
       let currentSegment = null;
       if (isCurrentDay) {
         currentSegment = getCurrentSegment(schedule, currentMinutes);
@@ -2706,10 +2726,10 @@ footer::before {
       });
     }
     
-    // Función para actualizar el programa actual en tiempo real
+    // Funcion para actualizar el programa actual en tiempo real
     function updateCurrentShow() {
       const now = new Date();
-      const currentDay = now.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+      const currentDay = now.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sabado
       const currentHour = now.getHours();
       const currentMinute = now.getMinutes().toString().padStart(2, '0');
       const period = currentHour >= 12 ? 'PM' : 'AM';
@@ -2717,16 +2737,16 @@ footer::before {
       const currentTime = `${hour12}:${currentMinute} ${period}`;
       const currentMinutes = currentHour * 60 + now.getMinutes();
       
-      // Determinar qué día es hoy
+      // Determinar que dia es hoy
       let daySchedule;
       let dayName;
       
       if (currentDay >= 1 && currentDay <= 5) { // Lunes a Viernes
         daySchedule = scheduleData.weekdays;
         dayName = "Lunes a Viernes";
-      } else if (currentDay === 6) { // Sábado
+      } else if (currentDay === 6) { // Sabado
         daySchedule = scheduleData.saturday;
-        dayName = "Sábado";
+        dayName = "Sabado";
       } else { // Domingo
         daySchedule = scheduleData.sunday;
         dayName = "Domingo";
@@ -2740,7 +2760,7 @@ footer::before {
       if (currentShowTime && currentSegment) {
         currentShowTime.innerHTML = `
           <strong>${currentSegment.title}</strong><br>
-          ${formatTimeRange(currentSegment.start, currentSegment.end)} · ${dayName}
+          ${formatTimeRange(currentSegment.start, currentSegment.end)} - ${dayName}
         `;
       }
       
@@ -2749,7 +2769,7 @@ footer::before {
       renderDaySchedule('saturday', scheduleData.saturday);
       renderDaySchedule('sunday', scheduleData.sunday);
       
-      // Cambiar automáticamente a la pestaña del día actual
+      // Cambiar automaticamente a la pestaña del dia actual
       let targetTab;
       if (currentDay >= 1 && currentDay <= 5) {
         targetTab = 'weekdays';
@@ -2759,7 +2779,7 @@ footer::before {
         targetTab = 'sunday';
       }
       
-      // Cambiar pestaña si no está activa
+      // Cambiar pestaña si no esta activa
       const activeTab = document.querySelector('.day-tab.active');
       if (activeTab && activeTab.getAttribute('data-day') !== targetTab) {
         const tabToClick = document.querySelector(`.day-tab[data-day="${targetTab}"]`);
@@ -2768,13 +2788,13 @@ footer::before {
         }
       }
       
-      // Actualizar texto del día actual
+      // Actualizar texto del dia actual
       const diaActualText = document.getElementById('dia-actual-text');
-      const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+      const dias = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
       diaActualText.textContent = dias[currentDay].toLowerCase();
     }
     
-    // Funcionalidad para los tabs de programación semanal
+    // Funcionalidad para los tabs de programacion semanal
     function initScheduleTabs() {
       const dayTabs = document.querySelectorAll('.day-tab');
       const daySchedules = document.querySelectorAll('.day-schedule');
@@ -2812,7 +2832,7 @@ footer::before {
     // REPRODUCTOR FUNCTIONALITY
     // ============================================
     
-    // Crear partículas dinámicas
+    // Crear particulas dinamicas
     function createParticles() {
       const container = document.getElementById('particlesBg');
       const colors = [getComputedStyle(document.documentElement).getPropertyValue('--neon-orange').trim(), 
@@ -2829,14 +2849,14 @@ footer::before {
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         
-        // Posición aleatoria
+        // Posicion aleatoria
         particle.style.left = `${Math.random() * 100}%`;
         
         // Color aleatorio
         const color = colors[Math.floor(Math.random() * colors.length)];
         particle.style.background = `radial-gradient(circle, ${color}30, transparent)`;
         
-        // Animación personalizada
+        // Animacion personalizada
         const duration = Math.random() * 25 + 15;
         const delay = Math.random() * 10;
         particle.style.animationDuration = `${duration}s`;
@@ -2851,8 +2871,9 @@ footer::before {
       const player = document.querySelector('.cstrEmbed');
       const loading = document.getElementById('loadingState');
       
+      // Cargar el script del reproductor
       const script = document.createElement('script');
-      script.src = '//cdn.cloud.caster.fm/widgets/embed.js';
+      script.src = '//cdn.cloud.caster.fm//widgets/embed.js';
       
       script.onload = function() {
         console.log('Reproductor DCMIX cargado');
@@ -2865,7 +2886,7 @@ footer::before {
             player.style.display = 'flex';
           }
           
-          // Activar animaciones más intensas
+          // Activar animaciones mas intensas
           activateEnergyMode();
         }, 2000);
       };
@@ -2885,7 +2906,7 @@ footer::before {
       document.body.appendChild(script);
     }
     
-    // Modo energía máxima
+    // Modo energia maxima
     function activateEnergyMode() {
       const eqBars = document.querySelectorAll('.eq-bar-bg');
       const waves = document.querySelectorAll('.wave-bg');
@@ -2900,7 +2921,7 @@ footer::before {
       });
     }
     
-    // Crear pulso de energía
+    // Crear pulso de energia
     function createEnergyPulse(x, y) {
       const pulse = document.createElement('div');
       pulse.className = 'energy-pulse';
@@ -2914,7 +2935,7 @@ footer::before {
       }, 800);
     }
     
-    // Metrónomo BPM avanzado
+    // Metronomo BPM avanzado
     function advancedBPMMetronome() {
       const bpmValue = document.getElementById('bpmValue');
       const tempIndicator = document.getElementById('temperatureIndicator');
@@ -2925,7 +2946,7 @@ footer::before {
       let beatCount = 0;
       let lastBeatTime = 0;
       
-      // Función para el latido del BPM
+      // Funcion para el latido del BPM
       function beat() {
         beatCount++;
         const now = Date.now();
@@ -2947,7 +2968,7 @@ footer::before {
         const bpmPercentage = Math.min(100, (currentBPM - 60) / 140 * 100);
         tempIndicator.style.left = `${bpmPercentage}%`;
         
-        // Cambiar color según la temperatura
+        // Cambiar color segun la temperatura
         if (currentBPM < 100) {
           tempIndicator.style.background = 'var(--neon-green)';
         } else if (currentBPM < 130) {
@@ -2964,7 +2985,7 @@ footer::before {
           bpmValue.style.color = 'var(--neon-orange)';
         }, 100);
         
-        // Crear partícula aleatoria
+        // Crear particula aleatoria
         if (Math.random() > 0.7) {
           createEnergyPulse(
             Math.random() * window.innerWidth,
@@ -2976,7 +2997,7 @@ footer::before {
       // Iniciar latido
       setInterval(beat, 60000 / currentBPM);
       
-      // Variación dinámica del BPM
+      // Variacion dinamica del BPM
       setInterval(() => {
         if (Math.random() > 0.5) {
           if (direction === 1) {
@@ -2987,12 +3008,12 @@ footer::before {
             if (currentBPM < 90) direction = 1;
           }
           
-          // Asegurar que esté en rango razonable
+          // Asegurar que este en rango razonable
           currentBPM = Math.max(80, Math.min(180, currentBPM));
         }
       }, 5000);
       
-      // Variaciones más pequeñas frecuentes
+      // Variaciones mas pequenas frecuentes
       setInterval(() => {
         if (Math.random() > 0.7) {
           const smallChange = Math.floor(Math.random() * 4) - 2;
@@ -3001,7 +3022,7 @@ footer::before {
       }, 1500);
     }
     
-    // Interacciones táctiles
+    // Interacciones tactiles
     function setupTouchInteractions() {
       const player = document.querySelector('.reproductor-container');
       
@@ -3009,7 +3030,7 @@ footer::before {
         player.addEventListener('touchstart', function(e) {
           this.style.transform = 'scale(0.99)';
           
-          // Crear pulso en la posición del toque
+          // Crear pulso en la posicion del toque
           const touch = e.touches[0];
           createEnergyPulse(touch.clientX, touch.clientY);
         });
@@ -3029,7 +3050,7 @@ footer::before {
       }
     }
     
-    // Animar barras de equalizador dinámicamente
+    // Animar barras de equalizador dinamicamente
     function animateEqualizer() {
       const bars = document.querySelectorAll('.eq-bar-bg');
       
@@ -3046,7 +3067,7 @@ footer::before {
     }
     
     // ============================================
-    // INICIALIZACIÓN DE TODO
+    // INICIALIZACION DE TODO
     // ============================================
     
     document.addEventListener('DOMContentLoaded', function() {
@@ -3057,10 +3078,10 @@ footer::before {
       setupTouchInteractions();
       animateEqualizer();
       
-      // Inicializar sistema de programación
+      // Inicializar sistema de programacion
       initScheduleTabs();
       
-      // Renderizar programación inicial
+      // Renderizar programacion inicial
       renderDaySchedule('weekdays', scheduleData.weekdays);
       renderDaySchedule('saturday', scheduleData.saturday);
       renderDaySchedule('sunday', scheduleData.sunday);
@@ -3096,5 +3117,8 @@ footer::before {
       }, 300);
     });
   </script>
+  
+  <!-- Script del reproductor Caster.fm -->
+  <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
 </body>
 </html>
