@@ -173,18 +173,20 @@
         .submit-btn:disabled { background-color: var(--medium-gray); color: var(--text-gray); cursor: not-allowed; }
         .submit-btn:disabled:hover { transform: none; }
         
-        /* Modal de confirmación */
+        /* Modal de instrucciones */
         .modal {
             display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;
         }
         .modal-content {
-            background-color: var(--medium-gray); padding: 40px; border-radius: 15px; max-width: 500px;
+            background-color: var(--medium-gray); padding: 40px; border-radius: 15px; max-width: 600px;
             width: 90%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .modal-icon { font-size: 4rem; color: var(--primary-yellow); margin-bottom: 20px; }
         .modal h3 { color: var(--primary-yellow); margin-bottom: 20px; font-size: 1.8rem; }
-        .modal p { color: var(--text-light); margin-bottom: 25px; }
+        .modal p { color: var(--text-light); margin-bottom: 15px; text-align: left; }
+        .modal ol { color: var(--text-light); margin-bottom: 25px; text-align: left; padding-left: 20px; }
+        .modal li { margin-bottom: 10px; }
         .modal-buttons { display: flex; gap: 15px; justify-content: center; }
         .modal-btn { 
             padding: 12px 25px; border-radius: 30px; font-weight: 600; cursor: pointer;
@@ -254,20 +256,31 @@
     </a>
     <button class="fixed-btn-arriba" id="btnArriba" title="Ir arriba"><i class="fas fa-arrow-up"></i></button>
 
-    <!-- Modal de confirmación -->
-    <div class="modal" id="confirmationModal">
+    <!-- Modal de instrucciones para subir audio -->
+    <div class="modal" id="instructionsModal">
         <div class="modal-content">
             <div class="modal-icon">
-                <i class="fas fa-paper-plane"></i>
+                <i class="fas fa-cloud-upload-alt"></i>
             </div>
-            <h3>¡Solicitud Enviada!</h3>
-            <p>Tu solicitud ha sido procesada correctamente. Ahora se abrirán WhatsApp y tu cliente de correo para completar el envío del archivo de audio.</p>
-            <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 15px;">
-                <strong>Nota:</strong> Recuerda adjuntar tu archivo de audio en el correo.
+            <h3>📤 Cómo Enviar tu Archivo de Audio</h3>
+            <p>Para que podamos recibir tu archivo de audio, por favor sigue estos pasos:</p>
+            <ol>
+                <li><strong>Sube tu archivo</strong> a uno de estos servicios gratuitos:</li>
+                <ul style="list-style: none; padding-left: 20px; margin-top: 10px;">
+                    <li>• <a href="https://wetransfer.com" target="_blank" style="color: var(--primary-yellow);">WeTransfer</a> (recomendado)</li>
+                    <li>• <a href="https://drive.google.com" target="_blank" style="color: var(--primary-yellow);">Google Drive</a></li>
+                    <li>• <a href="https://dropbox.com" target="_blank" style="color: var(--primary-yellow);">Dropbox</a></li>
+                    <li>• <a href="https://mega.nz" target="_blank" style="color: var(--primary-yellow);">MEGA</a></li>
+                </ul>
+                <li><strong>Configura el archivo</strong> como "público" o "cualquier persona con el enlace puede ver"</li>
+                <li><strong>Copia el enlace de descarga</strong> directa (no el enlace de vista previa)</li>
+                <li><strong>Pega el enlace</strong> en el campo "Enlace de descarga del audio" del formulario</li>
+            </ol>
+            <p style="font-size: 0.9rem; color: var(--text-gray);">
+                <strong>Nota:</strong> Asegúrate de que el enlace permita la descarga directa del archivo sin necesidad de iniciar sesión.
             </p>
             <div class="modal-buttons">
-                <button class="modal-btn primary" id="openWhatsAppBtn">Abrir WhatsApp</button>
-                <button class="modal-btn secondary" id="openEmailBtn">Abrir Correo</button>
+                <button class="modal-btn primary" id="closeModalBtn">Entendido, continuar</button>
             </div>
         </div>
     </div>
@@ -462,8 +475,8 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <h3>Solicita Presupuesto</h3>
-                    <p style="text-align: center; color: var(--text-gray); margin-bottom: 20px;">Tu solicitud se enviará directamente por WhatsApp y correo</p>
+                    <h3>Solicita Presupuesto por WhatsApp</h3>
+                    <p style="text-align: center; color: var(--text-gray); margin-bottom: 20px;">Completa el formulario y envía tu archivo de audio</p>
                     
                     <form id="contactForm">
                         <div class="form-group">
@@ -476,7 +489,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Teléfono (WhatsApp) *</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="+593 99 999 9999">
+                            <input type="tel" id="phone" name="phone" required placeholder="+593 96 148 0654">
                         </div>
                         <div class="form-group">
                             <label for="service">¿Qué servicio necesitas? *</label>
@@ -490,19 +503,31 @@
                             </select>
                         </div>
                         
-                        <!-- Campo de carga de archivo mejorado -->
-                        <div class="file-upload-container">
-                            <label class="file-upload-label">Sube tu archivo de audio (opcional)</label>
-                            <div class="file-upload-wrapper">
-                                <div class="file-upload-button">
-                                    <i class="fas fa-upload"></i> Seleccionar archivo de audio
-                                </div>
-                                <input type="file" class="file-upload-input" id="audioFile" name="audioFile" accept=".wav,.mp3,.m4a,.aiff,.flac" data-max-size="104857600">
-                            </div>
-                            <div class="file-name" id="fileName">No se ha seleccionado ningún archivo</div>
-                            <div class="file-requirements">
-                                Formatos aceptados: WAV, MP3, M4A, AIFF, FLAC (máx. 100MB). Recomendado: WAV 44.1kHz/24bit
-                            </div>
+                        <!-- Campo para enlace de descarga -->
+                        <div class="form-group">
+                            <label for="audioLink">
+                                Enlace de descarga del audio * 
+                                <i class="fas fa-question-circle" style="color: var(--primary-yellow); cursor: pointer;" id="helpAudioLink"></i>
+                            </label>
+                            <input type="url" id="audioLink" name="audioLink" required 
+                                   placeholder="https://wetransfer.com/downloads/tu-audio.wav"
+                                   pattern="https?://.+">
+                            <p style="font-size: 0.8rem; color: var(--text-gray); margin-top: 5px;">
+                                Enlace público para descargar tu archivo de audio
+                            </p>
+                        </div>
+                        
+                        <!-- Información del archivo -->
+                        <div class="form-group">
+                            <label for="audioDuration">Duración aproximada del audio *</label>
+                            <select id="audioDuration" name="audioDuration" required>
+                                <option value="">Selecciona duración</option>
+                                <option value="menos-5">Menos de 5 minutos</option>
+                                <option value="5-15">5 a 15 minutos</option>
+                                <option value="15-30">15 a 30 minutos</option>
+                                <option value="30-60">30 a 60 minutos</option>
+                                <option value="mas-60">Más de 60 minutos</option>
+                            </select>
                         </div>
                         
                         <div class="form-group">
@@ -521,7 +546,7 @@
                             </select>
                         </div>
                         <button type="submit" class="submit-btn" id="submitBtn">
-                            <i class="fas fa-paper-plane"></i> Enviar Solicitud
+                            <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
                         </button>
                     </form>
                 </div>
@@ -540,8 +565,8 @@
             <div class="footer-contact">
                 <h3>Contacto Directo</h3>
                 <div class="contact-info">
+                    <div class="contact-item"><i class="fab fa-whatsapp"></i><span>+593 96 148 0654</span></div>
                     <div class="contact-item"><i class="fas fa-envelope"></i><span>rdcrsound@gmail.com</span></div>
-                    <div class="contact-item"><i class="fas fa-phone"></i><span>+593 96 148 0654</span></div>
                     <div class="contact-item"><i class="fas fa-clock"></i><span>Lun-Vie: 9:00-19:00</span></div>
                 </div>
             </div>
@@ -559,9 +584,6 @@
     </footer>
 
     <script>
-        // Variables globales para almacenar datos del formulario
-        let formDataForModal = {};
-        
         const btnArriba = document.getElementById('btnArriba');
         window.addEventListener('scroll', () => { btnArriba.classList.toggle('mostrar', window.scrollY > 300); });
         btnArriba.addEventListener('click', () => { window.scrollTo({top:0,behavior:'smooth'}); });
@@ -580,142 +602,94 @@
             });
         });
         
-        // Manejo del campo de archivo de audio
-        const fileInput = document.getElementById('audioFile');
-        const fileNameDisplay = document.getElementById('fileName');
+        // Modal de instrucciones
+        const instructionsModal = document.getElementById('instructionsModal');
+        const helpAudioLink = document.getElementById('helpAudioLink');
+        const closeModalBtn = document.getElementById('closeModalBtn');
         
-        fileInput.addEventListener('change', function() {
-            if (this.files && this.files[0]) {
-                const file = this.files[0];
-                const fileSizeMB = (file.size / (1024*1024)).toFixed(2);
-                
-                // Validar tamaño del archivo (100MB máximo)
-                const maxSize = 100 * 1024 * 1024; // 100MB en bytes
-                if (file.size > maxSize) {
-                    alert('El archivo es demasiado grande. Tamaño máximo: 100MB');
-                    this.value = '';
-                    fileNameDisplay.textContent = 'No se ha seleccionado ningún archivo';
-                    return;
-                }
-                
-                fileNameDisplay.textContent = `Archivo seleccionado: ${file.name} (${fileSizeMB} MB)`;
-                fileNameDisplay.style.color = 'var(--primary-yellow)';
-            } else {
-                fileNameDisplay.textContent = 'No se ha seleccionado ningún archivo';
-                fileNameDisplay.style.color = 'var(--text-gray)';
+        helpAudioLink.addEventListener('click', () => {
+            instructionsModal.style.display = 'flex';
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            instructionsModal.style.display = 'none';
+        });
+        
+        instructionsModal.addEventListener('click', (e) => {
+            if (e.target === instructionsModal) {
+                instructionsModal.style.display = 'none';
             }
         });
         
-        // Formulario interactivo con envío a WhatsApp y correo
+        // Formulario interactivo con envío a WhatsApp
         const contactForm = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
-        const modal = document.getElementById('confirmationModal');
-        const openWhatsAppBtn = document.getElementById('openWhatsAppBtn');
-        const openEmailBtn = document.getElementById('openEmailBtn');
         
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Deshabilitar el botón de enviar
+            // Validar enlace de audio
+            const audioLink = document.getElementById('audioLink').value;
+            if (!audioLink.startsWith('http')) {
+                alert('Por favor ingresa un enlace válido que comience con http:// o https://');
+                return;
+            }
+            
+            // Deshabilitar el botón de enviar temporalmente
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando mensaje...';
             
             // Obtener datos del formulario
             const formData = new FormData(contactForm);
             const data = Object.fromEntries(formData);
             
-            // Obtener información del archivo si existe
-            const audioFile = fileInput.files[0];
-            const fileName = audioFile ? audioFile.name : 'No se subió archivo';
-            const fileSize = audioFile ? (audioFile.size / (1024*1024)).toFixed(2) + ' MB' : 'N/A';
+            // Crear mensaje estructurado para WhatsApp
+            const whatsappMessage = `*📋 NUEVA SOLICITUD DE PRESUPUESTO - RDCR AUDIOLAB*%0A%0A` +
+                                   `*👤 DATOS DEL CLIENTE*%0A` +
+                                   `• *Nombre:* ${data.name}%0A` +
+                                   `• *Email:* ${data.email}%0A` +
+                                   `• *Teléfono:* ${data.phone}%0A%0A` +
+                                   `*🎯 SERVICIO SOLICITADO*%0A` +
+                                   `• ${data.service}%0A%0A` +
+                                   `*📊 INFORMACIÓN DEL AUDIO*%0A` +
+                                   `• *Duración aproximada:* ${data.audioDuration}%0A` +
+                                   `• *Enlace del archivo:* ${data.audioLink}%0A%0A` +
+                                   `*💰 PRESUPUESTO*%0A` +
+                                   `• Rango: ${data.budget || 'No especificado'}%0A%0A` +
+                                   `*📝 DESCRIPCIÓN DEL PROYECTO*%0A` +
+                                   `${data.message}%0A%0A` +
+                                   `---%0A` +
+                                   `*📤 SOLICITUD ENVIADA DESDE:* RDCR AudioLab Website%0A` +
+                                   `*📅 FECHA:* ${new Date().toLocaleDateString('es-ES')}%0A` +
+                                   `*⏰ HORA:* ${new Date().toLocaleTimeString('es-ES')}`;
             
-            // Guardar datos para el modal
-            formDataForModal = {
-                name: data.name,
-                email: data.email,
-                phone: data.phone,
-                service: data.service,
-                budget: data.budget || 'No especificado',
-                message: data.message,
-                fileName: fileName,
-                fileSize: fileSize
-            };
+            const whatsappUrl = `https://wa.me/593961480654?text=${whatsappMessage}`;
             
-            // Mostrar el modal de confirmación
-            modal.style.display = 'flex';
+            // Mostrar mensaje de confirmación
+            alert('✅ ¡Formulario completado! Se abrirá WhatsApp con tu solicitud prellenada.');
             
             // Restaurar el botón de enviar
             setTimeout(() => {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Solicitud';
+                submitBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Enviar por WhatsApp';
+                
+                // Abrir WhatsApp en nueva pestaña
+                window.open(whatsappUrl, '_blank');
+                
+                // Opcional: Resetear formulario después de enviar
+                contactForm.reset();
             }, 1000);
         });
         
-        // Botón para abrir WhatsApp
-        openWhatsAppBtn.addEventListener('click', () => {
-            const { name, email, phone, service, budget, message, fileName, fileSize } = formDataForModal;
-            
-            const whatsappMessage = `*NUEVA SOLICITUD DE PRESUPUESTO - RDCR AUDIOLAB*%0A%0A` +
-                                   `*Nombre:* ${name}%0A` +
-                                   `*Email:* ${email}%0A` +
-                                   `*Teléfono:* ${phone}%0A` +
-                                   `*Servicio solicitado:* ${service}%0A` +
-                                   `*Presupuesto aproximado:* ${budget}%0A` +
-                                   `*Archivo de audio:* ${fileName} (${fileSize})%0A` +
-                                   `*Descripción del proyecto:*%0A${message}%0A%0A` +
-                                   `*Enviado desde:* RDCR AudioLab Website`;
-            
-            const whatsappUrl = `https://wa.me/593961480654?text=${whatsappMessage}`;
-            
-            // Abrir WhatsApp en nueva pestaña
-            window.open(whatsappUrl, '_blank');
-            
-            // Cerrar modal después de un tiempo
-            setTimeout(() => {
-                modal.style.display = 'none';
-                contactForm.reset();
-                fileNameDisplay.textContent = 'No se ha seleccionado ningún archivo';
-                fileNameDisplay.style.color = 'var(--text-gray)';
-            }, 1000);
-        });
-        
-        // Botón para abrir correo
-        openEmailBtn.addEventListener('click', () => {
-            const { name, email, phone, service, budget, message, fileName, fileSize } = formDataForModal;
-            
-            const emailSubject = `Nueva Solicitud de Presupuesto - ${name}`;
-            const emailBody = `Nueva solicitud de presupuesto recibida desde RDCR AudioLab:%0A%0A` +
-                            `*Nombre:* ${name}%0A` +
-                            `*Email:* ${email}%0A` +
-                            `*Teléfono:* ${phone}%0A` +
-                            `*Servicio solicitado:* ${service}%0A` +
-                            `*Presupuesto aproximado:* ${budget}%0A` +
-                            `*Archivo de audio:* ${fileName} (${fileSize})%0A` +
-                            `*Descripción del proyecto:*%0A${message}%0A%0A` +
-                            `---%0A` +
-                            `*Nota:* El archivo de audio deberá enviarse por separado o compartirse mediante un enlace de descarga.`;
-            
-            const mailtoUrl = `mailto:rdcrsound@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-            
-            // Abrir cliente de correo
-            window.location.href = mailtoUrl;
-            
-            // Cerrar modal después de un tiempo
-            setTimeout(() => {
-                modal.style.display = 'none';
-                contactForm.reset();
-                fileNameDisplay.textContent = 'No se ha seleccionado ningún archivo';
-                fileNameDisplay.style.color = 'var(--text-gray)';
-            }, 1000);
-        });
-        
-        // Cerrar modal al hacer clic fuera
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                contactForm.reset();
-                fileNameDisplay.textContent = 'No se ha seleccionado ningún archivo';
-                fileNameDisplay.style.color = 'var(--text-gray)';
+        // Validación en tiempo real del enlace de audio
+        const audioLinkInput = document.getElementById('audioLink');
+        audioLinkInput.addEventListener('input', function() {
+            if (this.value && !this.value.startsWith('http')) {
+                this.style.borderColor = 'red';
+                this.style.color = 'red';
+            } else {
+                this.style.borderColor = '';
+                this.style.color = '';
             }
         });
         
