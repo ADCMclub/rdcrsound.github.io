@@ -75,7 +75,7 @@
         .cta-button.secondary { background-color: transparent; color: var(--primary-yellow); }
         .cta-button.secondary:hover { background-color: var(--primary-yellow); color: var(--primary-black); }
         
-        /* Servicios */
+        /* Servicios - Actualizado con nuevo texto tarifario */
         .section-title { text-align: center; margin-bottom: 60px; position: relative; }
         .section-title h2 { font-size: 2.5rem; display: inline-block; color: var(--text-light); }
         .section-title h2:after {
@@ -85,31 +85,29 @@
         .services { padding: 100px 0; background-color: var(--light-gray); }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .service-card {
-            background-color: var(--medium-gray); border-radius: 10px; padding: 40px 30px; text-align: center;
+            background-color: var(--medium-gray); border-radius: 10px; padding: 40px 30px; text-align: left;
             transition: transform 0.3s, box-shadow 0.3s; border-top: 4px solid var(--primary-yellow);
         }
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
-        .service-icon { font-size: 3rem; color: var(--primary-yellow); margin-bottom: 20px; }
-        .service-card h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--text-light); }
+        .service-icon { font-size: 3rem; color: var(--primary-yellow); margin-bottom: 20px; text-align: center; }
+        .service-card h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--primary-yellow); text-align: center; }
         .service-card p { color: var(--text-gray); margin-bottom: 25px; }
-        .price { color: var(--primary-yellow); font-size: 1.5rem; font-weight: 700; margin: 15px 0; }
+        .service-features { margin: 20px 0; }
+        .service-features li { color: var(--text-gray); margin-bottom: 10px; padding-left: 20px; position: relative; }
+        .service-features li:before { content: "✓"; color: var(--primary-yellow); position: absolute; left: 0; }
+        .price-range { color: var(--primary-yellow); font-size: 1.3rem; font-weight: 700; margin: 15px 0; text-align: center; }
         
-        /* Before/After con audio real */
+        /* Before/After con 3 ejemplos */
         .before-after { padding: 100px 0; background-color: var(--light-gray); }
-        .ba-container { max-width: 1000px; margin: 0 auto; }
+        .ba-container { max-width: 1200px; margin: 0 auto; }
         .ba-player { background-color: var(--medium-gray); border-radius: 15px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .ba-title { text-align: center; margin-bottom: 40px; }
         .ba-title h3 { font-size: 2.2rem; color: var(--primary-yellow); margin-bottom: 10px; }
-        .audio-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
-        .audio-sample { background-color: var(--primary-black); padding: 25px; border-radius: 10px; border: 2px solid var(--medium-gray); }
-        .audio-sample h4 { color: var(--primary-yellow); margin-bottom: 20px; font-size: 1.3rem; }
+        .audio-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .audio-example { background-color: var(--primary-black); padding: 25px; border-radius: 10px; border: 2px solid var(--medium-gray); }
+        .audio-example h4 { color: var(--primary-yellow); margin-bottom: 15px; font-size: 1.3rem; text-align: center; }
         audio { width: 100%; margin-bottom: 15px; }
-        .audio-links { display: flex; gap: 15px; flex-wrap: wrap; }
-        .audio-link {
-            display: inline-flex; align-items: center; gap: 8px; background-color: var(--medium-gray); color: var(--text-light);
-            padding: 10px 20px; border-radius: 30px; text-decoration: none; transition: all 0.3s; font-size: 0.9rem;
-        }
-        .audio-link:hover { background-color: var(--primary-yellow); color: var(--primary-black); }
+        .audio-info { color: var(--text-gray); font-size: 0.9rem; margin-top: 10px; }
         
         /* Resultados */
         .results { padding: 100px 0; background-color: var(--primary-black); text-align: center; }
@@ -118,9 +116,20 @@
         .result-number { font-size: 3rem; color: var(--primary-yellow); font-weight: 700; margin-bottom: 10px; }
         .result-text { color: var(--text-light); font-size: 1.2rem; }
         
-        /* Contacto */
+        /* Contacto con recomendaciones */
         .contact { padding: 100px 0; background-color: var(--light-gray); }
-        .contact-form { max-width: 800px; margin: 0 auto; background-color: var(--medium-gray); padding: 50px; border-radius: 15px; }
+        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+        @media (max-width: 992px) { .contact-container { grid-template-columns: 1fr; } }
+        .contact-recommendations { background-color: var(--medium-gray); padding: 30px; border-radius: 15px; }
+        .contact-recommendations h3 { color: var(--primary-yellow); margin-bottom: 20px; font-size: 1.8rem; }
+        .recommendation-list { color: var(--text-gray); }
+        .recommendation-item { margin-bottom: 25px; }
+        .recommendation-item h4 { color: var(--text-light); margin-bottom: 10px; font-size: 1.2rem; }
+        .recommendation-item ul { list-style-type: none; }
+        .recommendation-item li { margin-bottom: 8px; position: relative; padding-left: 20px; }
+        .recommendation-item li:before { content: '•'; color: var(--primary-yellow); position: absolute; left: 0; }
+        .contact-form { background-color: var(--medium-gray); padding: 40px; border-radius: 15px; }
+        .contact-form h3 { text-align: center; color: var(--primary-yellow); margin-bottom: 30px; font-size: 1.8rem; }
         .form-group { margin-bottom: 25px; }
         .form-group label { display: block; margin-bottom: 8px; color: var(--text-light); }
         .form-group input, .form-group textarea, .form-group select {
@@ -164,7 +173,7 @@
             .nav-links.active { display: flex; } .mobile-menu-btn { display: block; }
             .hero { padding: 150px 0 80px; } .hero h1 { font-size: 2.3rem; } .hero p { font-size: 1.1rem; }
             .services, .before-after, .results, .contact { padding: 70px 0; }
-            .contact-form { padding: 30px; } .audio-comparison { grid-template-columns: 1fr; }
+            .contact-form { padding: 30px; } .audio-examples { grid-template-columns: 1fr; }
             .fixed-btn-atras { top: 15px; left: 15px; padding: 10px 16px; font-size: 0.9rem; }
             .logo { margin-left: 100px; } .fixed-btn-arriba { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.3rem; }
         }
@@ -208,11 +217,11 @@
 
     <section class="hero" id="home">
         <div class="container">
-            <div class="hero-subtitle">Estudio de Diseño Sonoro Profesional</div>
-            <h1>Transformamos tu <span class="hero-highlight">audio</span> en una experiencia extraordinaria</h1>
-            <p>Especialistas en edición, mezcla y diseño sonoro para proyectos audiovisuales, podcasters, músicos y creadores de contenido. Calidad profesional que marca la diferencia.</p>
+            <div class="hero-subtitle">AUDIOLAB BY RDCR SOUND</div>
+            <h1>Edición, mezcla y masterización <span class="hero-highlight">profesional</span> de audio</h1>
+            <p>En AUDIOLAB BY RDCR SOUND entendemos que el sonido no se improvisa. Cada proyecto se trabaja con criterio técnico, oído profesional y estándares de calidad pensados para radio, streaming y plataformas digitales.</p>
             <div class="hero-buttons">
-                <a href="#contact" class="cta-button">Solicitar Presupuesto Gratis</a>
+                <a href="#contact" class="cta-button">Solicitar Presupuesto</a>
                 <a href="#before-after" class="cta-button secondary">Escuchar Demos</a>
             </div>
         </div>
@@ -220,65 +229,92 @@
 
     <section class="services" id="services">
         <div class="container">
-            <div class="section-title"><h2>Servicios Profesionales</h2></div>
+            <div class="section-title"><h2>Tarifario Oficial</h2></div>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-wave-square"></i></div>
-                    <h3>Edición y Limpieza de Audio</h3>
-                    <p>Eliminamos ruidos, clicks, respiraciones y mejoramos la claridad vocal para podcasts, entrevistas y voces en off.</p>
-                    <div class="price">Desde €50</div>
-                    <a href="#contact" class="cta-button secondary" style="padding:12px 25px;font-size:1rem;">Consultar</a>
+                    <div class="service-icon"><i class="fas fa-microphone"></i></div>
+                    <h3>EDICIÓN DE VOZ Y LOCUCIÓN</h3>
+                    <ul class="service-features">
+                        <li><strong>Edición básica de voz</strong> (cortes, limpieza ligera, normalización): $20 – $40 por hora</li>
+                        <li><strong>Edición profesional de locución</strong> (limpieza profunda, ecualización, compresión y nivelación): $35 – $75 por hora</li>
+                        <li><strong>Locución comercial lista para emisión</strong> (radio / streaming): $25 – $60 por pieza</li>
+                    </ul>
+                    <div class="price-range">Desde $20 USD</div>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-sliders-h"></i></div>
-                    <h3>Mezcla y Masterización</h3>
-                    <p>Balance profesional de pistas y preparación final para Spotify, YouTube, cine o radio.</p>
-                    <div class="price">Desde €80</div>
-                    <a href="#contact" class="cta-button secondary" style="padding:12px 25px;font-size:1rem;">Consultar</a>
+                    <div class="service-icon"><i class="fas fa-podcast"></i></div>
+                    <h3>PODCAST Y CONTENIDO HABLADO</h3>
+                    <ul class="service-features">
+                        <li><strong>Edición completa de episodio</strong> (30 a 60 minutos): $60 – $250 por episodio</li>
+                        <li><strong>Podcast con varios locutores</strong> o estructura avanzada: desde $120 por episodio</li>
+                        <li>Incluye: limpieza de audio, cortes editoriales, mezcla, nivelación y master final</li>
+                    </ul>
+                    <div class="price-range">Desde $60 USD</div>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-theater-masks"></i></div>
-                    <h3>Diseño Sonoro</h3>
-                    <p>Efectos, ambientes y sonidos personalizados para videos, videojuegos y proyectos multimedia.</p>
-                    <div class="price">Desde €120</div>
-                    <a href="#contact" class="cta-button secondary" style="padding:12px 25px;font-size:1rem;">Consultar</a>
+                    <div class="service-icon"><i class="fas fa-music"></i></div>
+                    <h3>MÚSICA Y SERVICIOS AVANZADOS</h3>
+                    <ul class="service-features">
+                        <li><strong>Edición, mezcla y masterización</strong> de una canción (una pista vocal): $80 – $300 por pista</li>
+                        <li><strong>Corrección vocal / afinación (tuning):</strong> +$15 – $50 por pista</li>
+                        <li><strong>Masterización profesional independiente:</strong> $30 – $100 por pista</li>
+                        <li><strong>Proyectos corporativos o alta exigencia:</strong> $70 – $120 por hora</li>
+                    </ul>
+                    <div class="price-range">Desde $30 USD</div>
                 </div>
             </div>
+            <p style="text-align: center; color: var(--text-gray); margin-top: 40px; font-size: 0.9rem;">
+                <strong>Nota:</strong> Las tarifas están expresadas en dólares americanos (USD) y aplican para el mercado de Ecuador. Cobro mínimo por proyecto: $30. Los valores pueden variar según la duración, el estado del audio recibido y la complejidad técnica del trabajo.
+            </p>
         </div>
     </section>
 
     <section class="before-after" id="before-after">
         <div class="container">
-            <div class="section-title"><h2>Resultados Reales</h2></div>
+            <div class="section-title"><h2>Escucha la Diferencia</h2></div>
             <div class="ba-container">
                 <div class="ba-player">
                     <div class="ba-title">
-                        <h3>Escucha la Diferencia</h3>
+                        <h3>Ejemplos de Nuestro Trabajo</h3>
                         <p>Compara cómo transformamos audios problemáticos en producciones profesionales</p>
                     </div>
-                    <div class="audio-comparison">
-                        <div class="audio-sample">
-                            <h4>Audio Original (Antes)</h4>
-                            <audio controls><source src="https://assets.codepen.io/4358586/audio-before-demo.mp3" type="audio/mpeg">Tu navegador no soporta audio.</audio>
-                            <p>Problemas: Ruido de fondo, volumen bajo, ecualización desbalanceada</p>
+                    <div class="audio-examples">
+                        <div class="audio-example">
+                            <h4>Podcast - Edición Completa</h4>
+                            <audio controls>
+                                <source src="https://assets.codepen.io/4358586/podcast-before.mp3" type="audio/mpeg">
+                                Tu navegador no soporta audio.
+                            </audio>
+                            <audio controls>
+                                <source src="https://assets.codepen.io/4358586/podcast-after.mp3" type="audio/mpeg">
+                                Tu navegador no soporta audio.
+                            </audio>
+                            <p class="audio-info">ANTES: Podcast con ruido de fondo, volumen irregular. DESPUÉS: Audio limpio, nivelado y profesional.</p>
                         </div>
-                        <div class="audio-sample">
-                            <h4>Audio Procesado (Después)</h4>
-                            <audio controls><source src="https://assets.codepen.io/4358586/audio-after-demo.mp3" type="audio/mpeg">Tu navegador no soporta audio.</audio>
-                            <p>Resultado: Audio claro, profesional y listo para distribución</p>
+                        <div class="audio-example">
+                            <h4>Locución Comercial</h4>
+                            <audio controls>
+                                <source src="https://assets.codepen.io/4358586/voiceover-before.mp3" type="audio/mpeg">
+                                Tu navegador no soporta audio.
+                            </audio>
+                            <audio controls>
+                                <source src="https://assets.codepen.io/4358586/voiceover-after.mp3" type="audio/mpeg">
+                                Tu navegador no soporta audio.
+                            </audio>
+                            <p class="audio-info">ANTES: Voz con eco y resonancias. DESPUÉS: Voz clara, cálida y lista para radio.</p>
                         </div>
-                    </div>
-                    <div style="text-align:center;">
-                        <h4 style="color:var(--primary-yellow);margin-bottom:20px;">Más Ejemplos de Nuestro Trabajo</h4>
-                        <div class="audio-links" style="justify-content:center;">
-                            <a href="#" class="audio-link"><i class="fas fa-headphones"></i> Podcast Editado</a>
-                            <a href="#" class="audio-link"><i class="fas fa-music"></i> Mezcla Musical</a>
-                            <a href="#" class="audio-link"><i class="fas fa-film"></i> Diseño para Video</a>
-                            <a href="#" class="audio-link"><i class="fas fa-gamepad"></i> Efectos para Juegos</a>
+                        <div class="audio-example">
+                            <h4>Música - Mezcla y Masterización</h4>
+                            <audio controls>
+                                <source src="https://assets.codepen.io/4358586/music-before.mp3" type="audio/mpeg">
+                                Tu navegador no soporta audio.
+                            </audio>
+                            <audio controls>
+                                <source src="https://assets.codepen.io/4358586/music-after.mp3" type="audio/mpeg">
+                                Tu navegador no soporta audio.
+                            </audio>
+                            <p class="audio-info">ANTES: Mezcla desbalanceada y sin claridad. DESPUÉS: Equilibrio perfecto y sonido profesional.</p>
                         </div>
-                        <p style="margin-top:20px;color:var(--text-gray);font-size:0.9rem;">
-                            <i class="fas fa-info-circle" style="color:var(--primary-yellow);"></i> Estos son ejemplos demostrativos. Sube tu archivo para un demo personalizado.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -300,33 +336,103 @@
     <section class="contact" id="contact">
         <div class="container">
             <div class="section-title"><h2>¿Listo para Mejorar tu Audio?</h2></div>
-            <div class="contact-form">
-                <h3 style="text-align:center;color:var(--primary-yellow);margin-bottom:30px;">Solicita Presupuesto Gratis</h3>
-                <form id="contactForm">
-                    <div class="form-group"><label for="name">Nombre completo *</label><input type="text" id="name" name="name" required placeholder="Tu nombre"></div>
-                    <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" required placeholder="tu@email.com"></div>
-                    <div class="form-group">
-                        <label for="service">¿Qué servicio necesitas? *</label>
-                        <select id="service" name="service" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="edicion">Edición y limpieza de audio</option>
-                            <option value="mezcla">Mezcla y masterización</option>
-                            <option value="diseno">Diseño sonoro</option>
-                            <option value="branding">Branding sonoro</option>
-                            <option value="otro">Otro servicio</option>
-                        </select>
+            <div class="contact-container">
+                <div class="contact-recommendations">
+                    <h3>📋 Requisitos Técnicos para Tu Audio</h3>
+                    <div class="recommendation-list">
+                        <div class="recommendation-item">
+                            <h4>🔊 FORMATO DEL ARCHIVO</h4>
+                            <ul>
+                                <li><strong>Formato:</strong> WAV (obligatorio)</li>
+                                <li><strong>Calidad:</strong> 44.1 kHz / 24 bits (ideal) o 48 kHz / 24 bits</li>
+                                <li><strong>Canales:</strong> Mono</li>
+                                <li>❌ No enviar MP3, M4A, OGG, ni audios comprimidos</li>
+                            </ul>
+                        </div>
+                        <div class="recommendation-item">
+                            <h4>🎚️ NIVEL DE GRABACIÓN</h4>
+                            <ul>
+                                <li>Nivel promedio entre -12 dB y -6 dB</li>
+                                <li>Picos máximos: -3 dB</li>
+                                <li>❌ No grabar saturado (clip)</li>
+                                <li>❌ No grabar muy bajo (ruido innecesario)</li>
+                            </ul>
+                        </div>
+                        <div class="recommendation-item">
+                            <h4>🎧 CONDICIONES DE GRABACIÓN</h4>
+                            <ul>
+                                <li>Grabar en un espacio silencioso</li>
+                                <li>Evitar: ventiladores, aires acondicionados, eco o reverberación</li>
+                                <li>Usar micrófono dedicado (condensador o dinámico)</li>
+                                <li>Distancia recomendada al micrófono: 15–20 cm</li>
+                                <li>Usar filtro anti-pop (muy importante)</li>
+                            </ul>
+                        </div>
+                        <div class="recommendation-item">
+                            <h4>🎛️ PROCESAMIENTO (MUY IMPORTANTE)</h4>
+                            <ul>
+                                <li>El audio debe enviarse TOTALMENTE LIMPIO</li>
+                                <li>❌ No aplicar: Compresor, Ecualización, Reverb, Delay, Noise Reduction, Limitadores</li>
+                                <li>Sin efectos, sin presets, sin plugins</li>
+                                <li>La edición, limpieza, ecualización y masterización se realizan dentro de Adobe Audition</li>
+                            </ul>
+                        </div>
+                        <div class="recommendation-item">
+                            <h4>⏱️ SILENCIOS Y NOMBRE</h4>
+                            <ul>
+                                <li>Dejar 3 a 5 segundos de silencio al inicio o final del audio</li>
+                                <li><strong>Formato nombre:</strong> Nombre_Apellido_TipoDeVoz_Toma.wav</li>
+                                <li><strong>Ejemplo:</strong> DarioCastellanos_Locucion_Comercial_T1.wav</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="message">Describe tu proyecto *</label>
-                        <textarea id="message" name="message" required placeholder="Cuéntanos sobre tu proyecto, plazos, y cualquier detalle importante..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="file">Sube tu archivo de audio (opcional)</label>
-                        <input type="file" id="file" name="file" accept="audio/*">
-                        <p style="color:var(--text-gray);font-size:0.9rem;margin-top:5px;">Formatos aceptados: MP3, WAV, AIFF (máx. 50MB)</p>
-                    </div>
-                    <button type="submit" class="submit-btn">Enviar Solicitud</button>
-                </form>
+                </div>
+                <div class="contact-form">
+                    <h3>Solicita Presupuesto</h3>
+                    <p style="text-align: center; color: var(--text-gray); margin-bottom: 20px;">Tu solicitud se enviará directamente por WhatsApp y correo</p>
+                    
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre completo *</label>
+                            <input type="text" id="name" name="name" required placeholder="Tu nombre completo">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono (WhatsApp) *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+593 99 999 9999">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">¿Qué servicio necesitas? *</label>
+                            <select id="service" name="service" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="edicion">Edición de voz y locución</option>
+                                <option value="podcast">Podcast y contenido hablado</option>
+                                <option value="musica">Música y voces cantadas</option>
+                                <option value="avanzado">Servicios avanzados</option>
+                                <option value="duda">Tengo dudas, necesito asesoría</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Describe tu proyecto *</label>
+                            <textarea id="message" name="message" required placeholder="Cuéntanos sobre tu proyecto, duración, plazos y cualquier detalle importante..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Presupuesto aproximado (USD)</label>
+                            <select id="budget" name="budget">
+                                <option value="">Selecciona rango</option>
+                                <option value="20-50">$20 - $50</option>
+                                <option value="50-100">$50 - $100</option>
+                                <option value="100-200">$100 - $200</option>
+                                <option value="200+">Más de $200</option>
+                                <option value="no-se">No sé, necesito cotización</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-btn">Enviar Solicitud</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -340,22 +446,22 @@
                 </div>
             </div>
             <div class="footer-contact">
-                <h3>Contacto Rápido</h3>
+                <h3>Contacto Directo</h3>
                 <div class="contact-info">
-                    <div class="contact-item"><i class="fas fa-envelope"></i><span>info@rdcr-audiolab.com</span></div>
-                    <div class="contact-item"><i class="fas fa-phone"></i><span>+34 912 345 678</span></div>
+                    <div class="contact-item"><i class="fas fa-envelope"></i><span>rdcrsound@gmail.com</span></div>
+                    <div class="contact-item"><i class="fas fa-phone"></i><span>+593 96 148 0654</span></div>
                     <div class="contact-item"><i class="fas fa-clock"></i><span>Lun-Vie: 9:00-19:00</span></div>
                 </div>
             </div>
             <div class="social-links">
                 <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/593961480654" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 <a href="#" title="SoundCloud"><i class="fab fa-soundcloud"></i></a>
                 <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 RDCR AudioLab. Todos los derechos reservados.</p>
-                <p style="margin-top:10px;">Especialistas en diseño sonoro profesional</p>
+                <p>&copy; 2023 AUDIOLAB BY RDCR SOUND. Todos los derechos reservados.</p>
+                <p style="margin-top:10px;">Edición, mezcla y masterización profesional de audio</p>
             </div>
         </div>
     </footer>
@@ -379,13 +485,57 @@
             });
         });
         
+        // Formulario interactivo con envío directo a WhatsApp y correo
         const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', (e) => {
+        
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert('¡Gracias por tu consulta! Te contactaremos en menos de 24 horas.');
-            contactForm.reset();
+            
+            // Obtener datos del formulario
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+            
+            // Crear mensaje para WhatsApp
+            const whatsappMessage = `*NUEVA SOLICITUD DE PRESUPUESTO - RDCR AUDIOLAB*%0A%0A` +
+                                   `*Nombre:* ${data.name}%0A` +
+                                   `*Email:* ${data.email}%0A` +
+                                   `*Teléfono:* ${data.phone}%0A` +
+                                   `*Servicio:* ${data.service}%0A` +
+                                   `*Presupuesto:* ${data.budget || 'No especificado'}%0A` +
+                                   `*Mensaje:* ${data.message}%0A%0A` +
+                                   `*Enviado desde:* RDCR AudioLab Website`;
+            
+            const whatsappUrl = `https://wa.me/593961480654?text=${whatsappMessage}`;
+            
+            // Crear mensaje para correo
+            const emailSubject = `Nueva Solicitud de Presupuesto - ${data.name}`;
+            const emailBody = `Nueva solicitud de presupuesto recibida:%0A%0A` +
+                            `Nombre: ${data.name}%0A` +
+                            `Email: ${data.email}%0A` +
+                            `Teléfono: ${data.phone}%0A` +
+                            `Servicio: ${data.service}%0A` +
+                            `Presupuesto: ${data.budget || 'No especificado'}%0A` +
+                            `Mensaje: ${data.message}`;
+            
+            const mailtoUrl = `mailto:rdcrsound@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Mostrar mensaje de confirmación
+            alert('Tu solicitud está siendo procesada. Se abrirá WhatsApp y tu cliente de correo para enviar la información.');
+            
+            // Abrir WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Abrir cliente de correo
+            window.location.href = mailtoUrl;
+            
+            // Opcional: Resetear formulario después de enviar
+            setTimeout(() => {
+                contactForm.reset();
+                alert('¡Solicitud enviada con éxito! Te contactaremos en menos de 24 horas.');
+            }, 1000);
         });
         
+        // Smooth scroll para enlaces internos
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             if (!anchor.classList.contains('fixed-btn-atras')) {
                 anchor.addEventListener('click', function(e) {
