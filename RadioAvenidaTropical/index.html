@@ -1,3 +1,5 @@
+
+Adaptar reproductor y añadir radios
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,7 +8,6 @@
     <title>Avenida Tropical | RDCR Sound Network</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== VARIABLES ===== */
         :root {
             --neon-orange: #ff5e00;
             --neon-green: #39ff14;
@@ -20,7 +21,6 @@
             --text-light: #f0f0f0;
         }
         
-        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
@@ -54,7 +54,7 @@
             z-index: -1;
         }
         
-        /* ===== MODAL PEDIR CANCIÓN ===== */
+        /* MODAL DE PEDIR CANCIÓN */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -88,6 +88,10 @@
             position: relative;
             transform: translateY(-20px);
             transition: transform 0.4s ease;
+        }
+        
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
         }
         
         .modal-header {
@@ -214,7 +218,7 @@
             transform: rotate(90deg);
         }
         
-        /* ===== BOTÓN VOLVER ===== */
+        /* BOTÓN VOLVER */
         .back-button {
             position: fixed;
             top: 20px;
@@ -242,7 +246,7 @@
             color: var(--dark-bg);
         }
         
-        /* ===== HEADER ===== */
+        /* HEADER */
         header {
             background-color: rgba(5, 5, 5, 0.98);
             color: #fff;
@@ -302,7 +306,7 @@
             margin-top: 5px;
         }
         
-        /* ===== NAVEGACIÓN ===== */
+        /* NAVEGACIÓN */
         nav {
             width: 100%;
             display: flex;
@@ -354,7 +358,7 @@
             text-shadow: 0 0 5px var(--neon-green-glow);
         }
         
-        /* ===== BOTONES FLOTANTES ===== */
+        /* BOTÓN WHATSAPP */
         .whatsapp-float {
             position: fixed;
             bottom: 100px;
@@ -381,6 +385,7 @@
             animation: none;
         }
         
+        /* BOTÓN IR ARRIBA */
         .scroll-top {
             position: fixed;
             bottom: 30px;
@@ -415,7 +420,7 @@
             color: var(--dark-bg);
         }
         
-        /* ===== HERO ===== */
+        /* HERO */
         .hero {
             position: relative;
             padding: 180px 5% 80px;
@@ -484,6 +489,7 @@
             font-style: italic;
         }
         
+        /* BOTONES */
         .btn {
             padding: 14px 30px;
             border-radius: 50px;
@@ -554,7 +560,7 @@
             width: 100%;
         }
         
-        /* ===== PLAYER EN VIVO (NUEVO DISEÑO) ===== */
+        /* PLAYER EN VIVO */
         .player-section {
             background-color: var(--darker-bg);
             padding: 60px 20px;
@@ -573,95 +579,38 @@
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 700px;
+            max-width: 100%;
             margin: 0 auto;
             background: rgba(20, 20, 20, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 30px;
+            border-radius: 20px;
+            padding: 20px;
             box-shadow: 
                 0 10px 30px rgba(255, 99, 0, 0.2),
                 0 0 0 1px rgba(255, 99, 0, 0.1),
                 inset 0 0 20px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 99, 0, 0.2);
-            transition: all 0.4s ease;
         }
         
         .player-header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         .player-title {
-            color: var(--neon-orange);
-            font-size: 2rem;
+            color: #FF6300;
+            font-size: 1.5rem;
             font-weight: 700;
-            text-shadow: 0 0 15px var(--neon-orange-glow);
+            text-shadow: 0 0 10px rgba(255, 99, 0, 0.3);
             margin-bottom: 5px;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            line-height: 1.2;
         }
         
         .player-subtitle {
             color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 300;
-        }
-        
-        /* Botón de play personalizado */
-        .custom-play-btn {
-            width: 100px;
-            height: 100px;
-            background: var(--neon-orange);
-            border: none;
-            border-radius: 50%;
-            margin: 20px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 30px var(--neon-orange-glow);
-            transition: all 0.3s ease;
-            animation: pulse-play 2s infinite;
-            color: var(--dark-bg);
-            font-size: 3rem;
-        }
-        
-        .custom-play-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 50px var(--neon-orange-glow);
-            animation: none;
-        }
-        
-        .custom-play-btn i {
-            transition: all 0.3s ease;
-        }
-        
-        .custom-play-btn:hover i {
-            transform: scale(1.1);
-        }
-        
-        @keyframes pulse-play {
-            0% {
-                box-shadow: 0 0 0 0 var(--neon-orange-glow);
-            }
-            70% {
-                box-shadow: 0 0 0 20px rgba(255, 94, 0, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 94, 0, 0);
-            }
-        }
-        
-        /* Contenedor del embed (oculto inicialmente) */
-        .embed-wrapper {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        
-        .embed-wrapper.show {
-            display: block;
-            opacity: 1;
         }
         
         .player-area {
@@ -693,12 +642,23 @@
             height: 3px;
             background: linear-gradient(90deg, 
                 transparent, 
-                var(--neon-orange), 
-                var(--neon-yellow), 
-                var(--neon-orange), 
+                #FF6300, 
+                #FF9D00, 
+                #FF6300, 
                 transparent);
             opacity: 0.7;
             animation: audioWave 2s ease-in-out infinite;
+        }
+        
+        .player-info {
+            margin-top: 20px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 99, 0, 0.1);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.2);
         }
         
         .signal-indicators {
@@ -711,7 +671,7 @@
         .signal-bar {
             width: 4px;
             height: 15px;
-            background: var(--neon-orange);
+            background: #FF6300;
             border-radius: 2px;
             animation: signalPulse 1.5s infinite;
         }
@@ -729,89 +689,12 @@
             width: 30px;
             height: 30px;
             border: 3px solid rgba(255, 99, 0, 0.3);
-            border-top: 3px solid var(--neon-orange);
+            border-top: 3px solid #FF6300;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
         
-        .player-info {
-            margin-top: 20px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.8rem;
-            padding: 15px;
-            border-top: 1px solid rgba(255, 99, 0, 0.1);
-            border-radius: 10px;
-            background: rgba(0, 0, 0, 0.2);
-        }
-        
-        /* ===== SECCIÓN OTRAS RADIOS ===== */
-        .radios-section {
-            padding: 40px 20px;
-            background-color: rgba(5, 5, 5, 0.8);
-            text-align: center;
-            border-bottom: 2px solid var(--neon-yellow);
-        }
-        
-        .radios-title {
-            font-size: 1.8rem;
-            color: var(--neon-yellow);
-            text-shadow: 0 0 10px var(--neon-yellow-glow);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-        
-        .radios-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .radio-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-light);
-            transition: all 0.3s ease;
-            width: 120px;
-        }
-        
-        .radio-item:hover {
-            transform: translateY(-10px);
-        }
-        
-        .radio-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--neon-orange), var(--neon-yellow));
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.5rem;
-            color: var(--dark-bg);
-            margin-bottom: 10px;
-            box-shadow: 0 0 20px var(--neon-orange-glow);
-            transition: all 0.3s ease;
-        }
-        
-        .radio-item:hover .radio-icon {
-            box-shadow: 0 0 30px var(--neon-yellow-glow);
-            transform: scale(1.1);
-        }
-        
-        .radio-name {
-            font-weight: 600;
-            font-size: 1rem;
-            text-align: center;
-            color: var(--neon-green);
-        }
-        
-        /* ===== PROGRAMACIÓN SEMANAL (restaurada) ===== */
+        /* NUEVA SECCIÓN DE PROGRAMACIÓN CON PESTAÑAS HORIZONTALES */
         .programacion-nueva-section {
             padding: 60px 20px;
             background-color: var(--dark-bg);
@@ -822,7 +705,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .section-header {
             text-align: center;
             margin-bottom: 30px;
@@ -848,7 +731,8 @@
             font-style: italic;
             line-height: 1.3;
         }
-        
+
+        /* CONTENEDOR DE PESTAÑAS DE DÍAS */
         .dias-tabs-container {
             width: 100%;
             max-width: 1200px;
@@ -858,7 +742,7 @@
             -webkit-overflow-scrolling: touch;
             padding-bottom: 10px;
         }
-        
+
         .dias-tabs {
             display: flex;
             flex-wrap: nowrap;
@@ -867,7 +751,7 @@
             padding: 10px 5px;
             min-width: max-content;
         }
-        
+
         .dia-tab {
             padding: 12px 20px;
             background: rgba(255, 255, 255, 0.05);
@@ -884,14 +768,14 @@
             flex-shrink: 0;
             position: relative;
         }
-        
+
         .dia-tab:hover {
             border-color: var(--neon-yellow);
             color: var(--neon-yellow);
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(255, 240, 31, 0.2);
         }
-        
+
         .dia-tab.active {
             background: var(--neon-yellow);
             border-color: var(--neon-yellow);
@@ -899,7 +783,8 @@
             box-shadow: 0 0 20px var(--neon-yellow-glow);
             font-weight: 700;
         }
-        
+
+        /* Indicador del día actual */
         .hoy-badge {
             position: absolute;
             top: -8px;
@@ -912,7 +797,8 @@
             border-radius: 10px;
             box-shadow: 0 0 10px var(--neon-orange-glow);
         }
-        
+
+        /* CONTENEDOR DE PROGRAMAS */
         .programas-container {
             width: 100%;
             max-width: 1200px;
@@ -922,7 +808,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .programas-dia {
             display: none;
             flex-direction: column;
@@ -933,16 +819,17 @@
             overflow-y: auto;
             padding-bottom: 20px;
         }
-        
+
         .programas-dia.active {
             display: flex;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
+        /* CABECERA DEL DÍA */
         .dia-cabecera {
             text-align: center;
             margin-bottom: 20px;
@@ -951,26 +838,27 @@
             border-radius: 10px;
             border-left: 4px solid var(--neon-yellow);
         }
-        
+
         .dia-titulo {
             font-size: 1.8rem;
             color: var(--neon-yellow);
             text-shadow: 0 0 10px var(--neon-yellow-glow);
             margin-bottom: 5px;
         }
-        
+
         .dia-fecha {
             font-size: 1rem;
             color: var(--neon-green);
             font-style: italic;
         }
-        
+
+        /* LISTA DE PROGRAMAS POR HORA */
         .programas-horarios {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
-        
+
         .programa-horario-item {
             display: flex;
             align-items: flex-start;
@@ -981,18 +869,19 @@
             transition: all 0.3s ease;
             position: relative;
         }
-        
+
         .programa-horario-item:hover {
             background: rgba(255, 94, 0, 0.08);
             transform: translateX(5px);
         }
-        
+
+        /* Programa actual en vivo */
         .programa-horario-item.en-vivo {
             border-left: 4px solid var(--neon-green);
             background: rgba(57, 255, 20, 0.05);
             box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
         }
-        
+
         .en-vivo-badge {
             position: absolute;
             top: -8px;
@@ -1006,7 +895,7 @@
             box-shadow: 0 0 10px var(--neon-green-glow);
             animation: pulse-badge 2s infinite;
         }
-        
+
         .hora-programa {
             min-width: 100px;
             background: var(--neon-orange);
@@ -1020,16 +909,16 @@
             box-shadow: 0 0 10px var(--neon-orange-glow);
             flex-shrink: 0;
         }
-        
+
         .en-vivo .hora-programa {
             background: var(--neon-green);
             box-shadow: 0 0 10px var(--neon-green-glow);
         }
-        
+
         .programa-info {
             flex: 1;
         }
-        
+
         .programa-titulo {
             font-size: 1.1rem;
             font-weight: 700;
@@ -1037,21 +926,21 @@
             margin-bottom: 5px;
             line-height: 1.3;
         }
-        
+
         .programa-conductor {
             font-size: 0.9rem;
             color: var(--neon-green);
             margin-bottom: 5px;
             font-weight: 600;
         }
-        
+
         .programa-descripcion {
             font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.4;
             margin-bottom: 8px;
         }
-        
+
         .programa-genero {
             display: inline-block;
             background: rgba(255, 255, 255, 0.1);
@@ -1060,8 +949,8 @@
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.8);
         }
-        
-        /* ===== FOOTER ===== */
+
+        /* FOOTER */
         footer {
             background-color: rgba(5, 5, 5, 0.98);
             color: #fff;
@@ -1117,7 +1006,7 @@
             line-height: 1.4;
         }
         
-        /* ===== ANIMACIONES ===== */
+        /* ANIMACIONES */
         @keyframes pulse-neon {
             0% {
                 text-shadow: 0 0 5px var(--neon-orange-glow);
@@ -1177,7 +1066,7 @@
             }
         }
         
-        /* ===== BACKGROUND ANIMADO ===== */
+        /* PARTÍCULAS */
         .background-animations {
             position: fixed;
             top: 0;
@@ -1212,28 +1101,18 @@
             }
         }
         
-        /* ===== MEDIA QUERIES ===== */
+        /* MEDIA QUERIES PARA TABLET */
         @media (min-width: 768px) {
-            .custom-play-btn {
-                width: 120px;
-                height: 120px;
-                font-size: 3.5rem;
+            /* MODAL */
+            .modal-container {
+                padding: 40px;
             }
             
-            .radios-grid {
-                gap: 50px;
+            .modal-title {
+                font-size: 2.2rem;
             }
             
-            .radio-item {
-                width: 150px;
-            }
-            
-            .radio-icon {
-                width: 100px;
-                height: 100px;
-                font-size: 3rem;
-            }
-            
+            /* HEADER */
             header {
                 flex-direction: row;
                 justify-content: space-between;
@@ -1262,6 +1141,11 @@
                 padding: 0;
             }
             
+            /* HERO */
+            .hero {
+                padding: 180px 40px 80px;
+            }
+            
             .hero h2 {
                 font-size: 3.5rem;
             }
@@ -1277,6 +1161,27 @@
             .hero-btns {
                 flex-direction: row;
                 justify-content: center;
+            }
+            
+            .btn {
+                min-width: 220px;
+            }
+            
+            /* PLAYER */
+            .player-container {
+                max-width: 600px;
+                padding: 30px;
+            }
+            
+            /* PROGRAMACIÓN PARA TABLET */
+            .dias-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .dia-tab {
+                min-width: 120px;
+                padding: 15px 20px;
             }
             
             .programas-horarios {
@@ -1296,44 +1201,522 @@
                 margin-bottom: 10px;
                 align-self: flex-start;
             }
+            
+            /* FOOTER */
+            .network-logo {
+                font-size: 3rem;
+            }
+            
+            .network-title {
+                font-size: 2.2rem;
+            }
         }
         
+        /* MEDIA QUERIES PARA ESCRITORIO (PC) */
         @media (min-width: 1024px) {
-            .custom-play-btn {
-                width: 150px;
-                height: 150px;
-                font-size: 4rem;
+            /* CONTENEDOR PRINCIPAL */
+            body {
+                max-width: 1400px;
+                margin: 0 auto;
+                position: relative;
+            }
+            
+            /* MODAL */
+            .modal-container {
+                max-width: 550px;
+            }
+            
+            /* HEADER - ESCRITORIO */
+            header {
+                padding: 15px 40px;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                height: 90px;
+            }
+            
+            .logo {
+                flex-direction: row;
+                gap: 20px;
+                width: auto;
+                margin-bottom: 0;
+            }
+            
+            .logo-icon {
+                font-size: 3rem;
+                animation: floatDesktop 3s ease-in-out infinite;
+            }
+            
+            .logo-text h1 {
+                font-size: 2.2rem;
+                text-align: left;
+            }
+            
+            .logo-text p {
+                font-size: 1rem;
+                text-align: left;
+            }
+            
+            /* NAVEGACIÓN - ESCRITORIO */
+            nav {
+                width: auto;
+            }
+            
+            nav ul {
+                gap: 30px;
+                padding: 0;
+                flex-wrap: nowrap;
+            }
+            
+            nav a {
+                font-size: 1.1rem;
+                padding: 10px 20px;
+            }
+            
+            /* BOTONES FLOTANTES - ESCRITORIO */
+            .back-button {
+                top: 30px;
+                left: 40px;
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .whatsapp-float {
+                width: 70px;
+                height: 70px;
+                font-size: 35px;
+                bottom: 150px;
+                right: 40px;
+            }
+            
+            .scroll-top {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                bottom: 50px;
+                right: 40px;
+            }
+            
+            /* HERO - ESCRITORIO */
+            .hero {
+                padding: 200px 40px 100px;
+                min-height: 80vh;
+            }
+            
+            .hero-content {
+                max-width: 1000px;
             }
             
             .hero h2 {
                 font-size: 4.5rem;
+                margin-bottom: 25px;
+            }
+            
+            .hero-tagline {
+                font-size: 2.2rem;
+                margin-bottom: 25px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+                max-width: 800px;
+                margin-bottom: 60px;
+            }
+            
+            .hero-year {
+                font-size: 1.2rem;
+            }
+            
+            .hero-btns {
+                flex-direction: row;
+                justify-content: center;
+                gap: 30px;
+                margin-top: 50px;
+            }
+            
+            .btn {
+                padding: 16px 40px;
+                font-size: 1.1rem;
+                min-width: 250px;
+            }
+            
+            /* PLAYER - ESCRITORIO */
+            .player-section {
+                padding: 80px 40px;
+            }
+            
+            .player-container {
+                max-width: 900px;
+                padding: 40px;
+            }
+            
+            .player-title {
+                font-size: 2rem;
+            }
+            
+            .player-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            /* PROGRAMACIÓN - ESCRITORIO */
+            .programacion-nueva-section {
+                padding: 80px 40px;
+            }
+            
+            .section-header {
+                margin-bottom: 50px;
             }
             
             .section-title {
                 font-size: 2.8rem;
+                margin-bottom: 20px;
+            }
+            
+            .section-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            /* PESTAÑAS DE DÍAS - ESCRITORIO */
+            .dias-tabs-container {
+                max-width: 1200px;
+                margin-bottom: 40px;
+            }
+            
+            .dias-tabs {
+                flex-wrap: nowrap;
+                gap: 15px;
+                padding: 15px 0;
+            }
+            
+            .dia-tab {
+                min-width: 140px;
+                padding: 15px 25px;
+                font-size: 1.1rem;
+            }
+            
+            .hoy-badge {
+                top: -10px;
+                right: 15px;
+                font-size: 0.8rem;
+                padding: 3px 10px;
+            }
+            
+            /* CONTENEDOR DE PROGRAMAS - ESCRITORIO */
+            .programas-container {
+                max-width: 1200px;
+            }
+            
+            .dia-cabecera {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .dia-titulo {
+                font-size: 2.2rem;
+            }
+            
+            .dia-fecha {
+                font-size: 1.2rem;
+            }
+            
+            .programas-horarios {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 25px;
+            }
+            
+            .programa-horario-item {
+                padding: 20px;
+                flex-direction: row;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            .programa-horario-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(255, 94, 0, 0.1);
+            }
+            
+            .en-vivo-badge {
+                top: 10px;
+                right: 20px;
+                font-size: 0.8rem;
+                padding: 4px 12px;
+            }
+            
+            .hora-programa {
+                min-width: 120px;
+                padding: 10px 15px;
+                font-size: 1.1rem;
+                margin-right: 20px;
+            }
+            
+            .programa-titulo {
+                font-size: 1.3rem;
+            }
+            
+            .programa-conductor {
+                font-size: 1.1rem;
+            }
+            
+            .programa-descripcion {
+                font-size: 0.95rem;
+            }
+            
+            .programa-genero {
+                font-size: 0.85rem;
+                padding: 5px 12px;
+            }
+            
+            /* FOOTER - ESCRITORIO */
+            footer {
+                padding: 60px 40px 40px;
+            }
+            
+            .network-logo {
+                font-size: 3.5rem;
+            }
+            
+            .network-title {
+                font-size: 2.5rem;
+            }
+            
+            .network-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .footer-slogan {
+                font-size: 1.6rem;
+                margin: 40px 0;
+            }
+            
+            .copyright {
+                padding-top: 30px;
+                font-size: 1rem;
+            }
+            
+            /* ANIMACIÓN ESPECÍFICA PARA ESCRITORIO */
+            @keyframes floatDesktop {
+                0%, 100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-10px);
+                }
             }
         }
         
-        @media (max-width: 480px) {
-            .custom-play-btn {
-                width: 80px;
-                height: 80px;
+        /* MEDIA QUERIES PARA PANTALLAS MUY GRANDES */
+        @media (min-width: 1440px) {
+            body {
+                max-width: 1600px;
+            }
+            
+            /* HERO - PANTALLAS GRANDES */
+            .hero h2 {
+                font-size: 5rem;
+            }
+            
+            .hero-tagline {
                 font-size: 2.5rem;
+            }
+            
+            /* PROGRAMACIÓN - PANTALLAS GRANDES */
+            .programas-horarios {
+                grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+                gap: 30px;
+            }
+        }
+        
+        /* MEJORAS PARA LA VERSIÓN DE ESCRITORIO - DISEÑO RESPONSIVO AVANZADO */
+        @media (min-width: 1024px) and (max-width: 1439px) {
+            .programas-horarios {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 20px;
+            }
+        }
+        
+        /* MEJORAS ESPECÍFICAS PARA DISPOSITIVOS PEQUEÑOS */
+        @media (max-width: 480px) {
+            .modal-container {
+                padding: 25px 20px;
+            }
+            
+            .modal-title {
+                font-size: 1.6rem;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .hero {
+                padding: 160px 15px 60px;
             }
             
             .hero h2 {
                 font-size: 2rem;
+                padding: 0 10px;
             }
             
+            .hero-tagline {
+                font-size: 1.3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+                min-width: 180px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            /* PROGRAMACIÓN PARA CELULAR PEQUEÑO */
             .dia-tab {
                 min-width: 90px;
                 padding: 10px 15px;
+                font-size: 0.9rem;
             }
+            
+            .hoy-badge {
+                font-size: 0.6rem;
+                padding: 2px 6px;
+                top: -6px;
+                right: 5px;
+            }
+            
+            .programa-horario-item {
+                flex-direction: column;
+            }
+            
+            .hora-programa {
+                min-width: 90px;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .programa-titulo {
+                font-size: 1rem;
+            }
+            
+            .programa-conductor {
+                font-size: 0.85rem;
+            }
+            
+            .programa-descripcion {
+                font-size: 0.8rem;
+            }
+            
+            .en-vivo-badge {
+                top: 5px;
+                right: 10px;
+                font-size: 0.6rem;
+                padding: 2px 8px;
+            }
+            
+            .back-button {
+                top: 15px;
+                left: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+            
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                font-size: 26px;
+                bottom: 90px;
+                right: 15px;
+            }
+            
+            .scroll-top {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+                bottom: 25px;
+                right: 15px;
+            }
+            
+            .player-container {
+                padding: 15px;
+            }
+            
+            .player-title {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* AJUSTES PARA PANTALLAS MUY PEQUEÑAS */
+        @media (max-width: 360px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+                min-width: 160px;
+            }
+            
+            nav a {
+                padding: 6px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.5rem;
+            }
+            
+            /* PROGRAMACIÓN PARA PANTALLAS MUY PEQUEÑAS */
+            .dia-tab {
+                min-width: 80px;
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .programa-horario-item {
+                padding: 12px;
+            }
+            
+            .hora-programa {
+                min-width: 80px;
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* PREVENIR DESBORDAMIENTO HORIZONTAL */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* MEJORAR SCROLL SUAVE */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
 <body>
-    <!-- MODAL PEDIR CANCIÓN -->
+    <!-- MODAL PARA PEDIR CANCIÓN -->
     <div class="modal-overlay" id="songRequestModal">
         <div class="modal-container">
             <button class="close-modal" id="closeModalBtn">
@@ -1396,11 +1779,12 @@
         </nav>
     </header>
     
-    <!-- BOTONES FLOTANTES -->
+    <!-- BOTÓN WHATSAPP -->
     <div class="whatsapp-float" id="whatsappBtn">
         <i class="fab fa-whatsapp"></i>
     </div>
     
+    <!-- BOTÓN IR ARRIBA -->
     <div class="scroll-top" id="scrollTopBtn">
         <i class="fas fa-arrow-up"></i>
     </div>
@@ -1424,101 +1808,70 @@
         </div>
     </section>
 
-    <!-- PLAYER EN VIVO (NUEVO DISEÑO) -->
+    <!-- PLAYER EN VIVO -->
     <section class="player-section" id="player">
         <div class="background-animations" id="backgroundAnimations"></div>
         
         <div class="player-container">
             <div class="player-header">
                 <h1 class="player-title">AVENIDA TROPICAL</h1>
-                <p class="player-subtitle">Haz clic en Play para comenzar</p>
+                <p class="player-subtitle">Streaming en vivo • 24/7</p>
             </div>
             
-            <!-- Botón de Play personalizado -->
-            <div class="custom-play-btn" id="customPlayBtn">
-                <i class="fas fa-play"></i>
+            <div class="player-area">
+                <div class="loading" id="loadingState">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Conectando a la radio...</div>
+                </div>
+                
+                <div data-type="newStreamPlayer" 
+                     data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" 
+                     data-theme="dark" 
+                     data-color="FF6300" 
+                     data-channelId="a012d2d4-4ab4-4550-b184-3ae00c951cad" 
+                     data-rendered="false" 
+                     class="cstrEmbed" 
+                     style="display: none;">
+                    <a href="https://www.caster.fm">Shoutcast Hosting</a>
+                    <a href="https://www.caster.fm">Stream Hosting</a>
+                    <a href="https://www.caster.fm">Radio Server Hosting</a>
+                </div>
+                
+                <div class="audio-visualizer"></div>
             </div>
             
-            <!-- Contenedor del embed (oculto inicialmente) -->
-            <div class="embed-wrapper" id="embedWrapper">
-                <div class="player-area">
-                    <div class="loading" id="loadingState">
-                        <div class="spinner"></div>
-                        <div class="loading-text">Conectando a la radio...</div>
-                    </div>
-                    
-                    <div data-type="newStreamPlayer" 
-                         data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" 
-                         data-theme="dark" 
-                         data-color="FF6300" 
-                         data-channelId="a012d2d4-4ab4-4550-b184-3ae00c951cad" 
-                         data-rendered="false" 
-                         class="cstrEmbed" 
-                         style="display: none;">
-                        <a href="https://www.caster.fm">Shoutcast Hosting</a>
-                        <a href="https://www.caster.fm">Stream Hosting</a>
-                        <a href="https://www.caster.fm">Radio Server Hosting</a>
-                    </div>
-                    
-                    <div class="audio-visualizer"></div>
-                </div>
-                
-                <div class="signal-indicators">
-                    <div class="signal-bar"></div>
-                    <div class="signal-bar"></div>
-                    <div class="signal-bar"></div>
-                    <div class="signal-bar"></div>
-                    <div class="signal-bar"></div>
-                </div>
-                
-                <div class="player-info">
-                    <p>Streaming de alta calidad • 128 kbps</p>
-                    <p>DERECHOS RDCR SOUND</p>
-                </div>
+            <div class="signal-indicators">
+                <div class="signal-bar"></div>
+                <div class="signal-bar"></div>
+                <div class="signal-bar"></div>
+                <div class="signal-bar"></div>
+                <div class="signal-bar"></div>
+            </div>
+            
+            <div class="player-info">
+                <p>Streaming de alta calidad • 128 kbps</p>
+                <p>DERECHOS RDCR SOUND</p>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN OTRAS RADIOS -->
-    <section class="radios-section" id="otras-radios">
-        <h2 class="radios-title">📡 Nuestras Radios</h2>
-        <div class="radios-grid">
-            <a href="https://rdcrsound.adcm.club/avenidatropical" class="radio-item" target="_blank">
-                <div class="radio-icon"><i class="fas fa-palm-tree"></i></div>
-                <span class="radio-name">Avenida Tropical</span>
-            </a>
-            <a href="https://rdcrsound.adcm.club/sabrosita" class="radio-item" target="_blank">
-                <div class="radio-icon"><i class="fas fa-music"></i></div>
-                <span class="radio-name">Sabrosita RDCR</span>
-            </a>
-            <a href="https://rdcrsound.adcm.club/salsera" class="radio-item" target="_blank">
-                <div class="radio-icon"><i class="fas fa-compact-disc"></i></div>
-                <span class="radio-name">La Salsera</span>
-            </a>
-            <a href="https://rdcrsound.adcm.club/tropical" class="radio-item" target="_blank">
-                <div class="radio-icon"><i class="fas fa-umbrella-beach"></i></div>
-                <span class="radio-name">Tropicalísima</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- PROGRAMACIÓN SEMANAL (completa) -->
+    <!-- NUEVA SECCIÓN DE PROGRAMACIÓN CON PESTAÑAS HORIZONTALES -->
     <section class="programacion-nueva-section" id="programacion">
         <div class="section-header">
             <h2 class="section-title">Programación Salsera Semanal</h2>
             <div class="section-subtitle">Tu horario para bailar, organizado por días y horas. <span id="dia-actual-text"></span></div>
         </div>
         
-        <!-- Pestañas de días -->
+        <!-- Pestañas de días en fila horizontal -->
         <div class="dias-tabs-container">
             <div class="dias-tabs" id="diasTabs">
-                <!-- se generan con JS -->
+                <!-- Las pestañas se generarán con JavaScript -->
             </div>
         </div>
         
         <!-- Contenedor de programas por día -->
-        <div class="programas-container" id="programasContainer">
-            <!-- se generan con JS -->
+        <div class="programas-container">
+            <!-- Los programas de cada día se generarán con JavaScript -->
         </div>
     </section>
 
@@ -1540,39 +1893,45 @@
     </footer>
 
     <script>
-        // ========== MODAL PEDIR CANCIÓN ==========
+        // FUNCIONALIDAD DEL MODAL DE PEDIR CANCIÓN
         const songRequestModal = document.getElementById('songRequestModal');
         const whatsappBtn = document.getElementById('whatsappBtn');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const cancelFormBtn = document.getElementById('cancelFormBtn');
         const songRequestForm = document.getElementById('songRequestForm');
         
+        // Abrir modal al hacer clic en el botón de WhatsApp
         whatsappBtn.addEventListener('click', function() {
             songRequestModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden'; // Prevenir scroll
         });
         
+        // Cerrar modal
         function closeModal() {
             songRequestModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = 'auto'; // Restaurar scroll
         }
         
         closeModalBtn.addEventListener('click', closeModal);
         cancelFormBtn.addEventListener('click', closeModal);
         
+        // Cerrar modal al hacer clic fuera del contenido
         songRequestModal.addEventListener('click', function(e) {
             if (e.target === songRequestModal) {
                 closeModal();
             }
         });
         
+        // Manejar envío del formulario
         songRequestForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Obtener valores del formulario
             const nombreCompleto = document.getElementById('nombreCompleto').value.trim();
             const cancion = document.getElementById('cancion').value.trim();
             const comentario = document.getElementById('comentario').value.trim();
             
+            // Construir mensaje para WhatsApp
             let mensaje = `*PEDIDO DE CANCIÓN - AVENIDA TROPICAL*%0A`;
             mensaje += `%0A*Nombre:* ${nombreCompleto}`;
             mensaje += `%0A*Canción solicitada:* ${cancion}`;
@@ -1583,16 +1942,26 @@
             
             mensaje += `%0A%0A_Enviado desde Avenida Tropical RDCR Sound Network_`;
             
+            // Número de WhatsApp proporcionado
             const phoneNumber = '593961480654';
+            
+            // Crear URL de WhatsApp
             const url = `https://wa.me/${phoneNumber}?text=${mensaje}`;
             
+            // Abrir WhatsApp en una nueva pestaña
             window.open(url, '_blank');
+            
+            // Cerrar modal
             closeModal();
+            
+            // Resetear formulario
             songRequestForm.reset();
+            
+            // Mostrar confirmación visual (opcional)
             alert('Redirigiendo a WhatsApp con tu pedido de canción...');
         });
         
-        // ========== HEADER OCULTABLE ==========
+        // HEADER OCULTABLE AL BAJAR
         const mainHeader = document.getElementById('mainHeader');
         let lastScrollTop = 0;
         
@@ -1608,13 +1977,13 @@
             lastScrollTop = scrollTop;
         });
         
-        // ========== BOTÓN VOLVER ==========
+        // BOTÓN VOLVER
         const backButton = document.getElementById('backButton');
         backButton.addEventListener('click', function() {
             window.location.href = 'https://rdcrsound.adcm.club';
         });
         
-        // ========== BOTÓN IR ARRIBA ==========
+        // BOTÓN IR ARRIBA
         const scrollTopBtn = document.getElementById('scrollTopBtn');
         
         window.addEventListener('scroll', () => {
@@ -1632,7 +2001,7 @@
             });
         });
         
-        // ========== NAVEGACIÓN SUAVE ==========
+        // NAVEGACIÓN SUAVE
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1650,57 +2019,7 @@
             });
         });
         
-        // ========== FUNCIONALIDAD DEL BOTÓN DE PLAY ==========
-        const customPlayBtn = document.getElementById('customPlayBtn');
-        const embedWrapper = document.getElementById('embedWrapper');
-        
-        customPlayBtn.addEventListener('click', function() {
-            // Ocultar el botón de play
-            this.style.display = 'none';
-            // Mostrar el contenedor del embed
-            embedWrapper.classList.add('show');
-            // Inicializar el reproductor si no se ha cargado antes
-            if (!window.playerInitialized) {
-                initPlayer();
-                window.playerInitialized = true;
-            }
-        });
-        
-        // ========== CÓDIGO DEL REPRODUCTOR CASTER.FM ==========
-        function initPlayer() {
-            const player = document.querySelector('.cstrEmbed');
-            const loading = document.getElementById('loadingState');
-            
-            if (!player || !loading) return;
-            
-            const script = document.createElement('script');
-            script.src = '//cdn.cloud.caster.fm/widgets/embed.js';
-            script.onload = function() {
-                setTimeout(() => {
-                    if (loading) {
-                        loading.style.display = 'none';
-                    }
-                    if (player) {
-                        player.style.display = 'flex';
-                    }
-                }, 2000);
-            };
-            
-            script.onerror = function() {
-                if (loading) {
-                    loading.innerHTML = `
-                        <div style="color: #FF6300; text-align: center;">
-                            <p>⚠️ Error de conexión</p>
-                            <p style="font-size: 0.8rem; margin-top: 10px;">Intenta recargar la página</p>
-                        </div>
-                    `;
-                }
-            };
-            
-            document.body.appendChild(script);
-        }
-        
-        // ========== PARTÍCULAS DE FONDO ==========
+        // CÓDIGO DEL REPRODUCTOR
         function createParticles() {
             const container = document.getElementById('backgroundAnimations');
             if (!container) return;
@@ -1730,7 +2049,40 @@
             }
         }
         
-        // ========== SIMULACIÓN VISUALIZADOR ==========
+        // Inicializar el reproductor de Caster.fm
+        function initPlayer() {
+            const player = document.querySelector('.cstrEmbed');
+            const loading = document.getElementById('loadingState');
+            
+            if (!player || !loading) return;
+            
+            const script = document.createElement('script');
+            script.src = '//cdn.cloud.caster.fm/widgets/embed.js';
+            script.onload = function() {
+                setTimeout(() => {
+                    if (loading) {
+                        loading.style.display = 'none';
+                    }
+                    if (player) {
+                        player.style.display = 'flex';
+                    }
+                }, 2000);
+            };
+            
+            script.onerror = function() {
+                if (loading) {
+                    loading.innerHTML = `
+                        <div style="color: #FF6300; text-align: center;">
+                            <p>⚠️ Error de conexión</p>
+                            <p style="font-size: 0.8rem; margin-top: 10px;">Intenta recargar la página</p>
+                    `;
+                }
+            };
+            
+            document.body.appendChild(script);
+        }
+        
+        // Simular visualización de audio
         function simulateAudioVisualization() {
             const visualizer = document.querySelector('.audio-visualizer');
             const signalBars = document.querySelectorAll('.signal-bar');
@@ -1750,7 +2102,7 @@
             }, 200);
         }
         
-        // ========== PROGRAMACIÓN SEMANAL (COMPLETA) ==========
+        // NUEVA PROGRAMACIÓN SEMANAL ACTUALIZADA
         const programacionSemanal = {
             "lunes": [
                 { hora: "00:00 - 06:00", titulo: "SALSA DE MADRUGADA", conductor: "Avenida Tropical", descripcion: "Salsa suave, romántica y clásica para la noche", genero: "Salsa Romántica" },
@@ -1819,6 +2171,7 @@
             ]
         };
 
+        // Días de la semana en español
         const diasSemana = [
             { nombre: "lunes", numero: 1, fecha: "Hoy" },
             { nombre: "martes", numero: 2, fecha: "Mañana" },
@@ -1829,19 +2182,27 @@
             { nombre: "domingo", numero: 7, fecha: "Domingo" }
         ];
         
+        // Obtener el día actual - CORREGIDO
         const fecha = new Date();
         let diaActualIndex = fecha.getDay();
+        // JavaScript: 0 = Domingo, 1 = Lunes, 2 = Martes, etc.
+        // Nuestro array: 0 = Lunes, 1 = Martes, 2 = Miércoles, etc.
+        // Convertir el índice de JavaScript a nuestro array
         diaActualIndex = diaActualIndex === 0 ? 6 : diaActualIndex - 1;
         const diaActualNombre = diasSemana[diaActualIndex].nombre;
 
+        // FUNCIÓN PARA DETERMINAR SI UN PROGRAMA ESTÁ EN VIVO (CON RANGOS)
         function programaEstaEnVivo(rangoHora, diaNombre) {
+            // Solo verificar para el día actual
             if (diaNombre !== diaActualNombre) return false;
             
             const ahora = new Date();
             const horaActual = ahora.getHours().toString().padStart(2, '0') + ':' + ahora.getMinutes().toString().padStart(2, '0');
             
+            // Extraer hora de inicio y fin del rango
             const [horaInicio, horaFin] = rangoHora.split(' - ');
             
+            // Convertir a minutos para comparar
             const [horaInicioH, minInicio] = horaInicio.split(':').map(Number);
             const [horaFinH, minFin] = horaFin.split(':').map(Number);
             const [horaAct, minAct] = horaActual.split(':').map(Number);
@@ -1850,19 +2211,24 @@
             const minutosFin = horaFinH * 60 + minFin;
             const minutosActual = horaAct * 60 + minAct;
             
+            // Considerar que un programa está en vivo si la hora actual está dentro del rango
             return minutosActual >= minutosInicio && minutosActual <= minutosFin;
         }
 
+        // FUNCIÓN PARA INICIALIZAR LA PROGRAMACIÓN SEMANAL CON PESTAÑAS
         function inicializarProgramacionSemanal() {
             const diasTabsContainer = document.getElementById('diasTabs');
-            const programasContainer = document.getElementById('programasContainer');
+            const programasContainer = document.querySelector('.programas-container');
             const diaActualText = document.getElementById('dia-actual-text');
             
+            // Mostrar texto del día actual
             diaActualText.textContent = `(Hoy es ${diaActualNombre.charAt(0).toUpperCase() + diaActualNombre.slice(1)})`;
             
+            // LIMPIAR contenedores antes de agregar nuevos elementos
             diasTabsContainer.innerHTML = '';
             programasContainer.innerHTML = '';
             
+            // Crear pestañas para cada día
             diasSemana.forEach((diaObj, index) => {
                 const diaNombre = diaObj.nombre;
                 const esHoy = diaNombre === diaActualNombre;
@@ -1873,6 +2239,7 @@
                 diaTab.textContent = diaNombre.charAt(0).toUpperCase() + diaNombre.slice(1);
                 diaTab.dataset.dia = diaNombre;
                 
+                // Añadir badge para hoy
                 if (esHoy) {
                     const hoyBadge = document.createElement('span');
                     hoyBadge.className = 'hoy-badge';
@@ -1880,9 +2247,13 @@
                     diaTab.appendChild(hoyBadge);
                 }
                 
+                // Añadir evento de clic
                 diaTab.addEventListener('click', function() {
+                    // Remover clase 'active' de todas las pestañas
                     document.querySelectorAll('.dia-tab').forEach(tab => tab.classList.remove('active'));
+                    // Añadir clase 'active' a la pestaña clickeada
                     this.classList.add('active');
+                    // Mostrar programas del día seleccionado
                     mostrarProgramasDia(this.dataset.dia);
                 });
                 
@@ -1893,6 +2264,7 @@
                 programasDia.className = `programas-dia ${esHoy ? 'active' : ''}`;
                 programasDia.id = `programas-${diaNombre}`;
                 
+                // Crear cabecera del día
                 const diaCabecera = document.createElement('div');
                 diaCabecera.className = 'dia-cabecera';
                 diaCabecera.innerHTML = `
@@ -1902,9 +2274,11 @@
                 
                 programasDia.appendChild(diaCabecera);
                 
+                // Crear lista de horarios
                 const programasHorarios = document.createElement('div');
                 programasHorarios.className = 'programas-horarios';
                 
+                // Añadir programas del día
                 if (programacionSemanal[diaNombre]) {
                     programacionSemanal[diaNombre].forEach(programa => {
                         const enVivo = programaEstaEnVivo(programa.hora, diaNombre);
@@ -1930,37 +2304,64 @@
                 programasDia.appendChild(programasHorarios);
                 programasContainer.appendChild(programasDia);
             });
+            
+            // Desplazar a la sección de programación si se carga con el hash #programacion
+            if (window.location.hash === '#programacion') {
+                setTimeout(() => {
+                    const programacionSection = document.getElementById('programacion');
+                    if (programacionSection) {
+                        programacionSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 500);
+            }
         }
 
+        // FUNCIÓN PARA MOSTRAR PROGRAMAS DE UN DÍA ESPECÍFICO
         function mostrarProgramasDia(diaNombre) {
+            // Ocultar TODOS los contenedores de programas
             document.querySelectorAll('.programas-dia').forEach(container => {
                 container.classList.remove('active');
             });
             
+            // Mostrar SOLO el contenedor del día seleccionado
             const diaContainer = document.getElementById(`programas-${diaNombre}`);
             if (diaContainer) {
                 diaContainer.classList.add('active');
+                
+                // Desplazar suavemente a la sección de programación
+                setTimeout(() => {
+                    const programacionSection = document.getElementById('programacion');
+                    if (programacionSection) {
+                        programacionSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 300);
             }
         }
 
-        // ========== INICIALIZACIÓN ==========
+        // Inicializar cuando el DOM esté listo
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
+            initPlayer();
             simulateAudioVisualization();
             inicializarProgramacionSemanal();
             
-            // Asegurar que el día actual esté visible
-            setTimeout(() => {
-                const diaActualTab = document.querySelector(`.dia-tab[data-dia="${diaActualNombre}"]`);
-                if (diaActualTab) {
-                    diaActualTab.click();
-                }
-            }, 800);
+            // Efecto táctil para móviles
+            const container = document.querySelector('.player-container');
+            if (container) {
+                container.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                
+                container.addEventListener('touchend', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            }
             
             // Actualizar indicadores de programas en vivo cada minuto
             setInterval(() => {
                 const diaActualContainer = document.getElementById(`programas-${diaActualNombre}`);
                 if (diaActualContainer && diaActualContainer.classList.contains('active')) {
+                    // Actualizar visualmente los programas en vivo
                     const programasItems = diaActualContainer.querySelectorAll('.programa-horario-item');
                     programasItems.forEach(item => {
                         const horaElement = item.querySelector('.hora-programa');
@@ -1970,6 +2371,7 @@
                             
                             if (enVivo && !item.classList.contains('en-vivo')) {
                                 item.classList.add('en-vivo');
+                                // Añadir badge si no existe
                                 if (!item.querySelector('.en-vivo-badge')) {
                                     const badge = document.createElement('span');
                                     badge.className = 'en-vivo-badge';
@@ -1979,12 +2381,22 @@
                             } else if (!enVivo && item.classList.contains('en-vivo')) {
                                 item.classList.remove('en-vivo');
                                 const badge = item.querySelector('.en-vivo-badge');
-                                if (badge) badge.remove();
+                                if (badge) {
+                                    badge.remove();
+                                }
                             }
                         }
                     });
                 }
-            }, 60000);
+            }, 60000); // Cada minuto
+            
+            // Asegurar que el día actual esté visible al cargar
+            setTimeout(() => {
+                const diaActualTab = document.querySelector(`.dia-tab[data-dia="${diaActualNombre}"]`);
+                if (diaActualTab) {
+                    diaActualTab.click();
+                }
+            }, 800);
         });
     </script>
 </body>
