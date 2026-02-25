@@ -35,8 +35,12 @@
         .radios-section, .services-section, .compact-section { padding: 40px 20px; max-width: 1200px; margin: 0 auto 25px; text-align: center; }
         .radios-section h2, .services-section h2, .compact-section h2 { margin-bottom: 25px; font-size: 2em; position: relative; color: var(--cian-electrico); }
         .radios-section h2::after, .services-section h2::after, .compact-section h2::after { content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); width: 70px; height: 3px; background: linear-gradient(90deg, transparent, var(--cian-electrico), transparent); border-radius: 2px; box-shadow: 0 0 6px var(--cian-electrico); }
-        .radios-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; justify-items: center; }
-        .radio-card { width: 100%; height: 180px; background: var(--gris-oscuro); border-radius: 12px; position: relative; overflow: hidden; transition: all 0.4s ease; border: 2px solid transparent; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); cursor: pointer; }
+        .radios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; justify-items: center; } /* Ajustado a 3 columnas */
+        .radio-card { width: 100%; height: 180px; background: var(--gris-oscuro); border-radius: 12px; position: relative; overflow: hidden; transition: all 0.4s ease; cursor: pointer; border: 2px solid rgba(0, 229, 255, 0.3); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); animation: borderGlow 2s infinite alternate; } /* Marco animado */
+        @keyframes borderGlow {
+            0% { border-color: rgba(0, 229, 255, 0.3); box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 0 5px rgba(0,229,255,0.3); }
+            100% { border-color: var(--cian-electrico); box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 0 15px var(--cian-electrico); }
+        }
         .radio-image { width: 100%; height: 100%; object-fit: cover; transition: all 0.4s ease; }
         .radio-info { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 15, 15, 0.95); padding: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; opacity: 0; transform: translateY(10px); transition: all 0.4s ease; border-radius: 12px; }
         .radio-card:hover .radio-info { opacity: 1; transform: translateY(0); }
@@ -59,7 +63,12 @@
         .dario-voz-section h2 { font-size: 1.8em; margin-bottom: 8px; background: linear-gradient(45deg, var(--rosa-voz), var(--naranja-voz)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .btn-dario-voz { background: linear-gradient(45deg, var(--rosa-voz), var(--morado-voz)); color: var(--blanco-limpio); border: 2px solid var(--blanco-limpio); padding: 14px 28px; font-size: 1em; font-weight: 700; border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 6px 18px rgba(233, 30, 99, 0.3); animation: pulseDario 2s infinite; }
         @keyframes pulseDario { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
-        .podcasts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 25px; }
+        /* Estilos para el nuevo botón y dropdown de podcasts */
+        .podcast-toggle-btn { background: linear-gradient(45deg, var(--cian-electrico), #00B8D4); color: var(--negro-profundo); border: none; padding: 15px 30px; font-size: 1.2em; font-weight: 700; border-radius: 50px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0, 229, 255, 0.3); margin: 10px auto; border: 2px solid white; }
+        .podcast-toggle-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 25px rgba(0, 229, 255, 0.6); }
+        .podcast-dropdown { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.6s ease, opacity 0.4s ease, margin 0.4s ease; margin-top: 0; width: 100%; }
+        .podcast-dropdown.open { max-height: 600px; /* Altura suficiente para contener la grid */ opacity: 1; margin-top: 25px; }
+        .podcasts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
         .podcast-card { background: var(--gris-oscuro); border-radius: 10px; padding: 15px; text-align: center; transition: all 0.3s ease; border: 1px solid transparent; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 140px; }
         .podcast-card.spotify { border-color: #1DB954; }
         .podcast-card.spotify:hover { background: #1DB954; color: white; transform: translateY(-5px); box-shadow: 0 8px 20px rgba(29, 185, 84, 0.3); }
@@ -106,82 +115,16 @@
         .social-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--gris-oscuro); display: flex; align-items: center; justify-content: center; color: var(--cian-electrico); text-decoration: none; border: 1px solid var(--cian-electrico); transition: all 0.3s ease; }
         
         /* Estilos para el formulario de WhatsApp */
-        #whatsappFormModal .modal-content {
-            max-width: 450px;
-        }
-        
-        .whatsapp-form-container {
-            padding: 20px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--cian-electrico);
-            font-weight: 600;
-            font-size: 0.9em;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            background: var(--gris-oscuro);
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            border-radius: 6px;
-            color: var(--blanco-limpio);
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 0.95em;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--cian-electrico);
-            box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.1);
-        }
-        
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        .btn-whatsapp-submit {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            font-size: 1em;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-        
-        .btn-whatsapp-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
-        }
-        
-        .whatsapp-note {
-            text-align: center;
-            font-size: 0.85em;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        #whatsappFormModal .modal-content { max-width: 450px; }
+        .whatsapp-form-container { padding: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: var(--cian-electrico); font-weight: 600; font-size: 0.9em; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; background: var(--gris-oscuro); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 6px; color: var(--blanco-limpio); font-family: 'Segoe UI', sans-serif; font-size: 0.95em; transition: all 0.3s ease; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--cian-electrico); box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.1); }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .btn-whatsapp-submit { width: 100%; padding: 14px; background: linear-gradient(135deg, #25D366, #128C7E); border: none; border-radius: 8px; color: white; font-weight: 600; font-size: 1em; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; margin-top: 10px; }
+        .btn-whatsapp-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4); }
+        .whatsapp-note { text-align: center; font-size: 0.85em; color: rgba(255, 255, 255, 0.6); margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
         
         @media (max-width: 1200px) { .radios-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; margin: 0 auto; } }
         @media (max-width: 768px) { header { padding: 12px 20px; flex-wrap: wrap; } .nav-buttons { flex-direction: column; width: 100%; margin-top: 15px; display: none; gap: 8px; } .nav-buttons.active { display: flex; } .nav-btn { width: 100%; justify-content: center; padding: 12px; } .radios-grid { grid-template-columns: 1fr; max-width: 400px; } .services-grid, .podcasts-grid { grid-template-columns: 1fr; } .podcast-container { grid-template-columns: 1fr; padding: 15px; } }
@@ -204,6 +147,7 @@
             <button class="nav-btn" onclick="scrollToSection('publicidad')"><i class="fas fa-ad"></i> Publicidad</button>
         </nav>
     </header>
+    
     <section class="hero">
         <div class="hero-content">
             <h1>RDCR SOUND NETWORK</h1>
@@ -214,6 +158,30 @@
             </div>
         </div>
     </section>
+
+    <!-- Sección Nuestra Comunidad movida aquí -->
+    <section class="compact-section" id="estadisticas">
+        <h2>Nuestra Comunidad</h2>
+        <div class="estadisticas-grid">
+            <div class="estadistica-card">
+                <div class="estadistica-icon" style="font-size:2.2em;color:var(--cian-electrico);margin-bottom:12px;"><i class="fas fa-users"></i></div>
+                <div class="contador-numero" id="contadorVisitas" style="font-size:2em;font-weight:bold;color:var(--blanco-limpio);margin:8px 0;font-family:'Courier New',monospace;text-shadow:0 0 6px var(--cian-electrico);">0</div>
+                <div class="contador-texto" style="color:rgba(255,255,255,0.8);font-size:0.9em;">Visitas Totales</div>
+            </div>
+            <div class="estadistica-card">
+                <div class="estadistica-icon" style="font-size:2.2em;color:var(--cian-electrico);margin-bottom:12px;"><i class="fas fa-headphones-alt"></i></div>
+                <div class="contador-numero" id="contadorOyentes" style="font-size:2em;font-weight:bold;color:var(--blanco-limpio);margin:8px 0;font-family:'Courier New',monospace;text-shadow:0 0 6px var(--cian-electrico);">0</div>
+                <div class="contador-texto" style="color:rgba(255,255,255,0.8);font-size:0.9em;">Oyentes en Vivo</div>
+            </div>
+            <div class="estadistica-card">
+                <div class="estadistica-icon" style="font-size:2.2em;color:var(--cian-electrico);margin-bottom:12px;"><i class="fas fa-mobile-alt"></i></div>
+                <div class="contador-numero" id="contadorDescargas" style="font-size:2em;font-weight:bold;color:var(--blanco-limpio);margin:8px 0;font-family:'Courier New',monospace;text-shadow:0 0 6px var(--cian-electrico);">0</div>
+                <div class="contador-texto" style="color:rgba(255,255,255,0.8);font-size:0.9em;">Descargas de App</div>
+            </div>
+        </div>
+        <button class="quienes-btn" onclick="openModal('quienesSomos')" style="display:block;margin:25px auto 0;padding:10px 25px;background:linear-gradient(45deg,#9C27B0,#673AB7);border:1.5px solid var(--blanco-limpio);border-radius:6px;color:var(--blanco-limpio);font-weight:600;cursor:pointer;transition:all 0.3s ease;font-size:0.9em;text-transform:uppercase;letter-spacing:0.5px;"><i class="fas fa-users"></i> Quiénes Somos</button>
+    </section>
+
     <section class="radios-section" id="radios">
         <h2>Nuestras Emisoras</h2>
         <div class="radios-grid">
@@ -225,16 +193,14 @@
                 <img src="/img_radio/DCCLASICOS/WhatsApp Image 2025-12-23 at 16.59.55.jpeg" alt="DC Clásicos" class="radio-image">
                 <div class="radio-info"><h3>DC CLÁSICOS</h3><p>Baladas en español e inglés desde los 80 hasta la actualidad.</p><a href="/DCClasicosEC/" class="btn-radio-card"><i class="fas fa-headphones-alt"></i> Sintonizar</a></div>
             </div>
-            <div class="radio-card dc-mix">
-                <img src="/img_radio/DCMIX/DC MIX 3.jpg" alt="DC Mix" class="radio-image">
-                <div class="radio-info"><h3>DC MIX</h3><p>Música mezclada 24/7. Mixes de DJs, sin pausas largas.</p><a href="/DCMixEC/" class="btn-radio-card"><i class="fas fa-headphones-alt"></i> Sintonizar</a></div>
-            </div>
+            <!-- DC MIX eliminado -->
             <div class="radio-card avenida-tropical">
                 <img src="/img_radio/AVENIDA TTROPICAL/WhatsApp Image 2025-12-23 at 16.59.55 (2).jpeg" alt="Avenida Tropical" class="radio-image">
                 <div class="radio-info"><h3>AVENIDA TROPICAL</h3><p>Salsa pura, sin mezclas, sin excusas. Clásica, romántica, dura y actual.</p><a href="/RadioAvenidaTropical/" class="btn-radio-card"><i class="fas fa-headphones-alt"></i> Sintonizar</a></div>
             </div>
         </div>
     </section>
+    
     <section class="services-section" id="servicios">
         <h2>Nuestros Servicios</h2>
         <div class="services-grid">
@@ -252,23 +218,30 @@
             </div>
         </div>
     </section>
+    
     <section class="dario-voz-section" id="dariovoz">
         <h2>Dario <span style="color:#FF9800;">LA Voz</span></h2>
         <h3>Que Marca La Diferencia</h3>
         <div class="dario-voz-content">Comunicación de impacto para marcas y proyectos que buscan destacar. Creamos conexiones auténticas con tu audiencia a través de una voz profesional y versátil.<br><br>Con más de 5 años de experiencia en locución y producción de audio, ofrezco soluciones personalizadas para cada proyecto.</div>
         <button class="btn-dario-voz" onclick="window.location.href='https://rdcrsound.adcm.club/DarioLavoz/'"><i class="fas fa-external-link-alt"></i> Conocer Más</button>
     </section>
+    
     <section class="compact-section" id="podcasts">
         <h2>Podcasts</h2>
         <p style="text-align:center;max-width:700px;margin:0 auto 15px;color:rgba(255,255,255,0.8);font-size:0.9em;">Disfruta de nuestros contenidos especializados en tus plataformas favoritas.</p>
-        <div class="podcasts-grid">
-            <div class="podcast-card spotify" onclick="openPodcastModal('spotify')"><i class="fab fa-spotify"></i><h3>Spotify</h3><p>Todos nuestros programas</p></div>
-            <div class="podcast-card apple" onclick="openPodcastModal('apple')"><i class="fab fa-apple"></i><h3>Apple Podcasts</h3><p>Contenido exclusivo</p></div>
-            <div class="podcast-card tunein" onclick="openPodcastModal('tunein')"><i class="fas fa-podcast"></i><h3>TuneIn</h3><p>Escucha en TuneIn</p></div>
-            <div class="podcast-card ivoxx" onclick="openPodcastModal('ivoxx')"><i class="fas fa-podcast"></i><h3>IVOOX</h3><p>Escucha nuestros podcasts</p></div>
-            <div class="podcast-card iheart" onclick="openPodcastModal('iheart')"><i class="fas fa-heart"></i><h3>iHeart Podcasts</h3><p>Contenido en iHeart</p></div>
+        <!-- Nuevo botón interactivo para desplegar podcasts -->
+        <button class="podcast-toggle-btn" onclick="togglePodcasts()"><i class="fas fa-podcast"></i> AQUI LOS PODCAST <i class="fas fa-chevron-down" id="toggleIcon" style="transition: transform 0.3s;"></i></button>
+        <div class="podcast-dropdown" id="podcastDropdown">
+            <div class="podcasts-grid">
+                <div class="podcast-card spotify" onclick="openPodcastModal('spotify')"><i class="fab fa-spotify"></i><h3>Spotify</h3><p>Todos nuestros programas</p></div>
+                <div class="podcast-card apple" onclick="openPodcastModal('apple')"><i class="fab fa-apple"></i><h3>Apple Podcasts</h3><p>Contenido exclusivo</p></div>
+                <div class="podcast-card tunein" onclick="openPodcastModal('tunein')"><i class="fas fa-podcast"></i><h3>TuneIn</h3><p>Escucha en TuneIn</p></div>
+                <div class="podcast-card ivoxx" onclick="openPodcastModal('ivoxx')"><i class="fas fa-podcast"></i><h3>IVOOX</h3><p>Escucha nuestros podcasts</p></div>
+                <div class="podcast-card iheart" onclick="openPodcastModal('iheart')"><i class="fas fa-heart"></i><h3>iHeart Podcasts</h3><p>Contenido en iHeart</p></div>
+            </div>
         </div>
     </section>
+    
     <section class="compact-section" id="publicidad">
         <h2>Publicidad</h2>
         <p style="text-align:center;max-width:700px;margin:0 auto 15px;color:rgba(255,255,255,0.8);font-size:0.9em;">Tu marca puede llegar a miles de oyentes en nuestra red de radios online.</p>
@@ -294,6 +267,7 @@
         </div>
         <button class="tarifario-btn" onclick="openModal('tarifario')" style="display:block;margin:20px auto 0;padding:10px 20px;background:linear-gradient(45deg,#32CD32,#228B22);color:white;border:none;border-radius:6px;font-size:0.9em;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:0 4px 12px rgba(50,205,50,0.2);text-decoration:none;text-align:center;max-width:200px;"><i class="fas fa-file-invoice-dollar"></i> Ver Tarifario Publicitario</button>
     </section>
+    
     <section class="compact-section" id="download">
         <h2>Descarga Nuestra App</h2>
         <p style="text-align:center;max-width:600px;margin:0 auto 20px;color:rgba(255,255,255,0.8);font-size:0.9em;">Lleva RDCR Sound Network contigo a todas partes.</p>
@@ -302,27 +276,9 @@
             <a href="https://rdcrsound.adcm.club/" target="_blank" class="btn-primary-action"><i class="fab fa-app-store-ios"></i> App Store</a>
         </div>
     </section>
-    <section class="compact-section" id="estadisticas">
-        <h2>Nuestra Comunidad</h2>
-        <div class="estadisticas-grid">
-            <div class="estadistica-card">
-                <div class="estadistica-icon" style="font-size:2.2em;color:var(--cian-electrico);margin-bottom:12px;"><i class="fas fa-users"></i></div>
-                <div class="contador-numero" id="contadorVisitas" style="font-size:2em;font-weight:bold;color:var(--blanco-limpio);margin:8px 0;font-family:'Courier New',monospace;text-shadow:0 0 6px var(--cian-electrico);">0</div>
-                <div class="contador-texto" style="color:rgba(255,255,255,0.8);font-size:0.9em;">Visitas Totales</div>
-            </div>
-            <div class="estadistica-card">
-                <div class="estadistica-icon" style="font-size:2.2em;color:var(--cian-electrico);margin-bottom:12px;"><i class="fas fa-headphones-alt"></i></div>
-                <div class="contador-numero" id="contadorOyentes" style="font-size:2em;font-weight:bold;color:var(--blanco-limpio);margin:8px 0;font-family:'Courier New',monospace;text-shadow:0 0 6px var(--cian-electrico);">0</div>
-                <div class="contador-texto" style="color:rgba(255,255,255,0.8);font-size:0.9em;">Oyentes en Vivo</div>
-            </div>
-            <div class="estadistica-card">
-                <div class="estadistica-icon" style="font-size:2.2em;color:var(--cian-electrico);margin-bottom:12px;"><i class="fas fa-mobile-alt"></i></div>
-                <div class="contador-numero" id="contadorDescargas" style="font-size:2em;font-weight:bold;color:var(--blanco-limpio);margin:8px 0;font-family:'Courier New',monospace;text-shadow:0 0 6px var(--cian-electrico);">0</div>
-                <div class="contador-texto" style="color:rgba(255,255,255,0.8);font-size:0.9em;">Descargas de App</div>
-            </div>
-        </div>
-        <button class="quienes-btn" onclick="openModal('quienesSomos')" style="display:block;margin:25px auto 0;padding:10px 25px;background:linear-gradient(45deg,#9C27B0,#673AB7);border:1.5px solid var(--blanco-limpio);border-radius:6px;color:var(--blanco-limpio);font-weight:600;cursor:pointer;transition:all 0.3s ease;font-size:0.9em;text-transform:uppercase;letter-spacing:0.5px;"><i class="fas fa-users"></i> Quiénes Somos</button>
-    </section>
+    
+    <!-- La sección estadisticas fue movida arriba, después del hero -->
+    
     <section id="contacto" style="padding:30px 20px;max-width:700px;margin:0 auto;text-align:center;">
         <h2 style="margin-bottom:20px;color:var(--cian-electrico);font-size:1.8em;">Contacto</h2>
         <div style="display:flex;flex-direction:column;gap:12px;align-items:center;">
@@ -331,6 +287,7 @@
             <div style="display:flex;align-items:center;gap:8px;"><i class="fas fa-map-marker-alt" style="color:var(--cian-electrico);font-size:1.2em;"></i><span>Quito, Ecuador</span></div>
         </div>
     </section>
+    
     <footer>
         <div class="social-icons">
             <a href="https://www.facebook.com/rdcdrsound" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
@@ -689,6 +646,18 @@
                     }
                 });
             });
+        }
+        
+        // Función para toggle de podcasts con animación
+        function togglePodcasts() {
+            const dropdown = document.getElementById('podcastDropdown');
+            const icon = document.getElementById('toggleIcon');
+            dropdown.classList.toggle('open');
+            if (dropdown.classList.contains('open')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
         }
         
         // Formulario de WhatsApp
