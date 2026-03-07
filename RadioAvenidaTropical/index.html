@@ -216,41 +216,48 @@
             transform: rotate(90deg);
         }
         
-        /* BOTÓN VOLVER */
+        /* BOTÓN VOLVER MEJORADO CON FRASE SALSERA */
         .back-button {
             position: fixed;
             top: 20px;
             left: 20px;
-            width: 50px;
-            height: 50px;
+            padding: 12px 20px;
             background: var(--card-bg);
             border: 2px solid var(--neon-orange);
-            border-radius: 50%;
+            border-radius: 40px;
             display: flex;
-            justify-content: center;
             align-items: center;
+            gap: 8px;
             color: var(--neon-orange);
-            font-size: 20px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
             z-index: 1001;
             transition: all 0.3s ease;
             box-shadow: 0 0 15px var(--neon-orange-glow);
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            white-space: nowrap;
+        }
+        
+        .back-button i {
+            font-size: 18px;
         }
         
         .back-button:hover {
-            transform: translateY(-5px) scale(1.1);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 0 25px var(--neon-orange-glow);
             background: var(--neon-orange);
             color: var(--dark-bg);
+            border-color: var(--neon-orange);
         }
         
-        /* HEADER */
+        /* HEADER REESTRUCTURADO PARA CENTRAR EL LOGO */
         header {
             background-color: rgba(5, 5, 5, 0.98);
             color: #fff;
-            padding: 20px 5%;
+            padding: 15px 5%;
             display: flex;
-            flex-direction: column;
             align-items: center;
             position: fixed;
             top: 0;
@@ -267,14 +274,18 @@
             transform: translateY(-100%);
         }
         
+        .header-left {
+            flex: 1;
+            min-width: 60px; /* espacio para el botón de atrás */
+            visibility: hidden;
+        }
+        
         .logo {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 10px;
-            text-align: center;
-            width: 100%;
-            margin-bottom: 15px;
+            gap: 15px;
+            flex-shrink: 0;
+            margin: 0 15px;
         }
         
         .logo-icon {
@@ -304,11 +315,10 @@
             margin-top: 5px;
         }
         
-        /* NAVEGACIÓN */
         nav {
-            width: 100%;
+            flex: 1;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
         }
         
         nav ul {
@@ -316,9 +326,7 @@
             list-style: none;
             gap: 15px;
             flex-wrap: wrap;
-            justify-content: center;
-            padding: 10px 0;
-            width: 100%;
+            justify-content: flex-end;
         }
         
         nav a {
@@ -948,7 +956,7 @@
             color: rgba(255, 255, 255, 0.8);
         }
         
-        /* NUEVA SECCIÓN: OTRAS RADIOS */
+        /* NUEVA SECCIÓN: OTRAS RADIOS (SIN DC MIX) */
         .other-radios-section {
             padding: 60px 20px;
             background-color: var(--darker-bg);
@@ -1169,31 +1177,11 @@
             
             /* HEADER */
             header {
-                flex-direction: row;
-                justify-content: space-between;
                 padding: 15px 40px;
-            }
-            
-            .logo {
-                flex-direction: row;
-                gap: 15px;
-                width: auto;
-                margin-bottom: 0;
-                text-align: left;
             }
             
             .logo-text h1 {
                 font-size: 2rem;
-            }
-            
-            nav {
-                width: auto;
-            }
-            
-            nav ul {
-                flex-wrap: nowrap;
-                width: auto;
-                padding: 0;
             }
             
             /* HERO */
@@ -1259,7 +1247,7 @@
             
             /* OTRAS RADIOS */
             .radios-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
             
             /* FOOTER */
@@ -1289,17 +1277,7 @@
             /* HEADER - ESCRITORIO */
             header {
                 padding: 15px 40px;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
                 height: 90px;
-            }
-            
-            .logo {
-                flex-direction: row;
-                gap: 20px;
-                width: auto;
-                margin-bottom: 0;
             }
             
             .logo-icon {
@@ -1309,23 +1287,15 @@
             
             .logo-text h1 {
                 font-size: 2.2rem;
-                text-align: left;
             }
             
             .logo-text p {
                 font-size: 1rem;
-                text-align: left;
             }
             
             /* NAVEGACIÓN - ESCRITORIO */
-            nav {
-                width: auto;
-            }
-            
             nav ul {
                 gap: 30px;
-                padding: 0;
-                flex-wrap: nowrap;
             }
             
             nav a {
@@ -1337,9 +1307,8 @@
             .back-button {
                 top: 30px;
                 left: 40px;
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
+                font-size: 18px;
+                padding: 14px 25px;
             }
             
             .whatsapp-float {
@@ -1532,6 +1501,11 @@
                 padding: 80px 40px;
             }
             
+            .radios-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+            }
+            
             .radio-card {
                 padding: 40px 20px;
             }
@@ -1707,9 +1681,8 @@
             .back-button {
                 top: 15px;
                 left: 15px;
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
+                font-size: 14px;
+                padding: 8px 15px;
             }
             
             .whatsapp-float {
@@ -1782,6 +1755,11 @@
                 padding: 6px 10px;
                 font-size: 0.8rem;
             }
+            
+            .back-button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
         }
         
         /* PREVENIR DESBORDAMIENTO HORIZONTAL */
@@ -1838,13 +1816,14 @@
         </div>
     </div>
 
-    <!-- BOTÓN VOLVER -->
+    <!-- BOTÓN VOLVER CON FRASE SALSERA -->
     <div class="back-button" id="backButton">
-        <i class="fas fa-arrow-left"></i>
+        <i class="fas fa-arrow-left"></i> Volver al Son
     </div>
 
-    <!-- HEADER -->
+    <!-- HEADER CON LOGO CENTRADO -->
     <header id="mainHeader">
+        <div class="header-left"></div> <!-- Espacio invisible para equilibrar -->
         <div class="logo">
             <i class="fas fa-palm-tree logo-icon"></i>
             <div class="logo-text">
@@ -1956,7 +1935,7 @@
         </div>
     </section>
 
-    <!-- NUEVA SECCIÓN: OTRAS RADIOS DE RDCR SOUND NETWORK (se abren en la misma pestaña) -->
+    <!-- NUEVA SECCIÓN: OTRAS RADIOS DE RDCR SOUND NETWORK (SIN DC MIX) -->
     <section class="other-radios-section" id="otras-radios">
         <div class="section-header">
             <h2 class="section-title">Otras emisoras de RDCR Sound Network</h2>
@@ -1973,11 +1952,7 @@
                 <h3>DC Clásicos EC</h3>
                 <p>Los clásicos de siempre</p>
             </a>
-            <a href="https://rdcrsound.adcm.club/DCMixEC/" target="_self" class="radio-card">
-                <i class="fas fa-radio"></i>
-                <h3>DC Mix EC</h3>
-                <p>Mezclas y más</p>
-            </a>
+            <!-- DC Mix EC ha sido eliminado -->
         </div>
     </section>
 
