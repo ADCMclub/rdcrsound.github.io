@@ -179,7 +179,6 @@
             font-weight: bold;
         }
 
-        /* MODIFICACIONES PARA MOSTRAR TODA LA PROGRAMACIÓN */
         .programacion-container {
             background: rgba(20, 20, 25, 0.9);
             border-radius: 15px;
@@ -490,7 +489,6 @@
             transform: translateY(-3px) scale(1.05);
         }
 
-        /* Estilos para el Modal de WhatsApp */
         .whatsapp-modal {
             display: none;
             position: fixed;
@@ -681,7 +679,6 @@
             50% { border-left-color: #ff6666; }
         }
 
-        /* Media queries mejoradas para la programación responsiva */
         @media (max-width: 1200px) {
             .lista-programas {
                 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -717,20 +714,16 @@
                 grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
                 gap: 12px;
             }
-            /* Responsive para el modal */
             .modal-content {
                 width: 95%;
                 margin: 10px;
             }
-            
             .modal-header h3 {
                 font-size: 1.1rem;
             }
-            
             .form-footer {
                 flex-direction: column;
             }
-            
             .submit-btn,
             .cancel-btn {
                 width: 100%;
@@ -998,81 +991,75 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // DATOS DE PROGRAMACIÓN (actualizada)
+        // 📻 PROGRAMACIÓN ACTUALIZADA (con los cambios solicitados)
         const programacionCompleta = {
             lunes: [
-                { hora: "00:00", duracion: "6h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
-                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
-                { hora: "09:00", duracion: "3h", titulo: "Hits DC", desc: "Los éxitos más sonados del momento", categoria: "Música Actual" },
-                { hora: "12:00", duracion: "3h", titulo: "DC en Compañía", desc: "Música para acompañar tu mediodía", categoria: "Variedades" },
-                { hora: "15:00", duracion: "2h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
-                { hora: "17:00", duracion: "2h", titulo: "Drive DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
-                { hora: "19:00", duracion: "1h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
-                { hora: "20:00", duracion: "3h", titulo: "La Voz del Silencio", desc: "Con Darío Castellanos - Reflexiones y música suave", categoria: "Reflexión" },
-                { hora: "23:00", duracion: "1h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "00:00", duracion: "6h", titulo: "DC Night Flow", desc: "Música continua para la madrugada", categoria: "Nocturna" },
+                { hora: "06:00", duracion: "4h", titulo: "DC Morning Hits", desc: "El mejor comienzo para tu día", categoria: "Mañanas" },
+                { hora: "10:00", duracion: "3h", titulo: "DC Global Hits", desc: "Éxitos internacionales", categoria: "Internacional" },
+                { hora: "13:00", duracion: "3h", titulo: "DC Power Hits", desc: "La energía que necesitas", categoria: "Energía" },
+                { hora: "16:00", duracion: "3h", titulo: "DC Drive Hits", desc: "Música para tu viaje", categoria: "Tarde" },
+                { hora: "19:00", duracion: "2h", titulo: "DC Dance Hits", desc: "Ritmo para bailar", categoria: "Dance" },
+                { hora: "21:00", duracion: "3h", titulo: "DC Night Session", desc: "Lo mejor de la noche", categoria: "Noche" }
             ],
             martes: [
-                { hora: "00:00", duracion: "6h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
-                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
-                { hora: "09:00", duracion: "3h", titulo: "Hits DC", desc: "Los éxitos más sonados del momento", categoria: "Música Actual" },
-                { hora: "12:00", duracion: "3h", titulo: "DC en Compañía", desc: "Música para acompañar tu mediodía", categoria: "Variedades" },
-                { hora: "15:00", duracion: "2h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
-                { hora: "17:00", duracion: "2h", titulo: "Drive DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
-                { hora: "19:00", duracion: "1h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
-                { hora: "20:00", duracion: "3h", titulo: "La Voz del Silencio", desc: "Con Darío Castellanos - Reflexiones y música suave", categoria: "Reflexión" },
-                { hora: "23:00", duracion: "1h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "00:00", duracion: "6h", titulo: "DC Night Flow", desc: "Música continua para la madrugada", categoria: "Nocturna" },
+                { hora: "06:00", duracion: "4h", titulo: "DC Morning Hits", desc: "El mejor comienzo para tu día", categoria: "Mañanas" },
+                { hora: "10:00", duracion: "3h", titulo: "DC Global Hits", desc: "Éxitos internacionales", categoria: "Internacional" },
+                { hora: "13:00", duracion: "3h", titulo: "DC Power Hits", desc: "La energía que necesitas", categoria: "Energía" },
+                { hora: "16:00", duracion: "3h", titulo: "DC Drive Hits", desc: "Música para tu viaje", categoria: "Tarde" },
+                { hora: "19:00", duracion: "2h", titulo: "DC Dance Hits", desc: "Ritmo para bailar", categoria: "Dance" },
+                { hora: "21:00", duracion: "3h", titulo: "DC Night Session", desc: "Lo mejor de la noche", categoria: "Noche" }
             ],
             miercoles: [
-                { hora: "00:00", duracion: "6h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
-                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
-                { hora: "09:00", duracion: "3h", titulo: "Hits DC", desc: "Los éxitos más sonados del momento", categoria: "Música Actual" },
-                { hora: "12:00", duracion: "3h", titulo: "DC en Compañía", desc: "Música para acompañar tu mediodía", categoria: "Variedades" },
-                { hora: "15:00", duracion: "2h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
-                { hora: "17:00", duracion: "2h", titulo: "Drive DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
-                { hora: "19:00", duracion: "1h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
-                { hora: "20:00", duracion: "3h", titulo: "La Voz del Silencio", desc: "Con Darío Castellanos - Reflexiones y música suave", categoria: "Reflexión" },
-                { hora: "23:00", duracion: "1h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "00:00", duracion: "6h", titulo: "DC Night Flow", desc: "Música continua para la madrugada", categoria: "Nocturna" },
+                { hora: "06:00", duracion: "4h", titulo: "DC Morning Hits", desc: "El mejor comienzo para tu día", categoria: "Mañanas" },
+                { hora: "10:00", duracion: "3h", titulo: "DC Global Hits", desc: "Éxitos internacionales", categoria: "Internacional" },
+                { hora: "13:00", duracion: "3h", titulo: "DC Power Hits", desc: "La energía que necesitas", categoria: "Energía" },
+                { hora: "16:00", duracion: "3h", titulo: "DC Drive Hits", desc: "Música para tu viaje", categoria: "Tarde" },
+                { hora: "19:00", duracion: "2h", titulo: "DC Dance Hits", desc: "Ritmo para bailar", categoria: "Dance" },
+                { hora: "21:00", duracion: "3h", titulo: "DC Night Session", desc: "Lo mejor de la noche", categoria: "Noche" }
             ],
             jueves: [
-                { hora: "00:00", duracion: "6h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
-                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
-                { hora: "09:00", duracion: "3h", titulo: "Hits DC", desc: "Los éxitos más sonados del momento", categoria: "Música Actual" },
-                { hora: "12:00", duracion: "3h", titulo: "DC en Compañía", desc: "Música para acompañar tu mediodía", categoria: "Variedades" },
-                { hora: "15:00", duracion: "2h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
-                { hora: "17:00", duracion: "2h", titulo: "Drive DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
-                { hora: "19:00", duracion: "1h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
-                { hora: "20:00", duracion: "3h", titulo: "La Voz del Silencio", desc: "Con Darío Castellanos - Reflexiones y música suave", categoria: "Reflexión" },
-                { hora: "23:00", duracion: "1h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "00:00", duracion: "6h", titulo: "DC Night Flow", desc: "Música continua para la madrugada", categoria: "Nocturna" },
+                { hora: "06:00", duracion: "4h", titulo: "DC Morning Hits", desc: "El mejor comienzo para tu día", categoria: "Mañanas" },
+                { hora: "10:00", duracion: "3h", titulo: "DC Global Hits", desc: "Éxitos internacionales", categoria: "Internacional" },
+                { hora: "13:00", duracion: "3h", titulo: "DC Power Hits", desc: "La energía que necesitas", categoria: "Energía" },
+                { hora: "16:00", duracion: "3h", titulo: "DC Drive Hits", desc: "Música para tu viaje", categoria: "Tarde" },
+                { hora: "19:00", duracion: "2h", titulo: "DC Dance Hits", desc: "Ritmo para bailar", categoria: "Dance" },
+                { hora: "21:00", duracion: "1h", titulo: "DC Night Session", desc: "Ambiente nocturno", categoria: "Noche" },
+                { hora: "22:00", duracion: "1h", titulo: "DC MIX DJs Invitados", desc: "Mezclas exclusivas de DJs invitados", categoria: "DJ Set" },
+                { hora: "23:00", duracion: "1h", titulo: "DC Night Session", desc: "Cierre de noche", categoria: "Noche" }
             ],
             viernes: [
-                { hora: "00:00", duracion: "6h", titulo: "Noches DC", desc: "Baladas románticas, pop adulto, soft pop nocturno", categoria: "Música Nocturna" },
-                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Pop latino actual, hits globales suaves", categoria: "Pop Latino" },
-                { hora: "09:00", duracion: "3h", titulo: "Hits DC", desc: "Los éxitos más sonados del momento", categoria: "Música Actual" },
-                { hora: "12:00", duracion: "3h", titulo: "DC en Compañía", desc: "Música para acompañar tu mediodía", categoria: "Variedades" },
-                { hora: "15:00", duracion: "2h", titulo: "Tarde DC", desc: "Pop latino, crossover, merengue pop", categoria: "Música Latina" },
-                { hora: "17:00", duracion: "2h", titulo: "Drive DC", desc: "Pop energético, latin hits, reguetón adulto", categoria: "Música Energética" },
-                { hora: "19:00", duracion: "2h", titulo: "El Mensajero de la Salsa", desc: "Con Mr Cheo – salsa, historia y sentimiento", categoria: "Salsa" },
-                { hora: "21:00", duracion: "2h", titulo: "La Voz del Silencio", desc: "Con Darío Castellanos - Reflexiones y música suave", categoria: "Reflexión" },
-                { hora: "23:00", duracion: "1h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "00:00", duracion: "6h", titulo: "DC Night Flow", desc: "Música continua para la madrugada", categoria: "Nocturna" },
+                { hora: "06:00", duracion: "4h", titulo: "DC Morning Hits", desc: "El mejor comienzo para tu día", categoria: "Mañanas" },
+                { hora: "10:00", duracion: "3h", titulo: "DC Global Hits", desc: "Éxitos internacionales", categoria: "Internacional" },
+                { hora: "13:00", duracion: "3h", titulo: "DC Power Hits", desc: "La energía que necesitas", categoria: "Energía" },
+                { hora: "16:00", duracion: "3h", titulo: "DC Drive Hits", desc: "Música para tu viaje", categoria: "Tarde" },
+                { hora: "19:00", duracion: "2h", titulo: "El Mensajero de la Salsa", desc: "Con Diego Cheíto Grijalva – salsa, historia y sentimiento", categoria: "Salsa" },
+                { hora: "21:00", duracion: "1h", titulo: "DC MIX DJs Invitados", desc: "Mezclas exclusivas de DJs invitados", categoria: "DJ Set" },
+                { hora: "22:00", duracion: "2h", titulo: "DC Club Hits", desc: "Lo mejor del club", categoria: "Club" }
             ],
             sabado: [
-                { hora: "00:00", duracion: "6h", titulo: "DC Mix Night", desc: "Mixes crossover suaves (sin locución)", categoria: "Música Mix" },
-                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Baladas románticas, pop adulto, soft pop", categoria: "Música Latina" },
-                { hora: "09:00", duracion: "3h", titulo: "Clásicos DC", desc: "Éxitos de los 80s, 90s y 2000s", categoria: "Retro" },
-                { hora: "12:00", duracion: "1h", titulo: "++ Prendidos", desc: "Con Diego Cheíto Grijalva - Entrevistas y música", categoria: "Entretenimiento" },
-                { hora: "13:00", duracion: "4h", titulo: "Tarde DC Weekend", desc: "Música variada para tu sábado", categoria: "Música Variada" },
-                { hora: "17:00", duracion: "2h", titulo: "Salsa DC", desc: "Lo mejor de la salsa clásica y moderna", categoria: "Salsa" },
-                { hora: "19:00", duracion: "2h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
-                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "00:00", duracion: "2h", titulo: "DC Club Hits", desc: "Continuación de la noche", categoria: "Club" },
+                { hora: "02:00", duracion: "7h", titulo: "DC Night Flow", desc: "Música continua para la madrugada", categoria: "Nocturna" },
+                { hora: "09:00", duracion: "3h", titulo: "DC Weekend Hits", desc: "Comienza tu fin de semana", categoria: "Fin de Semana" },
+                { hora: "12:00", duracion: "1h", titulo: "Los ++ Prendidos", desc: "Con Diego Cheíto Grijalva – entrevistas y música", categoria: "Entretenimiento" },
+                { hora: "13:00", duracion: "3h", titulo: "DC Party Hits", desc: "Ritmo para la fiesta", categoria: "Fiesta" },
+                { hora: "16:00", duracion: "3h", titulo: "DC Global Hits", desc: "Éxitos internacionales", categoria: "Internacional" },
+                { hora: "19:00", duracion: "2h", titulo: "DC Party Starter", desc: "Calentando la noche", categoria: "Fiesta" },
+                { hora: "21:00", duracion: "1h", titulo: "DC MIX DJs Invitados", desc: "Mezclas exclusivas de DJs invitados", categoria: "DJ Set" },
+                { hora: "22:00", duracion: "1h", titulo: "DC MIX DJ HOXX (Exclusivo)", desc: "Set exclusivo de DJ HOXX", categoria: "DJ Set" },
+                { hora: "23:00", duracion: "3h", titulo: "DC Club Hits", desc: "La mejor música de club", categoria: "Club" }
             ],
             domingo: [
-                { hora: "00:00", duracion: "6h", titulo: "DC Mix Night", desc: "Mixes crossover suaves (sin locución)", categoria: "Música Mix" },
-                { hora: "06:00", duracion: "3h", titulo: "DC Despierta", desc: "Baladas románticas, pop adulto, soft pop", categoria: "Música Latina" },
-                { hora: "09:00", duracion: "4h", titulo: "Recuerdos DC", desc: "Los grandes éxitos de todas las épocas", categoria: "Retro" },
-                { hora: "13:00", duracion: "4h", titulo: "Domingo Relax DC", desc: "Música suave para relajar el domingo", categoria: "Relajación" },
-                { hora: "17:00", duracion: "2h", titulo: "Salsa DC", desc: "Salsa para animar tu tarde dominical", categoria: "Salsa" },
-                { hora: "19:00", duracion: "2h", titulo: "Especial DC", desc: "Contenido especial y entrevistas", categoria: "Especial" },
-                { hora: "21:00", duracion: "3h", titulo: "Noches DC", desc: "Baladas románticas, cierre musical suave", categoria: "Música Nocturna" }
+                { hora: "00:00", duracion: "6h", titulo: "DC Night Flow", desc: "Música continua para la madrugada", categoria: "Nocturna" },
+                { hora: "09:00", duracion: "3h", titulo: "DC Weekend Flow", desc: "Relájate con buen sonido", categoria: "Fin de Semana" },
+                { hora: "12:00", duracion: "4h", titulo: "DC Latin Pop", desc: "Lo mejor del pop latino", categoria: "Latino" },
+                { hora: "16:00", duracion: "2h", titulo: "DC Global Hits", desc: "Éxitos internacionales", categoria: "Internacional" },
+                { hora: "18:00", duracion: "1h", titulo: "DC MIX DJs Invitados", desc: "Mezclas exclusivas de DJs invitados", categoria: "DJ Set" },
+                { hora: "19:00", duracion: "5h", titulo: "DC Weekend Hits", desc: "Cierra el fin de semana", categoria: "Fin de Semana" }
             ]
         };
 
@@ -1082,7 +1069,6 @@
         let programaActual = null;
         let diaActual = '';
 
-        // FUNCIÓN PARA OBTENER EL DÍA ACTUAL
         function obtenerDiaActual() {
             const ahora = new Date();
             const diaIndex = ahora.getDay();
@@ -1090,7 +1076,6 @@
             return diasNombres[diaIndex];
         }
 
-        // FUNCIÓN PARA ACTUALIZAR RELOJ
         function actualizarReloj() {
             const ahora = new Date();
             const horas = ahora.getHours().toString().padStart(2, '0');
@@ -1114,7 +1099,6 @@
             }
         }
 
-        // FUNCIÓN PARA CALCULAR PROGRAMA ACTUAL
         function calcularProgramaActual() {
             const ahora = new Date();
             const horaActual = ahora.getHours();
@@ -1158,7 +1142,6 @@
             }
         }
 
-        // FUNCIÓN PARA RESALTAR DÍA ACTUAL
         function resaltarDiaActual() {
             const botonesDias = document.querySelectorAll('.dia-btn');
             botonesDias.forEach(boton => {
@@ -1169,7 +1152,6 @@
             });
         }
 
-        // FUNCIÓN PARA GENERAR BOTONES DE DÍAS
         function generarBotonesDias() {
             const contenedor = document.getElementById('dias-navegacion');
             const diasNombres = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
@@ -1187,7 +1169,6 @@
             });
         }
 
-        // FUNCIÓN PARA GENERAR PROGRAMACIÓN
         function generarProgramacion(dia) {
             const contenedor = document.getElementById(`lista-${dia}`);
             if (!contenedor) return;
@@ -1240,7 +1221,6 @@
             });
         }
 
-        // FUNCIÓN BOTÓN "IR ARRIBA"
         function configurarBotonArriba() {
             const scrollTopBtn = document.getElementById('scrollTopBtn');
             
@@ -1260,7 +1240,6 @@
             });
         }
 
-        // FUNCIÓN PARA MANEJAR EL FORMULARIO DE WHATSAPP
         function configurarFormularioWhatsApp() {
             const modal = document.getElementById('whatsappModal');
             const openBtn = document.getElementById('openFormBtn');
@@ -1268,33 +1247,28 @@
             const cancelBtn = document.getElementById('cancelBtn');
             const form = document.getElementById('whatsappForm');
             
-            // Abrir modal
             openBtn.addEventListener('click', () => {
                 modal.classList.add('show');
-                document.body.style.overflow = 'hidden'; // Prevenir scroll
+                document.body.style.overflow = 'hidden';
             });
             
-            // Cerrar modal
             const closeModal = () => {
                 modal.classList.remove('show');
-                document.body.style.overflow = 'auto'; // Restaurar scroll
+                document.body.style.overflow = 'auto';
             };
             
             closeBtn.addEventListener('click', closeModal);
             cancelBtn.addEventListener('click', closeModal);
             
-            // Cerrar al hacer clic fuera del modal
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     closeModal();
                 }
             });
             
-            // Manejar envío del formulario
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 
-                // Obtener valores del formulario
                 const nombre = document.getElementById('nombre').value.trim();
                 const cancion = document.getElementById('cancion').value.trim();
                 const comentario = document.getElementById('comentario').value.trim();
@@ -1304,7 +1278,6 @@
                     return;
                 }
                 
-                // Construir mensaje
                 let mensaje = `*SOLICITUD DE CANCIÓN - DCRADIOEC*\n\n`;
                 mensaje += `*Nombre:* ${nombre}\n`;
                 mensaje += `*Canción solicitada:* ${cancion}\n`;
@@ -1315,37 +1288,25 @@
                 
                 mensaje += `\n---\n_Enviado desde la web de DCRADIOEC_`;
                 
-                // Codificar para URL
                 const mensajeCodificado = encodeURIComponent(mensaje);
-                
-                // Número de WhatsApp
                 const telefono = '593961480654';
-                
-                // Redirigir a WhatsApp
                 const urlWhatsApp = `https://wa.me/${telefono}?text=${mensajeCodificado}`;
                 window.open(urlWhatsApp, '_blank');
                 
-                // Cerrar modal y resetear formulario
                 closeModal();
                 form.reset();
             });
         }
 
-        // INICIALIZACIÓN
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. Obtener día actual
             diaActual = obtenerDiaActual();
             
-            // 2. Generar botones de días
             generarBotonesDias();
             
-            // 3. Generar programación del día actual
             generarProgramacion(diaActual);
             
-            // 4. Mostrar contenedor del día actual
             document.getElementById(`programacion-${diaActual}`).classList.add('active');
             
-            // 5. Configurar navegación entre días
             const diasButtons = document.querySelectorAll('.dia-btn');
             const programacionDias = document.querySelectorAll('.programacion-dia');
             
@@ -1363,21 +1324,15 @@
                 });
             });
             
-            // 6. Configurar botón "Ir arriba"
             configurarBotonArriba();
-            
-            // 7. Configurar formulario de WhatsApp
             configurarFormularioWhatsApp();
             
-            // 8. Iniciar reloj
             actualizarReloj();
             setInterval(actualizarReloj, 1000);
             
-            // 9. Calcular programa actual
             calcularProgramaActual();
             setInterval(calcularProgramaActual, 60000);
             
-            // 10. Configurar Swiper
             new Swiper('.noticias-swiper', {
                 slidesPerView: 1,
                 spaceBetween: 15,
@@ -1391,13 +1346,13 @@
                 }
             });
             
-            // 11. Actualización automática
             setInterval(() => {
                 const diaActivo = document.querySelector('.dia-btn.active').getAttribute('data-dia');
                 generarProgramacion(diaActivo);
             }, 30000);
         });
     </script>
+    <!-- Metricool -->
+    <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
 </body>
 </html>
-<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
