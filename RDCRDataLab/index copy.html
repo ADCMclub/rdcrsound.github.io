@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estrategia de Impulsación</title>
+    <title>Estrategia de Impulsación · Analista de Datos</title>
     <style>
         * {
             box-sizing: border-box;
@@ -11,417 +11,461 @@
             padding: 0;
         }
         body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(145deg, #1e2b4f 0%, #2d3e6e 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
         }
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
             width: 100%;
-            max-width: 800px;
-            padding: 30px;
-            transition: transform 0.3s ease;
-        }
-        .container:hover {
-            transform: scale(1.01);
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
+            max-width: 880px;
+            padding: 20px;
+            transition: all 0.2s ease;
         }
         .header h2 {
-            color: #2c3e50;
-            font-size: 26px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            animation: fadeInDown 0.5s;
+            color: #0b1a33;
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            border-bottom: 2px solid #eef2f6;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            text-align: center;
         }
         .tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            border-bottom: 3px solid #ecf0f1;
-            padding-bottom: 10px;
+            gap: 6px;
+            margin-bottom: 20px;
+            background: #f0f4fa;
+            padding: 6px;
+            border-radius: 40px;
         }
         .tab {
-            padding: 12px 25px;
-            background: #ecf0f1;
-            border-radius: 30px;
+            flex: 1;
+            padding: 10px 16px;
+            background: transparent;
+            border-radius: 32px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 0.95rem;
             color: #2c3e50;
-            transition: all 0.3s;
-            border: 2px solid transparent;
+            transition: all 0.2s;
+            text-align: center;
+            border: none;
         }
         .tab.active {
-            background: #3498db;
-            color: white;
-            border-color: #2980b9;
-            box-shadow: 0 4px 10px rgba(52,152,219,0.3);
-            transform: translateY(-2px);
+            background: white;
+            color: #1e3c72;
+            box-shadow: 0 4px 10px rgba(0,30,60,0.12);
         }
         .tab-content {
             display: none;
-            animation: fadeIn 0.4s;
+            animation: fadeIn 0.3s ease-out;
         }
         .tab-content.active {
             display: block;
         }
         h3 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 20px;
-            border-left: 5px solid #3498db;
-            padding-left: 15px;
+            color: #0f2b45;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            border-left: 4px solid #3b6ea5;
+            padding-left: 14px;
         }
         h4 {
-            color: #34495e;
-            margin: 20px 0 10px;
-            font-size: 18px;
+            color: #1e3a5f;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 12px 0;
+            letter-spacing: 0.3px;
         }
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+            margin-bottom: 16px;
         }
         label {
             display: block;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: #4a5b6e;
+            margin-bottom: 3px;
         }
         input, select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #dcdde1;
+            padding: 8px 10px;
+            border: 1.5px solid #dde3ea;
             border-radius: 10px;
-            font-size: 15px;
-            transition: all 0.3s;
+            font-size: 0.9rem;
+            transition: 0.15s;
             background: white;
+            font-family: inherit;
         }
         input:focus, select:focus {
-            border-color: #3498db;
+            border-color: #2e5a9c;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(52,152,219,0.2);
-            transform: scale(1.02);
+            box-shadow: 0 0 0 3px rgba(46,90,156,0.12);
         }
         .readonly-field {
-            background-color: #f5f6fa;
-            color: #2c3e50;
+            background-color: #f4f7fb;
+            border-color: #d0dae8;
+            color: #0f2b45;
             font-weight: 500;
-            cursor: not-allowed;
         }
         .btn-send {
             width: 100%;
-            background: #27ae60;
+            background: #1d4e7c;
             color: white;
-            padding: 15px;
+            padding: 12px;
             border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(39,174,96,0.3);
-            margin-top: 25px;
+            gap: 8px;
+            transition: 0.15s;
+            box-shadow: 0 6px 14px rgba(25,75,125,0.3);
+            margin-top: 20px;
         }
         .btn-send:hover {
-            background: #2ecc71;
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 6px 20px rgba(46,204,113,0.4);
+            background: #2368a5;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px rgba(25,75,125,0.4);
         }
         .btn-send:disabled {
-            background: #bdc3c7;
+            background: #9aaec2;
             box-shadow: none;
             transform: none;
-            cursor: not-allowed;
         }
         .message-box {
-            margin-top: 20px;
-            padding: 12px;
-            border-radius: 10px;
+            margin-top: 16px;
+            padding: 10px;
+            border-radius: 12px;
             display: none;
             text-align: center;
             font-weight: 500;
-            animation: fadeInUp 0.3s;
+            font-size: 0.9rem;
+            animation: slideUp 0.2s;
         }
         .message-box.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background: #e0f2e9;
+            color: #0e6245;
+            border: 1px solid #b6e3d0;
             display: block;
         }
         .message-box.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background: #fee9e7;
+            color: #a12b2b;
+            border: 1px solid #fbc5c2;
             display: block;
         }
         .message-box.info {
-            background: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
+            background: #e1edfc;
+            color: #1b4c7c;
+            border: 1px solid #b9d4f0;
             display: block;
         }
         .loading {
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.4);
             border-radius: 50%;
             border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
+            animation: spin 0.8s linear infinite;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(5px); } 
+            to { opacity: 1; transform: translateY(0); } 
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(8px); } 
+            to { opacity: 1; transform: translateY(0); } 
         }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        small {
-            color: #7f8c8d;
-            font-size: 12px;
-            display: block;
-            margin-top: 4px;
-        }
+
+        /* CARDS COMPACTOS CON EFECTO PROFESIONAL */
         .result-box {
-            background: #f0f3f6;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 25px;
-            transition: box-shadow 0.3s;
+            background: #f9fcff;
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 18px;
+            border: 1px solid #e6edf6;
+            transition: all 0.2s cubic-bezier(0.2,0,0,1);
+            box-shadow: 0 2px 5px rgba(0,20,40,0.05);
         }
         .result-box:hover {
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -8px rgba(20,60,120,0.2);
+            border-color: #cbd9ec;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+            margin-top: 12px;
         }
         .result-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px dashed #bdc3c7;
+            align-items: baseline;
+            padding: 6px 0;
+            border-bottom: 1px dashed #cbd6e4;
+            font-size: 0.9rem;
         }
         .result-item span:first-child {
-            font-weight: 600;
-            color: #2c3e50;
+            font-weight: 500;
+            color: #2e4d73;
         }
         .result-item span:last-child {
             font-weight: 700;
-            color: #27ae60;
+            color: #1d6b41;
+            background: #e6f1eb;
+            padding: 2px 8px;
+            border-radius: 40px;
+            font-size: 0.9rem;
         }
-        .single-product {
+
+        /* PRODUCTO COMPACTO */
+        .product-compact {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .product-row {
-            display: flex;
-            gap: 15px;
-            align-items: center;
             flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
         }
-        .product-row input {
-            flex: 1;
+        .product-compact .product-label {
+            font-weight: 600;
+            color: #1e3a5f;
+            min-width: 60px;
+            font-size: 0.85rem;
+        }
+        .product-compact input {
+            flex: 1 1 100px;
             min-width: 80px;
         }
-        .product-label {
-            font-weight: 600;
-            color: #2c3e50;
-            min-width: 100px;
+        .product-compact .readonly-field {
+            background: #eaf1fa;
+            width: auto;
+            flex: 0 1 70px;
+        }
+
+        .inline-metrics {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            background: #e9f0f8;
+            padding: 12px 14px;
+            border-radius: 16px;
+            margin-top: 8px;
+        }
+        .metric {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+        .metric span:first-child {
+            font-weight: 500;
+            color: #314e74;
+            font-size: 0.8rem;
+        }
+        .metric span:last-child {
+            font-weight: 700;
+            color: #0f3b5e;
+            background: white;
+            padding: 3px 12px;
+            border-radius: 40px;
+            font-size: 1rem;
+        }
+
+        small {
+            color: #6b7f94;
+            font-size: 0.7rem;
+            display: block;
+            margin-top: 2px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 22px;
+            color: #98aec6;
+            font-size: 0.75rem;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h2>🚀 ESTRATEGIA DE IMPULSACIÓN ZONA DARÍO CASTELLANOS</h2>
-        <!-- Subtítulo eliminado -->
+        <h2>📈 ESTRATEGIA DE IMPULSACIÓN · ZONA DARÍO CASTELLANOS</h2>
     </div>
 
     <div class="tabs">
-        <div class="tab active" onclick="cambiarPestana('registro')">📝 Registro PDV</div>
-        <div class="tab" onclick="cambiarPestana('calculos')">📊 Cálculos</div>
+        <div class="tab active" onclick="cambiarPestana('registro')">📋 REGISTRO PDV</div>
+        <div class="tab" onclick="cambiarPestana('calculos')">📐 ANÁLISIS · CUOTAS</div>
     </div>
 
-    <!-- ========== PESTAÑA REGISTRO PDV (sin cambios) ========== -->
+    <!-- PESTAÑA REGISTRO (modificada solo en el select de PDV) -->
     <div id="pestanaRegistro" class="tab-content active">
-        <h3>📌 Registro de Impulsación Diaria</h3>
+        <h3>📌 Captura diaria de impulsación</h3>
         <div class="form-grid">
             <div>
-                <label for="pdv">Punto de Venta (PDV) *</label>
-                <select id="pdv" required>
-                    <option value="">-- Seleccione --</option>
-                    <option value="ECO QUITO COLON">ECO QUITO COLON</option>
-                    <option value="PDV GUAYAQUIL CENTRO">PDV GUAYAQUIL CENTRO</option>
-                    <option value="PDV CUENCA NORTE">PDV CUENCA NORTE</option>
-                    <option value="PDV MANTA SUR">PDV MANTA SUR</option>
-                    <option value="PDV AMBATO CENTRO">PDV AMBATO CENTRO</option>
-                </select>
+                <label for="pdv">PDV *</label>
+                <select id="pdv" required></select> <!-- se llena con JS -->
             </div>
             <div>
                 <label for="colaborador">Colaborador *</label>
                 <input type="text" id="colaborador" placeholder="Ej: JUAN PEREZ" required 
                        oninput="this.value = this.value.toUpperCase()">
-                <small>Mayúsculas automáticas</small>
+                <small>mayúsculas automáticas</small>
             </div>
             <div>
-                <label for="codigo">Código del Producto *</label>
-                <input type="text" id="codigo" placeholder="Ej: 0000132840" required>
-                <small>🔒 Se agregará automáticamente un apóstrofe para conservar ceros</small>
+                <label for="codigo">Código producto *</label>
+                <input type="text" id="codigo" placeholder="0000132840" required>
+                <small>🔒 se agrega apóstrofe</small>
             </div>
             <div>
-                <label for="nombreProducto">Nombre del Producto *</label>
-                <input type="text" id="nombreProducto" placeholder="Ej: ALQUA CEP NANO CARBON" required>
+                <label for="nombreProducto">Nombre producto *</label>
+                <input type="text" id="nombreProducto" placeholder="ALQUA CEP NANO CARBON" required>
             </div>
             <div>
-                <label for="ventaRealizada">VENTA REALIZADA HOY DIA *</label>
-                <input type="number" id="ventaRealizada" placeholder="Ej: 250" min="1" required>
+                <label for="ventaRealizada">Venta hoy *</label>
+                <input type="number" id="ventaRealizada" placeholder="250" min="1" required>
             </div>
         </div>
         <button class="btn-send" onclick="enviarRegistroPDV()" id="btnRegistro">
-            <span>💾</span> GUARDAR
+            <span>💾</span> GUARDAR REGISTRO
         </button>
     </div>
 
-    <!-- ========== PESTAÑA CÁLCULOS (totalmente modificada) ========== -->
+    <!-- PESTAÑA CÁLCULOS rediseñada para COMPACTO + PROFESIONAL -->
     <div id="pestanaCalculos" class="tab-content">
-        <h3>📊 Análisis y Proyecciones</h3>
+        <h3>📊 Proyecciones y cuotas · Analítica</h3>
 
-        <!-- SECCIÓN TRANSACCIONES (meses: Dic, Ene, Feb) -->
+        <!-- TRANSACCIONES POR PDV (compacto) -->
         <div class="result-box">
-            <h4>🏪 Transacciones por PDV</h4>
-            <div class="form-grid">
+            <h4>🏪 Transacciones · últimos 3 meses</h4>
+            <div class="form-grid" style="grid-template-columns: 1fr 0.8fr 0.8fr 0.8fr 0.8fr;">
                 <div>
-                    <label for="pdvCalculos">PDV (opcional)</label>
-                    <select id="pdvCalculos">
-                        <option value="">-- No especificar --</option>
-                        <option value="ECO QUITO COLON">ECO QUITO COLON</option>
-                        <option value="PDV GUAYAQUIL CENTRO">PDV GUAYAQUIL CENTRO</option>
-                        <option value="PDV CUENCA NORTE">PDV CUENCA NORTE</option>
-                    </select>
+                    <label>PDV (filtro)</label>
+                    <select id="pdvCalculos"></select>
                 </div>
-                <div>
-                    <label for="ventasDic">Diciembre</label>
-                    <input type="number" id="ventasDic" min="0" step="1" value="2500">
-                </div>
-                <div>
-                    <label for="ventasEne">Enero</label>
-                    <input type="number" id="ventasEne" min="0" step="1" value="3000">
-                </div>
-                <div>
-                    <label for="ventasFeb">Febrero</label>
-                    <input type="number" id="ventasFeb" min="0" step="1" value="2000">
-                </div>
-                <div>
-                    <label for="numColaboradores">N° Colaboradores *</label>
-                    <input type="number" id="numColaboradores" min="1" value="3" required>
-                </div>
+                <div><label>Dic</label><input type="number" id="ventasDic" value="2500"></div>
+                <div><label>Ene</label><input type="number" id="ventasEne" value="3000"></div>
+                <div><label>Feb</label><input type="number" id="ventasFeb" value="2000"></div>
+                <div><label># Colab.</label><input type="number" id="numColaboradores" value="3" min="1"></div>
             </div>
-            <div class="result-item">
-                <span>TOTAL TRANSACCIONES:</span>
-                <span id="totalTransacciones">7500</span>
-            </div>
-            <div class="result-item">
-                <span>LÍNEA BASE (PROMEDIO):</span>
-                <span id="lineaBaseTransacciones">2500</span>
-            </div>
-            <div class="result-item">
-                <span>IMPULSACIONES EFECTIVAS (30%):</span>
-                <span id="impulsacionesEfectivas">750</span>
-            </div>
-            <div class="result-item">
-                <span>IMP. POR COLABORADOR:</span>
-                <span id="impXColaborador">250</span>
+            <div class="result-grid">
+                <div class="result-item"><span>TOTAL</span><span id="totalTransacciones">7500</span></div>
+                <div class="result-item"><span>LÍNEA BASE</span><span id="lineaBaseTransacciones">2500</span></div>
+                <div class="result-item"><span>IMPULS. EFECTIVAS (30%)</span><span id="impulsacionesEfectivas">750</span></div>
+                <div class="result-item"><span>IMP. POR COLAB.</span><span id="impXColaborador">250</span></div>
             </div>
         </div>
 
-        <!-- SECCIÓN PRODUCTO ÚNICO (meses: Dic, Ene, Feb) -->
+        <!-- PRODUCTO ÚNICO (compacto horizontal) -->
         <div class="result-box">
-            <h4>📦 Producto – Línea Base</h4>
-            <div class="single-product">
-                <div class="product-row">
-                    <span class="product-label">Nombre del Producto:</span>
-                    <input type="text" id="productoNombre" value="ALQUA CEP NANO CARBON" placeholder="Ej: ALQUA CEP NANO CARBON">
-                </div>
-                <div class="product-row">
-                    <span class="product-label">Ventas Diciembre:</span>
-                    <input type="number" id="prodDic" min="0" step="1" value="4">
-                </div>
-                <div class="product-row">
-                    <span class="product-label">Ventas Enero:</span>
-                    <input type="number" id="prodEne" min="0" step="1" value="3">
-                </div>
-                <div class="product-row">
-                    <span class="product-label">Ventas Febrero:</span>
-                    <input type="number" id="prodFeb" min="0" step="1" value="3">
-                </div>
-                <div class="product-row">
-                    <span class="product-label">Total Producto:</span>
-                    <input type="number" id="prodTotal" class="readonly-field" readonly value="10">
-                </div>
-                <div class="product-row">
-                    <span class="product-label">Línea Base Producto:</span>
-                    <input type="number" id="prodLB" class="readonly-field" readonly value="3.33" step="0.01">
-                </div>
+            <h4>📦 Producto estrella · línea base</h4>
+            <div class="product-compact">
+                <span class="product-label">Nombre</span>
+                <input type="text" id="productoNombre" value="ALQUA CEP NANO CARBON" placeholder="Producto">
+            </div>
+            <div class="product-compact" style="flex-wrap: wrap; gap: 6px;">
+                <span class="product-label">Ventas</span>
+                <input type="number" id="prodDic" value="4" placeholder="Dic">
+                <input type="number" id="prodEne" value="3" placeholder="Ene">
+                <input type="number" id="prodFeb" value="3" placeholder="Feb">
+                <input type="number" id="prodTotal" class="readonly-field" readonly value="10" style="max-width:70px;" placeholder="Total">
+                <input type="number" id="prodLB" class="readonly-field" readonly value="3.33" step="0.01" style="max-width:70px;" placeholder="LB">
+            </div>
+            <div class="inline-metrics">
+                <div class="metric"><span>Total producto</span><span id="totalProdDisplay">10</span></div>
+                <div class="metric"><span>Línea base</span><span id="lbProdDisplay">3.33</span></div>
             </div>
         </div>
 
-        <!-- SECCIÓN CUOTAS (con días efectivos editables) -->
+        <!-- CUOTAS MENSUALES Y DIARIAS -->
         <div class="result-box">
-            <h4>🎯 Cuotas Mensuales y Diarias</h4>
-            <div class="form-grid">
-                <div>
-                    <label for="diasEfectivos">Días efectivos *</label>
-                    <input type="number" id="diasEfectivos" min="1" value="21" required>
+            <h4>🎯 Cuotas · objetivo impulsación</h4>
+            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                <div style="min-width: 120px;">
+                    <label>Días efectivos</label>
+                    <input type="number" id="diasEfectivos" value="21" min="1" style="width:100px;">
                 </div>
-            </div>
-            <div class="result-item">
-                <span>CUOTA MENSUAL PRODUCTO:</span>
-                <span id="cuotaMensual">253</span>
-            </div>
-            <div class="result-item">
-                <span>CUOTA DIARIA:</span>
-                <span id="cuotaDiaria">12.05</span>
+                <div class="metric"><span>Cuota mensual</span><span id="cuotaMensual">253</span></div>
+                <div class="metric"><span>Cuota diaria</span><span id="cuotaDiaria">12.05</span></div>
             </div>
         </div>
 
         <button class="btn-send" onclick="enviarCalculos()" id="btnCalculos">
-            <span>💾</span> GUARDAR
+            <span>💾</span> GUARDAR ANÁLISIS
         </button>
     </div>
 
-    <!-- Mensajes de estado -->
+    <!-- Mensajes flotantes -->
     <div id="messageBox" class="message-box"></div>
-
-    <div class="footer" style="text-align:center; margin-top:25px; color:#95a5a6;">
-        © 2026 Estrategia de Impulsación – Zona Darío Castellanos
-    </div>
+    <div class="footer">© 2026 · Datos analíticos · Zona Darío Castellanos</div>
 </div>
 
 <script>
-    // ==================== CONFIGURACIÓN ====================
-    const googleSheetsUrl = "https://script.google.com/macros/s/AKfycbwzjiNZpWIX6U6czpbcJy6WbtDyKE62QsQFh8Zj_E2PHGA3osmYihip7Vh7XZxEL6N9/exec";
+    // ==================== LISTA COMPLETA DE PDV (81) ====================
+    const pdvList = [
+        "ECO ANDINATEL OTAVALO", "ECO ANTONIO ANTE SAN ROQUE", "ECO ATUNTAQUI 2", "ECO ATUNTAQUI CENTRAL",
+        "ECO ATUNTAQUI LUIS LEORO", "ECO ATUNTAQUI PICHINCHA", "ECO BOLIVAR ATUNTAQUI", "ECO CARCHI BOLIVAR",
+        "ECO CARCHI HUACA", "ECO CENTRAL SAN GABRIEL", "ECO CLINICA IBARRA", "ECO COTACACHI LAS LOMAS",
+        "ECO COTACACHI MERCADO PRINCIPAL", "ECO COTACACHI QUIROGA", "ECO CRUZ ROJA OTAVALO", "ECO EL ANGEL",
+        "ECO EL ANGEL PARQUE CENTRAL", "ECO EL CISNE", "ECO GONZALEZ SUAREZ COTACACHI", "ECO HOSP SAN VICENTE DE PAUL",
+        "ECO IBARRA 10 DE AGOSTO", "ECO IBARRA 13 DE ABRIL", "ECO IBARRA AJAVI", "ECO IBARRA AV JAIME ROLDOS",
+        "ECO IBARRA BOLA AMARILLA", "ECO IBARRA CARANQUI", "ECO IBARRA CRISTOBAL DE TROYA", "ECO IBARRA EL CARMEN",
+        "ECO IBARRA EL RETORNO", "ECO IBARRA EUGENIO ESPEJO", "ECO IBARRA FRAY VACAS", "ECO IBARRA GALO PLAZA",
+        "ECO IBARRA HOSPITAL METROPOLITANO", "ECO IBARRA HUERTOS FAMILIARES", "ECO IBARRA INGLESA", "ECO IBARRA JUAN DE VELASCO",
+        "ECO IBARRA LA CANDELARIA", "ECO IBARRA LA MERCED", "ECO IBARRA LA VICTORIA", "ECO IBARRA LUIS VARGAS TORRES",
+        "ECO IBARRA MARIANO ACOSTA", "ECO IBARRA MERCADO AMAZONAS", "ECO IBARRA OBELISCO", "ECO IBARRA PARIS",
+        "ECO IBARRA PARQUE LA MERCED", "ECO IBARRA PILANQUI", "ECO IBARRA PRIORATO", "ECO IBARRA RAFAEL SANCHEZ",
+        "ECO IBARRA SANTA MARIANITA", "ECO IBARRA SANTA MONICA", "ECO IBARRA SUDAMERICANA", "ECO IBARRA TEODORO GOMEZ",
+        "ECO IMBABURA ANDRADE MARIN", "ECO JULIO ANDRADE", "ECO MIRA", "ECO MODERNA", "ECO OBISPO MOSQUERA",
+        "ECO OTAVALO", "ECO OTAVALO 31 DE OCTUBRE", "ECO OTAVALO AV ATAHUALPA", "ECO OTAVALO BOLIVAR",
+        "ECO OTAVALO COPACABANA", "ECO OTAVALO LOS CORAZAS", "ECO OTAVALO LUIS CISNEROS", "ECO OTAVALO MODESTO JARAMILLO",
+        "ECO OTAVALO SAN PABLO", "ECO OTAVALO SUCRE", "ECO PIMAMPIRO", "ECO PIMAMPIRO PAQUISHA",
+        "ECO SAN ANTONIO DE IBARRA", "ECO SAN GABRIEL", "ECO SANCHEZ Y CIFUENTES", "ECO TULCAN ANDRES BELLO",
+        "ECO TULCAN LUCIANO CORAL", "ECO TULCAN PARQUE AYORA", "ECO TULCAN ROBERTO GRIJALVA", "ECO TULCAN RUIZ",
+        "ECO TULCAN SUCRE", "ECO URCUQUI", "ECO VEINTIMILLA TULCAN", "MEDI IBARRA MARIANO ACOSTA"
+    ];
+
+    // ==================== INICIALIZAR SELECTS CON PDV ====================
+    function llenarSelects() {
+        const selectReg = document.getElementById('pdv');
+        const selectCalc = document.getElementById('pdvCalculos');
+
+        // Limpiar opciones actuales (excepto la primera si es "Seleccione")
+        selectReg.innerHTML = '<option value="">-- Seleccione PDV --</option>';
+        selectCalc.innerHTML = '<option value="">-- No especificar --</option>';
+
+        pdvList.forEach(pdv => {
+            let optionReg = document.createElement('option');
+            optionReg.value = pdv;
+            optionReg.textContent = pdv;
+            selectReg.appendChild(optionReg);
+
+            let optionCalc = document.createElement('option');
+            optionCalc.value = pdv;
+            optionCalc.textContent = pdv;
+            selectCalc.appendChild(optionCalc);
+        });
+    }
 
     // ==================== CAMBIO DE PESTAÑAS ====================
     function cambiarPestana(pestana) {
@@ -433,49 +477,51 @@
         } else {
             document.querySelectorAll('.tab')[1].classList.add('active');
             document.getElementById('pestanaCalculos').classList.add('active');
-            calcularTodo(); // actualizar cálculos al entrar
+            calcularTodo();
         }
         ocultarMensaje();
     }
 
-    // ==================== CÁLCULOS AUTOMÁTICOS (PESTAÑA CÁLCULOS) ====================
+    // ==================== CÁLCULOS EN VIVO ====================
     function calcularTodo() {
-        // --- Transacciones con meses Dic, Ene, Feb ---
+        // Transacciones
         const dic = parseFloat(document.getElementById('ventasDic').value) || 0;
         const ene = parseFloat(document.getElementById('ventasEne').value) || 0;
         const feb = parseFloat(document.getElementById('ventasFeb').value) || 0;
-        const numColab = parseInt(document.getElementById('numColaboradores').value) || 1;
+        const colab = parseInt(document.getElementById('numColaboradores').value) || 1;
 
-        const totalTrans = dic + ene + feb;
-        const lineaBase = totalTrans / 3;
-        const impulsaciones = lineaBase * 0.3;
-        const impXColab = impulsaciones / numColab;
+        const total = dic + ene + feb;
+        const lb = total / 3;
+        const impuls = lb * 0.3;
+        const impXCol = impuls / colab;
 
-        document.getElementById('totalTransacciones').innerText = totalTrans.toFixed(0);
-        document.getElementById('lineaBaseTransacciones').innerText = lineaBase.toFixed(0);
-        document.getElementById('impulsacionesEfectivas').innerText = impulsaciones.toFixed(0);
-        document.getElementById('impXColaborador').innerText = impXColab.toFixed(0);
+        document.getElementById('totalTransacciones').innerText = Math.round(total);
+        document.getElementById('lineaBaseTransacciones').innerText = Math.round(lb);
+        document.getElementById('impulsacionesEfectivas').innerText = Math.round(impuls);
+        document.getElementById('impXColaborador').innerText = Math.round(impXCol);
 
-        // --- Producto único (Dic, Ene, Feb) ---
-        const prodDic = parseFloat(document.getElementById('prodDic').value) || 0;
-        const prodEne = parseFloat(document.getElementById('prodEne').value) || 0;
-        const prodFeb = parseFloat(document.getElementById('prodFeb').value) || 0;
-        const prodTotal = prodDic + prodEne + prodFeb;
-        const prodLB = prodTotal / 3;
+        // Producto
+        const pDic = parseFloat(document.getElementById('prodDic').value) || 0;
+        const pEne = parseFloat(document.getElementById('prodEne').value) || 0;
+        const pFeb = parseFloat(document.getElementById('prodFeb').value) || 0;
+        const pTotal = pDic + pEne + pFeb;
+        const pLB = pTotal / 3;
 
-        document.getElementById('prodTotal').value = prodTotal;
-        document.getElementById('prodLB').value = prodLB.toFixed(2);
+        document.getElementById('prodTotal').value = pTotal;
+        document.getElementById('prodLB').value = pLB.toFixed(2);
+        document.getElementById('totalProdDisplay').innerText = pTotal;
+        document.getElementById('lbProdDisplay').innerText = pLB.toFixed(2);
 
-        // --- Cuotas ---
+        // Cuotas
         const dias = parseInt(document.getElementById('diasEfectivos').value) || 1;
-        const cuotaMensual = impXColab + prodLB;
-        const cuotaDiaria = cuotaMensual / dias;
+        const cuotaMens = impXCol + pLB;
+        const cuotaDia = cuotaMens / dias;
 
-        document.getElementById('cuotaMensual').innerText = cuotaMensual.toFixed(0);
-        document.getElementById('cuotaDiaria').innerText = cuotaDiaria.toFixed(2);
+        document.getElementById('cuotaMensual').innerText = Math.round(cuotaMens);
+        document.getElementById('cuotaDiaria').innerText = cuotaDia.toFixed(2);
     }
 
-    // Listeners para actualizar automáticamente
+    // Listeners para actualización automática
     document.getElementById('ventasDic').addEventListener('input', calcularTodo);
     document.getElementById('ventasEne').addEventListener('input', calcularTodo);
     document.getElementById('ventasFeb').addEventListener('input', calcularTodo);
@@ -485,7 +531,7 @@
     document.getElementById('prodFeb').addEventListener('input', calcularTodo);
     document.getElementById('diasEfectivos').addEventListener('input', calcularTodo);
 
-    // ==================== ENVÍO DE REGISTRO PDV ====================
+    // ==================== ENVÍO DE REGISTRO ====================
     async function enviarRegistroPDV() {
         const pdv = document.getElementById('pdv').value.trim();
         const colaborador = document.getElementById('colaborador').value.trim();
@@ -495,14 +541,11 @@
 
         if (!pdv) return mostrarMensaje('⚠️ Selecciona un PDV', 'error');
         if (!colaborador) return mostrarMensaje('⚠️ Ingresa el colaborador', 'error');
-        if (!codigo) return mostrarMensaje('⚠️ Ingresa el código del producto', 'error');
+        if (!codigo) return mostrarMensaje('⚠️ Ingresa el código', 'error');
         if (!nombreProducto) return mostrarMensaje('⚠️ Ingresa el nombre del producto', 'error');
-        if (!ventaRealizada) return mostrarMensaje('⚠️ Ingresa la venta realizada hoy', 'error');
+        if (!ventaRealizada) return mostrarMensaje('⚠️ Ingresa la venta realizada', 'error');
 
-        // Agregar apóstrofe para conservar ceros en Sheets
-        if (!codigo.startsWith("'")) {
-            codigo = "'" + codigo;
-        }
+        if (!codigo.startsWith("'")) codigo = "'" + codigo;
 
         await enviarDatos({
             tipo: 'registro',
@@ -515,46 +558,35 @@
     // ==================== ENVÍO DE CÁLCULOS ====================
     async function enviarCalculos() {
         const pdv = document.getElementById('pdvCalculos').value.trim() || "No especificado";
-        const dic = document.getElementById('ventasDic').value || 0;
-        const ene = document.getElementById('ventasEne').value || 0;
-        const feb = document.getElementById('ventasFeb').value || 0;
-        const total = document.getElementById('totalTransacciones').innerText;
-        const lineaBase = document.getElementById('lineaBaseTransacciones').innerText;
-        const impulsaciones = document.getElementById('impulsacionesEfectivas').innerText;
-        const impXColab = document.getElementById('impXColaborador').innerText;
-        const numColab = document.getElementById('numColaboradores').value || 3;
-        const productoNombre = document.getElementById('productoNombre').value.trim() || "Producto genérico";
-        const prodDic = document.getElementById('prodDic').value || 0;
-        const prodEne = document.getElementById('prodEne').value || 0;
-        const prodFeb = document.getElementById('prodFeb').value || 0;
-        const prodTotal = document.getElementById('prodTotal').value;
-        const prodLB = document.getElementById('prodLB').value;
-        const dias = document.getElementById('diasEfectivos').value || 21;
-        const cuotaMensual = document.getElementById('cuotaMensual').innerText;
-        const cuotaDiaria = document.getElementById('cuotaDiaria').innerText;
-
-        await enviarDatos({
+        const datos = {
             tipo: 'calculos',
-            pdv, 
-            diciembre: dic, enero: ene, febrero: feb,
-            totalTransacciones: total,
-            lineaBaseTransacciones: lineaBase,
-            impulsacionesEfectivas: impulsaciones,
-            impXColaborador: impXColab,
-            numeroColaboradores: numColab,
-            productoNombre,
-            ventasProducto: { dic: prodDic, ene: prodEne, feb: prodFeb },
-            totalProducto: prodTotal,
-            lineaBaseProducto: prodLB,
-            diasEfectivos: dias,
-            cuotaMensual,
-            cuotaDiaria,
+            pdv,
+            diciembre: document.getElementById('ventasDic').value,
+            enero: document.getElementById('ventasEne').value,
+            febrero: document.getElementById('ventasFeb').value,
+            totalTransacciones: document.getElementById('totalTransacciones').innerText,
+            lineaBaseTransacciones: document.getElementById('lineaBaseTransacciones').innerText,
+            impulsacionesEfectivas: document.getElementById('impulsacionesEfectivas').innerText,
+            impXColaborador: document.getElementById('impXColaborador').innerText,
+            numeroColaboradores: document.getElementById('numColaboradores').value,
+            productoNombre: document.getElementById('productoNombre').value.trim() || "Producto genérico",
+            ventasProducto: JSON.stringify({
+                dic: document.getElementById('prodDic').value,
+                ene: document.getElementById('prodEne').value,
+                feb: document.getElementById('prodFeb').value
+            }),
+            totalProducto: document.getElementById('prodTotal').value,
+            lineaBaseProducto: document.getElementById('prodLB').value,
+            diasEfectivos: document.getElementById('diasEfectivos').value,
+            cuotaMensual: document.getElementById('cuotaMensual').innerText,
+            cuotaDiaria: document.getElementById('cuotaDiaria').innerText,
             fecha: new Date().toLocaleDateString('es-EC'),
             hora: new Date().toLocaleTimeString('es-EC', { hour12: false })
-        }, 'btnCalculos', 'calculos');
+        };
+        await enviarDatos(datos, 'btnCalculos', 'calculos');
     }
 
-    // ==================== FUNCIÓN GENÉRICA DE ENVÍO ====================
+    // ==================== ENVÍO GENÉRICO ====================
     async function enviarDatos(datos, botonId, tipoForm) {
         const btn = document.getElementById(botonId);
         const textoOriginal = btn.innerHTML;
@@ -565,15 +597,10 @@
         try {
             const formData = new URLSearchParams();
             for (let key in datos) {
-                // Si algún valor es objeto, lo convertimos a JSON string
-                if (typeof datos[key] === 'object') {
-                    formData.append(key, JSON.stringify(datos[key]));
-                } else {
-                    formData.append(key, datos[key]);
-                }
+                formData.append(key, datos[key]);
             }
 
-            await fetch(googleSheetsUrl, {
+            await fetch('https://script.google.com/macros/s/AKfycbwzjiNZpWIX6U6czpbcJy6WbtDyKE62QsQFh8Zj_E2PHGA3osmYihip7Vh7XZxEL6N9/exec', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -581,8 +608,6 @@
             });
 
             mostrarMensaje('✅ Guardado correctamente', 'success');
-
-            // Limpiar campos después de 1.5 segundos (solo para registro)
             setTimeout(() => {
                 if (tipoForm === 'registro') {
                     document.getElementById('pdv').value = '';
@@ -593,7 +618,6 @@
                 }
                 ocultarMensaje();
             }, 1500);
-
         } catch (error) {
             console.error(error);
             mostrarMensaje('❌ Error de conexión', 'error');
@@ -608,14 +632,16 @@
         msg.textContent = texto;
         msg.className = 'message-box ' + tipo;
     }
-
     function ocultarMensaje() {
         document.getElementById('messageBox').textContent = '';
         document.getElementById('messageBox').className = 'message-box';
     }
 
-    // Inicializar cálculos al cargar
-    window.onload = calcularTodo;
+    // Inicializar
+    window.onload = function() {
+        llenarSelects();
+        calcularTodo();
+    };
 </script>
 </body>
 </html>
