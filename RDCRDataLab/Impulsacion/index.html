@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estrategia de Impulsación · Analista de Datos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Estrategia de Impulsación · Móvil</title>
     <style>
         * {
             box-sizing: border-box;
@@ -11,13 +11,13 @@
             padding: 0;
         }
         body {
-            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(145deg, #1e2b4f 0%, #2d3e6e 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 16px;
+            align-items: flex-start;
+            padding: 10px;
         }
         .container {
             background: rgba(255, 255, 255, 0.98);
@@ -25,40 +25,43 @@
             border-radius: 24px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
             width: 100%;
-            max-width: 880px;
-            padding: 20px;
+            max-width: 480px; /* para móvil, pero se adapta */
+            padding: 16px;
             transition: all 0.2s ease;
+            margin: 0 auto;
         }
         .header h2 {
             color: #0b1a33;
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.3px;
             border-bottom: 2px solid #eef2f6;
-            padding-bottom: 12px;
-            margin-bottom: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 16px;
             text-align: center;
+            line-height: 1.3;
         }
         .tabs {
             display: flex;
-            gap: 6px;
-            margin-bottom: 20px;
+            gap: 4px;
+            margin-bottom: 16px;
             background: #f0f4fa;
-            padding: 6px;
+            padding: 4px;
             border-radius: 40px;
         }
         .tab {
             flex: 1;
-            padding: 10px 16px;
+            padding: 8px 4px;
             background: transparent;
             border-radius: 32px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             color: #2c3e50;
             transition: all 0.2s;
             text-align: center;
             border: none;
+            white-space: nowrap;
         }
         .tab.active {
             background: white;
@@ -74,43 +77,49 @@
         }
         h3 {
             color: #0f2b45;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             border-left: 4px solid #3b6ea5;
-            padding-left: 14px;
+            padding-left: 12px;
         }
         h4 {
             color: #1e3a5f;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin: 0 0 12px 0;
-            letter-spacing: 0.3px;
+            margin: 0 0 10px 0;
+            letter-spacing: 0.2px;
         }
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-template-columns: 1fr;
             gap: 10px;
             margin-bottom: 16px;
+        }
+        @media (min-width: 400px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         label {
             display: block;
             font-weight: 500;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
             color: #4a5b6e;
             margin-bottom: 3px;
         }
         input, select {
             width: 100%;
-            padding: 8px 10px;
+            padding: 10px 10px;
             border: 1.5px solid #dde3ea;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 0.9rem;
             transition: 0.15s;
             background: white;
             font-family: inherit;
+            -webkit-appearance: none;
         }
         input:focus, select:focus {
             border-color: #2e5a9c;
@@ -127,7 +136,7 @@
             width: 100%;
             background: #1d4e7c;
             color: white;
-            padding: 12px;
+            padding: 14px 10px;
             border: none;
             border-radius: 40px;
             font-size: 1rem;
@@ -139,7 +148,7 @@
             gap: 8px;
             transition: 0.15s;
             box-shadow: 0 6px 14px rgba(25,75,125,0.3);
-            margin-top: 20px;
+            margin-top: 16px;
         }
         .btn-send:hover {
             background: #2368a5;
@@ -152,13 +161,13 @@
             transform: none;
         }
         .message-box {
-            margin-top: 16px;
+            margin-top: 12px;
             padding: 10px;
             border-radius: 12px;
             display: none;
             text-align: center;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             animation: slideUp 0.2s;
         }
         .message-box.success {
@@ -198,18 +207,18 @@
             to { opacity: 1; transform: translateY(0); } 
         }
 
-        /* CARDS COMPACTOS CON EFECTO PROFESIONAL */
+        /* CARDS COMPACTOS */
         .result-box {
             background: #f9fcff;
             border-radius: 18px;
-            padding: 16px;
-            margin-bottom: 18px;
+            padding: 14px;
+            margin-bottom: 14px;
             border: 1px solid #e6edf6;
             transition: all 0.2s cubic-bezier(0.2,0,0,1);
             box-shadow: 0 2px 5px rgba(0,20,40,0.05);
         }
         .result-box:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0 15px 25px -8px rgba(20,60,120,0.2);
             border-color: #cbd9ec;
         }
@@ -217,16 +226,16 @@
         .result-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px 16px;
-            margin-top: 12px;
+            gap: 8px;
+            margin-top: 10px;
         }
         .result-item {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            padding: 6px 0;
+            align-items: center;
+            padding: 5px 0;
             border-bottom: 1px dashed #cbd6e4;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .result-item span:first-child {
             font-weight: 500;
@@ -238,7 +247,8 @@
             background: #e6f1eb;
             padding: 2px 8px;
             border-radius: 40px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            white-space: nowrap;
         }
 
         /* PRODUCTO COMPACTO */
@@ -246,99 +256,107 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 8px;
+            margin-bottom: 10px;
         }
         .product-compact .product-label {
             font-weight: 600;
             color: #1e3a5f;
-            min-width: 60px;
-            font-size: 0.85rem;
+            min-width: 55px;
+            font-size: 0.8rem;
         }
         .product-compact input {
-            flex: 1 1 100px;
-            min-width: 80px;
+            flex: 1 1 80px;
+            min-width: 70px;
         }
         .product-compact .readonly-field {
             background: #eaf1fa;
-            width: auto;
             flex: 0 1 70px;
         }
 
         .inline-metrics {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
             background: #e9f0f8;
-            padding: 12px 14px;
+            padding: 10px 12px;
             border-radius: 16px;
             margin-top: 8px;
         }
         .metric {
             display: flex;
             align-items: baseline;
-            gap: 6px;
+            gap: 5px;
+            flex-wrap: wrap;
         }
         .metric span:first-child {
             font-weight: 500;
             color: #314e74;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
         .metric span:last-child {
             font-weight: 700;
             color: #0f3b5e;
             background: white;
-            padding: 3px 12px;
+            padding: 3px 10px;
             border-radius: 40px;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         small {
             color: #6b7f94;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             display: block;
             margin-top: 2px;
         }
         .footer {
             text-align: center;
-            margin-top: 22px;
+            margin-top: 18px;
             color: #98aec6;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
+        }
+
+        /* Ajustes para móvil muy pequeño */
+        @media (max-width: 360px) {
+            .container { padding: 12px; }
+            .tab { font-size: 0.7rem; }
+            .result-item span:last-child { padding: 2px 5px; }
+            .product-compact input { min-width: 60px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h2>📈 ESTRATEGIA DE IMPULSACIÓN · ZONA DARÍO CASTELLANOS</h2>
+        <h2>📈 ESTRATEGIA DE IMPULSACIÓN<br>ZONA DARÍO CASTELLANOS</h2>
     </div>
 
     <div class="tabs">
-        <div class="tab active" onclick="cambiarPestana('registro')">📋 REGISTRO PDV</div>
-        <div class="tab" onclick="cambiarPestana('calculos')">📐 ANÁLISIS · CUOTAS</div>
+        <div class="tab active" onclick="cambiarPestana('registro')">📋 REGISTRO</div>
+        <div class="tab" onclick="cambiarPestana('calculos')">📐 ANÁLISIS</div>
     </div>
 
-    <!-- PESTAÑA REGISTRO (modificada solo en el select de PDV) -->
+    <!-- PESTAÑA REGISTRO -->
     <div id="pestanaRegistro" class="tab-content active">
-        <h3>📌 Captura diaria de impulsación</h3>
+        <h3>📌 Captura diaria</h3>
         <div class="form-grid">
             <div>
                 <label for="pdv">PDV *</label>
-                <select id="pdv" required></select> <!-- se llena con JS -->
+                <select id="pdv" required></select>
             </div>
             <div>
                 <label for="colaborador">Colaborador *</label>
                 <input type="text" id="colaborador" placeholder="Ej: JUAN PEREZ" required 
                        oninput="this.value = this.value.toUpperCase()">
-                <small>mayúsculas automáticas</small>
+                <small>mayúsculas</small>
             </div>
             <div>
-                <label for="codigo">Código producto *</label>
+                <label for="codigo">Código *</label>
                 <input type="text" id="codigo" placeholder="0000132840" required>
                 <small>🔒 se agrega apóstrofe</small>
             </div>
             <div>
-                <label for="nombreProducto">Nombre producto *</label>
+                <label for="nombreProducto">Producto *</label>
                 <input type="text" id="nombreProducto" placeholder="ALQUA CEP NANO CARBON" required>
             </div>
             <div>
@@ -351,62 +369,62 @@
         </button>
     </div>
 
-    <!-- PESTAÑA CÁLCULOS rediseñada para COMPACTO + PROFESIONAL -->
+    <!-- PESTAÑA CÁLCULOS -->
     <div id="pestanaCalculos" class="tab-content">
-        <h3>📊 Proyecciones y cuotas · Analítica</h3>
+        <h3>📊 Proyecciones y cuotas</h3>
 
-        <!-- TRANSACCIONES POR PDV (compacto) -->
+        <!-- TRANSACCIONES -->
         <div class="result-box">
-            <h4>🏪 Transacciones · últimos 3 meses</h4>
-            <div class="form-grid" style="grid-template-columns: 1fr 0.8fr 0.8fr 0.8fr 0.8fr;">
+            <h4>🏪 Transacciones últimos 3 meses</h4>
+            <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
                 <div>
                     <label>PDV (filtro)</label>
                     <select id="pdvCalculos"></select>
                 </div>
+                <div><label># Colab.</label><input type="number" id="numColaboradores" value="3" min="1"></div>
                 <div><label>Dic</label><input type="number" id="ventasDic" value="2500"></div>
                 <div><label>Ene</label><input type="number" id="ventasEne" value="3000"></div>
                 <div><label>Feb</label><input type="number" id="ventasFeb" value="2000"></div>
-                <div><label># Colab.</label><input type="number" id="numColaboradores" value="3" min="1"></div>
             </div>
             <div class="result-grid">
                 <div class="result-item"><span>TOTAL</span><span id="totalTransacciones">7500</span></div>
                 <div class="result-item"><span>LÍNEA BASE</span><span id="lineaBaseTransacciones">2500</span></div>
-                <div class="result-item"><span>IMPULS. EFECTIVAS (30%)</span><span id="impulsacionesEfectivas">750</span></div>
-                <div class="result-item"><span>IMP. POR COLAB.</span><span id="impXColaborador">250</span></div>
+                <div class="result-item"><span>IMPULS. 30%</span><span id="impulsacionesEfectivas">750</span></div>
+                <div class="result-item"><span>IMP/COLAB</span><span id="impXColaborador">250</span></div>
             </div>
         </div>
 
-        <!-- PRODUCTO ÚNICO (compacto horizontal) -->
+        <!-- PRODUCTO -->
         <div class="result-box">
             <h4>📦 Producto estrella · línea base</h4>
             <div class="product-compact">
                 <span class="product-label">Nombre</span>
                 <input type="text" id="productoNombre" value="ALQUA CEP NANO CARBON" placeholder="Producto">
             </div>
-            <div class="product-compact" style="flex-wrap: wrap; gap: 6px;">
+            <div class="product-compact" style="flex-wrap: wrap; gap: 5px;">
                 <span class="product-label">Ventas</span>
                 <input type="number" id="prodDic" value="4" placeholder="Dic">
                 <input type="number" id="prodEne" value="3" placeholder="Ene">
                 <input type="number" id="prodFeb" value="3" placeholder="Feb">
-                <input type="number" id="prodTotal" class="readonly-field" readonly value="10" style="max-width:70px;" placeholder="Total">
-                <input type="number" id="prodLB" class="readonly-field" readonly value="3.33" step="0.01" style="max-width:70px;" placeholder="LB">
+                <input type="number" id="prodTotal" class="readonly-field" readonly value="10" style="max-width:65px;" placeholder="Total">
+                <input type="number" id="prodLB" class="readonly-field" readonly value="3.33" step="0.01" style="max-width:65px;" placeholder="LB">
             </div>
             <div class="inline-metrics">
-                <div class="metric"><span>Total producto</span><span id="totalProdDisplay">10</span></div>
-                <div class="metric"><span>Línea base</span><span id="lbProdDisplay">3.33</span></div>
+                <div class="metric"><span>Total</span><span id="totalProdDisplay">10</span></div>
+                <div class="metric"><span>LB</span><span id="lbProdDisplay">3.33</span></div>
             </div>
         </div>
 
-        <!-- CUOTAS MENSUALES Y DIARIAS -->
+        <!-- CUOTAS -->
         <div class="result-box">
-            <h4>🎯 Cuotas · objetivo impulsación</h4>
-            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-                <div style="min-width: 120px;">
-                    <label>Días efectivos</label>
-                    <input type="number" id="diasEfectivos" value="21" min="1" style="width:100px;">
+            <h4>🎯 Cuotas · objetivo</h4>
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                <div style="min-width: 100px;">
+                    <label>Días efect.</label>
+                    <input type="number" id="diasEfectivos" value="21" min="1" style="width:80px;">
                 </div>
-                <div class="metric"><span>Cuota mensual</span><span id="cuotaMensual">253</span></div>
-                <div class="metric"><span>Cuota diaria</span><span id="cuotaDiaria">12.05</span></div>
+                <div class="metric"><span>Mensual</span><span id="cuotaMensual">253</span></div>
+                <div class="metric"><span>Diaria</span><span id="cuotaDiaria">12.05</span></div>
             </div>
         </div>
 
@@ -415,13 +433,13 @@
         </button>
     </div>
 
-    <!-- Mensajes flotantes -->
+    <!-- Mensajes -->
     <div id="messageBox" class="message-box"></div>
-    <div class="footer">© 2026 · Datos analíticos · Zona Darío Castellanos</div>
+    <div class="footer">© 2026 · Analítica · Zona Darío Castellanos</div>
 </div>
 
 <script>
-    // ==================== LISTA COMPLETA DE PDV (81) ====================
+    // LISTA COMPLETA DE PDV (81)
     const pdvList = [
         "ECO ANDINATEL OTAVALO", "ECO ANTONIO ANTE SAN ROQUE", "ECO ATUNTAQUI 2", "ECO ATUNTAQUI CENTRAL",
         "ECO ATUNTAQUI LUIS LEORO", "ECO ATUNTAQUI PICHINCHA", "ECO BOLIVAR ATUNTAQUI", "ECO CARCHI BOLIVAR",
@@ -445,21 +463,16 @@
         "ECO TULCAN SUCRE", "ECO URCUQUI", "ECO VEINTIMILLA TULCAN", "MEDI IBARRA MARIANO ACOSTA"
     ];
 
-    // ==================== INICIALIZAR SELECTS CON PDV ====================
     function llenarSelects() {
         const selectReg = document.getElementById('pdv');
         const selectCalc = document.getElementById('pdvCalculos');
-
-        // Limpiar opciones actuales (excepto la primera si es "Seleccione")
         selectReg.innerHTML = '<option value="">-- Seleccione PDV --</option>';
         selectCalc.innerHTML = '<option value="">-- No especificar --</option>';
-
         pdvList.forEach(pdv => {
             let optionReg = document.createElement('option');
             optionReg.value = pdv;
             optionReg.textContent = pdv;
             selectReg.appendChild(optionReg);
-
             let optionCalc = document.createElement('option');
             optionCalc.value = pdv;
             optionCalc.textContent = pdv;
@@ -467,7 +480,6 @@
         });
     }
 
-    // ==================== CAMBIO DE PESTAÑAS ====================
     function cambiarPestana(pestana) {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -482,9 +494,7 @@
         ocultarMensaje();
     }
 
-    // ==================== CÁLCULOS EN VIVO ====================
     function calcularTodo() {
-        // Transacciones
         const dic = parseFloat(document.getElementById('ventasDic').value) || 0;
         const ene = parseFloat(document.getElementById('ventasEne').value) || 0;
         const feb = parseFloat(document.getElementById('ventasFeb').value) || 0;
@@ -500,7 +510,6 @@
         document.getElementById('impulsacionesEfectivas').innerText = Math.round(impuls);
         document.getElementById('impXColaborador').innerText = Math.round(impXCol);
 
-        // Producto
         const pDic = parseFloat(document.getElementById('prodDic').value) || 0;
         const pEne = parseFloat(document.getElementById('prodEne').value) || 0;
         const pFeb = parseFloat(document.getElementById('prodFeb').value) || 0;
@@ -512,7 +521,6 @@
         document.getElementById('totalProdDisplay').innerText = pTotal;
         document.getElementById('lbProdDisplay').innerText = pLB.toFixed(2);
 
-        // Cuotas
         const dias = parseInt(document.getElementById('diasEfectivos').value) || 1;
         const cuotaMens = impXCol + pLB;
         const cuotaDia = cuotaMens / dias;
@@ -521,7 +529,7 @@
         document.getElementById('cuotaDiaria').innerText = cuotaDia.toFixed(2);
     }
 
-    // Listeners para actualización automática
+    // Listeners
     document.getElementById('ventasDic').addEventListener('input', calcularTodo);
     document.getElementById('ventasEne').addEventListener('input', calcularTodo);
     document.getElementById('ventasFeb').addEventListener('input', calcularTodo);
@@ -531,7 +539,6 @@
     document.getElementById('prodFeb').addEventListener('input', calcularTodo);
     document.getElementById('diasEfectivos').addEventListener('input', calcularTodo);
 
-    // ==================== ENVÍO DE REGISTRO ====================
     async function enviarRegistroPDV() {
         const pdv = document.getElementById('pdv').value.trim();
         const colaborador = document.getElementById('colaborador').value.trim();
@@ -555,7 +562,6 @@
         }, 'btnRegistro', 'registro');
     }
 
-    // ==================== ENVÍO DE CÁLCULOS ====================
     async function enviarCalculos() {
         const pdv = document.getElementById('pdvCalculos').value.trim() || "No especificado";
         const datos = {
@@ -586,7 +592,6 @@
         await enviarDatos(datos, 'btnCalculos', 'calculos');
     }
 
-    // ==================== ENVÍO GENÉRICO ====================
     async function enviarDatos(datos, botonId, tipoForm) {
         const btn = document.getElementById(botonId);
         const textoOriginal = btn.innerHTML;
@@ -637,7 +642,6 @@
         document.getElementById('messageBox').className = 'message-box';
     }
 
-    // Inicializar
     window.onload = function() {
         llenarSelects();
         calcularTodo();
