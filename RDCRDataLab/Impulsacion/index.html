@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Estrategia de Impulsación · Móvil</title>
     <style>
-        /* (los estilos se mantienen igual que en la versión anterior) */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -326,17 +325,17 @@
 <body>
 <div class="container">
     <div class="header">
-        <h2>📈 ESTRATEGIA DE IMPULSACIÓN<br>ZONA DARÍO CASTELLANOS</h2>
+        <h2>ESTRATEGIA DE IMPULSACION<br>ZONA DARIO CASTELLANOS</h2>
     </div>
 
     <div class="tabs">
-        <div class="tab active" onclick="cambiarPestana('registro')">📋 REGISTRO</div>
-        <div class="tab" onclick="cambiarPestana('calculos')">📐 ANÁLISIS</div>
+        <div class="tab active" onclick="cambiarPestana('registro')">REGISTRO</div>
+        <div class="tab" onclick="cambiarPestana('calculos')">CALCULOS</div>
     </div>
 
     <!-- PESTAÑA REGISTRO -->
     <div id="pestanaRegistro" class="tab-content active">
-        <h3>📌 Captura diaria</h3>
+        <h3>Captura diaria</h3>
         <div class="form-grid">
             <div>
                 <label for="pdv">PDV *</label>
@@ -351,7 +350,7 @@
             <div>
                 <label for="codigo">Código *</label>
                 <input type="text" id="codigo" placeholder="0000132840" required>
-                <small>🔒 se agrega apóstrofe</small>
+                <small>se agrega apóstrofe</small>
             </div>
             <div>
                 <label for="nombreProducto">Producto *</label>
@@ -363,71 +362,71 @@
             </div>
         </div>
         <button class="btn-send" onclick="enviarRegistroPDV()" id="btnRegistro">
-            <span>💾</span> GUARDAR REGISTRO
+            <span></span> GUARDAR REGISTRO
         </button>
     </div>
 
     <!-- PESTAÑA CÁLCULOS -->
     <div id="pestanaCalculos" class="tab-content">
-        <h3>📊 Proyecciones y cuotas</h3>
+        <h3>Proyecciones y cuotas</h3>
 
         <!-- TRANSACCIONES -->
         <div class="result-box">
-            <h4>🏪 Transacciones últimos 3 meses</h4>
+            <h4>Transacciones últimos 3 meses</h4>
             <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
                 <div>
                     <label>PDV (filtro)</label>
                     <select id="pdvCalculos"></select>
                 </div>
-                <div><label># Colab.</label><input type="number" id="numColaboradores" value="3" min="1"></div>
-                <div><label>Dic</label><input type="number" id="ventasDic" value="2500"></div>
-                <div><label>Ene</label><input type="number" id="ventasEne" value="3000"></div>
-                <div><label>Feb</label><input type="number" id="ventasFeb" value="2000"></div>
+                <div><label># Colab.</label><input type="number" id="numColaboradores" value="" min="1" placeholder="0"></div>
+                <div><label>Dic</label><input type="number" id="ventasDic" value="" placeholder="DIC"></div>
+                <div><label>Ene</label><input type="number" id="ventasEne" value="" placeholder="ENE"></div>
+                <div><label>Feb</label><input type="number" id="ventasFeb" value="" placeholder="FEB"></div>
             </div>
             <div class="result-grid">
-                <div class="result-item"><span>TOTAL</span><span id="totalTransacciones">7500</span></div>
-                <div class="result-item"><span>LÍNEA BASE</span><span id="lineaBaseTransacciones">2500</span></div>
-                <div class="result-item"><span>IMPULS. 30%</span><span id="impulsacionesEfectivas">750</span></div>
-                <div class="result-item"><span>IMP/COLAB</span><span id="impXColaborador">250</span></div>
+                <div class="result-item"><span>TOTAL</span><span id="totalTransacciones">0</span></div>
+                <div class="result-item"><span>PROMEDIO</span><span id="lineaBaseTransacciones">0</span></div>
+                <div class="result-item"><span>IMPULS. 30%</span><span id="impulsacionesEfectivas">0</span></div>
+                <div class="result-item"><span>IMP/COLAB</span><span id="impXColaborador">0</span></div>
             </div>
         </div>
 
         <!-- PRODUCTO -->
         <div class="result-box">
-            <h4>📦 Producto estrella · línea base</h4>
+            <h4>Linea base producto</h4>
             <div class="product-compact">
                 <span class="product-label">Nombre</span>
-                <input type="text" id="productoNombre" value="ALQUA CEP NANO CARBON" placeholder="Producto">
+                <input type="text" id="productoNombre" value="" placeholder="Producto">
             </div>
             <div class="product-compact" style="flex-wrap: wrap; gap: 5px;">
                 <span class="product-label">Ventas</span>
-                <input type="number" id="prodDic" value="4" placeholder="Dic">
-                <input type="number" id="prodEne" value="3" placeholder="Ene">
-                <input type="number" id="prodFeb" value="3" placeholder="Feb">
-                <input type="number" id="prodTotal" class="readonly-field" readonly value="10" style="max-width:65px;" placeholder="Total">
-                <input type="number" id="prodLB" class="readonly-field" readonly value="3.33" step="0.01" style="max-width:65px;" placeholder="LB">
+                <input type="number" id="prodDic" value="" placeholder="DIC">
+                <input type="number" id="prodEne" value="" placeholder="ENE">
+                <input type="number" id="prodFeb" value="" placeholder="FEB">
+                <input type="number" id="prodTotal" class="readonly-field" readonly value="0" style="max-width:65px;" placeholder="Total">
+                <input type="number" id="prodLB" class="readonly-field" readonly value="0.00" step="0.01" style="max-width:65px;" placeholder="PROM">
             </div>
             <div class="inline-metrics">
-                <div class="metric"><span>Total</span><span id="totalProdDisplay">10</span></div>
-                <div class="metric"><span>LB</span><span id="lbProdDisplay">3.33</span></div>
+                <div class="metric"><span>Total</span><span id="totalProdDisplay">0</span></div>
+                <div class="metric"><span>PROMEDIO</span><span id="lbProdDisplay">0.00</span></div>
             </div>
         </div>
 
         <!-- CUOTAS -->
         <div class="result-box">
-            <h4>🎯 Cuotas · objetivo</h4>
+            <h4>Cuotas · objetivo</h4>
             <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
                 <div style="min-width: 100px;">
                     <label>Días efect.</label>
                     <input type="number" id="diasEfectivos" value="21" min="1" style="width:80px;">
                 </div>
-                <div class="metric"><span>Mensual</span><span id="cuotaMensual">253</span></div>
-                <div class="metric"><span>Diaria</span><span id="cuotaDiaria">12.05</span></div>
+                <div class="metric"><span>Mensual</span><span id="cuotaMensual">0</span></div>
+                <div class="metric"><span>Diaria</span><span id="cuotaDiaria">0.00</span></div>
             </div>
         </div>
 
         <button class="btn-send" onclick="enviarCalculos()" id="btnCalculos">
-            <span>💾</span> GUARDAR ANÁLISIS
+            <span></span> GUARDAR ANALISIS
         </button>
     </div>
 
@@ -496,17 +495,17 @@
         const dic = parseFloat(document.getElementById('ventasDic').value) || 0;
         const ene = parseFloat(document.getElementById('ventasEne').value) || 0;
         const feb = parseFloat(document.getElementById('ventasFeb').value) || 0;
-        const colab = parseInt(document.getElementById('numColaboradores').value) || 1;
+        const colab = parseInt(document.getElementById('numColaboradores').value) || 1; // Si está vacío, se toma 1 para evitar división por cero
 
         const total = dic + ene + feb;
-        const lb = total / 3;
-        const impuls = lb * 0.3;                // 30% de la línea base
-        const impXCol = impuls / colab;          // dividido entre colaboradores
+        const lb = total / 3;                // Línea base (promedio)
+        const impuls = lb * 0.3;              // 30% de la línea base
+        const impXCol = impuls / colab;        // dividido entre colaboradores
 
         document.getElementById('totalTransacciones').innerText = Math.round(total);
         document.getElementById('lineaBaseTransacciones').innerText = Math.round(lb);
         document.getElementById('impulsacionesEfectivas').innerText = Math.round(impuls);
-        document.getElementById('impXColaborador').innerText = Math.round(impXCol); // ahora dividido
+        document.getElementById('impXColaborador').innerText = Math.round(impXCol);
 
         const pDic = parseFloat(document.getElementById('prodDic').value) || 0;
         const pEne = parseFloat(document.getElementById('prodEne').value) || 0;
