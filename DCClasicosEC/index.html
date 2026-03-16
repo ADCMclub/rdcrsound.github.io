@@ -9,10 +9,10 @@
   <link rel="icon" href="/img_radio/DCCLASICOS/3.png" type="image/png">
   <style>
     :root {
-      --neon-gold: #FFD700;
-      --neon-gold-glow: #FFEE77;
-      --gold: #C9A227;
-      --dark-gold: #B08C1E;
+      --neon-blue: #0088FF;        /* Azul neón más vivo */
+      --neon-blue-glow: #44CCFF;    /* Resplandor más claro e intenso */
+      --blue: #0066CC;              /* Azul sólido oscuro (ajustado) */
+      --dark-blue: #004499;         /* Azul muy oscuro (ajustado) */
       --black: #000000;
       --dark: #0A0A0A;
       --cream: #FFF8E7;
@@ -43,10 +43,10 @@
       top: 0;
       left: 0;
       height: 4px;
-      background: linear-gradient(90deg, var(--gold), var(--neon-gold-glow), var(--gold));
+      background: linear-gradient(90deg, var(--blue), var(--neon-blue-glow), var(--blue));
       width: 0%;
       z-index: 10000;
-      box-shadow: 0 0 15px var(--neon-gold);
+      box-shadow: 0 0 15px var(--neon-blue);
       transition: width 0.1s;
     }
 
@@ -57,7 +57,7 @@
       left: -100%;
       width: 50%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,215,0,0.12), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0,136,255,0.15), transparent);
       transform: skewX(-20deg);
       pointer-events: none;
       z-index: 9999;
@@ -83,9 +83,9 @@
       position: absolute;
       width: 3px;
       height: 3px;
-      background: var(--neon-gold);
+      background: var(--neon-blue);
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--neon-gold);
+      box-shadow: 0 0 8px var(--neon-blue);
       opacity: 0.5;
       transition: transform 0.2s;
     }
@@ -104,7 +104,7 @@
       position: absolute;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 30%);
+      background: radial-gradient(circle, rgba(0,136,255,0.1) 0%, transparent 30%);
       animation: waveMove 20s infinite linear;
     }
     .wave1 { top: -50%; left: -50%; animation-duration: 18s; }
@@ -138,8 +138,8 @@
       padding: 30px 25px;
       max-width: 500px;
       width: 100%;
-      border: 2px solid var(--neon-gold);
-      box-shadow: 0 0 50px rgba(255,215,0,0.4);
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 50px rgba(0,136,255,0.5);
       position: relative;
       transform: scale(0.9);
       transition: transform 0.3s;
@@ -153,7 +153,7 @@
       right: 15px;
       background: transparent;
       border: none;
-      color: var(--neon-gold);
+      color: var(--neon-blue);
       font-size: 2rem;
       cursor: pointer;
       width: 45px;
@@ -162,7 +162,7 @@
       transition: var(--transition);
     }
     .close-modal:hover {
-      background: rgba(255,215,0,0.2);
+      background: rgba(0,136,255,0.2);
       transform: rotate(180deg);
     }
     .modal-header i {
@@ -177,22 +177,22 @@
     .form-group label {
       display: block;
       margin-bottom: 8px;
-      color: var(--neon-gold);
+      color: var(--neon-blue);
       font-weight: 500;
     }
     .form-control {
       width: 100%;
       padding: 14px 18px;
       background: rgba(30,30,30,0.9);
-      border: 1px solid rgba(255,215,0,0.3);
+      border: 1px solid rgba(0,136,255,0.3);
       border-radius: 12px;
       color: white;
       font-size: 16px;
       transition: var(--transition);
     }
     .form-control:focus {
-      border-color: var(--neon-gold);
-      box-shadow: 0 0 15px rgba(255,215,0,0.3);
+      border-color: var(--neon-blue);
+      box-shadow: 0 0 15px rgba(0,136,255,0.4);
       outline: none;
     }
     .submit-btn {
@@ -221,7 +221,7 @@
       position: fixed;
       top: 15px;
       left: 15px;
-      background: linear-gradient(145deg, var(--neon-gold), var(--dark-gold));
+      background: linear-gradient(145deg, var(--neon-blue), var(--dark-blue));
       color: var(--black);
       border: none;
       border-radius: 50px;
@@ -231,14 +231,14 @@
       align-items: center;
       gap: 8px;
       z-index: 1001;
-      box-shadow: 0 0 20px var(--neon-gold);
+      box-shadow: 0 0 20px var(--neon-blue);
       transition: var(--transition);
       text-decoration: none;
       font-size: 0.9rem;
     }
     .back-button:hover {
       transform: translateX(-5px) scale(1.05);
-      box-shadow: 0 0 30px var(--neon-gold-glow);
+      box-shadow: 0 0 30px var(--neon-blue-glow);
     }
 
     /* ===== HEADER ===== */
@@ -248,7 +248,7 @@
       color: var(--cream);
       padding: 20px 15px;
       text-align: center;
-      border-bottom: 2px solid rgba(255,215,0,0.3);
+      border-bottom: 2px solid rgba(0,136,255,0.3);
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -260,12 +260,12 @@
     }
     header h1 {
       font-size: clamp(1.8rem, 5vw, 2.8rem);
-      text-shadow: 0 0 10px var(--neon-gold);
+      text-shadow: 0 0 10px var(--neon-blue);
       animation: titleGlow 3s infinite alternate;
     }
     @keyframes titleGlow {
-      from { text-shadow: 0 0 10px var(--neon-gold); }
-      to { text-shadow: 0 0 30px var(--neon-gold-glow); }
+      from { text-shadow: 0 0 10px var(--neon-blue); }
+      to { text-shadow: 0 0 30px var(--neon-blue-glow); }
     }
     nav {
       display: flex;
@@ -279,7 +279,7 @@
       color: var(--cream);
       padding: 10px 18px;
       border-radius: 40px;
-      border: 2px solid rgba(255,215,0,0.3);
+      border: 2px solid rgba(0,136,255,0.3);
       font-weight: 600;
       transition: var(--transition);
       text-decoration: none;
@@ -288,10 +288,10 @@
       min-width: 100px;
     }
     .nav-btn:hover, .nav-btn.active {
-      border-color: var(--neon-gold);
+      border-color: var(--neon-blue);
       transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(255,215,0,0.3);
-      background: rgba(255,215,0,0.1);
+      box-shadow: 0 10px 20px rgba(0,136,255,0.4);
+      background: rgba(0,136,255,0.1);
     }
 
     /* ===== HERO ===== */
@@ -310,7 +310,7 @@
     }
     .hero h2 {
       font-size: clamp(2rem, 6vw, 3.5rem);
-      background: linear-gradient(45deg, var(--neon-gold), #fff);
+      background: linear-gradient(45deg, var(--neon-blue), #fff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -318,22 +318,22 @@
     /* ===== REPRODUCTOR (MUY COMPACTO) ===== */
     .vintage-player-section {
       background: rgba(10,10,10,0.9);
-      padding: 20px 15px;  /* Reducido aún más */
-      border-top: 2px solid rgba(255,215,0,0.3);
-      border-bottom: 2px solid rgba(255,215,0,0.3);
+      padding: 20px 15px;
+      border-top: 2px solid rgba(0,136,255,0.3);
+      border-bottom: 2px solid rgba(0,136,255,0.3);
     }
     .vintage-player {
       background: rgba(20,15,10,0.95);
       backdrop-filter: blur(10px);
       border-radius: 20px;
-      padding: 10px 12px;    /* Padding mínimo */
-      border: 3px solid var(--neon-gold);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.8), 0 0 30px rgba(255,215,0,0.3);
+      padding: 10px 12px;
+      border: 3px solid var(--neon-blue);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.8), 0 0 30px rgba(0,136,255,0.4);
       max-width: 900px;
       margin: 0 auto;
     }
     .player-header {
-      margin-bottom: 2px;  /* Casi eliminado */
+      margin-bottom: 2px;
     }
     .station-title {
       font-size: 1.6rem;
@@ -346,16 +346,16 @@
     .vinyl-container {
       display: flex;
       justify-content: center;
-      margin: 2px 0 5px;    /* Mínimo */
+      margin: 2px 0 5px;
       cursor: pointer;
     }
     .vinyl-record {
-      width: 70px;          /* Más pequeño */
+      width: 70px;
       height: 70px;
       background: radial-gradient(circle at 30% 30%, #444, #111);
       border-radius: 50%;
       border: 4px solid #2c1a10;
-      box-shadow: 0 0 20px rgba(255,215,0,0.3);
+      box-shadow: 0 0 20px rgba(0,136,255,0.4);
       animation: spin 8s linear infinite;
       transition: all 0.3s;
     }
@@ -365,11 +365,11 @@
     .vinyl-center {
       width: 20px;
       height: 20px;
-      background: var(--neon-gold);
+      background: var(--neon-blue);
       border-radius: 50%;
       position: relative;
-      margin: -45px auto 0;  /* Ajustado */
-      box-shadow: 0 0 15px var(--neon-gold);
+      margin: -45px auto 0;
+      box-shadow: 0 0 15px var(--neon-blue);
     }
     @keyframes spin {
       from { transform: rotate(0); }
@@ -378,10 +378,10 @@
     /* REPRODUCTOR CASTER FM COMPACTO */
     .cstrEmbed {
       width: 100%;
-      min-height: 80px;       /* Reducido */
+      min-height: 80px;
       background: rgba(26,15,10,0.9);
       border-radius: 12px;
-      border: 1px solid rgba(255,215,0,0.3);
+      border: 1px solid rgba(0,136,255,0.3);
       margin: 5px 0;
     }
     .decade-indicators {
@@ -393,7 +393,7 @@
     }
     .decade {
       background: rgba(44,26,16,0.8);
-      border: 2px solid rgba(255,215,0,0.4);
+      border: 2px solid rgba(0,136,255,0.4);
       border-radius: 40px;
       padding: 3px 12px;
       font-weight: 700;
@@ -403,21 +403,21 @@
       font-size: 0.8rem;
     }
     .decade:hover, .decade.active {
-      background: var(--neon-gold);
+      background: var(--neon-blue);
       color: black;
       transform: scale(1.1);
-      box-shadow: 0 0 20px var(--neon-gold);
+      box-shadow: 0 0 20px var(--neon-blue);
     }
     .listener-counter {
       display: inline-block;
       background: rgba(0,0,0,0.6);
-      border: 2px solid var(--neon-gold);
+      border: 2px solid var(--neon-blue);
       border-radius: 40px;
       padding: 3px 12px;
       margin-top: 2px;
       font-weight: 600;
-      color: var(--neon-gold);
-      box-shadow: 0 0 12px rgba(255,215,0,0.3);
+      color: var(--neon-blue);
+      box-shadow: 0 0 12px rgba(0,136,255,0.4);
       font-size: 0.8rem;
     }
 
@@ -443,11 +443,11 @@
       position: absolute;
       width: 70px;
       height: 3px;
-      background: var(--neon-gold);
+      background: var(--neon-blue);
       bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 0 10px var(--neon-gold);
+      box-shadow: 0 0 10px var(--neon-blue);
     }
 
     /* ===== PROGRAMACIÓN ===== */
@@ -455,19 +455,19 @@
       background: rgba(20,20,20,0.9);
       border-radius: 20px;
       overflow: hidden;
-      border: 1px solid rgba(255,215,0,0.2);
+      border: 1px solid rgba(0,136,255,0.2);
       margin-bottom: 30px;
     }
     .table-header {
       display: grid;
       grid-template-columns: 1fr 2fr;
-      background: rgba(255,215,0,0.1);
-      border-bottom: 2px solid gold;
+      background: rgba(0,136,255,0.1);
+      border-bottom: 2px solid var(--neon-blue);
     }
     .table-header div {
       padding: 12px;
       font-weight: 700;
-      color: var(--neon-gold);
+      color: var(--neon-blue);
       text-align: center;
     }
     .table-row {
@@ -480,8 +480,8 @@
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     .table-row.current {
-      background: rgba(255,215,0,0.2);
-      border-left: 5px solid gold;
+      background: rgba(0,136,255,0.2);
+      border-left: 5px solid var(--neon-blue);
     }
     .now-playing {
       background: rgba(0,0,0,0.7);
@@ -489,14 +489,14 @@
       padding: 20px;
       margin: 20px auto;
       max-width: 650px;
-      border: 2px solid gold;
-      box-shadow: 0 0 25px rgba(255,215,0,0.3);
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 25px rgba(0,136,255,0.4);
       text-align: center;
     }
     .current-program {
       font-size: 1.4rem !important;
-      color: gold !important;
-      text-shadow: 0 0 12px gold;
+      color: var(--neon-blue) !important;
+      text-shadow: 0 0 12px var(--neon-blue);
     }
 
     /* ===== MENSAJES ===== */
@@ -505,7 +505,7 @@
       backdrop-filter: blur(10px);
       border-radius: 40px;
       padding: 40px 25px;
-      border: 2px solid rgba(255,215,0,0.3);
+      border: 2px solid rgba(0,136,255,0.3);
       max-width: 850px;
       margin: 0 auto;
       text-align: center;
@@ -527,15 +527,15 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: rgba(255,215,0,0.2);
+      background: rgba(0,136,255,0.2);
       border: 2px solid transparent;
       cursor: pointer;
       transition: var(--transition);
     }
     .message-dot.active, .message-dot:hover {
-      background: var(--neon-gold);
+      background: var(--neon-blue);
       transform: scale(1.5);
-      box-shadow: 0 0 15px var(--neon-gold);
+      box-shadow: 0 0 15px var(--neon-blue);
       border-color: white;
     }
 
@@ -545,7 +545,7 @@
       border-radius: 50px;
       padding: 30px 20px;
       margin-top: 40px;
-      border: 2px solid rgba(255,215,0,0.3);
+      border: 2px solid rgba(0,136,255,0.3);
       max-width: 700px;
       margin-left: auto;
       margin-right: auto;
@@ -560,12 +560,12 @@
     }
     .station-btn {
       background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
-      border: 2px solid var(--neon-gold);
+      border: 2px solid var(--neon-blue);
       border-radius: 60px;
       padding: 14px 30px;
       font-size: 1.2rem;
       font-weight: 700;
-      color: var(--neon-gold);
+      color: var(--neon-blue);
       text-decoration: none;
       transition: var(--transition);
       display: inline-flex;
@@ -575,9 +575,9 @@
     }
     .station-btn:hover {
       transform: translateY(-5px) scale(1.05);
-      background: var(--neon-gold);
+      background: var(--neon-blue);
       color: black;
-      box-shadow: 0 0 30px var(--neon-gold);
+      box-shadow: 0 0 30px var(--neon-blue);
     }
 
     /* ===== BOTONES FLOTANTES ===== */
@@ -608,7 +608,7 @@
       background: linear-gradient(145deg, #25D366, #128C7E);
     }
     .scroll-top-btn {
-      background: linear-gradient(145deg, var(--neon-gold), var(--dark-gold));
+      background: linear-gradient(145deg, var(--neon-blue), var(--dark-blue));
       opacity: 0;
       visibility: hidden;
       transform: scale(0.8);
@@ -626,7 +626,7 @@
     /* ===== FOOTER ===== */
     footer {
       background: rgba(10,10,10,0.95);
-      border-top: 2px solid rgba(255,215,0,0.3);
+      border-top: 2px solid rgba(0,136,255,0.3);
       padding: 40px 20px 15px;
       text-align: center;
     }
@@ -727,7 +727,7 @@
     <div class="hero-content">
       <h2>La banda sonora de tu vida</h2>
       <p>Baladas que viven en la memoria • 24/7</p>
-      <a href="#reproductor" class="btn-neon" style="display: inline-block; margin-top: 20px; padding: 10px 25px; border: 2px solid gold; border-radius: 50px; color: gold; text-decoration: none; font-weight: 600;"><i class="fas fa-play"></i> Escuchar ahora</a>
+      <a href="#reproductor" class="btn-neon" style="display: inline-block; margin-top: 20px; padding: 10px 25px; border: 2px solid var(--neon-blue); border-radius: 50px; color: var(--neon-blue); text-decoration: none; font-weight: 600;"><i class="fas fa-play"></i> Escuchar ahora</a>
     </div>
   </section>
 
@@ -747,7 +747,7 @@
         <div data-type="newStreamPlayer" 
              data-publicToken="483de68b-f9e5-4fa3-b5ee-b27252721c33" 
              data-theme="dark" 
-             data-color="D9A05B" 
+             data-color="0088FF" 
              class="cstrEmbed">
           <a href="https://www.caster.fm">Shoutcast Hosting</a>
           <a href="https://www.caster.fm">Stream Hosting</a>
@@ -931,14 +931,14 @@
           flash.style.top = '50%';
           flash.style.left = '50%';
           flash.style.transform = 'translate(-50%, -50%)';
-          flash.style.background = 'rgba(255,215,0,0.9)';
+          flash.style.background = 'rgba(0,136,255,0.9)';
           flash.style.color = '#000';
           flash.style.padding = '12px 25px';
           flash.style.borderRadius = '50px';
           flash.style.fontSize = '1.8rem';
           flash.style.fontWeight = 'bold';
           flash.style.zIndex = '20001';
-          flash.style.boxShadow = '0 0 40px gold';
+          flash.style.boxShadow = '0 0 40px #0088FF';
           flash.style.animation = 'fadeOut 1s forwards';
           document.body.appendChild(flash);
           setTimeout(() => flash.remove(), 1000);
@@ -1114,15 +1114,15 @@
   <style>
     .btn-neon {
       background: transparent;
-      color: var(--neon-gold);
-      border: 2px solid var(--neon-gold);
+      color: var(--neon-blue);
+      border: 2px solid var(--neon-blue);
       transition: var(--transition);
     }
     .btn-neon:hover {
-      background: var(--neon-gold);
+      background: var(--neon-blue);
       color: black;
       transform: scale(1.1);
-      box-shadow: 0 0 30px var(--neon-gold);
+      box-shadow: 0 0 30px var(--neon-blue);
     }
     @keyframes fadeOut {
       0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
@@ -1133,6 +1133,10 @@
     }
     button, .nav-btn, .decade, .message-dot {
       touch-action: manipulation;
+    }
+    .neon-text {
+      color: var(--neon-blue);
+      text-shadow: 0 0 8px var(--neon-blue);
     }
   </style>
 </body>
