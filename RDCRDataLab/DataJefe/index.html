@@ -129,6 +129,24 @@ main { padding: 20px 24px; display: flex; flex-direction: column; gap: 20px; max
 @keyframes spin { to { transform: rotate(360deg); } }
 .load-text { font-family: var(--mono); font-size: 12px; color: var(--text2); }
 
+/* Tabs */
+.tabs {
+  display: flex; gap: 2px; background: var(--s1); border-bottom: 1px solid var(--border);
+  padding: 0 24px; margin-bottom: 20px;
+}
+.tab-btn {
+  background: transparent; border: none; padding: 12px 20px;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  color: var(--text3); cursor: pointer; transition: all 0.2s;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.tab-btn.active { color: var(--blue2); border-bottom-color: var(--blue2); }
+.tab-btn:hover { color: var(--text2); }
+
+.tab-pane { display: none; animation: fadeIn 0.2s ease; }
+.tab-pane.active { display: flex; flex-direction: column; gap: 20px; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
 .sec-head {
   display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px;
 }
@@ -230,8 +248,9 @@ th.sorted-desc::after { content: ' ↓'; color: var(--blue2); }
 td {
   padding: 9px 14px; border-bottom: 1px solid var(--border);
   font-size: 12px; white-space: nowrap; color: var(--text);
+  cursor: pointer;
 }
-tbody tr:hover td { background: rgba(37,99,235,0.04); }
+tbody tr:hover td { background: rgba(37,99,235,0.08); }
 tbody tr:last-child td { border-bottom: none; }
 
 .tag {
@@ -280,6 +299,19 @@ tbody tr:last-child td { border-bottom: none; }
 .rank-bar-wrap { width: 80px; height: 4px; background: var(--border); border-radius: 2px; flex-shrink: 0; }
 .rank-bar-fill { height: 100%; border-radius: 2px; }
 .rank-val { font-family: var(--mono); font-size: 11px; color: var(--text2); width: 64px; text-align: right; flex-shrink: 0; }
+
+/* Panel estructura */
+.struct-panel {
+  margin-top: 20px;
+  background: var(--s1);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 16px 20px;
+  display: none;
+}
+.struct-panel.visible { display: flex; gap: 20px; flex-wrap: wrap; align-items: baseline; }
+.struct-field { font-size: 12px; }
+.struct-field strong { color: var(--text3); font-weight: 600; margin-right: 6px; }
 </style>
 </head>
 <body>
@@ -335,200 +367,95 @@ tbody tr:last-child td { border-bottom: none; }
     <span class="filter-label">Tipo Farmacia</span>
     <select id="fTipo"><option value="">Todos</option></select>
   </div>
-  <div class="filter-group">
-    <span class="filter-label">Estructura</span>
-    <select id="fEstructura"><option value="">Todas</option></select>
-  </div>
   <div class="filter-sep"></div>
   <button class="btn" id="btnReset" style="font-size:11px;">✕ Limpiar filtros</button>
   <span id="filterCount" style="font-family:var(--mono);font-size:11px;color:var(--text3);margin-left:4px;"></span>
 </div>
 
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab-btn active" data-tab="tab1">📊 KPIs y Rankings</button>
+  <button class="tab-btn" data-tab="tab2">📈 Tendencias</button>
+  <button class="tab-btn" data-tab="tab3">⚖️ Comparativos</button>
+</div>
+
 <main>
-  <!-- KPIs -->
-  <div>
-    <div class="sec-head">
-      <span class="sec-title">Métricas clave</span>
-      <div class="sec-line"></div>
-      <span class="sec-count" id="totalRows">0 registros</span>
+  <!-- Tab 1: KPIs y Rankings -->
+  <div id="tab1" class="tab-pane active">
+    <!-- KPIs -->
+    <div>
+      <div class="sec-head"><span class="sec-title">Métricas clave</span><div class="sec-line"></div><span class="sec-count" id="totalRows">0 registros</span></div>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-accent"></div><div class="kpi-label">Ventas Totales</div><div class="kpi-value num-blue" id="kVentas">—</div><div class="kpi-sub" id="kVentasSub">acumulado</div><div class="kpi-trend">💰</div></div>
+        <div class="kpi"><div class="kpi-accent"></div><div class="kpi-label">Cupo Total</div><div class="kpi-value num-teal" id="kCupo">—</div><div class="kpi-sub">meta asignada</div><div class="kpi-trend">🎯</div></div>
+        <div class="kpi"><div class="kpi-accent"></div><div class="kpi-label">% Avance Prom.</div><div class="kpi-value" id="kAvance">—</div><div class="kpi-sub">sobre cupo</div><div class="kpi-trend">📈</div></div>
+        <div class="kpi"><div class="kpi-accent"></div><div class="kpi-label">Faltante Total</div><div class="kpi-value num-bad" id="kFaltante">—</div><div class="kpi-sub">por recuperar</div><div class="kpi-trend">⚠️</div></div>
+        <div class="kpi"><div class="kpi-accent"></div><div class="kpi-label">Transacciones</div><div class="kpi-value num-violet" id="kTrx">—</div><div class="kpi-sub">total Trx</div><div class="kpi-trend">🔢</div></div>
+        <div class="kpi"><div class="kpi-accent"></div><div class="kpi-label">Ticket Promedio</div><div class="kpi-value num-good" id="kTicket">—</div><div class="kpi-sub">por transacción</div><div class="kpi-trend">🧾</div></div>
+      </div>
     </div>
-    <div class="kpi-grid">
-      <div class="kpi">
-        <div class="kpi-accent"></div>
-        <div class="kpi-label">Ventas Totales</div>
-        <div class="kpi-value num-blue" id="kVentas">—</div>
-        <div class="kpi-sub" id="kVentasSub">acumulado</div>
-        <div class="kpi-trend">💰</div>
+
+    <!-- Insights automáticos -->
+    <div>
+      <div class="sec-head"><span class="sec-title">Insights automáticos</span><div class="sec-line"></div></div>
+      <div class="insight-grid" id="insightGrid">
+        <div class="insight"><div class="insight-label">Mejor Líder</div><div class="insight-val num-good" id="iMejorLider">—</div><div class="insight-desc" id="iMejorLiderSub">—</div></div>
+        <div class="insight"><div class="insight-label">Top Provincia</div><div class="insight-val num-blue" id="iTopProv">—</div><div class="insight-desc" id="iTopProvSub">—</div></div>
+        <div class="insight"><div class="insight-label">Marca Líder</div><div class="insight-val num-teal" id="iTopMarca">—</div><div class="insight-desc" id="iTopMarcaSub">—</div></div>
+        <div class="insight"><div class="insight-label">Farmacias en riesgo</div><div class="insight-val num-bad" id="iRiesgo">—</div><div class="insight-desc">%Avance &lt; 50%</div></div>
+        <div class="insight"><div class="insight-label">Farmacias al 100%+</div><div class="insight-val num-good" id="iCumple">—</div><div class="insight-desc">han alcanzado la meta</div></div>
+        <div class="insight"><div class="insight-label">% Proyección Prom.</div><div class="insight-val num-violet" id="iProy">—</div><div class="insight-desc">tendencia al cierre</div></div>
       </div>
-      <div class="kpi">
-        <div class="kpi-accent"></div>
-        <div class="kpi-label">Cupo Total</div>
-        <div class="kpi-value num-teal" id="kCupo">—</div>
-        <div class="kpi-sub">meta asignada</div>
-        <div class="kpi-trend">🎯</div>
+    </div>
+
+    <!-- Rankings y desempeño -->
+    <div>
+      <div class="sec-head"><span class="sec-title">Rankings</span><div class="sec-line"></div></div>
+      <div class="chart-row chart-row-2">
+        <div class="card"><div class="card-head"><div class="card-title">🏆 Top 10 Farmacias por Ventas</div><div class="card-badge">ranking</div></div><div class="chart-wrap h320"><canvas id="cTopFarmacias"></canvas></div></div>
+        <div class="card"><div class="card-head"><div class="card-title">⚠️ Farmacias en Riesgo (% Avance &lt; 50%)</div><div class="card-badge" id="bRisk">—</div></div><div id="rankRiesgo" class="rank-list" style="overflow-y:auto;max-height:300px;"></div></div>
       </div>
-      <div class="kpi">
-        <div class="kpi-accent"></div>
-        <div class="kpi-label">% Avance Prom.</div>
-        <div class="kpi-value" id="kAvance">—</div>
-        <div class="kpi-sub">sobre cupo</div>
-        <div class="kpi-trend">📈</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-accent"></div>
-        <div class="kpi-label">Faltante Total</div>
-        <div class="kpi-value num-bad" id="kFaltante">—</div>
-        <div class="kpi-sub">por recuperar</div>
-        <div class="kpi-trend">⚠️</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-accent"></div>
-        <div class="kpi-label">Transacciones</div>
-        <div class="kpi-value num-violet" id="kTrx">—</div>
-        <div class="kpi-sub">total Trx</div>
-        <div class="kpi-trend">🔢</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-accent"></div>
-        <div class="kpi-label">Ticket Promedio</div>
-        <div class="kpi-value num-good" id="kTicket">—</div>
-        <div class="kpi-sub">por transacción</div>
-        <div class="kpi-trend">🧾</div>
+    </div>
+
+    <div>
+      <div class="sec-head"><span class="sec-title">Análisis de desempeño</span><div class="sec-line"></div></div>
+      <div class="chart-row chart-row-2">
+        <div class="card"><div class="card-head"><div class="card-title">📉 Distribución de % Avance</div><div class="card-badge">rangos de cumplimiento</div></div><div class="chart-wrap h220"><canvas id="cAvanceDist"></canvas></div></div>
+        <div class="card"><div class="card-head"><div class="card-title">🎫 Ticket Promedio por Estructura</div><div class="card-badge" id="b4">—</div></div><div class="chart-wrap h220"><canvas id="cTicket"></canvas></div></div>
       </div>
     </div>
   </div>
 
-  <!-- Insights automáticos -->
-  <div>
-    <div class="sec-head">
-      <span class="sec-title">Insights automáticos</span>
-      <div class="sec-line"></div>
+  <!-- Tab 2: Tendencias -->
+  <div id="tab2" class="tab-pane">
+    <div>
+      <div class="sec-head"><span class="sec-title">Evolución mensual</span><div class="sec-line"></div></div>
+      <div class="card"><div class="card-head"><div class="card-title">📅 Ventas vs Cupo vs Proyección por Mes</div><div class="card-badge" id="b5">—</div></div><div class="chart-wrap h280"><canvas id="cMensual"></canvas></div></div>
     </div>
-    <div class="insight-grid" id="insightGrid">
-      <div class="insight"><div class="insight-label">Mejor Líder</div><div class="insight-val num-good" id="iMejorLider">—</div><div class="insight-desc" id="iMejorLiderSub">—</div></div>
-      <div class="insight"><div class="insight-label">Top Provincia</div><div class="insight-val num-blue" id="iTopProv">—</div><div class="insight-desc" id="iTopProvSub">—</div></div>
-      <div class="insight"><div class="insight-label">Marca Líder</div><div class="insight-val num-teal" id="iTopMarca">—</div><div class="insight-desc" id="iTopMarcaSub">—</div></div>
-      <div class="insight"><div class="insight-label">Farmacias en riesgo</div><div class="insight-val num-bad" id="iRiesgo">—</div><div class="insight-desc">%Avance &lt; 50%</div></div>
-      <div class="insight"><div class="insight-label">Farmacias al 100%+</div><div class="insight-val num-good" id="iCumple">—</div><div class="insight-desc">han alcanzado la meta</div></div>
-      <div class="insight"><div class="insight-label">% Proyección Prom.</div><div class="insight-val num-violet" id="iProy">—</div><div class="insight-desc">tendencia al cierre</div></div>
+    <div>
+      <div class="sec-head"><span class="sec-title">Tendencia de ventas por principales marcas</span><div class="sec-line"></div></div>
+      <div class="card"><div class="card-head"><div class="card-title">🏷️ Evolución mensual (Top 3 marcas)</div><div class="card-badge" id="bTrendMarcas">—</div></div><div class="chart-wrap h280"><canvas id="cTrendMarcas"></canvas></div></div>
     </div>
   </div>
 
-  <!-- Gráficas fila 1 -->
-  <div>
-    <div class="sec-head"><span class="sec-title">Ventas vs Cupo</span><div class="sec-line"></div></div>
+  <!-- Tab 3: Comparativos -->
+  <div id="tab3" class="tab-pane">
     <div class="chart-row chart-row-2">
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title">📊 Ventas vs Cupo por Líder Regional</div>
-          <div class="card-badge" id="b1">—</div>
-        </div>
-        <div class="chart-wrap h280"><canvas id="cLider"></canvas></div>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title">🏙️ % Avance por Provincia</div>
-          <div class="card-badge" id="b2">—</div>
-        </div>
-        <div class="chart-wrap h280"><canvas id="cProvincia"></canvas></div>
-      </div>
-
+      <div class="card"><div class="card-head"><div class="card-title">📊 Ventas vs Cupo por Líder Regional</div><div class="card-badge" id="b1">—</div></div><div class="chart-wrap h280"><canvas id="cLider"></canvas></div></div>
+      <div class="card"><div class="card-head"><div class="card-title">🏙️ % Avance por Provincia</div><div class="card-badge" id="b2">—</div></div><div class="chart-wrap h280"><canvas id="cProvincia"></canvas></div></div>
     </div>
-  </div>
-
-  <!-- Gráficas fila 2 -->
-  <div>
-    <div class="sec-head"><span class="sec-title">Distribución y proyección</span><div class="sec-line"></div></div>
     <div class="chart-row chart-row-3">
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title">🏷️ Ventas vs Proyección por Marca</div>
-          <div class="card-badge" id="b3">—</div>
-        </div>
-        <div class="chart-wrap h240"><canvas id="cMarca"></canvas></div>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title">🍩 Mix de Ventas por Marca</div>
-        </div>
-        <div class="chart-wrap h240"><canvas id="cDonut"></canvas></div>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title">🏪 Tipo de Farmacia</div>
-        </div>
-        <div class="chart-wrap h240"><canvas id="cTipo"></canvas></div>
-      </div>
-
+      <div class="card"><div class="card-head"><div class="card-title">🏷️ Ventas vs Proyección por Marca</div><div class="card-badge" id="b3">—</div></div><div class="chart-wrap h240"><canvas id="cMarca"></canvas></div></div>
+      <div class="card"><div class="card-head"><div class="card-title">🍩 Mix de Ventas por Marca</div></div><div class="chart-wrap h240"><canvas id="cDonut"></canvas></div></div>
+      <div class="card"><div class="card-head"><div class="card-title">🏪 Tipo de Farmacia</div></div><div class="chart-wrap h240"><canvas id="cTipo"></canvas></div></div>
+    </div>
+    <div>
+      <div class="sec-head"><span class="sec-title">Comparativo de % Avance mensual por provincia</span><div class="sec-line"></div></div>
+      <div class="card"><div class="card-head"><div class="card-title">📈 Evolución del % Avance (Top 3 provincias)</div><div class="card-badge" id="bCompProv">—</div></div><div class="chart-wrap h280"><canvas id="cCompProv"></canvas></div></div>
     </div>
   </div>
 
-  <!-- Gráficas fila 3 -->
-  <div>
-    <div class="sec-head"><span class="sec-title">Análisis de desempeño</span><div class="sec-line"></div></div>
-    <div class="chart-row chart-row-2">
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title">📉 Distribución de % Avance</div>
-          <div class="card-badge">rangos de cumplimiento</div>
-        </div>
-        <div class="chart-wrap h220"><canvas id="cAvanceDist"></canvas></div>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title">🎫 Ticket Promedio por Estructura</div>
-          <div class="card-badge" id="b4">—</div>
-        </div>
-        <div class="chart-wrap h220"><canvas id="cTicket"></canvas></div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Top Farmacias + Rankings -->
-  <div>
-    <div class="sec-head"><span class="sec-title">Rankings</span><div class="sec-line"></div></div>
-    <div class="chart-row chart-row-2">
-
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title">🏆 Top 10 Farmacias por Ventas</div>
-          <div class="card-badge">ranking</div>
-        </div>
-        <div class="chart-wrap h320"><canvas id="cTopFarmacias"></canvas></div>
-      </div>
-
-      <div class="card" style="gap:10px;">
-        <div class="card-head">
-          <div class="card-title">⚠️ Farmacias en Riesgo (% Avance &lt; 50%)</div>
-          <div class="card-badge" id="bRisk">—</div>
-        </div>
-        <div id="rankRiesgo" class="rank-list" style="overflow-y:auto;max-height:300px;"></div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Gráfica por mes -->
-  <div>
-    <div class="sec-head"><span class="sec-title">Evolución mensual</span><div class="sec-line"></div></div>
-    <div class="card">
-      <div class="card-head">
-        <div class="card-title">📅 Ventas vs Cupo vs Proyección por Mes</div>
-        <div class="card-badge" id="b5">—</div>
-      </div>
-      <div class="chart-wrap h280"><canvas id="cMensual"></canvas></div>
-    </div>
-  </div>
-
-  <!-- Tabla -->
+  <!-- Tabla de datos detallados (común a todas las pestañas) -->
   <div>
     <div class="sec-head"><span class="sec-title">Datos detallados</span><div class="sec-line"></div></div>
     <div class="table-card">
@@ -548,19 +475,18 @@ tbody tr:last-child td { border-bottom: none; }
         </div>
       </div>
     </div>
+    <!-- Panel de estructura de farmacia seleccionada -->
+    <div id="structPanel" class="struct-panel"></div>
   </div>
 </main>
 
 <div class="toasts" id="toasts"></div>
 
 <script>
-// ═══════════════════════════════════════════════
-//  CONFIG — URL ACTUALIZADA CON EL SCRIPT PROPORCIONADO
-// ═══════════════════════════════════════════════
+// ==================== CONFIGURACIÓN ====================
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbySFtV33cELoaSABUVoCQrPKJizRKlurcjh4sHJiGwSMz0-9tGI7SX24aaIoTQgC4Tw/exec";
-const REFRESH_MS = 60000; // 60 segundos
+const REFRESH_MS = 60000;
 
-// Mapeo exacto de columnas (debe coincidir con las cabeceras de la hoja)
 const C = {
   LIDER:      "LIDER REG",
   MARCA:      "MARCA",
@@ -590,26 +516,11 @@ const C = {
 };
 
 const PAL = ["#3b82f6","#14b8a6","#f59e0b","#ef4444","#a78bfa","#22c55e","#f97316","#ec4899","#06b6d4","#84cc16","#8b5cf6","#fbbf24"];
-const chartDefaults = () => ({
-  responsive: true, maintainAspectRatio: false,
-  plugins: {
-    legend: { display: false },
-    tooltip: { backgroundColor:"#0d1220", borderColor:"#1a2236", borderWidth:1, titleColor:"#e2e8f0", bodyColor:"#94a3b8", padding:10, cornerRadius:6 }
-  },
-  scales: {
-    x: { ticks:{color:"#475569",font:{size:10,family:"'DM Mono',monospace"},maxRotation:35}, grid:{color:"rgba(26,34,54,0.8)"} },
-    y: { ticks:{color:"#475569",font:{size:10,family:"'DM Mono',monospace"}}, grid:{color:"rgba(26,34,54,0.8)"} }
-  }
-});
 
-// ═══════════════════════════════════════════════
-//  ESTADO
-// ═══════════════════════════════════════════════
+// Estado global
 const state = { raw:[], filtered:[], charts:{}, sortCol:null, sortDir:1, searchQ:"", timer:null };
 
-// ═══════════════════════════════════════════════
-//  UTILS
-// ═══════════════════════════════════════════════
+// ==================== UTILIDADES ====================
 const num  = v => isNaN(parseFloat(v)) ? 0 : parseFloat(v);
 const pct  = v => isNaN(parseFloat(v)) ? 0 : parseFloat(v);
 
@@ -657,9 +568,21 @@ function topN(obj, n=10, desc=true) {
     .slice(0,n);
 }
 
-// ═══════════════════════════════════════════════
-//  FETCH
-// ═══════════════════════════════════════════════
+function chartDefaults() {
+  return {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { backgroundColor:"#0d1220", borderColor:"#1a2236", borderWidth:1, titleColor:"#e2e8f0", bodyColor:"#94a3b8", padding:10, cornerRadius:6 }
+    },
+    scales: {
+      x: { ticks:{color:"#475569",font:{size:10,family:"'DM Mono',monospace"},maxRotation:35}, grid:{color:"rgba(26,34,54,0.8)"} },
+      y: { ticks:{color:"#475569",font:{size:10,family:"'DM Mono',monospace"}}, grid:{color:"rgba(26,34,54,0.8)"} }
+    }
+  };
+}
+
+// ==================== CARGA DE DATOS ====================
 async function loadData() {
   setStatus("load");
   document.getElementById("loadMsg").textContent = "Leyendo Base Vts...";
@@ -717,9 +640,7 @@ async function silentRefresh() {
   } catch(e) { /* silencioso */ }
 }
 
-// ═══════════════════════════════════════════════
-//  FILTROS
-// ═══════════════════════════════════════════════
+// ==================== FILTROS ====================
 function populateFilters() {
   const d = state.raw;
   const fill = (id, col) => {
@@ -735,7 +656,7 @@ function populateFilters() {
   fill("fProvincia", C.PROVINCIA);
   fill("fMarca",     C.MARCA);
   fill("fTipo",      C.TIPO);
-  fill("fEstructura",C.ESTRUCTURA);
+  // El filtro estructura se elimina
 }
 
 function applyFilters() {
@@ -746,7 +667,6 @@ function applyFilters() {
     provincia: document.getElementById("fProvincia").value,
     marca:     document.getElementById("fMarca").value,
     tipo:      document.getElementById("fTipo").value,
-    estructura:document.getElementById("fEstructura").value,
   };
   const q = state.searchQ.toLowerCase();
 
@@ -757,7 +677,6 @@ function applyFilters() {
     if(f.provincia && r[C.PROVINCIA]         !== f.provincia)  return false;
     if(f.marca     && r[C.MARCA]             !== f.marca)      return false;
     if(f.tipo      && r[C.TIPO]              !== f.tipo)       return false;
-    if(f.estructura&& r[C.ESTRUCTURA]        !== f.estructura) return false;
     if(q) {
       const searchable = [r[C.FARMACIA],r[C.PROVINCIA],r[C.RESPONSABLE],r[C.CANTON],r[C.LIDER]].join(" ").toLowerCase();
       if(!searchable.includes(q)) return false;
@@ -769,12 +688,12 @@ function applyFilters() {
   document.getElementById("filterCount").textContent = active ? `· ${active} filtro${active>1?"s":""} activo${active>1?"s":""}` : "";
 }
 
-["fAño","fMes","fLider","fProvincia","fMarca","fTipo","fEstructura"].forEach(id => {
+["fAño","fMes","fLider","fProvincia","fMarca","fTipo"].forEach(id => {
   document.getElementById(id).addEventListener("change", () => { applyFilters(); renderAll(); });
 });
 
 document.getElementById("btnReset").addEventListener("click", () => {
-  ["fAño","fMes","fLider","fProvincia","fMarca","fTipo","fEstructura"].forEach(id => document.getElementById(id).value="");
+  ["fAño","fMes","fLider","fProvincia","fMarca","fTipo"].forEach(id => document.getElementById(id).value="");
   state.searchQ = "";
   document.getElementById("tblSearch").value = "";
   applyFilters(); renderAll();
@@ -787,15 +706,16 @@ document.getElementById("tblSearch").addEventListener("input", e => {
   applyFilters(); renderAll();
 });
 
-// ═══════════════════════════════════════════════
-//  RENDER PRINCIPAL
-// ═══════════════════════════════════════════════
+// ==================== RENDER PRINCIPAL ====================
 function renderAll() {
   const d = state.filtered;
   document.getElementById("totalRows").textContent = `${d.length} registros`;
 
   renderKPIs(d);
   renderInsights(d);
+  // Tabla
+  renderTable(d);
+  // Gráficos comunes
   renderChartLider(d);
   renderChartProvincia(d);
   renderChartMarca(d);
@@ -806,12 +726,11 @@ function renderAll() {
   renderChartTopFarmacias(d);
   renderRankRiesgo(d);
   renderChartMensual(d);
-  renderTable(d);
+  renderTrendMarcas(d);
+  renderCompProvAvance(d);
 }
 
-// ═══════════════════════════════════════════════
-//  KPIs
-// ═══════════════════════════════════════════════
+// ==================== KPIs e INSIGHTS ====================
 function renderKPIs(d) {
   const ventas   = d.reduce((s,r)=>s+r[C.VENTAS],0);
   const cupo     = d.reduce((s,r)=>s+r[C.CUPO],0);
@@ -833,9 +752,6 @@ function renderKPIs(d) {
   avEl.className = "kpi-value " + (avgAvance>=100?"num-good":avgAvance>=70?"num-teal":avgAvance>=50?"num-warn":"num-bad");
 }
 
-// ═══════════════════════════════════════════════
-//  INSIGHTS
-// ═══════════════════════════════════════════════
 function renderInsights(d) {
   const byLider   = groupBy(d, C.LIDER, r=>r[C.VENTAS]);
   const byProv    = groupBy(d, C.PROVINCIA, r=>r[C.VENTAS]);
@@ -858,282 +774,134 @@ function renderInsights(d) {
   document.getElementById("iProy").textContent          = fmtPct(avgProy);
 }
 
-// ═══════════════════════════════════════════════
-//  GRÁFICA 1 — Ventas vs Cupo por Líder Regional
-// ═══════════════════════════════════════════════
+// ==================== GRÁFICOS EXISTENTES (adaptados) ====================
 function renderChartLider(d) {
   const vByLider = groupBy(d, C.LIDER, r=>r[C.VENTAS]);
   const cByLider = groupBy(d, C.LIDER, r=>r[C.CUPO]);
   const keys = Object.keys(vByLider);
   document.getElementById("b1").textContent = keys.length + " líderes";
-
-  const cfg = {
-    type:"bar",
-    data:{
-      labels: keys,
-      datasets:[
-        { label:"Ventas",  data:keys.map(k=>vByLider[k]), backgroundColor:"rgba(59,130,246,0.75)", borderColor:"#3b82f6", borderWidth:1, borderRadius:3 },
-        { label:"Cupo",    data:keys.map(k=>cByLider[k]), backgroundColor:"rgba(20,184,166,0.35)",  borderColor:"#14b8a6", borderWidth:1, borderRadius:3 }
-      ]
-    },
-    options:{
-      ...chartDefaults(),
-      plugins:{
-        ...chartDefaults().plugins,
-        legend:{ display:true, labels:{color:"#94a3b8",font:{size:11}} }
-      }
-    }
-  };
-  if(state.charts.lider) {
-    state.charts.lider.data = cfg.data;
-    state.charts.lider.update();
-  } else {
-    state.charts.lider = new Chart(document.getElementById("cLider").getContext("2d"), cfg);
-  }
+  const cfg = { type:"bar", data:{ labels: keys, datasets:[ { label:"Ventas", data:keys.map(k=>vByLider[k]), backgroundColor:"rgba(59,130,246,0.75)", borderColor:"#3b82f6", borderWidth:1, borderRadius:3 }, { label:"Cupo", data:keys.map(k=>cByLider[k]), backgroundColor:"rgba(20,184,166,0.35)", borderColor:"#14b8a6", borderWidth:1, borderRadius:3 } ] }, options:{ ...chartDefaults(), plugins:{ ...chartDefaults().plugins, legend:{ display:true, labels:{color:"#94a3b8",font:{size:11}} } } } };
+  if(state.charts.lider) { state.charts.lider.data = cfg.data; state.charts.lider.update(); } else state.charts.lider = new Chart(document.getElementById("cLider").getContext("2d"), cfg);
 }
-
-// ═══════════════════════════════════════════════
-//  GRÁFICA 2 — % Avance por Provincia (horizontal)
-// ═══════════════════════════════════════════════
 function renderChartProvincia(d) {
-  const byProv = {};
-  d.forEach(r=>{
-    const k = r[C.PROVINCIA]||"Sin dato";
-    if(!byProv[k]) byProv[k]={sum:0,n:0};
-    byProv[k].sum += r[C.AVANCE];
-    byProv[k].n++;
-  });
+  const byProv = {}; d.forEach(r=>{ const k=r[C.PROVINCIA]||"Sin dato"; if(!byProv[k]) byProv[k]={sum:0,n:0}; byProv[k].sum+=r[C.AVANCE]; byProv[k].n++; });
   const entries = Object.entries(byProv).map(([k,v])=>[k, v.n?v.sum/v.n:0]).sort((a,b)=>b[1]-a[1]);
   document.getElementById("b2").textContent = entries.length + " provincias";
-
   const colors = entries.map(([,v])=>v>=100?"rgba(34,197,94,0.75)":v>=70?"rgba(59,130,246,0.75)":v>=50?"rgba(245,158,11,0.75)":"rgba(239,68,68,0.75)");
-  const cfg = {
-    type:"bar",
-    data:{
-      labels: entries.map(e=>e[0]),
-      datasets:[{ label:"% Avance", data:entries.map(e=>e[1]), backgroundColor:colors, borderRadius:3, borderWidth:0 }]
-    },
-    options:{
-      ...chartDefaults(), indexAxis:"y",
-      scales:{
-        x:{ ticks:{color:"#475569",font:{size:10}}, grid:{color:"rgba(26,34,54,0.8)"}, max:120 },
-        y:{ ticks:{color:"#94a3b8",font:{size:10}}, grid:{display:false} }
-      }
-    }
-  };
-  if(state.charts.prov) { state.charts.prov.data=cfg.data; state.charts.prov.update(); }
-  else state.charts.prov = new Chart(document.getElementById("cProvincia").getContext("2d"), cfg);
+  const cfg = { type:"bar", data:{ labels: entries.map(e=>e[0]), datasets:[{ label:"% Avance", data:entries.map(e=>e[1]), backgroundColor:colors, borderRadius:3, borderWidth:0 }] }, options:{ ...chartDefaults(), indexAxis:"y", scales:{ x:{ ticks:{color:"#475569",font:{size:10}}, grid:{color:"rgba(26,34,54,0.8)"}, max:120 }, y:{ ticks:{color:"#94a3b8",font:{size:10}}, grid:{display:false} } } } };
+  if(state.charts.prov) { state.charts.prov.data=cfg.data; state.charts.prov.update(); } else state.charts.prov = new Chart(document.getElementById("cProvincia").getContext("2d"), cfg);
 }
-
-// ═══════════════════════════════════════════════
-//  GRÁFICA 3 — Ventas vs Proyección por Marca
-// ═══════════════════════════════════════════════
 function renderChartMarca(d) {
   const vByMarca = groupBy(d, C.MARCA, r=>r[C.VENTAS]);
   const pByMarca = groupBy(d, C.MARCA, r=>r[C.PROY_VEN]);
   const keys = Object.keys(vByMarca);
   document.getElementById("b3").textContent = keys.length + " marcas";
-
-  const cfg = {
-    type:"bar",
-    data:{
-      labels:keys,
-      datasets:[
-        { label:"Ventas",      data:keys.map(k=>vByMarca[k]), backgroundColor:"rgba(59,130,246,0.8)", borderRadius:3, borderWidth:0 },
-        { label:"Proyección",  data:keys.map(k=>pByMarca[k]), backgroundColor:"rgba(167,139,250,0.4)", borderRadius:3, borderWidth:1, borderColor:"#a78bfa", type:"bar" }
-      ]
-    },
-    options:{
-      ...chartDefaults(),
-      plugins:{ ...chartDefaults().plugins, legend:{display:true,labels:{color:"#94a3b8",font:{size:11}}} }
-    }
-  };
-  if(state.charts.marca) { state.charts.marca.data=cfg.data; state.charts.marca.update(); }
-  else state.charts.marca = new Chart(document.getElementById("cMarca").getContext("2d"), cfg);
+  const cfg = { type:"bar", data:{ labels:keys, datasets:[ { label:"Ventas", data:keys.map(k=>vByMarca[k]), backgroundColor:"rgba(59,130,246,0.8)", borderRadius:3 }, { label:"Proyección", data:keys.map(k=>pByMarca[k]), backgroundColor:"rgba(167,139,250,0.4)", borderRadius:3, borderWidth:1, borderColor:"#a78bfa", type:"bar" } ] }, options:{ ...chartDefaults(), plugins:{ ...chartDefaults().plugins, legend:{display:true,labels:{color:"#94a3b8",font:{size:11}}} } } };
+  if(state.charts.marca) { state.charts.marca.data=cfg.data; state.charts.marca.update(); } else state.charts.marca = new Chart(document.getElementById("cMarca").getContext("2d"), cfg);
 }
-
-// ═══════════════════════════════════════════════
-//  GRÁFICA 4 — Donut mix de ventas
-// ═══════════════════════════════════════════════
 function renderChartDonut(d) {
   const byMarca = groupBy(d, C.MARCA, r=>r[C.VENTAS]);
   const entries = topN(byMarca, 8);
-  const cfg = {
-    type:"doughnut",
-    data:{
-      labels: entries.map(e=>e[0]),
-      datasets:[{ data:entries.map(e=>e[1]), backgroundColor:PAL.map(c=>c+"cc"), borderColor:PAL, borderWidth:1.5, hoverOffset:6 }]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false, cutout:"62%",
-      plugins:{
-        legend:{ display:true, position:"bottom", labels:{color:"#64748b",font:{size:10},padding:8,boxWidth:10} },
-        tooltip:{ backgroundColor:"#0d1220", borderColor:"#1a2236", borderWidth:1, titleColor:"#e2e8f0", bodyColor:"#94a3b8", callbacks:{ label: ctx=>`${ctx.label}: ${fmtK(ctx.raw)}` } }
-      }
-    }
-  };
-  if(state.charts.donut) { state.charts.donut.data=cfg.data; state.charts.donut.update(); }
-  else state.charts.donut = new Chart(document.getElementById("cDonut").getContext("2d"), cfg);
+  const cfg = { type:"doughnut", data:{ labels: entries.map(e=>e[0]), datasets:[{ data:entries.map(e=>e[1]), backgroundColor:PAL.map(c=>c+"cc"), borderColor:PAL, borderWidth:1.5, hoverOffset:6 }] }, options:{ responsive:true, maintainAspectRatio:false, cutout:"62%", plugins:{ legend:{ display:true, position:"bottom", labels:{color:"#64748b",font:{size:10},padding:8,boxWidth:10} }, tooltip:{ backgroundColor:"#0d1220", borderColor:"#1a2236", borderWidth:1, titleColor:"#e2e8f0", bodyColor:"#94a3b8", callbacks:{ label: ctx=>`${ctx.label}: ${fmtK(ctx.raw)}` } } } } };
+  if(state.charts.donut) { state.charts.donut.data=cfg.data; state.charts.donut.update(); } else state.charts.donut = new Chart(document.getElementById("cDonut").getContext("2d"), cfg);
 }
-
-// ═══════════════════════════════════════════════
-//  GRÁFICA 5 — Tipo de Farmacia (polar / bar)
-// ═══════════════════════════════════════════════
 function renderChartTipo(d) {
   const byTipo = groupBy(d, C.TIPO, r=>r[C.VENTAS]);
   const entries = topN(byTipo, 8);
-  const cfg = {
-    type:"doughnut",
-    data:{
-      labels: entries.map(e=>e[0]||"Sin tipo"),
-      datasets:[{ data:entries.map(e=>e[1]), backgroundColor:PAL.slice(3).map(c=>c+"cc"), borderColor:PAL.slice(3), borderWidth:1.5, hoverOffset:6 }]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false, cutout:"55%",
-      plugins:{
-        legend:{ display:true, position:"bottom", labels:{color:"#64748b",font:{size:10},padding:8,boxWidth:10} },
-        tooltip:{ backgroundColor:"#0d1220", borderColor:"#1a2236", borderWidth:1, titleColor:"#e2e8f0", bodyColor:"#94a3b8", callbacks:{ label: ctx=>`${ctx.label}: ${fmtK(ctx.raw)}` } }
-      }
-    }
-  };
-  if(state.charts.tipo) { state.charts.tipo.data=cfg.data; state.charts.tipo.update(); }
-  else state.charts.tipo = new Chart(document.getElementById("cTipo").getContext("2d"), cfg);
+  const cfg = { type:"doughnut", data:{ labels: entries.map(e=>e[0]||"Sin tipo"), datasets:[{ data:entries.map(e=>e[1]), backgroundColor:PAL.slice(3).map(c=>c+"cc"), borderColor:PAL.slice(3), borderWidth:1.5, hoverOffset:6 }] }, options:{ responsive:true, maintainAspectRatio:false, cutout:"55%", plugins:{ legend:{ display:true, position:"bottom", labels:{color:"#64748b",font:{size:10},padding:8,boxWidth:10} }, tooltip:{ backgroundColor:"#0d1220", borderColor:"#1a2236", borderWidth:1, titleColor:"#e2e8f0", bodyColor:"#94a3b8", callbacks:{ label: ctx=>`${ctx.label}: ${fmtK(ctx.raw)}` } } } } };
+  if(state.charts.tipo) { state.charts.tipo.data=cfg.data; state.charts.tipo.update(); } else state.charts.tipo = new Chart(document.getElementById("cTipo").getContext("2d"), cfg);
 }
-
-// ═══════════════════════════════════════════════
-//  GRÁFICA 6 — Distribución % Avance (histograma)
-// ═══════════════════════════════════════════════
 function renderChartAvanceDist(d) {
-  const ranges = [
-    {label:"0–25%",  min:0,   max:25},
-    {label:"25–50%", min:25,  max:50},
-    {label:"50–75%", min:50,  max:75},
-    {label:"75–100%",min:75,  max:100},
-    {label:"100%+",  min:100, max:Infinity}
-  ];
+  const ranges = [{label:"0–25%",min:0,max:25},{label:"25–50%",min:25,max:50},{label:"50–75%",min:50,max:75},{label:"75–100%",min:75,max:100},{label:"100%+",min:100,max:Infinity}];
   const counts = ranges.map(r => d.filter(x=>x[C.AVANCE]>=r.min && x[C.AVANCE]<r.max).length);
   const colors = ["rgba(239,68,68,0.7)","rgba(245,158,11,0.7)","rgba(59,130,246,0.7)","rgba(20,184,166,0.7)","rgba(34,197,94,0.7)"];
-  const cfg = {
-    type:"bar",
-    data:{ labels:ranges.map(r=>r.label), datasets:[{ data:counts, backgroundColor:colors, borderRadius:4, borderWidth:0 }] },
-    options:{
-      ...chartDefaults(),
-      plugins:{ ...chartDefaults().plugins, tooltip:{ ...chartDefaults().plugins.tooltip, callbacks:{ label:ctx=>`${ctx.raw} farmacias` } } }
-    }
-  };
-  if(state.charts.avDist) { state.charts.avDist.data=cfg.data; state.charts.avDist.update(); }
-  else state.charts.avDist = new Chart(document.getElementById("cAvanceDist").getContext("2d"), cfg);
+  const cfg = { type:"bar", data:{ labels:ranges.map(r=>r.label), datasets:[{ data:counts, backgroundColor:colors, borderRadius:4, borderWidth:0 }] }, options:{ ...chartDefaults(), plugins:{ ...chartDefaults().plugins, tooltip:{ ...chartDefaults().plugins.tooltip, callbacks:{ label:ctx=>`${ctx.raw} farmacias` } } } } };
+  if(state.charts.avDist) { state.charts.avDist.data=cfg.data; state.charts.avDist.update(); } else state.charts.avDist = new Chart(document.getElementById("cAvanceDist").getContext("2d"), cfg);
 }
-
-// ═══════════════════════════════════════════════
-//  GRÁFICA 7 — Ticket Promedio por Estructura
-// ═══════════════════════════════════════════════
 function renderChartTicket(d) {
-  const byEst = {};
-  d.filter(r=>r[C.TICKET]>0).forEach(r=>{
-    const k = r[C.ESTRUCTURA]||"Sin est.";
-    if(!byEst[k]) byEst[k]={sum:0,n:0};
-    byEst[k].sum+=r[C.TICKET]; byEst[k].n++;
-  });
+  const byEst = {}; d.filter(r=>r[C.TICKET]>0).forEach(r=>{ const k=r[C.ESTRUCTURA]||"Sin est."; if(!byEst[k]) byEst[k]={sum:0,n:0}; byEst[k].sum+=r[C.TICKET]; byEst[k].n++; });
   const entries = Object.entries(byEst).map(([k,v])=>[k,v.n?v.sum/v.n:0]).sort((a,b)=>b[1]-a[1]);
   document.getElementById("b4").textContent = entries.length + " estructuras";
-  const cfg = {
-    type:"bar", indexAxis:"y",
-    data:{ labels:entries.map(e=>e[0]), datasets:[{ data:entries.map(e=>e[1]), backgroundColor:"rgba(167,139,250,0.7)", borderColor:"#a78bfa", borderWidth:1, borderRadius:3 }] },
-    options:{
-      ...chartDefaults(),
-      scales:{
-        x:{ ticks:{color:"#475569",font:{size:10},callback:v=>fmtK(v)}, grid:{color:"rgba(26,34,54,0.8)"} },
-        y:{ ticks:{color:"#94a3b8",font:{size:10}}, grid:{display:false} }
-      }
-    }
-  };
-  if(state.charts.ticket) { state.charts.ticket.data=cfg.data; state.charts.ticket.update(); }
-  else state.charts.ticket = new Chart(document.getElementById("cTicket").getContext("2d"), cfg);
+  const cfg = { type:"bar", indexAxis:"y", data:{ labels:entries.map(e=>e[0]), datasets:[{ data:entries.map(e=>e[1]), backgroundColor:"rgba(167,139,250,0.7)", borderColor:"#a78bfa", borderWidth:1, borderRadius:3 }] }, options:{ ...chartDefaults(), scales:{ x:{ ticks:{color:"#475569",font:{size:10},callback:v=>fmtK(v)}, grid:{color:"rgba(26,34,54,0.8)"} }, y:{ ticks:{color:"#94a3b8",font:{size:10}}, grid:{display:false} } } } };
+  if(state.charts.ticket) { state.charts.ticket.data=cfg.data; state.charts.ticket.update(); } else state.charts.ticket = new Chart(document.getElementById("cTicket").getContext("2d"), cfg);
 }
-
-// ═══════════════════════════════════════════════
-//  GRÁFICA 8 — Top Farmacias
-// ═══════════════════════════════════════════════
 function renderChartTopFarmacias(d) {
   const byFarm = groupBy(d, C.FARMACIA, r=>r[C.VENTAS]);
   const entries = topN(byFarm, 15);
   const colors = entries.map(([,v],i)=>PAL[i%PAL.length]+"cc");
-  const cfg = {
-    type:"bar", indexAxis:"y",
-    data:{ labels:entries.map(e=>e[0].length>28?e[0].slice(0,26)+"…":e[0]), datasets:[{ data:entries.map(e=>e[1]), backgroundColor:colors, borderRadius:3, borderWidth:0 }] },
-    options:{
-      ...chartDefaults(),
-      scales:{
-        x:{ ticks:{color:"#475569",font:{size:10},callback:v=>fmtK(v)}, grid:{color:"rgba(26,34,54,0.8)"} },
-        y:{ ticks:{color:"#94a3b8",font:{size:10}}, grid:{display:false} }
-      }
-    }
-  };
-  if(state.charts.topFarm) { state.charts.topFarm.data=cfg.data; state.charts.topFarm.update(); }
-  else state.charts.topFarm = new Chart(document.getElementById("cTopFarmacias").getContext("2d"), cfg);
+  const cfg = { type:"bar", indexAxis:"y", data:{ labels:entries.map(e=>e[0].length>28?e[0].slice(0,26)+"…":e[0]), datasets:[{ data:entries.map(e=>e[1]), backgroundColor:colors, borderRadius:3, borderWidth:0 }] }, options:{ ...chartDefaults(), scales:{ x:{ ticks:{color:"#475569",font:{size:10},callback:v=>fmtK(v)}, grid:{color:"rgba(26,34,54,0.8)"} }, y:{ ticks:{color:"#94a3b8",font:{size:10}}, grid:{display:false} } } } };
+  if(state.charts.topFarm) { state.charts.topFarm.data=cfg.data; state.charts.topFarm.update(); } else state.charts.topFarm = new Chart(document.getElementById("cTopFarmacias").getContext("2d"), cfg);
 }
-
-// ═══════════════════════════════════════════════
-//  RANKING RIESGO
-// ═══════════════════════════════════════════════
 function renderRankRiesgo(d) {
   const riesgo = d.filter(r=>r[C.AVANCE]<50).sort((a,b)=>a[C.AVANCE]-b[C.AVANCE]).slice(0,20);
   document.getElementById("bRisk").textContent = riesgo.length + " farmacias";
   const maxFaltante = Math.max(...riesgo.map(r=>r[C.FALTANTE]),1);
   const el = document.getElementById("rankRiesgo");
   if(!riesgo.length) { el.innerHTML=`<div class="empty"><big>✅</big>No hay farmacias en riesgo</div>`; return; }
-  el.innerHTML = riesgo.map((r,i)=>{
-    const pct = r[C.AVANCE];
-    const color = pct<25?"#ef4444":pct<40?"#f97316":"#f59e0b";
-    const fillW = Math.round((r[C.FALTANTE]/maxFaltante)*100);
-    return `<div class="rank-item">
-      <span class="rank-num">${i+1}</span>
-      <div style="flex:1;min-width:0;">
-        <div class="rank-name" style="color:#e2e8f0">${r[C.FARMACIA]||"—"}</div>
-        <div style="font-size:10px;color:#475569;font-family:var(--mono)">${r[C.PROVINCIA]||""} · ${r[C.LIDER]||""}</div>
-      </div>
-      <span style="font-family:var(--mono);font-size:11px;color:${color};width:40px;text-align:right">${fmtPct(pct)}</span>
-      <div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:${fillW}%;background:${color}"></div></div>
-      <span class="rank-val" style="color:#ef4444">${fmtK(r[C.FALTANTE])}</span>
-    </div>`;
-  }).join("");
+  el.innerHTML = riesgo.map((r,i)=>{ const pct = r[C.AVANCE]; const color = pct<25?"#ef4444":pct<40?"#f97316":"#f59e0b"; const fillW = Math.round((r[C.FALTANTE]/maxFaltante)*100); return `<div class="rank-item"><span class="rank-num">${i+1}</span><div style="flex:1;min-width:0;"><div class="rank-name" style="color:#e2e8f0">${r[C.FARMACIA]||"—"}</div><div style="font-size:10px;color:#475569;font-family:var(--mono)">${r[C.PROVINCIA]||""} · ${r[C.LIDER]||""}</div></div><span style="font-family:var(--mono);font-size:11px;color:${color};width:40px;text-align:right">${fmtPct(pct)}</span><div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:${fillW}%;background:${color}"></div></div><span class="rank-val" style="color:#ef4444">${fmtK(r[C.FALTANTE])}</span></div>`; }).join("");
 }
-
-// ═══════════════════════════════════════════════
-//  GRÁFICA 9 — Evolución mensual
-// ═══════════════════════════════════════════════
 function renderChartMensual(d) {
-  const byMes = {};
-  d.forEach(r=>{
-    const k = r[C.NUM_MES]||0;
-    if(!byMes[k]) byMes[k]={mes:r[C.MES]||k, v:0, c:0, p:0};
-    byMes[k].v+=r[C.VENTAS]; byMes[k].c+=r[C.CUPO]; byMes[k].p+=r[C.PROY_VEN];
-  });
+  const byMes = {}; d.forEach(r=>{ const k=r[C.NUM_MES]||0; if(!byMes[k]) byMes[k]={mes:r[C.MES]||k, v:0, c:0, p:0}; byMes[k].v+=r[C.VENTAS]; byMes[k].c+=r[C.CUPO]; byMes[k].p+=r[C.PROY_VEN]; });
   const entries = Object.entries(byMes).sort((a,b)=>Number(a[0])-Number(b[0]));
   document.getElementById("b5").textContent = entries.length + " meses";
-  const cfg = {
-    type:"bar",
-    data:{
-      labels: entries.map(e=>e[1].mes),
-      datasets:[
-        { label:"Ventas",      data:entries.map(e=>e[1].v), backgroundColor:"rgba(59,130,246,0.75)", borderRadius:3, order:2 },
-        { label:"Cupo",        data:entries.map(e=>e[1].c), backgroundColor:"rgba(20,184,166,0.3)",  borderRadius:3, order:3 },
-        { label:"Proyección",  data:entries.map(e=>e[1].p), type:"line", borderColor:"#f59e0b", backgroundColor:"rgba(245,158,11,0.1)", tension:0.4, fill:true, pointRadius:4, pointBackgroundColor:"#f59e0b", order:1 }
-      ]
-    },
-    options:{
-      ...chartDefaults(),
-      plugins:{ ...chartDefaults().plugins, legend:{ display:true, labels:{color:"#94a3b8",font:{size:11}} } }
-    }
-  };
-  if(state.charts.mensual) { state.charts.mensual.data=cfg.data; state.charts.mensual.update(); }
-  else state.charts.mensual = new Chart(document.getElementById("cMensual").getContext("2d"), cfg);
+  const cfg = { type:"bar", data:{ labels: entries.map(e=>e[1].mes), datasets:[ { label:"Ventas", data:entries.map(e=>e[1].v), backgroundColor:"rgba(59,130,246,0.75)", borderRadius:3, order:2 }, { label:"Cupo", data:entries.map(e=>e[1].c), backgroundColor:"rgba(20,184,166,0.3)", borderRadius:3, order:3 }, { label:"Proyección", data:entries.map(e=>e[1].p), type:"line", borderColor:"#f59e0b", backgroundColor:"rgba(245,158,11,0.1)", tension:0.4, fill:true, pointRadius:4, pointBackgroundColor:"#f59e0b", order:1 } ] }, options:{ ...chartDefaults(), plugins:{ ...chartDefaults().plugins, legend:{ display:true, labels:{color:"#94a3b8",font:{size:11}} } } } };
+  if(state.charts.mensual) { state.charts.mensual.data=cfg.data; state.charts.mensual.update(); } else state.charts.mensual = new Chart(document.getElementById("cMensual").getContext("2d"), cfg);
 }
 
-// ═══════════════════════════════════════════════
-//  TABLA
-// ═══════════════════════════════════════════════
+// ==================== NUEVOS GRÁFICOS DE TENDENCIA Y COMPARATIVO ====================
+function renderTrendMarcas(d) {
+  // Agrupar ventas por mes y marca, seleccionar top 3 marcas por venta total
+  const totalByMarca = groupBy(d, C.MARCA, r=>r[C.VENTAS]);
+  const top3Marcas = Object.entries(totalByMarca).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>e[0]);
+
+  const mesMap = {}; // mesNum -> {mesLabel, marcas:{marca:valor}}
+  d.forEach(r=>{
+    const mesNum = r[C.NUM_MES];
+    if(!mesNum) return;
+    if(!mesMap[mesNum]) mesMap[mesNum] = { mes: r[C.MES]||mesNum, valores: {} };
+    if(top3Marcas.includes(r[C.MARCA])) {
+      mesMap[mesNum].valores[r[C.MARCA]] = (mesMap[mesNum].valores[r[C.MARCA]]||0) + r[C.VENTAS];
+    }
+  });
+  const sortedMeses = Object.keys(mesMap).sort((a,b)=>Number(a)-Number(b));
+  const labels = sortedMeses.map(m=>mesMap[m].mes);
+  const datasets = top3Marcas.map((marca,idx)=> ({
+    label: marca, data: sortedMeses.map(m=>mesMap[m].valores[marca]||0),
+    borderColor: PAL[idx%PAL.length], backgroundColor: "transparent", tension:0.3, fill:false, pointRadius:3, pointBackgroundColor: PAL[idx%PAL.length]
+  }));
+  const cfg = { type:"line", data:{ labels, datasets }, options:{ ...chartDefaults(), plugins:{ ...chartDefaults().plugins, legend:{ display:true, labels:{color:"#94a3b8",font:{size:11}} } }, scales:{ y:{ ticks:{ callback:v=>fmtK(v) } } } } };
+  if(state.charts.trendMarcas) { state.charts.trendMarcas.data=cfg.data; state.charts.trendMarcas.update(); } else state.charts.trendMarcas = new Chart(document.getElementById("cTrendMarcas").getContext("2d"), cfg);
+  document.getElementById("bTrendMarcas").textContent = top3Marcas.length ? top3Marcas.join(", ") : "—";
+}
+
+function renderCompProvAvance(d) {
+  // Calcular % avance promedio por provincia y mes (top 3 provincias por volumen de ventas)
+  const totalByProv = groupBy(d, C.PROVINCIA, r=>r[C.VENTAS]);
+  const top3Prov = Object.entries(totalByProv).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>e[0]);
+
+  const mesProv = {}; // mesNum -> { mesLabel, prov:{prov:avancePromedio} }
+  d.forEach(r=>{
+    const mesNum = r[C.NUM_MES];
+    const prov = r[C.PROVINCIA];
+    if(!mesNum || !top3Prov.includes(prov)) return;
+    if(!mesProv[mesNum]) mesProv[mesNum] = { mes: r[C.MES]||mesNum, sum: {}, count: {} };
+    if(!mesProv[mesNum].sum[prov]) mesProv[mesNum].sum[prov] = 0;
+    if(!mesProv[mesNum].count[prov]) mesProv[mesNum].count[prov] = 0;
+    mesProv[mesNum].sum[prov] += r[C.AVANCE];
+    mesProv[mesNum].count[prov] += 1;
+  });
+  const sortedMeses = Object.keys(mesProv).sort((a,b)=>Number(a)-Number(b));
+  const labels = sortedMeses.map(m=>mesProv[m].mes);
+  const datasets = top3Prov.map((prov,idx)=> ({
+    label: prov, data: sortedMeses.map(m=> mesProv[m].count[prov] ? mesProv[m].sum[prov]/mesProv[m].count[prov] : 0),
+    borderColor: PAL[idx%PAL.length], backgroundColor: "transparent", tension:0.3, fill:false, pointRadius:3, pointBackgroundColor: PAL[idx%PAL.length]
+  }));
+  const cfg = { type:"line", data:{ labels, datasets }, options:{ ...chartDefaults(), plugins:{ ...chartDefaults().plugins, legend:{ display:true, labels:{color:"#94a3b8",font:{size:11}} } }, scales:{ y:{ ticks:{ callback:v=>v.toFixed(0)+"%" } } } } };
+  if(state.charts.compProv) { state.charts.compProv.data=cfg.data; state.charts.compProv.update(); } else state.charts.compProv = new Chart(document.getElementById("cCompProv").getContext("2d"), cfg);
+  document.getElementById("bCompProv").textContent = top3Prov.length ? top3Prov.join(", ") : "—";
+}
+
+// ==================== TABLA CON DETALLE DE ESTRUCTURA ====================
 const TABLE_COLS = [
   {key:C.FARMACIA,   label:"Farmacia"},
   {key:C.LIDER,      label:"Líder Reg."},
@@ -1158,7 +926,7 @@ function renderTable(d) {
 
   const ths = TABLE_COLS.map(c=>`<th data-col="${c.key}" class="${state.sortCol===c.key?'sorted-'+( state.sortDir===1?'asc':'desc'):''}">${c.label}</th>`).join("");
 
-  const rows = d.slice(0,500).map(r=>{
+  const rows = d.slice(0,500).map((r, idx)=>{
     const tds = TABLE_COLS.map(col=>{
       const v = r[col.key];
       if(col.color && col.num) {
@@ -1170,12 +938,13 @@ function renderTable(d) {
       if(col.num) return `<td style="font-family:var(--mono);text-align:right">${col.fmt?col.fmt(num(v)):fmt(num(v))}</td>`;
       return `<td>${v||"—"}</td>`;
     }).join("");
-    return `<tr>${tds}</tr>`;
+    return `<tr data-farm-idx="${idx}">${tds}</tr>`;
   }).join("");
 
   container.innerHTML = `<table><thead><tr>${ths}</tr></thead><tbody>${rows}</tbody></table>`;
   if(d.length>500) container.innerHTML += `<div style="padding:12px 18px;font-size:11px;color:var(--text3);text-align:center">Mostrando 500 de ${d.length} registros · Ajusta los filtros para ver más</div>`;
 
+  // Ordenamiento
   container.querySelectorAll("th").forEach(th => {
     th.addEventListener("click", ()=>{
       const col = th.dataset.col;
@@ -1190,11 +959,49 @@ function renderTable(d) {
       renderTable(state.filtered);
     });
   });
+
+  // Click en fila para mostrar estructura
+  const panel = document.getElementById("structPanel");
+  document.querySelectorAll("#tblContainer tbody tr").forEach(tr => {
+    tr.addEventListener("click", (e) => {
+      const idx = tr.dataset.farmIdx;
+      if(idx !== undefined) {
+        const farm = state.filtered[parseInt(idx)];
+        if(farm) {
+          panel.innerHTML = `
+            <div class="struct-field"><strong>Estructura:</strong> ${farm[C.ESTRUCTURA]||"—"}</div>
+            <div class="struct-field"><strong>Cargo:</strong> ${farm[C.CARGO]||"—"}</div>
+            <div class="struct-field"><strong>Tiempo:</strong> ${farm[C.TIEMPO]||"—"}</div>
+            <div class="struct-field"><strong>Ingreso:</strong> ${farm[C.INGRESO]||"—"}</div>
+          `;
+          panel.classList.add("visible");
+        }
+      }
+    });
+  });
 }
 
-// ═══════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════
+// ==================== TABS ====================
+function initTabs() {
+  const btns = document.querySelectorAll(".tab-btn");
+  const panes = document.querySelectorAll(".tab-pane");
+  btns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tabId = btn.dataset.tab;
+      btns.forEach(b => b.classList.remove("active"));
+      panes.forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById(tabId).classList.add("active");
+      // Forzar redibujado de gráficos
+      setTimeout(() => {
+        Object.values(state.charts).forEach(ch => ch?.update());
+      }, 50);
+    });
+  });
+}
+
+// ==================== INIT ====================
+initTabs();
 loadData();
 </script>
 </body>
