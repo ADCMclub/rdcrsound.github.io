@@ -1,0 +1,791 @@
+Formulario cx farmaenlace · HTML
+Copiar
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OPORTUNIDADES DE MEJORA TABLERO CX - FARMAENLACE 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --azul:           #1a3a6b;
+      --azul-medio:     #2255a4;
+      --azul-claro:     #4a90d9;
+      --azul-brillante: #60adf5;
+      --acento:         #f0c040;
+      --bg:             #eef3fa;
+      --surface:        #ffffff;
+      --text:           #12203a;
+      --text-muted:     #6080a8;
+      --border:         #c5d8f0;
+      --shadow:         0 8px 40px rgba(34,85,164,0.13);
+    }
+ 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px 60px;
+      position: relative;
+      overflow-x: hidden;
+    }
+ 
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 65% 45% at 5% 5%,   rgba(26,58,107,0.13) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 55% at 95% 85%,  rgba(74,144,217,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 50% 50%,  rgba(96,173,245,0.07) 0%, transparent 70%);
+      animation: bgPulse 9s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+ 
+    @keyframes bgPulse {
+      0%   { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 1;   transform: scale(1.05); }
+    }
+ 
+    .particle {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      animation: float linear infinite;
+      opacity: 0.15;
+    }
+    @keyframes float {
+      0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0; }
+      10%  { opacity: 0.15; }
+      90%  { opacity: 0.15; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+ 
+    .hex-deco {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.04;
+      animation: hexFloat ease-in-out infinite alternate;
+    }
+    @keyframes hexFloat {
+      from { transform: translateY(0) rotate(0deg); }
+      to   { transform: translateY(-20px) rotate(15deg); }
+    }
+ 
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 780px;
+      animation: slideUp 0.8s cubic-bezier(.23,1,.32,1) both;
+    }
+ 
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(48px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+ 
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #0d1f42 0%, #1a3a6b 45%, #2255a4 100%);
+      border-radius: 26px 26px 0 0;
+      padding: 42px 52px 38px;
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.015) 40px,
+          rgba(255,255,255,0.015) 41px
+        );
+    }
+ 
+    .header-glow {
+      position: absolute;
+      right: -60px; top: -60px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(96,173,245,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+ 
+    .header-glow2 {
+      position: absolute;
+      left: -40px; bottom: -80px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240,192,64,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+ 
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+ 
+    .logo-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--acento), #e0a820);
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 18px rgba(240,192,64,0.40);
+    }
+ 
+    .logo-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+ 
+    .header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(19px, 3.8vw, 28px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+      position: relative;
+      z-index: 1;
+    }
+ 
+    .header h1 span { color: var(--acento); }
+ 
+    .header-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+      position: relative;
+      z-index: 1;
+    }
+ 
+    .header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.80);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      border-radius: 20px;
+    }
+ 
+    /* FORM BODY */
+    .form-body {
+      background: var(--surface);
+      padding: 46px 52px;
+      border-radius: 0 0 26px 26px;
+      box-shadow: var(--shadow);
+    }
+ 
+    .progress-bar-wrapper { margin-bottom: 34px; }
+ 
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 9px;
+    }
+ 
+    .progress-text { font-size: 12px; color: var(--text-muted); }
+ 
+    .progress-pct {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--azul-medio);
+    }
+ 
+    .progress-track {
+      height: 7px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+ 
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--azul), var(--azul-brillante));
+      border-radius: 99px;
+      width: 0%;
+      transition: width 0.55s cubic-bezier(.23,1,.32,1);
+      position: relative;
+    }
+ 
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 0;
+      width: 12px; height: 100%;
+      background: rgba(255,255,255,0.5);
+      border-radius: 99px;
+      filter: blur(3px);
+    }
+ 
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--azul-medio);
+      margin-bottom: 10px;
+    }
+ 
+    .field-group { margin-bottom: 34px; }
+ 
+    .field-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+ 
+    .select-wrapper { position: relative; }
+ 
+    .select-wrapper::after {
+      content: '▾';
+      position: absolute;
+      right: 18px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--azul-medio);
+      font-size: 18px;
+      pointer-events: none;
+    }
+ 
+    select {
+      width: 100%;
+      appearance: none;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 48px 16px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+      outline: none;
+    }
+ 
+    select:focus {
+      border-color: var(--azul-medio);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(34,85,164,0.11);
+    }
+ 
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 34px 0 28px;
+    }
+ 
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+    }
+ 
+    .divider-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--azul-medio);
+      white-space: nowrap;
+    }
+ 
+    .oportunidades-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+ 
+    .oportunidad-card {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 26px 16px;
+      position: relative;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      animation: cardIn 0.6s cubic-bezier(.23,1,.32,1) both;
+    }
+ 
+    .oportunidad-card:nth-child(1) { animation-delay: 0.04s; }
+    .oportunidad-card:nth-child(2) { animation-delay: 0.11s; }
+    .oportunidad-card:nth-child(3) { animation-delay: 0.18s; }
+    .oportunidad-card:nth-child(4) { animation-delay: 0.25s; }
+    .oportunidad-card:nth-child(5) { animation-delay: 0.32s; }
+ 
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateX(-22px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+ 
+    .oportunidad-card:hover {
+      border-color: var(--azul-claro);
+      box-shadow: 0 6px 24px rgba(34,85,164,0.10);
+      transform: translateY(-2px);
+    }
+ 
+    .oportunidad-card:focus-within {
+      border-color: var(--azul-medio);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(34,85,164,0.09), 0 6px 24px rgba(34,85,164,0.09);
+    }
+ 
+    .card-number {
+      position: absolute;
+      top: -13px; left: 22px;
+      background: linear-gradient(135deg, var(--azul-medio), var(--azul));
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      box-shadow: 0 3px 12px rgba(26,58,107,0.30);
+    }
+ 
+    .card-sublabel {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      margin-top: 6px;
+    }
+ 
+    textarea {
+      width: 100%;
+      min-height: 88px;
+      background: transparent;
+      border: none;
+      outline: none;
+      resize: vertical;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.65;
+    }
+ 
+    textarea::placeholder { color: #a0b8d8; }
+ 
+    .char-counter {
+      text-align: right;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      transition: color 0.3s;
+    }
+ 
+    .char-counter.warn { color: #e07b39; }
+ 
+    .btn-wrapper {
+      margin-top: 42px;
+      display: flex;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+ 
+    .btn-reset {
+      padding: 15px 28px;
+      border-radius: 14px;
+      background: transparent;
+      border: 2px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.3s, color 0.3s;
+    }
+ 
+    .btn-reset:hover { border-color: var(--azul-medio); color: var(--azul-medio); }
+ 
+    .btn-submit {
+      padding: 15px 38px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--azul-medio) 0%, var(--azul) 100%);
+      border: none;
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 6px 24px rgba(26,58,107,0.35);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+ 
+    .btn-submit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.14), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+ 
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(26,58,107,0.42); }
+    .btn-submit:hover::before { opacity: 1; }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+ 
+    .spinner {
+      display: none;
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+ 
+    @keyframes spin { to { transform: rotate(360deg); } }
+ 
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      background: linear-gradient(135deg, var(--azul), #0d1f42);
+      color: #fff;
+      padding: 18px 28px;
+      border-radius: 16px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 8px 32px rgba(13,31,66,0.40);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transform: translateY(110px);
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(.23,1,.32,1), opacity 0.5s;
+      z-index: 999;
+      max-width: 360px;
+    }
+ 
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.error { background: linear-gradient(135deg, #7b1c1c, #c0392b); }
+ 
+    .toast-icon {
+      width: 34px; height: 34px;
+      background: var(--acento);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+ 
+    .toast.error .toast-icon { background: rgba(255,255,255,0.2); }
+ 
+    @media (max-width: 620px) {
+      .header, .form-body { padding: 28px 24px; }
+      .header { border-radius: 18px 18px 0 0; }
+      .form-body { border-radius: 0 0 18px 18px; }
+      .btn-wrapper { flex-direction: column; }
+      .btn-reset, .btn-submit { width: 100%; justify-content: center; }
+      .toast { left: 16px; right: 16px; bottom: 20px; }
+    }
+  </style>
+</head>
+<body>
+ 
+  <script>
+    // Partículas
+    const colors = ['#1a3a6b','#2255a4','#4a90d9','#60adf5'];
+    for (let i = 0; i < 14; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 28 + 8;
+      p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*14+10}s;animation-delay:${Math.random()*12}s;`;
+      document.body.appendChild(p);
+    }
+    // Hexágonos
+    [['8%','12%',7],['82%','25%',9],['55%','75%',8]].forEach(([l,t,d]) => {
+      const h = document.createElement('div');
+      h.className = 'hex-deco';
+      h.innerHTML = `<svg width="180" height="200" viewBox="0 0 180 200"><polygon points="90,0 180,50 180,150 90,200 0,150 0,50" fill="#2255a4"/></svg>`;
+      h.style.cssText = `left:${l};top:${t};animation-duration:${d}s;`;
+      document.body.appendChild(h);
+    });
+  </script>
+ 
+  <div class="wrapper">
+ 
+    <div class="header">
+      <div class="header-glow"></div>
+      <div class="header-glow2"></div>
+      <div class="logo-row">
+        <div class="logo-icon">💊</div>
+        <span class="logo-label">Farmaenlace · CX</span>
+      </div>
+      <h1>OPORTUNIDADES DE MEJORA<br><span>TABLERO CX · FARMAENLACE 2026</span></h1>
+      <div class="header-badges">
+        <span class="header-badge">Customer Experience</span>
+        <span class="header-badge">Gestión de Mejora Continua</span>
+      </div>
+    </div>
+ 
+    <div class="form-body">
+ 
+      <div class="progress-bar-wrapper">
+        <div class="progress-info">
+          <span class="progress-text">Progreso del formulario</span>
+          <span class="progress-pct" id="pctLabel">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+ 
+      <form id="mainForm" novalidate>
+ 
+        <div class="field-group">
+          <div class="section-label">Paso 1 · Identificación</div>
+          <label class="field-label" for="lider">Líder Regional *</label>
+          <div class="select-wrapper">
+            <select id="lider" name="lider" required>
+              <option value="" disabled selected>— Selecciona tu nombre —</option>
+              <option>LUIS ARMANDO MONTALVO FONSECA</option>
+              <option>DANNY FABIAN MATAMOROS TINOCO</option>
+              <option>GISSELA XIMENA QUINA GUAMBI</option>
+              <option>ROBERTO DARIO CASTELLANOS RIVERA</option>
+              <option>GUSTAVO XAVIER PAREDES PEREZ</option>
+              <option>HENRY JONATHAN VALLEJO PILAGUANO</option>
+              <option>JORGE GUSTAVO VILLACIS MENDEZ</option>
+              <option>JOSE FRANKLIN AGUILAR MOROMENACHO</option>
+              <option>LUIS ALBERTO IGLESIAS EGAS</option>
+              <option>NELSON MARCELO CEVALLOS MEZA</option>
+              <option>HECTOR XAVIER BOLAÑOS NAVAS</option>
+            </select>
+          </div>
+        </div>
+ 
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-label">Paso 2 · Oportunidades de Mejora</span>
+          <div class="divider-line"></div>
+        </div>
+ 
+        <div class="oportunidades-grid">
+ 
+          <div class="oportunidad-card">
+            <span class="card-number">OPORTUNIDAD 01</span>
+            <p class="card-sublabel">Primera oportunidad de mejora identificada en el tablero CX</p>
+            <textarea name="op1" id="op1" maxlength="300" placeholder="Ej: Mejorar el tiempo de respuesta en atención al cliente..."></textarea>
+            <div class="char-counter" id="cc1">0 / 300</div>
+          </div>
+ 
+          <div class="oportunidad-card">
+            <span class="card-number">OPORTUNIDAD 02</span>
+            <p class="card-sublabel">Segunda oportunidad de mejora identificada en el tablero CX</p>
+            <textarea name="op2" id="op2" maxlength="300" placeholder="Ej: Fortalecer el seguimiento post-venta y fidelización..."></textarea>
+            <div class="char-counter" id="cc2">0 / 300</div>
+          </div>
+ 
+          <div class="oportunidad-card">
+            <span class="card-number">OPORTUNIDAD 03</span>
+            <p class="card-sublabel">Tercera oportunidad de mejora identificada en el tablero CX</p>
+            <textarea name="op3" id="op3" maxlength="300" placeholder="Ej: Reducir el índice de quejas mediante capacitación..."></textarea>
+            <div class="char-counter" id="cc3">0 / 300</div>
+          </div>
+ 
+          <div class="oportunidad-card">
+            <span class="card-number">OPORTUNIDAD 04</span>
+            <p class="card-sublabel">Cuarta oportunidad de mejora identificada en el tablero CX</p>
+            <textarea name="op4" id="op4" maxlength="300" placeholder="Ej: Optimizar el proceso de despacho y tiempos de espera..."></textarea>
+            <div class="char-counter" id="cc4">0 / 300</div>
+          </div>
+ 
+          <div class="oportunidad-card">
+            <span class="card-number">OPORTUNIDAD 05</span>
+            <p class="card-sublabel">Quinta oportunidad de mejora identificada en el tablero CX</p>
+            <textarea name="op5" id="op5" maxlength="300" placeholder="Ej: Implementar indicadores de satisfacción en puntos de venta..."></textarea>
+            <div class="char-counter" id="cc5">0 / 300</div>
+          </div>
+ 
+        </div>
+ 
+        <div class="btn-wrapper">
+          <button type="button" class="btn-reset" id="btnReset">Limpiar</button>
+          <button type="submit" class="btn-submit" id="btnSubmit">
+            REGISTRAR OPORTUNIDADES →
+            <span class="spinner" id="spinner"></span>
+          </button>
+        </div>
+ 
+      </form>
+    </div>
+  </div>
+ 
+  <div class="toast" id="toast">
+    <div class="toast-icon" id="toastIcon">✓</div>
+    <div>
+      <div id="toastTitle">¡Registro exitoso!</div>
+      <div id="toastSub" style="font-size:12px;font-weight:400;opacity:0.75;margin-top:3px">Guardado en Google Sheets</div>
+    </div>
+  </div>
+ 
+  <script>
+    // ════════════════════════════════════════════════════
+    //  ⚠️  PASO FINAL: Pega aquí la URL de tu Apps Script
+    // ════════════════════════════════════════════════════
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkYNPlUMQ3BxUZpQkxy9ykvE0sXdoAHBoWSnmzct-K7qxUFU1ujFbkOiUY1FNEYM4/exec';
+ 
+    // Contadores de caracteres
+    [1,2,3,4,5].forEach(n => {
+      const ta = document.getElementById('op'+n);
+      const cc = document.getElementById('cc'+n);
+      ta.addEventListener('input', () => {
+        const len = ta.value.length;
+        cc.textContent = `${len} / 300`;
+        cc.classList.toggle('warn', len > 250);
+        updateProgress();
+      });
+    });
+ 
+    // Barra de progreso
+    function updateProgress() {
+      let filled = document.getElementById('lider').value ? 1 : 0;
+      [1,2,3,4,5].forEach(n => {
+        if (document.getElementById('op'+n).value.trim()) filled++;
+      });
+      const pct = Math.round((filled / 6) * 100);
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('pctLabel').textContent = pct + '%';
+    }
+ 
+    document.getElementById('lider').addEventListener('change', updateProgress);
+ 
+    // Toast
+    function showToast(success, title, sub) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastIcon').textContent  = success ? '✓' : '✕';
+      document.getElementById('toastTitle').textContent = title;
+      document.getElementById('toastSub').textContent   = sub;
+      toast.classList.toggle('error', !success);
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 4500);
+    }
+ 
+    // Validación
+    function validar() {
+      const lider = document.getElementById('lider');
+      if (!lider.value) {
+        lider.style.borderColor = '#c0392b';
+        lider.focus();
+        setTimeout(() => lider.style.borderColor = '', 2200);
+        return false;
+      }
+      let ok = true;
+      [1,2,3,4,5].forEach(n => {
+        const ta = document.getElementById('op'+n);
+        if (!ta.value.trim()) {
+          ta.closest('.oportunidad-card').style.borderColor = '#c0392b';
+          setTimeout(() => ta.closest('.oportunidad-card').style.borderColor = '', 2200);
+          ok = false;
+        }
+      });
+      return ok;
+    }
+ 
+    // ── Envío a Google Sheets ──
+    document.getElementById('mainForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (!validar()) return;
+ 
+      const btn     = document.getElementById('btnSubmit');
+      const spinner = document.getElementById('spinner');
+      btn.disabled  = true;
+      spinner.style.display = 'inline-block';
+ 
+      const payload = {
+        fecha: new Date().toLocaleString('es-EC'),
+        lider: document.getElementById('lider').value,
+        op1:   document.getElementById('op1').value,
+        op2:   document.getElementById('op2').value,
+        op3:   document.getElementById('op3').value,
+        op4:   document.getElementById('op4').value,
+        op5:   document.getElementById('op5').value,
+      };
+ 
+      try {
+        // mode: 'no-cors' es necesario con Apps Script publicado como webapp
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode:   'no-cors',
+          body:   JSON.stringify(payload),
+        });
+ 
+        showToast(true, '¡Registro exitoso!', 'Las oportunidades fueron guardadas en Google Sheets');
+        document.getElementById('mainForm').reset();
+        [1,2,3,4,5].forEach(n => {
+          document.getElementById('cc'+n).textContent = '0 / 300';
+          document.getElementById('cc'+n).classList.remove('warn');
+        });
+        updateProgress();
+ 
+      } catch (err) {
+        showToast(false, 'Error al guardar', 'Verifica tu conexión e intenta de nuevo');
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+        spinner.style.display = 'none';
+      }
+    });
+ 
+    // Reset
+    document.getElementById('btnReset').addEventListener('click', () => {
+      document.getElementById('mainForm').reset();
+      [1,2,3,4,5].forEach(n => {
+        document.getElementById('cc'+n).textContent = '0 / 300';
+        document.getElementById('cc'+n).classList.remove('warn');
+      });
+      updateProgress();
+    });
+  </script>
+</body>
+</html>
