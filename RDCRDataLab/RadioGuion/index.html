@@ -319,7 +319,7 @@
         </div>
 
         <div class="program-selector">
-            <button class="program-btn salsa active" id="btnSalsa">🎺 ENTRELONELES - Salsa (2 horas)</button>
+            <button class="program-btn salsa active" id="btnSalsa">🎺 ENTRETELONES - Salsa (2 horas)</button>
             <button class="program-btn balada" id="btnBalada">🎵 LA VOZ DEL SILENCIO - Baladas 80s-2020s (2 horas)</button>
         </div>
 
@@ -336,7 +336,7 @@
 
             <div class="guion-panel">
                 <div class="guion-header">
-                    <h2 id="guionTitulo">🎙️ Guion - ENTRELONELES</h2>
+                    <h2 id="guionTitulo">🎙️ Guion - ENTRETELONES</h2>
                     <button class="btn-copiar" id="btnCopiar">📋 Copiar guion</button>
                 </div>
                 <div class="guion-content salsa" id="guionContent">
@@ -608,7 +608,7 @@
             });
 
             return `========================================
-🎙️ ENTRELONELES - PROGRAMA DE SALSA
+🎙️ ENTRETELONES- PROGRAMA DE SALSA
 📅 ${fechaFormateada}
 ⏰ Duración: 2 horas (120 minutos)
 🆔 ID: SALSA-${fecha.replace(/-/g, '')}
@@ -618,7 +618,7 @@
 🔊 ENTRADA: "${canciones[0].cancion}" (30s fade)
 
 🎙️ APERTURA:
-"Bienvenidos a ENTRELONELES! Soy [NOMBRE] y hoy ${fechaFormateada} bailamos salsa."
+"Bienvenidos a ENTRETELONES! Soy [NOMBRE] y hoy ${fechaFormateada} bailamos salsa."
 
 📰 NOTICIAS (00:03):
 🔥 "${noticia.titulo}"
@@ -718,7 +718,7 @@ ${bloqueCanciones}
             
             if (programaActual === "salsa") {
                 guionContent.textContent = generarGuionSalsa(fechaActual);
-                guionTitulo.textContent = "🎙️ Guion - ENTRELONELES (Salsa)";
+                guionTitulo.textContent = "🎙️ Guion - ENTRETELONES (Salsa)";
                 guionContent.className = "guion-content salsa";
                 rankingPanel.className = "ranking-panel salsa";
             } else {
