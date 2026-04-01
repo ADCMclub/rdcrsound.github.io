@@ -2,648 +2,682 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Estrategia de Impulsación · Móvil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>RDCR DataLab 2026 · Próximamente</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="/img_radio/RDCR SOUND NETWORK/10.png" type="image/png">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        /* ===== MISMA PALETA Y ESTILOS PRINCIPALES ===== */
+        :root {
+            --negro-profundo: #0F0F0F;
+            --cian-electrico: #00E5FF;
+            --blanco-limpio: #FFFFFF;
+            --gris-oscuro: #2A2A2A;
+            --rosa-voz: #E91E63;
+            --naranja-voz: #FF9800;
+            --morado-voz: #9C27B0;
         }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(145deg, #1e2b4f 0%, #2d3e6e 100%);
-            min-height: 100vh;
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif; 
+            color: var(--blanco-limpio); 
+            background: var(--negro-profundo); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+        
+        /* Header (idéntico al original) */
+        header { 
+            background: rgba(15, 15, 15, 0.98); 
+            backdrop-filter: blur(15px); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid rgba(0, 229, 255, 0.4); 
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+            position: relative;
+            z-index: 1000;
+        }
+        
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo h2 { 
+            margin: 0; 
+            font-size: 1.5em; 
+            background: linear-gradient(45deg, var(--cian-electrico), #00B8D4); 
+            -webkit-background-clip: text; 
+            background-clip: text;
+            -webkit-text-fill-color: transparent; 
+            font-weight: 800; 
+        }
+        
+        /* MAIN CONSTRUCCIÓN */
+        .error-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .error-container {
+            max-width: 850px;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+        
+        /* Código grande con estilo gradiente + animación */
+        .error-code {
+            font-size: 170px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--cian-electrico), #00B8D4, var(--rosa-voz), var(--cian-electrico));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 15px;
+            letter-spacing: 8px;
+            animation: gradientShift 4s ease infinite, pulseError 3s infinite alternate;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes pulseError {
+            0% { text-shadow: 0 0 20px rgba(0, 229, 255, 0.3); }
+            100% { text-shadow: 0 0 45px rgba(0, 229, 255, 0.7); }
+        }
+        
+        .error-title {
+            font-size: 2.3em;
+            margin-bottom: 20px;
+            color: var(--blanco-limpio);
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .error-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cian-electrico), var(--rosa-voz), transparent);
+            border-radius: 3px;
+        }
+        
+        .error-message {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 650px;
+            margin: 0 auto 25px;
+            line-height: 1.6;
+        }
+        
+        /* Visualizador de audio (mismo estilo) */
+        .audio-visualizer {
+            width: 100%;
+            max-width: 420px;
+            height: 80px;
+            margin: 30px auto;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .bar {
+            width: 6px;
+            background: linear-gradient(to top, var(--cian-electrico), var(--rosa-voz));
+            border-radius: 4px 4px 0 0;
+            animation: audioWave 1.5s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.08s);
+        }
+        
+        @keyframes audioWave {
+            0%, 100% { height: 18%; opacity: 0.6; }
+            50% { height: 85%; opacity: 1; }
+        }
+        
+        /* Botones de acción */
+        .action-buttons {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            padding: 10px;
+            gap: 25px;
+            margin: 35px 0 35px;
+            flex-wrap: wrap;
         }
-        .container {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(8px);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-            width: 100%;
-            max-width: 480px;
-            padding: 16px;
-            transition: all 0.2s ease;
-            margin: 0 auto;
+        
+        .action-btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 2px solid transparent;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
         }
-        .header h2 {
-            color: #0b1a33;
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--cian-electrico), #0099cc);
+            color: var(--negro-profundo);
+            box-shadow: 0 8px 20px rgba(0, 229, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 229, 255, 0.5);
+            border-color: var(--blanco-limpio);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--blanco-limpio);
+            border: 2px solid var(--cian-electrico);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 229, 255, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 229, 255, 0.3);
+        }
+        
+        /* Enlaces rápidos - radios activas (SOLO AVENIDA TROPICAL Y DC CLÁSICOS) */
+        .quick-links {
+            margin-top: 45px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 229, 255, 0.25);
+        }
+        
+        .quick-links h3 {
+            color: var(--cian-electrico);
+            margin-bottom: 20px;
             font-size: 1.3rem;
             font-weight: 600;
-            letter-spacing: -0.3px;
-            border-bottom: 2px solid #eef2f6;
-            padding-bottom: 10px;
-            margin-bottom: 16px;
-            text-align: center;
-            line-height: 1.3;
         }
-        .tabs {
+        
+        .links-grid {
             display: flex;
-            gap: 4px;
-            margin-bottom: 16px;
-            background: #f0f4fa;
-            padding: 4px;
-            border-radius: 40px;
-        }
-        .tab {
-            flex: 1;
-            padding: 8px 4px;
-            background: transparent;
-            border-radius: 32px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: #2c3e50;
-            transition: all 0.2s;
-            text-align: center;
-            border: none;
-            white-space: nowrap;
-        }
-        .tab.active {
-            background: white;
-            color: #1e3c72;
-            box-shadow: 0 4px 10px rgba(0,30,60,0.12);
-        }
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease-out;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        h3 {
-            color: #0f2b45;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            border-left: 4px solid #3b6ea5;
-            padding-left: 12px;
-        }
-        h4 {
-            color: #1e3a5f;
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin: 0 0 10px 0;
-            letter-spacing: 0.2px;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-        @media (min-width: 400px) {
-            .form-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        label {
-            display: block;
-            font-weight: 500;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2px;
-            color: #4a5b6e;
-            margin-bottom: 3px;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px 10px;
-            border: 1.5px solid #dde3ea;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            transition: 0.15s;
-            background: white;
-            font-family: inherit;
-            -webkit-appearance: none;
-        }
-        input:focus, select:focus {
-            border-color: #2e5a9c;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(46,90,156,0.12);
-        }
-        .readonly-field {
-            background-color: #f4f7fb;
-            border-color: #d0dae8;
-            color: #0f2b45;
-            font-weight: 500;
-        }
-        .btn-send {
-            width: 100%;
-            background: #1d4e7c;
-            color: white;
-            padding: 14px 10px;
-            border: none;
-            border-radius: 40px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
-            transition: 0.15s;
-            box-shadow: 0 6px 14px rgba(25,75,125,0.3);
-            margin-top: 16px;
+            gap: 28px;
+            flex-wrap: wrap;
+            max-width: 500px;
+            margin: 0 auto;
         }
-        .btn-send:hover {
-            background: #2368a5;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 18px rgba(25,75,125,0.4);
-        }
-        .btn-send:disabled {
-            background: #9aaec2;
-            box-shadow: none;
-            transform: none;
-        }
-        .message-box {
-            margin-top: 12px;
-            padding: 10px;
-            border-radius: 12px;
-            display: none;
+        
+        .link-card {
+            background: rgba(42, 42, 42, 0.7);
+            backdrop-filter: blur(4px);
+            padding: 15px 28px;
+            border-radius: 20px;
             text-align: center;
-            font-weight: 500;
-            font-size: 0.85rem;
-            animation: slideUp 0.2s;
-        }
-        .message-box.success {
-            background: #e0f2e9;
-            color: #0e6245;
-            border: 1px solid #b6e3d0;
-            display: block;
-        }
-        .message-box.error {
-            background: #fee9e7;
-            color: #a12b2b;
-            border: 1px solid #fbc5c2;
-            display: block;
-        }
-        .message-box.info {
-            background: #e1edfc;
-            color: #1b4c7c;
-            border: 1px solid #b9d4f0;
-            display: block;
-        }
-        .loading {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255,255,255,0.4);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(5px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-        @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(8px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-
-        .result-box {
-            background: #f9fcff;
-            border-radius: 18px;
-            padding: 14px;
-            margin-bottom: 14px;
-            border: 1px solid #e6edf6;
-            transition: all 0.2s cubic-bezier(0.2,0,0,1);
-            box-shadow: 0 2px 5px rgba(0,20,40,0.05);
-        }
-        .result-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px -8px rgba(20,60,120,0.2);
-            border-color: #cbd9ec;
-        }
-
-        .result-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .result-item {
+            text-decoration: none;
+            color: var(--blanco-limpio);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            transition: all 0.25s ease;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px 0;
-            border-bottom: 1px dashed #cbd6e4;
-            font-size: 0.85rem;
-        }
-        .result-item span:first-child {
-            font-weight: 500;
-            color: #2e4d73;
-        }
-        .result-item span:last-child {
-            font-weight: 700;
-            color: #1d6b41;
-            background: #e6f1eb;
-            padding: 2px 8px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-
-        .product-compact {
-            display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             align-items: center;
             gap: 8px;
-            margin-bottom: 10px;
+            min-width: 160px;
         }
-        .product-compact .product-label {
-            font-weight: 600;
-            color: #1e3a5f;
-            min-width: 55px;
-            font-size: 0.8rem;
+        
+        .link-card:hover {
+            border-color: var(--cian-electrico);
+            transform: translateY(-6px);
+            background: rgba(0, 229, 255, 0.1);
+            box-shadow: 0 12px 25px rgba(0, 229, 255, 0.2);
         }
-        .product-compact input {
-            flex: 1 1 80px;
-            min-width: 70px;
+        
+        .link-card i {
+            font-size: 1.8rem;
+            color: var(--cian-electrico);
         }
-        .product-compact .readonly-field {
-            background: #eaf1fa;
-            flex: 0 1 70px;
-        }
-
-        .inline-metrics {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            background: #e9f0f8;
-            padding: 10px 12px;
-            border-radius: 16px;
-            margin-top: 8px;
-        }
-        .metric {
-            display: flex;
-            align-items: baseline;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
-        .metric span:first-child {
-            font-weight: 500;
-            color: #314e74;
-            font-size: 0.75rem;
-        }
-        .metric span:last-child {
-            font-weight: 700;
-            color: #0f3b5e;
-            background: white;
-            padding: 3px 10px;
-            border-radius: 40px;
+        
+        /* Contador de desarrollo (evolución del "reconnection counter") */
+        .dev-counter {
+            color: rgba(255,255,255,0.7);
             font-size: 0.9rem;
+            margin-top: 20px;
+            font-family: 'Fira Mono', monospace;
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0,229,255,0.3);
         }
-
-        small {
-            color: #6b7f94;
-            font-size: 0.65rem;
-            display: block;
-            margin-top: 2px;
+        
+        /* Elementos flotantes animados */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
-        .footer {
+        
+        .floating-element {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--cian-electrico);
+            border-radius: 50%;
+            opacity: 0.35;
+            animation: floatElement 20s infinite linear;
+        }
+        
+        @keyframes floatElement {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100px) translateX(80px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Footer igual */
+        footer { 
+            background: rgba(15, 15, 15, 0.97); 
+            padding: 30px 20px 25px; 
+            border-top: 1px solid rgba(0, 229, 255, 0.3);
             text-align: center;
-            margin-top: 18px;
-            color: #98aec6;
-            font-size: 0.7rem;
+            margin-top: 20px;
         }
-
-        @media (max-width: 360px) {
-            .container { padding: 12px; }
-            .tab { font-size: 0.7rem; }
-            .result-item span:last-child { padding: 2px 5px; }
-            .product-compact input { min-width: 60px; }
+        
+        .social-icons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 18px; 
+            margin-bottom: 22px; 
+            flex-wrap: wrap; 
+        }
+        
+        .social-icon { 
+            width: 44px; 
+            height: 44px; 
+            border-radius: 50%; 
+            background: var(--gris-oscuro); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--cian-electrico); 
+            text-decoration: none; 
+            border: 1px solid var(--cian-electrico); 
+            transition: all 0.3s ease; 
+            font-size: 1.3rem;
+        }
+        
+        .social-icon:hover {
+            background: var(--cian-electrico);
+            color: var(--negro-profundo);
+            transform: translateY(-4px) scale(1.05);
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.85rem;
+            margin-top: 12px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .error-code { font-size: 110px; letter-spacing: 4px; }
+            .error-title { font-size: 1.8rem; }
+            .error-message { font-size: 0.95rem; padding: 0 12px; }
+            .action-buttons { gap: 15px; }
+            .action-btn { padding: 12px 24px; font-size: 0.9rem; }
+            .links-grid { flex-direction: column; align-items: center; gap: 16px; }
+            .link-card { width: 80%; min-width: unset; }
+            header { padding: 12px 20px; }
+        }
+        
+        @media (max-width: 480px) {
+            .error-code { font-size: 85px; }
+            .error-title { font-size: 1.5rem; }
+        }
+        
+        /* badge sutil */
+        .badge-datalab {
+            background: rgba(0,229,255,0.12);
+            border-radius: 30px;
+            padding: 5px 14px;
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            border-left: 2px solid var(--cian-electrico);
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h2>ESTRATEGIA DE IMPULSACION<br>ZONA DARIO CASTELLANOS</h2>
-    </div>
-
-    <div class="tabs">
-        <div class="tab active" onclick="cambiarPestana('registro')">REGISTRO</div>
-        <div class="tab" onclick="cambiarPestana('calculos')">CALCULOS</div>
-    </div>
-
-    <!-- PESTAÑA REGISTRO -->
-    <div id="pestanaRegistro" class="tab-content active">
-        <h3>Registro Semanal</h3>
-        <div class="form-grid">
-            <div>
-                <label for="pdv">PDV *</label>
-                <select id="pdv" required></select>
-            </div>
-            <div>
-                <label for="colaborador">Colaborador *</label>
-                <input type="text" id="colaborador" placeholder="Ej: JUAN PEREZ" required 
-                       oninput="this.value = this.value.toUpperCase()">
-                <small>mayúsculas</small>
-            </div>
-            <div>
-                <label for="codigo">Código *</label>
-                <input type="text" id="codigo" placeholder="0000132840" required>
-                <small>se agrega apóstrofe</small>
-            </div>
-            <div>
-                <label for="nombreProducto">Producto *</label>
-                <input type="text" id="nombreProducto" placeholder="ALQUA CEP NANO CARBON" required>
-            </div>
-            <div>
-                <label for="ventaRealizada">Venta Semanal *</label>
-                <input type="number" id="ventaRealizada" placeholder="250" min="1" required>
-            </div>
+    <header>
+        <div class="logo">
+            <img src="/img_radio/RDCR SOUND NETWORK/10.png" alt="RDCR Sound Network" style="height:40px;width:auto;">
+            <h2>RDCR SOUND</h2>
         </div>
-        <button class="btn-send" onclick="enviarRegistroPDV()" id="btnRegistro">
-            <span></span> GUARDAR REGISTRO
-        </button>
-    </div>
+    </header>
 
-    <!-- PESTAÑA CÁLCULOS -->
-    <div id="pestanaCalculos" class="tab-content">
-        <h3>Proyecciones y cuotas</h3>
-
-        <!-- TRANSACCIONES -->
-        <div class="result-box">
-            <h4>Transacciones últimos 3 meses</h4>
-            <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
-                <div>
-                    <label>PDV (filtro)</label>
-                    <select id="pdvCalculos"></select>
+    <main class="error-main">
+        <div class="floating-elements" id="floatingElements"></div>
+        
+        <div class="error-container">
+            <!-- Código visual con año 2026 y gradiente animado -->
+            <div class="error-code">2026</div>
+            
+            <!-- Badge decorativo -->
+            <div class="badge-datalab">
+                <i class="fas fa-chart-line"></i> RDCR DataLab · Innovación auditiva
+            </div>
+            
+            <!-- El título será manipulado por efecto de máquina de escribir -->
+            <h1 class="error-title">RDCR DataLab 2026</h1>
+            
+            <p class="error-message">
+                <i class="fas fa-microchip"></i> Estamos construyendo una nueva experiencia de análisis musical y visualización de datos.<br>
+                <strong>RDCR DataLab 2026</strong> llegará con herramientas innovadoras para creadores y oyentes.  
+                Nuestro equipo trabaja sin descanso para ofrecerte lo mejor. <strong>¡Muy pronto se habilitará!</strong>
+            </p>
+            
+            <!-- Visualizador de audio animado -->
+            <div class="audio-visualizer" id="audioVisualizer"></div>
+            
+            <p class="error-message">
+                Mientras tanto, sintoniza nuestras emisoras activas o regresa al inicio.  
+                La espera valdrá la pena. 🚀
+            </p>
+            
+            <!-- Botones de acción: volver al inicio / ir a radios -->
+            <div class="action-buttons">
+                <a href="/" class="action-btn btn-primary">
+                    <i class="fas fa-home"></i> Volver al Inicio
+                </a>
+                <a href="#radios" class="action-btn btn-secondary" id="btnRadios">
+                    <i class="fas fa-radio"></i> Escuchar Radio
+                </a>
+            </div>
+            
+            <!-- Navegación rápida a emisoras activas: SOLO AVENIDA TROPICAL Y DC CLÁSICOS -->
+            <div class="quick-links">
+                <h3><i class="fas fa-satellite-dish"></i> Nuestras Frecuencias Activas</h3>
+                <div class="links-grid">
+                    <a href="/DCClasicosEC/" class="link-card">
+                        <i class="fas fa-headphones"></i>
+                        <span>DC Clásicos</span>
+                    </a>
+                    <a href="/RadioAvenidaTropical/" class="link-card">
+                        <i class="fas fa-umbrella-beach"></i>
+                        <span>Avenida Tropical</span>
+                    </a>
                 </div>
-                <div><label># Colab.</label><input type="number" id="numColaboradores" value="" min="1" placeholder="0"></div>
-                <div><label>Dic</label><input type="number" id="ventasDic" value="" placeholder="DIC"></div>
-                <div><label>Ene</label><input type="number" id="ventasEne" value="" placeholder="ENE"></div>
-                <div><label>Feb</label><input type="number" id="ventasFeb" value="" placeholder="FEB"></div>
             </div>
-            <div class="result-grid">
-                <div class="result-item"><span>TOTAL</span><span id="totalTransacciones">0</span></div>
-                <div class="result-item"><span>PROMEDIO</span><span id="lineaBaseTransacciones">0</span></div>
-                <div class="result-item"><span>IMPULS. 30%</span><span id="impulsacionesEfectivas">0</span></div>
-                <div class="result-item"><span>IMP/COLAB</span><span id="impXColaborador">0</span></div>
+            
+            <!-- Contador dinámico de desarrollo -->
+            <div class="dev-counter" id="devCounter">
+                <i class="fas fa-code-branch"></i> Ciclos de desarrollo: 0
             </div>
         </div>
+    </main>
 
-        <!-- PRODUCTO -->
-        <div class="result-box">
-            <h4>Linea base producto</h4>
-            <div class="product-compact">
-                <span class="product-label">Nombre</span>
-                <input type="text" id="productoNombre" value="" placeholder="Producto">
-            </div>
-            <div class="product-compact" style="flex-wrap: wrap; gap: 5px;">
-                <span class="product-label">Ventas</span>
-                <input type="number" id="prodDic" value="" placeholder="DIC">
-                <input type="number" id="prodEne" value="" placeholder="ENE">
-                <input type="number" id="prodFeb" value="" placeholder="FEB">
-                <input type="number" id="prodTotal" class="readonly-field" readonly value="0" style="max-width:65px;" placeholder="Total">
-                <input type="number" id="prodLB" class="readonly-field" readonly value="0.00" step="0.01" style="max-width:65px;" placeholder="PROM">
-            </div>
-            <div class="inline-metrics">
-                <div class="metric"><span>Total</span><span id="totalProdDisplay">0</span></div>
-                <div class="metric"><span>PROMEDIO</span><span id="lbProdDisplay">0.00</span></div>
-            </div>
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/rdcdrsound" target="_blank" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://x.com/DCradioEc" target="_blank" class="social-icon">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.youtube.com/@CanalRDCRTv" target="_blank" class="social-icon">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
         </div>
-
-        <!-- CUOTAS -->
-        <div class="result-box">
-            <h4>Cuotas · objetivo</h4>
-            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
-                <div style="min-width: 100px;">
-                    <label>Días efect.</label>
-                    <input type="number" id="diasEfectivos" value="21" min="1" style="width:80px;">
-                </div>
-                <div class="metric"><span>Mensual</span><span id="cuotaMensual">0</span></div>
-                <div class="metric"><span>Diaria</span><span id="cuotaDiaria">0.00</span></div>
-            </div>
+        <div class="copyright">
+            <p>© 2026 RDCR Sound Network · RDCR DataLab 2026 — Construyendo el futuro del análisis musical</p>
+            <p>Quito, Ecuador · Próximamente</p>
         </div>
+    </footer>
 
-        <button class="btn-send" onclick="enviarCalculos()" id="btnCalculos">
-            <span></span> GUARDAR ANALISIS
-        </button>
-    </div>
-
-    <!-- Mensajes -->
-    <div id="messageBox" class="message-box"></div>
-    <div class="footer">© 2026 · Analítica · RDCR DATALAB</div>
-</div>
-
-<script>
-    // LISTA COMPLETA DE PDV (81)
-    const pdvList = [
-        "ECO ANDINATEL OTAVALO", "ECO ANTONIO ANTE SAN ROQUE", "ECO ATUNTAQUI 2", "ECO ATUNTAQUI CENTRAL",
-        "ECO ATUNTAQUI LUIS LEORO", "ECO ATUNTAQUI PICHINCHA", "ECO BOLIVAR ATUNTAQUI", "ECO CARCHI BOLIVAR",
-        "ECO CARCHI HUACA", "ECO CENTRAL SAN GABRIEL", "ECO CLINICA IBARRA", "ECO COTACACHI LAS LOMAS",
-        "ECO COTACACHI MERCADO PRINCIPAL", "ECO COTACACHI QUIROGA", "ECO CRUZ ROJA OTAVALO", "ECO EL ANGEL",
-        "ECO EL ANGEL PARQUE CENTRAL", "ECO EL CISNE", "ECO GONZALEZ SUAREZ COTACACHI", "ECO HOSP SAN VICENTE DE PAUL",
-        "ECO IBARRA 10 DE AGOSTO", "ECO IBARRA 13 DE ABRIL", "ECO IBARRA AJAVI", "ECO IBARRA AV JAIME ROLDOS",
-        "ECO IBARRA BOLA AMARILLA", "ECO IBARRA CARANQUI", "ECO IBARRA CRISTOBAL DE TROYA", "ECO IBARRA EL CARMEN",
-        "ECO IBARRA EL RETORNO", "ECO IBARRA EUGENIO ESPEJO", "ECO IBARRA FRAY VACAS", "ECO IBARRA GALO PLAZA",
-        "ECO IBARRA HOSPITAL METROPOLITANO", "ECO IBARRA HUERTOS FAMILIARES", "ECO IBARRA INGLESA", "ECO IBARRA JUAN DE VELASCO",
-        "ECO IBARRA LA CANDELARIA", "ECO IBARRA LA MERCED", "ECO IBARRA LA VICTORIA", "ECO IBARRA LUIS VARGAS TORRES",
-        "ECO IBARRA MARIANO ACOSTA", "ECO IBARRA MERCADO AMAZONAS", "ECO IBARRA OBELISCO", "ECO IBARRA PARIS",
-        "ECO IBARRA PARQUE LA MERCED", "ECO IBARRA PILANQUI", "ECO IBARRA PRIORATO", "ECO IBARRA RAFAEL SANCHEZ",
-        "ECO IBARRA SANTA MARIANITA", "ECO IBARRA SANTA MONICA", "ECO IBARRA SUDAMERICANA", "ECO IBARRA TEODORO GOMEZ",
-        "ECO IMBABURA ANDRADE MARIN", "ECO JULIO ANDRADE", "ECO MIRA", "ECO MODERNA", "ECO OBISPO MOSQUERA",
-        "ECO OTAVALO", "ECO OTAVALO 31 DE OCTUBRE", "ECO OTAVALO AV ATAHUALPA", "ECO OTAVALO BOLIVAR",
-        "ECO OTAVALO COPACABANA", "ECO OTAVALO LOS CORAZAS", "ECO OTAVALO LUIS CISNEROS", "ECO OTAVALO MODESTO JARAMILLO",
-        "ECO OTAVALO SAN PABLO", "ECO OTAVALO SUCRE", "ECO PIMAMPIRO", "ECO PIMAMPIRO PAQUISHA",
-        "ECO SAN ANTONIO DE IBARRA", "ECO SAN GABRIEL", "ECO SANCHEZ Y CIFUENTES", "ECO TULCAN ANDRES BELLO",
-        "ECO TULCAN LUCIANO CORAL", "ECO TULCAN PARQUE AYORA", "ECO TULCAN ROBERTO GRIJALVA", "ECO TULCAN RUIZ",
-        "ECO TULCAN SUCRE", "ECO URCUQUI", "ECO VEINTIMILLA TULCAN", "MEDI IBARRA MARIANO ACOSTA"
-    ];
-
-    function llenarSelects() {
-        const selectReg = document.getElementById('pdv');
-        const selectCalc = document.getElementById('pdvCalculos');
-        selectReg.innerHTML = '<option value="">-- Seleccione PDV --</option>';
-        selectCalc.innerHTML = '<option value="">-- No especificar --</option>';
-        pdvList.forEach(pdv => {
-            let optionReg = document.createElement('option');
-            optionReg.value = pdv;
-            optionReg.textContent = pdv;
-            selectReg.appendChild(optionReg);
-            let optionCalc = document.createElement('option');
-            optionCalc.value = pdv;
-            optionCalc.textContent = pdv;
-            selectCalc.appendChild(optionCalc);
-        });
-    }
-
-    function cambiarPestana(pestana) {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        if (pestana === 'registro') {
-            document.querySelectorAll('.tab')[0].classList.add('active');
-            document.getElementById('pestanaRegistro').classList.add('active');
-        } else {
-            document.querySelectorAll('.tab')[1].classList.add('active');
-            document.getElementById('pestanaCalculos').classList.add('active');
-            calcularTodo();
-        }
-        ocultarMensaje();
-    }
-
-    function calcularTodo() {
-        const dic = parseFloat(document.getElementById('ventasDic').value) || 0;
-        const ene = parseFloat(document.getElementById('ventasEne').value) || 0;
-        const feb = parseFloat(document.getElementById('ventasFeb').value) || 0;
-        const colab = parseInt(document.getElementById('numColaboradores').value) || 1; // Si está vacío, se toma 1 para evitar división por cero
-
-        const total = dic + ene + feb;
-        const lb = total / 3;                // Línea base (promedio)
-        const impuls = lb * 0.3;              // 30% de la línea base
-        const impXCol = impuls / colab;        // dividido entre colaboradores
-
-        document.getElementById('totalTransacciones').innerText = Math.round(total);
-        document.getElementById('lineaBaseTransacciones').innerText = Math.round(lb);
-        document.getElementById('impulsacionesEfectivas').innerText = Math.round(impuls);
-        document.getElementById('impXColaborador').innerText = Math.round(impXCol);
-
-        const pDic = parseFloat(document.getElementById('prodDic').value) || 0;
-        const pEne = parseFloat(document.getElementById('prodEne').value) || 0;
-        const pFeb = parseFloat(document.getElementById('prodFeb').value) || 0;
-        const pTotal = pDic + pEne + pFeb;
-        const pLB = pTotal / 3;
-
-        document.getElementById('prodTotal').value = pTotal;
-        document.getElementById('prodLB').value = pLB.toFixed(2);
-        document.getElementById('totalProdDisplay').innerText = pTotal;
-        document.getElementById('lbProdDisplay').innerText = pLB.toFixed(2);
-
-        const dias = parseInt(document.getElementById('diasEfectivos').value) || 1;
-        // Cuota mensual = IMP/COLAB + LB producto
-        const cuotaMens = impXCol + pLB;
-        const cuotaDia = cuotaMens / dias;
-
-        document.getElementById('cuotaMensual').innerText = Math.round(cuotaMens);
-        document.getElementById('cuotaDiaria').innerText = cuotaDia.toFixed(2);
-    }
-
-    // Listeners
-    document.getElementById('ventasDic').addEventListener('input', calcularTodo);
-    document.getElementById('ventasEne').addEventListener('input', calcularTodo);
-    document.getElementById('ventasFeb').addEventListener('input', calcularTodo);
-    document.getElementById('numColaboradores').addEventListener('input', calcularTodo);
-    document.getElementById('prodDic').addEventListener('input', calcularTodo);
-    document.getElementById('prodEne').addEventListener('input', calcularTodo);
-    document.getElementById('prodFeb').addEventListener('input', calcularTodo);
-    document.getElementById('diasEfectivos').addEventListener('input', calcularTodo);
-
-    async function enviarRegistroPDV() {
-        const pdv = document.getElementById('pdv').value.trim();
-        const colaborador = document.getElementById('colaborador').value.trim();
-        let codigo = document.getElementById('codigo').value.trim();
-        const nombreProducto = document.getElementById('nombreProducto').value.trim();
-        const ventaRealizada = document.getElementById('ventaRealizada').value.trim();
-
-        if (!pdv) return mostrarMensaje('⚠️ Selecciona un PDV', 'error');
-        if (!colaborador) return mostrarMensaje('⚠️ Ingresa el colaborador', 'error');
-        if (!codigo) return mostrarMensaje('⚠️ Ingresa el código', 'error');
-        if (!nombreProducto) return mostrarMensaje('⚠️ Ingresa el nombre del producto', 'error');
-        if (!ventaRealizada) return mostrarMensaje('⚠️ Ingresa la venta realizada', 'error');
-
-        if (!codigo.startsWith("'")) codigo = "'" + codigo;
-
-        await enviarDatos({
-            tipo: 'registro',
-            pdv, colaborador, codigo, nombreProducto, ventaRealizada,
-            fecha: new Date().toLocaleDateString('es-EC'),
-            hora: new Date().toLocaleTimeString('es-EC', { hour12: false })
-        }, 'btnRegistro', 'registro');
-    }
-
-    async function enviarCalculos() {
-        const pdv = document.getElementById('pdvCalculos').value.trim() || "No especificado";
-        const datos = {
-            tipo: 'calculos',
-            pdv,
-            diciembre: document.getElementById('ventasDic').value,
-            enero: document.getElementById('ventasEne').value,
-            febrero: document.getElementById('ventasFeb').value,
-            totalTransacciones: document.getElementById('totalTransacciones').innerText,
-            lineaBaseTransacciones: document.getElementById('lineaBaseTransacciones').innerText,
-            impulsacionesEfectivas: document.getElementById('impulsacionesEfectivas').innerText,
-            impXColaborador: document.getElementById('impXColaborador').innerText,
-            numeroColaboradores: document.getElementById('numColaboradores').value,
-            productoNombre: document.getElementById('productoNombre').value.trim() || "Producto genérico",
-            ventasProducto: JSON.stringify({
-                dic: document.getElementById('prodDic').value,
-                ene: document.getElementById('prodEne').value,
-                feb: document.getElementById('prodFeb').value
-            }),
-            totalProducto: document.getElementById('prodTotal').value,
-            lineaBaseProducto: document.getElementById('prodLB').value,
-            diasEfectivos: document.getElementById('diasEfectivos').value,
-            cuotaMensual: document.getElementById('cuotaMensual').innerText,
-            cuotaDiaria: document.getElementById('cuotaDiaria').innerText,
-            fecha: new Date().toLocaleDateString('es-EC'),
-            hora: new Date().toLocaleTimeString('es-EC', { hour12: false })
-        };
-        await enviarDatos(datos, 'btnCalculos', 'calculos');
-    }
-
-    async function enviarDatos(datos, botonId, tipoForm) {
-        const btn = document.getElementById(botonId);
-        const textoOriginal = btn.innerHTML;
-        btn.innerHTML = '<span class="loading"></span> Guardando...';
-        btn.disabled = true;
-        mostrarMensaje('📤 Enviando...', 'info');
-
-        try {
-            const formData = new URLSearchParams();
-            for (let key in datos) {
-                formData.append(key, datos[key]);
+    <script>
+        // ========== 1. ELEMENTOS FLOTANTES ==========
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            const colors = ['#00E5FF', '#E91E63', '#FF9800', '#9C27B0', '#00B8D4'];
+            
+            for (let i = 0; i < 22; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                const size = Math.random() * 12 + 4;
+                const colorChoice = colors[Math.floor(Math.random() * colors.length)];
+                const delay = Math.random() * 18;
+                const duration = 12 + Math.random() * 18;
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.background = colorChoice;
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${delay}s`;
+                element.style.animationDuration = `${duration}s`;
+                element.style.opacity = Math.random() * 0.6 + 0.15;
+                container.appendChild(element);
             }
-
-            await fetch('https://script.google.com/macros/s/AKfycbwzjiNZpWIX6U6czpbcJy6WbtDyKE62QsQFh8Zj_E2PHGA3osmYihip7Vh7XZxEL6N9/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: formData
-            });
-
-            mostrarMensaje('✅ Guardado correctamente', 'success');
-            setTimeout(() => {
-                if (tipoForm === 'registro') {
-                    document.getElementById('pdv').value = '';
-                    document.getElementById('colaborador').value = '';
-                    document.getElementById('codigo').value = '';
-                    document.getElementById('nombreProducto').value = '';
-                    document.getElementById('ventaRealizada').value = '';
-                }
-                ocultarMensaje();
-            }, 1500);
-        } catch (error) {
-            console.error(error);
-            mostrarMensaje('❌ Error de conexión', 'error');
-        } finally {
-            btn.innerHTML = textoOriginal;
-            btn.disabled = false;
         }
-    }
-
-    function mostrarMensaje(texto, tipo) {
-        const msg = document.getElementById('messageBox');
-        msg.textContent = texto;
-        msg.className = 'message-box ' + tipo;
-    }
-    function ocultarMensaje() {
-        document.getElementById('messageBox').textContent = '';
-        document.getElementById('messageBox').className = 'message-box';
-    }
-
-    window.onload = function() {
-        llenarSelects();
-        calcularTodo();
-    };
-</script>
+        
+        // ========== 2. VISUALIZADOR DE AUDIO ==========
+        function createAudioVisualizer() {
+            const container = document.querySelector('.audio-visualizer');
+            if (!container) return;
+            container.innerHTML = '';
+            for (let i = 0; i < 22; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.style.setProperty('--i', i);
+                const randomBase = Math.random() * 0.8 + 0.3;
+                bar.style.height = `${randomBase * 100}%`;
+                container.appendChild(bar);
+            }
+            setInterval(() => {
+                const bars = document.querySelectorAll('.bar');
+                bars.forEach(bar => {
+                    const newH = Math.random() * 0.9 + 0.2;
+                    bar.style.height = `${newH * 100}%`;
+                });
+            }, 2200);
+        }
+        
+        // ========== 3. EFECTO MÁQUINA DE ESCRIBIR ==========
+        function startTypingEffect() {
+            const titleElement = document.querySelector('.error-title');
+            if (!titleElement) return;
+            const messages = [
+                "RDCR DataLab 2026",
+                "CONSTRUYENDO DATALAB...",
+                "ANALIZANDO MÉTRICAS AUDIO...",
+                "OPTIMIZANDO VISUALIZACIÓN",
+                "MUY PRONTO DISPONIBLE",
+                "🔊 LISTOS PARA INNOVAR"
+            ];
+            let msgIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            
+            function typeEffect() {
+                const currentMsg = messages[msgIndex];
+                if (!isDeleting && charIndex <= currentMsg.length) {
+                    titleElement.textContent = currentMsg.substring(0, charIndex);
+                    charIndex++;
+                    setTimeout(typeEffect, 110);
+                } 
+                else if (isDeleting && charIndex >= 0) {
+                    titleElement.textContent = currentMsg.substring(0, charIndex);
+                    charIndex--;
+                    setTimeout(typeEffect, 45);
+                } 
+                else {
+                    isDeleting = !isDeleting;
+                    if (!isDeleting) {
+                        msgIndex = (msgIndex + 1) % messages.length;
+                    }
+                    setTimeout(typeEffect, 1300);
+                }
+            }
+            setTimeout(() => {
+                typeEffect();
+            }, 1800);
+        }
+        
+        // ========== 4. CONTADOR DE DESARROLLO ==========
+        function startDevCounter() {
+            let cycles = 0;
+            const counterDiv = document.getElementById('devCounter');
+            if (!counterDiv) return;
+            counterDiv.innerHTML = `<i class="fas fa-microchip"></i> Ingeniería en progreso · 0 ciclos de mejora`;
+            setInterval(() => {
+                cycles++;
+                const progressPercent = Math.min(cycles * 1.2, 98).toFixed(1);
+                counterDiv.innerHTML = `<i class="fas fa-chart-simple"></i> Esfuerzo DataLab · ${cycles} ciclos activos · ${progressPercent}% sinergia digital`;
+                if (cycles % 7 === 0) {
+                    counterDiv.style.transition = '0.2s';
+                    counterDiv.style.color = '#00E5FF';
+                    counterDiv.style.textShadow = '0 0 4px cyan';
+                    setTimeout(() => {
+                        counterDiv.style.color = 'rgba(255,255,255,0.85)';
+                        counterDiv.style.textShadow = 'none';
+                    }, 500);
+                }
+            }, 3200);
+        }
+        
+        // ========== 5. SCROLL SUAVE A RADIOS ==========
+        function handleRadiosClick(event) {
+            event.preventDefault();
+            const msgElement = document.querySelector('.error-message');
+            if (msgElement) {
+                const originalMsg = msgElement.innerHTML;
+                msgElement.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Redirigiendo a las ondas de RDCR...';
+                msgElement.style.color = '#00E5FF';
+                setTimeout(() => {
+                    window.location.href = "/#radios";
+                }, 1200);
+            } else {
+                window.location.href = "/#radios";
+            }
+        }
+        
+        // ========== 6. EFECTO DE PARPADEO EN EL 2026 ==========
+        function startBlinkEffectOnCode() {
+            const codeDiv = document.querySelector('.error-code');
+            if (!codeDiv) return;
+            setInterval(() => {
+                codeDiv.style.textShadow = '0 0 55px rgba(233,30,99,0.6)';
+                setTimeout(() => {
+                    codeDiv.style.textShadow = '0 0 30px rgba(0, 229, 255, 0.5)';
+                }, 280);
+            }, 4800);
+        }
+        
+        // ========== 7. ANIMACIÓN ENTRADA SUAVE ==========
+        function fadeInBody() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.9s ease-out';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 80);
+        }
+        
+        // ========== 8. BOTÓN DE ESCUCHAR RADIO ==========
+        function bindRadioButton() {
+            const radioBtn = document.getElementById('btnRadios');
+            if (radioBtn) {
+                radioBtn.addEventListener('click', handleRadiosClick);
+            }
+        }
+        
+        // ========== 9. TÍTULO DINÁMICO ==========
+        function addSubtleConstructionBadge() {
+            let titleInterval = 0;
+            setInterval(() => {
+                if (titleInterval % 2 === 0) {
+                    document.title = "⚡ RDCR DataLab · En construcción ⚡";
+                } else {
+                    document.title = "🎧 RDCR DataLab 2026 · Muy pronto 🎧";
+                }
+                titleInterval++;
+                if (titleInterval > 10) titleInterval = 0;
+            }, 4000);
+        }
+        
+        // ========== INICIALIZACIÓN TOTAL ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            createFloatingElements();
+            createAudioVisualizer();
+            startTypingEffect();
+            startDevCounter();
+            startBlinkEffectOnCode();
+            fadeInBody();
+            bindRadioButton();
+            addSubtleConstructionBadge();
+            
+            // refresco adicional de barras
+            const audioVis = document.querySelector('.audio-visualizer');
+            if (audioVis) {
+                setInterval(() => {
+                    const bars = document.querySelectorAll('.bar');
+                    if (bars.length) {
+                        bars.forEach(bar => {
+                            const newH = Math.random() * 0.9 + 0.2;
+                            bar.style.height = `${newH * 100}%`;
+                        });
+                    }
+                }, 1800);
+            }
+            
+            // tooltip flotante
+            const container = document.querySelector('.error-container');
+            if (container) {
+                const tooltipSpan = document.createElement('div');
+                tooltipSpan.style.position = 'absolute';
+                tooltipSpan.style.bottom = '-15px';
+                tooltipSpan.style.right = '10px';
+                tooltipSpan.style.fontSize = '0.7rem';
+                tooltipSpan.style.opacity = '0.6';
+                tooltipSpan.style.background = 'rgba(0,0,0,0.5)';
+                tooltipSpan.style.padding = '4px 12px';
+                tooltipSpan.style.borderRadius = '40px';
+                tooltipSpan.innerHTML = '<i class="fas fa-tools"></i> DataLab en fase beta · 2026';
+                container.style.position = 'relative';
+                container.appendChild(tooltipSpan);
+            }
+        });
+        
+        // Prevenir comportamiento extraño de páginas en cache
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
 </body>
 </html>
