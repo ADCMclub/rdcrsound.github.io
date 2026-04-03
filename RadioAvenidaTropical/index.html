@@ -1,1 +1,413 @@
-<div data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div><script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Avenida Tropical | La música que te pega fuerte</title>
+    <!-- Font Awesome 6 (iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fondo tropical vibrante */
+        body {
+            background: linear-gradient(135deg, #ffd966 0%, #ffb347 50%, #ff8c42 100%);
+            font-family: 'Segoe UI', 'Poppins', 'Roboto', sans-serif;
+            line-height: 1.3;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* Contenedor principal con leve transparencia y sombra */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 1.2rem 2rem;
+        }
+
+        /* Tarjetas con estilo fresco y ligero */
+        .player-card, .accordion-section {
+            background: rgba(255, 248, 225, 0.95);
+            backdrop-filter: blur(2px);
+            border-radius: 1.8rem;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.2rem;
+            padding: 0.8rem 1rem;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 215, 130, 0.6);
+        }
+
+        /* Cabecera con botón de ATRÁS superior */
+        .top-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+
+        .title-area h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff6e0, #ffecb3);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .slogan {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #fff3cf;
+            background: #c13b1bcc;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            margin-top: 5px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Botón Atrás (único, superior) */
+        .btn-back-top {
+            background: #2c3e2f;
+            color: #f9e45b;
+            border: none;
+            padding: 0.7rem 1.6rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-family: inherit;
+        }
+
+        .btn-back-top i {
+            font-size: 1.2rem;
+        }
+
+        .btn-back-top:hover {
+            background: #1e3a1f;
+            transform: scale(1.02);
+            color: #ffea80;
+            box-shadow: 0 6px 14px black;
+        }
+
+        /* Reproductor embed responsivo */
+        .cstr-embed-wrapper {
+            width: 100%;
+            min-height: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        div[data-type="newStreamPlayer"] {
+            width: 100%;
+        }
+
+        /* ACORDEÓN: reduce espacios */
+        .accordion-section {
+            padding: 0.3rem 0.8rem 0.5rem 0.8rem;
+        }
+
+        details {
+            background: #fff9ef;
+            border-radius: 1.4rem;
+            padding: 0.2rem;
+            transition: 0.2s;
+        }
+
+        summary {
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.7rem 0.9rem;
+            cursor: pointer;
+            color: #b64926;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            list-style: none;
+            border-radius: 1.2rem;
+            background: #ffe6c7;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary i {
+            font-size: 1.2rem;
+            color: #e67e22;
+        }
+
+        .summary-text {
+            flex: 1;
+        }
+
+        details[open] summary {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background: #ffdead;
+        }
+
+        .accordion-content {
+            padding: 0.7rem 1rem 0.5rem;
+            color: #2d2b26;
+            font-size: 0.9rem;
+            border-top: 2px solid #ffcf9a;
+            margin-top: 0.2rem;
+            background: #fff5e8;
+            border-radius: 0 0 1rem 1rem;
+        }
+
+        .accordion-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Botón flotante WhatsApp tropical */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            background-color: #25D366;
+            color: white;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 32px;
+            line-height: 58px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse-wa 1.6s infinite;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #1ebea5;
+            transform: scale(1.07);
+        }
+
+        @keyframes pulse-wa {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Ajustes móviles */
+        @media (max-width: 650px) {
+            .top-header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                border-radius: 30px;
+            }
+            .btn-back-top {
+                justify-content: center;
+            }
+            .title-area h1 {
+                font-size: 1.5rem;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 28px;
+                line-height: 50px;
+            }
+            .container {
+                padding: 0.8rem;
+            }
+        }
+
+        /* Pie de página */
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #fff3cf;
+            margin-top: 1rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(255,240,170,0.5);
+            font-weight: 500;
+        }
+
+        /* Elementos extra */
+        .badge-tropical {
+            display: inline-block;
+            background: #f39c12;
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #2c1a0a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- PARTE SUPERIOR: BOTÓN DE ATRÁS + TÍTULO Y ESLOGAN -->
+    <div class="top-header">
+        <div class="title-area">
+            <h1><i class="fas fa-umbrella-beach"></i> AVENIDA TROPICAL</h1>
+            <div class="slogan">
+                <i class="fas fa-volume-up"></i> ¡Con la música que te pega fuerte!
+            </div>
+        </div>
+        <!-- Botón Atrás único: redirige a https://rdcrsound.adcm.club/ -->
+        <a href="https://rdcrsound.adcm.club/" class="btn-back-top" id="backToHomeBtn">
+            <i class="fas fa-arrow-left"></i> Atrás
+        </a>
+    </div>
+
+    <!-- Reproductor Caster.fm (embed original) -->
+    <div class="player-card">
+        <div class="cstr-embed-wrapper">
+            <div data-type="newStreamPlayer" 
+                 data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" 
+                 data-theme="light" 
+                 data-color="e81e4d" 
+                 data-channelId="" 
+                 data-rendered="false" 
+                 class="cstrEmbed">
+                <a href="https://www.caster.fm">Shoutcast Hosting</a> 
+                <a href="https://www.caster.fm">Stream Hosting</a> 
+                <a href="https://www.caster.fm">Radio Server Hosting</a>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 8px;">
+            <span class="badge-tropical"><i class="fas fa-fire"></i> Pegando duro 24/7</span>
+        </div>
+    </div>
+
+    <!-- ACORDEÓN: reduce espacios al colapsar -->
+    <div class="accordion-section">
+        <details>
+            <summary>
+                <i class="fas fa-palm-tree"></i>
+                <span class="summary-text"><i class="fas fa-info-circle"></i> Más sobre Avenida Tropical</span>
+                <i class="fas fa-compress-alt" style="font-size: 0.8rem;"></i>
+            </summary>
+            <div class="accordion-content">
+                <p><strong>🌴 AVENIDA TROPICAL</strong> — Ritmo, sabor y la energía que te mueve. Somos la emisora que pega fuerte con los mejores éxitos tropicales, salsa, merengue, cumbia, reguetón y mucho más.</p>
+                <p><i class="fas fa-clock"></i> <strong>Programación destacada:</strong><br>
+                • <strong>Mañanas Tropicales</strong> (7AM - 10AM): El despertar con la mejor energía.<br>
+                • <strong>La Hora del Pegue</strong> (1PM - 3PM): La música que pega más fuerte.<br>
+                • <strong>Fiesta Avenida</strong> (Viernes 9PM): mezclas exclusivas.<br>
+                • <strong>Sábado de Rumba</strong> todo el día.</p>
+                <p><i class="fas fa-headset"></i> ¡Conéctate y siente el ritmo! Síguenos en redes con #AvenidaTropical.</p>
+                <p style="font-size: 0.75rem; margin-top: 8px;"><i class="fas fa-lightbulb"></i> Clic en el título para colapsar/expandir y mantener el espacio limpio.</p>
+            </div>
+        </details>
+        <div style="text-align: right; font-size: 0.7rem; margin-top: 6px; color: #fff0b5;">
+            <i class="fas fa-arrow-up"></i> Acordeón colapsado para ahorrar espacio
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-music"></i> Avenida Tropical - La música que te pega fuerte • ¡Dale play y siente el poder!
+    </footer>
+</div>
+
+<!-- Botón flotante WHATSAPP -->
+<a href="https://wa.me/593987654321?text=Hola%20Avenida%20Tropical%20%F0%9F%8C%B4%20Quiero%20saludarlos%20y%20pedir%20mi%20canci%C3%B3n%20que%20pega%20fuerte" 
+   class="whatsapp-float" 
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Contáctanos por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</div>
+
+<!-- Script para cargar el reproductor Caster y dar estilo responsivo al iframe -->
+<script>
+    // Cargar script del reproductor si no existe
+    (function loadCasterEmbed() {
+        const existingScript = document.querySelector('script[src*="caster.fm//widgets/embed.js"]');
+        if (!existingScript) {
+            const script = document.createElement('script');
+            script.src = '//cdn.cloud.caster.fm//widgets/embed.js';
+            script.async = true;
+            document.body.appendChild(script);
+        }
+    })();
+
+    // Ajustar el iframe del reproductor para que sea 100% responsivo y sin bordes extra
+    window.addEventListener('load', function() {
+        const playerDiv = document.querySelector('div[data-type="newStreamPlayer"]');
+        if (playerDiv) {
+            const observer = new MutationObserver(() => {
+                const iframe = playerDiv.querySelector('iframe');
+                if (iframe) {
+                    iframe.style.width = '100%';
+                    iframe.style.maxWidth = '100%';
+                    iframe.style.borderRadius = '1rem';
+                    iframe.style.border = 'none';
+                    observer.disconnect();
+                }
+            });
+            observer.observe(playerDiv, { childList: true, subtree: true });
+            const existingIframe = playerDiv.querySelector('iframe');
+            if (existingIframe) {
+                existingIframe.style.width = '100%';
+                existingIframe.style.maxWidth = '100%';
+                existingIframe.style.borderRadius = '1rem';
+                existingIframe.style.border = 'none';
+            }
+        }
+    });
+
+    // Aviso opcional: el botón de Atrás es un enlace directo a la página solicitada.
+    // Si por algún motivo se desea un comportamiento de historial, pero el requerimiento es claro:
+    // "debe dirigir a esta página https://rdcrsound.adcm.club/", por lo tanto es un href.
+    // Se añade un pequeño console log informativo.
+    console.log("✅ Avenida Tropical - Botón Atrás redirige a rdcrsound.adcm.club");
+</script>
+
+<!-- Estilos adicionales para asegurar reproductor sin márgenes y acordeón compacto -->
+<style>
+    /* garantizar que el iframe del player no genere scroll extra */
+    .cstrEmbed iframe, div[data-type="newStreamPlayer"] iframe {
+        display: block;
+        width: 100% !important;
+        margin: 0 auto;
+        border-radius: 16px;
+    }
+    details summary i.fa-chevron-circle-down {
+        transition: transform 0.2s;
+    }
+    details[open] summary i.fa-chevron-circle-down {
+        transform: rotate(180deg);
+    }
+    /* eliminar cualquier fondo extraño */
+    .player-card .cstr-embed-wrapper {
+        padding: 0;
+    }
+    /* botón de atrás sin efectos no deseados */
+    .btn-back-top:active {
+        transform: scale(0.98);
+    }
+</style>
+</body>
+</html>
