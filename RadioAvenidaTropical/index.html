@@ -427,7 +427,7 @@
             color: var(--dark-bg);
         }
         
-        /* HERO CON ANIMACIÓN EN TÍTULOS */
+        /* HERO CON ANIMACIÓN */
         .hero {
             position: relative;
             padding: 180px 5% 80px;
@@ -498,7 +498,6 @@
             font-style: italic;
         }
         
-        /* ANIMACIONES PARA TÍTULOS */
         @keyframes titleGlow {
             0%, 100% {
                 text-shadow: 0 0 10px rgba(255, 94, 0, 0.5);
@@ -726,7 +725,7 @@
             animation: spin 1s linear infinite;
         }
         
-        /* SECCIÓN PROGRAMACIÓN CON ANIMACIÓN EN TÍTULO */
+        /* SECCIÓN PROGRAMACIÓN */
         .programacion-nueva-section {
             padding: 60px 20px;
             background-color: var(--dark-bg);
@@ -764,7 +763,6 @@
             line-height: 1.3;
         }
 
-        /* CONTENEDOR DE PESTAÑAS */
         .dias-tabs-container {
             width: 100%;
             max-width: 1200px;
@@ -1150,7 +1148,6 @@
             }
         }
         
-        /* MEDIA QUERIES PARA ESCRITORIO */
         @media (min-width: 768px) {
             .hero-btns {
                 flex-direction: row;
@@ -1285,15 +1282,13 @@
                     <div class="spinner"></div>
                     <div class="loading-text">Conectando a la radio...</div>
                 </div>
-                <div data-type="newStreamPlayer" 
-                     data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" 
-                     data-theme="dark" 
-                     data-color="FF6300" 
-                     data-channelId="a012d2d4-4ab4-4550-b184-3ae00c951cad" 
-                     data-rendered="false" 
-                     class="cstrEmbed" 
-                     style="display: none;">
+                <!-- REPRODUCTOR EXACTAMENTE COMO LO SOLICITASTE -->
+                <div data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="dark" data-color="0002D4" data-channelId="" data-rendered="false" class="cstrEmbed" style="display: none;">
+                    <a href="https://www.caster.fm">Shoutcast Hosting</a>
+                    <a href="https://www.caster.fm">Stream Hosting</a>
+                    <a href="https://www.caster.fm">Radio Server Hosting</a>
                 </div>
+                <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
                 <div class="audio-visualizer"></div>
             </div>
             <div class="signal-indicators">
@@ -1353,7 +1348,7 @@
     </footer>
 
     <script>
-        // Programación completa (misma estructura, con géneros tropicales/salsa)
+        // Programación completa (adaptada a música tropical)
         const programacionSemanal = {
             "lunes": [
                 { hora: "00:00 - 06:00", titulo: "MADRUGADA TROPICAL", conductor: "Avenida Tropical", descripcion: "Música suave y romántica para la noche", genero: "Baladas Tropicales" },
@@ -1502,7 +1497,7 @@
             if (target) target.classList.add('active');
         }
 
-        // Modal y otros scripts (igual que antes)
+        // Modal y otros scripts
         const modal = document.getElementById('songRequestModal');
         const whatsBtn = document.getElementById('whatsappBtn');
         const closeModalBtn = document.getElementById('closeModalBtn');
@@ -1553,22 +1548,39 @@
             });
         });
 
-        // Inicializar reproductor
-        function initPlayer() {
-            const playerDiv = document.querySelector('.cstrEmbed');
-            const loading = document.getElementById('loadingState');
-            if (!playerDiv) return;
-            const script = document.createElement('script');
-            script.src = '//cdn.cloud.caster.fm/widgets/embed.js';
-            script.onload = () => {
+        // Ocultar el loading cuando el script del reproductor haya cargado y el widget se muestre
+        const scriptPlayer = document.querySelector('script[src*="embed.js"]');
+        if (scriptPlayer) {
+            scriptPlayer.addEventListener('load', () => {
                 setTimeout(() => {
-                    if (loading) loading.style.display = 'none';
-                    if (playerDiv) playerDiv.style.display = 'flex';
-                }, 2000);
-            };
-            document.body.appendChild(script);
+                    const loading = document.getElementById('loadingState');
+                    const widget = document.querySelector('.cstrEmbed');
+                    if (loading && widget) {
+                        loading.style.display = 'none';
+                        widget.style.display = 'flex';
+                    }
+                }, 1500);
+            });
+            // Por si el script ya está en caché y el evento load no se dispara
+            if (document.querySelector('.cstrEmbed[data-rendered="true"]')) {
+                const loading = document.getElementById('loadingState');
+                const widget = document.querySelector('.cstrEmbed');
+                if (loading && widget) {
+                    loading.style.display = 'none';
+                    widget.style.display = 'flex';
+                }
+            }
+        } else {
+            // Fallback: ocultar después de 3 segundos
+            setTimeout(() => {
+                const loading = document.getElementById('loadingState');
+                const widget = document.querySelector('.cstrEmbed');
+                if (loading && widget) {
+                    loading.style.display = 'none';
+                    widget.style.display = 'flex';
+                }
+            }, 3000);
         }
-        initPlayer();
 
         // Partículas
         function createParticles() {
