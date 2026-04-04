@@ -3,52 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Estrategia de Impulsación · Móvil</title>
+    <title>Estrategia de Impulsación · Dario Castellanos</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(145deg, #1e2b4f 0%, #2d3e6e 100%);
+            background: #0a0f1c;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             padding: 10px;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        /* FONDO DINÁMICO CON ONDAS Y LÍNEAS MEJORADAS */
+        .dynamic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .moving-lines {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(60, 110, 180, 0.1) 0px,
+                rgba(60, 110, 180, 0.1) 2px,
+                transparent 2px,
+                transparent 12px
+            );
+            animation: shiftLines 28s linear infinite;
+        }
+
+        .wave-ripple {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(30,100,180,0.08) 0%, rgba(10,20,50,0) 70%);
+            animation: pulseGlow 8s infinite alternate;
+        }
+
+        .wave-svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        .wave-svg svg {
+            width: 100%;
+            height: 100%;
+            animation: gentleWave 14s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+        }
+
+        @keyframes shiftLines {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-20%) translateY(-20%); }
+        }
+
+        @keyframes gentleWave {
+            0% { transform: translateX(0) translateY(0px); opacity: 0.3; }
+            50% { transform: translateX(-3%) translateY(-12px); opacity: 0.6; }
+            100% { transform: translateX(0) translateY(0px); opacity: 0.3; }
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.2; transform: scale(1);}
+            100% { opacity: 0.5; transform: scale(1.02);}
+        }
+
+        .floating-numbers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            font-family: monospace;
+            font-weight: bold;
+            color: rgba(70, 130, 200, 0.2);
+            font-size: 1.2rem;
+            pointer-events: none;
+            animation: floatNumbers 30s linear infinite;
+        }
+
+        @keyframes floatNumbers {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-100px); }
+        }
+
         .container {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(8px);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            border-radius: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.3) inset;
             width: 100%;
             max-width: 480px;
             padding: 16px;
             transition: all 0.2s ease;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
-        .header h2 {
-            color: #0b1a33;
-            font-size: 1.3rem;
-            font-weight: 600;
-            letter-spacing: -0.3px;
-            border-bottom: 2px solid #eef2f6;
-            padding-bottom: 10px;
-            margin-bottom: 16px;
+
+        /* HEADER ANIMADO */
+        .animated-header {
             text-align: center;
-            line-height: 1.3;
+            margin-bottom: 12px;
+            animation: softGlowPulse 3s infinite ease-in-out;
         }
+
+        .animated-header h2 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0b2b4f, #1e5a9c, #2c7bc0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 8px rgba(30,90,156,0.3);
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+            animation: titleFloat 2.5s infinite alternate;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #2b6a9f, #4a9eff, #3a8bda);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-top: 4px;
+            letter-spacing: 2px;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes titleFloat {
+            0% { transform: translateY(0px); text-shadow: 0 0 2px rgba(30,90,156,0.2);}
+            100% { transform: translateY(-2px); text-shadow: 0 0 12px rgba(30,120,210,0.5);}
+        }
+
+        @keyframes softGlowPulse {
+            0% { opacity: 0.95; filter: drop-shadow(0 0 0px rgba(60,130,210,0));}
+            50% { opacity: 1; filter: drop-shadow(0 0 6px rgba(60,130,210,0.4));}
+            100% { opacity: 0.95; filter: drop-shadow(0 0 0px rgba(60,130,210,0));}
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -100%; opacity: 0.9; }
+            100% { background-position: 200%; opacity: 1; }
+            background-size: 200% auto;
+        }
+
         .tabs {
             display: flex;
             gap: 4px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             background: #f0f4fa;
             padding: 4px;
             border-radius: 40px;
         }
+
         .tab {
             flex: 1;
             padding: 8px 4px;
@@ -63,18 +194,27 @@
             border: none;
             white-space: nowrap;
         }
+
         .tab.active {
             background: white;
             color: #1e3c72;
             box-shadow: 0 4px 10px rgba(0,30,60,0.12);
         }
+
         .tab-content {
             display: none;
-            animation: fadeIn 0.3s ease-out;
+            animation: fadeSlideIn 0.35s ease-out;
         }
+
         .tab-content.active {
             display: block;
         }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         h3 {
             color: #0f2b45;
             font-size: 1.1rem;
@@ -82,7 +222,15 @@
             margin-bottom: 12px;
             border-left: 4px solid #3b6ea5;
             padding-left: 12px;
+            position: relative;
+            animation: textGlow 2s infinite alternate;
         }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 0px rgba(59,110,165,0);}
+            100% { text-shadow: 0 0 3px rgba(59,110,165,0.4);}
+        }
+
         h4 {
             color: #1e3a5f;
             font-size: 0.95rem;
@@ -90,17 +238,20 @@
             margin: 0 0 10px 0;
             letter-spacing: 0.2px;
         }
+
         .form-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
             margin-bottom: 16px;
         }
+
         @media (min-width: 400px) {
             .form-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
         label {
             display: block;
             font-weight: 500;
@@ -110,6 +261,7 @@
             color: #4a5b6e;
             margin-bottom: 3px;
         }
+
         input, select {
             width: 100%;
             padding: 10px 10px;
@@ -121,20 +273,23 @@
             font-family: inherit;
             -webkit-appearance: none;
         }
+
         input:focus, select:focus {
             border-color: #2e5a9c;
             outline: none;
             box-shadow: 0 0 0 3px rgba(46,90,156,0.12);
         }
+
         .readonly-field {
             background-color: #f4f7fb;
             border-color: #d0dae8;
             color: #0f2b45;
             font-weight: 500;
         }
+
         .btn-send {
             width: 100%;
-            background: #1d4e7c;
+            background: linear-gradient(95deg, #1d4e7c, #2b6c9e);
             color: white;
             padding: 14px 10px;
             border: none;
@@ -146,48 +301,59 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: 0.15s;
+            transition: 0.2s;
             box-shadow: 0 6px 14px rgba(25,75,125,0.3);
             margin-top: 16px;
         }
+
         .btn-send:hover {
-            background: #2368a5;
             transform: translateY(-2px);
-            box-shadow: 0 10px 18px rgba(25,75,125,0.4);
+            box-shadow: 0 12px 20px rgba(25,75,125,0.4);
+            background: linear-gradient(95deg, #2368a5, #3280b9);
         }
+
         .btn-send:disabled {
             background: #9aaec2;
             box-shadow: none;
             transform: none;
         }
+
         .message-box {
             margin-top: 12px;
-            padding: 10px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 20px;
             display: none;
             text-align: center;
             font-weight: 500;
             font-size: 0.85rem;
-            animation: slideUp 0.2s;
+            animation: bounceIn 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+            backdrop-filter: blur(8px);
         }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            80% { transform: scale(1.02); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
         .message-box.success {
-            background: #e0f2e9;
-            color: #0e6245;
-            border: 1px solid #b6e3d0;
-            display: block;
+            background: rgba(32, 128, 80, 0.2);
+            color: #0a6e48;
+            border: 1px solid #94e0b4;
         }
+
         .message-box.error {
-            background: #fee9e7;
+            background: rgba(200, 60, 50, 0.15);
             color: #a12b2b;
             border: 1px solid #fbc5c2;
-            display: block;
         }
+
         .message-box.info {
-            background: #e1edfc;
+            background: rgba(30, 100, 180, 0.15);
             color: #1b4c7c;
             border: 1px solid #b9d4f0;
-            display: block;
         }
+
         .loading {
             display: inline-block;
             width: 16px;
@@ -197,29 +363,23 @@
             border-top-color: white;
             animation: spin 0.8s linear infinite;
         }
+
         @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(5px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-        @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(8px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
 
         .result-box {
-            background: #f9fcff;
-            border-radius: 18px;
+            background: rgba(249, 252, 255, 0.92);
+            border-radius: 20px;
             padding: 14px;
             margin-bottom: 14px;
-            border: 1px solid #e6edf6;
-            transition: all 0.2s cubic-bezier(0.2,0,0,1);
-            box-shadow: 0 2px 5px rgba(0,20,40,0.05);
+            border: 1px solid rgba(200, 215, 235, 0.7);
+            transition: all 0.2s;
+            backdrop-filter: blur(2px);
+            animation: boxSoftPulse 3s infinite alternate;
         }
-        .result-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px -8px rgba(20,60,120,0.2);
-            border-color: #cbd9ec;
+
+        @keyframes boxSoftPulse {
+            0% { box-shadow: 0 2px 6px rgba(0,0,0,0.02); border-color: rgba(200,215,235,0.5);}
+            100% { box-shadow: 0 8px 18px rgba(46,90,156,0.08); border-color: rgba(100,160,220,0.4);}
         }
 
         .result-grid {
@@ -228,6 +388,7 @@
             gap: 8px;
             margin-top: 10px;
         }
+
         .result-item {
             display: flex;
             justify-content: space-between;
@@ -235,19 +396,21 @@
             padding: 5px 0;
             border-bottom: 1px dashed #cbd6e4;
             font-size: 0.85rem;
+            transition: all 0.2s;
         }
-        .result-item span:first-child {
-            font-weight: 500;
-            color: #2e4d73;
-        }
+
         .result-item span:last-child {
             font-weight: 700;
             color: #1d6b41;
             background: #e6f1eb;
             padding: 2px 8px;
             border-radius: 40px;
-            font-size: 0.85rem;
-            white-space: nowrap;
+            animation: numberPop 0.2s ease;
+        }
+
+        @keyframes numberPop {
+            from { transform: scale(0.95); opacity: 0.7; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .product-compact {
@@ -257,19 +420,26 @@
             gap: 8px;
             margin-bottom: 10px;
         }
-        .product-compact .product-label {
-            font-weight: 600;
-            color: #1e3a5f;
-            min-width: 55px;
-            font-size: 0.8rem;
-        }
-        .product-compact input {
-            flex: 1 1 80px;
+
+        /* Mejora para móviles: inputs con tamaño flexible */
+        .product-compact input[type="number"],
+        .product-compact input[type="text"] {
+            flex: 1 1 auto;
             min-width: 70px;
         }
-        .product-compact .readonly-field {
-            background: #eaf1fa;
-            flex: 0 1 70px;
+
+        /* Ajuste responsive para campos de ventas del producto */
+        @media (max-width: 450px) {
+            .product-compact {
+                gap: 6px;
+            }
+            .product-compact input[type="number"] {
+                min-width: 65px;
+                width: auto;
+            }
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .inline-metrics {
@@ -281,32 +451,19 @@
             border-radius: 16px;
             margin-top: 8px;
         }
-        .metric {
-            display: flex;
-            align-items: baseline;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
-        .metric span:first-child {
-            font-weight: 500;
-            color: #314e74;
-            font-size: 0.75rem;
-        }
+
         .metric span:last-child {
-            font-weight: 700;
-            color: #0f3b5e;
             background: white;
             padding: 3px 10px;
             border-radius: 40px;
-            font-size: 0.9rem;
+            font-weight: 700;
         }
 
         small {
             color: #6b7f94;
             font-size: 0.65rem;
-            display: block;
-            margin-top: 2px;
         }
+
         .footer {
             text-align: center;
             margin-top: 18px;
@@ -317,71 +474,82 @@
         @media (max-width: 360px) {
             .container { padding: 12px; }
             .tab { font-size: 0.7rem; }
-            .result-item span:last-child { padding: 2px 5px; }
-            .product-compact input { min-width: 60px; }
         }
     </style>
 </head>
 <body>
+
+<div class="dynamic-bg">
+    <div class="moving-lines"></div>
+    <div class="wave-ripple"></div>
+    <div class="wave-svg">
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+            <path d="M0,128 C150,96 300,160 450,144 C600,128 750,80 900,96 C1050,112 1200,144 1200,144 L1200,200 L0,200 Z" fill="rgba(70,130,200,0.2)" stroke="none">
+                <animate attributeName="d" dur="12s" values="M0,128 C150,96 300,160 450,144 C600,128 750,80 900,96 C1050,112 1200,144 1200,144 L1200,200 L0,200 Z;
+                M0,96 C150,128 300,80 450,112 C600,144 750,112 900,80 C1050,64 1200,96 1200,96 L1200,200 L0,200 Z;
+                M0,128 C150,96 300,160 450,144 C600,128 750,80 900,96 C1050,112 1200,144 1200,144 L1200,200 L0,200 Z" repeatCount="indefinite" fill="freeze"/>
+            </path>
+        </svg>
+    </div>
+    <div class="floating-numbers" id="floatingNumbers"></div>
+</div>
+
 <div class="container">
-    <div class="header">
-        <h2>ESTRATEGIA DE IMPULSACION<br>ZONA DARIO CASTELLANOS</h2>
+    <div class="animated-header">
+        <h2>ESTRATEGIA DE IMPULSACIÓN<br>ZONA DARIO CASTELLANOS</h2>
+        <div class="subtitle">ABRIL 2026</div>
     </div>
 
     <div class="tabs">
         <div class="tab active" onclick="cambiarPestana('registro')">REGISTRO</div>
-        <div class="tab" onclick="cambiarPestana('calculos')">CALCULOS</div>
+        <div class="tab" onclick="cambiarPestana('calculos')">CÁLCULOS</div>
     </div>
 
-    <!-- PESTAÑA REGISTRO -->
+    <!-- REGISTRO -->
     <div id="pestanaRegistro" class="tab-content active">
         <h3>Registro Semanal</h3>
         <div class="form-grid">
             <div>
-                <label for="pdv">PDV *</label>
+                <label>PDV *</label>
                 <select id="pdv" required></select>
             </div>
             <div>
-                <label for="colaborador">Colaborador *</label>
-                <input type="text" id="colaborador" placeholder="Ej: JUAN PEREZ" required 
-                       oninput="this.value = this.value.toUpperCase()">
+                <label>Colaborador *</label>
+                <input type="text" id="colaborador" placeholder="Ej: JUAN PEREZ" oninput="this.value = this.value.toUpperCase()">
                 <small>mayúsculas</small>
             </div>
             <div>
-                <label for="codigo">Código *</label>
-                <input type="text" id="codigo" placeholder="0000132840" required>
+                <label>Código *</label>
+                <input type="text" id="codigo" placeholder="0000132840">
                 <small>se agrega apóstrofe</small>
             </div>
             <div>
-                <label for="nombreProducto">Producto *</label>
-                <input type="text" id="nombreProducto" placeholder="ALQUA CEP NANO CARBON" required>
+                <label>Producto *</label>
+                <input type="text" id="nombreProducto" placeholder="ALQUA CEP NANO CARBON">
             </div>
             <div>
-                <label for="ventaRealizada">Venta Semanal *</label>
-                <input type="number" id="ventaRealizada" placeholder="250" min="1" required>
+                <label>Venta Semanal *</label>
+                <input type="number" id="ventaRealizada" placeholder="250" min="1">
             </div>
         </div>
-        <button class="btn-send" onclick="enviarRegistroPDV()" id="btnRegistro">
-            <span></span> GUARDAR REGISTRO
-        </button>
+        <button class="btn-send" onclick="enviarRegistroPDV()" id="btnRegistro">GUARDAR REGISTRO</button>
     </div>
 
-    <!-- PESTAÑA CÁLCULOS -->
+    <!-- CÁLCULOS con campos de producto en blanco para llenar (Ene, Feb, Mar) -->
     <div id="pestanaCalculos" class="tab-content">
         <h3>Proyecciones y cuotas</h3>
 
-        <!-- TRANSACCIONES -->
         <div class="result-box">
-            <h4>Transacciones últimos 3 meses</h4>
+            <h4>📊 Transacciones últimos 3 meses (Ene - Feb - Mar)</h4>
             <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
                 <div>
                     <label>PDV (filtro)</label>
                     <select id="pdvCalculos"></select>
                 </div>
-                <div><label># Colab.</label><input type="number" id="numColaboradores" value="" min="1" placeholder="0"></div>
-                <div><label>Dic</label><input type="number" id="ventasDic" value="" placeholder="DIC"></div>
-                <div><label>Ene</label><input type="number" id="ventasEne" value="" placeholder="ENE"></div>
-                <div><label>Feb</label><input type="number" id="ventasFeb" value="" placeholder="FEB"></div>
+                <div><label># Colab.</label><input type="number" id="numColaboradores" placeholder="0" min="1"></div>
+                <div><label>Enero</label><input type="number" id="ventasEne" placeholder="ENE" value="0"></div>
+                <div><label>Febrero</label><input type="number" id="ventasFeb" placeholder="FEB" value="0"></div>
+                <div><label>Marzo</label><input type="number" id="ventasMar" placeholder="MAR" value="0"></div>
             </div>
             <div class="result-grid">
                 <div class="result-item"><span>TOTAL</span><span id="totalTransacciones">0</span></div>
@@ -391,52 +559,48 @@
             </div>
         </div>
 
-        <!-- PRODUCTO -->
         <div class="result-box">
-            <h4>Linea base producto</h4>
+            <h4>📦 Línea base producto (Ene - Feb - Mar)</h4>
             <div class="product-compact">
                 <span class="product-label">Nombre</span>
-                <input type="text" id="productoNombre" value="" placeholder="Producto">
+                <input type="text" id="productoNombre" placeholder="Producto clave">
             </div>
-            <div class="product-compact" style="flex-wrap: wrap; gap: 5px;">
+            <!-- VENTAS DEL PRODUCTO: CASILLEROS VACÍOS (SIN NÚMEROS POR DEFECTO) para que el usuario ingrese -->
+            <div class="product-compact" style="flex-wrap: wrap; gap: 8px;">
                 <span class="product-label">Ventas</span>
-                <input type="number" id="prodDic" value="" placeholder="DIC">
-                <input type="number" id="prodEne" value="" placeholder="ENE">
-                <input type="number" id="prodFeb" value="" placeholder="FEB">
-                <input type="number" id="prodTotal" class="readonly-field" readonly value="0" style="max-width:65px;" placeholder="Total">
-                <input type="number" id="prodLB" class="readonly-field" readonly value="0.00" step="0.01" style="max-width:65px;" placeholder="PROM">
+                <input type="number" id="prodEne" placeholder="ENERO" value="">
+                <input type="number" id="prodFeb" placeholder="FEBRERO" value="">
+                <input type="number" id="prodMar" placeholder="MARZO" value="">
+                <input type="number" id="prodTotal" class="readonly-field" readonly value="0" style="max-width:75px;">
+                <input type="number" id="prodLB" class="readonly-field" readonly value="0.00" step="0.01" style="max-width:75px;">
             </div>
             <div class="inline-metrics">
-                <div class="metric"><span>Total</span><span id="totalProdDisplay">0</span></div>
-                <div class="metric"><span>PROMEDIO</span><span id="lbProdDisplay">0.00</span></div>
+                <div class="metric"><span>Total ventas</span><span id="totalProdDisplay">0</span></div>
+                <div class="metric"><span>PROMEDIO (LB)</span><span id="lbProdDisplay">0.00</span></div>
             </div>
         </div>
 
-        <!-- CUOTAS -->
         <div class="result-box">
-            <h4>Cuotas · objetivo</h4>
+            <h4>🎯 Cuotas · objetivo</h4>
             <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
                 <div style="min-width: 100px;">
                     <label>Días efect.</label>
-                    <input type="number" id="diasEfectivos" value="21" min="1" style="width:80px;">
+                    <input type="number" id="diasEfectivos" placeholder="Ej: 21" min="1" style="width:85px;">
                 </div>
-                <div class="metric"><span>Mensual</span><span id="cuotaMensual">0</span></div>
-                <div class="metric"><span>Diaria</span><span id="cuotaDiaria">0.00</span></div>
+                <div class="metric"><span>Meta Mensual</span><span id="cuotaMensual">0</span></div>
+                <div class="metric"><span>Meta Diaria</span><span id="cuotaDiaria">0.00</span></div>
             </div>
         </div>
 
-        <button class="btn-send" onclick="enviarCalculos()" id="btnCalculos">
-            <span></span> GUARDAR ANALISIS
-        </button>
+        <button class="btn-send" onclick="enviarCalculos()" id="btnCalculos">GUARDAR CÁLCULOS</button>
     </div>
 
-    <!-- Mensajes -->
     <div id="messageBox" class="message-box"></div>
-    <div class="footer">© 2026 · Analítica · RDCR DATALAB</div>
+    <div class="footer">© 2026 · Analítica dinámica · RDCR DATALAB</div>
 </div>
 
 <script>
-    // LISTA COMPLETA DE PDV (81)
+    // PDV list (81 original)
     const pdvList = [
         "ECO ANDINATEL OTAVALO", "ECO ANTONIO ANTE SAN ROQUE", "ECO ATUNTAQUI 2", "ECO ATUNTAQUI CENTRAL",
         "ECO ATUNTAQUI LUIS LEORO", "ECO ATUNTAQUI PICHINCHA", "ECO BOLIVAR ATUNTAQUI", "ECO CARCHI BOLIVAR",
@@ -460,20 +624,48 @@
         "ECO TULCAN SUCRE", "ECO URCUQUI", "ECO VEINTIMILLA TULCAN", "MEDI IBARRA MARIANO ACOSTA"
     ];
 
+    const frasesMotivacionales = [
+        "🎯 ¡Excelente! Cada venta te acerca más a la meta.", "💪 ¡Fuerza! Este registro es un paso más hacia el éxito.",
+        "🚀 ¡Vamos por más! Tu esfuerzo se refleja en cada cifra.", "🏆 ¡Sigue así! Cada unidad cuenta para alcanzar el objetivo.",
+        "✨ ¡Gran trabajo! La constancia siempre da resultados.", "📈 ¡Ese es el camino! Con ventas así llegaremos lejos.",
+        "🌟 ¡Insuperable! Tu dedicación impulsa a todo el equipo.", "⚡ ¡A romper récords! Cada registro suma al triunfo.",
+        "🎉 ¡Felicidades! Otro logro más en tu historial.", "🔝 ¡Vas por buen camino! La meta está más cerca.",
+        "💎 Calidad en cada venta, así se construye el éxito.", "🔥 Sigue encendiendo las ventas, eres imparable.",
+        "📊 Cada registro es una pieza clave del rompecabezas.", "🏅 Nivel experto: cada venta te hace más fuerte.",
+        "🌱 Pequeños pasos, grandes resultados. ¡Sigue así!"
+    ];
+
+    function obtenerFraseMotivacional() {
+        return frasesMotivacionales[Math.floor(Math.random() * frasesMotivacionales.length)];
+    }
+
+    function generarNumerosFlotantes() {
+        const container = document.getElementById('floatingNumbers');
+        if (!container) return;
+        container.innerHTML = '';
+        const count = 35;
+        for (let i = 0; i < count; i++) {
+            const span = document.createElement('span');
+            span.textContent = Math.floor(Math.random() * 100);
+            span.style.position = 'absolute';
+            span.style.left = Math.random() * 100 + '%';
+            span.style.top = Math.random() * 100 + '%';
+            span.style.opacity = Math.random() * 0.3 + 0.1;
+            span.style.fontSize = Math.random() * 20 + 12 + 'px';
+            span.style.animation = `floatNumbers ${Math.random() * 20 + 20}s linear infinite`;
+            span.style.animationDelay = Math.random() * 10 + 's';
+            container.appendChild(span);
+        }
+    }
+
     function llenarSelects() {
         const selectReg = document.getElementById('pdv');
         const selectCalc = document.getElementById('pdvCalculos');
         selectReg.innerHTML = '<option value="">-- Seleccione PDV --</option>';
         selectCalc.innerHTML = '<option value="">-- No especificar --</option>';
         pdvList.forEach(pdv => {
-            let optionReg = document.createElement('option');
-            optionReg.value = pdv;
-            optionReg.textContent = pdv;
-            selectReg.appendChild(optionReg);
-            let optionCalc = document.createElement('option');
-            optionCalc.value = pdv;
-            optionCalc.textContent = pdv;
-            selectCalc.appendChild(optionCalc);
+            selectReg.appendChild(new Option(pdv, pdv));
+            selectCalc.appendChild(new Option(pdv, pdv));
         });
     }
 
@@ -492,50 +684,46 @@
     }
 
     function calcularTodo() {
-        const dic = parseFloat(document.getElementById('ventasDic').value) || 0;
-        const ene = parseFloat(document.getElementById('ventasEne').value) || 0;
-        const feb = parseFloat(document.getElementById('ventasFeb').value) || 0;
-        const colab = parseInt(document.getElementById('numColaboradores').value) || 1; // Si está vacío, se toma 1 para evitar división por cero
+        // Transacciones Ene, Feb, Mar
+        const ene = parseFloat(document.getElementById('ventasEne')?.value) || 0;
+        const feb = parseFloat(document.getElementById('ventasFeb')?.value) || 0;
+        const mar = parseFloat(document.getElementById('ventasMar')?.value) || 0;
+        const colab = parseInt(document.getElementById('numColaboradores')?.value) || 1;
+        const totalTrans = ene + feb + mar;
+        const promedio = totalTrans / 3;
+        const impuls30 = promedio * 0.3;
+        const impXCol = impuls30 / colab;
 
-        const total = dic + ene + feb;
-        const lb = total / 3;                // Línea base (promedio)
-        const impuls = lb * 0.3;              // 30% de la línea base
-        const impXCol = impuls / colab;        // dividido entre colaboradores
-
-        document.getElementById('totalTransacciones').innerText = Math.round(total);
-        document.getElementById('lineaBaseTransacciones').innerText = Math.round(lb);
-        document.getElementById('impulsacionesEfectivas').innerText = Math.round(impuls);
+        document.getElementById('totalTransacciones').innerText = Math.round(totalTrans);
+        document.getElementById('lineaBaseTransacciones').innerText = Math.round(promedio);
+        document.getElementById('impulsacionesEfectivas').innerText = Math.round(impuls30);
         document.getElementById('impXColaborador').innerText = Math.round(impXCol);
 
-        const pDic = parseFloat(document.getElementById('prodDic').value) || 0;
-        const pEne = parseFloat(document.getElementById('prodEne').value) || 0;
-        const pFeb = parseFloat(document.getElementById('prodFeb').value) || 0;
-        const pTotal = pDic + pEne + pFeb;
+        // Producto: valores en blanco se interpretan como 0
+        const pEne = parseFloat(document.getElementById('prodEne')?.value) || 0;
+        const pFeb = parseFloat(document.getElementById('prodFeb')?.value) || 0;
+        const pMar = parseFloat(document.getElementById('prodMar')?.value) || 0;
+        const pTotal = pEne + pFeb + pMar;
         const pLB = pTotal / 3;
-
         document.getElementById('prodTotal').value = pTotal;
         document.getElementById('prodLB').value = pLB.toFixed(2);
         document.getElementById('totalProdDisplay').innerText = pTotal;
         document.getElementById('lbProdDisplay').innerText = pLB.toFixed(2);
 
-        const dias = parseInt(document.getElementById('diasEfectivos').value) || 1;
-        // Cuota mensual = IMP/COLAB + LB producto
+        // Cuotas
+        const dias = parseInt(document.getElementById('diasEfectivos')?.value) || 1;
         const cuotaMens = impXCol + pLB;
         const cuotaDia = cuotaMens / dias;
-
         document.getElementById('cuotaMensual').innerText = Math.round(cuotaMens);
         document.getElementById('cuotaDiaria').innerText = cuotaDia.toFixed(2);
     }
 
-    // Listeners
-    document.getElementById('ventasDic').addEventListener('input', calcularTodo);
-    document.getElementById('ventasEne').addEventListener('input', calcularTodo);
-    document.getElementById('ventasFeb').addEventListener('input', calcularTodo);
-    document.getElementById('numColaboradores').addEventListener('input', calcularTodo);
-    document.getElementById('prodDic').addEventListener('input', calcularTodo);
-    document.getElementById('prodEne').addEventListener('input', calcularTodo);
-    document.getElementById('prodFeb').addEventListener('input', calcularTodo);
-    document.getElementById('diasEfectivos').addEventListener('input', calcularTodo);
+    // Listeners para actualizar cálculos al modificar campos (incluye los inputs de producto vacíos)
+    const camposInput = ['ventasEne', 'ventasFeb', 'ventasMar', 'numColaboradores', 'prodEne', 'prodFeb', 'prodMar', 'diasEfectivos'];
+    camposInput.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', calcularTodo);
+    });
 
     async function enviarRegistroPDV() {
         const pdv = document.getElementById('pdv').value.trim();
@@ -547,8 +735,8 @@
         if (!pdv) return mostrarMensaje('⚠️ Selecciona un PDV', 'error');
         if (!colaborador) return mostrarMensaje('⚠️ Ingresa el colaborador', 'error');
         if (!codigo) return mostrarMensaje('⚠️ Ingresa el código', 'error');
-        if (!nombreProducto) return mostrarMensaje('⚠️ Ingresa el nombre del producto', 'error');
-        if (!ventaRealizada) return mostrarMensaje('⚠️ Ingresa la venta realizada', 'error');
+        if (!nombreProducto) return mostrarMensaje('⚠️ Ingresa el producto', 'error');
+        if (!ventaRealizada) return mostrarMensaje('⚠️ Ingresa la venta', 'error');
 
         if (!codigo.startsWith("'")) codigo = "'" + codigo;
 
@@ -557,62 +745,65 @@
             pdv, colaborador, codigo, nombreProducto, ventaRealizada,
             fecha: new Date().toLocaleDateString('es-EC'),
             hora: new Date().toLocaleTimeString('es-EC', { hour12: false })
-        }, 'btnRegistro', 'registro');
+        }, 'btnRegistro');
     }
 
     async function enviarCalculos() {
         const pdv = document.getElementById('pdvCalculos').value.trim() || "No especificado";
+        const ventasProductoObj = {
+            enero: document.getElementById('prodEne').value || '0',
+            febrero: document.getElementById('prodFeb').value || '0',
+            marzo: document.getElementById('prodMar').value || '0'
+        };
+
         const datos = {
             tipo: 'calculos',
-            pdv,
-            diciembre: document.getElementById('ventasDic').value,
-            enero: document.getElementById('ventasEne').value,
-            febrero: document.getElementById('ventasFeb').value,
+            pdv: pdv,
+            ventasEnero: document.getElementById('ventasEne').value || '0',
+            ventasFebrero: document.getElementById('ventasFeb').value || '0',
+            ventasMarzo: document.getElementById('ventasMar').value || '0',
             totalTransacciones: document.getElementById('totalTransacciones').innerText,
             lineaBaseTransacciones: document.getElementById('lineaBaseTransacciones').innerText,
             impulsacionesEfectivas: document.getElementById('impulsacionesEfectivas').innerText,
             impXColaborador: document.getElementById('impXColaborador').innerText,
-            numeroColaboradores: document.getElementById('numColaboradores').value,
+            numeroColaboradores: document.getElementById('numColaboradores').value || '0',
             productoNombre: document.getElementById('productoNombre').value.trim() || "Producto genérico",
-            ventasProducto: JSON.stringify({
-                dic: document.getElementById('prodDic').value,
-                ene: document.getElementById('prodEne').value,
-                feb: document.getElementById('prodFeb').value
-            }),
+            ventasProducto: JSON.stringify(ventasProductoObj),
             totalProducto: document.getElementById('prodTotal').value,
             lineaBaseProducto: document.getElementById('prodLB').value,
-            diasEfectivos: document.getElementById('diasEfectivos').value,
+            diasEfectivos: document.getElementById('diasEfectivos').value || '',
             cuotaMensual: document.getElementById('cuotaMensual').innerText,
             cuotaDiaria: document.getElementById('cuotaDiaria').innerText,
             fecha: new Date().toLocaleDateString('es-EC'),
             hora: new Date().toLocaleTimeString('es-EC', { hour12: false })
         };
-        await enviarDatos(datos, 'btnCalculos', 'calculos');
+
+        await enviarDatos(datos, 'btnCalculos');
     }
 
-    async function enviarDatos(datos, botonId, tipoForm) {
+    async function enviarDatos(datos, botonId) {
         const btn = document.getElementById(botonId);
-        const textoOriginal = btn.innerHTML;
+        const originalText = btn.innerHTML;
         btn.innerHTML = '<span class="loading"></span> Guardando...';
         btn.disabled = true;
         mostrarMensaje('📤 Enviando...', 'info');
 
         try {
             const formData = new URLSearchParams();
-            for (let key in datos) {
-                formData.append(key, datos[key]);
-            }
+            for (let k in datos) formData.append(k, datos[k]);
 
-            await fetch('https://script.google.com/macros/s/AKfycbwzjiNZpWIX6U6czpbcJy6WbtDyKE62QsQFh8Zj_E2PHGA3osmYihip7Vh7XZxEL6N9/exec', {
+            await fetch('https://script.google.com/macros/s/AKfycbyUvSZ8Y18RwVDgEKujMCv1U6gi2cmrdyeBcoHYKyJ0b7nNbTVyMPwX8iXhbhq0OGWH/exec', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: formData
             });
 
-            mostrarMensaje('✅ Guardado correctamente', 'success');
+            const fraseMotivacion = obtenerFraseMotivacional();
+            mostrarMensaje(`✅ Guardado correctamente<br>✨ ${fraseMotivacion}`, 'success');
+
             setTimeout(() => {
-                if (tipoForm === 'registro') {
+                if (botonId === 'btnRegistro') {
                     document.getElementById('pdv').value = '';
                     document.getElementById('colaborador').value = '';
                     document.getElementById('codigo').value = '';
@@ -620,29 +811,37 @@
                     document.getElementById('ventaRealizada').value = '';
                 }
                 ocultarMensaje();
-            }, 1500);
+            }, 3000);
         } catch (error) {
             console.error(error);
             mostrarMensaje('❌ Error de conexión', 'error');
         } finally {
-            btn.innerHTML = textoOriginal;
+            btn.innerHTML = originalText;
             btn.disabled = false;
         }
     }
 
     function mostrarMensaje(texto, tipo) {
         const msg = document.getElementById('messageBox');
-        msg.textContent = texto;
-        msg.className = 'message-box ' + tipo;
-    }
-    function ocultarMensaje() {
-        document.getElementById('messageBox').textContent = '';
-        document.getElementById('messageBox').className = 'message-box';
+        msg.innerHTML = texto;
+        msg.className = `message-box ${tipo}`;
+        msg.style.display = 'block';
     }
 
-    window.onload = function() {
+    function ocultarMensaje() {
+        const msg = document.getElementById('messageBox');
+        msg.style.display = 'none';
+        msg.className = 'message-box';
+    }
+
+    window.onload = () => {
         llenarSelects();
         calcularTodo();
+        generarNumerosFlotantes();
+        document.getElementById('diasEfectivos').value = '';
+        setInterval(() => {
+            if (document.getElementById('floatingNumbers').children.length < 20) generarNumerosFlotantes();
+        }, 30000);
     };
 </script>
 </body>
