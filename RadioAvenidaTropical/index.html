@@ -1,413 +1,596 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Avenida Tropical | La música que te pega fuerte</title>
-    <!-- Font Awesome 6 (iconos) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Avenida Tropical | RDCR Sound Network - Salsa 100% Tropical</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --neon-orange: #ff5e00;
+            --neon-green: #39ff14;
+            --neon-yellow: #fff01f;
+            --neon-orange-glow: rgba(255, 94, 0, 0.7);
+            --neon-green-glow: rgba(57, 255, 20, 0.7);
+            --neon-yellow-glow: rgba(255, 240, 31, 0.7);
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --card-bg: #111111;
+            --text-light: #f0f0f0;
+            --tropical-pink: #e81e4d;
+            --tropical-pink-glow: rgba(232, 30, 77, 0.6);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        /* Fondo tropical vibrante */
+        
         body {
-            background: linear-gradient(135deg, #ffd966 0%, #ffb347 50%, #ff8c42 100%);
-            font-family: 'Segoe UI', 'Poppins', 'Roboto', sans-serif;
-            line-height: 1.3;
-            padding: 0;
-            margin: 0;
-            min-height: 100vh;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-
-        /* Contenedor principal con leve transparencia y sombra */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 1rem 1.2rem 2rem;
-        }
-
-        /* Tarjetas con estilo fresco y ligero */
-        .player-card, .accordion-section {
-            background: rgba(255, 248, 225, 0.95);
-            backdrop-filter: blur(2px);
-            border-radius: 1.8rem;
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-            margin-bottom: 1.2rem;
-            padding: 0.8rem 1rem;
-            transition: all 0.2s;
-            border: 1px solid rgba(255, 215, 130, 0.6);
-        }
-
-        /* Cabecera con botón de ATRÁS superior */
-        .top-header {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 0.6rem 1.2rem;
-            border-radius: 60px;
-            backdrop-filter: blur(4px);
-        }
-
-        .title-area h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #fff6e0, #ffecb3);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-            margin: 0;
-            line-height: 1.2;
-        }
-
-        .slogan {
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: #fff3cf;
-            background: #c13b1bcc;
-            display: inline-block;
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-            margin-top: 5px;
-            backdrop-filter: blur(2px);
-        }
-
-        /* Botón Atrás (único, superior) */
-        .btn-back-top {
-            background: #2c3e2f;
-            color: #f9e45b;
-            border: none;
-            padding: 0.7rem 1.6rem;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: 0.2s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            font-family: inherit;
-        }
-
-        .btn-back-top i {
-            font-size: 1.2rem;
-        }
-
-        .btn-back-top:hover {
-            background: #1e3a1f;
-            transform: scale(1.02);
-            color: #ffea80;
-            box-shadow: 0 6px 14px black;
-        }
-
-        /* Reproductor embed responsivo */
-        .cstr-embed-wrapper {
-            width: 100%;
-            min-height: 160px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        div[data-type="newStreamPlayer"] {
-            width: 100%;
-        }
-
-        /* ACORDEÓN: reduce espacios */
-        .accordion-section {
-            padding: 0.3rem 0.8rem 0.5rem 0.8rem;
-        }
-
-        details {
-            background: #fff9ef;
-            border-radius: 1.4rem;
-            padding: 0.2rem;
-            transition: 0.2s;
-        }
-
-        summary {
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 0.7rem 0.9rem;
-            cursor: pointer;
-            color: #b64926;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            list-style: none;
-            border-radius: 1.2rem;
-            background: #ffe6c7;
-        }
-
-        summary::-webkit-details-marker {
-            display: none;
-        }
-
-        summary i {
-            font-size: 1.2rem;
-            color: #e67e22;
-        }
-
-        .summary-text {
-            flex: 1;
-        }
-
-        details[open] summary {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            background: #ffdead;
-        }
-
-        .accordion-content {
-            padding: 0.7rem 1rem 0.5rem;
-            color: #2d2b26;
-            font-size: 0.9rem;
-            border-top: 2px solid #ffcf9a;
-            margin-top: 0.2rem;
-            background: #fff5e8;
-            border-radius: 0 0 1rem 1rem;
-        }
-
-        .accordion-content p {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Botón flotante WhatsApp tropical */
-        .whatsapp-float {
+        
+        /* MODAL */
+        .modal-overlay {
             position: fixed;
-            bottom: 22px;
-            right: 22px;
-            background-color: #25D366;
-            color: white;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 32px;
-            line-height: 58px;
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
-            transition: all 0.3s ease;
-            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
             display: flex;
-            align-items: center;
             justify-content: center;
-            text-decoration: none;
-            animation: pulse-wa 1.6s infinite;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
-
-        .whatsapp-float:hover {
-            background-color: #1ebea5;
-            transform: scale(1.07);
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
-
-        @keyframes pulse-wa {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
-            70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        .modal-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 0 30px var(--neon-green-glow);
+            position: relative;
         }
-
-        /* Ajustes móviles */
-        @media (max-width: 650px) {
-            .top-header {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-                border-radius: 30px;
-            }
-            .btn-back-top {
-                justify-content: center;
-            }
-            .title-area h1 {
-                font-size: 1.5rem;
-            }
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                font-size: 28px;
-                line-height: 50px;
-            }
-            .container {
-                padding: 0.8rem;
-            }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: var(--neon-orange);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
-
-        /* Pie de página */
-        footer {
-            text-align: center;
-            font-size: 0.7rem;
-            color: #fff3cf;
-            margin-top: 1rem;
-            padding-top: 0.5rem;
-            border-top: 1px solid rgba(255,240,170,0.5);
-            font-weight: 500;
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,240,31,0.3);
+            border-radius: 10px;
+            color: white;
+            margin-bottom: 15px;
         }
-
-        /* Elementos extra */
-        .badge-tropical {
-            display: inline-block;
-            background: #f39c12;
-            border-radius: 30px;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.7rem;
-            font-weight: bold;
-            color: #2c1a0a;
+        .btn-modal {
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn-send { background: var(--neon-green); color: var(--dark-bg); }
+        .btn-cancel { background: transparent; color: var(--neon-orange); border: 2px solid var(--neon-orange); }
+        
+        /* BOTÓN VOLVER */
+        .back-button {
+            position: fixed; top: 20px; left: 20px; padding: 12px 20px; background: var(--card-bg); 
+            border: 2px solid var(--neon-orange); border-radius: 40px; display: flex; align-items: center; 
+            gap: 8px; color: var(--neon-orange); font-weight: 600; cursor: pointer; z-index: 1001;
+            box-shadow: 0 0 15px var(--neon-orange-glow);
+        }
+        
+        /* HEADER */
+        header {
+            background: rgba(5,5,5,0.98); padding: 15px 5%; display: flex; align-items: center; 
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; 
+            border-bottom: 2px solid var(--neon-orange);
+        }
+        .logo { display: flex; align-items: center; gap: 15px; }
+        .logo-icon { font-size: 2.5rem; color: var(--neon-orange); }
+        .logo-text h1 { font-size: 1.5rem; background: linear-gradient(90deg, var(--neon-orange), var(--neon-yellow)); 
+            -webkit-background-clip: text; background-clip: text; color: transparent; }
+        nav { flex: 1; display: flex; justify-content: flex-end; }
+        nav ul { display: flex; list-style: none; gap: 15px; }
+        nav a { color: #fff; text-decoration: none; font-weight: 600; padding: 8px 15px; }
+        nav a:hover { color: var(--neon-green); }
+        
+        /* WHATSAPP FLOTANTE */
+        .whatsapp-float {
+            position: fixed; bottom: 100px; right: 20px; width: 60px; height: 60px; 
+            background: #25D366; border-radius: 50%; display: flex; justify-content: center; 
+            align-items: center; color: white; font-size: 30px; cursor: pointer; z-index: 999;
+            box-shadow: 0 0 20px rgba(37,211,102,0.8);
+        }
+        .scroll-top {
+            position: fixed; bottom: 30px; right: 20px; width: 50px; height: 50px; 
+            background: var(--card-bg); border: 2px solid var(--neon-yellow); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; color: var(--neon-yellow); 
+            cursor: pointer; z-index: 997; opacity: 0; visibility: hidden;
+        }
+        .scroll-top.active { opacity: 1; visibility: visible; }
+        
+        /* HERO */
+        .hero {
+            padding: 180px 5% 80px; text-align: center; min-height: 100vh; 
+            display: flex; align-items: center; justify-content: center; 
+            background: linear-gradient(45deg, rgba(10,10,10,0.9), rgba(5,5,5,0.9));
+            border-bottom: 3px solid var(--neon-orange);
+        }
+        .hero h2 { font-size: 2.5rem; color: var(--neon-yellow); }
+        .hero-tagline { font-size: 1.5rem; color: var(--tropical-pink); text-shadow: 0 0 10px var(--tropical-pink-glow); margin-bottom: 20px; font-weight: 700; letter-spacing: 1px; }
+        .btn {
+            padding: 14px 30px; border-radius: 50px; font-weight: 700; text-decoration: none; 
+            display: inline-block; margin: 10px; min-width: 200px;
+        }
+        .btn-primary { background: var(--neon-orange); color: var(--dark-bg); box-shadow: 0 0 20px var(--neon-orange-glow); }
+        .btn-secondary { background: transparent; border: 2px solid var(--neon-green); color: var(--neon-green); }
+        
+        /* PLAYER */
+        .player-section { padding: 60px 20px; background: var(--darker-bg); text-align: center; }
+        .player-container { max-width: 750px; margin: 0 auto; background: rgba(20,20,20,0.95); border-radius: 20px; padding: 25px; }
+        .player-title { font-size: 1.8rem; color: var(--neon-orange); margin-bottom: 20px; }
+        .radio-frame { width: 100%; min-height: 180px; border-radius: 15px; border: none; background: #000; margin: 10px 0; }
+        .signal-indicators { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+        .signal-bar { width: 5px; height: 20px; background: #FF6300; border-radius: 3px; animation: signalPulse 1.5s infinite; }
+        
+        /* PROGRAMACIÓN */
+        .programacion-section { padding: 60px 20px; background: var(--dark-bg); }
+        .section-title { text-align: center; font-size: 2rem; color: var(--neon-orange); margin-bottom: 40px; }
+        
+        .live-now-card {
+            background: linear-gradient(135deg, rgba(57,255,20,0.12), rgba(255,94,0,0.08));
+            border: 2px solid var(--neon-green);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .live-badge { background: var(--neon-green); color: black; padding: 5px 15px; border-radius: 40px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+        .current-program-name { font-size: 1.6rem; color: var(--neon-yellow); font-weight: 800; }
+        
+        .dias-tabs {
+            display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; 
+            margin-bottom: 30px; max-width: 1200px; margin-left: auto; margin-right: auto;
+        }
+        .dia-tab {
+            padding: 12px 24px; background: rgba(255,255,255,0.05); 
+            border: 2px solid rgba(255,240,31,0.3); border-radius: 40px; 
+            font-weight: 700; cursor: pointer; position: relative;
+        }
+        .dia-tab.active { background: var(--neon-yellow); color: var(--dark-bg); border-color: var(--neon-yellow); }
+        .hoy-badge {
+            position: absolute; top: -10px; right: -8px; background: var(--neon-orange); 
+            color: black; font-size: 0.7rem; padding: 3px 8px; border-radius: 30px;
+        }
+        
+        .programas-container { max-width: 1300px; margin: 0 auto; }
+        .programas-dia { display: none; }
+        .programas-dia.active { display: block; }
+        .programas-horarios {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); 
+            gap: 24px; margin-top: 20px;
+        }
+        .programa-horario-item {
+            background: rgba(255,255,255,0.03); border-left: 5px solid var(--neon-orange); 
+            border-radius: 16px; padding: 18px;
+        }
+        .programa-horario-item.en-vivo { border-left-color: var(--neon-green); background: rgba(57,255,20,0.08); }
+        .en-vivo-badge {
+            background: var(--neon-green); color: black; font-weight: bold; font-size: 0.7rem; 
+            padding: 3px 12px; border-radius: 30px; display: inline-block; margin-bottom: 10px;
+        }
+        .hora-programa { background: var(--neon-orange); color: black; padding: 5px 14px; border-radius: 30px; font-weight: bold; font-size: 0.8rem; display: inline-block; margin-bottom: 12px; }
+        .programa-titulo { font-size: 1.2rem; font-weight: 800; color: var(--neon-yellow); }
+        .btn-pedir-programa {
+            background: transparent; border: 1.5px solid var(--neon-orange); color: var(--neon-orange); 
+            padding: 6px 14px; border-radius: 40px; font-size: 0.75rem; cursor: pointer; margin-top: 10px;
+        }
+        
+        .other-radios-section { padding: 60px 20px; background: var(--darker-bg); text-align: center; }
+        .radio-card {
+            display: inline-block; background: var(--card-bg); border: 2px solid var(--neon-green); 
+            border-radius: 20px; padding: 35px 25px; text-decoration: none; color: white; 
+            max-width: 300px; margin: 0 auto;
+        }
+        
+        footer { background: rgba(5,5,5,0.98); text-align: center; padding: 40px 20px; border-top: 3px solid var(--neon-green); }
+        
+        @keyframes signalPulse {
+            0%,100% { transform: scaleY(0.4); opacity: 0.6; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+        
+        @media (min-width: 768px) {
+            .hero h2 { font-size: 3.5rem; }
+        }
+        
+        /* Estilo para el contenedor del reproductor Caster */
+        .cstrEmbed, [data-type="newStreamPlayer"] {
+            width: 100%;
+            min-height: 170px;
+            border-radius: 15px;
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <!-- PARTE SUPERIOR: BOTÓN DE ATRÁS + TÍTULO Y ESLOGAN -->
-    <div class="top-header">
-        <div class="title-area">
-            <h1><i class="fas fa-umbrella-beach"></i> AVENIDA TROPICAL</h1>
-            <div class="slogan">
-                <i class="fas fa-volume-up"></i> ¡Con la música que te pega fuerte!
-            </div>
-        </div>
-        <!-- Botón Atrás único: redirige a https://rdcrsound.adcm.club/ -->
-        <a href="https://rdcrsound.adcm.club/" class="btn-back-top" id="backToHomeBtn">
-            <i class="fas fa-arrow-left"></i> Atrás
-        </a>
-    </div>
-
-    <!-- Reproductor Caster.fm (embed original) -->
-    <div class="player-card">
-        <div class="cstr-embed-wrapper">
-            <div data-type="newStreamPlayer" 
-                 data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" 
-                 data-theme="light" 
-                 data-color="e81e4d" 
-                 data-channelId="" 
-                 data-rendered="false" 
-                 class="cstrEmbed">
-                <a href="https://www.caster.fm">Shoutcast Hosting</a> 
-                <a href="https://www.caster.fm">Stream Hosting</a> 
-                <a href="https://www.caster.fm">Radio Server Hosting</a>
-            </div>
-        </div>
-        <div style="text-align: center; margin-top: 8px;">
-            <span class="badge-tropical"><i class="fas fa-fire"></i> Pegando duro 24/7</span>
+    <!-- MODAL -->
+    <div class="modal-overlay" id="songRequestModal">
+        <div class="modal-container">
+            <button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button>
+            <h2 style="color: var(--neon-yellow); margin-bottom: 20px;">Pedir Canción</h2>
+            <form id="songRequestForm">
+                <input type="text" id="nombreCompleto" class="form-input" placeholder="Tu nombre" required>
+                <input type="text" id="cancion" class="form-input" placeholder="Canción / Artista" required>
+                <textarea id="comentario" class="form-input" placeholder="Dedicatoria o saludo" rows="3"></textarea>
+                <button type="submit" class="btn-modal btn-send"><i class="fab fa-whatsapp"></i> Enviar</button>
+                <button type="button" class="btn-modal btn-cancel" id="cancelFormBtn">Cancelar</button>
+            </form>
         </div>
     </div>
-
-    <!-- ACORDEÓN: reduce espacios al colapsar -->
-    <div class="accordion-section">
-        <details>
-            <summary>
-                <i class="fas fa-palm-tree"></i>
-                <span class="summary-text"><i class="fas fa-info-circle"></i> Más sobre Avenida Tropical</span>
-                <i class="fas fa-compress-alt" style="font-size: 0.8rem;"></i>
-            </summary>
-            <div class="accordion-content">
-                <p><strong>🌴 AVENIDA TROPICAL</strong> — Ritmo, sabor y la energía que te mueve. Somos la emisora que pega fuerte con los mejores éxitos tropicales, salsa, merengue, cumbia, reguetón y mucho más.</p>
-                <p><i class="fas fa-clock"></i> <strong>Programación destacada:</strong><br>
-                • <strong>Mañanas Tropicales</strong> (7AM - 10AM): El despertar con la mejor energía.<br>
-                • <strong>La Hora del Pegue</strong> (1PM - 3PM): La música que pega más fuerte.<br>
-                • <strong>Fiesta Avenida</strong> (Viernes 9PM): mezclas exclusivas.<br>
-                • <strong>Sábado de Rumba</strong> todo el día.</p>
-                <p><i class="fas fa-headset"></i> ¡Conéctate y siente el ritmo! Síguenos en redes con #AvenidaTropical.</p>
-                <p style="font-size: 0.75rem; margin-top: 8px;"><i class="fas fa-lightbulb"></i> Clic en el título para colapsar/expandir y mantener el espacio limpio.</p>
-            </div>
-        </details>
-        <div style="text-align: right; font-size: 0.7rem; margin-top: 6px; color: #fff0b5;">
-            <i class="fas fa-arrow-up"></i> Acordeón colapsado para ahorrar espacio
+    
+    <div class="back-button" id="backButton"><i class="fas fa-arrow-left"></i> Volver al Son</div>
+    
+    <header id="mainHeader">
+        <div class="logo">
+            <i class="fas fa-palm-tree logo-icon"></i>
+            <div class="logo-text"><h1>Avenida Tropical</h1></div>
         </div>
-    </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#player">En Vivo</a></li>
+                <li><a href="#programacion">Programación</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="whatsapp-float" id="whatsappBtn"><i class="fab fa-whatsapp"></i></div>
+    <div class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></div>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h2>Salsa. Solo salsa</h2>
+            <div class="hero-tagline">¡CON LA MÚSICA QUE TE PEGA FUERTE, 100% TROPICAL!</div>
+            <div>
+                <a href="#player" class="btn btn-primary"><i class="fas fa-play-circle"></i> Escuchar en vivo</a>
+                <a href="#programacion" class="btn btn-secondary"><i class="fas fa-calendar-alt"></i> Programación</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLAYER EN VIVO CON CASTER.FM EMBED ACTUALIZADO -->
+    <section class="player-section" id="player">
+        <div class="player-container">
+            <h2 class="player-title">📻 AVENIDA TROPICAL EN VIVO</h2>
+            <!-- NUEVO CÓDIGO DE REPRODUCTOR CASTER.FM CON TEMA LIGHT Y COLOR TROPICAL -->
+            <div class="radio-frame">
+                <div data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed">
+                    <a href="https://www.caster.fm">Shoutcast Hosting</a> 
+                    <a href="https://www.caster.fm">Stream Hosting</a> 
+                    <a href="https://www.caster.fm">Radio Server Hosting</a>
+                </div>
+                <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+            </div>
+            <div class="signal-indicators">
+                <div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div>
+                <div class="signal-bar"></div><div class="signal-bar"></div>
+            </div>
+            <p>Streaming 128 kbps • RDCR Sound Network • Calidad profesional • 100% TROPICAL</p>
+        </div>
+    </section>
+
+    <!-- PROGRAMACIÓN -->
+    <section class="programacion-section" id="programacion">
+        <h2 class="section-title">📅 Programación Salsera</h2>
+        
+        <div class="live-now-card" id="liveNowWidget">
+            <div class="live-badge"><i class="fas fa-circle"></i> EN VIVO AHORA</div>
+            <div id="liveNowContent">Cargando...</div>
+        </div>
+        
+        <div class="dias-tabs" id="diasTabs"></div>
+        <div class="programas-container" id="programasContainer"></div>
+    </section>
+
+    <section class="other-radios-section">
+        <h2 class="section-title">Otra emisora de RDCR Sound Network</h2>
+        <div style="margin-top: 30px;">
+            <a href="https://rdcrsound.adcm.club/DCClasicosEC/" target="_self" class="radio-card">
+                <i class="fas fa-radio" style="font-size: 3rem; color: var(--neon-yellow);"></i>
+                <h3>DC Clásicos EC</h3>
+                <p>Los clásicos de siempre</p>
+            </a>
+        </div>
+    </section>
 
     <footer>
-        <i class="fas fa-music"></i> Avenida Tropical - La música que te pega fuerte • ¡Dale play y siente el poder!
+        <i class="fas fa-satellite-dish" style="font-size: 2rem; color: var(--neon-green);"></i>
+        <h3>RDCR Sound Network</h3>
+        <p>Aquí no se habla, se baila. Salsa. Solo salsa. 100% Tropical.</p>
+        <p>Avenida Tropical · RDCR Sound Network 2026 | "Donde la salsa vive y pega fuerte"</p>
     </footer>
-</div>
 
-<!-- Botón flotante WHATSAPP -->
-<a href="https://wa.me/593987654321?text=Hola%20Avenida%20Tropical%20%F0%9F%8C%B4%20Quiero%20saludarlos%20y%20pedir%20mi%20canci%C3%B3n%20que%20pega%20fuerte" 
-   class="whatsapp-float" 
-   target="_blank"
-   rel="noopener noreferrer"
-   aria-label="Contáctanos por WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-</div>
+    <script>
+        // DATOS DE PROGRAMACIÓN COMPLETA
+        const programacionSemanal = {
+            lunes: [
+                { hora: "00:00 - 06:00", titulo: "SALSA DE MADRUGADA", conductor: "Avenida Tropical", descripcion: "Salsa suave y romántica", genero: "Romántica" },
+                { hora: "06:00 - 12:00", titulo: "MAÑANA TROPICAL", conductor: "Avenida Tropical", descripcion: "Clásicos y biografías", genero: "Clásica" },
+                { hora: "12:00 - 18:00", titulo: "TARDE SALSERA", conductor: "Avenida Tropical", descripcion: "Variedad y doble de artistas", genero: "Variada" },
+                { hora: "18:00 - 19:00", titulo: "BOLEROS TROPICALES", conductor: "Avenida Tropical", descripcion: "Boleros y romance", genero: "Boleros" },
+                { hora: "19:00 - 21:00", titulo: "NOCHE ROMÁNTICA", conductor: "Avenida Tropical", descripcion: "Salsa romántica", genero: "Romántica" },
+                { hora: "21:00 - 21:30", titulo: "REFLEXIÓN AL SON DEL CARIBE", conductor: "Avenida Tropical", descripcion: "Música con mensaje", genero: "Inspiradora" },
+                { hora: "21:30 - 24:00", titulo: "SALSA NOCTURNA", conductor: "Avenida Tropical", descripcion: "Elegante y clásica", genero: "Nocturna" }
+            ],
+            martes: [
+                { hora: "00:00 - 06:00", titulo: "SALSA DE MADRUGADA", conductor: "Avenida Tropical", descripcion: "Suave y romántica", genero: "Romántica" },
+                { hora: "06:00 - 12:00", titulo: "MAÑANA TROPICAL", conductor: "Avenida Tropical", descripcion: "Salsa continua", genero: "Clásica" },
+                { hora: "12:00 - 18:00", titulo: "TARDE SALSERA", conductor: "Avenida Tropical", descripcion: "Salsa dura y moderada", genero: "Variada" },
+                { hora: "18:00 - 18:30", titulo: "BOLEROS TROPICALES", conductor: "Avenida Tropical", descripcion: "Boleros", genero: "Boleros" },
+                { hora: "18:30 - 19:30", titulo: "LOS MÁXIMOS DE LA SALSA", conductor: "Maximino Rivera Jr.", descripcion: "Éxitos históricos", genero: "Legendaria" },
+                { hora: "19:30 - 21:00", titulo: "NOCHE ROMÁNTICA", conductor: "Avenida Tropical", descripcion: "Salsa romántica", genero: "Romántica" },
+                { hora: "21:00 - 21:30", titulo: "REFLEXIÓN AL SON DEL CARIBE", conductor: "Avenida Tropical", descripcion: "Mensaje positivo", genero: "Inspiradora" },
+                { hora: "21:30 - 24:00", titulo: "SALSA NOCTURNA", conductor: "Avenida Tropical", descripcion: "Clásica nocturna", genero: "Nocturna" }
+            ],
+            miercoles: [
+                { hora: "00:00 - 06:00", titulo: "SALSA DE MADRUGADA", conductor: "Avenida Tropical", descripcion: "Salsa suave", genero: "Romántica" },
+                { hora: "06:00 - 12:00", titulo: "MAÑANA TROPICAL", conductor: "Avenida Tropical", descripcion: "Clásicos del ayer", genero: "Clásica" },
+                { hora: "12:00 - 18:00", titulo: "TARDE SALSERA", conductor: "Avenida Tropical", descripcion: "La mejor salsa", genero: "Variada" },
+                { hora: "18:00 - 19:00", titulo: "BOLEROS TROPICALES", conductor: "Avenida Tropical", descripcion: "Boleros inolvidables", genero: "Boleros" },
+                { hora: "19:00 - 21:00", titulo: "NOCHE ROMÁNTICA", conductor: "Avenida Tropical", descripcion: "Salsa para enamorar", genero: "Romántica" },
+                { hora: "21:00 - 21:30", titulo: "REFLEXIÓN AL SON DEL CARIBE", conductor: "Avenida Tropical", descripcion: "Reflexión musical", genero: "Inspiradora" },
+                { hora: "21:30 - 24:00", titulo: "SALSA NOCTURNA", conductor: "Avenida Tropical", descripcion: "Noches de salsa", genero: "Nocturna" }
+            ],
+            jueves: [
+                { hora: "00:00 - 06:00", titulo: "SALSA DE MADRUGADA", conductor: "Avenida Tropical", descripcion: "Madrugada salsera", genero: "Romántica" },
+                { hora: "06:00 - 12:00", titulo: "MAÑANA TROPICAL", conductor: "Avenida Tropical", descripcion: "Mañanas con salsa", genero: "Clásica" },
+                { hora: "12:00 - 18:00", titulo: "TARDE SALSERA", conductor: "Avenida Tropical", descripcion: "Tardes de ritmo", genero: "Variada" },
+                { hora: "18:00 - 19:00", titulo: "BOLEROS TROPICALES", conductor: "Avenida Tropical", descripcion: "Boleros clásicos", genero: "Boleros" },
+                { hora: "19:00 - 21:00", titulo: "NOCHE ROMÁNTICA", conductor: "Avenida Tropical", descripcion: "Noches de romance", genero: "Romántica" },
+                { hora: "21:00 - 21:30", titulo: "REFLEXIÓN AL SON DEL CARIBE", conductor: "Avenida Tropical", descripcion: "Mensaje y salsa", genero: "Inspiradora" },
+                { hora: "21:30 - 24:00", titulo: "SALSA NOCTURNA", conductor: "Avenida Tropical", descripcion: "Salsa bajo la luna", genero: "Nocturna" }
+            ],
+            viernes: [
+                { hora: "00:00 - 06:00", titulo: "SALSA DE MADRUGADA", conductor: "Avenida Tropical", descripcion: "Salsa suave", genero: "Romántica" },
+                { hora: "06:00 - 12:00", titulo: "MAÑANA TROPICAL", conductor: "Avenida Tropical", descripcion: "Clásicos", genero: "Clásica" },
+                { hora: "12:00 - 18:00", titulo: "TARDE SALSERA", conductor: "Avenida Tropical", descripcion: "Variedad", genero: "Variada" },
+                { hora: "18:00 - 19:00", titulo: "BOLEROS TROPICALES", conductor: "Avenida Tropical", descripcion: "Boleros", genero: "Boleros" },
+                { hora: "19:00 - 21:00", titulo: "EL MENSAJERO DE LA SALSA", conductor: "Diego Cheito Grijalva", descripcion: "Salsa con contenido", genero: "Mensaje" },
+                { hora: "21:00 - 21:30", titulo: "REFLEXIÓN AL SON DEL CARIBE", conductor: "Avenida Tropical", descripcion: "Inspiración", genero: "Inspiradora" },
+                { hora: "21:30 - 24:00", titulo: "SALSA NOCTURNA", conductor: "Avenida Tropical", descripcion: "Clásica elegante", genero: "Nocturna" }
+            ],
+            sabado: [
+                { hora: "00:00 - 06:00", titulo: "SALSA DE MADRUGADA", conductor: "Avenida Tropical", descripcion: "Tradicional", genero: "Clásica" },
+                { hora: "06:00 - 08:00", titulo: "MAÑANA TROPICAL", conductor: "Avenida Tropical", descripcion: "Salsa continua", genero: "Matutina" },
+                { hora: "08:00 - 09:00", titulo: "ENTRETELONES", conductor: "Darío Castellanos", descripcion: "Historias salseras", genero: "Cultural" },
+                { hora: "09:00 - 12:00", titulo: "MAÑANA TROPICAL", conductor: "Avenida Tropical", descripcion: "Ritmo mañanero", genero: "Matutina" },
+                { hora: "12:00 - 13:00", titulo: "PRENDIDOS", conductor: "Diego Cheito Grijalva", descripcion: "Salsa intensa", genero: "Energética" },
+                { hora: "13:00 - 17:30", titulo: "SÁBADO SALSERO", conductor: "Avenida Tropical", descripcion: "Salsa dura", genero: "Dura" },
+                { hora: "17:30 - 18:30", titulo: "TIMBA Y SABOR", conductor: "Ivette", descripcion: "Timba cubana", genero: "Timba" },
+                { hora: "18:30 - 24:00", titulo: "NOCHE SALSERA", conductor: "Avenida Tropical", descripcion: "Mixes tropicales", genero: "Tropical" }
+            ],
+            domingo: [
+                { hora: "00:00 - 07:00", titulo: "SALSA DE MADRUGADA", conductor: "Avenida Tropical", descripcion: "Suave", genero: "Clásica" },
+                { hora: "07:00 - 08:00", titulo: "SALSA CLÁSICA", conductor: "Avenida Tropical", descripcion: "Tradicional", genero: "Tradicional" },
+                { hora: "08:00 - 09:00", titulo: "ENTRETELONES", conductor: "Darío Castellanos", descripcion: "Cultura salsera", genero: "Cultural" },
+                { hora: "09:00 - 14:00", titulo: "DOMINGO SALSERO", conductor: "Avenida Tropical", descripcion: "Clásica y romántica", genero: "Dominical" },
+                { hora: "14:00 - 18:00", titulo: "MIXES DE SALSA", conductor: "Avenida Tropical", descripcion: "Mixes variados", genero: "Mix" },
+                { hora: "18:00 - 24:00", titulo: "CIERRE TROPICAL", conductor: "Avenida Tropical", descripcion: "Salsa romántica", genero: "Romántica" }
+            ]
+        };
 
-<!-- Script para cargar el reproductor Caster y dar estilo responsivo al iframe -->
-<script>
-    // Cargar script del reproductor si no existe
-    (function loadCasterEmbed() {
-        const existingScript = document.querySelector('script[src*="caster.fm//widgets/embed.js"]');
-        if (!existingScript) {
-            const script = document.createElement('script');
-            script.src = '//cdn.cloud.caster.fm//widgets/embed.js';
-            script.async = true;
-            document.body.appendChild(script);
-        }
-    })();
+        const dias = [
+            { nombre: "lunes", display: "Lunes" }, { nombre: "martes", display: "Martes" }, 
+            { nombre: "miercoles", display: "Miércoles" }, { nombre: "jueves", display: "Jueves" }, 
+            { nombre: "viernes", display: "Viernes" }, { nombre: "sabado", display: "Sábado" }, 
+            { nombre: "domingo", display: "Domingo" }
+        ];
 
-    // Ajustar el iframe del reproductor para que sea 100% responsivo y sin bordes extra
-    window.addEventListener('load', function() {
-        const playerDiv = document.querySelector('div[data-type="newStreamPlayer"]');
-        if (playerDiv) {
-            const observer = new MutationObserver(() => {
-                const iframe = playerDiv.querySelector('iframe');
-                if (iframe) {
-                    iframe.style.width = '100%';
-                    iframe.style.maxWidth = '100%';
-                    iframe.style.borderRadius = '1rem';
-                    iframe.style.border = 'none';
-                    observer.disconnect();
+        const hoy = new Date();
+        let diaActualIndex = hoy.getDay();
+        let diaActualNombre = "";
+        if (diaActualIndex === 0) diaActualNombre = "domingo";
+        else if (diaActualIndex === 1) diaActualNombre = "lunes";
+        else if (diaActualIndex === 2) diaActualNombre = "martes";
+        else if (diaActualIndex === 3) diaActualNombre = "miercoles";
+        else if (diaActualIndex === 4) diaActualNombre = "jueves";
+        else if (diaActualIndex === 5) diaActualNombre = "viernes";
+        else if (diaActualIndex === 6) diaActualNombre = "sabado";
+
+        function obtenerProgramaActual() {
+            const programas = programacionSemanal[diaActualNombre];
+            if (!programas) return null;
+            const ahora = new Date();
+            const horaActual = ahora.getHours() * 60 + ahora.getMinutes();
+            for (let prog of programas) {
+                let [inicioStr, finStr] = prog.hora.split(' - ');
+                let [inicioH, inicioM] = inicioStr.split(':').map(Number);
+                let [finH, finM] = finStr.split(':').map(Number);
+                let inicioMin = inicioH * 60 + inicioM;
+                let finMin = finH * 60 + finM;
+                if (horaActual >= inicioMin && horaActual <= finMin) {
+                    return prog;
                 }
-            });
-            observer.observe(playerDiv, { childList: true, subtree: true });
-            const existingIframe = playerDiv.querySelector('iframe');
-            if (existingIframe) {
-                existingIframe.style.width = '100%';
-                existingIframe.style.maxWidth = '100%';
-                existingIframe.style.borderRadius = '1rem';
-                existingIframe.style.border = 'none';
+            }
+            return null;
+        }
+
+        function actualizarLiveNow() {
+            const actual = obtenerProgramaActual();
+            const container = document.getElementById("liveNowContent");
+            if (actual) {
+                container.innerHTML = `
+                    <div class="current-program-name">🎙️ ${actual.titulo}</div>
+                    <div>Conductor: ${actual.conductor}</div>
+                    <div>${actual.descripcion} • ${actual.genero}</div>
+                    <div style="margin-top: 10px;">🕒 ${new Date().toLocaleTimeString()}</div>
+                `;
+            } else {
+                container.innerHTML = "<div>✨ Disfrutando la mejor salsa del mundo ✨</div>";
             }
         }
-    });
 
-    // Aviso opcional: el botón de Atrás es un enlace directo a la página solicitada.
-    // Si por algún motivo se desea un comportamiento de historial, pero el requerimiento es claro:
-    // "debe dirigir a esta página https://rdcrsound.adcm.club/", por lo tanto es un href.
-    // Se añade un pequeño console log informativo.
-    console.log("✅ Avenida Tropical - Botón Atrás redirige a rdcrsound.adcm.club");
-</script>
+        function programaEnVivo(prog, diaNombre) {
+            if (diaNombre !== diaActualNombre) return false;
+            const ahora = new Date();
+            const horaActual = ahora.getHours() * 60 + ahora.getMinutes();
+            let [inicioStr, finStr] = prog.hora.split(' - ');
+            let [inicioH, inicioM] = inicioStr.split(':').map(Number);
+            let [finH, finM] = finStr.split(':').map(Number);
+            let inicioMin = inicioH * 60 + inicioM;
+            let finMin = finH * 60 + finM;
+            return horaActual >= inicioMin && horaActual <= finMin;
+        }
 
-<!-- Estilos adicionales para asegurar reproductor sin márgenes y acordeón compacto -->
-<style>
-    /* garantizar que el iframe del player no genere scroll extra */
-    .cstrEmbed iframe, div[data-type="newStreamPlayer"] iframe {
-        display: block;
-        width: 100% !important;
-        margin: 0 auto;
-        border-radius: 16px;
-    }
-    details summary i.fa-chevron-circle-down {
-        transition: transform 0.2s;
-    }
-    details[open] summary i.fa-chevron-circle-down {
-        transform: rotate(180deg);
-    }
-    /* eliminar cualquier fondo extraño */
-    .player-card .cstr-embed-wrapper {
-        padding: 0;
-    }
-    /* botón de atrás sin efectos no deseados */
-    .btn-back-top:active {
-        transform: scale(0.98);
-    }
-</style>
+        function construirProgramacion() {
+            const tabsDiv = document.getElementById("diasTabs");
+            const progContainer = document.getElementById("programasContainer");
+            tabsDiv.innerHTML = "";
+            progContainer.innerHTML = "";
+
+            dias.forEach(dia => {
+                const esHoy = dia.nombre === diaActualNombre;
+                const tab = document.createElement("div");
+                tab.className = `dia-tab ${esHoy ? "active" : ""}`;
+                tab.textContent = dia.display;
+                if (esHoy) {
+                    const badge = document.createElement("span");
+                    badge.className = "hoy-badge";
+                    badge.textContent = "HOY";
+                    tab.appendChild(badge);
+                }
+                tab.onclick = () => {
+                    document.querySelectorAll(".dia-tab").forEach(t => t.classList.remove("active"));
+                    tab.classList.add("active");
+                    document.querySelectorAll(".programas-dia").forEach(p => p.classList.remove("active"));
+                    document.getElementById(`prog-${dia.nombre}`).classList.add("active");
+                };
+                tabsDiv.appendChild(tab);
+
+                const diaDiv = document.createElement("div");
+                diaDiv.className = `programas-dia ${esHoy ? "active" : ""}`;
+                diaDiv.id = `prog-${dia.nombre}`;
+                
+                const horariosDiv = document.createElement("div");
+                horariosDiv.className = "programas-horarios";
+                
+                const programas = programacionSemanal[dia.nombre];
+                if (programas) {
+                    programas.forEach(prog => {
+                        const enVivo = programaEnVivo(prog, dia.nombre);
+                        const item = document.createElement("div");
+                        item.className = `programa-horario-item ${enVivo ? "en-vivo" : ""}`;
+                        if (enVivo) {
+                            const badge = document.createElement("div");
+                            badge.className = "en-vivo-badge";
+                            badge.innerHTML = '<i class="fas fa-circle"></i> EN VIVO';
+                            item.appendChild(badge);
+                        }
+                        item.innerHTML += `
+                            <div class="hora-programa">${prog.hora}</div>
+                            <div class="programa-titulo">${prog.titulo}</div>
+                            <div><i class="fas fa-user"></i> ${prog.conductor}</div>
+                            <div style="font-size: 0.85rem; color: #ccc;">${prog.descripcion}</div>
+                            <button class="btn-pedir-programa" data-programa="${prog.titulo}">
+                                <i class="fab fa-whatsapp"></i> Pedir canción
+                            </button>
+                        `;
+                        horariosDiv.appendChild(item);
+                    });
+                }
+                diaDiv.appendChild(horariosDiv);
+                progContainer.appendChild(diaDiv);
+            });
+
+            document.querySelectorAll('.btn-pedir-programa').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const programa = btn.getAttribute('data-programa');
+                    document.getElementById("comentario").value = `Pedido para el programa "${programa}" - `;
+                    document.getElementById("songRequestModal").classList.add("active");
+                });
+            });
+        }
+
+        // Modal
+        const modal = document.getElementById("songRequestModal");
+        document.getElementById("closeModalBtn")?.addEventListener("click", () => {
+            modal.classList.remove("active");
+        });
+        document.getElementById("cancelFormBtn")?.addEventListener("click", () => {
+            modal.classList.remove("active");
+        });
+        document.getElementById("whatsappBtn")?.addEventListener("click", () => {
+            document.getElementById("comentario").value = "";
+            modal.classList.add("active");
+        });
+        document.getElementById("songRequestForm")?.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById("nombreCompleto").value.trim();
+            const cancion = document.getElementById("cancion").value.trim();
+            const comentario = document.getElementById("comentario").value.trim();
+            if (!nombre || !cancion) {
+                alert("Completa tu nombre y la canción");
+                return;
+            }
+            const msg = `*PETICIÓN AVENIDA TROPICAL*%0A%0A*Nombre:* ${nombre}%0A*Canción:* ${cancion}%0A*Comentario:* ${comentario || "Sin comentario"}`;
+            window.open(`https://wa.me/593961480654?text=${msg}`, "_blank");
+            modal.classList.remove("active");
+            e.target.reset();
+        });
+
+        // Scroll y efectos
+        window.addEventListener("scroll", () => {
+            const scrollBtn = document.getElementById("scrollTopBtn");
+            if (window.scrollY > 300) scrollBtn.classList.add("active");
+            else scrollBtn.classList.remove("active");
+        });
+        document.getElementById("scrollTopBtn")?.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        document.getElementById("backButton")?.addEventListener("click", () => {
+            window.location.href = "https://rdcrsound.adcm.club";
+        });
+
+        // Animación barras
+        setInterval(() => {
+            document.querySelectorAll('.signal-bar').forEach(bar => {
+                bar.style.transform = `scaleY(${Math.random() * 0.8 + 0.3})`;
+            });
+        }, 500);
+
+        // Inicializar
+        construirProgramacion();
+        actualizarLiveNow();
+        setInterval(actualizarLiveNow, 60000);
+    </script>
 </body>
 </html>
