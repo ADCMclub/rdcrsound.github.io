@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>RadioSync Pro - Sistema de Gestión para Radio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #0a0a0a;
+            padding: 16px;
+        }
+
+        .app {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #121212;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #2a2a3e;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .header h1 span {
+            background: linear-gradient(90deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .header p {
+            color: #888;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: #ff4444;
+            color: white;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
+        .now-playing {
+            background: #1e1e2e;
+            margin: 16px;
+            padding: 16px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .song-info {
+            flex: 1;
+        }
+
+        .song-info .label {
+            font-size: 12px;
+            color: #feca57;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .song-info .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            margin-top: 4px;
+        }
+
+        .song-info .next {
+            font-size: 11px;
+            color: #888;
+            margin-top: 6px;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-whatsapp:active {
+            opacity: 0.8;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 16px;
+            margin-bottom: 20px;
+        }
+
+        .info-card {
+            background: #1e1e2e;
+            padding: 14px;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .info-card:active {
+            transform: scale(0.98);
+            background: #2a2a3a;
+        }
+
+        .info-card .icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .info-card .label {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .info-card .value {
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            margin-top: 4px;
+        }
+
+        .metrics {
+            display: flex;
+            justify-content: space-around;
+            background: #1a1a2a;
+            margin: 16px;
+            padding: 14px;
+            border-radius: 20px;
+        }
+
+        .metric {
+            text-align: center;
+            flex: 1;
+        }
+
+        .metric .number {
+            font-size: 22px;
+            font-weight: bold;
+            color: #feca57;
+        }
+
+        .metric .label {
+            font-size: 10px;
+            color: #888;
+        }
+
+        .section {
+            padding: 0 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .messages-container {
+            background: #1e1e2e;
+            border-radius: 20px;
+            padding: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .message-item {
+            background: #2a2a3a;
+            padding: 12px;
+            border-radius: 14px;
+            margin-bottom: 8px;
+            border-left: 3px solid #feca57;
+        }
+
+        .message-user {
+            font-weight: bold;
+            color: #feca57;
+            font-size: 13px;
+        }
+
+        .message-text {
+            color: #eee;
+            font-size: 14px;
+            margin-top: 4px;
+            word-break: break-word;
+        }
+
+        .message-time {
+            font-size: 10px;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        .requests-container {
+            background: #1e1e2e;
+            border-radius: 20px;
+            padding: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .request-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #2a2a3a;
+        }
+
+        .request-song {
+            color: #fff;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .request-user {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .btn-mark-played {
+            background: #2a2a3a;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: #feca57;
+            font-size: 11px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-mark-played:active {
+            background: #3a3a4a;
+        }
+
+        .ia-suggestion {
+            background: linear-gradient(90deg, #2d1b4e, #1a1a2e);
+            padding: 14px;
+            border-radius: 20px;
+            margin: 16px;
+            text-align: center;
+            font-size: 13px;
+            color: #ddd;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 12px;
+            padding: 0 16px 20px 16px;
+        }
+
+        .control-btn {
+            flex: 1;
+            background: #2a2a3a;
+            border: none;
+            padding: 12px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .control-btn:active {
+            transform: scale(0.97);
+        }
+
+        .control-btn.active {
+            background: #feca57;
+            color: #1a1a2a;
+        }
+
+        .ranking {
+            background: #1e1e2e;
+            border-radius: 20px;
+            padding: 12px;
+        }
+
+        .ranking-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #2a2a3a;
+            color: #ccc;
+            font-size: 13px;
+        }
+
+        .empty {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-item {
+            animation: fadeIn 0.2s ease;
+        }
+
+        /* Scrollbar personalizada */
+        .messages-container::-webkit-scrollbar,
+        .requests-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .messages-container::-webkit-scrollbar-track {
+            background: #1e1e2e;
+            border-radius: 4px;
+        }
+
+        .messages-container::-webkit-scrollbar-thumb {
+            background: #feca57;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <div class="header">
+        <h1>Radio<span>Sync</span></h1>
+        <p>Tu voz, tu musica · Gestion en vivo</p>
+        <div class="status-badge" id="liveStatus">EN VIVO</div>
+    </div>
+
+    <div class="now-playing">
+        <div class="song-info">
+            <div class="label">AHORA SUENA</div>
+            <div class="title" id="nowPlaying">The Weeknd - Blinding Lights</div>
+            <div class="next" id="nextTrack">Siguiente: Dua Lipa - Levitating</div>
+        </div>
+        <button class="btn-whatsapp" id="whatsappBtn">
+            Pedir cancion
+        </button>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-card" data-field="clima">
+            <div class="icon">☀️</div>
+            <div class="label">CLIMA</div>
+            <div class="value" id="clima">22°C · Soleado</div>
+        </div>
+        <div class="info-card" data-field="noticias">
+            <div class="icon">📰</div>
+            <div class="label">NOTICIAS</div>
+            <div class="value" id="noticias">Nuevo album hoy</div>
+        </div>
+        <div class="info-card" data-field="promos">
+            <div class="icon">🏷️</div>
+            <div class="label">PROMOCIONES</div>
+            <div class="value" id="promos">30% OFF para fans</div>
+        </div>
+        <div class="info-card" data-field="sorteos">
+            <div class="icon">🎁</div>
+            <div class="label">SORTEOS</div>
+            <div class="value" id="sorteos">Entradas dobles</div>
+        </div>
+    </div>
+
+    <div class="metrics">
+        <div class="metric">
+            <div class="number" id="oyentes">147</div>
+            <div class="label">OYENTES</div>
+        </div>
+        <div class="metric">
+            <div class="number" id="msgMinuto">12</div>
+            <div class="label">MSG/MIN</div>
+        </div>
+        <div class="metric">
+            <div class="number" id="interaccion">85%</div>
+            <div class="label">ENGAGEMENT</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">
+            <span>Mensajes en vivo</span>
+            <span id="msgCount" style="color:#feca57;">0</span>
+        </div>
+        <div class="messages-container" id="messagesList">
+            <div class="empty">Los mensajes apareceran aqui</div>
+        </div>
+    </div>
+
+    <div class="ia-suggestion" id="iaSuggestion">
+        Analizando conversacion...
+    </div>
+
+    <div class="section">
+        <div class="section-title">
+            <span>Pedidos en cola</span>
+            <span id="requestsCount" style="color:#feca57;">0</span>
+        </div>
+        <div class="requests-container" id="requestsList">
+            <div class="empty">Sin pedidos pendientes</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Top oyentes</div>
+        <div class="ranking" id="rankingList">
+            <div class="empty">Sin actividad aun</div>
+        </div>
+    </div>
+
+    <div class="control-buttons">
+        <div class="control-btn active" id="btnVivo">Modo Vivo</div>
+        <div class="control-btn" id="btnAuto">Auto Piloto</div>
+        <div class="control-btn" id="btnSilenciar">Silenciar</div>
+    </div>
+</div>
+
+<script>
+    // ==================== CONFIGURACION ====================
+    // Para conectar con RadioBOSS, configura estos valores:
+    const RADIOBOSS_CONFIG = {
+        enabled: true,  // Cambiar a true cuando tengas RadioBOSS
+        ip: '192.168.0.105',
+        port: '9001',
+        password: 'radio2024'
+    };
+
+    // Numero de WhatsApp de la radio
+    const WHATSAPP_NUMBER = "593961480654"; // CAMBIAR POR EL NUMERO REAL
+
+    // ==================== ESTADO GLOBAL ====================
+    let state = {
+        mensajes: [],
+        pedidos: [],
+        usuarios: {},
+        modoAuto: false,
+        modoSilenciado: false,
+        oyentes: 147,
+        msgPorMinuto: 12,
+        ultimoAnalisis: null
+    };
+
+    // ==================== FUNCIONES PRINCIPALES ====================
+
+    function agregarMensaje(texto, usuario, esPedido = false) {
+        const nuevoMsg = {
+            id: Date.now(),
+            texto: texto.substring(0, 200),
+            usuario: usuario.substring(0, 30),
+            hora: new Date().toLocaleTimeString(),
+            timestamp: Date.now()
+        };
+
+        state.mensajes.unshift(nuevoMsg);
+        
+        if (state.mensajes.length > 100) {
+            state.mensajes = state.mensajes.slice(0, 100);
+        }
+
+        if (!state.usuarios[usuario]) {
+            state.usuarios[usuario] = 0;
+        }
+        state.usuarios[usuario]++;
+
+        if (esPedido || texto.toLowerCase().includes('pido') || texto.toLowerCase().includes('quiero')) {
+            let cancion = texto;
+            const match = texto.match(/(?:pido|quiero que pongas|ponme|quiero)\s+(.+?)(?:\?|$|\.)/i);
+            if (match) {
+                cancion = match[1].substring(0, 50);
+            }
+            state.pedidos.unshift({
+                id: Date.now(),
+                cancion: cancion,
+                usuario: usuario,
+                timestamp: Date.now()
+            });
+        }
+
+        if (state.modoAuto && !texto.includes('[Auto]')) {
+            setTimeout(() => {
+                agregarMensaje("[Auto] Gracias por tu mensaje. Te escuchamos en vivo", "RadioBot", false);
+            }, 2000);
+        }
+
+        actualizarUI();
+        actualizarMetricas();
+    }
+
+    function marcarReproducido(id) {
+        const index = state.pedidos.findIndex(p => p.id === id);
+        if (index !== -1) {
+            const pedido = state.pedidos[index];
+            agregarMensaje(`Canción "${pedido.cancion}" reproducida por pedido de ${pedido.usuario}`, "Sistema", false);
+            state.pedidos.splice(index, 1);
+            actualizarUI();
+            
+            if (RADIOBOSS_CONFIG.enabled) {
+                enviarComandoRadioBOSS('next');
+            }
+        }
+    }
+
+    function enviarComandoRadioBOSS(comando) {
+        if (!RADIOBOSS_CONFIG.enabled) return;
+        const url = `http://${RADIOBOSS_CONFIG.ip}:${RADIOBOSS_CONFIG.port}/?pass=${RADIOBOSS_CONFIG.password}&action=${comando}`;
+        fetch(url).catch(e => console.log('Error conectando a RadioBOSS:', e));
+    }
+
+    function obtenerCancionRadioBOSS() {
+        if (!RADIOBOSS_CONFIG.enabled) return;
+        const url = `http://${RADIOBOSS_CONFIG.ip}:${RADIOBOSS_CONFIG.port}/?pass=${RADIOBOSS_CONFIG.password}&action=playbackinfo`;
+        fetch(url)
+            .then(res => res.text())
+            .then(data => {
+                const match = data.match(/TITLE="([^"]+)"/);
+                const artistMatch = data.match(/ARTIST="([^"]+)"/);
+                if (match) {
+                    const artist = artistMatch ? artistMatch[1] : '';
+                    const title = match[1];
+                    document.getElementById('nowPlaying').innerText = artist ? `${artist} - ${title}` : title;
+                }
+            })
+            .catch(e => console.log('Error obteniendo cancion de RadioBOSS'));
+    }
+
+    function actualizarUI() {
+        const msgContainer = document.getElementById('messagesList');
+        if (state.modoSilenciado) {
+            msgContainer.innerHTML = '<div class="empty">Modo silenciado - Mensajes ocultos</div>';
+        } else if (state.mensajes.length === 0) {
+            msgContainer.innerHTML = '<div class="empty">Los mensajes apareceran aqui</div>';
+        } else {
+            msgContainer.innerHTML = state.mensajes.slice(0, 30).map(m => `
+                <div class="message-item">
+                    <div class="message-user">${escapeHtml(m.usuario)}</div>
+                    <div class="message-text">${escapeHtml(m.texto)}</div>
+                    <div class="message-time">${m.hora}</div>
+                </div>
+            `).join('');
+        }
+        document.getElementById('msgCount').innerText = state.mensajes.length;
+
+        const reqContainer = document.getElementById('requestsList');
+        if (state.pedidos.length === 0) {
+            reqContainer.innerHTML = '<div class="empty">Sin pedidos pendientes</div>';
+        } else {
+            reqContainer.innerHTML = state.pedidos.map(p => `
+                <div class="request-item">
+                    <div>
+                        <div class="request-song">${escapeHtml(p.cancion)}</div>
+                        <div class="request-user">por ${escapeHtml(p.usuario)}</div>
+                    </div>
+                    <button class="btn-mark-played" onclick="marcarReproducido(${p.id})">Marcar reproducido</button>
+                </div>
+            `).join('');
+        }
+        document.getElementById('requestsCount').innerText = state.pedidos.length;
+
+        const topUsuarios = Object.entries(state.usuarios)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5);
+        
+        const rankingContainer = document.getElementById('rankingList');
+        if (topUsuarios.length === 0) {
+            rankingContainer.innerHTML = '<div class="empty">Sin actividad aun</div>';
+        } else {
+            rankingContainer.innerHTML = topUsuarios.map(([user, count], idx) => {
+                let medal = '';
+                if (idx === 0) medal = '1. ';
+                else if (idx === 1) medal = '2. ';
+                else if (idx === 2) medal = '3. ';
+                else medal = `${idx + 1}. `;
+                return `
+                    <div class="ranking-item">
+                        <span>${medal}${escapeHtml(user)}</span>
+                        <span>${count} mensajes</span>
+                    </div>
+                `;
+            }).join('');
+        }
+    }
+
+    function actualizarMetricas() {
+        document.getElementById('oyentes').innerText = state.oyentes;
+        document.getElementById('msgMinuto').innerText = state.msgPorMinuto;
+        
+        let engagement = Math.min(100, Math.floor((state.msgPorMinuto / 35) * 100));
+        document.getElementById('interaccion').innerText = engagement + '%';
+        
+        let sugerencia = '';
+        if (state.msgPorMinuto > 20) {
+            sugerencia = 'Alta interaccion detectada. Aprovecha para promocionar sorteos y contenido exclusivo.';
+        } else if (state.msgPorMinuto < 5) {
+            sugerencia = 'Baja interaccion. Sugerencia: lanza una pregunta abierta o un sorteo rapido.';
+        } else if (state.pedidos.length > 0) {
+            sugerencia = `${state.pedidos.length} pedido(s) en espera. Mencionalos al aire para aumentar participacion.`;
+        } else {
+            sugerencia = 'Recomendacion: comparte el clima y las noticias para generar conversacion.';
+        }
+        document.getElementById('iaSuggestion').innerHTML = `Recomendacion IA: ${sugerencia}`;
+    }
+
+    function editarInfo(campo) {
+        const elemento = document.getElementById(campo);
+        const valorActual = elemento.innerText;
+        const nuevoValor = prompt(`Editar ${campo.toUpperCase()}:`, valorActual);
+        if (nuevoValor && nuevoValor.trim()) {
+            elemento.innerText = nuevoValor.trim();
+            agregarMensaje(`Actualizacion: ${campo} - ${nuevoValor.trim()}`, "Admin", false);
+        }
+    }
+
+    function abrirWhatsApp() {
+        const mensaje = "Hola! Quiero pedir una cancion: ";
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        
+        setTimeout(() => {
+            const cancion = prompt("Que cancion pediste? (Demo)", "Mi cancion favorita");
+            if (cancion && cancion.trim()) {
+                agregarMensaje(`Hola, quiero pedir "${cancion.trim()}"`, "WhatsApp", true);
+            }
+        }, 3000);
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    function iniciarSimulacion() {
+        setInterval(() => {
+            state.oyentes = Math.floor(Math.random() * 200) + 50;
+            state.msgPorMinuto = Math.floor(Math.random() * 25) + 3;
+            actualizarMetricas();
+        }, 10000);
+
+        setInterval(() => {
+            const mensajesDemo = [
+                "Excelente musica, sigan asi",
+                "Saludos desde Argentina",
+                "Pido musica de los 80 por favor",
+                "Muy buen programa loco",
+                "No paren la musica",
+                "Que tema esta sonando?",
+                "Felicitaciones por la radio"
+            ];
+            const randomMsg = mensajesDemo[Math.floor(Math.random() * mensajesDemo.length)];
+            const esPedido = randomMsg.includes('Pido') || randomMsg.includes('pido');
+            const usuario = `Oyente${Math.floor(Math.random() * 99) + 1}`;
+            agregarMensaje(randomMsg, usuario, esPedido);
+        }, 18000);
+
+        if (RADIOBOSS_CONFIG.enabled) {
+            setInterval(obtenerCancionRadioBOSS, 10000);
+        }
+    }
+
+    // ==================== EVENTOS ====================
+    document.getElementById('whatsappBtn').onclick = abrirWhatsApp;
+    
+    document.getElementById('btnVivo').onclick = () => {
+        state.modoAuto = false;
+        state.modoSilenciado = false;
+        document.getElementById('btnVivo').classList.add('active');
+        document.getElementById('btnAuto').classList.remove('active');
+        document.getElementById('btnSilenciar').classList.remove('active');
+        document.getElementById('liveStatus').innerText = 'EN VIVO';
+        document.getElementById('liveStatus').style.background = '#ff4444';
+        agregarMensaje("Modo EN VIVO activado", "Sistema", false);
+    };
+    
+    document.getElementById('btnAuto').onclick = () => {
+        state.modoAuto = true;
+        state.modoSilenciado = false;
+        document.getElementById('btnAuto').classList.add('active');
+        document.getElementById('btnVivo').classList.remove('active');
+        document.getElementById('btnSilenciar').classList.remove('active');
+        document.getElementById('liveStatus').innerText = 'AUTO PILOTO';
+        document.getElementById('liveStatus').style.background = '#feca57';
+        document.getElementById('liveStatus').style.color = '#1a1a2a';
+        agregarMensaje("Modo AUTO PILOTO activado - Respuestas automaticas", "Sistema", false);
+    };
+    
+    document.getElementById('btnSilenciar').onclick = () => {
+        state.modoSilenciado = !state.modoSilenciado;
+        actualizarUI();
+        if (state.modoSilenciado) {
+            document.getElementById('btnSilenciar').classList.add('active');
+            agregarMensaje("Mensajes silenciados", "Sistema", false);
+        } else {
+            document.getElementById('btnSilenciar').classList.remove('active');
+            agregarMensaje("Mensajes visibles nuevamente", "Sistema", false);
+        }
+    };
+
+    document.querySelectorAll('.info-card').forEach(card => {
+        card.onclick = () => {
+            const field = card.getAttribute('data-field');
+            if (field) editarInfo(field);
+        };
+    });
+
+    iniciarSimulacion();
+    actualizarUI();
+    actualizarMetricas();
+
+    console.log('RadioSync Pro iniciada correctamente');
+    console.log('Para conectar RadioBOSS: edita RADIOBOSS_CONFIG al inicio del script');
+</script>
+</body>
+</html>
+
