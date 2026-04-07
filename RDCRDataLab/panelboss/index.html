@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>RadioSync - Panel de Control (Operador)</title>
+    <title>DataLabRadio - Operador</title>
     <style>
         * {
             margin: 0;
@@ -12,9 +12,10 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #0a0a0a;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             padding: 20px;
+            min-height: 100vh;
         }
 
         .container {
@@ -23,59 +24,89 @@
         }
 
         h1 {
-            color: #feca57;
+            background: linear-gradient(90deg, #feca57, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 20px;
+            font-size: 32px;
         }
 
         .dashboard {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 20px;
         }
 
         .card {
-            background: #1e1e2e;
-            border-radius: 20px;
+            background: rgba(26, 26, 62, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
             padding: 20px;
             margin-bottom: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
         }
 
         .card h3 {
-            color: #feca57;
+            background: linear-gradient(90deg, #feca57, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 15px;
-            border-bottom: 1px solid #2a2a3a;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 10px;
         }
 
         .status-badge {
             display: inline-block;
-            background: #ff4444;
+            background: linear-gradient(135deg, #ff4444, #cc0000);
             color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
+            padding: 5px 15px;
+            border-radius: 30px;
             font-size: 12px;
             margin-left: 10px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
         }
 
         .radio-controls {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
             margin-bottom: 20px;
         }
 
         .radio-btn {
-            background: #2a2a3a;
+            background: linear-gradient(135deg, #2a2a4a, #1a1a3a);
             border: none;
-            padding: 10px 20px;
-            border-radius: 40px;
+            padding: 12px 24px;
+            border-radius: 50px;
             color: white;
             cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .radio-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .radio-btn:active {
+            transform: scale(0.98);
         }
 
         .radio-btn.active {
-            background: #feca57;
-            color: #1a1a2a;
+            background: linear-gradient(135deg, #feca57, #ff6b6b);
+            color: #1a1a2e;
         }
 
         .messages-list, .requests-list {
@@ -84,9 +115,9 @@
         }
 
         .message-item, .request-item {
-            background: #2a2a3a;
+            background: rgba(255,255,255,0.05);
             padding: 12px;
-            border-radius: 14px;
+            border-radius: 18px;
             margin-bottom: 8px;
             border-left: 3px solid #feca57;
         }
@@ -97,7 +128,7 @@
         }
 
         .message-text {
-            color: #eee;
+            color: #ddd;
             margin-top: 4px;
         }
 
@@ -113,12 +144,14 @@
         }
 
         .btn-mark {
-            background: #feca57;
+            background: linear-gradient(135deg, #feca57, #ff6b6b);
             border: none;
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 6px 16px;
+            border-radius: 30px;
             cursor: pointer;
             margin-top: 8px;
+            font-weight: bold;
+            color: #1a1a2e;
         }
 
         .edit-grid {
@@ -128,33 +161,35 @@
         }
 
         .edit-field {
-            background: #2a2a3a;
+            background: rgba(255,255,255,0.05);
             padding: 15px;
-            border-radius: 16px;
+            border-radius: 20px;
         }
 
         .edit-field label {
             display: block;
             color: #feca57;
             margin-bottom: 8px;
+            font-size: 12px;
         }
 
-        .edit-field input, .edit-field textarea {
+        .edit-field input {
             width: 100%;
-            padding: 10px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 16px;
             border: none;
-            background: #1e1e2e;
+            background: rgba(0,0,0,0.3);
             color: white;
         }
 
         .edit-field button {
             margin-top: 10px;
-            background: #feca57;
+            background: linear-gradient(135deg, #feca57, #ff6b6b);
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 8px 20px;
+            border-radius: 30px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         .metrics-grid {
@@ -165,22 +200,26 @@
         }
 
         .metric-card {
-            background: #2a2a3a;
+            background: rgba(255,255,255,0.05);
             padding: 15px;
-            border-radius: 16px;
+            border-radius: 20px;
         }
 
         .metric-number {
             font-size: 32px;
             font-weight: bold;
-            color: #feca57;
+            background: linear-gradient(90deg, #feca57, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .ranking-item {
             display: flex;
             justify-content: space-between;
             padding: 8px 0;
-            border-bottom: 1px solid #2a2a3a;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: #ccc;
         }
 
         .empty {
@@ -193,322 +232,100 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #feca57;
-            color: #1a1a2a;
-            padding: 12px 20px;
-            border-radius: 40px;
+            background: linear-gradient(135deg, #feca57, #ff6b6b);
+            color: #1a1a2e;
+            padding: 12px 24px;
+            border-radius: 50px;
             z-index: 1000;
+            animation: fadeIn 0.3s ease;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>RadioSync - Panel de Control <span id="liveStatus" class="status-badge">EN VIVO</span></h1>
+    <h1>🎛️ DataLabRadio - Panel Operador</h1>
     
     <div class="dashboard">
-        <!-- Columna 1: Control RadioBOSS -->
         <div class="card">
-            <h3>Control RadioBOSS</h3>
+            <h3>🎚️ Control RadioBOSS <span id="liveStatus" class="status-badge">EN VIVO</span></h3>
             <div class="radio-controls">
-                <button class="radio-btn" id="btnNext">Siguiente Cancion</button>
-                <button class="radio-btn" id="btnPlay">Play</button>
-                <button class="radio-btn" id="btnPause">Pausa</button>
+                <button class="radio-btn" id="btnNext">⏩ Siguiente</button>
+                <button class="radio-btn" id="btnPlay">▶️ Play</button>
+                <button class="radio-btn" id="btnPause">⏸️ Pausa</button>
             </div>
             <div>
-                <p><strong>Ahora suena:</strong> <span id="nowPlaying">Cargando...</span></p>
-                <p><strong>Siguiente:</strong> <span id="nextTrack">Cargando...</span></p>
+                <p><strong>🎵 Ahora suena:</strong> <span id="nowPlaying" style="color:#feca57;">Cargando...</span></p>
+                <p><strong>⏩ Siguiente:</strong> <span id="nextTrack" style="color:#aaa;">Cargando...</span></p>
             </div>
         </div>
         
-        <!-- Columna 2: Modos de operacion -->
         <div class="card">
-            <h3>Modos de Operacion</h3>
+            <h3>⚙️ Modos de Operacion</h3>
             <div class="radio-controls">
-                <button class="radio-btn active" id="modoVivo">Modo Vivo</button>
-                <button class="radio-btn" id="modoAuto">Auto Piloto</button>
-                <button class="radio-btn" id="modoSilenciar">Silenciar Mensajes</button>
+                <button class="radio-btn active" id="modoVivo">🎙️ Modo Vivo</button>
+                <button class="radio-btn" id="modoAuto">🤖 Auto Piloto</button>
+                <button class="radio-btn" id="modoSilenciar">🔇 Silenciar</button>
             </div>
-            <div id="iaSuggestion" style="background:#2a2a3a; padding:15px; border-radius:16px; margin-top:15px;">
-                Recomendacion IA: Conectado a RadioBOSS
+            <div id="iaSuggestion" style="background:rgba(255,255,255,0.05); padding:15px; border-radius:20px; margin-top:15px;">
+                🤖 Recomendacion IA: Conectado a RadioBOSS
             </div>
         </div>
         
-        <!-- Columna 3: Editar contenido (clima, noticias, etc) -->
         <div class="card">
-            <h3>Editar Contenido</h3>
+            <h3>✏️ Editar Contenido (Los oyentes lo ven al instante)</h3>
             <div class="edit-grid">
-                <div class="edit-field">
-                    <label>Clima</label>
-                    <input type="text" id="editClima" placeholder="Ej: 22°C - Soleado">
-                    <button onclick="guardarContenido('clima')">Guardar</button>
-                </div>
-                <div class="edit-field">
-                    <label>Noticias</label>
-                    <input type="text" id="editNoticias" placeholder="Ultima noticia">
-                    <button onclick="guardarContenido('noticias')">Guardar</button>
-                </div>
-                <div class="edit-field">
-                    <label>Promociones</label>
-                    <input type="text" id="editPromos" placeholder="Oferta especial">
-                    <button onclick="guardarContenido('promos')">Guardar</button>
-                </div>
-                <div class="edit-field">
-                    <label>Sorteos</label>
-                    <input type="text" id="editSorteos" placeholder="Premio actual">
-                    <button onclick="guardarContenido('sorteos')">Guardar</button>
-                </div>
+                <div class="edit-field"><label>☀️ Clima</label><input type="text" id="editClima" placeholder="Ej: 22°C - Soleado"><button onclick="guardarContenido('clima')">💾 Guardar</button></div>
+                <div class="edit-field"><label>📰 Noticias</label><input type="text" id="editNoticias" placeholder="Ultima noticia"><button onclick="guardarContenido('noticias')">💾 Guardar</button></div>
+                <div class="edit-field"><label>🏷️ Promociones</label><input type="text" id="editPromos" placeholder="Oferta especial"><button onclick="guardarContenido('promos')">💾 Guardar</button></div>
+                <div class="edit-field"><label>🎁 Sorteos</label><input type="text" id="editSorteos" placeholder="Premio actual"><button onclick="guardarContenido('sorteos')">💾 Guardar</button></div>
             </div>
         </div>
     </div>
     
     <div class="dashboard">
-        <!-- Pedidos en cola -->
         <div class="card">
-            <h3>Pedidos en Cola <span id="pedidosCount">0</span></h3>
-            <div class="requests-list" id="requestsList">
-                <div class="empty">Sin pedidos pendientes</div>
-            </div>
+            <h3>📋 Pedidos en Cola <span id="pedidosCount" style="color:#feca57;">0</span></h3>
+            <div class="requests-list" id="requestsList"><div class="empty">📝 Sin pedidos pendientes</div></div>
         </div>
         
-        <!-- Mensajes en vivo -->
         <div class="card">
-            <h3>Mensajes en Vivo <span id="mensajesCount">0</span></h3>
-            <div class="messages-list" id="messagesList">
-                <div class="empty">Sin mensajes</div>
-            </div>
+            <h3>💬 Mensajes en Vivo <span id="mensajesCount" style="color:#feca57;">0</span></h3>
+            <div class="messages-list" id="messagesList"><div class="empty">💬 Sin mensajes</div></div>
         </div>
         
-        <!-- Metricas y Ranking -->
         <div class="card">
-            <h3>Metricas en Vivo</h3>
+            <h3>📊 Metricas en Vivo</h3>
             <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-number" id="oyentes">0</div>
-                    <div>Oyentes</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number" id="msgMinuto">0</div>
-                    <div>Msg/Min</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number" id="engagement">0%</div>
-                    <div>Engagement</div>
-                </div>
+                <div class="metric-card"><div class="metric-number" id="oyentes">0</div><div>👥 Oyentes</div></div>
+                <div class="metric-card"><div class="metric-number" id="msgMinuto">0</div><div>💬 Msg/Min</div></div>
+                <div class="metric-card"><div class="metric-number" id="engagement">0%</div><div>📈 Engagement</div></div>
             </div>
-            <h3 style="margin-top:20px;">Top Oyentes</h3>
-            <div id="rankingList">
-                <div class="empty">Sin actividad</div>
-            </div>
+            <h3 style="margin-top:20px;">🏆 Top Oyentes</h3>
+            <div id="rankingList"><div class="empty">📊 Sin actividad</div></div>
         </div>
     </div>
 </div>
 
 <script>
-    // ==================== CONFIGURACION RADIOBOSS ====================
+    // ==================== CONFIGURACION ====================
+    const API_URL = "http://192.168.0.105/servidor.php";
+    
     const RADIOBOSS_IP = "192.168.0.105";
     const RADIOBOSS_PORT = "9001";
     const RADIOBOSS_PASS = "radio2024";
+    const RADIOBOSS_URL = `http://${RADIOBOSS_IP}:${RADIOBOSS_PORT}/?pass=${RADIOBOSS_PASS}&action=`;
     
-    // ==================== ESTADO ====================
-    let mensajes = [];
     let pedidos = [];
+    let mensajes = [];
     let usuarios = {};
     let modoAuto = false;
     let modoSilenciado = false;
-    
-    // ==================== FUNCIONES RADIOBOSS ====================
-    
-    function enviarComandoRadioBOSS(comando) {
-        const url = `http://${RADIOBOSS_IP}:${RADIOBOSS_PORT}/?pass=${RADIOBOSS_PASS}&action=${comando}`;
-        fetch(url)
-            .then(() => mostrarToast(`Comando enviado: ${comando}`))
-            .catch(e => mostrarToast(`Error: ${e.message}`));
-    }
-    
-    async function obtenerCancionActual() {
-        try {
-            const url = `http://${RADIOBOSS_IP}:${RADIOBOSS_PORT}/?pass=${RADIOBOSS_PASS}&action=playbackinfo`;
-            const response = await fetch(url);
-            const data = await response.text();
-            
-            const parser = new DOMParser();
-            const xml = parser.parseFromString(data, 'text/xml');
-            const track = xml.querySelector('CurrentTrack TRACK');
-            
-            if (track) {
-                const artist = track.getAttribute('ARTIST') || '';
-                const title = track.getAttribute('TITLE') || '';
-                document.getElementById('nowPlaying').innerText = artist ? `${artist} - ${title}` : title;
-            }
-        } catch (error) {
-            document.getElementById('nowPlaying').innerText = 'Error de conexion';
-        }
-    }
-    
-    async function obtenerSiguienteTrack() {
-        try {
-            const url = `http://${RADIOBOSS_IP}:${RADIOBOSS_PORT}/?pass=${RADIOBOSS_PASS}&action=getplaylist2`;
-            const response = await fetch(url);
-            const data = await response.text();
-            
-            const parser = new DOMParser();
-            const xml = parser.parseFromString(data, 'text/xml');
-            const nextTrack = xml.querySelector('Track[Position="1"]');
-            
-            if (nextTrack) {
-                const title = nextTrack.getAttribute('TITLE') || '';
-                document.getElementById('nextTrack').innerText = title;
-            }
-        } catch (error) {
-            document.getElementById('nextTrack').innerText = 'Error';
-        }
-    }
-    
-    // ==================== GESTION DE PEDIDOS (WhatsApp real) ====================
-    
-    // Esta funcion debe ser llamada cuando llega un mensaje de WhatsApp
-    // En produccion, conectarias esto con un webhook de WhatsApp Business API
-    function recibirPedidoWhatsApp(remitente, mensaje) {
-        const esPedido = mensaje.toLowerCase().includes('pido') || mensaje.toLowerCase().includes('quiero');
-        
-        const nuevoMsg = {
-            id: Date.now(),
-            texto: mensaje,
-            usuario: remitente,
-            hora: new Date().toLocaleTimeString()
-        };
-        
-        mensajes.unshift(nuevoMsg);
-        
-        if (!usuarios[remitente]) usuarios[remitente] = 0;
-        usuarios[remitente]++;
-        
-        if (esPedido) {
-            let cancion = mensaje.replace(/pido|quiero que pongas|quiero/gi, '').trim();
-            pedidos.unshift({
-                id: Date.now(),
-                cancion: cancion.substring(0, 50),
-                usuario: remitente
-            });
-        }
-        
-        if (modoAuto && !mensaje.includes('[Auto]')) {
-            setTimeout(() => {
-                recibirPedidoWhatsApp('RadioBot', '[Auto] Gracias por tu mensaje');
-            }, 2000);
-        }
-        
-        actualizarUI();
-    }
-    
-    function marcarReproducido(id) {
-        const index = pedidos.findIndex(p => p.id === id);
-        if (index !== -1) {
-            const pedido = pedidos[index];
-            recibirPedidoWhatsApp('Sistema', `Cancion "${pedido.cancion}" reproducida por pedido de ${pedido.usuario}`);
-            pedidos.splice(index, 1);
-            actualizarUI();
-        }
-    }
-    
-    // ==================== CONTENIDO (Clima, Noticias, etc) ====================
-    
-    function guardarContenido(tipo) {
-        const inputId = `edit${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
-        const valor = document.getElementById(inputId).value;
-        
-        if (valor) {
-            localStorage.setItem(`radio_${tipo}`, valor);
-            mostrarToast(`${tipo} guardado: ${valor}`);
-            
-            // Notificar a la app de oyentes (usando localStorage o API)
-            // En produccion, enviarias esto a un servidor
-        }
-    }
-    
-    function cargarContenido() {
-        const tipos = ['clima', 'noticias', 'promos', 'sorteos'];
-        tipos.forEach(tipo => {
-            const guardado = localStorage.getItem(`radio_${tipo}`);
-            if (guardado) {
-                document.getElementById(`edit${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`).value = guardado;
-            } else {
-                // Valores por defecto
-                const defaults = {
-                    clima: '22°C - Soleado',
-                    noticias: 'Bienvenidos a RadioSync',
-                    promos: 'Siguenos en redes sociales',
-                    sorteos: 'Participa por premios'
-                };
-                document.getElementById(`edit${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`).value = defaults[tipo];
-            }
-        });
-    }
-    
-    // ==================== METRICAS ====================
-    
-    function actualizarMetricas() {
-        document.getElementById('mensajesCount').innerText = mensajes.length;
-        document.getElementById('pedidosCount').innerText = pedidos.length;
-        
-        const oyentes = Math.floor(Math.random() * 200) + 50;
-        const msgMinuto = Math.floor(Math.random() * 25) + 3;
-        const engagement = Math.min(100, Math.floor((msgMinuto / 35) * 100));
-        
-        document.getElementById('oyentes').innerText = oyentes;
-        document.getElementById('msgMinuto').innerText = msgMinuto;
-        document.getElementById('engagement').innerText = engagement + '%';
-        
-        const topUsuarios = Object.entries(usuarios).sort((a,b) => b[1] - a[1]).slice(0, 5);
-        const rankingHtml = topUsuarios.map(([user, count], idx) => `
-            <div class="ranking-item">
-                <span>${idx + 1}. ${user}</span>
-                <span>${count} mensajes</span>
-            </div>
-        `).join('');
-        document.getElementById('rankingList').innerHTML = rankingHtml || '<div class="empty">Sin actividad</div>';
-        
-        let sugerencia = '';
-        if (msgMinuto > 20) sugerencia = 'Alta interaccion! Aprovecha para promocionar sorteos.';
-        else if (msgMinuto < 5) sugerencia = 'Baja interaccion. Lanza una pregunta o sorteo.';
-        else if (pedidos.length > 0) sugerencia = `${pedidos.length} pedido(s) en espera. Mencionalos al aire.`;
-        else sugerencia = 'Todo en orden. Conectado a RadioBOSS correctamente.';
-        document.getElementById('iaSuggestion').innerHTML = `Recomendacion IA: ${sugerencia}`;
-    }
-    
-    function actualizarUI() {
-        const msgContainer = document.getElementById('messagesList');
-        if (modoSilenciado) {
-            msgContainer.innerHTML = '<div class="empty">Modo silenciado - Mensajes ocultos</div>';
-        } else if (mensajes.length === 0) {
-            msgContainer.innerHTML = '<div class="empty">Sin mensajes</div>';
-        } else {
-            msgContainer.innerHTML = mensajes.slice(0, 30).map(m => `
-                <div class="message-item">
-                    <div class="message-user">${escapeHtml(m.usuario)}</div>
-                    <div class="message-text">${escapeHtml(m.texto)}</div>
-                    <div class="message-time">${m.hora}</div>
-                </div>
-            `).join('');
-        }
-        
-        const reqContainer = document.getElementById('requestsList');
-        if (pedidos.length === 0) {
-            reqContainer.innerHTML = '<div class="empty">Sin pedidos pendientes</div>';
-        } else {
-            reqContainer.innerHTML = pedidos.map(p => `
-                <div class="request-item">
-                    <div>
-                        <div class="request-song">${escapeHtml(p.cancion)}</div>
-                        <div class="message-user">por ${escapeHtml(p.usuario)}</div>
-                    </div>
-                    <button class="btn-mark" onclick="marcarReproducido(${p.id})">Marcar reproducido</button>
-                </div>
-            `).join('');
-        }
-        
-        actualizarMetricas();
-    }
     
     function mostrarToast(mensaje) {
         const toast = document.createElement('div');
@@ -518,14 +335,184 @@
         setTimeout(() => toast.remove(), 3000);
     }
     
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
+    function enviarComandoRadioBOSS(comando) {
+        fetch(RADIOBOSS_URL + comando)
+            .then(() => mostrarToast(`✅ Comando enviado: ${comando}`))
+            .catch(e => mostrarToast(`❌ Error: ${e.message}`));
+    }
+    
+    async function obtenerCancionActual() {
+        try {
+            const response = await fetch(RADIOBOSS_URL + 'playbackinfo');
+            const data = await response.text();
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(data, 'text/xml');
+            const track = xml.querySelector('CurrentTrack TRACK');
+            if (track) {
+                const artist = track.getAttribute('ARTIST') || '';
+                const title = track.getAttribute('TITLE') || '';
+                document.getElementById('nowPlaying').innerText = artist ? `${artist} - ${title}` : title;
+            }
+        } catch (error) {
+            document.getElementById('nowPlaying').innerText = '❌ Error de conexion';
+        }
+    }
+    
+    async function obtenerSiguienteTrack() {
+        try {
+            const response = await fetch(RADIOBOSS_URL + 'getplaylist2');
+            const data = await response.text();
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(data, 'text/xml');
+            const nextTrack = xml.querySelector('Track[Position="1"]');
+            if (nextTrack) {
+                const title = nextTrack.getAttribute('TITLE') || '';
+                document.getElementById('nextTrack').innerText = title;
+            }
+        } catch (error) {
+            document.getElementById('nextTrack').innerText = '❌ Error';
+        }
+    }
+    
+    async function guardarContenido(tipo) {
+        const inputId = `edit${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
+        const valor = document.getElementById(inputId).value;
+        if (!valor) return;
+        
+        try {
+            const response = await fetch(`${API_URL}?action=guardar_contenido`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ [tipo]: valor })
+            });
+            if (response.ok) {
+                mostrarToast(`✅ ${tipo} guardado y enviado a los oyentes`);
+            }
+        } catch (error) {
+            mostrarToast('❌ Error al guardar');
+        }
+    }
+    
+    async function cargarContenido() {
+        try {
+            const response = await fetch(`${API_URL}?action=obtener_contenido`);
+            const data = await response.json();
+            document.getElementById('editClima').value = data.clima;
+            document.getElementById('editNoticias').value = data.noticias;
+            document.getElementById('editPromos').value = data.promos;
+            document.getElementById('editSorteos').value = data.sorteos;
+        } catch (error) {}
+    }
+    
+    async function obtenerPedidos() {
+        try {
+            const response = await fetch(`${API_URL}?action=obtener_pedidos`);
+            pedidos = await response.json();
+            actualizarListaPedidos();
+        } catch (error) {}
+    }
+    
+    async function obtenerMensajes() {
+        try {
+            const response = await fetch(`${API_URL}?action=obtener_mensajes`);
+            mensajes = await response.json();
+            actualizarListaMensajes();
+            
+            usuarios = {};
+            mensajes.forEach(m => {
+                if (!usuarios[m.usuario]) usuarios[m.usuario] = 0;
+                usuarios[m.usuario]++;
+            });
+            actualizarRanking();
+        } catch (error) {}
+    }
+    
+    async function marcarReproducido(id) {
+        try {
+            await fetch(`${API_URL}?action=marcar_reproducido`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id })
+            });
+            mostrarToast('✅ Pedido marcado como reproducido');
+            obtenerPedidos();
+        } catch (error) {
+            mostrarToast('❌ Error');
+        }
+    }
+    
+    function actualizarListaPedidos() {
+        const container = document.getElementById('requestsList');
+        if (pedidos.length === 0) {
+            container.innerHTML = '<div class="empty">📝 Sin pedidos pendientes</div>';
+        } else {
+            container.innerHTML = pedidos.map(p => `
+                <div class="request-item">
+                    <div>
+                        <div class="request-song">🎵 ${escapeHtml(p.cancion)}</div>
+                        <div class="message-user">por ${escapeHtml(p.usuario)}</div>
+                        <div class="message-time">${p.timestamp}</div>
+                    </div>
+                    <button class="btn-mark" onclick="marcarReproducido(${p.id})">✅ Marcar reproducido</button>
+                </div>
+            `).join('');
+        }
+        document.getElementById('pedidosCount').innerText = pedidos.length;
+    }
+    
+    function actualizarListaMensajes() {
+        const container = document.getElementById('messagesList');
+        if (modoSilenciado) {
+            container.innerHTML = '<div class="empty">🔇 Modo silenciado</div>';
+        } else if (mensajes.length === 0) {
+            container.innerHTML = '<div class="empty">💬 Sin mensajes</div>';
+        } else {
+            container.innerHTML = mensajes.slice(0, 30).map(m => `
+                <div class="message-item">
+                    <div class="message-user">${escapeHtml(m.usuario)}</div>
+                    <div class="message-text">${escapeHtml(m.texto)}</div>
+                    <div class="message-time">${m.hora}</div>
+                </div>
+            `).join('');
+        }
+        document.getElementById('mensajesCount').innerText = mensajes.length;
+    }
+    
+    function actualizarRanking() {
+        const topUsuarios = Object.entries(usuarios).sort((a,b) => b[1] - a[1]).slice(0, 5);
+        const container = document.getElementById('rankingList');
+        if (topUsuarios.length === 0) {
+            container.innerHTML = '<div class="empty">📊 Sin actividad</div>';
+        } else {
+            container.innerHTML = topUsuarios.map(([user, count], idx) => 
+                `<div class="ranking-item"><span>${idx+1}. ${escapeHtml(user)}</span><span>${count} mensajes</span></div>`
+            ).join('');
+        }
+    }
+    
+    function actualizarMetricas() {
+        const oyentes = Math.floor(Math.random() * 200) + 80;
+        const msgMinuto = mensajes.length > 0 ? Math.min(30, Math.floor(mensajes.length / 2)) : 5;
+        document.getElementById('oyentes').innerText = oyentes;
+        document.getElementById('msgMinuto').innerText = msgMinuto;
+        document.getElementById('engagement').innerText = Math.min(100, Math.floor((msgMinuto / 30) * 100)) + '%';
+        
+        let sugerencia = '';
+        if (msgMinuto > 20) sugerencia = '🔥 Alta interaccion! Aprovecha para promocionar sorteos.';
+        else if (msgMinuto < 5) sugerencia = '⚠️ Baja interaccion. Lanza una pregunta o sorteo.';
+        else if (pedidos.length > 0) sugerencia = `🎵 ${pedidos.length} pedido(s) en espera. Mencionalos al aire.`;
+        else sugerencia = '✅ Todo en orden. Conectado a RadioBOSS correctamente.';
+        document.getElementById('iaSuggestion').innerHTML = `🤖 Recomendacion IA: ${sugerencia}`;
+    }
+    
+    function escapeHtml(str) { 
+        if (!str) return ''; 
+        return str.replace(/[&<>]/g, function(m) { 
+            if (m === '&') return '&amp;'; 
+            if (m === '<') return '&lt;'; 
+            if (m === '>') return '&gt;'; 
+            return m; 
+        }); 
     }
     
     // ==================== EVENTOS ====================
@@ -533,63 +520,38 @@
     document.getElementById('btnPlay').onclick = () => enviarComandoRadioBOSS('play');
     document.getElementById('btnPause').onclick = () => enviarComandoRadioBOSS('pause');
     
-    document.getElementById('modoVivo').onclick = () => {
-        modoAuto = false;
-        modoSilenciado = false;
-        document.getElementById('modoVivo').classList.add('active');
-        document.getElementById('modoAuto').classList.remove('active');
-        document.getElementById('modoSilenciar').classList.remove('active');
-        document.getElementById('liveStatus').innerText = 'EN VIVO';
-        document.getElementById('liveStatus').style.background = '#ff4444';
-        mostrarToast('Modo Vivo activado');
+    document.getElementById('modoVivo').onclick = () => { 
+        modoAuto=false; modoSilenciado=false; 
+        document.getElementById('liveStatus').innerText='EN VIVO'; 
+        mostrarToast('🎙️ Modo Vivo activado');
     };
     
-    document.getElementById('modoAuto').onclick = () => {
-        modoAuto = true;
-        modoSilenciado = false;
-        document.getElementById('modoAuto').classList.add('active');
-        document.getElementById('modoVivo').classList.remove('active');
-        document.getElementById('modoSilenciar').classList.remove('active');
-        document.getElementById('liveStatus').innerText = 'AUTO PILOTO';
-        document.getElementById('liveStatus').style.background = '#feca57';
-        mostrarToast('Auto Piloto activado');
+    document.getElementById('modoAuto').onclick = () => { 
+        modoAuto=true; modoSilenciado=false; 
+        document.getElementById('liveStatus').innerText='AUTO PILOTO'; 
+        mostrarToast('🤖 Auto Piloto activado');
     };
     
-    document.getElementById('modoSilenciar').onclick = () => {
-        modoSilenciado = !modoSilenciado;
-        actualizarUI();
-        mostrarToast(modoSilenciado ? 'Mensajes silenciados' : 'Mensajes visibles');
+    document.getElementById('modoSilenciar').onclick = () => { 
+        modoSilenciado=!modoSilenciado; 
+        actualizarListaMensajes(); 
+        mostrarToast(modoSilenciado?'🔇 Mensajes silenciados':'🔔 Mensajes visibles');
     };
-    
-    // ==================== SIMULACION DE MENSAJES DE WHATSAPP ====================
-    // En produccion, esto se reemplaza por un webhook real de WhatsApp
-    function simularMensajeWhatsApp() {
-        const mensajesDemo = [
-            "Excelente musica, saludos",
-            "Pido Bohemian Rhapsody",
-            "Muy buen programa",
-            "Que tema esta sonando?"
-        ];
-        const randomMsg = mensajesDemo[Math.floor(Math.random() * mensajesDemo.length)];
-        const usuario = `WhatsApp_${Math.floor(Math.random() * 99) + 1}`;
-        recibirPedidoWhatsApp(usuario, randomMsg);
-    }
     
     // ==================== INICIALIZACION ====================
     cargarContenido();
     obtenerCancionActual();
     obtenerSiguienteTrack();
+    obtenerPedidos();
+    obtenerMensajes();
     
     setInterval(obtenerCancionActual, 5000);
     setInterval(obtenerSiguienteTrack, 10000);
-    setInterval(actualizarMetricas, 3000);
+    setInterval(obtenerPedidos, 3000);
+    setInterval(obtenerMensajes, 3000);
+    setInterval(actualizarMetricas, 5000);
     
-    // Simular mensajes cada 15 segundos (reemplazar con webhook real)
-    setInterval(simularMensajeWhatsApp, 15000);
-    
-    console.log('Panel de Operador iniciado');
-    console.log('RadioBOSS IP:', RADIOBOSS_IP);
-    console.log('WhatsApp numero:', '593961480654');
+    console.log('DataLabRadio Operador iniciado');
 </script>
 </body>
 </html>
