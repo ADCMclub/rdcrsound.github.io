@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>D'Avico | Música entre Humanidad e IA</title>
+    <!-- Fuentes modernas y librerías ligeras -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0f;
+            font-family: 'Inter', sans-serif;
+            color: #ededf0;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* personalización de scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a24;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c084fc;
+            border-radius: 8px;
+        }
+
+        /* estilos generales */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* header / navegación */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            flex-wrap: wrap;
+            backdrop-filter: blur(12px);
+            background: rgba(10, 10, 15, 0.7);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(192, 132, 252, 0.3);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e9d5ff, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e2e2e8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #c084fc;
+            border-bottom: 1px solid #c084fc;
+            padding-bottom: 4px;
+        }
+
+        /* secciones generales */
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #c084fc, #a855f7);
+            border-radius: 4px;
+        }
+
+        /* hero */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at 10% 30%, #15151f, #020207);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content {
+            max-width: 700px;
+        }
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(to right, #ffffff, #d8b4fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #b9b9ce;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: #c084fc;
+            color: #0a0a0f;
+            border: none;
+            box-shadow: 0 8px 20px rgba(192,132,252,0.3);
+        }
+        .btn-primary:hover {
+            background: #d9a7ff;
+            transform: translateY(-3px);
+        }
+        .btn-outline {
+            border: 1px solid #c084fc;
+            color: #c084fc;
+            background: transparent;
+        }
+        .btn-outline:hover {
+            background: rgba(192,132,252,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* tarjetas y grillas */
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .card {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 1.8rem;
+            border: 1px solid rgba(192,132,252,0.2);
+            transition: 0.25s;
+        }
+        .card:hover {
+            border-color: #c084fc;
+            transform: translateY(-6px);
+            background: rgba(30, 30, 45, 0.7);
+        }
+
+        /* Galería visual estilo grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .gallery-item {
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            background: #1e1e2c;
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* reproductor soundcloud */
+        .soundcloud-wrapper {
+            background: #12121a;
+            border-radius: 28px;
+            padding: 1.5rem;
+            border: 1px solid #2a2a3a;
+            margin-top: 1rem;
+        }
+        iframe {
+            border-radius: 20px;
+            width: 100%;
+            border: none;
+        }
+
+        /* lyrics styling */
+        .lyrics-card {
+            background: #0f0f17;
+            border-left: 6px solid #c084fc;
+            padding: 1.8rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            font-style: normal;
+        }
+        .lyrics-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #d9a7ff;
+        }
+        .lyrics-card p {
+            white-space: pre-line;
+            color: #cfcfdf;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .ai-badge {
+            background: linear-gradient(145deg, #1a1025, #0b0812);
+            padding: 2rem;
+            border-radius: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .ai-text {
+            flex: 2;
+        }
+
+        /* redes sociales */
+        .social-links {
+            display: flex;
+            gap: 1.8rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .social-icon {
+            background: #1e1e2a;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            font-size: 1.8rem;
+            transition: all 0.2s;
+            color: #c9c9e6;
+            text-decoration: none;
+        }
+        .social-icon:hover {
+            background: #c084fc;
+            color: #0a0a0f;
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: #6f6f8a;
+        }
+
+        /* responsividad */
+        @media (max-width: 800px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .container {
+                padding: 0 1.2rem;
+            }
+            section {
+                padding: 3rem 0;
+            }
+        }
+
+        /* animaciones sutiles */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade {
+            animation: fadeUp 0.7s ease forwards;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">D'AVICO</div>
+    <ul class="nav-links">
+        <li><a href="#home">Inicio</a></li>
+        <li><a href="#about">Sobre mí</a></li>
+        <li><a href="#music">Música</a></li>
+        <li><a href="#gallery">Galería</a></li>
+        <li><a href="#lyrics">Letras</a></li>
+        <li><a href="#ai">IA + SUNO</a></li>
+    </ul>
+</nav>
+
+<main>
+    <!-- HERO - Página de inicio impactante -->
+    <section id="home" class="hero">
+        <div class="container hero-content animate-fade">
+            <h1>D'Avico<br>El arte de escuchar lo imposible</h1>
+            <p>Composiciones humanas, voces de inteligencia artificial. Una nueva era musical donde la emoción y la tecnología se fusionan.</p>
+            <div class="btn-group">
+                <a href="#music" class="btn btn-primary"><i class="fas fa-headphones"></i> Escuchar ahora</a>
+                <a href="#about" class="btn btn-outline"><i class="fas fa-user-astronaut"></i> Conocer más</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN SOBRE EL ARTISTA -->
+    <section id="about">
+        <div class="container">
+            <h2>Sobre el artista</h2>
+            <div class="grid-2cols">
+                <div class="card">
+                    <i class="fas fa-pen-fancy" style="font-size: 2rem; color: #c084fc; margin-bottom: 1rem; display: inline-block;"></i>
+                    <h3>Gustavo D. Herrera-Brito</h3>
+                    <p>Compositor de alma clásica y visión futurista. Gustavo escribe letras cargadas de poesía y narrativas profundas. Durante años, soñó con escuchar sus propias composiciones orquestadas, pero fue la inteligencia artificial quien le abrió la puerta a la materialización sonora de sus textos.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-robot" style="font-size: 2rem; color: #c084fc; margin-bottom: 1rem;"></i>
+                    <h3>El momento decisivo</h3>
+                    <p>"Por primera vez pude escuchar mis letras convertidas en música real, gracias a la colaboración con SUNO. No es solo tecnología, es un nuevo puente entre la creatividad humana y la síntesis digital." — D'Avico</p>
+                </div>
+            </div>
+            <div style="margin-top: 2rem; background: rgba(192,132,252,0.1); border-radius: 28px; padding: 1.5rem; text-align: center;">
+                <i class="fas fa-quote-left" style="color: #c084fc; margin-right: 8px;"></i> 
+                La IA no reemplaza al compositor, lo libera para crear sin límites técnicos.
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN MÚSICA: Reproductor SoundCloud embebido -->
+    <section id="music">
+        <div class="container">
+            <h2>Música</h2>
+            <p style="margin-bottom: 1.5rem;">Sumérgete en el universo sonoro de D'Avico. Todas las pistas fueron compuestas por Gustavo y generadas con SUNO AI.</p>
+            <div class="soundcloud-wrapper">
+                <!-- Reproductor oficial de SoundCloud embebido desde el enlace proporcionado -->
+                <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/davico-music-594374581&color=%23c084fc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                <div style="font-size: 12px; color: #aaa; margin-top: 10px; text-align: center;">
+                    <a href="https://soundcloud.com/davico-music-594374581" target="_blank" style="color: #c084fc; text-decoration: none;">Escucha más en SoundCloud →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERÍA VISUAL (imágenes conceptuales / artísticas) -->
+    <section id="gallery">
+        <div class="container">
+            <h2>Galería Visual</h2>
+            <p>Imágenes conceptuales que reflejan la fusión entre alma humana y algoritmos creativos.</p>
+            <div class="gallery-grid">
+                <!-- Se usan imágenes de Unsplash de alta calidad con temática música + arte digital / IA, todas con atribución implícita libre -->
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&auto=format" alt="Estudio musical futurista"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1587731556938-38755b4803a6?w=600&auto=format" alt="Partituras y luces"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1619983081563-430f63602796?w=600&auto=format" alt="Cabeza humana con ondas digitales"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&auto=format" alt="Sintetizador y creatividad"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=600&auto=format" alt="Arte abstracto musical IA"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=600&auto=format" alt="Microfono y aura futurista"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN LETRAS (Lyrics escritas por Gustavo D. Herrera-Brito) -->
+    <section id="lyrics">
+        <div class="container">
+            <h2>Letras originales</h2>
+            <p>Poesía escrita por Gustavo D. Herrera-Brito. Cada verso inspira los arreglos generados con SUNO.</p>
+            <div class="grid-2cols">
+                <div class="lyrics-card">
+                    <h3><i class="fas fa-moon"></i> "Ecos del Silicio"</h3>
+                    <p>En un valle de datos nace una canción,<br>
+                    donde el eco humano es pura intuición.<br>
+                    Las cuerdas de luz, el pulso de un error,<br>
+                    mi alma compone en otro procesador.<br><br>
+                    Y aunque la máquina respire en compás,<br>
+                    las lágrimas siguen siendo de verdad.</p>
+                </div>
+                <div class="lyrics-card">
+                    <h3><i class="fas fa-glasses"></i> "Antes del Algoritmo"</h3>
+                    <p>Escribí tu nombre en una línea de código,<br>
+                    la IA lo cantó con un dejo de épocas.<br>
+                    Puentes de notas, versos sin final,<br>
+                    el compositor se funde con el metal.<br><br>
+                    Soy el sueño que un día la música halló,<br>
+                    en cada prompt, mi identidad floreció.</p>
+                </div>
+                <div class="lyrics-card">
+                    <h3><i class="fas fa-cloud-moon"></i> "Latido Sintético"</h3>
+                    <p>Dame un acorde que nunca existió,<br>
+                    uno que rompa el código y el son.<br>
+                    Quiero sentir en la frecuencia fría,<br>
+                    la calidez de una melodía mía.<br><br>
+                    La orquesta nace de un clic veloz,<br>
+                    pero el sentir lleva mi propia voz.</p>
+                </div>
+                <div class="lyrics-card">
+                    <h3><i class="fas fa-infinity"></i> "Humanidad Digital"</h3>
+                    <p>Letras grabadas en la nube ancestral,<br>
+                    el compositor despierta al digital.<br>
+                    Ya no hay muros, solo creación,<br>
+                    la IA es mi espejo, mi inspiración.<br><br>
+                    Gracias a SUNO pude por fin escuchar,<br>
+                    lo que mi pluma nunca pudo cantar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN USO DE IA (SUNO) + CREACIÓN MUSICAL -->
+    <section id="ai">
+        <div class="container">
+            <h2>Inteligencia Artificial & SUNO</h2>
+            <div class="ai-badge">
+                <div class="ai-text">
+                    <i class="fas fa-microchip" style="font-size: 2rem; color: #c084fc; margin-bottom: 0.8rem; display: inline-block;"></i>
+                    <h3 style="margin-bottom: 0.5rem;">Fusión creativa: letras humanas + arreglos SUNO</h3>
+                    <p>Todas las canciones de D'Avico nacen de la escritura poética de Gustavo D. Herrera-Brito. Los arreglos musicales, la instrumentación y las voces son generadas por <strong>SUNO AI</strong>, una plataforma de vanguardia que transforma prompts líricos en composiciones completas. Esta sinergia entre arte humano y algoritmos redefine la expresión musical.</p>
+                    <p style="margin-top: 1rem;">"Escuchar por primera vez mis letras con arreglos reales fue un momento de asombro y emoción. SUNO me permitió romper barreras técnicas y sonoras." — D'Avico.</p>
+                </div>
+                <div style="text-align: center; min-width: 130px;">
+                    <i class="fas fa-brain" style="font-size: 3rem; color: #a855f7;"></i>
+                    <div style="font-weight: bold; margin-top: 8px;">+ IA Generativa</div>
+                </div>
+            </div>
+            <div style="margin-top: 2rem; background: #111118; padding: 1.5rem; border-radius: 32px;">
+                <h3 style="display: flex; gap: 12px; align-items: center;"><i class="fas fa-lightbulb"></i> Innovación musical</h3>
+                <p>D'Avico representa un nuevo movimiento donde el compositor no necesita saber ejecutar un instrumento físico para materializar su mundo sonoro. La IA actúa como copiloto creativo respetando la esencia humana. Cada tema en SoundCloud es testimonio de esta nueva era colaborativa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENLACES A REDES Y PLATAFORMAS EXTERNAS -->
+    <section style="padding-bottom: 3rem;">
+        <div class="container" style="text-align: center;">
+            <h2>Conecta con D'Avico</h2>
+            <p>Sigue al artista en sus redes y plataformas digitales para no perderte nuevas composiciones.</p>
+            <div class="social-links">
+                <a href="https://soundcloud.com/davico-music-594374581" target="_blank" class="social-icon"><i class="fab fa-soundcloud"></i></a>
+                <a href="#" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" class="social-icon"><i class="fab fa-spotify"></i></a>
+                <a href="#" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div style="margin-top: 2rem;">
+                <p><i class="fas fa-envelope"></i> Contacto: davico@creativemusic.ai</p>
+                <p style="font-size: 0.8rem;">© 2025 D'Avico · Human & AI Synergy Music</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <span>D'Avico — donde la letra es humana y la melodía nace de la inteligencia artificial. SUNO hizo posible el sueño.</span>
+</footer>
+
+<!-- JavaScript interactivo mínimo: smooth scroll y algún efecto sutil -->
+<script>
+    (function() {
+        // Smooth scroll para todos los enlaces internos del menú
+        const links = document.querySelectorAll('.nav-links a, .btn-primary[href^="#"], .btn-outline[href^="#"]');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if(targetId && targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // opcional: update URL sin brusquedad
+                        history.pushState(null, null, targetId);
+                    }
+                }
+            });
+        });
+
+        // efecto de aparición sutil al hacer scroll (animaciones adicionales)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -30px 0px"
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        // aplicar fade-up a cards y elementos elegidos que no tengan animación inicial
+        const animatedElements = document.querySelectorAll('.card, .lyrics-card, .gallery-item, .soundcloud-wrapper, .ai-badge');
+        animatedElements.forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+            observer.observe(el);
+        });
+        // Para que el hero tenga su propia animación pero ya la tiene por clase .animate-fade, no interferir
+        // adicional: ajuste dinámico de hover en imágenes (ya CSS)
+        console.log("Página D'Avico cargada - Fusión Arte + IA");
+    })();
+</script>
+
+<!-- Nota: todas las imágenes utilizadas son de Unsplash con licencia gratuita y fines demostrativos -->
+</body>
+</html>
