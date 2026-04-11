@@ -1,772 +1,1588 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RDCR Sound - Ranking Mundial + Guiones para Radio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AudioLabRDCR — Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --c:  #00f5ff;
+  --pk: #c800ff;
+  --gn: #39ff14;
+  --yw: #ffe600;
+  --rd: #ff3b3b;
+  --bg: #07071a;
+  --bg2:#0f0f28;
+  --bg3:#161635;
+  --br: rgba(0,245,255,.18);
+  --br2:rgba(255,255,255,.08);
+  --tx: #f0f0ff;
+  --mu: rgba(240,240,255,.5);
+  --F:  'Exo 2',sans-serif;
+  --FD: 'Orbitron',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--F);background:var(--bg);color:var(--tx);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,rgba(0,245,255,.07),transparent 55%),
+             radial-gradient(ellipse 60% 40% at 90% 100%,rgba(200,0,255,.07),transparent 55%)}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font-family:var(--F);color:var(--tx)}
+input,textarea,select{font-family:var(--F);color:var(--tx)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--br);border-radius:4px}
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            min-height: 100vh;
-            padding: 20px;
-        }
+/* ── LAYOUT ── */
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 14px 30px}
 
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-        }
+/* ── HEADER ── */
+.hdr{
+  background:rgba(7,7,26,.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--br);
+  padding:12px 18px;display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:100;
+  margin-bottom:18px;
+}
+.hdr-logo{display:flex;align-items:center;gap:10px}
+.hdr-ico{width:36px;height:36px;border-radius:9px;
+  background:linear-gradient(135deg,var(--c),var(--pk));
+  display:flex;align-items:center;justify-content:center;font-size:18px}
+.hdr-name{font-family:var(--FD);font-size:15px;font-weight:900;
+  background:linear-gradient(90deg,var(--c),var(--pk));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hdr-sub{font-size:10px;color:var(--mu);letter-spacing:2px}
+.hdr-right{display:flex;align-items:center;gap:14px}
+.hdr-clock{font-family:var(--FD);font-size:18px;font-weight:900;color:var(--c);letter-spacing:2px}
+.live-pill{display:flex;align-items:center;gap:5px;
+  background:rgba(255,59,59,.12);border:1px solid rgba(255,59,59,.4);
+  border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;
+  color:var(--rd);letter-spacing:1px}
+.ld{width:6px;height:6px;border-radius:50%;background:var(--rd);animation:bl 1.3s infinite}
+@keyframes bl{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.2;transform:scale(.5)}}
 
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 20px 30px;
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
+/* ── GRID ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
 
-        .logo h1 {
-            background: linear-gradient(135deg, #f12711, #f5af19);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.8rem;
-        }
+/* ── CARD ── */
+.card{background:var(--bg2);border:1px solid var(--br);border-radius:14px;padding:18px;margin-bottom:16px}
+.card-ttl{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--c);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--br2);
+  display:flex;align-items:center;gap:7px}
+.card-ttl::before{content:'';display:block;width:3px;height:14px;background:var(--c);border-radius:2px}
 
-        .logo p {
-            font-size: 0.8rem;
-            color: #666;
-        }
+/* ── PLAYER ── */
+.player-main{
+  background:linear-gradient(135deg,rgba(0,245,255,.08),rgba(200,0,255,.07));
+  border:1px solid var(--br);border-radius:16px;padding:20px;margin-bottom:16px;
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.pl-cover{width:72px;height:72px;border-radius:12px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--c),var(--pk));
+  display:flex;align-items:center;justify-content:center;font-size:32px;
+  box-shadow:0 0 20px rgba(0,245,255,.25)}
+.pl-info{flex:1;min-width:0}
+.pl-label{font-size:10px;color:var(--c);letter-spacing:3px;text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.wave{display:flex;align-items:center;gap:2px;height:13px}
+.wave span{display:block;width:2px;background:var(--c);border-radius:2px;
+  animation:wv .8s ease-in-out infinite}
+.wave span:nth-child(1){height:4px;animation-delay:.0s}
+.wave span:nth-child(2){height:10px;animation-delay:.1s}
+.wave span:nth-child(3){height:13px;animation-delay:.2s}
+.wave span:nth-child(4){height:8px;animation-delay:.3s}
+.wave span:nth-child(5){height:5px;animation-delay:.15s}
+@keyframes wv{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.2)}}
+.wave.off span{animation-play-state:paused;opacity:.2}
+.pl-song{font-size:20px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-artist{font-size:13px;color:var(--mu);margin-top:3px}
+.pl-status{font-size:11px;margin-top:5px;display:flex;align-items:center;gap:6px}
+.sdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.sdot.ok{background:var(--gn);box-shadow:0 0 6px var(--gn)}
+.sdot.err{background:var(--rd)}
+.sdot.wait{background:var(--yw);animation:bl .8s infinite}
+.pl-controls{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.btn-play{width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg,var(--c),var(--pk));
+  display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;
+  box-shadow:0 0 20px rgba(0,245,255,.35);transition:transform .15s}
+.btn-play:active{transform:scale(.93)}
+.btn-play.on{background:linear-gradient(135deg,var(--rd),var(--pk))}
+.vol-wrap{display:flex;align-items:center;gap:8px}
+.vol-wrap span{font-size:16px}
+.vol{width:100px;-webkit-appearance:none;appearance:none;height:4px;border-radius:4px;
+  outline:none;background:linear-gradient(90deg,var(--c) 80%,rgba(255,255,255,.15) 80%)}
+.vol::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;
+  border-radius:50%;background:var(--c);cursor:pointer;box-shadow:0 0 6px var(--c)}
+.oy-chip{display:flex;align-items:center;gap:5px;
+  background:rgba(57,255,20,.08);border:1px solid rgba(57,255,20,.25);
+  border-radius:20px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--gn)}
 
-        .date-controls {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+/* ── STATS ── */
+.stat{background:var(--bg3);border:1px solid var(--br2);border-radius:12px;padding:14px;
+  text-align:center;position:relative;overflow:hidden}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.sc::before{background:var(--c)}.sp::before{background:var(--pk)}
+.sg::before{background:var(--gn)}.sy::before{background:var(--yw)}
+.stat-v{font-family:var(--FD);font-size:24px;font-weight:900;line-height:1}
+.vc{color:var(--c)}.vp{color:var(--pk)}.vg{color:var(--gn)}.vy{color:var(--yw)}
+.stat-l{font-size:10px;color:var(--mu);margin-top:4px;letter-spacing:1px;text-transform:uppercase}
 
-        .date-controls input, .date-controls select {
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-size: 1rem;
-        }
+/* ── CLIMA (sin API key) ── */
+.wx-card{display:flex;align-items:center;gap:16px;padding:14px;
+  background:rgba(0,245,255,.05);border:1px solid var(--br);border-radius:12px}
+.wx-ico{font-size:48px;filter:drop-shadow(0 0 8px rgba(0,245,255,.3))}
+.wx-temp{font-family:var(--FD);font-size:32px;font-weight:900;color:var(--c);line-height:1}
+.wx-desc{font-size:12px;color:var(--mu);margin-top:3px}
+.wx-city{font-size:10px;color:var(--c);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.wx-det{font-size:11px;color:var(--mu);line-height:1.9;text-align:right;flex:1}
+.wx-det strong{color:var(--tx)}
+.wx-nokey{background:rgba(255,230,0,.07);border:1px solid rgba(255,230,0,.25);
+  border-radius:12px;padding:14px;font-size:12px;color:var(--mu);line-height:1.6}
 
-        .btn-generar {
-            background: linear-gradient(135deg, #f12711, #f5af19);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+/* ── BOTÓN WHATSAPP ── */
+.btn-wa{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  border-radius:14px;padding:16px;font-size:16px;font-weight:800;color:#fff;
+  box-shadow:0 4px 20px rgba(37,211,102,.28);transition:transform .15s;
+  position:relative;overflow:hidden;cursor:pointer;width:100%;margin-bottom:16px;
+}
+.btn-wa::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);
+  transform:translateX(-100%);animation:sh 2.5s infinite}
+@keyframes sh{to{transform:translateX(100%)}}
+.btn-wa:active{transform:scale(.97)}
+.wa-txt{display:flex;flex-direction:column;text-align:left}
+.wa-t{font-size:15px;font-weight:900}
+.wa-s{font-size:11px;opacity:.85}
 
-        .program-selector {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+/* ── PLAYLIST ── */
+.pl-item{display:flex;align-items:center;gap:10px;padding:10px 12px;
+  border-radius:10px;border:1px solid transparent;transition:all .2s;margin-bottom:5px;cursor:pointer}
+.pl-item:hover{background:rgba(255,255,255,.04);border-color:var(--br2)}
+.pl-item.curr{background:rgba(0,245,255,.07);border-color:rgba(0,245,255,.25)}
+.pl-num{width:22px;font-size:11px;color:var(--mu);text-align:center;flex-shrink:0}
+.pl-item.curr .pl-num{color:var(--c)}
+.pl-ttl{font-size:13px;font-weight:700}
+.pl-art{font-size:11px;color:var(--mu)}
+.pl-dur{font-size:12px;color:var(--mu);flex-shrink:0;font-family:var(--FD)}
 
-        .program-btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
+/* ── CABINA MENSAJES ── */
+.msg{background:rgba(255,255,255,.03);border-radius:9px;padding:8px 10px;
+  border-left:3px solid transparent;margin-bottom:5px;animation:mi .3s ease}
+@keyframes mi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.msg.pedido{border-left-color:var(--c)}
+.msg.saludo{border-left-color:var(--gn)}
+.msg.consulta{border-left-color:var(--yw)}
+.msg.destacado{border-left-color:var(--pk);background:rgba(200,0,255,.06)}
+.msg-top{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.msg-nom{font-size:12px;font-weight:700}
+.mtag{font-size:8px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  border-radius:3px;padding:1px 6px}
+.mt-p{background:rgba(0,245,255,.15);color:var(--c)}
+.mt-s{background:rgba(57,255,20,.15);color:var(--gn)}
+.mt-c{background:rgba(255,230,0,.15);color:var(--yw)}
+.mt-o{background:rgba(255,255,255,.08);color:var(--mu)}
+.msg-hr{font-size:9px;color:var(--mu);margin-left:auto}
+.msg-tx{font-size:12px;line-height:1.4}
+.msg-ac{display:flex;gap:5px;margin-top:5px}
+.ma{font-size:9px;font-weight:700;border-radius:5px;padding:2px 8px;
+  border:1px solid var(--br2);color:var(--mu);transition:all .15s}
+.ma:hover{background:var(--br2);color:var(--tx)}
+.ma.p{border-color:rgba(0,245,255,.3);color:var(--c)}
 
-        .program-btn.salsa {
-            background: #e74c3c;
-            color: white;
-        }
+/* ── MSGS BOX ── */
+.msgs-box{height:240px;overflow-y:auto;background:rgba(0,0,0,.2);
+  border:1px solid var(--br2);border-radius:10px;padding:8px}
 
-        .program-btn.salsa.active {
-            background: #c0392b;
-            box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
-        }
+/* ── IA LOCUTOR (sin API externa) ── */
+.ia-box{background:linear-gradient(135deg,rgba(200,0,255,.1),rgba(0,245,255,.06));
+  border:1px solid rgba(200,0,255,.25);border-radius:12px;padding:14px;margin-bottom:10px}
+.ia-hdr{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.ia-ico{width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,var(--pk),var(--c));
+  display:flex;align-items:center;justify-content:center;font-size:15px}
+.ia-lbl{font-size:10px;letter-spacing:2px;color:var(--pk);font-weight:700;text-transform:uppercase}
+.ia-sub{font-size:11px;color:var(--mu)}
+.ia-out{background:rgba(0,0,0,.35);border:1px solid var(--br2);border-radius:9px;
+  padding:12px;font-size:13px;line-height:1.7;min-height:65px;white-space:pre-wrap}
 
-        .program-btn.balada {
-            background: #3498db;
-            color: white;
-        }
+/* ── FORMULARIOS ── */
+.fg{margin-bottom:10px}
+.flbl{font-size:10px;color:var(--mu);letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:4px;display:block}
+.finp{width:100%;padding:10px 12px;background:rgba(255,255,255,.05);
+  border:1px solid var(--br2);border-radius:9px;font-size:13px;outline:none;
+  transition:border-color .2s;-webkit-appearance:none}
+.finp:focus{border-color:var(--c)}
+.fsel{width:100%;padding:10px 12px;background:rgba(255,255,255,.05);
+  border:1px solid var(--br2);border-radius:9px;font-size:13px;outline:none;-webkit-appearance:none}
+option{background:#0f0f28}
 
-        .program-btn.balada.active {
-            background: #2980b9;
-            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
-        }
+/* ── BOTONES ── */
+.btn{padding:10px 20px;border-radius:9px;font-size:13px;font-weight:700;
+  font-family:var(--F);cursor:pointer;transition:all .15s;border:none}
+.btn:active{transform:scale(.97)}
+.btn-prime{background:linear-gradient(135deg,var(--c),var(--pk));color:#fff;
+  box-shadow:0 0 14px rgba(0,245,255,.2)}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid var(--br2);color:var(--tx)}
+.btn-gn{background:rgba(57,255,20,.1);border:1px solid rgba(57,255,20,.3);color:var(--gn)}
+.btn-pk{background:rgba(200,0,255,.1);border:1px solid rgba(200,0,255,.3);color:var(--pk)}
+.btn-rd{background:rgba(255,59,59,.1);border:1px solid rgba(255,59,59,.3);color:var(--rd)}
+.btn-yw{background:rgba(255,230,0,.1);border:1px solid rgba(255,230,0,.3);color:var(--yw)}
+.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.row-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 
-        /* Tabs de países */
-        .country-tabs {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 10px 15px;
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+/* ── TOGGLE ── */
+.tgl-row{display:flex;align-items:center;justify-content:space-between;
+  padding:9px 0;border-bottom:1px solid var(--br2)}
+.tgl-row:last-child{border:none}
+.tgl-lbl{font-size:13px}
+.tgl-sub{font-size:10px;color:var(--mu);margin-top:1px}
+.tgl{position:relative;width:42px;height:23px;flex-shrink:0}
+.tgl input{opacity:0;width:0;height:0}
+.tgl-s{position:absolute;inset:0;background:rgba(255,255,255,.08);
+  border-radius:23px;cursor:pointer;transition:background .3s}
+.tgl-s::before{content:'';position:absolute;left:3px;top:3px;width:17px;height:17px;
+  border-radius:50%;background:var(--mu);transition:transform .3s,background .3s}
+.tgl input:checked+.tgl-s{background:rgba(0,245,255,.2)}
+.tgl input:checked+.tgl-s::before{transform:translateX(19px);background:var(--c);box-shadow:0 0 7px var(--c)}
 
-        .country-tab {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            background: #ecf0f1;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
+/* ── SCHEDULE ── */
+.sc-it{display:flex;align-items:center;gap:12px;
+  background:var(--bg3);border:1px solid var(--br2);border-radius:10px;
+  padding:11px 13px;margin-bottom:6px}
+.sc-it.now{border-color:var(--c);background:rgba(0,245,255,.05)}
+.sc-t{font-family:var(--FD);font-size:12px;font-weight:700;color:var(--c);min-width:70px;flex-shrink:0}
+.sc-dot{width:7px;height:7px;border-radius:50%;background:var(--br2);flex-shrink:0}
+.sc-it.now .sc-dot{background:var(--c);box-shadow:0 0 7px var(--c);animation:bl 1.4s infinite}
+.sc-nm{font-size:13px;font-weight:700}
+.sc-hst{font-size:11px;color:var(--mu)}
+.sc-badge{font-size:9px;font-weight:700;background:rgba(0,245,255,.12);color:var(--c);
+  border-radius:6px;padding:3px 8px;flex-shrink:0}
 
-        .country-tab.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
+/* ── NAV TABS ── */
+.tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.tab{padding:9px 18px;border-radius:9px;font-size:13px;font-weight:600;
+  border:1px solid var(--br2);color:var(--mu);transition:all .2s;cursor:pointer}
+.tab.active{background:rgba(0,245,255,.1);border-color:rgba(0,245,255,.4);color:var(--c)}
+.view{display:none}
+.view.active{display:block}
 
-        .country-tab:hover {
-            transform: translateY(-2px);
-        }
+/* ── PANEL LOGIN ── */
+.panel-lock{max-width:380px;margin:50px auto;text-align:center}
 
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
+/* ── TTS SLIDERS ── */
+.tts-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.tts-s{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:4px;
+  outline:none;background:linear-gradient(90deg,var(--c) 50%,rgba(255,255,255,.15) 50%)}
+.tts-s::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;
+  border-radius:50%;background:var(--c);cursor:pointer}
 
-        /* Ranking con métricas */
-        .ranking-panel {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 20px;
-            height: fit-content;
-        }
+/* ── TOAST ── */
+.toast{position:fixed;top:14px;right:14px;z-index:9999;
+  background:rgba(10,10,30,.97);border:1px solid var(--c);border-radius:12px;
+  padding:12px 16px;display:flex;align-items:center;gap:10px;
+  font-size:13px;opacity:0;pointer-events:none;transition:all .3s;
+  box-shadow:0 4px 20px rgba(0,245,255,.15);max-width:320px;transform:translateY(-6px)}
+.toast.show{opacity:1;transform:none}
+.toast.warn{border-color:var(--yw)}
+.toast.err{border-color:var(--rd)}
+.toast.ok{border-color:var(--gn)}
 
-        .ranking-panel h2 {
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid;
-        }
+/* ── EMPTY ── */
+.empty{text-align:center;padding:24px;color:var(--mu);font-size:12px;line-height:1.7}
 
-        .ranking-panel.salsa h2 { border-color: #e74c3c; color: #e74c3c; }
-        .ranking-panel.balada h2 { border-color: #3498db; color: #3498db; }
+/* ── SOCIAL ── */
+.soc{display:flex;gap:10px;flex-wrap:wrap}
+.soc-btn{display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:12px 16px;border-radius:12px;border:1px solid var(--br2);
+  background:var(--bg3);font-size:10px;color:var(--mu);
+  min-width:70px;transition:transform .15s;cursor:pointer}
+.soc-btn:active{transform:scale(.93)}
+.soc-ico{font-size:22px}
+.soc-fb{border-color:rgba(24,119,242,.3)}
+.soc-ig{border-color:rgba(225,48,108,.3)}
+.soc-yt{border-color:rgba(255,0,0,.3)}
+.soc-tk{border-color:rgba(255,255,255,.2)}
 
-        .ranking-item {
-            background: white;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
+/* ── PEDIDOS ── */
+.ped-it{display:flex;align-items:center;gap:10px;
+  background:var(--bg3);border:1px solid var(--br2);border-radius:9px;padding:9px 12px;margin-bottom:5px}
+.ped-n{width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--c),var(--pk));
+  display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900}
+.ped-ttl{font-size:13px;font-weight:700}
+.ped-art{font-size:11px;color:var(--mu)}
+.ped-cnt{background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.2);
+  border-radius:7px;padding:3px 8px;font-size:11px;font-weight:700;color:var(--c)}
+.ped-it.done{opacity:.4}
+.ped-it.done .ped-ttl{text-decoration:line-through}
 
-        .ranking-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
+/* ── FEEDBACK ── */
+.fb-ok{display:none;margin-top:7px;color:var(--gn);font-size:12px;font-weight:700}
 
-        .rank-num {
-            font-size: 1.5rem;
-            font-weight: bold;
-            width: 45px;
-            color: #667eea;
-        }
-
-        .song-title {
-            flex: 1;
-        }
-
-        .song-title strong {
-            font-size: 1rem;
-            display: block;
-        }
-
-        .song-artist {
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        .trend-icon {
-            font-size: 1.2rem;
-        }
-
-        .trend-up { color: #4caf50; }
-        .trend-down { color: #f44336; }
-        .trend-equal { color: #ff9800; }
-
-        .metrics-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid #eee;
-        }
-
-        .metric {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.75rem;
-            background: #f8f9fa;
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
-
-        .metric-icon {
-            font-size: 0.9rem;
-        }
-
-        .metric-value {
-            font-weight: bold;
-        }
-
-        /* Guion */
-        .guion-panel {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 25px;
-        }
-
-        .guion-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .btn-copiar {
-            background: #27ae60;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .guion-content {
-            background: #fef9e6;
-            padding: 25px;
-            border-radius: 15px;
-            font-family: 'Courier New', monospace;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            max-height: 650px;
-            overflow-y: auto;
-            border-left: 5px solid;
-            font-size: 0.8rem;
-        }
-
-        .guion-content.salsa { border-left-color: #e74c3c; }
-        .guion-content.balada { border-left-color: #3498db; }
-
-        .footer {
-            text-align: center;
-            color: white;
-            margin-top: 25px;
-            padding: 15px;
-            font-size: 0.7rem;
-            opacity: 0.8;
-        }
-
-        @media (max-width: 1000px) {
-            .two-columns {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+/* ── WAVEFORM ── */
+.wf{display:flex;align-items:center;gap:2px;height:30px}
+.wf-b{flex:1;border-radius:2px;background:linear-gradient(0deg,var(--c),var(--pk));
+  opacity:.5;transition:height .25s}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">
-                <h1>🎙️ RDCR Sound - Ranking Mundial + Radio</h1>
-                <p>Spotify · Apple Music · Billboard · Tendencias Virales | Entretelones · La Voz del Silencio</p>
-            </div>
-            <div class="date-controls">
-                <input type="date" id="fechaPrograma" value="2026-03-29">
-                <select id="paisRanking">
-                    <option value="Ecuador">🇪🇨 Ecuador</option>
-                    <option value="Colombia">🇨🇴 Colombia</option>
-                    <option value="Argentina">🇦🇷 Argentina</option>
-                    <option value="Mexico">🇲🇽 México</option>
-                    <option value="Espana">🇪🇸 España</option>
-                    <option value="USA">🇺🇸 Estados Unidos</option>
-                    <option value="Chile">🇨🇱 Chile</option>
-                    <option value="Peru">🇵🇪 Perú</option>
-                </select>
-                <button class="btn-generar" id="btnGenerar">📅 Actualizar</button>
-            </div>
-        </div>
 
-        <div class="program-selector">
-            <button class="program-btn salsa active" id="btnSalsa">🎺 ENTRETELONES - Salsa (2 horas)</button>
-            <button class="program-btn balada" id="btnBalada">🎵 LA VOZ DEL SILENCIO - Baladas 80s-2020s (2 horas)</button>
-        </div>
+<audio id="audio" preload="none"></audio>
 
-        <div class="two-columns">
-            <div>
-                <div class="country-tabs" id="countryTabs">
-                    <!-- Se llenará con JS -->
-                </div>
-                <div class="ranking-panel salsa" id="rankingPanel">
-                    <h2>📊 Top 10 <span id="paisActual">Ecuador</span> - Semanal</h2>
-                    <div id="rankingList"></div>
-                </div>
-            </div>
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span id="tIco">🔔</span>
+  <span id="tMsg">—</span>
+</div>
 
-            <div class="guion-panel">
-                <div class="guion-header">
-                    <h2 id="guionTitulo">🎙️ Guion - ENTRETELONES</h2>
-                    <button class="btn-copiar" id="btnCopiar">📋 Copiar guion</button>
-                </div>
-                <div class="guion-content salsa" id="guionContent">
-                    Cargando guion...
-                </div>
-            </div>
-        </div>
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-logo">
+    <div class="hdr-ico">🎙️</div>
+    <div>
+      <div class="hdr-name" id="hdrNombre">AUDIOLABRDCR</div>
+      <div class="hdr-sub">PANEL DE CONDUCCIÓN IA</div>
+    </div>
+  </div>
+  <div class="hdr-right">
+    <div class="live-pill" id="livePill" style="display:none">
+      <span class="ld"></span>ON AIR
+    </div>
+    <div>
+      <div class="hdr-clock" id="reloj">00:00:00</div>
+      <div style="font-size:10px;color:var(--mu);text-align:right" id="fechaHdr">—</div>
+    </div>
+  </div>
+</header>
 
-        <div class="footer">
-            🤖 Datos: Spotify · Apple Music · Billboard · TikTok Trends | Actualización diaria | Guiones únicos por fecha
+<div class="wrap">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="tab('inicio',this)">🏠 Inicio</button>
+    <button class="tab" onclick="tab('ia',this)">🎙️ Locutor IA</button>
+    <button class="tab" onclick="tab('cabina',this)">💬 Cabina</button>
+    <button class="tab" onclick="tab('playlist',this)">🎵 Playlist</button>
+    <button class="tab" onclick="tab('config',this)">⚙️ Config</button>
+  </div>
+
+  <!-- ══════════ INICIO ══════════ -->
+  <div class="view active" id="view-inicio">
+
+    <!-- PLAYER -->
+    <div class="player-main">
+      <div class="pl-cover">🎵</div>
+      <div class="pl-info">
+        <div class="pl-label">
+          <div class="wave off" id="wave">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span id="npLabel">LISTO PARA EMITIR</span>
         </div>
+        <div class="pl-song" id="songTitle">—</div>
+        <div class="pl-artist" id="songArtist">Presioná ▶ para conectar al stream</div>
+        <div class="pl-status">
+          <span class="sdot wait" id="sdot"></span>
+          <span id="smsg" style="color:var(--mu);font-size:12px">Desconectado</span>
+        </div>
+        <div style="margin-top:8px">
+          <div class="wf" id="wfViz"></div>
+        </div>
+      </div>
+      <div class="pl-controls">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <button class="btn-play" id="btnPlay" onclick="toggleStream()">▶</button>
+          <div class="vol-wrap">
+            <span>🔈</span>
+            <input type="range" class="vol" id="volSlider" min="0" max="100" value="80"
+              oninput="setVol(this.value)">
+            <span>🔊</span>
+          </div>
+        </div>
+        <div class="oy-chip">👥 <span id="oyentes">—</span></div>
+      </div>
     </div>
 
-    <script>
-        // ==================== BASE DE DATOS MULTIPAÍS ====================
-        
-        // Ranking por país con métricas multi-fuente
-        const rankingsGlobales = {
-            Ecuador: {
-                fecha: "2026-03-29",
-                canciones: [
-                    { pos: 1, cancion: "BESO EN LA NOCHE", artista: "Bad Bunny, Quevedo", spotify: "12.4M", apple: "8.2M", billboard: "#1", viral: "#1 TikTok", trend: "up" },
-                    { pos: 2, cancion: "SABOR A MI", artista: "Karla Kanora", spotify: "11.8M", apple: "7.5M", billboard: "#2", viral: "#1 Global Spotify", trend: "up" },
-                    { pos: 3, cancion: "LUNA LLENA", artista: "Jhayco, Rauw Alejandro", spotify: "10.2M", apple: "6.9M", billboard: "#3", viral: "#5 TikTok EC", trend: "down" },
-                    { pos: 4, cancion: "MONTAÑERO", artista: "J Balvin, Don Patricio", spotify: "9.8M", apple: "6.5M", billboard: "#4", viral: "#8 TikTok", trend: "equal" },
-                    { pos: 5, cancion: "TE EXTRAÑO", artista: "Greeicy, Mike Bahía", spotify: "9.1M", apple: "6.1M", billboard: "#5", viral: "#3 TikTok", trend: "up" }
-                ]
-            },
-            Colombia: {
-                fecha: "2026-03-29",
-                canciones: [
-                    { pos: 1, cancion: "MEDELLÍN EN VIVO", artista: "Karol G, Feid", spotify: "16.8M", apple: "11.3M", billboard: "#1 COL", viral: "#1 TikTok COL", trend: "up" },
-                    { pos: 2, cancion: "FERXXO 2026", artista: "Feid, Ryan Castro", spotify: "14.5M", apple: "9.8M", billboard: "#2", viral: "#2 TikTok", trend: "up" },
-                    { pos: 3, cancion: "PROVENZA RMX", artista: "Karol G, Shakira", spotify: "13.2M", apple: "8.9M", billboard: "#3", viral: "#4 TikTok", trend: "equal" },
-                    { pos: 4, cancion: "BOGOTÁ", artista: "J Balvin, Blessd", spotify: "11.9M", apple: "8.1M", billboard: "#4", viral: "#6 TikTok", trend: "down" },
-                    { pos: 5, cancion: "QUIÉN MANDA", artista: "Ryan Castro", spotify: "10.7M", apple: "7.2M", billboard: "#5", viral: "#3 TikTok", trend: "up" }
-                ]
-            },
-            Argentina: {
-                fecha: "2026-03-29",
-                canciones: [
-                    { pos: 1, cancion: "PERRO SALVAJE", artista: "Duki, Bizarrap", spotify: "15.2M", apple: "10.1M", billboard: "#1 ARG", viral: "#1 TikTok ARG", trend: "up" },
-                    { pos: 2, cancion: "LALALÁ", artista: "Maria Becerra", spotify: "13.7M", apple: "8.9M", billboard: "#2", viral: "#3 TikTok", trend: "equal" },
-                    { pos: 3, cancion: "CORAZÓN VACÍO", artista: "Tini, Milo j", spotify: "11.9M", apple: "7.8M", billboard: "#3", viral: "#2 TikTok", trend: "up" },
-                    { pos: 4, cancion: "AMOR DE VERANO", artista: "Luck Ra", spotify: "10.4M", apple: "6.9M", billboard: "#4", viral: "#5 TikTok", trend: "down" },
-                    { pos: 5, cancion: "MI EX TENÍA RAZÓN", artista: "Karol G", spotify: "9.8M", apple: "6.5M", billboard: "#5", viral: "#7 TikTok", trend: "up" }
-                ]
-            },
-            Mexico: {
-                fecha: "2026-03-29",
-                canciones: [
-                    { pos: 1, cancion: "SE ACABÓ", artista: "Peso Pluma, Natanael Cano", spotify: "18.3M", apple: "12.7M", billboard: "#1 MEX", viral: "#1 TikTok MEX", trend: "up" },
-                    { pos: 2, cancion: "CORRIDO TRISTE", artista: "Junior H", spotify: "15.9M", apple: "10.8M", billboard: "#2", viral: "#2 TikTok", trend: "equal" },
-                    { pos: 3, cancion: "LA BEBE RMX", artista: "Yng Lvcas, Peso Pluma", spotify: "14.2M", apple: "9.5M", billboard: "#3", viral: "#4 TikTok", trend: "down" },
-                    { pos: 4, cancion: "REGIONAL MEXICANO", artista: "Grupo Frontera", spotify: "12.7M", apple: "8.4M", billboard: "#4", viral: "#3 TikTok", trend: "up" },
-                    { pos: 5, cancion: "AMOR PROPIO", artista: "Ángela Aguilar", spotify: "11.4M", apple: "7.6M", billboard: "#5", viral: "#6 TikTok", trend: "up" }
-                ]
-            },
-            Espana: {
-                fecha: "2026-03-29",
-                canciones: [
-                    { pos: 1, cancion: "ISLAS CANARIAS", artista: "Quevedo, Saiko", spotify: "14.2M", apple: "9.8M", billboard: "#1 ESP", viral: "#1 TikTok ESP", trend: "up" },
-                    { pos: 2, cancion: "MADRID AMANECE", artista: "Morad, Beny Jr", spotify: "12.8M", apple: "8.5M", billboard: "#2", viral: "#2 TikTok", trend: "up" },
-                    { pos: 3, cancion: "YO YA NO SÉ", artista: "Aitana, Myke Towers", spotify: "11.5M", apple: "7.6M", billboard: "#3", viral: "#4 TikTok", trend: "down" },
-                    { pos: 4, cancion: "BARCELONA ES ASÍ", artista: "Rels B", spotify: "10.3M", apple: "6.8M", billboard: "#4", viral: "#5 TikTok", trend: "equal" },
-                    { pos: 5, cancion: "LUNA", artista: "Saiko", spotify: "9.7M", apple: "6.4M", billboard: "#5", viral: "#3 TikTok", trend: "up" }
-                ]
-            },
-            USA: {
-                fecha: "2026-03-29",
-                canciones: [
-                    { pos: 1, cancion: "ESPUMAS", artista: "Kendrick Lamar, Bad Bunny", spotify: "22.1M", apple: "18.5M", billboard: "#1 HOT 100", viral: "#1 Global", trend: "up" },
-                    { pos: 2, cancion: "WE CAN'T BE FRIENDS", artista: "Ariana Grande", spotify: "18.7M", apple: "15.2M", billboard: "#2", viral: "#2 TikTok", trend: "up" },
-                    { pos: 3, cancion: "TEXAS HOLD 'EM", artista: "Beyoncé", spotify: "16.4M", apple: "13.1M", billboard: "#3", viral: "#3 TikTok", trend: "equal" },
-                    { pos: 4, cancion: "LOVE ON", artista: "Selena Gomez", spotify: "14.8M", apple: "11.9M", billboard: "#4", viral: "#5 TikTok", trend: "down" },
-                    { pos: 5, cancion: "SATURN", artista: "SZA", spotify: "13.5M", apple: "10.8M", billboard: "#5", viral: "#4 TikTok", trend: "up" }
-                ]
-            },
-            Chile: {
-                fecha: "2026-03-29",
-                canciones: [
-                    { pos: 1, cancion: "POBRE CORAZÓN", artista: "Cris MJ", spotify: "9.2M", apple: "6.1M", billboard: "#1 CHI", viral: "#1 TikTok CHI", trend: "up" },
-                    { pos: 2, cancion: "UNA FOTO", artista: "Jere Klein, Cris MJ", spotify: "8.7M", apple: "5.8M", billboard: "#2", viral: "#2 TikTok", trend: "up" },
-                    { pos: 3, cancion: "LUNA", artista: "Pailita", spotify: "7.9M", apple: "5.2M", billboard: "#3", viral: "#3 TikTok", trend: "equal" },
-                    { pos: 4, cancion: "QUÉDATE", artista: "Standly", spotify: "7.4M", apple: "4.9M", billboard: "#4", viral: "#4 TikTok", trend: "down" },
-                    { pos: 5, cancion: "BÉSAME", artista: "Marcianeke", spotify: "6.8M", apple: "4.5M", billboard: "#5", viral: "#5 TikTok", trend: "up" }
-                ]
-            },
-            Peru: {
-                fecha: "2026-03-29",
-                canciones: [
-                    { pos: 1, cancion: "LA CHISPA", artista: "Gian Marco", spotify: "6.5M", apple: "4.2M", billboard: "#1 PER", viral: "#1 TikTok PER", trend: "up" },
-                    { pos: 2, cancion: "AMOR EN EL PERÚ", artista: "Daniela Darcourt", spotify: "5.9M", apple: "3.8M", billboard: "#2", viral: "#2 TikTok", trend: "up" },
-                    { pos: 3, cancion: "MI SELECCIÓN", artista: "Eva Ayllón", spotify: "5.4M", apple: "3.5M", billboard: "#3", viral: "#3 TikTok", trend: "equal" },
-                    { pos: 4, cancion: "PERÚ CON SALSA", artista: "Grupo Niche", spotify: "4.9M", apple: "3.2M", billboard: "#4", viral: "#4 TikTok", trend: "down" },
-                    { pos: 5, cancion: "CORAZÓN ANDINO", artista: "Renata Flores", spotify: "4.5M", apple: "2.9M", billboard: "#5", viral: "#5 TikTok", trend: "up" }
-                ]
-            }
-        };
+    <!-- STATS -->
+    <div class="grid3" style="margin-bottom:16px">
+      <div class="stat sc">
+        <div class="stat-v vc" id="stOy">—</div>
+        <div class="stat-l">Oyentes</div>
+      </div>
+      <div class="stat sp">
+        <div class="stat-v vp" id="stMsg">0</div>
+        <div class="stat-l">Mensajes hoy</div>
+      </div>
+      <div class="stat sg">
+        <div class="stat-v vg" id="stPed">0</div>
+        <div class="stat-l">Pedidos</div>
+      </div>
+    </div>
 
-        // Catálogo SALSA
-        const catalogoSalsa = [
-            { cancion: "LA RUEDA DE LA SALSA", artista: "Marc Anthony", año: "2026", duracion: "4:32", decada: "2020s" },
-            { cancion: "CORAZÓN SALSERO", artista: "Luis Figueroa", año: "2026", duracion: "4:15", decada: "2020s" },
-            { cancion: "EL CANTANTE (LIVE)", artista: "Gilberto Santa Rosa", año: "2025", duracion: "5:02", decada: "2020s" },
-            { cancion: "BESO EN LA SALSA", artista: "Bad Bunny & Marc Anthony", año: "2026", duracion: "4:45", decada: "2020s" },
-            { cancion: "MI SALSA TE ESPERA", artista: "Víctor Manuelle", año: "2026", duracion: "4:28", decada: "2020s" },
-            { cancion: "CALI PACHANGUERO", artista: "Grupo Niche", año: "2025", duracion: "5:10", decada: "2020s" },
-            { cancion: "SALSA CON SABOR", artista: "India", año: "2026", duracion: "4:50", decada: "2020s" },
-            { cancion: "EL PRESO", artista: "Fruko y sus Tesos", año: "2025", duracion: "4:55", decada: "2020s" },
-            { cancion: "AMOR DE SALSA", artista: "Tito Nieves", año: "2026", duracion: "4:20", decada: "2020s" },
-            { cancion: "LA PANTERA", artista: "Willie Colón & Héctor Lavoe", año: "1975", duracion: "6:30", decada: "1970s" },
-            { cancion: "PEDRO NAVAJITA", artista: "Willie Colón & Héctor Lavoe", año: "1978", duracion: "5:15", decada: "1970s" },
-            { cancion: "IDILIO", artista: "Willie Colón & Héctor Lavoe", año: "1975", duracion: "5:40", decada: "1970s" },
-            { cancion: "PERIÓDICO DE AYER", artista: "Héctor Lavoe", año: "1978", duracion: "6:00", decada: "1970s" },
-            { cancion: "EL CANTANTE", artista: "Héctor Lavoe", año: "1978", duracion: "5:30", decada: "1970s" },
-            { cancion: "Y VUELVO A NACER", artista: "Rubén Blades", año: "1984", duracion: "5:20", decada: "1980s" },
-            { cancion: "Buscando Guayaba", artista: "Rubén Blades", año: "1985", duracion: "5:45", decada: "1980s" },
-            { cancion: "TIBURÓN", artista: "Rubén Blades", año: "1987", duracion: "6:00", decada: "1980s" },
-            { cancion: "FRESCO", artista: "Frankie Ruiz", año: "1989", duracion: "5:05", decada: "1980s" },
-            { cancion: "LA CURA", artista: "Frankie Ruiz", año: "1987", duracion: "4:55", decada: "1980s" },
-            { cancion: "DESNÚDATE MUJER", artista: "Frankie Ruiz", año: "1988", duracion: "5:15", decada: "1980s" },
-            { cancion: "VUELVO A NACER", artista: "Rubén Blades", año: "1992", duracion: "5:20", decada: "1990s" },
-            { cancion: "LLORARÁS", artista: "Oscar D'León", año: "1995", duracion: "4:30", decada: "1990s" },
-            { cancion: "QUE ALGUIEN ME DIGA", artista: "Gilberto Santa Rosa", año: "1996", duracion: "5:00", decada: "1990s" },
-            { cancion: "CONVICCIÓN", artista: "Gilberto Santa Rosa", año: "1998", duracion: "4:45", decada: "1990s" },
-            { cancion: "VALIÓ LA PENA", artista: "Marc Anthony", año: "2004", duracion: "4:30", decada: "2000s" },
-            { cancion: "AHORA QUIEN", artista: "Marc Anthony", año: "2007", duracion: "4:15", decada: "2000s" },
-            { cancion: "TU AMOR ME HACE BIEN", artista: "Marc Anthony", año: "2010", duracion: "4:25", decada: "2010s" },
-            { cancion: "FLOR PALIDA", artista: "Marc Anthony", año: "2013", duracion: "4:35", decada: "2010s" }
-        ];
+    <!-- WHATSAPP -->
+    <div class="btn-wa" id="btnWA" onclick="abrirWA()">
+      <span style="font-size:26px">💬</span>
+      <div class="wa-txt">
+        <span class="wa-t">PEDÍ TU CANCIÓN POR WHATSAPP</span>
+        <span class="wa-s">¡Escribinos y te leemos al aire!</span>
+      </div>
+    </div>
 
-        // Catálogo BALADAS por décadas
-        const baladas80s = [
-            { cancion: "CARELESS WHISPER", artista: "George Michael", año: "1984", idioma: "Inglés", duracion: "5:00", decada: "1980s" },
-            { cancion: "TOTAL ECLIPSE OF THE HEART", artista: "Bonnie Tyler", año: "1983", idioma: "Inglés", duracion: "4:30", decada: "1980s" },
-            { cancion: "LA INCONDICIONAL", artista: "Luis Miguel", año: "1989", idioma: "Español", duracion: "4:25", decada: "1980s" },
-            { cancion: "CÓMO FUE", artista: "Emmanuel", año: "1986", idioma: "Español", duracion: "4:00", decada: "1980s" },
-            { cancion: "HELLO", artista: "Lionel Richie", año: "1984", idioma: "Inglés", duracion: "4:40", decada: "1980s" },
-            { cancion: "I WANT TO KNOW WHAT LOVE IS", artista: "Foreigner", año: "1984", idioma: "Inglés", duracion: "5:00", decada: "1980s" }
-        ];
+    <div class="grid2">
+      <!-- CLIMA wttr.in — SIN API KEY -->
+      <div>
+        <div class="card">
+          <div class="card-ttl">🌤 Clima en vivo</div>
+          <div id="wxContent">
+            <div class="empty">
+              Configurá tu ciudad en ⚙️ Config para ver el clima.<br>
+              <small>No necesita ninguna cuenta ni API key.</small>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--mu);margin-top:8px">
+            Actualizado hace <span id="wxTime">—</span>
+            <button class="btn btn-ghost btn-sm" style="float:right;padding:3px 9px;font-size:10px" onclick="fetchClima()">↻ Actualizar</button>
+          </div>
+        </div>
 
-        const baladas90s = [
-            { cancion: "I WILL ALWAYS LOVE YOU", artista: "Whitney Houston", año: "1992", idioma: "Inglés", duracion: "4:35", decada: "1990s" },
-            { cancion: "MY HEART WILL GO ON", artista: "Celine Dion", año: "1997", idioma: "Inglés", duracion: "4:40", decada: "1990s" },
-            { cancion: "ENTRA EN MI VIDA", artista: "Sin Bandera", año: "1999", idioma: "Español", duracion: "4:10", decada: "1990s" },
-            { cancion: "LA FUERZA DEL CORAZÓN", artista: "Alejandro Sanz", año: "1995", idioma: "Español", duracion: "4:30", decada: "1990s" },
-            { cancion: "UN-BREAK MY HEART", artista: "Toni Braxton", año: "1996", idioma: "Inglés", duracion: "4:30", decada: "1990s" }
-        ];
+        <!-- REDES -->
+        <div class="card">
+          <div class="card-ttl">📲 Seguinos</div>
+          <div class="soc">
+            <a id="lFb" href="#" target="_blank" class="soc-btn soc-fb">
+              <span class="soc-ico">👤</span>Facebook
+            </a>
+            <a id="lIg" href="#" target="_blank" class="soc-btn soc-ig">
+              <span class="soc-ico">📸</span>Instagram
+            </a>
+            <a id="lYt" href="#" target="_blank" class="soc-btn soc-yt">
+              <span class="soc-ico">▶️</span>YouTube
+            </a>
+            <a id="lTk" href="#" target="_blank" class="soc-btn soc-tk">
+              <span class="soc-ico">🎵</span>TikTok
+            </a>
+          </div>
+        </div>
+      </div>
 
-        const baladas2000s = [
-            { cancion: "YOU'RE BEAUTIFUL", artista: "James Blunt", año: "2005", idioma: "Inglés", duracion: "3:30", decada: "2000s" },
-            { cancion: "A DIOS LE PIDO", artista: "Juanes", año: "2002", idioma: "Español", duracion: "3:25", decada: "2000s" },
-            { cancion: "THE SCIENTIST", artista: "Coldplay", año: "2002", idioma: "Inglés", duracion: "5:09", decada: "2000s" },
-            { cancion: "COLGANDO EN TUS MANOS", artista: "Carlos Baute", año: "2008", idioma: "Español", duracion: "3:50", decada: "2000s" },
-            { cancion: "FIX YOU", artista: "Coldplay", año: "2005", idioma: "Inglés", duracion: "4:55", decada: "2000s" }
-        ];
+      <!-- PROGRAMACIÓN + NOTICIAS -->
+      <div>
+        <div class="card">
+          <div class="card-ttl">📋 Programación de hoy</div>
+          <div id="schedList">
+            <div class="empty">Sin programas · Agregá desde ⚙️ Config</div>
+          </div>
+        </div>
 
-        const baladas2010s = [
-            { cancion: "SOMEONE LIKE YOU", artista: "Adele", año: "2011", idioma: "Inglés", duracion: "4:45", decada: "2010s" },
-            { cancion: "THINKING OUT LOUD", artista: "Ed Sheeran", año: "2014", idioma: "Inglés", duracion: "4:41", decada: "2010s" },
-            { cancion: "FUISTE TÚ", artista: "Ricardo Arjona", año: "2014", idioma: "Español", duracion: "4:35", decada: "2010s" },
-            { cancion: "CORRE", artista: "Jesse & Joy", año: "2011", idioma: "Español", duracion: "4:48", decada: "2010s" },
-            { cancion: "HELLO", artista: "Adele", año: "2015", idioma: "Inglés", duracion: "4:55", decada: "2010s" }
-        ];
+        <div class="card">
+          <div class="card-ttl">📰 Noticias</div>
+          <div id="newsList">
+            <div class="empty">Sin noticias · Agregá desde ⚙️ Config</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        const baladas2020s = [
-            { cancion: "EASY ON ME", artista: "Adele", año: "2021", idioma: "Inglés", duracion: "3:44", decada: "2020s" },
-            { cancion: "FLOWERS", artista: "Miley Cyrus", año: "2023", idioma: "Inglés", duracion: "3:20", decada: "2020s" },
-            { cancion: "PROVENZA", artista: "Karol G", año: "2022", idioma: "Español", duracion: "3:30", decada: "2020s" },
-            { cancion: "VUELVE", artista: "Sebastián Yatra", año: "2021", idioma: "Español", duracion: "3:40", decada: "2020s" }
-        ];
+  <!-- ══════════ LOCUTOR IA ══════════ -->
+  <div class="view" id="view-ia">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <div class="card-ttl">🎙️ Generar intervención</div>
+          <div style="font-size:12px;color:var(--mu);margin-bottom:12px;line-height:1.6;
+            background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.15);
+            border-radius:9px;padding:10px">
+            💡 <strong style="color:var(--c)">Sin API externa.</strong>
+            Las intervenciones se generan con plantillas inteligentes que usan
+            <strong>la hora real, el clima, la canción actual y el nombre de tu radio</strong>.
+            El resultado suena natural y va directo al lector de voz.
+          </div>
 
-        // Noticias diarias
-        const noticiasGlobales = {
-            salsa: {
-                "2026-03-29": { titulo: "Marc Anthony anuncia gira mundial 2026-2027", cuerpo: "El salsero puertorriqueño presentará 'Salsa Global Tour' con 40 conciertos en 15 países." },
-                "2026-03-30": { titulo: "Nueva generación de salsa colombiana", cuerpo: "Grupo Niche lanza 'Cali Vive' con colaboraciones internacionales." }
-            },
-            balada: {
-                "2026-03-29": { titulo: "Adele confirma nuevo álbum para 2027", cuerpo: "La cantante británica adelantó que ya está trabajando en su quinto álbum." },
-                "2026-03-30": { titulo: "Las baladas de los 80s vuelven a las listas", cuerpo: "Por efecto viral en TikTok, clásicos como 'Careless Whisper' reaparecen en top global." }
-            }
-        };
+          <div class="fg">
+            <label class="flbl">Tipo de intervención</label>
+            <select id="iaTipo" class="fsel finp">
+              <option value="apertura">🎬 Apertura del programa</option>
+              <option value="hora">🕐 Mención de hora</option>
+              <option value="cancion">🎵 Presentar canción</option>
+              <option value="clima">🌤 Mencionar el clima</option>
+              <option value="saludo">👋 Saludar a los oyentes</option>
+              <option value="cierre">🎤 Cierre del bloque</option>
+              <option value="sorteo">🎁 Anunciar sorteo</option>
+              <option value="pedido">💬 Responder pedido</option>
+              <option value="id">📻 Identificar la radio</option>
+              <option value="libre">✏️ Texto libre</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="flbl">Detalle extra (opcional — canción, nombre del oyente, etc.)</label>
+            <input id="iaExtra" class="finp" placeholder="Ej: próxima canción es Hotel California de Eagles">
+          </div>
 
-        const frasesSalsa = [
-            "La salsa no se baila, se siente. El ritmo está en las venas.",
-            "Dicen que quien baila salsa, olvida sus penas. Y quien la canta, las convierte en arte.",
-            "La salsa nació en Nueva York, pero el corazón se quedó en el Caribe."
-        ];
+          <div class="row-b">
+            <button class="btn btn-prime" onclick="generarIA()">⚡ Generar texto</button>
+            <button class="btn btn-ghost btn-sm" onclick="limpiarIA()">Limpiar</button>
+          </div>
+        </div>
 
-        const frasesBalada = [
-            "Una balada es un susurro al corazón en un mundo lleno de gritos.",
-            "Las mejores baladas son las que duelen. Porque solo el dolor verdadero inspira arte genuino.",
-            "El amor y la balada van de la mano. No hay uno sin la otra."
-        ];
+        <!-- TTS CONTROL -->
+        <div class="card">
+          <div class="card-ttl">🔊 Control de Voz (gratis)</div>
+          <div class="tts-row">
+            <span style="font-size:11px;color:var(--mu);width:65px">Velocidad</span>
+            <input type="range" class="tts-s" id="ttsRate" min="0.6" max="1.8" step="0.05" value="0.95"
+              oninput="updTTS(this,'r')">
+            <span style="font-size:11px;color:var(--c);width:30px" id="ttsRateV">0.95</span>
+          </div>
+          <div class="tts-row">
+            <span style="font-size:11px;color:var(--mu);width:65px">Tono</span>
+            <input type="range" class="tts-s" id="ttsPitch" min="0.5" max="1.8" step="0.05" value="1.05"
+              oninput="updTTS(this,'p')">
+            <span style="font-size:11px;color:var(--c);width:30px" id="ttsPitchV">1.05</span>
+          </div>
+          <div class="fg" style="margin-top:8px">
+            <label class="flbl">Voz del sistema (en español)</label>
+            <select id="ttsVoice" class="fsel finp" style="font-size:12px"></select>
+          </div>
 
-        // ==================== FUNCIONES ====================
+          <!-- Auto-intervenciones -->
+          <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--br2)">
+            <div style="font-size:10px;color:var(--mu);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">
+              Auto-intervenciones
+            </div>
+            <div class="tgl-row">
+              <div>
+                <div class="tgl-lbl">Mención de hora cada 30 min</div>
+              </div>
+              <label class="tgl"><input type="checkbox" id="togHora" onchange="saveToggle('togHora',this.checked)"><span class="tgl-s"></span></label>
+            </div>
+            <div class="tgl-row">
+              <div>
+                <div class="tgl-lbl">Identificar la emisora cada hora</div>
+              </div>
+              <label class="tgl"><input type="checkbox" id="togID" onchange="saveToggle('togID',this.checked)"><span class="tgl-s"></span></label>
+            </div>
+            <div class="tgl-row">
+              <div>
+                <div class="tgl-lbl">Saludar a los oyentes cada 20 min</div>
+              </div>
+              <label class="tgl"><input type="checkbox" id="togSaludo" onchange="saveToggle('togSaludo',this.checked)"><span class="tgl-s"></span></label>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        let programaActual = "salsa";
-        let fechaActual = "2026-03-29";
-        let paisRankingActual = "Ecuador";
+      <div>
+        <!-- OUTPUT -->
+        <div class="card">
+          <div class="card-ttl">📢 Texto del locutor</div>
+          <div class="ia-box">
+            <div class="ia-hdr">
+              <div class="ia-ico">🎙️</div>
+              <div>
+                <div class="ia-lbl">AudioLab Locutor IA</div>
+                <div class="ia-sub" id="iaStatus">Listo para generar</div>
+              </div>
+            </div>
+            <div class="ia-out" id="iaOutput">
+              Elegí un tipo de intervención y presioná <strong>Generar texto</strong>.
+            </div>
+          </div>
+          <div class="row-b" style="margin-top:12px">
+            <button class="btn btn-gn" onclick="hablar()" id="btnHablar">🔊 Leer en voz alta</button>
+            <button class="btn btn-rd btn-sm" onclick="detener()">⏹ Detener</button>
+            <button class="btn btn-ghost btn-sm" onclick="copiar()">📋 Copiar</button>
+          </div>
 
-        function getNoticia(programa, fecha) {
-            const noticias = noticiasGlobales[programa];
-            return noticias[fecha] || Object.values(noticias)[0];
-        }
+          <!-- HISTORIAL -->
+          <div style="margin-top:14px">
+            <div style="font-size:10px;color:var(--mu);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">
+              Historial de hoy
+            </div>
+            <div id="historial" style="max-height:200px;overflow-y:auto">
+              <div class="empty" style="padding:10px">Sin intervenciones generadas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        function getFrase(programa, seed) {
-            const frases = programa === "salsa" ? frasesSalsa : frasesBalada;
-            return frases[seed % frases.length];
-        }
+  <!-- ══════════ CABINA ══════════ -->
+  <div class="view" id="view-cabina">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <div class="card-ttl">💬 Mensajes en vivo</div>
 
-        function getFechaFormateada(fecha) {
-            const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(fecha).toLocaleDateString('es-ES', opciones);
-        }
+          <!-- Filtros -->
+          <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm active" id="fTodo" onclick="filtrar('todos',this)"
+              style="font-size:11px;background:rgba(0,245,255,.1);border-color:rgba(0,245,255,.4);color:var(--c)">
+              Todos
+            </button>
+            <button class="btn btn-ghost btn-sm" id="fPed" onclick="filtrar('pedido',this)" style="font-size:11px">🎵 Pedidos</button>
+            <button class="btn btn-ghost btn-sm" id="fSal" onclick="filtrar('saludo',this)" style="font-size:11px">👋 Saludos</button>
+            <button class="btn btn-ghost btn-sm" id="fDest" onclick="filtrar('dest',this)" style="font-size:11px">⭐ Destacados</button>
+          </div>
 
-        function getCancionesDelDia(catalogo, cantidad, fechaSeed) {
-            const seed = new Date(fechaSeed).getTime();
-            const shuffled = [...catalogo];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor((seed + i) % (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled.slice(0, cantidad);
-        }
+          <div class="msgs-box" id="msgsBox">
+            <div class="empty">
+              Los mensajes de oyentes aparecen aquí.<br>
+              Usá el formulario de abajo para simular o ingresar mensajes manualmente.
+            </div>
+          </div>
 
-        function getBaladasPorDecadas(fechaSeed) {
-            const seed = new Date(fechaSeed).getTime();
-            const porDecada = [
-                { decada: "1980s", catalogo: baladas80s, seleccion: 2 },
-                { decada: "1990s", catalogo: baladas90s, seleccion: 2 },
-                { decada: "2000s", catalogo: baladas2000s, seleccion: 2 },
-                { decada: "2010s", catalogo: baladas2010s, seleccion: 2 },
-                { decada: "2020s", catalogo: baladas2020s, seleccion: 4 }
-            ];
-            let seleccionadas = [];
-            let offset = 0;
-            for (const dec of porDecada) {
-                const shuffled = [...dec.catalogo];
-                for (let i = shuffled.length - 1; i > 0; i--) {
-                    const j = Math.floor((seed + offset + i) % (i + 1));
-                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-                }
-                seleccionadas.push(...shuffled.slice(0, dec.seleccion));
-                offset += 100;
-            }
-            return seleccionadas;
-        }
+          <!-- Ingreso de mensaje -->
+          <div style="margin-top:12px">
+            <div style="font-size:10px;color:var(--mu);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">
+              Ingresar mensaje
+            </div>
+            <div style="display:flex;gap:6px;margin-bottom:6px">
+              <input id="msgNom" class="finp" style="flex:0 0 130px;font-size:12px" placeholder="Nombre del oyente">
+              <input id="msgTxt" class="finp" placeholder="Mensaje..."
+                onkeydown="if(event.key==='Enter')enviarMsg()" style="font-size:12px">
+            </div>
+            <button onclick="enviarMsg()" class="btn btn-prime btn-sm" style="width:100%">
+              Enviar mensaje
+            </button>
+          </div>
+        </div>
+      </div>
 
-        function generarGuionSalsa(fecha) {
-            const fechaFormateada = getFechaFormateada(fecha);
-            const noticia = getNoticia("salsa", fecha);
-            const frase = getFrase("salsa", new Date(fecha).getDate());
-            const canciones = getCancionesDelDia(catalogoSalsa, 12, fecha);
-            
-            let bloqueCanciones = "";
-            canciones.forEach((cancion, index) => {
-                const minutosInicio = 5 + (index * 6);
-                const hora = 14 + Math.floor(minutosInicio / 60);
-                const minuto = minutosInicio % 60;
-                bloqueCanciones += `
-[🎙️ CANCIÓN ${index + 1} - ${hora.toString().padStart(2,'0')}:${minuto.toString().padStart(2,'0')}]
-🎵 "${cancion.cancion}" - ${cancion.artista} (${cancion.año}) | Duración: ${cancion.duracion}
-📝 Locución: "${cancion.artista} nos trae este éxito del ${cancion.año}. ${index === 2 ? frase : ''}"
+      <!-- PEDIDOS -->
+      <div>
+        <div class="card">
+          <div class="card-ttl">🎵 Pedidos detectados</div>
+          <div id="pedList">
+            <div class="empty">Sin pedidos aún</div>
+          </div>
+        </div>
 
-`;
-            });
+        <!-- OYENTES -->
+        <div class="card">
+          <div class="card-ttl">👥 Oyentes activos</div>
+          <div id="oyList">
+            <div class="empty">Sin oyentes registrados</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            return `========================================
-🎙️ ENTRETELONES- PROGRAMA DE SALSA
-📅 ${fechaFormateada}
-⏰ Duración: 2 horas (120 minutos)
-🆔 ID: SALSA-${fecha.replace(/-/g, '')}
-========================================
+  <!-- ══════════ PLAYLIST ══════════ -->
+  <div class="view" id="view-playlist">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <div class="card-ttl">🎵 Cola de reproducción <span style="color:var(--mu);font-size:10px;margin-left:4px" id="plTotal">(0)</span></div>
+          <div id="plList">
+            <div class="empty">Sin canciones · Agregá desde el formulario</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="card-ttl">➕ Agregar canción</div>
+          <div class="fg">
+            <label class="flbl">Título</label>
+            <input id="plTit" class="finp" placeholder="Ej: Bohemian Rhapsody">
+          </div>
+          <div class="fg">
+            <label class="flbl">Artista</label>
+            <input id="plArt" class="finp" placeholder="Ej: Queen">
+          </div>
+          <div class="fg">
+            <label class="flbl">Duración</label>
+            <input id="plDur" class="finp" placeholder="4:35">
+          </div>
+          <div class="row-b">
+            <button class="btn btn-prime" onclick="addSong()">➕ Agregar</button>
+            <button class="btn btn-rd btn-sm" onclick="clearPlaylist()">🗑 Limpiar todo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-[🎬 INICIO - 00:00]
-🔊 ENTRADA: "${canciones[0].cancion}" (30s fade)
+  <!-- ══════════ CONFIG ══════════ -->
+  <div class="view" id="view-config">
 
-🎙️ APERTURA:
-"Bienvenidos a ENTRETELONES! Soy [NOMBRE] y hoy ${fechaFormateada} bailamos salsa."
+    <div id="cfgLock" style="max-width:360px;margin:40px auto;text-align:center">
+      <div style="font-size:48px;margin-bottom:14px">🔒</div>
+      <div style="font-family:var(--FD);font-size:18px;color:var(--c);margin-bottom:6px">PANEL DE CONFIG</div>
+      <div style="font-size:13px;color:var(--mu);margin-bottom:20px">Contraseña de administrador</div>
+      <input type="password" id="passInp" class="finp" placeholder="Contraseña"
+        onkeydown="if(event.key==='Enter')loginCfg()">
+      <button class="btn btn-prime" style="width:100%;margin-top:10px" onclick="loginCfg()">INGRESAR</button>
+      <div style="font-size:11px;color:var(--mu);margin-top:10px">
+        Por defecto: <strong style="color:var(--c)">audio2024</strong>
+      </div>
+    </div>
 
-📰 NOTICIAS (00:03):
-🔥 "${noticia.titulo}"
-📝 "${noticia.cuerpo}"
+    <div id="cfgPanel" style="display:none">
 
-💬 FRASE: "${frase}"
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div style="font-family:var(--FD);font-size:14px;font-weight:900;color:var(--c)">⚙️ CONFIGURACIÓN</div>
+        <button class="btn btn-rd btn-sm" onclick="logoutCfg()">Cerrar sesión</button>
+      </div>
 
-${bloqueCanciones}
+      <div class="grid2">
+        <div>
+          <!-- DATOS DE LA RADIO -->
+          <div class="card">
+            <div class="card-ttl">📻 Datos de la radio</div>
+            <div class="fg">
+              <label class="flbl">Nombre de la radio</label>
+              <input id="cNombre" class="finp" placeholder="Ej: AudioLabRDCR FM 103.5">
+            </div>
+            <div class="fg">
+              <label class="flbl">URL del stream (Icecast / Shoutcast / HLS)</label>
+              <input id="cStream" class="finp" placeholder="https://stream.turadio.com:8000/live">
+              <div style="font-size:10px;color:var(--mu);margin-top:4px;line-height:1.5">
+                Tu empresa de hosting de radio te da esta URL. Es el link de audio en vivo.
+              </div>
+            </div>
+            <div class="fg">
+              <label class="flbl">URL metadatos Icecast — para canción + oyentes en tiempo real (opcional)</label>
+              <input id="cMeta" class="finp" placeholder="https://stream.turadio.com:8000/status-json.xsl">
+            </div>
+            <div class="fg">
+              <label class="flbl">Nombre del locutor / personalidad IA</label>
+              <input id="cLocutor" class="finp" placeholder="Ej: Diego, Valentina, AudioBot">
+            </div>
+            <div class="fg">
+              <label class="flbl">Estilo de conducción</label>
+              <select id="cEstilo" class="fsel finp">
+                <option value="dinamico">Dinámico y juvenil 🔥</option>
+                <option value="tropical">Tropical y festivo 🌴</option>
+                <option value="nocturno">Nocturno y tranquilo 🌙</option>
+                <option value="formal">Formal y profesional 📰</option>
+                <option value="humor">Con humor 😄</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label class="flbl">WhatsApp (sin + ni espacios) — Ej: 5939XXXXXXXX</label>
+              <input id="cWA" class="finp" placeholder="5939XXXXXXXX">
+            </div>
+            <div class="row-b">
+              <button class="btn btn-prime" onclick="saveRadio()">💾 Guardar</button>
+              <button class="btn btn-gn btn-sm" onclick="testStream()">🔊 Probar stream</button>
+            </div>
+            <div class="fb-ok" id="fbRadio">✅ Guardado correctamente</div>
+          </div>
+        </div>
 
-[🎙️ CIERRE - 1:55:00]
-"Gracias por acompañarnos. ¡Hasta la próxima semana!"
+        <div>
+          <!-- CLIMA SIN API KEY — usa wttr.in -->
+          <div class="card">
+            <div class="card-ttl">🌤 Clima — Sin API Key</div>
+            <div style="font-size:12px;color:var(--mu);margin-bottom:12px;line-height:1.6;
+              background:rgba(57,255,20,.05);border:1px solid rgba(57,255,20,.2);
+              border-radius:9px;padding:10px">
+              ✅ <strong style="color:var(--gn)">No necesita ninguna cuenta ni API.</strong><br>
+              Usa el servicio público wttr.in que funciona con solo escribir tu ciudad.
+            </div>
+            <div class="fg">
+              <label class="flbl">Ciudad</label>
+              <input id="cCiudad" class="finp" placeholder="Ej: Quito / Buenos Aires / Montevideo">
+            </div>
+            <div class="row-b">
+              <button class="btn btn-prime" onclick="saveClima()">💾 Guardar</button>
+              <button class="btn btn-gn btn-sm" onclick="fetchClima()">🔄 Probar clima</button>
+            </div>
+            <div class="fb-ok" id="fbClima">✅ Ciudad guardada</div>
+          </div>
 
-========================================`;
-        }
+          <!-- REDES -->
+          <div class="card">
+            <div class="card-ttl">📲 Redes Sociales</div>
+            <div class="fg">
+              <label class="flbl">Facebook URL</label>
+              <input id="cFb" class="finp" placeholder="https://facebook.com/turadio">
+            </div>
+            <div class="fg">
+              <label class="flbl">Instagram URL</label>
+              <input id="cIg" class="finp" placeholder="https://instagram.com/turadio">
+            </div>
+            <div class="fg">
+              <label class="flbl">YouTube URL</label>
+              <input id="cYt" class="finp" placeholder="https://youtube.com/@turadio">
+            </div>
+            <div class="fg">
+              <label class="flbl">TikTok URL</label>
+              <input id="cTk" class="finp" placeholder="https://tiktok.com/@turadio">
+            </div>
+            <div class="row-b">
+              <button class="btn btn-prime" onclick="saveRedes()">💾 Guardar redes</button>
+            </div>
+            <div class="fb-ok" id="fbRedes">✅ Guardado</div>
+          </div>
 
-        function generarGuionBalada(fecha) {
-            const fechaFormateada = getFechaFormateada(fecha);
-            const noticia = getNoticia("balada", fecha);
-            const frase = getFrase("balada", new Date(fecha).getDate());
-            const canciones = getBaladasPorDecadas(fecha);
-            
-            let bloqueCanciones = "";
-            canciones.forEach((cancion, index) => {
-                const minutosInicio = 5 + (index * 6);
-                const hora = 14 + Math.floor(minutosInicio / 60);
-                const minuto = minutosInicio % 60;
-                bloqueCanciones += `
-[🎙️ ${index + 1} - ${hora.toString().padStart(2,'0')}:${minuto.toString().padStart(2,'0')}]
-🎵 "${cancion.cancion}" - ${cancion.artista} (${cancion.año}) | ${cancion.idioma}
-📝 Locución: "${cancion.artista} - ${cancion.cancion}. ${index === 3 ? frase : ''}"
+          <!-- PROGRAMACIÓN -->
+          <div class="card">
+            <div class="card-ttl">📋 Programación</div>
+            <div id="schedEditor"></div>
+            <div class="row-b">
+              <button class="btn btn-ghost btn-sm" onclick="addPrograma()">➕ Agregar programa</button>
+              <button class="btn btn-prime btn-sm" onclick="saveProg()">💾 Guardar</button>
+            </div>
+            <div class="fb-ok" id="fbProg">✅ Guardado</div>
+          </div>
 
-`;
-            });
+          <!-- NOTICIAS -->
+          <div class="card">
+            <div class="card-ttl">📰 Noticias</div>
+            <div id="notEditor"></div>
+            <div class="row-b">
+              <button class="btn btn-ghost btn-sm" onclick="addNoticia()">➕ Agregar noticia</button>
+              <button class="btn btn-prime btn-sm" onclick="saveNots()">💾 Guardar</button>
+            </div>
+            <div class="fb-ok" id="fbNots">✅ Guardado</div>
+          </div>
 
-            return `========================================
-🎵 LA VOZ DEL SILENCIO - BALADAS 80s-2020s
-📅 ${fechaFormateada}
-⏰ 2 horas | 🆔 BALADA-${fecha.replace(/-/g, '')}
-========================================
+          <!-- CONTRASEÑA -->
+          <div class="card">
+            <div class="card-ttl">🔐 Cambiar contraseña</div>
+            <div class="fg">
+              <label class="flbl">Nueva contraseña</label>
+              <input type="password" id="newP1" class="finp" placeholder="Mínimo 6 caracteres">
+            </div>
+            <div class="fg">
+              <label class="flbl">Confirmar</label>
+              <input type="password" id="newP2" class="finp" placeholder="Repetir">
+            </div>
+            <div class="row-b">
+              <button class="btn btn-prime" onclick="changePass()">🔒 Cambiar</button>
+            </div>
+            <div class="fb-ok" id="fbPass">✅ Contraseña actualizada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-[🎬 INICIO] 🔊 "Hello" - Adele (30s)
+</div><!-- /wrap -->
 
-🎙️ APERTURA:
-"Bienvenidos a LA VOZ DEL SILENCIO. Baladas en inglés y español, desde los 80s hasta hoy."
+<script>
+/* ══════════════════════════
+   STORAGE
+══════════════════════════ */
+const L = {
+  g: k => { try{return localStorage.getItem(k)}catch{return null} },
+  s: (k,v) => { try{localStorage.setItem(k,v)}catch{} },
+  gJ: (k,d=[]) => { try{return JSON.parse(localStorage.getItem(k))||d}catch{return d} },
+  sJ: (k,v) => { try{localStorage.setItem(k,JSON.stringify(v))}catch{} },
+};
+const C = {
+  nombre:  ()=>L.g('al_nombre')||'AudioLabRDCR',
+  stream:  ()=>L.g('al_stream')||'',
+  meta:    ()=>L.g('al_meta')||'',
+  locutor: ()=>L.g('al_locutor')||'tu locutor',
+  estilo:  ()=>L.g('al_estilo')||'dinamico',
+  wa:      ()=>L.g('al_wa')||'',
+  ciudad:  ()=>L.g('al_ciudad')||'',
+  fb:      ()=>L.g('al_fb')||'',
+  ig:      ()=>L.g('al_ig')||'',
+  yt:      ()=>L.g('al_yt')||'',
+  tk:      ()=>L.g('al_tk')||'',
+  pass:    ()=>L.g('al_pass')||'audio2024',
+  prog:    ()=>L.gJ('al_prog'),
+  nots:    ()=>L.gJ('al_nots'),
+  playlist:()=>L.gJ('al_playlist'),
+};
 
-📰 NOTICIA: "${noticia.titulo}" - ${noticia.cuerpo}
+/* ══════════════════════════
+   ESTADO
+══════════════════════════ */
+const S = {
+  playing:false, vol:80, msgs:[], pedidos:{}, oyentes:{},
+  filtro:'todos', playlist:[], wxData:null, ttsRate:0.95, ttsPitch:1.05,
+  voice:null, autoHora:false, autoID:false, autoSaludo:false,
+};
 
-💬 REFLEXIÓN: "${frase}"
+/* ══════════════════════════
+   INIT
+══════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  aplicarConfig();
+  initReloj();
+  initVoces();
+  cargarPlaylist();
+  renderProg();
+  renderNots();
+  renderSchedEditor();
+  renderNotEditor();
+  fetchClima();
+  if (C.meta()) fetchMeta();
+  cargarToggles();
+  generarWF();
+  setInterval(fetchMeta, 15000);
+});
 
-${bloqueCanciones}
+function aplicarConfig() {
+  const n = C.nombre();
+  el('hdrNombre').textContent = n;
+  document.title = `${n} — Panel`;
+  if (C.fb()) el('lFb').href = C.fb();
+  if (C.ig()) el('lIg').href = C.ig();
+  if (C.yt()) el('lYt').href = C.yt();
+  if (C.tk()) el('lTk').href = C.tk();
+  // Cargar campos config si panel abierto
+  if (el('cNombre')) {
+    el('cNombre').value = C.nombre();
+    el('cStream').value = C.stream();
+    el('cMeta').value = C.meta();
+    el('cLocutor').value = C.locutor();
+    el('cEstilo').value = C.estilo()||'dinamico';
+    el('cWA').value = C.wa();
+    el('cCiudad').value = C.ciudad();
+    el('cFb').value = C.fb();
+    el('cIg').value = C.ig();
+    el('cYt').value = C.yt();
+    el('cTk').value = C.tk();
+  }
+}
 
-[🎙️ CIERRE] "Hasta la próxima semana. ¡Gracias!"
+/* ══════════════════════════
+   RELOJ + AUTO-IA
+══════════════════════════ */
+function initReloj() {
+  function tick() {
+    const now = new Date();
+    el('reloj').textContent = now.toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    el('fechaHdr').textContent = now.toLocaleDateString('es',{weekday:'long',day:'numeric',month:'long'});
+    const m=now.getMinutes(), s=now.getSeconds();
+    if (s===0 && S.playing) {
+      if (S.autoHora && m%30===0) autoIA('hora');
+      if (S.autoID  && m===0)     autoIA('id');
+      if (S.autoSaludo && m%20===0 && m!==0) autoIA('saludo');
+    }
+  }
+  tick(); setInterval(tick,1000);
+}
 
-========================================`;
-        }
+/* ══════════════════════════
+   STREAM
+══════════════════════════ */
+const audio = document.getElementById('audio');
 
-        function actualizarRanking() {
-            const rankingDiv = document.getElementById("rankingList");
-            const paisActualSpan = document.getElementById("paisActual");
-            const datosPais = rankingsGlobales[paisRankingActual];
-            
-            paisActualSpan.textContent = paisRankingActual;
-            
-            if (!datosPais) return;
-            
-            let html = "";
-            datosPais.canciones.forEach(c => {
-                const trendIcon = c.trend === "up" ? "📈" : (c.trend === "down" ? "📉" : "➖");
-                const trendClass = c.trend === "up" ? "trend-up" : (c.trend === "down" ? "trend-down" : "trend-equal");
-                
-                html += `
-                    <div class="ranking-item">
-                        <div class="ranking-header">
-                            <div class="rank-num">#${c.pos}</div>
-                            <div class="song-title">
-                                <strong>${c.cancion}</strong>
-                                <span class="song-artist">${c.artista}</span>
-                            </div>
-                            <div class="trend-icon ${trendClass}">${trendIcon}</div>
-                        </div>
-                        <div class="metrics-grid">
-                            <div class="metric"><span class="metric-icon">🎵</span><span class="metric-value">${c.spotify}</span><span>Spotify</span></div>
-                            <div class="metric"><span class="metric-icon">🍎</span><span class="metric-value">${c.apple}</span><span>Apple</span></div>
-                            <div class="metric"><span class="metric-icon">📊</span><span class="metric-value">${c.billboard}</span><span>Billboard</span></div>
-                            <div class="metric"><span class="metric-icon">🔥</span><span class="metric-value">${c.viral}</span><span>Viral</span></div>
-                        </div>
-                    </div>
-                `;
-            });
-            rankingDiv.innerHTML = html;
-        }
+audio.addEventListener('playing', () => {
+  S.playing = true;
+  el('btnPlay').textContent = '⏹';
+  el('btnPlay').classList.add('on');
+  el('wave').classList.remove('off');
+  el('livePill').style.display = 'flex';
+  el('npLabel').textContent = 'SONANDO AHORA';
+  setStatus('ok','Transmisión activa ✓');
+  toast('📻', `${C.nombre()} — EN VIVO`, 'ok');
+  fetchMeta();
+});
+audio.addEventListener('pause', onStop);
+audio.addEventListener('error', ()=>{ onStop(); toast('❌','No se pudo conectar. Verificá la URL del stream en ⚙️ Config','err'); });
+audio.addEventListener('waiting', ()=>setStatus('wait','Conectando...'));
 
-        function actualizarGuion() {
-            const guionContent = document.getElementById("guionContent");
-            const guionTitulo = document.getElementById("guionTitulo");
-            const rankingPanel = document.getElementById("rankingPanel");
-            
-            if (programaActual === "salsa") {
-                guionContent.textContent = generarGuionSalsa(fechaActual);
-                guionTitulo.textContent = "🎙️ Guion - ENTRETELONES (Salsa)";
-                guionContent.className = "guion-content salsa";
-                rankingPanel.className = "ranking-panel salsa";
-            } else {
-                guionContent.textContent = generarGuionBalada(fechaActual);
-                guionTitulo.textContent = "🎵 Guion - LA VOZ DEL SILENCIO (Baladas 80s-2020s)";
-                guionContent.className = "guion-content balada";
-                rankingPanel.className = "ranking-panel balada";
-            }
-        }
+function onStop() {
+  S.playing = false;
+  el('btnPlay').textContent = '▶';
+  el('btnPlay').classList.remove('on');
+  el('wave').classList.add('off');
+  el('livePill').style.display = 'none';
+  el('npLabel').textContent = 'LISTO PARA EMITIR';
+  setStatus('err','Desconectado');
+}
+function setStatus(t,m) {
+  el('sdot').className = `sdot ${t}`;
+  el('smsg').textContent = m;
+  el('smsg').style.color = t==='ok'?'var(--gn)':t==='wait'?'var(--yw)':'var(--mu)';
+}
+function toggleStream() {
+  if (S.playing) { audio.pause(); audio.src=''; return; }
+  const url = C.stream();
+  if (!url) { toast('⚠️','Configurá la URL del stream en ⚙️ Config','warn'); tab('config',document.querySelector('.tab:last-child')); return; }
+  setStatus('wait','Conectando...');
+  audio.src = url; audio.volume = S.vol/100;
+  audio.play().catch(()=>{});
+}
+function setVol(v) {
+  S.vol = Number(v); audio.volume = S.vol/100;
+  const s=el('volSlider');
+  s.style.background = `linear-gradient(90deg,var(--c) ${v}%,rgba(255,255,255,.15) ${v}%)`;
+}
 
-        function actualizarTodo() {
-            actualizarRanking();
-            actualizarGuion();
-        }
+/* ══════════════════════════
+   METADATA ICECAST (real)
+══════════════════════════ */
+async function fetchMeta() {
+  const url = C.meta(); if (!url) return;
+  try {
+    const r = await fetch(url,{cache:'no-store'});
+    const d = await r.json();
+    const src = d?.icestats?.source;
+    const m = Array.isArray(src)?src[0]:src;
+    if (!m) return;
+    const titulo = m.title||m.song||'—';
+    const artista = m.artist||'';
+    const oy = m.listeners??'—';
+    el('songTitle').textContent = titulo||'En vivo';
+    el('songArtist').textContent = artista||'♪ Transmisión en vivo';
+    el('oyentes').textContent = oy;
+    el('stOy').textContent = oy;
+  } catch{}
+}
 
-        // ==================== EVENTOS ====================
-        
-        document.getElementById("btnSalsa").addEventListener("click", () => {
-            programaActual = "salsa";
-            document.getElementById("btnSalsa").classList.add("active");
-            document.getElementById("btnBalada").classList.remove("active");
-            actualizarGuion();
-        });
-        
-        document.getElementById("btnBalada").addEventListener("click", () => {
-            programaActual = "balada";
-            document.getElementById("btnBalada").classList.add("active");
-            document.getElementById("btnSalsa").classList.remove("active");
-            actualizarGuion();
-        });
-        
-        document.getElementById("btnGenerar").addEventListener("click", () => {
-            fechaActual = document.getElementById("fechaPrograma").value;
-            paisRankingActual = document.getElementById("paisRanking").value;
-            actualizarTodo();
-        });
-        
-        document.getElementById("btnCopiar").addEventListener("click", async () => {
-            const guionText = document.getElementById("guionContent").textContent;
-            await navigator.clipboard.writeText(guionText);
-            const btn = document.getElementById("btnCopiar");
-            const original = btn.textContent;
-            btn.textContent = "✅ ¡Copiado!";
-            setTimeout(() => { btn.textContent = original; }, 2000);
-        });
-        
-        // Inicializar
-        actualizarTodo();
-    </script>
+/* ══════════════════════════
+   CLIMA — wttr.in (SIN API KEY)
+══════════════════════════ */
+async function fetchClima() {
+  const city = C.ciudad();
+  if (!city) { el('wxContent').innerHTML='<div class="empty">Configurá tu ciudad en ⚙️ Config</div>'; return; }
+  try {
+    // wttr.in devuelve JSON de clima sin registro ni API key
+    const r = await fetch(`https://wttr.in/${encodeURIComponent(city)}?format=j1`);
+    const d = await r.json();
+    const cc = d.current_condition[0];
+    const desc = cc.lang_es?.[0]?.value || cc.weatherDesc[0].value;
+    const temp = cc.temp_C;
+    const hum = cc.humidity;
+    const viento = cc.windspeedKmph;
+    const sens = cc.FeelsLikeC;
+    const iconMap = {
+      113:'☀️',116:'⛅',119:'☁️',122:'☁️',143:'🌫',176:'🌦',
+      179:'🌨',182:'🌧',185:'🌧',200:'⛈',227:'❄️',230:'❄️',
+      248:'🌫',260:'🌫',263:'🌧',266:'🌧',281:'🌧',284:'🌧',
+      293:'🌦',296:'🌦',299:'🌧',302:'🌧',305:'🌧',308:'🌧',
+      311:'🌧',314:'🌧',317:'🌧',320:'🌨',323:'🌨',326:'🌨',
+      329:'❄️',332:'❄️',335:'❄️',338:'❄️',350:'🌧',353:'🌦',
+      356:'🌧',359:'🌧',362:'🌨',365:'🌨',368:'🌨',371:'❄️',
+      374:'🌨',377:'🌨',386:'⛈',389:'⛈',392:'⛈',395:'❄️',
+    };
+    const ico = iconMap[parseInt(cc.weatherCode)] || '🌤';
+    const nombre = d.nearest_area?.[0]?.areaName?.[0]?.value || city;
+    S.wxData = {temp,desc,ico,hum,viento,sens,nombre};
+    el('wxContent').innerHTML = `
+      <div class="wx-card">
+        <div class="wx-ico">${ico}</div>
+        <div>
+          <div class="wx-temp">${temp}°C</div>
+          <div class="wx-desc">${desc}</div>
+          <div class="wx-city">${nombre}</div>
+        </div>
+        <div class="wx-det">
+          💧 <strong>${hum}%</strong> humedad<br>
+          💨 <strong>${viento} km/h</strong> viento<br>
+          🌡 Sensación <strong>${sens}°C</strong>
+        </div>
+      </div>
+    `;
+    const now = new Date();
+    el('wxTime').textContent = now.toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'});
+    setTimeout(fetchClima,600000); // cada 10 min
+  } catch(e) {
+    el('wxContent').innerHTML = `<div class="wx-nokey">⚠️ No se pudo obtener el clima de "${city}". Verificá que el nombre de la ciudad sea correcto.</div>`;
+  }
+}
+
+/* ══════════════════════════
+   WHATSAPP
+══════════════════════════ */
+function abrirWA() {
+  const num = C.wa().replace(/\D/g,'');
+  if (!num) { toast('⚠️','Configurá el número de WhatsApp en ⚙️ Config','warn'); return; }
+  const msg = encodeURIComponent('¡Hola! Quiero pedir una canción 🎵');
+  window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+}
+
+/* ══════════════════════════
+   IA LOCUTOR — PLANTILLAS INTELIGENTES (sin API externa)
+══════════════════════════ */
+const estilos = {
+  dinamico: ['¡Qué ritmo!','¡Arriba ese volumen!','¡Hay que moverse!','¡Esto está pegando fuerte!'],
+  tropical: ['¡Ay ay ay!','¡Eso está caliente!','¡A gozar se dijo!','¡La fiesta sigue!'],
+  nocturno: ['Buenas noches...','Dejá que la música te acompañe...','Para los que no duermen...','Relax...'],
+  formal: ['Buenos días, estimados oyentes.','Bienvenidos a nuestra transmisión.','Seguimos en el aire.'],
+  humor: ['¿Siguen ahí o se quedaron dormidos?','¡No cambien que esto mejora!','¡Sigan escuchando o les cuento chistes!'],
+};
+
+function getExpr() {
+  const e = C.estilo();
+  const arr = estilos[e]||estilos.dinamico;
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+function getHora() {
+  return new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'});
+}
+function getClima() {
+  if (!S.wxData) return '';
+  return `Hace ${S.wxData.temp}°C en ${S.wxData.nombre}, con ${S.wxData.desc.toLowerCase()}.`;
+}
+function getSong() { return el('songTitle').textContent||'—'; }
+function getArtist() { return el('songArtist').textContent||''; }
+function getNombre() { return C.nombre(); }
+function getLoc() { return C.locutor()||'tu locutor'; }
+
+function generarIA() {
+  const tipo = el('iaTipo').value;
+  const extra = el('iaExtra').value.trim();
+  const n = getNombre(), loc = getLoc(), hora = getHora();
+  const clima = getClima(), song = getSong(), artist = getArtist();
+  const expr = getExpr();
+
+  const templates = {
+    apertura: [
+      `${expr} Bienvenidos a ${n}, la radio que siempre está con vos. Son las ${hora} y arrancamos con todo lo mejor. Yo soy ${loc} y este es el mejor momento del día. ¡Quedense con nosotros!`,
+      `¡Hola, hola, hola! Son las ${hora} y ${n} está en el aire. ${expr} Yo soy ${loc}, y lo que viene es lo mejor de la música. No se vayan a ningún lado.`,
+    ],
+    hora: [
+      `Son las ${hora} en ${n}. ${clima||'El día transcurre de maravilla.'} Seguimos con la mejor música, que los acompañamos siempre.`,
+      `Pasando por las ${hora}. Aquí en ${n} no paramos. ${expr} Y vos seguís con nosotros, que es lo que importa.`,
+    ],
+    cancion: extra ? [
+      `Ahora suena... ${extra}. ${expr} Disfrútenla y nos cuentan qué les parece.`,
+      `A continuación, para todos ustedes, ${extra}. ${getNombre()}, siempre con la mejor música.`,
+    ] : [
+      `A continuación, ${song}${artist&&artist!=='—'?` de ${artist}`:''} únicamente en ${n}. ${expr}`,
+      `Sigue la música en ${n}. Ahora van a escuchar ${song}. ¡A disfrutar!`,
+    ],
+    clima: clima ? [
+      `Un dato para los que están afuera: ${clima} Así que ya saben cómo abrigarse. Seguimos en ${n}.`,
+      `El tiempo por hoy: ${clima} Les informamos desde ${n}. ${expr}`,
+    ] : [`El clima de hoy no está disponible en este momento. Lo actualizamos pronto en ${n}.`],
+    saludo: [
+      `${expr} Un saludo gigante a todos los que nos están escuchando en este momento. Gracias por elegirnos. Son lo mejor de ${n}.`,
+      `¡Saludos a todos los que están con nosotros! Gracias por sintonizar ${n}. Son las ${hora} y esto es para ustedes.`,
+    ],
+    cierre: [
+      `Y así cerramos este bloque en ${n}. Gracias por acompañarnos, yo soy ${loc} y en unos minutos volvemos con más. ¡No cambien!`,
+      `Pausa momentánea en ${n}. Han sido unos buenos momentos juntos. Volvemos enseguida con más música.`,
+    ],
+    sorteo: extra ? [
+      `¡Atención, atención! ${n} tiene un sorteo especial: ${extra}. Comuníquense con nosotros para participar. ¡La suerte puede ser tuya!`,
+    ] : [
+      `Atención oyentes de ${n}, tenemos un sorteo especial. Comuníquense con nosotros por WhatsApp para participar. ${expr}`,
+    ],
+    pedido: extra ? [
+      `Recibimos el pedido de ${extra}. ¡Va para vos! Seguimos aceptando pedidos en ${n} por WhatsApp.`,
+      `Para quien nos lo pidió: ahí va ${extra}. En ${n} escuchamos a nuestros oyentes. ${expr}`,
+    ] : [
+      `¡Pedidos al aire! Si querés escuchar tu canción favorita en ${n}, escribinos por WhatsApp. ¡Estamos a disposición!`,
+    ],
+    id: [
+      `Están escuchando ${n}, la radio que nunca para. Son las ${hora} y seguimos con la mejor música. Yo soy ${loc}. ¡Bienvenidos!`,
+      `Aquí ${n}. Transmitiendo para todos ustedes las ${hora}. ${expr} ¡Gracias por estar!`,
+    ],
+    libre: extra ? [
+      extra,
+    ] : [`${n}, son las ${hora}. ${expr} ¡Seguimos juntos!`],
+  };
+
+  const arr = templates[tipo]||templates.libre;
+  const txt = arr[Math.floor(Math.random()*arr.length)];
+
+  el('iaOutput').textContent = txt;
+  el('iaStatus').textContent = 'Texto listo · Presioná Leer en voz alta';
+  agregarHistorial(tipo, txt);
+  toast('🎙️','Texto generado','ok');
+}
+
+function autoIA(tipo) {
+  if (!S.playing) return;
+  const saved = el('iaTipo').value;
+  el('iaTipo').value = tipo;
+  generarIA();
+  el('iaTipo').value = saved;
+  setTimeout(()=>hablar(), 300);
+}
+
+function agregarHistorial(tipo, txt) {
+  const box = el('historial');
+  const hora = new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'});
+  const div = document.createElement('div');
+  div.style.cssText='background:rgba(255,255,255,.03);border:1px solid var(--br2);border-radius:7px;padding:8px 10px;margin-bottom:5px;cursor:pointer;font-size:11px;line-height:1.5';
+  div.innerHTML = `<div style="display:flex;justify-content:space-between;color:var(--mu);font-size:9px;margin-bottom:3px"><span>${tipo}</span><span>${hora}</span></div>${esc(txt.slice(0,100))}${txt.length>100?'...':''}`;
+  div.onclick = ()=>{ el('iaOutput').textContent = txt; hablar(); };
+  if (box.querySelector('.empty')) box.innerHTML='';
+  box.insertBefore(div, box.firstChild);
+}
+
+function limpiarIA() {
+  el('iaOutput').textContent = 'Elegí un tipo de intervención y presioná Generar texto.';
+  el('iaStatus').textContent = 'Listo para generar';
+  el('iaExtra').value = '';
+}
+
+/* ══════════════════════════
+   TTS (gratis — navegador)
+══════════════════════════ */
+function initVoces() {
+  function load() {
+    const voces = speechSynthesis.getVoices();
+    const sel = el('ttsVoice'); if (!sel) return;
+    sel.innerHTML = voces.map((v,i)=>
+      `<option value="${i}" ${v.lang.startsWith('es')&&!S.voice?'selected':''}>${v.name} (${v.lang})</option>`
+    ).join('');
+    const esp = voces.filter(v=>v.lang.startsWith('es'));
+    if (esp.length && !S.voice) S.voice = esp[0];
+    sel.onchange = () => S.voice = speechSynthesis.getVoices()[parseInt(sel.value)];
+  }
+  speechSynthesis.onvoiceschanged = load;
+  setTimeout(load,500);
+}
+
+function hablar() {
+  const txt = el('iaOutput').textContent;
+  if (!txt||txt.startsWith('Elegí')) { toast('⚠️','Generá un texto primero','warn'); return; }
+  detener();
+  const u = new SpeechSynthesisUtterance(txt);
+  if (S.voice) u.voice = S.voice;
+  u.rate = S.ttsRate; u.pitch = S.ttsPitch; u.lang = 'es-ES';
+  speechSynthesis.speak(u);
+  toast('🔊','Leyendo en voz alta...','ok');
+}
+
+function detener() { speechSynthesis.cancel(); }
+function copiar() {
+  navigator.clipboard.writeText(el('iaOutput').textContent)
+    .then(()=>toast('📋','Texto copiado','ok')).catch(()=>{});
+}
+
+function updTTS(inp,prop) {
+  const v = parseFloat(inp.value);
+  if (prop==='r') { S.ttsRate=v; el('ttsRateV').textContent=v.toFixed(2); }
+  else { S.ttsPitch=v; el('ttsPitchV').textContent=v.toFixed(2); }
+  inp.style.background=`linear-gradient(90deg,var(--c) ${(v/parseFloat(inp.max))*100}%,rgba(255,255,255,.15) ${(v/parseFloat(inp.max))*100}%)`;
+}
+
+/* ══════════════════════════
+   MENSAJES / CABINA
+══════════════════════════ */
+function detectarTipo(txt) {
+  const t=txt.toLowerCase();
+  if(/pon[eé]n?|pedir?|quiero|pedido|pongan|escuchar/.test(t)) return 'pedido';
+  if(/hola|saludos|buenos|buenas|escuch|amor|mejor|encanta/.test(t)) return 'saludo';
+  if(/[?¿]|cuándo|cómo|cuanto|cuando|como|horario|sorteo/.test(t)) return 'consulta';
+  return 'otro';
+}
+function enviarMsg() {
+  const nom=el('msgNom').value.trim()||'Oyente', txt=el('msgTxt').value.trim();
+  if (!txt) { toast('⚠️','Escribí un mensaje','warn'); return; }
+  addMsg(nom,txt); el('msgTxt').value='';
+}
+function addMsg(nombre,texto,tipo) {
+  if (!tipo) tipo=detectarTipo(texto);
+  const hora=new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'});
+  const msg={id:Date.now()+Math.random(),nombre,texto,tipo,hora,dest:false};
+  S.msgs.unshift(msg);
+  el('stMsg').textContent=S.msgs.length;
+  if (!S.oyentes[nombre]) S.oyentes[nombre]={nombre,msgs:0,tipos:[]};
+  S.oyentes[nombre].msgs++;
+  if (!S.oyentes[nombre].tipos.includes(tipo)) S.oyentes[nombre].tipos.push(tipo);
+  if (tipo==='pedido') {
+    const m=texto.match(/(?:pon[eé]n?|pongan|quiero|pedir?)\s+["']?(.+?)["']?\s*(?:de\s+(.+?))?[!?.]*$/i);
+    if (m) {
+      const k=m[1].trim().toLowerCase();
+      if (!S.pedidos[k]) S.pedidos[k]={can:m[1].trim(),art:m[2]?.trim()||'—',cnt:0,done:false};
+      S.pedidos[k].cnt++;
+      el('stPed').textContent=Object.keys(S.pedidos).length;
+      renderPeds();
+    }
+    toast('🎵',`${nombre}: "${texto.slice(0,40)}"...`,'ok');
+  }
+  renderMsgs(); renderOys();
+}
+function renderMsgs() {
+  const box=el('msgsBox');
+  const lista = S.filtro==='todos'?S.msgs:S.filtro==='dest'?S.msgs.filter(m=>m.dest):S.msgs.filter(m=>m.tipo===S.filtro);
+  if (!lista.length){box.innerHTML='<div class="empty">Sin mensajes en este filtro</div>';return;}
+  box.innerHTML=lista.map(m=>`
+    <div class="msg ${m.tipo} ${m.dest?'destacado':''}">
+      <div class="msg-top">
+        <span class="msg-nom">${esc(m.nombre)}</span>
+        <span class="mtag mt-${m.tipo==='otro'?'o':m.tipo[0]}">${lblT(m.tipo)}</span>
+        <span class="msg-hr">${m.hora}</span>
+      </div>
+      <div class="msg-tx">${esc(m.texto)}</div>
+      <div class="msg-ac">
+        <button class="ma p" onclick="togDest(${m.id})">⭐</button>
+        <button class="ma" onclick="respIA(${m.id})">🎙️ IA</button>
+        <button class="ma" onclick="delMsg(${m.id})">🗑</button>
+      </div>
+    </div>
+  `).join('');
+}
+function lblT(t){return{pedido:'PEDIDO',saludo:'SALUDO',consulta:'CONSULTA',otro:'MSG'}[t]||'MSG'}
+function togDest(id){const m=S.msgs.find(x=>x.id==id);if(m){m.dest=!m.dest;renderMsgs()}}
+function delMsg(id){S.msgs=S.msgs.filter(x=>x.id!=id);renderMsgs()}
+function respIA(id){
+  const m=S.msgs.find(x=>x.id==id); if(!m) return;
+  el('iaTipo').value='pedido';
+  el('iaExtra').value=m.texto;
+  tab('ia',document.querySelectorAll('.tab')[1]);
+  generarIA();
+}
+function filtrar(f,btn){
+  S.filtro=f;
+  document.querySelectorAll('.tab,.btn').forEach(b=>{if(b.dataset.f)b.style.background=''});
+  ['fTodo','fPed','fSal','fDest'].forEach(id=>{
+    const e=el(id); if(e){ e.style.background=''; e.style.borderColor='rgba(255,255,255,.08)'; e.style.color='var(--mu)'; }
+  });
+  btn.style.background='rgba(0,245,255,.1)'; btn.style.borderColor='rgba(0,245,255,.4)'; btn.style.color='var(--c)';
+  renderMsgs();
+}
+function renderPeds(){
+  const list=el('pedList');
+  const items=Object.values(S.pedidos).sort((a,b)=>b.cnt-a.cnt);
+  if(!items.length){list.innerHTML='<div class="empty">Sin pedidos</div>';return;}
+  list.innerHTML=items.map((p,i)=>`
+    <div class="ped-it ${p.done?'done':''}">
+      <div class="ped-n">${i+1}</div>
+      <div style="flex:1">
+        <div class="ped-ttl">${esc(p.can)}</div>
+        <div class="ped-art">— ${esc(p.art)}</div>
+      </div>
+      <div class="ped-cnt">${p.cnt}×</div>
+      <button onclick="togglePed('${esc(p.can)}')" style="font-size:18px">${p.done?'✅':'▶️'}</button>
+    </div>
+  `).join('');
+}
+function togglePed(can){
+  const k=can.toLowerCase();
+  if(S.pedidos[k]){S.pedidos[k].done=!S.pedidos[k].done;renderPeds();if(S.pedidos[k].done)toast('✅',`"${can}" reproducida`,'ok');}
+}
+const AVC=['#00f5ff','#c800ff','#39ff14','#ffe600','#ff7b00'];
+function renderOys(){
+  const list=el('oyList');
+  const items=Object.values(S.oyentes).sort((a,b)=>b.msgs-a.msgs).slice(0,10);
+  if(!items.length){list.innerHTML='<div class="empty">Sin oyentes</div>';return;}
+  list.innerHTML=items.map((o,i)=>{
+    const col=AVC[i%AVC.length];
+    const ini=o.nombre.split(' ').map(n=>n[0]||'').join('').slice(0,2).toUpperCase();
+    return `<div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--br2)">
+      <div style="width:30px;height:30px;border-radius:50%;background:${col}18;border:2px solid ${col};
+        display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">${ini}</div>
+      <div style="flex:1"><div style="font-size:12px;font-weight:700">${esc(o.nombre)}${o.msgs>=5?' <span style="font-size:9px;background:rgba(0,245,255,.13);color:var(--c);border-radius:3px;padding:1px 5px">VIP</span>':''}</div>
+      <div style="font-size:10px;color:var(--mu)">${o.msgs} msgs</div></div>
+    </div>`;
+  }).join('');
+}
+
+/* ══════════════════════════
+   PLAYLIST
+══════════════════════════ */
+function cargarPlaylist(){S.playlist=C.playlist();renderPl()}
+function addSong(){
+  const t=el('plTit').value.trim();
+  if(!t){toast('⚠️','Ingresá el título','warn');return;}
+  S.playlist.push({t,a:el('plArt').value.trim()||'—',d:el('plDur').value||'?:??',id:Date.now()});
+  L.sJ('al_playlist',S.playlist);
+  el('plTit').value='';el('plArt').value='';el('plDur').value='';
+  renderPl(); toast('🎵',`"${t}" agregada`,'ok');
+}
+function clearPlaylist(){if(!confirm('¿Limpiar la playlist?'))return;S.playlist=[];L.sJ('al_playlist',[]);renderPl()}
+function renderPl(){
+  el('plTotal').textContent=`(${S.playlist.length})`;
+  const list=el('plList');
+  if(!S.playlist.length){list.innerHTML='<div class="empty">Sin canciones</div>';return;}
+  list.innerHTML=S.playlist.map((c,i)=>`
+    <div class="pl-item ${i===0?'curr':''}">
+      <span class="pl-num">${i===0?'▶':i+1}</span>
+      <div style="flex:1;min-width:0">
+        <div class="pl-ttl">${esc(c.t)}</div>
+        <div class="pl-art">${esc(c.a)}</div>
+      </div>
+      <span class="pl-dur">${esc(c.d)}</span>
+      <button onclick="delSong(${c.id})" style="font-size:14px;padding:2px 6px;
+        background:rgba(255,59,59,.1);border:1px solid rgba(255,59,59,.2);
+        border-radius:5px;color:var(--rd)">✕</button>
+    </div>
+  `).join('');
+}
+function delSong(id){S.playlist=S.playlist.filter(c=>c.id!==id);L.sJ('al_playlist',S.playlist);renderPl()}
+
+/* ══════════════════════════
+   PROGRAMACIÓN / NOTICIAS
+══════════════════════════ */
+function renderProg(){
+  const d=C.prog(); const list=el('schedList');
+  if(!d.length){list.innerHTML='<div class="empty">Sin programas · Agregá desde ⚙️ Config</div>';return;}
+  list.innerHTML=d.map(p=>`
+    <div class="sc-it ${p.ahora?'now':''}">
+      <span class="sc-t">${esc(p.hora)}</span>
+      <span class="sc-dot"></span>
+      <div style="flex:1">
+        <div class="sc-nm">${esc(p.nombre)}</div>
+        <div class="sc-hst">🎙️ ${esc(p.locutor||'—')}</div>
+      </div>
+      ${p.ahora?'<span class="sc-badge">EN VIVO</span>':''}
+    </div>
+  `).join('');
+}
+function renderNots(){
+  const d=C.nots(); const list=el('newsList');
+  if(!d.length){list.innerHTML='<div class="empty">Sin noticias · Agregá desde ⚙️ Config</div>';return;}
+  list.innerHTML=d.map(n=>`
+    <div style="background:var(--bg3);border:1px solid var(--br2);border-radius:9px;padding:10px 12px;margin-bottom:6px">
+      <div style="font-size:13px;font-weight:700;margin-bottom:3px">${esc(n.titulo)}</div>
+      <div style="font-size:11px;color:var(--mu)">${esc(n.cuerpo)}</div>
+      <div style="font-size:10px;color:var(--c);margin-top:4px;font-family:var(--FD)">${esc(n.tiempo||'')}</div>
+    </div>
+  `).join('');
+}
+
+/* EDITORES CONFIG */
+function renderSchedEditor(){
+  const d=C.prog(); el('schedEditor').innerHTML=d.map((p,i)=>`
+    <div style="border:1px solid var(--br2);border-radius:9px;padding:9px;margin-bottom:7px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px">
+        <input class="finp" id="sh${i}" value="${esc(p.hora)}" placeholder="Ej: 08:00 - 12:00" style="font-size:12px;padding:7px 10px">
+        <input class="finp" id="sn${i}" value="${esc(p.nombre)}" placeholder="Nombre del programa" style="font-size:12px;padding:7px 10px">
+      </div>
+      <input class="finp" id="sl${i}" value="${esc(p.locutor||'')}" placeholder="Locutor" style="font-size:12px;padding:7px 10px;margin-bottom:6px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <label style="font-size:11px;color:var(--mu)">EN VIVO ahora:</label>
+        <label class="tgl" style="margin:0"><input type="checkbox" id="sa${i}" ${p.ahora?'checked':''}><span class="tgl-s"></span></label>
+        <button onclick="elimProg(${i})" class="btn btn-rd btn-sm" style="margin-left:auto;padding:4px 10px;font-size:11px">🗑</button>
+      </div>
+    </div>`).join('');
+}
+function addPrograma(){
+  const d=C.prog(); d.push({hora:'00:00 - 06:00',nombre:'Nuevo Programa',locutor:'',ahora:false});
+  L.sJ('al_prog',d); renderSchedEditor();
+}
+function elimProg(i){const d=C.prog();d.splice(i,1);L.sJ('al_prog',d);renderSchedEditor()}
+function saveProg(){
+  const d=C.prog().map((_,i)=>({
+    hora:el(`sh${i}`)?.value||'',nombre:el(`sn${i}`)?.value||'',
+    locutor:el(`sl${i}`)?.value||'',ahora:el(`sa${i}`)?.checked||false
+  }));
+  L.sJ('al_prog',d);showFB('fbProg');renderProg();
+}
+
+function renderNotEditor(){
+  const d=C.nots(); el('notEditor').innerHTML=d.map((n,i)=>`
+    <div style="border:1px solid var(--br2);border-radius:9px;padding:9px;margin-bottom:7px">
+      <input class="finp" id="nt${i}" value="${esc(n.titulo)}" placeholder="Título" style="font-size:12px;padding:7px 10px;margin-bottom:5px">
+      <textarea class="finp" id="nb${i}" style="min-height:45px;resize:vertical;padding:7px 10px;font-size:12px">${esc(n.cuerpo)}</textarea>
+      <input class="finp" id="nh${i}" value="${esc(n.tiempo||'')}" placeholder="Ej: Hoy, Hace 2h" style="font-size:12px;padding:7px 10px;margin-top:5px">
+      <button onclick="elimNot(${i})" class="btn btn-rd btn-sm" style="margin-top:5px;font-size:11px">🗑 Eliminar</button>
+    </div>`).join('');
+}
+function addNoticia(){const d=C.nots();d.push({titulo:'Nueva noticia',cuerpo:'',tiempo:'Ahora'});L.sJ('al_nots',d);renderNotEditor()}
+function elimNot(i){const d=C.nots();d.splice(i,1);L.sJ('al_nots',d);renderNotEditor()}
+function saveNots(){
+  const d=C.nots().map((_,i)=>({titulo:el(`nt${i}`)?.value||'',cuerpo:el(`nb${i}`)?.value||'',tiempo:el(`nh${i}`)?.value||''}));
+  L.sJ('al_nots',d);showFB('fbNots');renderNots();
+}
+
+/* ══════════════════════════
+   CONFIG GUARDADO
+══════════════════════════ */
+function loginCfg(){
+  if(el('passInp').value===C.pass()){
+    el('cfgLock').style.display='none';
+    el('cfgPanel').style.display='block';
+    aplicarConfig();
+    toast('✅','Bienvenido al Panel','ok');
+  } else { toast('❌','Contraseña incorrecta','err'); el('passInp').value=''; }
+}
+function logoutCfg(){el('cfgLock').style.display='block';el('cfgPanel').style.display='none'}
+function saveRadio(){
+  L.s('al_nombre',el('cNombre').value.trim());L.s('al_stream',el('cStream').value.trim());
+  L.s('al_meta',el('cMeta').value.trim());L.s('al_locutor',el('cLocutor').value.trim());
+  L.s('al_estilo',el('cEstilo').value);L.s('al_wa',el('cWA').value.trim());
+  showFB('fbRadio');aplicarConfig();
+}
+function saveClima(){L.s('al_ciudad',el('cCiudad').value.trim());showFB('fbClima');fetchClima()}
+function saveRedes(){
+  L.s('al_fb',el('cFb').value.trim());L.s('al_ig',el('cIg').value.trim());
+  L.s('al_yt',el('cYt').value.trim());L.s('al_tk',el('cTk').value.trim());
+  showFB('fbRedes');aplicarConfig();
+}
+function testStream(){
+  const url=el('cStream').value.trim();
+  if(!url){toast('⚠️','Ingresá la URL primero','warn');return;}
+  const a=new Audio(url); a.volume=0.01;
+  a.play().then(()=>{a.pause();toast('✅','¡Stream accesible! Guardá y conectá.','ok')})
+    .catch(()=>toast('❌','No se pudo conectar. Verificá la URL.','err'));
+}
+function changePass(){
+  const p1=el('newP1').value,p2=el('newP2').value;
+  if(!p1){toast('⚠️','Ingresá la nueva contraseña','warn');return;}
+  if(p1!==p2){toast('❌','Las contraseñas no coinciden','err');return;}
+  if(p1.length<6){toast('⚠️','Mínimo 6 caracteres','warn');return;}
+  L.s('al_pass',p1);el('newP1').value='';el('newP2').value='';showFB('fbPass');
+}
+
+/* ══════════════════════════
+   TOGGLES
+══════════════════════════ */
+function cargarToggles(){
+  ['togHora','togID','togSaludo'].forEach(id=>{
+    const v=L.g(`tg_${id}`)!=='false';
+    const e=el(id); if(e) e.checked=v;
+    if(id==='togHora') S.autoHora=v;
+    if(id==='togID') S.autoID=v;
+    if(id==='togSaludo') S.autoSaludo=v;
+  });
+}
+function saveToggle(id,val){
+  L.s(`tg_${id}`,val);
+  if(id==='togHora') S.autoHora=val;
+  if(id==='togID') S.autoID=val;
+  if(id==='togSaludo') S.autoSaludo=val;
+  toast(val?'✅':'⏸',`${id.replace('tog','')} ${val?'activado':'desactivado'}`,'ok');
+}
+
+/* ══════════════════════════
+   WAVEFORM VISUAL
+══════════════════════════ */
+function generarWF(){
+  const box=el('wfViz'); if(!box) return;
+  box.innerHTML=Array.from({length:28},(_,i)=>
+    `<div class="wf-b" id="wfb${i}" style="height:${15+Math.random()*50}%"></div>`
+  ).join('');
+  setInterval(()=>{
+    if(!S.playing) return;
+    for(let i=0;i<28;i++){const b=document.getElementById(`wfb${i}`);if(b)b.style.height=`${8+Math.random()*75}%`}
+  },200);
+}
+
+/* ══════════════════════════
+   TABS
+══════════════════════════ */
+function tab(v,btn){
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  el('view-'+v).classList.add('active');
+  btn.classList.add('active');
+  if(v==='config'){el('cfgLock').style.display='block';el('cfgPanel').style.display='none'}
+}
+
+/* ══════════════════════════
+   TOAST
+══════════════════════════ */
+let tT=null;
+function toast(ico,msg,type='ok'){
+  const e=el('toast');
+  el('tIco').textContent=ico;el('tMsg').textContent=msg;
+  e.className=`toast ${type} show`;
+  if(tT) clearTimeout(tT);
+  tT=setTimeout(()=>e.classList.remove('show'),3400);
+}
+
+/* ══════════════════════════
+   UTILS
+══════════════════════════ */
+function el(id){return document.getElementById(id)}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function showFB(id){const e=el(id);if(!e)return;e.style.display='block';setTimeout(()=>e.style.display='none',2500)}
+</script>
 </body>
 </html>
