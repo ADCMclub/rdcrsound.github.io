@@ -6,7 +6,7 @@
 <title>Avenida Tropical | RDCR Sound Network - 100% Tropical</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-:root{--neon-orange:#ff5e00;--neon-green:#39ff14;--neon-yellow:#fff01f;--neon-orange-glow:rgba(255,94,0,0.7);--neon-green-glow:rgba(57,255,20,0.7);--neon-yellow-glow:rgba(255,240,31,0.7);--dark-bg:#0a0a0a;--darker-bg:#050505;--card-bg:#111111;--text-light:#f0f0f0;--tropical-pink:#e81e4d;--tropical-pink-glow:rgba(232,30,77,0.6)}
+:root{--neon-orange:#ff5e00;--neon-green:#39ff14;--neon-yellow:#fff01f;--neon-orange-glow:rgba(255,94,0,0.7);--neon-green-glow:rgba(57,255,20,0.7);--neon-yellow-glow:rgba(255,240,31,0.7);--dark-bg:#0a0a0a;--darker-bg:#050505;--card-bg:#111111;--text-light:#f0f0f0;--tropical-pink:#e81e4d;--tropical-pink-glow:rgba(232,30,77,0.6);--dj-purple:#b300ff;--dj-blue:#00e5ff}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
 body{background-color:var(--dark-bg);color:var(--text-light);line-height:1.5;overflow-x:hidden}
 .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(5px);display:flex;justify-content:center;align-items:center;z-index:10000;opacity:0;visibility:hidden;transition:all 0.3s ease}
@@ -75,6 +75,19 @@ footer p{margin:5px 0}
 .interactive-player:hover{box-shadow:0 0 30px var(--tropical-pink),0 0 12px var(--neon-yellow)}
 .player-glow{animation:borderPulse 2s infinite}
 @keyframes borderPulse{0%,100%{box-shadow:0 0 4px var(--tropical-pink)}50%{box-shadow:0 0 22px var(--tropical-pink),0 0 8px var(--neon-yellow)}}
+
+/* ANIMACIÓN ESPECIAL PARA MIXES / DJ */
+.player-dj-mode {
+  animation: djBorderPulse 1.8s infinite !important;
+  box-shadow: 0 0 25px var(--dj-purple), 0 0 15px var(--dj-blue) !important;
+}
+@keyframes djBorderPulse {
+  0% { box-shadow: 0 0 10px var(--dj-purple), 0 0 5px var(--neon-yellow); border: 1px solid var(--dj-purple); }
+  25% { box-shadow: 0 0 30px var(--dj-blue), 0 0 20px var(--neon-green); border: 1px solid var(--dj-blue); }
+  50% { box-shadow: 0 0 15px var(--neon-yellow), 0 0 30px var(--tropical-pink); border: 1px solid var(--neon-yellow); }
+  75% { box-shadow: 0 0 35px var(--dj-purple), 0 0 15px var(--neon-orange); border: 1px solid var(--dj-purple); }
+  100% { box-shadow: 0 0 10px var(--dj-purple), 0 0 5px var(--neon-yellow); border: 1px solid var(--dj-purple); }
+}
 </style>
 </head>
 <body>
@@ -159,7 +172,7 @@ function sendWhatsAppDirect(nombre, cancion, comentario) {
     window.location.href = `https://wa.me/${telefono}?text=${mensaje}`;
 }
 
-// PROGRAMACIÓN ACTUALIZADA: SÁBADO CON "JUST REMIX" (18:30-21:30) + DJ INVITADOS (21:30-24:00)
+// PROGRAMACIÓN CON JUST REMIX Y DJ INVITADOS
 const programacionSemanal = {
     lunes: [
         {hora:"00:00 - 06:00", titulo:"SALSA DE MADRUGADA", conductor:"Avenida Tropical", descripcion:"Salsa suave y romántica", genero:"Romántica"},
@@ -215,7 +228,7 @@ const programacionSemanal = {
         {hora:"12:00 - 13:00", titulo:"++ PRENDIDOS", conductor:"Diego Cheito Grijalva", descripcion:"Salsa intensa", genero:"Energética"},
         {hora:"13:00 - 17:30", titulo:"SÁBADO SALSERO", conductor:"Avenida Tropical", descripcion:"Salsa dura", genero:"Dura"},
         {hora:"17:30 - 18:30", titulo:"TIMBA Y SABOR", conductor:"Ivette", descripcion:"Timba cubana", genero:"Timba"},
-        // CAMBIO PRINCIPAL: JUST REMIX desde 18:30 por 3 horas
+        // JUST REMIX desde 18:30 (3 horas)
         {hora:"18:30 - 21:30", titulo:"JUST REMIX", conductor:"Avenida Tropical", descripcion:"Mezclas exclusivas y energía tropical", genero:"Remix"},
         {hora:"21:30 - 24:00", titulo:"DJ INVITADOS", conductor:"DJ Invitados", descripcion:"Sesiones especiales con los mejores DJs", genero:"DJ Set"}
     ],
@@ -267,6 +280,24 @@ function obtenerProgramaActual() {
     return null;
 }
 
+// Función para aplicar animación DJ si el programa actual es de mezclas/DJ
+function actualizarModoDJ() {
+    const playerFrame = document.getElementById("interactivePlayer");
+    const programa = obtenerProgramaActual();
+    if (!programa) {
+        playerFrame.classList.remove("player-dj-mode");
+        return;
+    }
+    const titulo = programa.titulo.toUpperCase();
+    const genero = programa.genero.toUpperCase();
+    // Palabras clave que activan el modo DJ
+    if (titulo.includes("REMIX") || titulo.includes("MIX") || titulo.includes("DJ") || genero.includes("DJ") || genero.includes("REMIX") || genero.includes("MIX")) {
+        playerFrame.classList.add("player-dj-mode");
+    } else {
+        playerFrame.classList.remove("player-dj-mode");
+    }
+}
+
 function actualizarLiveNow() {
     const actual = obtenerProgramaActual();
     const container = document.getElementById("liveNowContent");
@@ -275,6 +306,8 @@ function actualizarLiveNow() {
     } else {
         container.innerHTML = "<div>Disfrutando la mejor salsa del mundo</div>";
     }
+    // Actualizar también la animación del reproductor
+    actualizarModoDJ();
 }
 
 function programaEnVivo(prog, diaNombre) {
@@ -386,7 +419,10 @@ setInterval(() => {
 
 construirProgramacion();
 actualizarLiveNow();
-setInterval(actualizarLiveNow, 60000);
+// Actualizar cada minuto: programa en vivo + animación DJ
+setInterval(() => {
+    actualizarLiveNow();
+}, 60000);
 </script>
 </body>
 </html>
