@@ -111,7 +111,6 @@ footer p{margin:5px 0}
     <h2 class="player-title">AVENIDA TROPICAL EN VIVO</h2>
     <div class="interactive-player player-glow" id="interactivePlayer">
       <div class="radio-frame">
-        <!-- REPRODUCTOR ACTUALIZADO: data-theme="dark" data-color="E4A002" -->
         <div class="cstrEmbed" data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="dark" data-color="E4A002" data-channelId="" data-rendered="false">
           <a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a>
         </div>
@@ -160,7 +159,7 @@ function sendWhatsAppDirect(nombre, cancion, comentario) {
     window.location.href = `https://wa.me/${telefono}?text=${mensaje}`;
 }
 
-// PROGRAMACIÓN (misma estructura anterior)
+// PROGRAMACIÓN ACTUALIZADA: SÁBADO CON "JUST REMIX" (18:30-21:30) + DJ INVITADOS (21:30-24:00)
 const programacionSemanal = {
     lunes: [
         {hora:"00:00 - 06:00", titulo:"SALSA DE MADRUGADA", conductor:"Avenida Tropical", descripcion:"Salsa suave y romántica", genero:"Romántica"},
@@ -216,9 +215,9 @@ const programacionSemanal = {
         {hora:"12:00 - 13:00", titulo:"++ PRENDIDOS", conductor:"Diego Cheito Grijalva", descripcion:"Salsa intensa", genero:"Energética"},
         {hora:"13:00 - 17:30", titulo:"SÁBADO SALSERO", conductor:"Avenida Tropical", descripcion:"Salsa dura", genero:"Dura"},
         {hora:"17:30 - 18:30", titulo:"TIMBA Y SABOR", conductor:"Ivette", descripcion:"Timba cubana", genero:"Timba"},
-        {hora:"18:30 - 19:30", titulo:"TIMBA Y SABOR", conductor:"Ivette", descripcion:"Timba cubana", genero:"Timba"},
-        {hora:"19:30 - 22:30", titulo:"DJ HOXX", conductor:"Henry Loor", descripcion:"Mezclas exclusivas y ritmo urbano tropical", genero:"DJ Set"},
-        {hora:"22:30 - 24:00", titulo:"NOCHE SALSERA", conductor:"Avenida Tropical", descripcion:"Mixes tropicales", genero:"Tropical"}
+        // CAMBIO PRINCIPAL: JUST REMIX desde 18:30 por 3 horas
+        {hora:"18:30 - 21:30", titulo:"JUST REMIX", conductor:"Avenida Tropical", descripcion:"Mezclas exclusivas y energía tropical", genero:"Remix"},
+        {hora:"21:30 - 24:00", titulo:"DJ INVITADOS", conductor:"DJ Invitados", descripcion:"Sesiones especiales con los mejores DJs", genero:"DJ Set"}
     ],
     domingo: [
         {hora:"00:00 - 07:00", titulo:"SALSA DE MADRUGADA", conductor:"Avenida Tropical", descripcion:"Suave", genero:"Clásica"},
