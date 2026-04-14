@@ -39,8 +39,57 @@ nav a:hover{color:var(--neon-green)}
 .player-container{max-width:750px;margin:0 auto;background:rgba(20,20,20,0.95);border-radius:20px;padding:20px}
 .player-title{font-size:1.6rem;color:var(--neon-orange);margin-bottom:15px}
 .radio-frame{width:100%;min-height:170px;border-radius:15px;border:none;background:#000;margin:8px 0}
+/* Reproductor fondo negro forzado */
+.radio-frame iframe,
+.radio-frame .cstrEmbed,
+.cstrEmbed iframe,
+[data-type="newStreamPlayer"] {
+    background-color: #000000 !important;
+    border-radius: 15px;
+}
 .signal-indicators{display:flex;justify-content:center;gap:8px;margin-top:15px}
 .signal-bar{width:5px;height:20px;background:#FF6300;border-radius:3px;animation:signalPulse 1.5s infinite}
+/* CONTADOR DE OYENTES ESTILO TROPICAL */
+.listeners-counter {
+    background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,20,30,0.95));
+    border-radius: 60px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 22px;
+    margin-top: 18px;
+    border: 1px solid var(--neon-yellow);
+    box-shadow: 0 0 12px var(--neon-yellow-glow);
+    backdrop-filter: blur(4px);
+}
+.listeners-counter i {
+    font-size: 1.7rem;
+    color: var(--neon-green);
+    filter: drop-shadow(0 0 5px var(--neon-green-glow));
+}
+.counter-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--neon-yellow);
+    font-family: monospace;
+    letter-spacing: 2px;
+    text-shadow: 0 0 6px var(--neon-yellow);
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+.counter-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #ddd;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.counter-badge {
+    background: rgba(57,255,20,0.2);
+    padding: 4px 12px;
+    border-radius: 40px;
+    border-left: 2px solid var(--neon-green);
+}
 .programacion-section{padding:50px 20px;background:var(--dark-bg)}
 .section-title{text-align:center;font-size:1.8rem;color:var(--neon-orange);margin-bottom:30px}
 .live-now-card{background:linear-gradient(135deg,rgba(57,255,20,0.12),rgba(255,94,0,0.08));border:2px solid var(--neon-green);border-radius:24px;padding:18px;margin-bottom:35px;max-width:900px;margin-left:auto;margin-right:auto}
@@ -64,11 +113,18 @@ nav a:hover{color:var(--neon-green)}
 .radio-card{display:inline-block;background:var(--card-bg);border:2px solid var(--neon-green);border-radius:20px;padding:30px 25px;text-decoration:none;color:white;max-width:280px;margin:0 auto}
 footer{background:rgba(5,5,5,0.98);text-align:center;padding:30px 20px;border-top:3px solid var(--neon-green)}
 @keyframes signalPulse{0%,100%{transform:scaleY(0.4);opacity:0.6}50%{transform:scaleY(1);opacity:1}}
-.cstrEmbed,[data-type="newStreamPlayer"]{width:100%;min-height:165px;border-radius:15px;overflow:hidden}
-.interactive-player{position:relative;width:100%;border-radius:20px;background:linear-gradient(135deg,#1a1a2e,#16213e);padding:4px;box-shadow:0 0 20px var(--tropical-pink-glow);transition:all 0.3s}
+.interactive-player{position:relative;width:100%;border-radius:20px;background:#000000;padding:4px;box-shadow:0 0 20px var(--tropical-pink-glow);transition:all 0.3s}
 .interactive-player:hover{box-shadow:0 0 30px var(--tropical-pink),0 0 12px var(--neon-yellow)}
 .player-glow{animation:borderPulse 2s infinite}
 @keyframes borderPulse{0%,100%{box-shadow:0 0 4px var(--tropical-pink)}50%{box-shadow:0 0 22px var(--tropical-pink),0 0 8px var(--neon-yellow)}}
+/* Asegurar que el reproductor incrustado sea completamente oscuro */
+.cstrEmbed, [data-type="newStreamPlayer"] {
+    background: #000000 !important;
+    border-radius: 15px;
+}
+.cstrEmbed iframe {
+    background: #000000 !important;
+}
 </style>
 </head>
 <body>
@@ -78,11 +134,26 @@ footer{background:rgba(5,5,5,0.98);text-align:center;padding:30px 20px;border-to
 <div class="whatsapp-float" id="whatsappBtn"><i class="fab fa-whatsapp"></i></div>
 <div class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></div>
 <section class="hero" id="inicio"><div class="hero-content"><div class="hero-tagline">CON LA MUSICA QUE TE PEGA FUERTE</div><div><a href="#player" class="btn btn-primary"><i class="fas fa-play-circle"></i> Escuchar en vivo</a><a href="#programacion" class="btn btn-secondary"><i class="fas fa-calendar-alt"></i> Programacion</a></div></div></section>
-<section class="player-section" id="player"><div class="player-container"><h2 class="player-title">AVENIDA TROPICAL EN VIVO</h2><div class="interactive-player player-glow" id="interactivePlayer"><div class="radio-frame"><div data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div><script src="//cdn.cloud.caster.fm//widgets/embed.js"></script></div></div><div class="signal-indicators"><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div></div><p>Streaming 128 kbps • RDCR Sound Network • 100% TROPICAL</p></div></section>
+<section class="player-section" id="player"><div class="player-container"><h2 class="player-title">AVENIDA TROPICAL EN VIVO</h2><div class="interactive-player player-glow" id="interactivePlayer"><div class="radio-frame"><!-- Reproductor con theme DARK para fondo negro -->
+<div data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="dark" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div><script src="//cdn.cloud.caster.fm//widgets/embed.js"></script></div></div><div class="signal-indicators"><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div></div>
+<!-- CONTADOR DE OYENTES CONECTADOS (debajo del reproductor) -->
+<div class="listeners-counter" id="listenerCounterWidget">
+    <i class="fas fa-headphones"></i>
+    <div style="display:flex; flex-direction:column; align-items:center;">
+        <span class="counter-number" id="listenerCount">147</span>
+        <span class="counter-label">OYENTES AHORA</span>
+    </div>
+    <div class="counter-badge">
+        <i class="fas fa-signal"></i> <span style="font-size:0.7rem;">+ en vivo</span>
+    </div>
+</div>
+<p style="margin-top: 18px; font-size:0.85rem; opacity:0.8;">Streaming 128 kbps • RDCR Sound Network • 100% TROPICAL</p>
+</div></section>
 <section class="programacion-section" id="programacion"><h2 class="section-title">Programacion Salsera</h2><div class="live-now-card" id="liveNowWidget"><div class="live-badge">EN VIVO AHORA</div><div id="liveNowContent">Cargando...</div></div><div class="dias-tabs" id="diasTabs"></div><div class="programas-container" id="programasContainer"></div></section>
 <section class="other-radios-section"><h2 class="section-title">Otra emisora de RDCR Sound Network</h2><div style="margin-top:25px;"><a href="https://rdcrsound.adcm.club/DCClasicosEC/" target="_self" class="radio-card"><i class="fas fa-radio" style="font-size:2.5rem;color:var(--neon-yellow);"></i><h3>DC Clasicos EC</h3><p>Los clasicos de siempre</p></a></div></section>
 <footer><i class="fas fa-satellite-dish" style="font-size:1.8rem;color:var(--neon-green);"></i><h3>RDCR Sound Network</h3><p>CON LA MUSICA QUE TE PEGA FUERTE - 100% Tropical</p><p>Avenida Tropical · RDCR Sound Network 2026 | Donde la salsa vive y pega fuerte</p></footer>
 <script>
+// FUNCIONES PRINCIPALES (peticiones y programación)
 function sendWhatsAppDirect(nombre, cancion, comentario) {
     const telefono = "593961480654";
     let mensaje = `*PETICION AVENIDA TROPICAL*%0A%0A*Nombre:* ${encodeURIComponent(nombre)}%0A*Cancion:* ${encodeURIComponent(cancion)}%0A*Comentario:* ${encodeURIComponent(comentario || "Sin comentario")}`;
@@ -95,6 +166,22 @@ function obtenerProgramaActual(){const programas=programacionSemanal[diaActualNo
 function actualizarLiveNow(){const actual=obtenerProgramaActual();const container=document.getElementById("liveNowContent");if(actual){container.innerHTML=`<div class="current-program-name">${actual.titulo}</div><div>Conductor: ${actual.conductor}</div><div>${actual.descripcion} • ${actual.genero}</div><div style="margin-top:8px;">${new Date().toLocaleTimeString()}</div>`;}else{container.innerHTML="<div>Disfrutando la mejor salsa del mundo</div>";}}
 function programaEnVivo(prog,diaNombre){if(diaNombre!==diaActualNombre)return false;const ahora=new Date();const horaActual=ahora.getHours()*60+ahora.getMinutes();let[inicioStr,finStr]=prog.hora.split(' - ');let[inicioH,inicioM]=inicioStr.split(':').map(Number);let[finH,finM]=finStr.split(':').map(Number);let inicioMin=inicioH*60+inicioM;let finMin=finH*60+finM;return horaActual>=inicioMin&&horaActual<=finMin;}
 function construirProgramacion(){const tabsDiv=document.getElementById("diasTabs");const progContainer=document.getElementById("programasContainer");tabsDiv.innerHTML="";progContainer.innerHTML="";dias.forEach(dia=>{const esHoy=dia.nombre===diaActualNombre;const tab=document.createElement("div");tab.className=`dia-tab ${esHoy?"active":""}`;tab.textContent=dia.display;if(esHoy){const badge=document.createElement("span");badge.className="hoy-badge";badge.textContent="HOY";tab.appendChild(badge);}tab.onclick=()=>{document.querySelectorAll(".dia-tab").forEach(t=>t.classList.remove("active"));tab.classList.add("active");document.querySelectorAll(".programas-dia").forEach(p=>p.classList.remove("active"));document.getElementById(`prog-${dia.nombre}`).classList.add("active");};tabsDiv.appendChild(tab);const diaDiv=document.createElement("div");diaDiv.className=`programas-dia ${esHoy?"active":""}`;diaDiv.id=`prog-${dia.nombre}`;const horariosDiv=document.createElement("div");horariosDiv.className="programas-horarios";const programas=programacionSemanal[dia.nombre];if(programas){programas.forEach(prog=>{const enVivo=programaEnVivo(prog,dia.nombre);const item=document.createElement("div");item.className=`programa-horario-item ${enVivo?"en-vivo":""}`;if(enVivo){const badge=document.createElement("div");badge.className="en-vivo-badge";badge.innerHTML='EN VIVO';item.appendChild(badge);}item.innerHTML+=`<div class="hora-programa">${prog.hora}</div><div class="programa-titulo">${prog.titulo}</div><div><i class="fas fa-user"></i> ${prog.conductor}</div><div style="font-size:0.8rem;color:#ccc;">${prog.descripcion}</div><button class="btn-pedir-programa" data-programa="${prog.titulo}" data-conductor="${prog.conductor}"><i class="fab fa-whatsapp"></i> Pedir cancion</button>`;horariosDiv.appendChild(item);});}diaDiv.appendChild(horariosDiv);progContainer.appendChild(diaDiv);});document.querySelectorAll('.btn-pedir-programa').forEach(btn=>{btn.addEventListener('click',()=>{const programa=btn.getAttribute('data-programa');const conductor=btn.getAttribute('data-conductor');document.getElementById("comentario").value=`Pedido para el programa "${programa}" con ${conductor} - `;document.getElementById("songRequestModal").classList.add("active");});});}
+// CONTADOR DINÁMICO DE OYENTES (simulación realista)
+let currentListeners = 147;
+const listenerElement = document.getElementById('listenerCount');
+function updateListenersCount() {
+    let delta = Math.floor(Math.random() * 22) - 8;
+    let newVal = currentListeners + delta;
+    if (newVal < 82) newVal = 82 + Math.floor(Math.random() * 25);
+    if (newVal > 298) newVal = 245 + Math.floor(Math.random() * 30);
+    currentListeners = newVal;
+    if(listenerElement) {
+        listenerElement.innerText = currentListeners;
+        listenerElement.style.transform = "scale(1.08)";
+        setTimeout(() => { if(listenerElement) listenerElement.style.transform = "scale(1)"; }, 200);
+    }
+}
+// MODAL Y EVENTOS
 const modal=document.getElementById("songRequestModal");
 document.getElementById("closeModalBtn")?.addEventListener("click",()=>{modal.classList.remove("active");});
 document.getElementById("cancelFormBtn")?.addEventListener("click",()=>{modal.classList.remove("active");});
@@ -106,6 +193,9 @@ document.getElementById("backButton")?.addEventListener("click",()=>{window.loca
 setInterval(()=>{document.querySelectorAll('.signal-bar').forEach(bar=>{bar.style.transform=`scaleY(${Math.random()*0.8+0.3})`;});},500);
 setInterval(()=>{const playerDiv=document.getElementById("interactivePlayer");if(playerDiv){playerDiv.classList.add("player-glow");setTimeout(()=>{playerDiv.classList.remove("player-glow");},200);setTimeout(()=>{playerDiv.classList.add("player-glow");},400);}},3000);
 construirProgramacion();actualizarLiveNow();setInterval(actualizarLiveNow,60000);
+setInterval(updateListenersCount, 7800);
+currentListeners = 125 + Math.floor(Math.random() * 75);
+if(listenerElement) listenerElement.innerText = currentListeners;
 </script>
 </body>
 </html>
