@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<meta name="theme-color" content="#070a0f"/>
+<title>ECO FARMA — Dashboard 13/04/2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--gold:#f5c842;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--bg0:#070a0f;--bg1:#0f1219;--border:#1e2330;--border2:#252a38;--txt:#e8e2d0;--txt2:#9ca3af;--txt3:#4b5563;--txt4:#252a38;--mono:'Space Mono',monospace;--r:10px}
+html,body{background:var(--bg0);min-height:100vh;font-family:'Syne',sans-serif;color:var(--txt);padding-bottom:72px}
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:50;background:var(--bg0);border-bottom:0.5px solid var(--border);padding:.65rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.hdr-l{display:flex;align-items:center;gap:.6rem;min-width:0}
+.logo{width:32px;height:32px;background:var(--gold);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:11px;color:var(--bg0);flex-shrink:0}
+.htitle{font-size:13px;font-weight:800;color:var(--gold);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hsub{font-size:9px;color:var(--txt3);font-family:var(--mono);margin-top:1px}
+.pill{display:flex;align-items:center;gap:4px;font-size:9px;font-family:var(--mono);color:var(--green);background:#052e16;padding:3px 8px;border-radius:20px;border:0.5px solid #166534;flex-shrink:0;white-space:nowrap}
+.dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pu 1.5s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.2}}
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:#0a0d13;border-top:0.5px solid var(--border);display:flex;padding-bottom:env(safe-area-inset-bottom)}
+.bi{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.45rem .2rem;gap:2px;cursor:pointer;border:none;background:none;color:var(--txt3);font-family:var(--mono);font-size:8px;text-transform:uppercase;transition:color .2s}
+.bi.on{color:var(--gold)}
+.bic{font-size:17px;line-height:1}
+/* SECTIONS */
+.sec{display:none;padding:.875rem .875rem 0;animation:fi .2s ease}
+.sec.show{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+/* CARD */
+.card{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.875rem;margin-bottom:.75rem}
+.pt{font-size:9px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.55rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+.pt select{background:var(--bg0);color:var(--txt2);border:0.5px solid var(--border2);border-radius:4px;font-size:9px;font-family:var(--mono);padding:3px 6px;outline:none;max-width:100%}
+/* KPI */
+.kg{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.75rem}
+.kc{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.7rem;position:relative;overflow:hidden}
+.kc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--border)}
+.kc.hi::before{background:var(--gold)}.kc.gr::before{background:var(--green)}.kc.rd::before{background:var(--red)}.kc.bl::before{background:var(--blue)}
+.kl{font-size:8px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px}
+.kv{font-size:20px;font-weight:700;font-family:var(--mono);color:var(--gold);line-height:1}
+.kv.sm{font-size:12px;margin-top:1px;line-height:1.3}
+.kv.gr{color:var(--green)}.kv.rd{color:var(--red)}.kv.bl{color:var(--blue)}
+.ks{font-size:9px;color:var(--txt3);font-family:var(--mono);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kb{display:inline-block;font-size:8px;font-family:var(--mono);padding:2px 6px;border-radius:3px;margin-top:3px}
+.kb.up{background:#052e16;color:var(--green)}.kb.dn{background:#2a0909;color:var(--red)}
+/* FILTERS */
+.fb{display:flex;flex-direction:column;gap:.45rem;margin-bottom:.75rem}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}
+.tab{padding:6px 12px;border-radius:6px;font-size:10px;font-family:var(--mono);cursor:pointer;border:0.5px solid var(--border2);background:var(--bg1);color:var(--txt3);min-height:34px;transition:all .2s}
+.tab.on{background:var(--gold);color:var(--bg0);border-color:var(--gold);font-weight:700}
+.frow{display:flex;gap:.4rem}
+.gsel{background:var(--bg1);border:0.5px solid var(--border2);color:var(--txt2);padding:6px 8px;border-radius:6px;font-size:10px;font-family:var(--mono);outline:none;flex:1;min-height:34px}
+.gsel:focus{border-color:var(--gold)}
+.srch{background:var(--bg1);border:0.5px solid var(--border2);color:var(--txt);padding:8px 10px;border-radius:6px;font-size:13px;font-family:var(--mono);outline:none;width:100%;min-height:40px}
+.srch::placeholder{color:var(--txt4)}
+.srch:focus{border-color:var(--gold)}
+.fc{font-size:9px;font-family:var(--mono);color:var(--txt4);text-align:right}
+/* RANKING */
+.rl{display:flex;flex-direction:column;gap:4px}
+.ri{display:flex;align-items:center;gap:6px;padding:8px 9px;background:var(--bg0);border:0.5px solid #13161e;border-radius:8px;min-height:44px}
+.ri.r1{border-left:2px solid var(--gold)}.ri.r23{border-left:2px solid var(--green)}.ri.bot{border-left:2px solid var(--red)}.ri.mid{border-left:2px solid var(--border)}
+.rp{font-family:var(--mono);font-size:10px;color:var(--txt4);width:18px;text-align:right;flex-shrink:0}
+.rbar{height:3px;border-radius:2px;background:var(--gold);opacity:.4;flex-shrink:0;min-width:2px}
+.rn{flex:1;font-size:11px;color:#c9c5be;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ri.r1 .rn{color:var(--gold);font-weight:700}
+.rtg{font-size:8px;font-family:var(--mono);padding:2px 4px;border-radius:3px;flex-shrink:0;background:#0d1520;color:var(--blue);max-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rv{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;min-width:42px;text-align:right}
+.pgn{display:flex;align-items:center;justify-content:space-between;margin-top:.55rem;padding-top:.55rem;border-top:0.5px solid var(--border)}
+.pgb{background:var(--bg0);border:0.5px solid var(--border2);color:var(--txt3);padding:6px 14px;border-radius:6px;font-size:10px;font-family:var(--mono);cursor:pointer;min-height:34px}
+.pgb:disabled{opacity:.2;cursor:default}
+.pgi{font-size:10px;font-family:var(--mono);color:var(--txt4)}
+/* CHART */
+.cwrap{position:relative;width:100%}
+/* CANTON TABLE */
+.gt{width:100%;border-collapse:collapse;font-size:10px;font-family:var(--mono)}
+.gt th{color:var(--txt4);text-align:left;padding:5px 6px;border-bottom:0.5px solid var(--border);font-weight:400;text-transform:uppercase;font-size:8px;letter-spacing:.5px}
+.gt td{padding:5px 6px;border-bottom:0.5px solid #0d1016;color:var(--txt2);vertical-align:middle}
+.gt tr:hover td{background:var(--bg0)}
+.gbg{background:#0d1016;border-radius:2px;height:4px;width:50px;display:inline-block;vertical-align:middle}
+.gf{height:4px;border-radius:2px}
+.gbadge{font-size:8px;padding:1px 5px;border-radius:3px;background:#13161e;color:var(--txt3)}
+/* TICKER */
+.tkr{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:.75rem}
+.tl{padding:.45rem .75rem;border-bottom:0.5px solid var(--border);font-size:8px;font-family:var(--mono);color:var(--txt3);text-transform:uppercase;letter-spacing:.8px;display:flex;align-items:center;gap:.35rem}
+.tw{overflow:hidden;padding:.4rem 0;position:relative}
+.tw::after{content:'';position:absolute;right:0;top:0;bottom:0;width:28px;background:linear-gradient(to left,var(--bg1),transparent);z-index:2;pointer-events:none}
+.tt{display:flex;white-space:nowrap;will-change:transform}
+.tt.run{animation:tks 140s linear infinite}
+.tt:hover{animation-play-state:paused}
+@keyframes tks{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ti{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;margin-right:1.5rem;flex-shrink:0}
+.ti .n{color:var(--txt2)}.ti .v{color:var(--gold);font-weight:700}.ti .p{font-size:8px;padding:1px 3px;border-radius:2px;background:#0d1520;color:var(--blue)}.ti .r{font-size:8px;color:var(--txt4)}
+.ti.r1 .n{color:var(--gold)}.ti.last .n{color:var(--red)}
+.sep{color:var(--border);margin:0 .25rem;font-size:10px}
+/* INFO */
+.info-card{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.875rem;margin-bottom:.75rem;font-size:11px;font-family:var(--mono);color:var(--txt3);line-height:2}
+.info-card span{color:var(--txt2)}
+/* DESKTOP */
+@media(min-width:768px){
+  body{padding-bottom:0}
+  .bnav{display:none}
+  .sec{display:block !important;padding:0}
+  .dw{padding:1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .dw .full{grid-column:1/-1}
+  .kg{grid-template-columns:repeat(5,1fr)}
+  .kv{font-size:18px}.kv.sm{font-size:12px}
+  .fb{flex-direction:row;flex-wrap:wrap;align-items:center}
+  .fb .srch{width:auto;flex:1;max-width:250px;min-height:32px;font-size:11px;padding:5px 10px}
+  .gsel{flex:0 0 auto;min-height:32px}
+  .tab{min-height:28px;padding:4px 12px}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-l">
+    <div class="logo">ECO</div>
+    <div>
+      <div class="htitle">ECO FARMA</div>
+      <div class="hsub">81 PDV · CARCHI & IMBABURA</div>
+    </div>
+  </div>
+  <div class="pill"><span class="dot"></span>Act. 13/04/2026</div>
+</div>
+
+<!-- INICIO -->
+<div class="sec show" id="s0">
+<div class="dw">
+  <div class="full">
+    <div class="kg">
+      <div class="kc hi"><div class="kl">Total Unidades</div><div class="kv" id="k1">—</div><div class="ks" id="k1s">—</div></div>
+      <div class="kc gr"><div class="kl">PDV Activos</div><div class="kv gr" id="k2">—</div><div class="ks" id="k2s">—</div></div>
+      <div class="kc bl"><div class="kl">Provincias</div><div class="kv bl" id="k3">—</div><div class="ks" id="k3s">—</div></div>
+      <div class="kc gr"><div class="kl">Líder</div><div class="kv sm gr" id="k4">—</div><div class="ks" id="k4s">—</div><div class="kb up" id="k4b">—</div></div>
+      <div class="kc rd"><div class="kl">Atención</div><div class="kv sm rd" id="k5">—</div><div class="ks" id="k5s">—</div><div class="kb dn" id="k5b">—</div></div>
+    </div>
+    <div class="tkr">
+      <div class="tl"><span class="dot"></span>Ranking en vivo · toca para pausar</div>
+      <div class="tw"><div class="tt" id="tkrT"></div></div>
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <div class="pt"><span>Top 10 PDV</span></div>
+      <div class="rl" id="top10"></div>
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <div class="pt"><span>Por provincia</span></div>
+      <div class="cwrap" style="height:220px"><canvas id="provC0" role="img" aria-label="Provincias">Provincias</canvas></div>
+    </div>
+    <div class="card">
+      <div class="pt"><span>Por cantón</span></div>
+      <div style="overflow-x:auto;max-height:200px;overflow-y:auto">
+        <table class="gt"><thead><tr><th>#</th><th>Cantón</th><th>Prov.</th><th style="text-align:right">Uds.</th><th>PDV</th></tr></thead><tbody id="cB0"></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- RANKING -->
+<div class="sec" id="s1">
+<div class="dw">
+<div class="full">
+  <div class="fb">
+    <div class="tabs">
+      <span class="tab on" onclick="setTab('all',this)">TODOS</span>
+      <span class="tab" onclick="setTab('top',this)">TOP 10</span>
+      <span class="tab" onclick="setTab('bot',this)">ÚLTIMOS 10</span>
+    </div>
+    <div class="frow">
+      <select class="gsel" id="selProv" onchange="onProv()"></select>
+      <select class="gsel" id="selCant" onchange="applyF()"></select>
+    </div>
+    <input class="srch" id="srch" placeholder="Buscar farmacia, cantón, provincia…" oninput="applyF()"/>
+    <span class="fc" id="fc"></span>
+  </div>
+  <div class="card">
+    <div class="pt"><span>Ranking completo</span><span id="rc" style="color:var(--txt4)"></span></div>
+    <div class="rl" id="rl"></div>
+    <div class="pgn">
+      <button class="pgb" id="pp" onclick="pg(-1)" disabled>◀ ANTERIOR</button>
+      <span class="pgi" id="pi">—</span>
+      <button class="pgb" id="pn" onclick="pg(1)" disabled>SIGUIENTE ▶</button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- GRÁFICAS -->
+<div class="sec" id="s2">
+<div class="dw">
+<div class="full">
+  <div class="card">
+    <div class="pt">
+      <span>Comparativo PDV — nombres completos</span>
+      <select id="cv" onchange="renderBar()">
+        <option value="10">Top 10</option>
+        <option value="20">Top 20</option>
+        <option value="30">Top 30</option>
+        <option value="bot">Últimos 10</option>
+      </select>
+    </div>
+    <div class="cwrap" id="barWrap"><canvas id="barC" role="img" aria-label="Ventas PDV">Ventas PDV</canvas></div>
+  </div>
+</div>
+<div>
+  <div class="card">
+    <div class="pt"><span>Por provincia</span></div>
+    <div class="cwrap" style="height:220px"><canvas id="provC" role="img" aria-label="Provincias">Provincias</canvas></div>
+  </div>
+</div>
+<div>
+  <div class="card">
+    <div class="pt"><span>Por cantón</span></div>
+    <div style="overflow-x:auto;max-height:260px;overflow-y:auto">
+      <table class="gt"><thead><tr><th>#</th><th>Cantón</th><th>Prov.</th><th style="text-align:right">Uds.</th><th>PDV</th><th>%</th></tr></thead><tbody id="cB"></tbody></table>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- INFO -->
+<div class="sec" id="s3">
+<div class="dw"><div class="full">
+  <div class="info-card">
+    <span>Archivo fuente:</span> 1_5109760675526215207.xlsx<br>
+    <span>Generado:</span> 13/04/2026 — 22:46:22<br>
+    <span>PDV incluidos:</span> 81<br>
+    <span>Cobertura:</span> CARCHI & IMBABURA<br>
+    <br>
+    Para actualizar, el administrador debe cargar el nuevo Excel en<br>
+    <span>ECO_Admin.html</span> y generar un nuevo archivo viewer.
+  </div>
+</div></div>
+</div>
+
+<nav class="bnav">
+  <button class="bi on" onclick="goS(0,this)"><span class="bic">◈</span>Inicio</button>
+  <button class="bi" onclick="goS(1,this)"><span class="bic">≡</span>Ranking</button>
+  <button class="bi" onclick="goS(2,this)"><span class="bic">▲</span>Gráficas</button>
+  <button class="bi" onclick="goS(3,this)"><span class="bic">ℹ</span>Info</button>
+</nav>
+
+<script>
+const RAW=[{"farmacia":"ECO CLINICA IBARRA","usuario":"USUARIO 1","venta":50000,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"USUARIO 2","venta":1758,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI 2","usuario":"USUARIO 3","venta":4375,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN ANDRES BELLO","usuario":"USUARIO 4","venta":3746,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO CENTRAL SAN GABRIEL","usuario":"USUARIO 5","venta":4034,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA HOSPITAL METROPOLITANO","usuario":"USUARIO 6","venta":230000,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA SANTA MARIANITA","usuario":"USUARIO 7","venta":2159,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO CRUZ ROJA OTAVALO","usuario":"USUARIO 8","venta":2873,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO MODERNA","usuario":"USUARIO 9","venta":2262,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA TEODORO GOMEZ","usuario":"USUARIO 10","venta":2020,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO HOSP SAN VICENTE DE PAUL","usuario":"USUARIO 11","venta":2916,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO ATUNTAQUI CENTRAL","usuario":"USUARIO 12","venta":3183,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO IBARRA MARIANO ACOSTA","usuario":"USUARIO 13","venta":2944,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA VICTORIA","usuario":"USUARIO 14","venta":2752,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO COTACACHI LAS LOMAS","usuario":"USUARIO 15","venta":2177,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA AJAVI","usuario":"USUARIO 16","venta":2244,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA GALO PLAZA","usuario":"USUARIO 17","venta":1017,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO URCUQUI","usuario":"USUARIO 18","venta":1400,"canton":"URCUQUI","provincia":"CARCHI"},{"farmacia":"ECO ANDINATEL OTAVALO","usuario":"USUARIO 19","venta":2488,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA BOLA AMARILLA","usuario":"USUARIO 20","venta":1723,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO COPACABANA","usuario":"USUARIO 21","venta":2695,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO LOS CORAZAS","usuario":"USUARIO 22","venta":2250,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA PILANQUI","usuario":"USUARIO 23","venta":1969,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO VEINTIMILLA TULCAN","usuario":"USUARIO 24","venta":2894,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO COTACACHI QUIROGA","usuario":"USUARIO 25","venta":2726,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA MERCADO AMAZONAS","usuario":"USUARIO 26","venta":1826,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO SAN GABRIEL","usuario":"USUARIO 27","venta":1707,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PARIS","usuario":"USUARIO 28","venta":1707,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA EL RETORNO","usuario":"USUARIO 29","venta":1970,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA SANTA MONICA","usuario":"USUARIO 30","venta":1340,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA CRISTOBAL DE TROYA","usuario":"USUARIO 31","venta":1708,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA EL CARMEN","usuario":"USUARIO 32","venta":1255,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO SAN ANTONIO DE IBARRA","usuario":"USUARIO 33","venta":1882,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO COTACACHI MERCADO PRINCIPAL","usuario":"USUARIO 34","venta":2524,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI LUIS LEORO","usuario":"USUARIO 35","venta":1627,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO PIMAMPIRO","usuario":"USUARIO 36","venta":2394,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO 31 DE OCTUBRE","usuario":"USUARIO 37","venta":2548,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO BOLIVAR ATUNTAQUI","usuario":"USUARIO 38","venta":2002,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO IBARRA 13 DE ABRIL","usuario":"USUARIO 39","venta":2580,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PARQUE LA MERCED","usuario":"USUARIO 40","venta":1880,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA INGLESA","usuario":"USUARIO 41","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO CARCHI BOLIVAR","usuario":"USUARIO 42","venta":1763,"canton":"BOLIVAR","provincia":"CARCHI"},{"farmacia":"ECO TULCAN PARQUE AYORA","usuario":"USUARIO 43","venta":1646,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO MIRA","usuario":"USUARIO 44","venta":2054,"canton":"MIRA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN SUCRE","usuario":"USUARIO 45","venta":2427,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO PIMAMPIRO PAQUISHA","usuario":"USUARIO 46","venta":2473,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA OBELISCO","usuario":"USUARIO 47","venta":1737,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN RUIZ","usuario":"USUARIO 48","venta":2180,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO EL CISNE","usuario":"USUARIO 49","venta":1505,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO JULIO ANDRADE","usuario":"USUARIO 50","venta":1694,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO TULCAN ROBERTO GRIJALVA","usuario":"USUARIO 51","venta":1928,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO EL ANGEL PARQUE CENTRAL","usuario":"USUARIO 52","venta":2470,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO","usuario":"USUARIO 53","venta":2120,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO GONZALEZ SUAREZ COTACACHI","usuario":"USUARIO 54","venta":1885,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO IBARRA CARANQUI","usuario":"USUARIO 55","venta":1482,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO EL ANGEL","usuario":"USUARIO 56","venta":1818,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO AV ATAHUALPA","usuario":"USUARIO 57","venta":1806,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO OBISPO MOSQUERA","usuario":"USUARIO 58","venta":1532,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA 10 DE AGOSTO","usuario":"USUARIO 59","venta":1861,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO SANCHEZ Y CIFUENTES","usuario":"USUARIO 60","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI PICHINCHA","usuario":"USUARIO 61","venta":1465,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO CARCHI HUACA","usuario":"USUARIO 62","venta":964,"canton":"SAN PEDRO DE HUACA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO SUCRE","usuario":"USUARIO 63","venta":1165,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO SAN PABLO","usuario":"USUARIO 64","venta":1319,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA LUIS VARGAS TORRES","usuario":"USUARIO 65","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA EUGENIO ESPEJO","usuario":"USUARIO 66","venta":1521,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IMBABURA ANDRADE MARIN","usuario":"USUARIO 67","venta":1095,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO MODESTO JARAMILLO","usuario":"USUARIO 68","venta":1939,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA AV JAIME ROLDOS","usuario":"USUARIO 69","venta":1805,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA CANDELARIA","usuario":"USUARIO 70","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN LUCIANO CORAL","usuario":"USUARIO 71","venta":1194,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA MERCED","usuario":"USUARIO 72","venta":787,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO BOLIVAR","usuario":"USUARIO 73","venta":1249,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA JUAN DE VELASCO","usuario":"USUARIO 74","venta":725,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ANTONIO ANTE SAN ROQUE","usuario":"USUARIO 75","venta":1123,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PRIORATO","usuario":"USUARIO 76","venta":1186,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA HUERTOS FAMILIARES","usuario":"USUARIO 77","venta":1191,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA RAFAEL SANCHEZ","usuario":"USUARIO 78","venta":828,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA FRAY VACAS","usuario":"USUARIO 79","venta":968,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO LUIS CISNEROS","usuario":"USUARIO 80","venta":1547,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA SUDAMERICANA","usuario":"USUARIO 81","venta":598,"canton":"IBARRA","provincia":"IMBABURA"}];
+let agg=[],filt=[],tab='all',pg_=0,PG=10,barI=null,pI=null,pI0=null,pv={};
+
+function aggregate(rows){const m={};rows.forEach(r=>{if(!m[r.farmacia])m[r.farmacia]={...r,venta:0};m[r.farmacia].venta+=r.venta;});return Object.values(m).sort((a,b)=>b.venta-a.venta);}
+function aggK(data,key){const m={};data.forEach(r=>{const k=r[key]||'—';if(!m[k])m[k]={venta:0,pdv:0,prov:r.provincia};m[k].venta+=r.venta;m[k].pdv++;});return Object.entries(m).map(([k,v])=>({name:k,...v})).sort((a,b)=>b.venta-a.venta);}
+
+function goS(n,el){document.querySelectorAll('.sec').forEach((s,i)=>s.classList.toggle('show',i===n));document.querySelectorAll('.bi').forEach(b=>b.classList.remove('on'));el.classList.add('on');if(n===2)setTimeout(()=>{renderBar();mkP('provC',pI,r=>pI=r);},60);}
+
+// FILTERS - con opción TODAS
+function initFilters(){
+  const provs=[...new Set(agg.map(r=>r.provincia).filter(Boolean))].sort();
+  document.getElementById('selProv').innerHTML=
+    '<option value="">TODAS LAS PROVINCIAS</option>'+
+    provs.map(p=>`<option value="${p}">${p}</option>`).join('');
+  document.getElementById('selCant').innerHTML='<option value="">TODOS LOS CANTONES</option>'+
+    [...new Set(agg.map(r=>r.canton).filter(Boolean))].sort().map(c=>`<option value="${c}">${c}</option>`).join('');
+}
+function onProv(){
+  const prov=document.getElementById('selProv').value;
+  const cants=[...new Set(agg.filter(r=>!prov||r.provincia===prov).map(r=>r.canton).filter(Boolean))].sort();
+  document.getElementById('selCant').innerHTML=
+    '<option value="">TODOS LOS CANTONES</option>'+
+    cants.map(c=>`<option value="${c}">${c}</option>`).join('');
+  pg_=0;applyF();
+}
+function setTab(t,el){tab=t;pg_=0;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));el.classList.add('on');applyF();}
+function applyF(){
+  const q=(document.getElementById('srch')?.value||'').toLowerCase().trim();
+  const prov=document.getElementById('selProv').value;
+  const cant=document.getElementById('selCant').value;
+  let src=[...agg];
+  if(prov)src=src.filter(r=>r.provincia===prov);
+  if(cant)src=src.filter(r=>r.canton===cant);
+  if(tab==='top')src=src.slice(0,10);
+  else if(tab==='bot')src=src.slice(-10).reverse();
+  if(q)src=src.filter(r=>[r.farmacia,r.canton,r.provincia,r.usuario].join(' ').toLowerCase().includes(q));
+  filt=src;
+  const fc=document.getElementById('fc');
+  if(fc)fc.textContent=src.length+' PDV mostrados';
+  renderRank();
+}
+
+// RANKING
+function renderRank(){
+  const total=filt.length,pages=Math.ceil(total/PG)||1;
+  if(pg_>=pages)pg_=Math.max(0,pages-1);
+  const slice=filt.slice(pg_*PG,(pg_+1)*PG);
+  const maxV=agg[0]?.venta||1;
+  const el=document.getElementById('rl');el.innerHTML='';
+  if(!slice.length){el.innerHTML='<div style="padding:1rem;text-align:center;color:var(--txt4);font-size:11px;font-family:var(--mono)">Sin resultados para los filtros seleccionados</div>';return;}
+  slice.forEach(r=>{
+    const gr=agg.findIndex(x=>x.farmacia===r.farmacia)+1;
+    const prev=pv[r.farmacia]||0,diff=r.venta-prev;
+    const pct=prev>0?((diff/prev)*100).toFixed(1):null;
+    const cls=gr===1?'ri r1':gr<=3?'ri r23':gr===agg.length?'ri bot':'ri mid';
+    const bw=Math.max(2,Math.round((r.venta/maxV)*48));
+    el.innerHTML+=`<div class="${cls}" title="${r.farmacia} — ${r.canton} (${r.provincia}) · ${r.usuario}">
+      <span class="rp">${gr}</span>
+      <span class="rbar" style="width:${bw}px"></span>
+      <span class="rn">${r.farmacia}</span>
+      <span class="rtg">${r.canton}</span>
+      <span class="rv">${r.venta.toLocaleString('es')}</span>
+    </div>`;
+    pv[r.farmacia]=r.venta;
+  });
+  const rc=document.getElementById('rc');
+  if(rc)rc.textContent=`${pg_*PG+1}–${Math.min((pg_+1)*PG,total)} de ${total}`;
+  document.getElementById('pi').textContent=`Pág ${pg_+1}/${pages}`;
+  document.getElementById('pp').disabled=pg_===0;
+  document.getElementById('pn').disabled=pg_>=pages-1;
+}
+function pg(d){pg_+=d;renderRank();}
+
+// TOP 10
+function renderTop10(){
+  const top=agg.slice(0,10),maxV=agg[0]?.venta||1;
+  document.getElementById('top10').innerHTML=top.map((r,i)=>{
+    const cls=i===0?'ri r1':i<=2?'ri r23':'ri mid';
+    const bw=Math.max(2,Math.round((r.venta/maxV)*48));
+    return`<div class="${cls}" title="${r.farmacia} — ${r.canton} (${r.provincia})">
+      <span class="rp">${i+1}</span><span class="rbar" style="width:${bw}px"></span>
+      <span class="rn">${r.farmacia}</span>
+      <span class="rtg">${r.canton}</span>
+      <span class="rv">${r.venta.toLocaleString('es')}</span>
+    </div>`;
+  }).join('');
+}
+
+// BAR CHART — HORIZONTAL, nombres completos
+function renderBar(){
+  const v=document.getElementById('cv').value;
+  const src=v==='bot'?[...agg].slice(-10).reverse():agg.slice(0,parseInt(v));
+  const topV=agg[0]?.venta||1,botV=agg[agg.length-1]?.venta||0;
+  const colors=src.map(r=>r.venta===topV?'#f5c842':r.venta===botV?'#ef4444':r.venta>=topV*.7?'#22c55e':'#3b82f6');
+  // Altura dinámica: 38px por barra
+  const h=Math.max(280,src.length*38+60);
+  const wrap=document.getElementById('barWrap');
+  wrap.style.height=h+'px';
+  if(barI)barI.destroy();
+  barI=new Chart(document.getElementById('barC'),{
+    type:'bar',
+    data:{
+      labels:src.map(r=>r.farmacia),
+      datasets:[{data:src.map(r=>r.venta),backgroundColor:colors,borderRadius:4,borderSkipped:false}]
+    },
+    options:{
+      indexAxis:'y',
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:(c)=>{const r=src[c.dataIndex];return[`${c.raw.toLocaleString('es')} uds`,`${r.canton} · ${r.provincia}`];}}}
+      },
+      scales:{
+        x:{grid:{color:'#13161e'},ticks:{color:'#4b5563',font:{family:'Space Mono',size:9},callback:v=>v.toLocaleString('es')}},
+        y:{grid:{color:'transparent'},ticks:{color:'#e8e2d0',font:{family:'Space Mono',size:9},crossAlign:'far'}}
+      }
+    }
+  });
+}
+
+// PROVINCE DONUT
+function mkP(cid,inst,cb){
+  const pa=aggK(agg,'provincia');
+  const total=pa.reduce((s,r)=>s+r.venta,0);
+  const pal=['#f5c842','#3b82f6','#22c55e','#ef4444','#a78bfa'];
+  if(inst)inst.destroy();
+  cb(new Chart(document.getElementById(cid),{
+    type:'doughnut',
+    data:{labels:pa.map(p=>p.name),datasets:[{data:pa.map(p=>p.venta),backgroundColor:pal.slice(0,pa.length),borderWidth:1.5,borderColor:'#0f1219'}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'60%',
+      plugins:{legend:{display:true,position:'right',labels:{color:'#6b7280',font:{family:'Space Mono',size:9},boxWidth:10,padding:8}},
+               tooltip:{callbacks:{label:(c)=>`${c.label}: ${c.raw.toLocaleString('es')} (${((c.raw/total)*100).toFixed(1)}%)`}}}}
+  }));
+}
+
+// CANTON TABLE
+function renderCant(tbid){
+  const ca=aggK(agg,'canton');
+  const total=ca.reduce((s,r)=>s+r.venta,0);
+  const maxV=ca[0]?.venta||1;
+  const pal={};
+  const colors=['#f5c842','#3b82f6','#22c55e','#ef4444','#a78bfa'];
+  [...new Set(ca.map(c=>c.prov))].forEach((p,i)=>pal[p]=colors[i%colors.length]);
+  document.getElementById(tbid).innerHTML=ca.map((c,i)=>{
+    const pct=((c.venta/total)*100).toFixed(1);
+    const bw=Math.round((c.venta/maxV)*46);
+    const bc=pal[c.prov]||'#6b7280';
+    return`<tr>
+      <td style="color:var(--txt4)">${i+1}</td>
+      <td style="color:${i<3?'var(--gold)':'var(--txt2)'};font-weight:${i<3?700:400};max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${c.name}">${c.name}</td>
+      <td><span class="gbadge">${c.prov}</span></td>
+      <td style="text-align:right;color:var(--gold);font-weight:700">${c.venta.toLocaleString('es')}</td>
+      <td style="color:var(--txt4)">${c.pdv}</td>
+      <td><div class="gbg"><div class="gf" style="width:${bw}px;background:${bc}"></div></div><span style="font-size:8px;color:var(--txt4);margin-left:3px">${pct}%</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// TICKER
+function renderTicker(){
+  const track=document.getElementById('tkrT');
+  track.classList.remove('run');
+  const items=agg.map((r,i)=>{
+    const cls=i===0?'ti r1':i===agg.length-1?'ti last':'ti';
+    const sym=i===0?'◆':i===agg.length-1?'▽':'·';
+    return`<span class="${cls}"><span class="r">${String(i+1).padStart(2,'0')}</span><span class="p">${r.provincia.slice(0,3)}</span><span class="n">${sym} ${r.farmacia}</span><span class="v">${r.venta.toLocaleString('es')}</span></span><span class="sep">|</span>`;
+  }).join('');
+  track.innerHTML=items+items;
+  void track.offsetWidth;
+  track.classList.add('run');
+}
+
+// KPIs
+function renderKPIs(){
+  const total=agg.reduce((s,r)=>s+r.venta,0);
+  const provs=[...new Set(agg.map(r=>r.provincia).filter(Boolean))];
+  const cants=[...new Set(agg.map(r=>r.canton).filter(Boolean))];
+  const top=agg[0],bot=agg[agg.length-1];
+  document.getElementById('k1').textContent=total.toLocaleString('es');
+  document.getElementById('k1s').textContent='Prom: '+Math.round(total/agg.length).toLocaleString('es')+'/PDV';
+  document.getElementById('k2').textContent=agg.length;
+  document.getElementById('k2s').textContent=cants.length+' cantones';
+  document.getElementById('k3').textContent=provs.length;
+  document.getElementById('k3s').textContent=provs.join(' · ');
+  if(top){document.getElementById('k4').textContent=top.farmacia;document.getElementById('k4s').textContent=top.canton+' · '+top.provincia;document.getElementById('k4b').textContent=top.venta.toLocaleString('es')+' uds';}
+  if(bot){document.getElementById('k5').textContent=bot.farmacia;document.getElementById('k5s').textContent=bot.canton+' · '+bot.provincia;document.getElementById('k5b').textContent=bot.venta.toLocaleString('es')+' uds';}
+}
+
+// INIT
+agg=aggregate(RAW);
+renderKPIs();
+initFilters();
+applyF();
+renderTop10();
+renderTicker();
+mkP('provC0',pI0,r=>pI0=r);
+renderCant('cB0');
+renderCant('cB');
+</script>
+</body>
+</html>
