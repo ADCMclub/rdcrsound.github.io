@@ -2,1605 +2,786 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RDCR AudioLab - Estudio de Diseño Sonoro Profesional</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="/img_radio/audio LAb.jpg" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>AudioLab by RDCR | Branding Sonoro, Jingles y Cuñas</title>
+    <meta name="description" content="AudioLab by RDCR: Producción de imagen de radio, jingles cantados, drops y cuñas publicitarias. Grabado con micrófono AKG P120 y interfaz UMC404. Sonido profesional.">
+    <!-- Fuentes e íconos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            -webkit-tap-highlight-color: transparent;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        :root {
-            --primary-black: #000000; 
-            --primary-yellow: #FFD700; 
-            --secondary-yellow: #FFED4E;
-            --light-gray: #1A1A1A; 
-            --medium-gray: #333333; 
-            --text-light: #F5F5F5; 
-            --text-gray: #AAAAAA;
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0c10;
+            color: #eef2ff;
+            line-height: 1.5;
+            scroll-behavior: smooth;
         }
-        
-        body { 
-            background-color: var(--primary-black); 
-            color: var(--text-light); 
-            line-height: 1.6; 
-            overflow-x: hidden; 
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
-        
-        .container { 
-            width: 100%; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 0 20px; 
-        }
-        
-        /* Botones fijos optimizados para móvil */
-        .fixed-btn-atras {
-            position: fixed; 
-            top: 15px; 
-            left: 15px; 
-            z-index: 2000; 
-            background-color: var(--primary-yellow);
-            color: var(--primary-black); 
-            border: none; 
-            border-radius: 30px; 
-            padding: 10px 16px; 
-            cursor: pointer;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            gap: 8px; 
-            font-weight: 600; 
-            font-size: 0.9rem; 
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+
+        a {
             text-decoration: none;
-            min-width: 45px;
-            min-height: 45px;
+            color: inherit;
         }
-        
-        .fixed-btn-atras span {
-            display: inline;
-        }
-        
-        .fixed-btn-atras:hover { 
-            background-color: var(--secondary-yellow); 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4); 
-        }
-        
-        .fixed-btn-arriba {
-            position: fixed; 
-            bottom: 20px; 
-            right: 20px; 
-            z-index: 2000; 
-            width: 50px; 
-            height: 50px; 
-            border-radius: 50%;
-            background-color: var(--primary-yellow); 
-            color: var(--primary-black); 
-            border: none; 
-            cursor: pointer;
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 1.3rem; 
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
-            opacity: 0; 
-            visibility: hidden;
-        }
-        
-        .fixed-btn-arriba.mostrar { 
-            opacity: 1; 
-            visibility: visible; 
-        }
-        
-        .fixed-btn-arriba:hover { 
-            background-color: var(--secondary-yellow); 
-            transform: translateY(-3px); 
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4); 
-        }
-        
-        /* Header optimizado para móvil */
-        header {
-            background-color: rgba(0,0,0,0.95); 
-            padding: 15px 0; 
-            position: fixed; 
-            width: 100%; 
-            z-index: 1000;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.5); 
-            top: 0;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        
-        .header-container { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            width: 100%;
-        }
-        
-        .logo { 
-            display: flex; 
-            align-items: center; 
-            text-decoration: none; 
-            margin-left: 60px;
-        }
-        
-        .logo-main { 
-            display: flex; 
-            flex-direction: column; 
-        }
-        
-        .logo-top { 
-            display: flex; 
-            align-items: baseline; 
-        }
-        
-        .logo-au { 
-            font-size: 1.8rem; 
-            font-weight: 800; 
-            color: var(--primary-yellow); 
-            letter-spacing: 1px; 
-        }
-        
-        .logo-rdcr { 
-            font-size: 1.4rem; 
-            font-weight: 700; 
-            color: var(--text-light); 
-            margin-left: 3px; 
-            letter-spacing: 0.5px; 
-        }
-        
-        .logo-audiolab { 
-            font-size: 0.8rem; 
-            color: var(--primary-yellow); 
-            font-weight: 500; 
-            letter-spacing: 1.5px; 
-            margin-top: -3px; 
-        }
-        
-        /* Menú de navegación responsive */
-        .nav-links { 
-            display: flex; 
-            gap: 20px; 
-        }
-        
-        .nav-links a {
-            color: var(--text-light); 
-            text-decoration: none; 
-            font-weight: 500; 
-            font-size: 0.95rem; 
-            transition: color 0.3s;
-            position: relative;
-            white-space: nowrap;
-        }
-        
-        .nav-links a:hover { 
-            color: var(--primary-yellow); 
-        }
-        
-        .nav-links a:after {
-            content: ''; 
-            position: absolute; 
-            width: 0; 
-            height: 2px; 
-            background: var(--primary-yellow);
-            left: 0; 
-            bottom: -3px; 
-            transition: width 0.3s;
-        }
-        
-        .nav-links a:hover:after { 
-            width: 100%; 
-        }
-        
-        .mobile-menu-btn { 
-            display: none; 
-            background: none; 
-            border: none; 
-            color: var(--primary-yellow); 
-            font-size: 1.5rem; 
-            cursor: pointer;
-            padding: 5px;
-            z-index: 1001;
-        }
-        
-        /* Hero optimizado para móvil */
-        .hero {
-            padding: 150px 0 70px; 
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), 
-            url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
-            background-size: cover; 
-            text-align: center;
-            min-height: 100vh;
-            display: flex;
+
+        .btn {
+            display: inline-flex;
             align-items: center;
-        }
-        
-        .hero-content {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        .hero h1 { 
-            font-size: 2rem; 
-            margin-bottom: 15px; 
-            color: var(--text-light); 
-            line-height: 1.2;
-            text-align: center;
-        }
-        
-        .hero-highlight { 
-            color: var(--primary-yellow); 
-        }
-        
-        .hero-subtitle { 
-            font-size: 1.1rem; 
-            color: var(--primary-yellow); 
-            margin-bottom: 12px; 
-            font-weight: 600; 
-            text-align: center;
-        }
-        
-        .hero p { 
-            font-size: 1rem; 
-            max-width: 100%; 
-            margin: 0 auto 30px; 
-            color: var(--text-gray); 
-            text-align: center;
-            padding: 0 10px;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        
-        .cta-button {
-            display: inline-block; 
-            background-color: var(--primary-yellow); 
-            color: var(--primary-black); 
-            padding: 14px 30px;
-            border-radius: 50px; 
-            text-decoration: none; 
-            font-weight: 700; 
-            font-size: 1rem; 
-            transition: all 0.3s;
-            border: 2px solid var(--primary-yellow); 
-            width: 100%;
-            max-width: 300px;
-            text-align: center;
-        }
-        
-        .cta-button:hover { 
-            background-color: transparent; 
-            color: var(--primary-yellow); 
-            transform: translateY(-2px); 
-        }
-        
-        .cta-button.secondary { 
-            background-color: transparent; 
-            color: var(--primary-yellow); 
-        }
-        
-        .cta-button.secondary:hover { 
-            background-color: var(--primary-yellow); 
-            color: var(--primary-black); 
-        }
-        
-        /* Servicios optimizados para móvil */
-        .section-title { 
-            text-align: center; 
-            margin-bottom: 40px; 
-            position: relative; 
-            padding: 0 15px;
-        }
-        
-        .section-title h2 { 
-            font-size: 1.8rem; 
-            display: inline-block; 
-            color: var(--text-light); 
-        }
-        
-        .section-title h2:after {
-            content: ''; 
-            position: absolute; 
-            width: 80px; 
-            height: 3px; 
-            background-color: var(--primary-yellow);
-            left: 50%; 
-            bottom: -10px; 
-            transform: translateX(-50%);
-        }
-        
-        .services { 
-            padding: 70px 0; 
-            background-color: var(--light-gray); 
-        }
-        
-        .services-grid { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 30px; 
-            padding: 0 15px;
-        }
-        
-        .service-card {
-            background-color: var(--medium-gray); 
-            border-radius: 10px; 
-            padding: 30px 20px; 
-            text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s; 
-            border-top: 4px solid var(--primary-yellow);
-            width: 100%;
-            margin: 0 auto;
-            max-width: 400px;
-        }
-        
-        .service-card:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
-        }
-        
-        .service-icon { 
-            font-size: 2.5rem; 
-            color: var(--primary-yellow); 
-            margin-bottom: 15px; 
-            text-align: center; 
-        }
-        
-        .service-card h3 { 
-            font-size: 1.5rem; 
-            margin-bottom: 15px; 
-            color: var(--primary-yellow); 
-            text-align: center; 
-        }
-        
-        .service-card p { 
-            color: var(--text-gray); 
-            margin-bottom: 20px; 
-            font-size: 0.95rem;
-        }
-        
-        .service-features { 
-            margin: 15px 0; 
-        }
-        
-        .service-features li { 
-            color: var(--text-gray); 
-            margin-bottom: 8px; 
-            padding-left: 20px; 
-            position: relative; 
-            font-size: 0.9rem;
-        }
-        
-        .service-features li:before { 
-            content: "✓"; 
-            color: var(--primary-yellow); 
-            position: absolute; 
-            left: 0; 
-        }
-        
-        .price-range { 
-            color: var(--primary-yellow); 
-            font-size: 1.2rem; 
-            font-weight: 700; 
-            margin: 15px 0; 
-            text-align: center; 
-        }
-        
-        /* Before/After optimizado para móvil */
-        .before-after { 
-            padding: 70px 0; 
-            background-color: var(--light-gray); 
-        }
-        
-        .ba-container { 
-            width: 100%; 
-            margin: 0 auto; 
-            padding: 0 15px;
-        }
-        
-        .ba-player { 
-            background-color: var(--medium-gray); 
-            border-radius: 12px; 
-            padding: 25px 20px; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
-            width: 100%;
-        }
-        
-        .ba-title { 
-            text-align: center; 
-            margin-bottom: 30px; 
-        }
-        
-        .ba-title h3 { 
-            font-size: 1.6rem; 
-            color: var(--primary-yellow); 
-            margin-bottom: 8px; 
-        }
-        
-        .audio-examples { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 20px; 
-        }
-        
-        .audio-example { 
-            background-color: var(--primary-black); 
-            padding: 20px 15px; 
-            border-radius: 10px; 
-            border: 2px solid var(--medium-gray); 
-            width: 100%;
-        }
-        
-        .audio-example h4 { 
-            color: var(--primary-yellow); 
-            margin-bottom: 12px; 
-            font-size: 1.1rem; 
-            text-align: center; 
-        }
-        
-        audio { 
-            width: 100%; 
-            margin-bottom: 12px; 
-        }
-        
-        .audio-info { 
-            color: var(--text-gray); 
-            font-size: 0.85rem; 
-            margin-top: 10px; 
-            text-align: center;
-        }
-        
-        /* Resultados optimizados para móvil */
-        .results { 
-            padding: 70px 0; 
-            background-color: var(--primary-black); 
-            text-align: center; 
-        }
-        
-        .results-grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 20px; 
-            margin-top: 30px;
-            padding: 0 15px;
-        }
-        
-        .result-item { 
-            padding: 20px; 
-        }
-        
-        .result-number { 
-            font-size: 2rem; 
-            color: var(--primary-yellow); 
-            font-weight: 700; 
-            margin-bottom: 5px; 
-        }
-        
-        .result-text { 
-            color: var(--text-light); 
-            font-size: 0.9rem; 
-        }
-        
-        /* Contacto optimizado para móvil */
-        .contact { 
-            padding: 70px 0; 
-            background-color: var(--light-gray); 
-        }
-        
-        .contact-container { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 40px; 
-            align-items: start;
-            padding: 0 15px;
-        }
-        
-        .contact-recommendations { 
-            background-color: var(--medium-gray); 
-            padding: 25px 20px; 
-            border-radius: 12px; 
-            order: 2;
-        }
-        
-        .contact-recommendations h3 { 
-            color: var(--primary-yellow); 
-            margin-bottom: 15px; 
-            font-size: 1.5rem; 
-            text-align: center;
-        }
-        
-        .recommendation-list { 
-            color: var(--text-gray); 
-        }
-        
-        .recommendation-item { 
-            margin-bottom: 20px; 
-        }
-        
-        .recommendation-item h4 { 
-            color: var(--text-light); 
-            margin-bottom: 8px; 
-            font-size: 1.1rem; 
-        }
-        
-        .recommendation-item ul { 
-            list-style-type: none; 
-        }
-        
-        .recommendation-item li { 
-            margin-bottom: 6px; 
-            position: relative; 
-            padding-left: 20px; 
-            font-size: 0.9rem;
-        }
-        
-        .recommendation-item li:before { 
-            content: '•'; 
-            color: var(--primary-yellow); 
-            position: absolute; 
-            left: 0; 
-        }
-        
-        .contact-form { 
-            background-color: var(--medium-gray); 
-            padding: 25px 20px; 
-            border-radius: 12px; 
-            order: 1;
-            width: 100%;
-        }
-        
-        .contact-form h3 { 
-            text-align: center; 
-            color: var(--primary-yellow); 
-            margin-bottom: 20px; 
-            font-size: 1.5rem; 
-        }
-        
-        .form-group { 
-            margin-bottom: 20px; 
-        }
-        
-        .form-group label { 
-            display: block; 
-            margin-bottom: 6px; 
-            color: var(--text-light); 
-            font-size: 0.95rem;
-        }
-        
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%; 
-            padding: 12px 15px; 
-            background-color: var(--primary-black); 
-            border: 1px solid var(--text-gray);
-            border-radius: 8px; 
-            color: var(--text-light); 
-            font-size: 1rem;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-        
-        .form-group textarea { 
-            height: 120px; 
-            resize: vertical; 
-        }
-        
-        /* Botón de enviar */
-        .submit-btn {
-            background-color: var(--primary-yellow); 
-            color: var(--primary-black); 
-            border: none; 
-            padding: 16px 30px;
-            border-radius: 50px; 
-            font-weight: 700; 
-            font-size: 1rem; 
-            cursor: pointer; 
-            transition: all 0.3s; 
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             gap: 10px;
-        }
-        
-        .submit-btn:hover { 
-            background-color: var(--secondary-yellow); 
-            transform: translateY(-2px); 
-        }
-        
-        .submit-btn:disabled { 
-            background-color: var(--medium-gray); 
-            color: var(--text-gray); 
-            cursor: not-allowed; 
-        }
-        
-        .submit-btn:disabled:hover { 
-            transform: none; 
-        }
-        
-        /* Modal optimizado para móvil */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 3000; 
-            left: 0; 
-            top: 0; 
-            width: 100%; 
-            height: 100%;
-            background-color: rgba(0,0,0,0.9); 
-            align-items: center; 
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .modal-content {
-            background-color: var(--medium-gray); 
-            padding: 25px 20px; 
-            border-radius: 12px; 
-            width: 100%;
-            max-width: 500px;
-            text-align: center; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
-        .modal-icon { 
-            font-size: 3rem; 
-            color: var(--primary-yellow); 
-            margin-bottom: 15px; 
-        }
-        
-        .modal h3 { 
-            color: var(--primary-yellow); 
-            margin-bottom: 15px; 
-            font-size: 1.5rem; 
-        }
-        
-        .modal p { 
-            color: var(--text-light); 
-            margin-bottom: 15px; 
-            text-align: left; 
-            font-size: 0.95rem;
-        }
-        
-        .modal ol { 
-            color: var(--text-light); 
-            margin-bottom: 20px; 
-            text-align: left; 
-            padding-left: 20px; 
-        }
-        
-        .modal li { 
-            margin-bottom: 10px; 
-            font-size: 0.9rem;
-        }
-        
-        .modal-buttons { 
-            display: flex; 
-            flex-direction: column;
-            gap: 12px; 
-            justify-content: center; 
-            width: 100%;
-        }
-        
-        .modal-btn { 
-            padding: 12px 20px; 
-            border-radius: 30px; 
-            font-weight: 600; 
+            background: #e63946;
+            color: white;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 40px;
+            transition: all 0.25s ease;
+            border: none;
             cursor: pointer;
-            transition: all 0.3s; 
-            border: 2px solid var(--primary-yellow);
-            width: 100%;
-            font-size: 0.95rem;
-        }
-        
-        .modal-btn.primary { 
-            background-color: var(--primary-yellow); 
-            color: var(--primary-black);
-        }
-        
-        .modal-btn.secondary { 
-            background-color: transparent; 
-            color: var(--primary-yellow);
-        }
-        
-        .modal-btn:hover { 
-            transform: translateY(-2px); 
-        }
-        
-        /* Footer optimizado para móvil */
-        footer { 
-            background-color: #111; 
-            padding: 50px 0 25px; 
-            text-align: center; 
-        }
-        
-        .footer-logo { 
-            margin-bottom: 25px; 
-        }
-        
-        .footer-logo .logo-au { 
-            font-size: 2.5rem; 
-        }
-        
-        .footer-logo .logo-rdcr { 
-            font-size: 1.8rem; 
-        }
-        
-        .footer-logo .logo-audiolab { 
-            font-size: 1rem; 
-        }
-        
-        .footer-contact { 
-            margin-bottom: 30px; 
-        }
-        
-        .footer-contact h3 { 
-            font-size: 1.3rem; 
-            margin-bottom: 15px; 
-            color: var(--text-light); 
-        }
-        
-        .contact-info { 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; 
-            gap: 15px; 
-            flex-wrap: wrap; 
-        }
-        
-        .contact-item { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            gap: 8px; 
-            color: var(--text-gray); 
-        }
-        
-        .contact-item i { 
-            color: var(--primary-yellow); 
-        }
-        
-        .social-links { 
-            display: flex; 
-            justify-content: center; 
-            gap: 15px; 
-            margin-bottom: 30px; 
-        }
-        
-        .social-links a {
-            display: inline-flex; 
-            align-items: center; 
-            justify-content: center; 
-            width: 40px; 
-            height: 40px;
-            background-color: var(--medium-gray); 
-            border-radius: 50%; 
-            color: var(--primary-yellow); 
             font-size: 1rem;
-            transition: all 0.3s;
+            letter-spacing: -0.2px;
         }
-        
-        .social-links a:hover { 
-            background-color: var(--primary-yellow); 
-            color: var(--primary-black); 
-            transform: translateY(-3px); 
+
+        .btn i {
+            font-size: 1.1rem;
         }
-        
-        .copyright { 
-            color: var(--text-gray); 
-            font-size: 0.8rem; 
-            padding-top: 20px; 
-            border-top: 1px solid var(--medium-gray); 
-            width: 90%;
-            margin: 0 auto;
+
+        .btn:hover {
+            background: #c1121f;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -8px rgba(230,57,70,0.4);
         }
-        
-        /* Media Queries para tablets */
-        @media (min-width: 768px) {
-            .container { padding: 0 30px; }
-            
-            .fixed-btn-atras { 
-                top: 20px; 
-                left: 20px; 
-                padding: 12px 20px; 
-                font-size: 1rem; 
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #e63946;
+            color: #e63946;
+        }
+
+        .btn-outline:hover {
+            background: #e6394610;
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        /* header */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 1px solid #1f2937;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #e63946);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo p {
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #e63946;
+        }
+
+        /* hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            max-width: 900px;
+            margin: 0 auto 20px;
+            background: linear-gradient(to right, #ffffff, #ff8c94);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #cbd5e6;
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+
+        /* sección servicios */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            margin-bottom: 70px;
+        }
+
+        .service-card {
+            background: #11161f;
+            padding: 32px 20px;
+            border-radius: 28px;
+            text-align: center;
+            transition: all 0.2s;
+            border: 1px solid #1e2a3a;
+            cursor: pointer;
+        }
+
+        .service-card i {
+            font-size: 2.8rem;
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: #9ca3af;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #e6394660;
+            background: #121a26;
+        }
+
+        /* Reproductor de demo flotante */
+        .demo-player {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e293b;
+            backdrop-filter: blur(12px);
+            border-radius: 60px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 1000;
+            border: 1px solid #e63946;
+            font-weight: 500;
+        }
+        .demo-player audio {
+            height: 40px;
+        }
+        .close-demo {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+        @media (max-width: 700px) {
+            .demo-player { bottom: 10px; right: 10px; left: 10px; border-radius: 40px; flex-wrap: wrap; justify-content: center; }
+        }
+
+        /* equipos */
+        .gear-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            background: #0f1119;
+            border-radius: 48px;
+            padding: 40px 30px;
+            margin: 60px 0;
+            align-items: center;
+        }
+        .gear-item {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+        .gear-item img {
+            width: 100%;
+            max-width: 260px;
+            border-radius: 24px;
+            box-shadow: 0 20px 30px -12px black;
+            background: #111;
+            padding: 12px;
+            border: 1px solid #2d3a4e;
+        }
+        .gear-item h4 {
+            margin-top: 20px;
+            font-size: 1.3rem;
+        }
+        .badge-equipo {
+            background: #1e293b;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+
+        /* reseñas */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .review-card {
+            background: #11161f;
+            padding: 28px;
+            border-radius: 28px;
+            border-left: 4px solid #e63946;
+        }
+
+        .review-text {
+            font-style: normal;
+            margin-bottom: 20px;
+            color: #e2e8f0;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: #ff8c94;
+        }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 12px;
+        }
+
+        /* stats */
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            background: #0b0e14;
+            padding: 50px 20px;
+            border-radius: 60px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #e63946;
+        }
+
+        /* why us */
+        .why-us {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+            background: #0c0f16;
+            padding: 40px;
+            border-radius: 48px;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature i {
+            font-size: 2rem;
+            background: #1e293b;
+            padding: 12px;
+            border-radius: 60px;
+            margin-bottom: 15px;
+            color: #e63946;
+        }
+
+        /* Formulario de contacto */
+        .contact-form {
+            background: #0f1119;
+            border-radius: 40px;
+            padding: 50px;
+            margin: 40px 0;
+        }
+        .form-group {
+            margin-bottom: 24px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: #1a1f2c;
+            border: 1px solid #2d3a4e;
+            border-radius: 28px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #e63946;
+            background: #1e2535;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #cbd5e6;
+        }
+        .submit-btn {
+            background: #e63946;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Botón flotante WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #20b859;
+        }
+
+        /* Botón volver arriba */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #e63946;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-top:hover {
+            background-color: #c1121f;
+            transform: translateY(-5px);
+        }
+
+        /* Botón volver atrás */
+        .back-button {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background-color: #1e293b;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border: none;
+        }
+        .back-button:hover {
+            background-color: #e63946;
+            transform: translateX(-3px);
+        }
+
+        /* footer */
+        footer {
+            background: #05080f;
+            margin-top: 80px;
+            padding: 50px 0 30px;
+            border-top: 1px solid #1f2a3a;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 18px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #9ca3af;
+            margin-bottom: 12px;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: #e63946;
+        }
+
+        .social-icons i {
+            font-size: 1.6rem;
+            margin-right: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.85rem;
+            border-top: 1px solid #1f2937;
+            padding-top: 30px;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
             }
-            
-            .logo { margin-left: 100px; }
-            
-            .logo-au { font-size: 2.5rem; }
-            .logo-rdcr { font-size: 1.8rem; }
-            .logo-audiolab { font-size: 1rem; }
-            
-            .hero { padding: 180px 0 100px; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero-subtitle { font-size: 1.3rem; }
-            .hero p { font-size: 1.1rem; }
-            
-            .hero-buttons { flex-direction: row; justify-content: center; }
-            .cta-button { width: auto; }
-            
-            .section-title h2 { font-size: 2.2rem; }
-            
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .service-card { max-width: 100%; }
-            
-            .results-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
-            .result-number { font-size: 2.5rem; }
-            
-            .contact-container { grid-template-columns: 1fr 1fr; }
-            .contact-recommendations { order: 1; }
-            .contact-form { order: 2; }
-            
-            .audio-examples { grid-template-columns: repeat(2, 1fr); }
-            .modal-buttons { flex-direction: row; }
-            .modal-btn { width: auto; }
-        }
-        
-        /* Media Queries para desktop */
-        @media (min-width: 992px) {
-            .container { padding: 0 40px; }
-            
-            .nav-links { gap: 30px; }
-            .nav-links a { font-size: 1.1rem; }
-            
-            .hero h1 { font-size: 3rem; }
-            .hero-subtitle { font-size: 1.4rem; }
-            .hero p { font-size: 1.2rem; max-width: 800px; }
-            
-            .services-grid { grid-template-columns: repeat(3, 1fr); }
-            .section-title h2 { font-size: 2.5rem; }
-            
-            .audio-examples { grid-template-columns: repeat(3, 1fr); }
-            
-            .results-grid { gap: 40px; }
-            .result-number { font-size: 3rem; }
-            
-            .fixed-btn-arriba { 
-                bottom: 30px; 
-                right: 30px; 
-                width: 60px; 
-                height: 60px; 
-                font-size: 1.5rem; 
+            .hero h2 {
+                font-size: 2.2rem;
             }
-        }
-        
-        /* Media Queries para pantallas muy pequeñas */
-        @media (max-width: 480px) {
-            .fixed-btn-atras span { display: none; }
-            .fixed-btn-atras { 
-                width: 40px; 
-                height: 40px; 
-                border-radius: 50%; 
-                padding: 0;
+            .section-title {
+                font-size: 1.8rem;
             }
-            
-            .logo { margin-left: 50px; }
-            
-            .logo-au { font-size: 1.6rem; }
-            .logo-rdcr { font-size: 1.2rem; }
-            .logo-audiolab { font-size: 0.7rem; }
-            
-            .hero h1 { font-size: 1.8rem; }
-            .hero-subtitle { font-size: 1rem; }
-            
-            .section-title h2 { font-size: 1.6rem; }
-            
-            .service-card h3 { font-size: 1.3rem; }
-            
-            .results-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .result-number { font-size: 1.8rem; }
-            .result-text { font-size: 0.8rem; }
-            
-            .contact-item { flex-direction: column; text-align: center; }
-        }
-        
-        /* Ajustes específicos para iOS Safari */
-        @supports (-webkit-touch-callout: none) {
-            .hero { min-height: -webkit-fill-available; }
-            .modal-content { max-height: 85vh; }
-        }
-        
-        /* Ajustes para navegadores WebKit */
-        @media screen and (-webkit-min-device-pixel-ratio:0) {
-            select, textarea, input { font-size: 16px; }
-        }
-        
-        /* Mejoras de accesibilidad */
-        @media (prefers-reduced-motion: reduce) {
-            * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+            .back-button {
+                top: 20px;
+                left: 20px;
+            }
+            .contact-form {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <a href="https://rdcrsound.adcm.club/" class="fixed-btn-atras" id="btnAtras" title="Volver a rdcrsound.adcm.club">
-        <i class="fas fa-arrow-left"></i><span>Atrás</span>
-    </a>
-    
-    <button class="fixed-btn-arriba" id="btnArriba" title="Ir arriba">
-        <i class="fas fa-arrow-up"></i>
-    </button>
 
-    <!-- Modal de instrucciones para subir audio -->
-    <div class="modal" id="instructionsModal">
-        <div class="modal-content">
-            <div class="modal-icon">
-                <i class="fas fa-cloud-upload-alt"></i>
+<!-- Botón volver atrás -->
+<button class="back-button" onclick="window.history.back();" title="Volver atrás">
+    <i class="fas fa-arrow-left"></i>
+</button>
+
+<!-- Botón flotante WhatsApp (DIRECTO) -->
+<a href="https://wa.me/593961480654?text=Hola%20AudioLab%20by%20RDCR%2C%20me%20interesa%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20producci%C3%B3n%20de%20audio" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Botón volver arriba -->
+<div class="scroll-top" id="scrollTopBtn" title="Ir arriba">
+    <i class="fas fa-chevron-up"></i>
+</div>
+
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <h1>AudioLab by RDCR</h1>
+                <p>Branding sonoro con alma analógica</p>
             </div>
-            <h3>📤 Cómo Enviar tu Archivo de Audio</h3>
-            <p>Para que podamos recibir tu archivo de audio, por favor sigue estos pasos:</p>
-            <ol>
-                <li><strong>Sube tu archivo</strong> a uno de estos servicios gratuitos:</li>
-                <ul style="list-style: none; padding-left: 20px; margin-top: 10px; margin-bottom: 15px;">
-                    <li>• <a href="https://wetransfer.com" target="_blank" style="color: var(--primary-yellow); text-decoration: none;">WeTransfer</a> (recomendado, 2GB gratis)</li>
-                    <li>• <a href="https://drive.google.com" target="_blank" style="color: var(--primary-yellow); text-decoration: none;">Google Drive</a> (15GB gratis)</li>
-                    <li>• <a href="https://dropbox.com" target="_blank" style="color: var(--primary-yellow); text-decoration: none;">Dropbox</a> (2GB gratis)</li>
-                    <li>• <a href="https://mega.nz" target="_blank" style="color: var(--primary-yellow); text-decoration: none;">MEGA</a> (20GB gratis)</li>
-                </ul>
-                <li><strong>Configura el archivo</strong> como "público" o "cualquier persona con el enlace puede ver/descargar"</li>
-                <li><strong>Copia el enlace de descarga</strong> directa (no el enlace de vista previa)</li>
-                <li><strong>Pega el enlace</strong> en el campo "Enlace de descarga del audio" del formulario</li>
-            </ol>
-            <p style="font-size: 0.9rem; color: var(--text-gray); text-align: center;">
-                <strong>📝 Nota:</strong> Asegúrate de que el enlace permita la descarga directa del archivo sin necesidad de iniciar sesión.
-            </p>
-            <div class="modal-buttons">
-                <button class="modal-btn primary" id="closeModalBtn">
-                    <i class="fas fa-check"></i> Entendido, continuar
-                </button>
+            <div class="nav-links">
+                <a href="#">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#escucha">Escucha</a>
+                <a href="#equipo">Estudio</a>
+                <a href="#clientes">Clientes</a>
+                <a href="#contacto">Contacto</a>
             </div>
         </div>
     </div>
+</header>
 
-    <header>
-        <div class="container header-container">
-            <a href="#" class="logo">
-                <div class="logo-main">
-                    <div class="logo-top">
-                        <div class="logo-au">Au</div>
-                        <div class="logo-rdcr">RDCR</div>
-                    </div>
-                    <div class="logo-audiolab">AudioLab</div>
-                </div>
-            </a>
-            
-            <nav>
-                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="nav-links" id="navLinks">
-                    <a href="#home">Inicio</a>
-                    <a href="#services">Servicios</a>
-                    <a href="#before-after">Resultados</a>
-                    <a href="#contact">Contacto</a>
-                </div>
-            </nav>
+<main>
+    <div class="container">
+        <div class="hero">
+            <h2>Imagen de radio, Jingles Cantados & Cuñas que suenan a industria</h2>
+            <p>AudioLab by RDCR graba con micrófono AKG P120 e interfaz UMC404. Calidad broadcast para emisoras, podcasts y marcas exigentes.</p>
+            <a href="#contacto" class="btn">🎧 Solicita demo gratis <i class="fas fa-arrow-right"></i></a>
         </div>
-    </header>
 
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <div class="hero-subtitle">AUDIOLAB BY RDCR SOUND</div>
-            <h1>Edición, mezcla y masterización <span class="hero-highlight">profesional</span> de audio</h1>
-            <p>En AUDIOLAB BY RDCR SOUND entendemos que el sonido no se improvisa. Cada proyecto se trabaja con criterio técnico, oído profesional y estándares de calidad pensados para radio, streaming y plataformas digitales.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="cta-button">
-                    <i class="fas fa-dollar-sign"></i> Solicitar Presupuesto
-                </a>
-                <a href="#before-after" class="cta-button secondary">
-                    <i class="fas fa-headphones"></i> Escuchar Demos
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Tarifario Oficial</h2>
-            </div>
-            
+        <!-- Servicios interactivos: al hacer clic se escucha demo -->
+        <div id="servicios">
+            <h2 class="section-title">¿Qué audio podemos crear para ti? (Haz clic para escuchar demo)</h2>
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-microphone"></i>
-                    </div>
-                    <h3>EDICIÓN DE VOZ Y LOCUCIÓN</h3>
-                    <ul class="service-features">
-                        <li><strong>Edición básica de voz</strong> (cortes, limpieza ligera, normalización): $20 – $40 por hora</li>
-                        <li><strong>Edición profesional de locución</strong> (limpieza profunda, ecualización, compresión y nivelación): $35 – $75 por hora</li>
-                        <li><strong>Locución comercial lista para emisión</strong> (radio / streaming): $25 – $60 por pieza</li>
-                    </ul>
-                    <div class="price-range">Desde $20 USD</div>
+                <div class="service-card" data-demo="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" data-nombre="Radio Imaging">
+                    <i class="fas fa-waveform"></i>
+                    <h3>Imagen de Radio</h3>
+                    <p>Imaging, cortinas, ráfagas y estaciones con identidad propia.</p>
+                    <span style="font-size:0.8rem; color:#e63946;">🔊 clic para demo</span>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-podcast"></i>
-                    </div>
-                    <h3>PODCAST Y CONTENIDO HABLADO</h3>
-                    <ul class="service-features">
-                        <li><strong>Edición completa de episodio</strong> (30 a 60 minutos): $60 – $250 por episodio</li>
-                        <li><strong>Podcast con varios locutores</strong> o estructura avanzada: desde $120 por episodio</li>
-                        <li>Incluye: limpieza de audio, cortes editoriales, mezcla, nivelación y master final</li>
-                    </ul>
-                    <div class="price-range">Desde $60 USD</div>
+                <div class="service-card" data-demo="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" data-nombre="DJ Drops">
+                    <i class="fas fa-microphone-alt"></i>
+                    <h3>DJ Drops</h3>
+                    <p>Drops energéticos para locutores, mixes y programas de radio.</p>
+                    <span style="font-size:0.8rem; color:#e63946;">🔊 clic para demo</span>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-music"></i>
-                    </div>
-                    <h3>MÚSICA Y SERVICIOS AVANZADOS</h3>
-                    <ul class="service-features">
-                        <li><strong>Edición, mezcla y masterización</strong> de una canción (una pista vocal): $80 – $300 por pista</li>
-                        <li><strong>Corrección vocal / afinación (tuning):</strong> +$15 – $50 por pista</li>
-                        <li><strong>Masterización profesional independiente:</strong> $30 – $100 por pista</li>
-                        <li><strong>Proyectos corporativos o alta exigencia:</strong> $70 – $120 por hora</li>
-                    </ul>
-                    <div class="price-range">Desde $30 USD</div>
+                <div class="service-card" data-demo="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" data-nombre="Jingles Cantados">
+                    <i class="fas fa-music"></i>
+                    <h3>Jingles Cantados</h3>
+                    <p>Jingles originales, voces profesionales y arreglos a medida.</p>
+                    <span style="font-size:0.8rem; color:#e63946;">🔊 clic para demo</span>
                 </div>
-            </div>
-            
-            <p style="text-align: center; color: var(--text-gray); margin-top: 30px; font-size: 0.85rem; padding: 0 15px;">
-                <strong>📝 Nota:</strong> Las tarifas están expresadas en dólares americanos (USD) y aplican para el mercado de Ecuador. Cobro mínimo por proyecto: $30. Los valores pueden variar según la duración, el estado del audio recibido y la complejidad técnica del trabajo.
-            </p>
-        </div>
-    </section>
-
-    <section class="before-after" id="before-after">
-        <div class="container">
-            <div class="section-title">
-                <h2>Escucha la Diferencia</h2>
-            </div>
-            
-            <div class="ba-container">
-                <div class="ba-player">
-                    <div class="ba-title">
-                        <h3>Ejemplos de Nuestro Trabajo</h3>
-                        <p style="color: var(--text-gray); font-size: 0.95rem;">Compara cómo transformamos audios problemáticos en producciones profesionales</p>
-                    </div>
-                    
-                    <div class="audio-examples">
-                        <div class="audio-example">
-                            <h4>Podcast - Edición Completa</h4>
-                            <audio controls preload="metadata">
-                                <source src="/RDCRAudioLab/audios/Audio Original (Antes) locucion.mp3" type="audio/mpeg">
-                                Tu navegador no soporta audio.
-                            </audio>
-                            <audio controls preload="metadata">
-                                <source src="/RDCRAudioLab/audios/Audio Original (despues) locucion.mp3" type="audio/mpeg">
-                                Tu navegador no soporta audio.
-                            </audio>
-                            <p class="audio-info">ANTES: Podcast con ruido de fondo, volumen irregular. DESPUÉS: Audio limpio, nivelado y profesional.</p>
-                        </div>
-                        
-                        <div class="audio-example">
-                            <h4>Locución Comercial</h4>
-                            <audio controls preload="metadata">
-                                <source src="/RDCRAudioLab/audios/Audio Original (Antes) locucion.mp3" type="audio/mpeg">
-                                Tu navegador no soporta audio.
-                            </audio>
-                            <audio controls preload="metadata">
-                                <source src="/RDCRAudioLab/audios/Audio Original (despues) locucion.mp3" type="audio/mpeg">
-                                Tu navegador no soporta audio.
-                            </audio>
-                            <p class="audio-info">ANTES: Voz con eco y resonancias. DESPUÉS: Voz clara, cálida y lista para radio.</p>
-                        </div>
-                        
-                        <div class="audio-example">
-                            <h4>Música - Mezcla y Masterización</h4>
-                            <audio controls preload="metadata">
-                                <source src="/RDCRAudioLab/audios/Audio Original (Antes) locucion.mp3" type="audio/mpeg">
-                                Tu navegador no soporta audio.
-                            </audio>
-                            <audio controls preload="metadata">
-                                <source src="/RDCRAudioLab/audios/Audio Original (despues) locucion.mp3" type="audio/mpeg">
-                                Tu navegador no soporta audio.
-                            </audio>
-                            <p class="audio-info">ANTES: Mezcla desbalanceada y sin claridad. DESPUÉS: Equilibrio perfecto y sonido profesional.</p>
-                        </div>
-                    </div>
+                <div class="service-card" data-demo="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" data-nombre="Cuñas Publicitarias">
+                    <i class="fas fa-bullhorn"></i>
+                    <h3>Cuñas Publicitarias</h3>
+                    <p>Anuncios de alto impacto para radio digital y tradicional.</p>
+                    <span style="font-size:0.8rem; color:#e63946;">🔊 clic para demo</span>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section class="results">
-        <div class="container">
-            <div class="section-title">
-                <h2>Confían en Nosotros</h2>
-            </div>
-            
-            <div class="results-grid">
-                <div class="result-item">
-                    <div class="result-number">200+</div>
-                    <div class="result-text">Proyectos Completados</div>
+        <!-- Reproductor demo flotante -->
+        <div id="floatingDemo" class="demo-player" style="display: none;">
+            <span id="demoLabel">Escuchando: </span>
+            <audio id="demoAudio" controls autoplay></audio>
+            <button id="closeDemoBtn" class="close-demo"><i class="fas fa-times-circle"></i></button>
+        </div>
+
+        <!-- Escucha sección alternativa -->
+        <div id="escucha" class="listen-section" style="background:#0f1117; border-radius:48px; padding:40px 30px; text-align:center; margin:40px 0;">
+            <i class="fas fa-headphones" style="font-size: 2.5rem; color:#e63946;"></i>
+            <h3 style="font-size: 1.8rem; margin: 15px 0;">Demo general de estudio</h3>
+            <p>Muestra de calidad de grabación con AKG P120 + UMC404</p>
+            <audio controls src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" style="width:100%; max-width:500px; margin-top:20px;"></audio>
+        </div>
+
+        <!-- EQUIPO: AKG P120 y UMC404 -->
+        <div id="equipo">
+            <h2 class="section-title">Nuestro hardware profesional</h2>
+            <div class="gear-showcase">
+                <div class="gear-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23222'/%3E%3Ccircle cx='100' cy='90' r='45' fill='%23333' stroke='%23555' stroke-width='2'/%3E%3Crect x='85' y='130' width='30' height='50' fill='%23444'/%3E%3Ctext x='50' y='180' fill='%23aaa' font-size='12'%3EAKG P120%3C/text%3E%3C/svg%3E" alt="Micrófono AKG P120 referencia">
+                    <h4>Micrófono AKG P120</h4>
+                    <div class="badge-equipo">Cápsula de 1" · Patrón cardioide · Respuesta plana</div>
+                    <p style="margin-top:12px;">Cautivamos cada voz con la claridad y calidez del AKG P120, ideal para voces y locuciones broadcast.</p>
                 </div>
-                
-                <div class="result-item">
-                    <div class="result-number">99%</div>
-                    <div class="result-text">Clientes Satisfechos</div>
-                </div>
-                
-                <div class="result-item">
-                    <div class="result-number">24h</div>
-                    <div class="result-text">Entrega Express</div>
-                </div>
-                
-                <div class="result-item">
-                    <div class="result-number">100%</div>
-                    <div class="result-text">Garantía de Calidad</div>
+                <div class="gear-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%231a1e2a'/%3E%3Crect x='40' y='50' width='120' height='70' rx='10' fill='%23333'/%3E%3Ccircle cx='70' cy='85' r='12' fill='%23555'/%3E%3Ccircle cx='110' cy='85' r='12' fill='%23555'/%3E%3Ctext x='55' y='150' fill='%23aaa' font-size='12'%3EUMC404%3C/text%3E%3C/svg%3E" alt="Interfaz Behringer UMC404 referencia">
+                    <h4>Interfaz UMC404</h4>
+                    <div class="badge-equipo">4 canales · Preamps Midas · 24-bit/192kHz</div>
+                    <p style="margin-top:12px;">Grabación cristalina y sin ruido. La UMC404 garantiza el rango dinámico que distingue a AudioLab by RDCR.</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>¿Listo para Mejorar tu Audio?</h2>
-            </div>
-            
-            <div class="contact-container">
-                <div class="contact-form">
-                    <h3>Solicita Presupuesto por WhatsApp</h3>
-                    <p style="text-align: center; color: var(--text-gray); margin-bottom: 20px; font-size: 0.95rem;">
-                        Completa el formulario y envía tu archivo de audio
-                    </p>
-                    
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Nombre completo *</label>
-                            <input type="text" id="name" name="name" required placeholder="Tu nombre completo">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required placeholder="tu@email.com">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Teléfono (WhatsApp) *</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="+593 96 148 0654" pattern="\+593\s?\d{9}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">¿Qué servicio necesitas? *</label>
-                            <select id="service" name="service" required>
-                                <option value="">Selecciona una opción</option>
-                                <option value="edicion">Edición de voz y locución</option>
-                                <option value="podcast">Podcast y contenido hablado</option>
-                                <option value="musica">Música y voces cantadas</option>
-                                <option value="avanzado">Servicios avanzados</option>
-                                <option value="duda">Tengo dudas, necesito asesoría</option>
-                            </select>
-                        </div>
-                        
-                        <!-- Campo para enlace de descarga -->
-                        <div class="form-group">
-                            <label for="audioLink">
-                                Enlace de descarga del audio * 
-                                <i class="fas fa-question-circle" style="color: var(--primary-yellow); cursor: pointer;" id="helpAudioLink" aria-label="Ayuda para enlace de audio"></i>
-                            </label>
-                            <input type="url" id="audioLink" name="audioLink" required 
-                                   placeholder="https://wetransfer.com/downloads/tu-audio.wav"
-                                   pattern="https?://.+">
-                            <p style="font-size: 0.8rem; color: var(--text-gray); margin-top: 5px;">
-                                Enlace público para descargar tu archivo de audio
-                            </p>
-                        </div>
-                        
-                        <!-- Información del archivo -->
-                        <div class="form-group">
-                            <label for="audioDuration">Duración aproximada del audio *</label>
-                            <select id="audioDuration" name="audioDuration" required>
-                                <option value="">Selecciona duración</option>
-                                <option value="menos-5">Menos de 5 minutos</option>
-                                <option value="5-15">5 a 15 minutos</option>
-                                <option value="15-30">15 a 30 minutos</option>
-                                <option value="30-60">30 a 60 minutos</option>
-                                <option value="mas-60">Más de 60 minutos</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Describe tu proyecto *</label>
-                            <textarea id="message" name="message" required placeholder="Cuéntanos sobre tu proyecto, duración, plazos y cualquier detalle importante..."></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="budget">Presupuesto aproximado (USD)</label>
-                            <select id="budget" name="budget">
-                                <option value="">Selecciona rango</option>
-                                <option value="20-50">$20 - $50</option>
-                                <option value="50-100">$50 - $100</option>
-                                <option value="100-200">$100 - $200</option>
-                                <option value="200+">Más de $200</option>
-                                <option value="no-se">No sé, necesito cotización</option>
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn" id="submitBtn">
-                            <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
-                        </button>
-                    </form>
+        <!-- Cualquier formato de radio -->
+        <div style="background: linear-gradient(145deg, #0e1420, #080b10); padding: 48px 32px; border-radius: 48px; margin: 40px 0;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px;">
+                <div>
+                    <h3 style="font-size: 1.8rem; font-weight: 700;">Cualquier formato de radio. Creamos tu imagen y jingles.</h3>
+                    <p style="margin-top: 12px; max-width: 550px;">Top 40, urbano, rock, noticias o talk radio. AudioLab by RDCR produce sonido a medida para tu audiencia y presupuesto.</p>
                 </div>
-                
-                <div class="contact-recommendations">
-                    <h3>📋 Requisitos Técnicos para Tu Audio</h3>
-                    <div class="recommendation-list">
-                        <div class="recommendation-item">
-                            <h4>🔊 FORMATO DEL ARCHIVO</h4>
-                            <ul>
-                                <li><strong>Formato:</strong> WAV (obligatorio)</li>
-                                <li><strong>Calidad:</strong> 44.1 kHz / 24 bits (ideal) o 48 kHz / 24 bits</li>
-                                <li><strong>Canales:</strong> Mono</li>
-                                <li>❌ No enviar MP3, M4A, OGG, ni audios comprimidos</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="recommendation-item">
-                            <h4>🎚️ NIVEL DE GRABACIÓN</h4>
-                            <ul>
-                                <li>Nivel promedio entre -12 dB y -6 dB</li>
-                                <li>Picos máximos: -3 dB</li>
-                                <li>❌ No grabar saturado (clip)</li>
-                                <li>❌ No grabar muy bajo (ruido innecesario)</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="recommendation-item">
-                            <h4>🎧 CONDICIONES DE GRABACIÓN</h4>
-                            <ul>
-                                <li>Grabar en un espacio silencioso</li>
-                                <li>Evitar: ventiladores, aires acondicionados, eco o reverberación</li>
-                                <li>Usar micrófono dedicado (condensador o dinámico)</li>
-                                <li>Distancia recomendada al micrófono: 15–20 cm</li>
-                                <li>Usar filtro anti-pop (muy importante)</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="recommendation-item">
-                            <h4>🎛️ PROCESAMIENTO (MUY IMPORTANTE)</h4>
-                            <ul>
-                                <li>El audio debe enviarse TOTALMENTE LIMPIO</li>
-                                <li>❌ No aplicar: Compresor, Ecualización, Reverb, Delay, Noise Reduction, Limitadores</li>
-                                <li>Sin efectos, sin presets, sin plugins</li>
-                                <li>La edición, limpieza, ecualización y masterización se realizan dentro de Adobe Audition</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="recommendation-item">
-                            <h4>⏱️ SILENCIOS Y NOMBRE</h4>
-                            <ul>
-                                <li>Dejar 3 a 5 segundos de silencio al inicio o final del audio</li>
-                                <li><strong>Formato nombre:</strong> Nombre_Apellido_TipoDeVoz_Toma.wav</li>
-                                <li><strong>Ejemplo:</strong> DarioCastellanos_Locucion_Comercial_T1.wav</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <a href="#contacto" class="btn btn-outline">Diseñemos tu sonido <i class="fas fa-pen-fancy"></i></a>
             </div>
         </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-logo">
-                <div class="logo-main">
-                    <div class="logo-top">
-                        <div class="logo-au">Au</div>
-                        <div class="logo-rdcr">RDCR</div>
-                    </div>
-                    <div class="logo-audiolab">AudioLab</div>
-                </div>
-            </div>
-            
-            <div class="footer-contact">
-                <h3>Contacto Directo</h3>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>+593 96 148 0654</span>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>rdcrsound@gmail.com</span>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <i class="fas fa-clock"></i>
-                        <span>Lun-Vie: 9:00-19:00</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="social-links">
-                <a href="#" title="Instagram" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                
-                <a href="https://wa.me/593961480654" title="WhatsApp" target="_blank" rel="noopener" aria-label="WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                
-                <a href="#" title="SoundCloud" aria-label="SoundCloud">
-                    <i class="fab fa-soundcloud"></i>
-                </a>
-                
-                <a href="#" title="LinkedIn" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 AUDIOLAB BY RDCR SOUND. Todos los derechos reservados.</p>
-                <p style="margin-top:10px; font-size: 0.75rem;">Edición, mezcla y masterización profesional de audio</p>
+        <!-- reseñas -->
+        <div id="clientes">
+            <h2 class="section-title">Lo que nuestros clientes dicen</h2>
+            <div class="reviews-grid">
+                <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"La calidad de grabación con el AKG P120 es insuperable. Nuestra emisora suena a nivel internacional."</div><div class="review-author">— Lina M. / Radio Fuego 88.8</div></div>
+                <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"El equipo de AudioLab entiende la importancia del hardware. Los drops tienen una presencia increíble gracias a la UMC404."</div><div class="review-author">— Ricardo G. / Flyways Radio</div></div>
+                <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Nos fascinó poder escuchar demos antes de comprar. La producción es limpia, potente y profesional."</div><div class="review-author">— Jarrod D. / Sun FM</div></div>
+                <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"La transparencia del micrófono AKG + la interfaz UMC hacen que cada jingle suene como un hit de radio."</div><div class="review-author">— Daniel B. / Kiel FM</div></div>
+                <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Cambiamos el sonido de la emisora. Ahora todo suena más grande. ¡Altamente recomendados!"</div><div class="review-author">— Francesco / Addiktion Radio</div></div>
+                <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"El mejor estudio de branding sonoro. Nos asesoraron en cada paso y el resultado final es espectacular."</div><div class="review-author">— Rebecca F. / Capital Media HD</div></div>
             </div>
         </div>
-    </footer>
 
-    <script>
-        // Botón arriba - mostrar/ocultar dinámicamente
-        const btnArriba = document.getElementById('btnArriba');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                btnArriba.classList.add('mostrar');
-            } else {
-                btnArriba.classList.remove('mostrar');
-            }
+        <!-- stats -->
+        <div class="stats">
+            <div class="stat-item"><h4>500+</h4><p>Estaciones servidas</p></div>
+            <div class="stat-item"><h4>15+</h4><p>Idiomas disponibles</p></div>
+            <div class="stat-item"><h4>4.9★</h4><p>Puntuación media</p></div>
+            <div class="stat-item"><h4>100%</h4><p>Audio ready broadcast</p></div>
+        </div>
+
+        <!-- Why AudioLab by RDCR -->
+        <div class="why-us">
+            <div class="feature"><i class="fas fa-chart-line"></i><h4>Moderno & actual</h4><p>Siempre a la vanguardia sonora.</p></div>
+            <div class="feature"><i class="fas fa-file-audio"></i><h4>Calidad .wav</h4><p>Entregas en alta resolución.</p></div>
+            <div class="feature"><i class="fas fa-stopwatch"></i><h4>Respuesta rápida</h4><p>Turnaround ágil y profesional.</p></div>
+            <div class="feature"><i class="fas fa-microphone"></i><h4>AKG P120 + UMC404</h4><p>Cadena de sonido de estudio real.</p></div>
+        </div>
+
+        <!-- FORMULARIO DE CONTACTO FUNCIONAL -->
+        <div id="contacto">
+            <h2 class="section-title">Cuéntanos sobre tu proyecto</h2>
+            <div class="contact-form">
+                <form action="https://formspree.io/f/xgvargdp" method="POST">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo *</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo electrónico *</label>
+                        <input type="email" id="email" name="email" required placeholder="tucorreo@ejemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono / WhatsApp</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="+593 96 123 4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="servicio">Servicio que te interesa *</label>
+                        <select id="servicio" name="servicio" required>
+                            <option value="">Selecciona una opción</option>
+                            <option>Imagen de Radio (Imaging)</option>
+                            <option>DJ Drops</option>
+                            <option>Jingles Cantados</option>
+                            <option>Cuñas Publicitarias</option>
+                            <option>Paquete completo de branding</option>
+                            <option>Otro / No estoy seguro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje o requerimientos *</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Cuéntanos sobre tu emisora, marca o proyecto..."></textarea>
+                    </div>
+                    <button type="submit" class="btn submit-btn">Enviar mensaje <i class="fas fa-paper-plane"></i></button>
+                </form>
+                <p style="text-align: center; margin-top: 24px; font-size: 0.85rem; color:#8ca3ba;">Recibirás respuesta en menos de 24 horas. También puedes escribirnos por WhatsApp al <strong>+593 961 480 654</strong>.</p>
+            </div>
+        </div>
+
+        <div style="background: #0b1018; border-radius: 40px; padding: 40px 30px; text-align: center; margin: 30px 0;">
+            <h3>¿Listo para sonar como una emisora profesional?</h3>
+            <p style="margin: 15px 0;">Contáctanos y recibe una lluvia de ideas creativa sin costo. Creamos tu identidad sonora desde el primer concepto.</p>
+            <a href="#contacto" class="btn" style="margin-top: 10px;">Quiero mi presupuesto <i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>AudioLab by RDCR</h4>
+                <p>Producción de imagen de radio, jingles cantados y cuñas publicitarias con hardware profesional (AKG P120, UMC404). Sonido que vende.</p>
+                <div class="social-icons" style="margin-top: 20px;">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Enlaces rápidos</h4>
+                <a href="#">Inicio</a>
+                <a href="#servicios">Servicios interactivos</a>
+                <a href="#equipo">Estudio / Gear</a>
+                <a href="#clientes">Testimonios</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <a href="mailto:rdcrsound@gmail.com">rdcrsound@gmail.com</a>
+                <a href="tel:+593961480654">+593 961 480 654</a>
+                <a href="#">Política de privacidad</a>
+                <a href="#">Términos de servicio</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025 AudioLab by RDCR — Branding sonoro profesional · Grabado con micrófono AKG P120 e interfaz UMC404.</p>
+            <p style="margin-top: 8px;">Inspirado en la excelencia creativa · Hecho para radioemisoras audaces</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Servicios con demo
+    const serviceCards = document.querySelectorAll('.service-card');
+    const floatingDemo = document.getElementById('floatingDemo');
+    const demoAudio = document.getElementById('demoAudio');
+    const demoLabel = document.getElementById('demoLabel');
+    const closeDemoBtn = document.getElementById('closeDemoBtn');
+
+    function playDemo(url, serviceName) {
+        demoLabel.innerText = `🎧 Escuchando demo: ${serviceName} `;
+        demoAudio.src = url;
+        floatingDemo.style.display = 'flex';
+        demoAudio.play().catch(e => console.log("Autoplay bloqueado"));
+    }
+
+    serviceCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const demoUrl = card.getAttribute('data-demo');
+            const serviceName = card.querySelector('h3')?.innerText || 'Audio';
+            if (demoUrl) playDemo(demoUrl, serviceName);
+            else alert("Demo no disponible, solicita muestra personalizada.");
         });
-        
-        // Botón arriba - lleva al inicio de la página con smooth scroll
-        btnArriba.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Menú móvil optimizado
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-                
-            // Prevenir scroll del body cuando el menú está abierto
-            if (navLinks.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        });
-        
-        // Cerrar menú al hacer clic en un enlace
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                document.body.style.overflow = '';
-            });
-        });
-        
-        // Modal de instrucciones
-        const instructionsModal = document.getElementById('instructionsModal');
-        const helpAudioLink = document.getElementById('helpAudioLink');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        
-        helpAudioLink.addEventListener('click', () => {
-            instructionsModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        });
-        
-        closeModalBtn.addEventListener('click', () => {
-            instructionsModal.style.display = 'none';
-            document.body.style.overflow = '';
-        });
-        
-        instructionsModal.addEventListener('click', (e) => {
-            if (e.target === instructionsModal) {
-                instructionsModal.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-        });
-        
-        // Formulario interactivo con envío a WhatsApp
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Validar enlace de audio
-            const audioLink = document.getElementById('audioLink').value;
-            if (!audioLink.startsWith('http')) {
-                alert('❌ Por favor ingresa un enlace válido que comience con http:// o https://');
-                audioLinkInput.focus();
-                return;
-            }
-            
-            // Deshabilitar el botón de enviar temporalmente
-            submitBtn.disabled = true;
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando mensaje...';
-            
-            try {
-                // Obtener datos del formulario
-                const formData = new FormData(contactForm);
-                const data = Object.fromEntries(formData);
-                
-                // Obtener texto del servicio seleccionado
-                const serviceSelect = document.getElementById('service');
-                const serviceText = serviceSelect.options[serviceSelect.selectedIndex].text;
-                
-                // Obtener texto de la duración seleccionada
-                const durationSelect = document.getElementById('audioDuration');
-                const durationText = durationSelect.options[durationSelect.selectedIndex].text;
-                
-                // Obtener texto del presupuesto seleccionado
-                const budgetSelect = document.getElementById('budget');
-                const budgetText = budgetSelect.value ? budgetSelect.options[budgetSelect.selectedIndex].text : 'No especificado';
-                
-                // Crear mensaje estructurado para WhatsApp
-                const whatsappMessage = `*📋 NUEVA SOLICITUD DE PRESUPUESTO - RDCR AUDIOLAB*%0A%0A` +
-                                       `*👤 DATOS DEL CLIENTE*%0A` +
-                                       `• *Nombre:* ${data.name}%0A` +
-                                       `• *Email:* ${data.email}%0A` +
-                                       `• *Teléfono:* ${data.phone}%0A%0A` +
-                                       `*🎯 SERVICIO SOLICITADO*%0A` +
-                                       `• ${serviceText}%0A%0A` +
-                                       `*📊 INFORMACIÓN DEL AUDIO*%0A` +
-                                       `• *Duración aproximada:* ${durationText}%0A` +
-                                       `• *Enlace del archivo:* ${data.audioLink}%0A%0A` +
-                                       `*💰 PRESUPUESTO*%0A` +
-                                       `• Rango: ${budgetText}%0A%0A` +
-                                       `*📝 DESCRIPCIÓN DEL PROYECTO*%0A` +
-                                       `${data.message}%0A%0A` +
-                                       `---%0A` +
-                                       `*📤 SOLICITUD ENVIADA DESDE:* RDCR AudioLab Website%0A` +
-                                       `*📅 FECHA:* ${new Date().toLocaleDateString('es-ES')}%0A` +
-                                       `*⏰ HORA:* ${new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`;
-                
-                const whatsappUrl = `https://wa.me/593961480654?text=${encodeURIComponent(whatsappMessage)}`;
-                
-                // Mostrar mensaje de confirmación
-                alert('✅ ¡Formulario completado! Se abrirá WhatsApp con tu solicitud prellenada.');
-                
-                // Abrir WhatsApp en nueva pestaña
-                setTimeout(() => {
-                    window.open(whatsappUrl, '_blank');
-                    
-                    // Restaurar el botón de enviar
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalText;
-                    
-                    // Resetear formulario después de enviar
-                    contactForm.reset();
-                }, 500);
-                
-            } catch (error) {
-                console.error('Error al procesar el formulario:', error);
-                alert('❌ Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo.');
-                
-                // Restaurar el botón de enviar en caso de error
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-            }
-        });
-        
-        // Validación en tiempo real del enlace de audio
-        const audioLinkInput = document.getElementById('audioLink');
-        audioLinkInput.addEventListener('input', function() {
-            if (this.value && !this.value.startsWith('http')) {
-                this.style.borderColor = '#ff4444';
-                this.style.borderWidth = '2px';
-            } else {
-                this.style.borderColor = '';
-                this.style.borderWidth = '';
-            }
-        });
-        
-        // Smooth scroll para enlaces internos optimizado
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            if (!anchor.classList.contains('fixed-btn-atras')) {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        // Cerrar menú móvil si está abierto
-                        navLinks.classList.remove('active');
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                        document.body.style.overflow = '';
-                        
-                        // Calcular posición considerando el header fijo
-                        const headerHeight = document.querySelector('header').offsetHeight;
-                        const targetPosition = targetElement.offsetTop - headerHeight - 20;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            }
-        });
-        
-        // Inicializar botón arriba según posición de scroll
-        if (window.scrollY > 300) {
-            btnArriba.classList.add('mostrar');
-        }
-        
-        // Prevenir zoom en inputs en iOS
-        document.addEventListener('touchstart', function() {}, {passive: true});
-        
-        // Mejorar rendimiento en móviles
-        document.addEventListener('DOMContentLoaded', function() {
-            // Precargar imágenes importantes
-            const heroImage = new Image();
-            heroImage.src = 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
-            
-            // Precargar íconos de FontAwesome
-            const fontAwesome = new FontFace('FontAwesome', 'url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2)');
-            fontAwesome.load().then(function(loadedFace) {
-                document.fonts.add(loadedFace);
-            });
-        });
-        
-        // Manejar tecla Escape para cerrar modal y menú
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                if (instructionsModal.style.display === 'flex') {
-                    instructionsModal.style.display = 'none';
-                    document.body.style.overflow = '';
-                }
-                
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    document.body.style.overflow = '';
-                }
-            }
-        });
-        
-        // Optimizar para carga en móviles
-        if ('connection' in navigator && navigator.connection.saveData === true) {
-            // Modo ahorro de datos activado
-            document.querySelectorAll('audio').forEach(audio => {
-                audio.preload = 'none';
-            });
-        }
-    </script>
+    });
+
+    closeDemoBtn.addEventListener('click', () => {
+        demoAudio.pause();
+        demoAudio.src = "";
+        floatingDemo.style.display = 'none';
+    });
+
+    // Scroll top
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) scrollTopBtn.classList.add('show');
+        else scrollTopBtn.classList.remove('show');
+    });
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 </body>
 </html>
