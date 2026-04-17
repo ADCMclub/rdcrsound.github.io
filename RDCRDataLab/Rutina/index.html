@@ -24,17 +24,28 @@
 <script type="text/babel">
 const { useState, useEffect, useCallback, useRef, useMemo } = React;
 
+// time: schedule block | tip: quick reminder | weekend: alternate time on Sat/Sun
 const HABITS = [
-  { id:"oracion",    icon:"🙏", label:"Oración / Devocional",    points:15 },
-  { id:"ejercicio",  icon:"💪", label:"Ejercicio matutino",       points:15 },
-  { id:"habilidad",  icon:"🎓", label:"Bloque de habilidad",      points:15 },
-  { id:"sinmovil",   icon:"📵", label:"Sin móvil al despertar",   points:10 },
-  { id:"movilnoche", icon:"🌙", label:"Móvil fuera del cuarto",   points:10 },
-  { id:"desayuno",   icon:"🥗", label:"Desayuno proteico",        points:8  },
-  { id:"video",      icon:"🎬", label:"Grabé video de contenido", points:12 },
-  { id:"radio",      icon:"📻", label:"Programa de radio",        points:15 },
-  { id:"suenio",     icon:"😴", label:"Dormí antes de 23:00",     points:10 },
-  { id:"libreta",    icon:"📝", label:"Anotaciones en libreta",   points:8  },
+  { id:"oracion",    icon:"🙏", label:"Oración / Devocional",    points:15,
+    time:"05:00–05:20", tip:"Ora en voz alta — práctica de oratoria", weekendTime:"06:00–06:30" },
+  { id:"ejercicio",  icon:"💪", label:"Ejercicio matutino",       points:15,
+    time:"05:20–05:55", tip:"L/M/V fuerza · Mar/Jue cardio HIIT", weekendTime:"06:30–07:30" },
+  { id:"habilidad",  icon:"🎓", label:"Bloque de habilidad",      points:15,
+    time:"06:10–06:45", tip:"L=Audition · M=Datos · X=Oratoria · J=Audition · V=Datos", weekendTime:"08:00–12:00" },
+  { id:"sinmovil",   icon:"📵", label:"Sin móvil al despertar",   points:10,
+    time:"04:55–07:00", tip:"Sin tocar el teléfono los primeros 90 min del día", weekendTime:"04:55–07:00" },
+  { id:"movilnoche", icon:"🌙", label:"Móvil fuera del cuarto",   points:10,
+    time:"22:20–04:55", tip:"Cargador fuera del cuarto. Sin excepciones.", weekendTime:"22:30–06:00" },
+  { id:"desayuno",   icon:"🥗", label:"Desayuno proteico",        points:8,
+    time:"05:55–06:10", tip:"Huevos + avena. Sin azúcar procesada.", weekendTime:"07:30–08:00" },
+  { id:"video",      icon:"🎬", label:"Grabé video de contenido", points:12,
+    time:"20:15–20:50", tip:"1 video 60–90 seg. Tema rotativo por día.", weekendTime:"14:00–16:00" },
+  { id:"radio",      icon:"📻", label:"Programa de radio",        points:15,
+    time:"21:00–22:00", tip:"Aplica oratoria: pausas, dicción, variación de tono.", weekendTime:"20:00–21:00" },
+  { id:"suenio",     icon:"😴", label:"Dormí antes de 23:00",     points:10,
+    time:"22:40–04:55", tip:"Mínimo 6h para ciclos REM. Cuarto oscuro y frío.", weekendTime:"22:30–06:00" },
+  { id:"libreta",    icon:"📝", label:"Anotaciones en libreta",   points:8,
+    time:"22:00–22:20", tip:"3 cosas que mejoré hoy. Próximo tema de radio.", weekendTime:"21:00–21:30" },
 ];
 const DAYS     = ["L","M","X","J","V","S","D"];
 const DAY_FULL = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
@@ -190,10 +201,20 @@ function TabNav({view,setView}){
   </div>;
 }
 
+// Returns Date for each day of the current ISO week (Mon–Sun)
+function getWeekDates(){
+  const now=new Date(), dow=(now.getDay()+6)%7;
+  const mon=new Date(now); mon.setDate(now.getDate()-dow); mon.setHours(0,0,0,0);
+  return Array.from({length:7},(_,i)=>{ const d=new Date(mon); d.setDate(mon.getDate()+i); return d; });
+}
+function fmtShort(d){ return `${d.getDate()} ${MONTHS_ES[d.getMonth()].slice(0,3)}`; }
+function fmtFull(d){ return `${d.getDate()} de ${MONTHS_ES[d.getMonth()]} ${d.getFullYear()}`; }
+
 // ── WEEK VIEW ────────────────────────────────────────────────
 function WeekView({checks,setChecks,showToast,setConfetti}){
   const todayIdx=(new Date().getDay()+6)%7;
   const [activeDay,setActiveDay]=useState(todayIdx);
+  const weekDates=useMemo(()=>getWeekDates(),[]);
 
   function toggle(day,hid,pts){
     const key=`${day}_${hid}`, was=!!checks[key];
@@ -234,12 +255,15 @@ function WeekView({checks,setChecks,showToast,setConfetti}){
     <div style={{display:"flex",gap:5,marginBottom:10}}>
       {DAYS.map((d,i)=>{
         const pct=dpct(i),dn=done(i),isT=i===todayIdx,isA=i===activeDay,lv=getLevel(pct);
+        const dt=weekDates[i];
         return <button key={i} onClick={()=>setActiveDay(i)} style={{flex:1,padding:"7px 2px 5px",border:"none",
           borderRadius:10,background:isA?"linear-gradient(160deg,#1a2540,#0f1a2e)":"rgba(255,255,255,.03)",
           outline:isA?`2px solid ${lv.color}`:isT?"1px solid rgba(255,215,0,.4)":"1px solid #1e2d40",
           transform:isA?"translateY(-2px)":"none",boxShadow:isA?`0 6px 20px ${lv.color}22`:"none",transition:"all .2s"}}>
           <div style={{fontSize:8,color:isT?"#FFD700":"#8892a4",fontWeight:isT?700:400}}>{isT?"HOY":d}</div>
-          <div style={{marginTop:4,display:"flex",justifyContent:"center"}}><Ring pct={pct} size={30} stroke={2.5} color={dn?"#00C896":lv.color} small/></div>
+          <div style={{fontSize:11,fontWeight:700,color:isA?lv.color:isT?"#FFD700":"#e8edf2",lineHeight:1,marginTop:2}}>{dt.getDate()}</div>
+          <div style={{fontSize:7,color:"#4a5568",lineHeight:1,marginBottom:2}}>{MONTHS_ES[dt.getMonth()].slice(0,3).toUpperCase()}</div>
+          <div style={{display:"flex",justifyContent:"center"}}><Ring pct={pct} size={28} stroke={2.5} color={dn?"#00C896":lv.color} small/></div>
           {dn&&<div style={{fontSize:9,marginTop:1}}>✅</div>}
         </button>;
       })}
@@ -251,7 +275,10 @@ function WeekView({checks,setChecks,showToast,setConfetti}){
       <div>
         <div style={{fontSize:9,color:"#8892a4",letterSpacing:3,textTransform:"uppercase"}}>
           {activeDay===todayIdx?"⚡ HOY — ":""}{DAY_FULL[activeDay]}</div>
-        <div style={{fontSize:18,fontWeight:700,color:"#fff",marginTop:2}}>{dp(activeDay)} / {TOTAL_PTS} pts</div>
+        <div style={{fontSize:13,color:alv.color,fontWeight:700,marginTop:1}}>
+          📅 {fmtFull(weekDates[activeDay])}
+        </div>
+        <div style={{fontSize:17,fontWeight:700,color:"#fff",marginTop:2}}>{dp(activeDay)} / {TOTAL_PTS} pts</div>
         <div style={{marginTop:4}}><Badge label={alv.label} color={alv.color}/></div>
       </div>
       <Ring pct={apct} size={62} stroke={6} color={alv.color}/>
@@ -260,19 +287,42 @@ function WeekView({checks,setChecks,showToast,setConfetti}){
     <div style={{display:"flex",flexDirection:"column",gap:6}}>
       {HABITS.map(h=>{
         const k=`${activeDay}_${h.id}`,ch=!!checks[k];
+        const isWeekend = activeDay>=5;
+        const displayTime = isWeekend ? h.weekendTime : h.time;
         return <button key={h.id} onClick={()=>toggle(activeDay,h.id,h.points)} style={{
-          display:"flex",alignItems:"center",gap:11,padding:"11px 13px",
+          display:"flex",alignItems:"flex-start",gap:11,padding:"11px 13px",
           border:"none",borderRadius:10,textAlign:"left",width:"100%",transition:"all .2s",
           background:ch?"linear-gradient(135deg,rgba(0,200,150,.15),rgba(0,200,150,.05))":"rgba(255,255,255,.03)",
           outline:ch?"1px solid rgba(0,200,150,.4)":"1px solid #1e2d40",
           transform:ch?"scale(1.01)":"scale(1)",boxShadow:ch?"0 4px 16px rgba(0,200,150,.12)":"none"}}>
-          <div style={{width:22,height:22,borderRadius:5,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",
+          {/* checkbox */}
+          <div style={{width:22,height:22,borderRadius:5,flexShrink:0,marginTop:1,
+            display:"flex",alignItems:"center",justifyContent:"center",
             background:ch?"#00C896":"transparent",border:`2px solid ${ch?"#00C896":"#2d3748"}`,
             transition:"all .2s",fontSize:12,color:"#0a0e14",fontWeight:900}}>{ch?"✓":""}</div>
-          <span style={{fontSize:16,flexShrink:0}}>{h.icon}</span>
-          <div style={{flex:1,fontSize:12,fontWeight:600,color:ch?"#00C896":"#e8edf2",
-            textDecoration:ch?"line-through":"none",textDecorationColor:"rgba(0,200,150,.5)",transition:"all .2s"}}>{h.label}</div>
-          <div style={{padding:"2px 9px",borderRadius:20,flexShrink:0,fontSize:10,fontWeight:700,
+          {/* icon */}
+          <span style={{fontSize:16,flexShrink:0,marginTop:1}}>{h.icon}</span>
+          {/* content */}
+          <div style={{flex:1,minWidth:0}}>
+            <div style={{display:"flex",alignItems:"center",gap:7,flexWrap:"wrap"}}>
+              <span style={{fontSize:12,fontWeight:600,color:ch?"#00C896":"#e8edf2",
+                textDecoration:ch?"line-through":"none",textDecorationColor:"rgba(0,200,150,.5)",
+                transition:"all .2s"}}>{h.label}</span>
+              {/* time badge */}
+              <span style={{
+                display:"inline-flex",alignItems:"center",gap:3,
+                padding:"1px 7px",borderRadius:20,fontSize:9,fontWeight:700,flexShrink:0,
+                background:ch?"rgba(0,200,150,.15)":"rgba(30,144,255,.12)",
+                border:`1px solid ${ch?"rgba(0,200,150,.3)":"rgba(30,144,255,.25)"}`,
+                color:ch?"#00C896":"#60a5fa",
+              }}>⏰ {displayTime}</span>
+            </div>
+            {/* tip */}
+            <div style={{fontSize:9,color:ch?"rgba(0,200,150,.6)":"#4a5568",marginTop:3,
+              fontStyle:"italic",lineHeight:1.4,transition:"all .2s"}}>{h.tip}</div>
+          </div>
+          {/* points */}
+          <div style={{padding:"2px 9px",borderRadius:20,flexShrink:0,fontSize:10,fontWeight:700,marginTop:1,
             background:ch?"rgba(0,200,150,.2)":"rgba(255,255,255,.05)",
             border:`1px solid ${ch?"rgba(0,200,150,.4)":"#2d3748"}`,
             color:ch?"#00C896":"#8892a4",transition:"all .2s"}}>+{h.points}</div>
@@ -284,9 +334,13 @@ function WeekView({checks,setChecks,showToast,setConfetti}){
       <SectionTitle>📊 Resumen semana</SectionTitle>
       {DAYS.map((d,i)=>{
         const pct=dpct(i),dn=done(i),lv=getLevel(pct);
+        const dt=weekDates[i];
         return <div key={i} onClick={()=>setActiveDay(i)} style={{display:"flex",alignItems:"center",gap:9,marginBottom:7,cursor:"pointer"}}>
-          <div style={{width:18,fontSize:9,fontWeight:i===todayIdx?700:400,
-            color:i===activeDay?lv.color:i===todayIdx?"#FFD700":"#8892a4"}}>{d}</div>
+          <div style={{width:32,flexShrink:0}}>
+            <div style={{fontSize:9,fontWeight:i===todayIdx?700:400,
+              color:i===activeDay?lv.color:i===todayIdx?"#FFD700":"#8892a4"}}>{d}</div>
+            <div style={{fontSize:8,color:"#2d3748",lineHeight:1}}>{dt.getDate()}/{dt.getMonth()+1}</div>
+          </div>
           <Bar pct={pct} color={dn?"#00C896":lv.color}/>
           <div style={{width:30,fontSize:9,fontWeight:700,color:lv.color,textAlign:"right"}}>{pct}%</div>
           {dn&&<span style={{fontSize:9}}>🏆</span>}
