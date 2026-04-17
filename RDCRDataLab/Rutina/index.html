@@ -24,28 +24,28 @@
 <script type="text/babel">
 const { useState, useEffect, useCallback, useRef, useMemo } = React;
 
-// time: schedule block | tip: quick reminder | weekend: alternate time on Sat/Sun
+// Ordered chronologically matching the PDF schedule
 const HABITS = [
+  { id:"sinmovil",   icon:"📵", label:"Sin móvil al despertar",   points:10,
+    time:"04:55–07:00", tip:"Sin tocar el teléfono los primeros 90 min del día", weekendTime:"04:55–07:00" },
   { id:"oracion",    icon:"🙏", label:"Oración / Devocional",    points:15,
     time:"05:00–05:20", tip:"Ora en voz alta — práctica de oratoria", weekendTime:"06:00–06:30" },
   { id:"ejercicio",  icon:"💪", label:"Ejercicio matutino",       points:15,
-    time:"05:20–05:55", tip:"L/M/V fuerza · Mar/Jue cardio HIIT", weekendTime:"06:30–07:30" },
-  { id:"habilidad",  icon:"🎓", label:"Bloque de habilidad",      points:15,
-    time:"06:10–06:45", tip:"L=Audition · M=Datos · X=Oratoria · J=Audition · V=Datos", weekendTime:"08:00–12:00" },
-  { id:"sinmovil",   icon:"📵", label:"Sin móvil al despertar",   points:10,
-    time:"04:55–07:00", tip:"Sin tocar el teléfono los primeros 90 min del día", weekendTime:"04:55–07:00" },
-  { id:"movilnoche", icon:"🌙", label:"Móvil fuera del cuarto",   points:10,
-    time:"22:20–04:55", tip:"Cargador fuera del cuarto. Sin excepciones.", weekendTime:"22:30–06:00" },
+    time:"05:20–05:55", tip:"L/X/V fuerza · M/J cardio HIIT", weekendTime:"06:30–07:30" },
   { id:"desayuno",   icon:"🥗", label:"Desayuno proteico",        points:8,
     time:"05:55–06:10", tip:"Huevos + avena. Sin azúcar procesada.", weekendTime:"07:30–08:00" },
+  { id:"habilidad",  icon:"🎓", label:"Bloque de habilidad",      points:15,
+    time:"06:10–06:45", tip:"L=Audition · M=Datos · X=Oratoria · J=Audition · V=Datos", weekendTime:"08:00–12:00" },
   { id:"video",      icon:"🎬", label:"Grabé video de contenido", points:12,
     time:"20:15–20:50", tip:"1 video 60–90 seg. Tema rotativo por día.", weekendTime:"14:00–16:00" },
   { id:"radio",      icon:"📻", label:"Programa de radio",        points:15,
     time:"21:00–22:00", tip:"Aplica oratoria: pausas, dicción, variación de tono.", weekendTime:"20:00–21:00" },
-  { id:"suenio",     icon:"😴", label:"Dormí antes de 23:00",     points:10,
-    time:"22:40–04:55", tip:"Mínimo 6h para ciclos REM. Cuarto oscuro y frío.", weekendTime:"22:30–06:00" },
   { id:"libreta",    icon:"📝", label:"Anotaciones en libreta",   points:8,
     time:"22:00–22:20", tip:"3 cosas que mejoré hoy. Próximo tema de radio.", weekendTime:"21:00–21:30" },
+  { id:"movilnoche", icon:"🌙", label:"Móvil fuera del cuarto",   points:10,
+    time:"22:20–04:55", tip:"Cargador fuera del cuarto. Sin excepciones.", weekendTime:"22:30–06:00" },
+  { id:"suenio",     icon:"😴", label:"Dormí antes de 23:00",     points:10,
+    time:"22:40–04:55", tip:"Mínimo 6h para ciclos REM. Cuarto oscuro y frío.", weekendTime:"22:30–06:00" },
 ];
 const DAYS     = ["L","M","X","J","V","S","D"];
 const DAY_FULL = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
@@ -187,13 +187,13 @@ function SectionTitle({children}){
 
 // ── TABS ─────────────────────────────────────────────────────
 function TabNav({view,setView}){
-  return <div style={{display:"flex",gap:6,padding:"14px 16px 0",maxWidth:720,margin:"0 auto"}}>
-    {[{id:"week",icon:"📅",label:"SEMANA"},{id:"month",icon:"📆",label:"MES"},{id:"year",icon:"📊",label:"AÑO"}].map(t=>{
+  return <div style={{display:"flex",gap:4,padding:"14px 16px 0",maxWidth:720,margin:"0 auto"}}>
+    {[{id:"week",icon:"📅",label:"SEMANA"},{id:"month",icon:"📆",label:"MES"},{id:"year",icon:"📊",label:"AÑO"},{id:"rutina",icon:"📋",label:"RUTINA"}].map(t=>{
       const a=view===t.id;
-      return <button key={t.id} onClick={()=>setView(t.id)} style={{flex:1,padding:"9px 4px",border:"none",
+      return <button key={t.id} onClick={()=>setView(t.id)} style={{flex:1,padding:"9px 2px",border:"none",
         borderRadius:"8px 8px 0 0",
         background:a?"linear-gradient(180deg,#1a2540,#0f1a2e)":"rgba(255,255,255,.03)",
-        color:a?"#FFD700":"#8892a4",fontSize:10,fontWeight:700,letterSpacing:2,
+        color:a?"#FFD700":"#8892a4",fontSize:9,fontWeight:700,letterSpacing:1.5,
         borderBottom:a?"2px solid #FFD700":"2px solid transparent",transition:"all .2s"}}>
         {t.icon} {t.label}
       </button>;
@@ -581,6 +581,360 @@ function YearView({allWeeksData}){
   </div>;
 }
 
+// ── RUTINA VIEW (full PDF reference) ────────────────────────
+function RutinaView(){
+  const [section,setSection]=useState("lv");
+  const C={gold:"#FFD700",blue:"#1E90FF",green:"#00C896",orange:"#FF6B35",purple:"#A855F7",red:"#FF4757",gray:"#8892a4"};
+
+  const SECS=[
+    {id:"lv",   icon:"📅", label:"L–V"},
+    {id:"fds",  icon:"🌅", label:"Fin de Semana"},
+    {id:"rot",  icon:"🎓", label:"Rotación"},
+    {id:"cort", icon:"🧬", label:"Cortisol"},
+    {id:"movil",icon:"📱", label:"Móvil"},
+    {id:"verd", icon:"💣", label:"Verdades"},
+    {id:"plan", icon:"🚀", label:"Plan 4 Sem."},
+  ];
+
+  const LV_BLOQUES=[
+    {hora:"04:55 AM",      titulo:"⏰ LEVANTARSE",          color:C.gold,
+     desc:"Alarma sin snooze. Vaso de agua fría. 3 respiraciones. NO toques el teléfono."},
+    {hora:"05:00–05:20",   titulo:"🙏 TIEMPO CON DIOS",      color:C.gold,
+     desc:"Oración en voz alta (práctica para oratoria). Lectura bíblica 1 capítulo. Agradecimiento en libreta."},
+    {hora:"05:20–05:55",   titulo:"💪 EJERCICIO",            color:C.green,
+     desc:"L/X/V: Fuerza — sentadillas, flexiones, peso corporal 3×15. M/J: Cardio HIIT 20 min + stretching."},
+    {hora:"05:55–06:10",   titulo:"🥗 DUCHA + NUTRICIÓN",    color:C.green,
+     desc:"Ducha fría 30 seg al final. Desayuno proteico: huevos + avena. Sin azúcar procesada."},
+    {hora:"06:10–06:45",   titulo:"🎓 BLOQUE DE HABILIDAD",  color:C.blue,
+     desc:"L=Adobe Audition · M=Análisis de Datos · X=Oratoria · J=Adobe Audition · V=Datos. 1 sola habilidad."},
+    {hora:"06:45–07:00",   titulo:"📋 PREPARACIÓN",          color:C.blue,
+     desc:"Revisa agenda. Prepara audio/contenido que grabarás en la noche. Sin redes sociales aún."},
+    {hora:"07:00–12:00",   titulo:"💼 TRABAJO bloque 1",     color:C.gray,
+     desc:"Máxima energía = tareas más importantes. Aplica habilidades del bloque AM. Pausa 5 min c/90 min."},
+    {hora:"12:00–12:40",   titulo:"🥗 ALMUERZO ESTRATÉGICO", color:C.green,
+     desc:"Comida real. 10 min caminata. 5 min revisión del concepto de habilidad del día. Sin reels."},
+    {hora:"12:40–14:00",   titulo:"💼 TRABAJO bloque 2",     color:C.gray,
+     desc:"Practica 5 min de dicción o escucha 1 podcast de datos/audio. Sin TikTok ni reels."},
+    {hora:"14:00–20:00",   titulo:"💼 TRABAJO bloque 3",     color:C.gray,
+     desc:"Energía baja: delega, revisa, responde. Guarda energía creativa para las 8 PM."},
+    {hora:"20:00–20:15",   titulo:"🔄 TRANSICIÓN CRÍTICA",   color:C.orange,
+     desc:"Llega a casa. 5 min en silencio. Come algo ligero. NO revises redes. Prepara equipo de grabación."},
+    {hora:"20:15–20:50",   titulo:"🎬 GRABACIÓN / CONTENIDO",color:C.orange,
+     desc:"1 video corto 60–90 seg. L=Oratoria/tip · M=Datos · X=Radio/audio · J=Motivación · V=Resumen semana."},
+    {hora:"20:50–21:00",   titulo:"📻 PREP RADIO",           color:C.purple,
+     desc:"Revisa estructura del programa. 2 min calentamiento vocal. Chequeo técnico Adobe Audition."},
+    {hora:"21:00–22:00",   titulo:"🎙️ PROGRAMA DE RADIO",    color:C.purple,
+     desc:"EN VIVO. Pausas dramáticas, dicción clara, variación de tono. Tu radio ES tu laboratorio de oratoria."},
+    {hora:"22:00–22:20",   titulo:"📝 CIERRE Y REVISIÓN",    color:C.gray,
+     desc:"Anota 3 cosas que mejoraste hoy en el programa. Prepara tema de mañana. Deja el equipo listo."},
+    {hora:"22:20–22:40",   titulo:"📵 DESINTOX DIGITAL",     color:C.red,
+     desc:"MÓVIL EN CARGADOR FUERA DEL CUARTO. Lectura física 15 min. O audio relajante."},
+    {hora:"22:40–04:55",   titulo:"😴 SUEÑO (6h15min)",      color:C.blue,
+     desc:"Mínimo 6h para ciclos REM completos. Sin alarmas intermedias. Cuarto oscuro y frío (18–20°C)."},
+  ];
+
+  const SAB=[
+    {hora:"06:00–06:30", act:"Oración + meditación extendida",          prop:"Recarga espiritual semanal profunda"},
+    {hora:"06:30–07:30", act:"Ejercicio largo (caminata, natación, gym)",prop:"Bajar cortisol acumulado de la semana"},
+    {hora:"07:30–08:00", act:"Desayuno consciente, sin móvil",           prop:"Cortisol bajo en la mañana"},
+    {hora:"08:00–10:00", act:"BLOQUE PROFUNDO: Adobe Audition",          prop:"2 horas sin interrupciones. Tutorial + práctica real"},
+    {hora:"10:00–10:15", act:"Pausa activa",                             prop:"Caminar, estirar, agua"},
+    {hora:"10:15–12:00", act:"BLOQUE PROFUNDO: Análisis de Datos",       prop:"Dataset real + ejercicio Power BI/Python"},
+    {hora:"12:00–14:00", act:"Tiempo social / familia / descanso",       prop:"Recuperación social y emocional"},
+    {hora:"14:00–16:00", act:"Grabación BATCH (2–3 videos)",             prop:"Contenido para toda la semana siguiente"},
+    {hora:"16:00–17:00", act:"ORATORIA: espejo o grabada",               prop:"Revisar videos propios, corregir vicios de dicción"},
+    {hora:"20:00–21:00", act:"RADIO (1 hora)",                           prop:"Programa fin de semana"},
+    {hora:"21:00–22:00", act:"Tiempo libre sin pantallas",               prop:"Libreta de ideas, lectura, música"},
+    {hora:"22:30",       act:"DORMIR",                                    prop:"8 horas. El único día que puedes lograrlo"},
+  ];
+  const DOM=[
+    {hora:"06:00–07:00", act:"Oración + Revisión semanal (libreta)",     prop:"Evaluar qué funcionó y qué no esta semana"},
+    {hora:"07:00–08:30", act:"Ejercicio + Desayuno tranquilo",            prop:"Sin prisa. El domingo es tu día de recarga"},
+    {hora:"09:00–10:00", act:"PLANEACIÓN SEMANA",                         prop:"Definir tema radio, videos, habilidad a practicar"},
+    {hora:"10:00–12:00", act:"Tiempo espiritual / Iglesia / Comunidad",  prop:"Nutrición espiritual profunda. No negociable"},
+    {hora:"12:00–18:00", act:"Descanso, familia, naturaleza",             prop:"El descanso real es productivo. El cerebro consolida"},
+    {hora:"18:00–19:00", act:"Repaso rápido habilidad de la semana",     prop:"30 min Audition + 30 min Datos. Solo repasar"},
+    {hora:"19:00–20:00", act:"Prep kit semana: ropa, comida, agenda",    prop:"Eliminar fricciones del lunes. Reduce cortisol"},
+    {hora:"21:30",       act:"DORMIR (9h meta)",                          prop:"La noche del domingo define toda tu semana"},
+  ];
+
+  const ROT=[
+    {dia:"LUNES",   hab:"Adobe Audition", color:C.blue,
+     foco:"Edición de voz, reducción de ruido, EQ paramétrico",
+     recurso:"YouTube: 'Adobe Audition Tutorial 2024' + audio de tu radio"},
+    {dia:"MARTES",  hab:"Análisis de Datos", color:C.green,
+     foco:"Power BI / Python Pandas / Excel avanzado. 1 dataset real",
+     recurso:"Kaggle.com datasets gratuitos + canal 'Data with Mo' en YouTube"},
+    {dia:"MIÉRCOLES",hab:"Oratoria", color:C.orange,
+     foco:"Dicción, pausas, estructura narrativa, manejo de voz",
+     recurso:"'Hablar bien en público' (Anxo Pérez). Grábate 5 min y analiza"},
+    {dia:"JUEVES",  hab:"Adobe Audition", color:C.blue,
+     foco:"Multitrack, efectos de sonido, edición avanzada de podcast/radio",
+     recurso:"Aplica en el audio de tu programa del día anterior"},
+    {dia:"VIERNES", hab:"Análisis de Datos", color:C.green,
+     foco:"Dashboard, visualización, storytelling con datos",
+     recurso:"Crea 1 dashboard de métricas de tu radio o redes"},
+    {dia:"SÁBADO",  hab:"Profundidad 2h+2h", color:C.purple,
+     foco:"Audition 2h + Datos 2h. El día de mayor avance real",
+     recurso:"Completa 1 proyecto pequeño: editar episodio + 1 reporte"},
+    {dia:"DOMINGO", hab:"Oratoria + Revisión", color:C.orange,
+     foco:"Practica guión del programa. Revisa grabaciones",
+     recurso:"Ve 1 TED Talk y anota 3 técnicas que usó el orador. Imítalas"},
+  ];
+
+  const VERDADES=[
+    {n:"1",titulo:"No puedes dominar todo a la vez.",
+     texto:"El cerebro forma memoria procedimental en 66 días por habilidad. Con 3 en paralelo, en 1 año habrás avanzado 30% en 3 cosas en vez de 100% en 1. El sistema de rotación resuelve esto."},
+    {n:"2",titulo:"Trabajar 13 horas diarias no es productividad.",
+     texto:"Es supervivencia. El cortisol crónico destruye el hipocampo (memoria) y la corteza prefrontal (decisiones). Sin las mañanas estratégicas, tu esfuerzo nocturno rinde 40% menos."},
+    {n:"3",titulo:"El móvil es tu mayor saboteador, no tu herramienta.",
+     texto:"Cada impulso de ver el teléfono libera dopamina barata que agota tu sistema de recompensa. Resultado: el estudio, el ejercicio y la oración parecen 'aburridos'."},
+    {n:"4",titulo:"Tu programa de radio ES tu laboratorio de oratoria.",
+     texto:"No necesitas cursos caros. Cada noche tienes 60 min de práctica real. Grábate, analízate y mejora 1 cosa por semana. En 52 semanas: 52 mejoras concretas."},
+    {n:"5",titulo:"Dios va primero o va al último.",
+     texto:"Cuando va al último, siempre hay algo más urgente. Al ponerlo primero, no solo cumples espiritualmente: la oración reduce cortisol, aumenta gratitud y activa el sistema nervioso parasimpático."},
+  ];
+
+  const PLAN=[
+    {sem:"SEMANA 1",sub:"Cimientos",color:C.blue,
+     enfoque:"Solo 2 hábitos: despertar 5AM + móvil fuera del cuarto",
+     meta:"2 hábitos en semana 1 = 80% de éxito. 8 hábitos = 5% de éxito"},
+    {sem:"SEMANA 2",sub:"Mañanas",color:C.green,
+     enfoque:"Agrega oración 5AM + ejercicio 5:20AM. Mantén los 2 de semana 1",
+     meta:"Ya tienes 4 hábitos. El cuerpo empieza a sentir diferencia en cortisol"},
+    {sem:"SEMANA 3",sub:"Habilidad",color:C.orange,
+     enfoque:"Activa el bloque de habilidad 6:10AM. Rotación L/M/X/J/V",
+     meta:"Estructura completa de mañanas. ¿Cómo llegas al trabajo vs semana 1?"},
+    {sem:"SEMANA 4",sub:"Contenido",color:C.gold,
+     enfoque:"Activa grabación de videos 20:15PM. 1 video diario mínimo",
+     meta:"Sistema completo. Semana 4 es medición y ajuste fino"},
+  ];
+
+  const MANTRAS=[
+    '"Soy disciplinado cuando nadie me ve, porque eso construye quién soy."',
+    '"Mi voz tiene propósito. Cada programa, cada video, cada clase es un legado."',
+    '"El cansancio es real. La renuncia es opcional."',
+    '"Dios va primero. Todo lo demás es consecuencia de eso."',
+    '"No soy adicto al teléfono. Soy dueño de mi atención."',
+  ];
+
+  const card={background:"rgba(255,255,255,.02)",border:"1px solid #1e2d40",borderRadius:10,padding:"10px 12px",marginBottom:8};
+  const TH={fontSize:9,color:"#8892a4",fontWeight:700,textTransform:"uppercase",letterSpacing:1};
+
+  return <div className="fade-in" style={{maxWidth:720,margin:"0 auto",padding:"0 14px 20px"}}>
+    {/* sub-nav */}
+    <div style={{overflowX:"auto",WebkitOverflowScrolling:"touch",paddingBottom:4}}>
+      <div style={{display:"flex",gap:5,marginTop:14,marginBottom:14,minWidth:"max-content"}}>
+        {SECS.map(s=>{
+          const a=section===s.id;
+          return <button key={s.id} onClick={()=>setSection(s.id)} style={{
+            padding:"6px 10px",border:"none",borderRadius:8,fontSize:10,fontWeight:700,
+            background:a?"linear-gradient(135deg,#1E90FF22,#1a2030)":"rgba(255,255,255,.03)",
+            color:a?"#60a5fa":"#8892a4",
+            outline:a?"1px solid rgba(30,144,255,.4)":"1px solid #1e2d40",
+            transition:"all .2s",whiteSpace:"nowrap",
+          }}>{s.icon} {s.label}</button>;
+        })}
+      </div>
+    </div>
+
+    {/* ─── LUNES–VIERNES ─── */}
+    {section==="lv"&&<>
+      <SectionTitle>📅 RUTINA LUNES A VIERNES — HORA POR HORA</SectionTitle>
+      {LV_BLOQUES.map((b,i)=>(
+        <div key={i} style={{...card,borderLeft:`3px solid ${b.color}33`}}>
+          <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+            <div style={{
+              minWidth:88,padding:"3px 7px",borderRadius:6,textAlign:"center",flexShrink:0,
+              background:`${b.color}15`,border:`1px solid ${b.color}33`,
+              fontSize:9,fontWeight:700,color:b.color,letterSpacing:.5,lineHeight:1.4,
+            }}>{b.hora}</div>
+            <div>
+              <div style={{fontSize:11,fontWeight:700,color:"#fff",marginBottom:3}}>{b.titulo}</div>
+              <div style={{fontSize:10,color:"#8892a4",lineHeight:1.5}}>{b.desc}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </>}
+
+    {/* ─── FIN DE SEMANA ─── */}
+    {section==="fds"&&<>
+      <SectionTitle>🌅 SÁBADO — Recuperación + Profundidad</SectionTitle>
+      {SAB.map((r,i)=>(
+        <div key={i} style={{...card,display:"flex",gap:10,alignItems:"flex-start"}}>
+          <div style={{minWidth:82,fontSize:9,fontWeight:700,color:C.orange,flexShrink:0,letterSpacing:.5}}>{r.hora}</div>
+          <div style={{flex:1}}>
+            <div style={{fontSize:11,fontWeight:700,color:"#fff",marginBottom:2}}>{r.act}</div>
+            <div style={{fontSize:10,color:"#8892a4"}}>{r.prop}</div>
+          </div>
+        </div>
+      ))}
+      <SectionTitle>🌞 DOMINGO — Planeación + Fe + Cuerpo</SectionTitle>
+      {DOM.map((r,i)=>(
+        <div key={i} style={{...card,display:"flex",gap:10,alignItems:"flex-start"}}>
+          <div style={{minWidth:82,fontSize:9,fontWeight:700,color:C.gold,flexShrink:0,letterSpacing:.5}}>{r.hora}</div>
+          <div style={{flex:1}}>
+            <div style={{fontSize:11,fontWeight:700,color:"#fff",marginBottom:2}}>{r.act}</div>
+            <div style={{fontSize:10,color:"#8892a4"}}>{r.prop}</div>
+          </div>
+        </div>
+      ))}
+    </>}
+
+    {/* ─── ROTACIÓN ─── */}
+    {section==="rot"&&<>
+      <SectionTitle>🎓 SISTEMA DE ROTACIÓN DE HABILIDADES (06:10–06:45)</SectionTitle>
+      {ROT.map((r,i)=>(
+        <div key={i} style={{...card,borderLeft:`3px solid ${r.color}55`}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:5}}>
+            <span style={{fontSize:11,fontWeight:700,color:"#fff"}}>{r.dia}</span>
+            <span style={{fontSize:10,fontWeight:700,color:r.color,background:`${r.color}15`,
+              padding:"2px 8px",borderRadius:20,border:`1px solid ${r.color}33`}}>{r.hab}</span>
+          </div>
+          <div style={{fontSize:10,color:"#e8edf2",marginBottom:3}}>{r.foco}</div>
+          <div style={{fontSize:9,color:"#4a5568",fontStyle:"italic"}}>📚 {r.recurso}</div>
+        </div>
+      ))}
+    </>}
+
+    {/* ─── CORTISOL ─── */}
+    {section==="cort"&&<>
+      <SectionTitle>🧬 PROTOCOLO ANTI-CORTISOL</SectionTitle>
+      {[
+        {titulo:"❌ AUMENTA CORTISOL — ELIMINAR",color:C.red,items:[
+          "Mirar el móvil los primeros 30 min al despertar",
+          "Redes sociales antes de dormir",
+          "Azúcar y cafeína después de las 3 PM",
+          "Saltarse el desayuno",
+          "No tener estructura diaria",
+          "Acostarse después de medianoche",
+          "Ver noticias negativas al despertar",
+        ]},
+        {titulo:"✅ BAJA CORTISOL — INCORPORAR",color:C.green,items:[
+          "Ejercicio matutino (15–30 min mínimo)",
+          "Ducha fría 30 segundos al final",
+          "Oración / meditación 10–20 min",
+          "Desayuno con proteína en las primeras 2h",
+          "Exposición a luz natural matutina",
+          "Magnesio antes de dormir (nueces)",
+          "Respiración 4-7-8 al llegar del trabajo",
+        ]},
+        {titulo:"🌙 HÁBITOS DE SUEÑO — NO NEGOCIABLES",color:C.blue,items:[
+          "Sin pantallas 60 min antes de dormir",
+          "Cuarto oscuro y frío (18–20°C ideal)",
+          "Misma hora de dormir y despertar",
+          "Móvil fuera del cuarto siempre",
+          "Técnica 4-7-8: inhala 4s, aguanta 7s, exhala 8s",
+          "Si no duermes en 20 min, levántate y lee",
+          "Mínimo 6h para consolidar lo aprendido",
+        ]},
+      ].map((g,gi)=>(
+        <div key={gi} style={{...card,border:`1px solid ${g.color}33`,marginBottom:12}}>
+          <div style={{fontSize:11,fontWeight:700,color:g.color,marginBottom:8}}>{g.titulo}</div>
+          {g.items.map((it,ii)=>(
+            <div key={ii} style={{display:"flex",gap:8,marginBottom:5,alignItems:"flex-start"}}>
+              <div style={{width:6,height:6,borderRadius:"50%",background:g.color,flexShrink:0,marginTop:4}}/>
+              <div style={{fontSize:10,color:"#e8edf2",lineHeight:1.4}}>{it}</div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </>}
+
+    {/* ─── MÓVIL ─── */}
+    {section==="movil"&&<>
+      <SectionTitle>📱 PROTOCOLO DE DESINTOXICACIÓN DIGITAL</SectionTitle>
+      {[
+        {zona:"04:55–07:00\n☀️ Mañana sagrada",color:C.red,
+         regla:"🚫 PROHIBIDO. El móvil se desbloquea SOLO al salir al trabajo",
+         por:"Los primeros 90 min definen tu estado de dopamina todo el día. Las redes lo secuestran."},
+        {zona:"07:00–20:00\n💼 Trabajo",color:C.orange,
+         regla:"Solo llamadas necesarias. Redes: máximo 2 revisiones de 10 min (12pm y 5pm)",
+         por:"Cada notificación tarda 23 min en recuperar el foco (UC Irvine)."},
+        {zona:"20:00–21:00\n🎬 Grabación + Radio",color:C.purple,
+         regla:"Solo herramientas de trabajo (cámara, Adobe Audition). Sin redes",
+         por:"Máxima creatividad. Contaminarla con redes reduce calidad del contenido."},
+        {zona:"21:00–22:00\n🎙️ Radio en vivo",color:C.blue,
+         regla:"Solo equipo de radio. Sin teléfono en mano durante el programa",
+         por:"La audiencia merece tu presencia total. Es tu imagen de marca."},
+        {zona:"22:00–04:55\n🌙 Noche",color:C.red,
+         regla:"📵 MÓVIL EN CARGADOR FUERA DEL CUARTO. Sin excepciones.",
+         por:"La luz azul suprime melatonina 3 horas. El scrolling nocturno eleva cortisol hasta la mañana."},
+      ].map((r,i)=>(
+        <div key={i} style={{...card,borderLeft:`3px solid ${r.color}55`}}>
+          <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+            <div style={{minWidth:88,fontSize:9,fontWeight:700,color:r.color,whiteSpace:"pre-line",
+              lineHeight:1.4,flexShrink:0}}>{r.zona}</div>
+            <div>
+              <div style={{fontSize:10,fontWeight:700,color:"#fff",marginBottom:3}}>{r.regla}</div>
+              <div style={{fontSize:9,color:"#8892a4",fontStyle:"italic"}}>{r.por}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </>}
+
+    {/* ─── VERDADES ─── */}
+    {section==="verd"&&<>
+      <SectionTitle>💣 VERDADES QUE NADIE TE DICE</SectionTitle>
+      {VERDADES.map((v,i)=>(
+        <div key={i} style={{...card,display:"flex",gap:12,alignItems:"flex-start",borderLeft:`3px solid ${C.gold}44`}}>
+          <div style={{fontSize:22,fontWeight:900,color:C.gold,flexShrink:0,lineHeight:1,minWidth:24}}>{v.n}</div>
+          <div>
+            <div style={{fontSize:12,fontWeight:700,color:"#fff",marginBottom:5}}>{v.titulo}</div>
+            <div style={{fontSize:10,color:"#8892a4",lineHeight:1.6}}>{v.texto}</div>
+          </div>
+        </div>
+      ))}
+      <SectionTitle>🔥 MANTRAS DIARIOS</SectionTitle>
+      {MANTRAS.map((m,i)=>(
+        <div key={i} style={{...card,background:"rgba(255,215,0,.04)",border:"1px solid rgba(255,215,0,.15)",
+          fontSize:11,fontStyle:"italic",color:C.gold,textAlign:"center",padding:"12px 14px",lineHeight:1.6}}>
+          {m}
+        </div>
+      ))}
+    </>}
+
+    {/* ─── PLAN 4 SEMANAS ─── */}
+    {section==="plan"&&<>
+      <SectionTitle>🚀 PLAN DE IMPLEMENTACIÓN — 4 SEMANAS</SectionTitle>
+      <div style={{...card,background:"rgba(255,71,87,.06)",border:"1px solid rgba(255,71,87,.2)",marginBottom:14}}>
+        <div style={{fontSize:10,fontWeight:700,color:C.red,marginBottom:4}}>⚠️ REGLA DE ORO</div>
+        <div style={{fontSize:10,color:"#e8edf2",lineHeight:1.5}}>
+          No intentes implementar todo de golpe. 2 hábitos en semana 1 tienen <strong style={{color:C.green}}>80% de éxito</strong>. 8 hábitos tienen <strong style={{color:C.red}}>5% de éxito</strong>. Sigue el plan.
+        </div>
+      </div>
+      {PLAN.map((p,i)=>(
+        <div key={i} style={{...card,borderLeft:`3px solid ${p.color}`,marginBottom:10}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
+            <span style={{fontSize:12,fontWeight:700,color:p.color}}>{p.sem}</span>
+            <span style={{fontSize:9,color:"#8892a4",background:"rgba(255,255,255,.04)",
+              padding:"2px 8px",borderRadius:20,border:"1px solid #2d3748"}}>{p.sub}</span>
+          </div>
+          <div style={{fontSize:11,fontWeight:600,color:"#e8edf2",marginBottom:4}}>📌 {p.enfoque}</div>
+          <div style={{fontSize:10,color:"#8892a4",lineHeight:1.4}}>✓ {p.meta}</div>
+        </div>
+      ))}
+      <SectionTitle>📊 MÉTRICAS MENSUALES</SectionTitle>
+      {[
+        {area:"🎵 Adobe Audition",color:C.blue,  metrica:"Edité X episodios de radio con calidad profesional (sin ruido, EQ correcto)",   tool:"Escucha comparativa: Ep.1 vs Ep. actual"},
+        {area:"📈 Análisis Datos", color:C.green, metrica:"Completé X dashboards reales y X ejercicios de Kaggle",                          tool:"Portfolio en GitHub o Google Drive"},
+        {area:"🎤 Oratoria",       color:C.orange,metrica:"Grabé y revisé X videos. Velocidad, pausas, claridad mejoradas",                  tool:"Comparar video mes 1 vs mes 3"},
+        {area:"📱 Redes Sociales", color:C.purple,metrica:"X videos publicados, X seguidores ganados, X% engagement",                        tool:"Instagram/TikTok Insights semanales"},
+        {area:"💪 Físico",         color:C.red,   metrica:"Peso corporal, % grasa, circunferencia cintura cada 2 semanas",                   tool:"Foto mensual + báscula + cinta métrica"},
+        {area:"🙏 Fe / Espiritual",color:C.gold,  metrica:"Días de oración consecutivos, capítulos leídos, paz interior (escala 1–10)",     tool:"Diario espiritual en libreta física"},
+      ].map((m,i)=>(
+        <div key={i} style={{...card,borderLeft:`3px solid ${m.color}44`}}>
+          <div style={{fontSize:11,fontWeight:700,color:m.color,marginBottom:4}}>{m.area}</div>
+          <div style={{fontSize:10,color:"#e8edf2",marginBottom:3}}>{m.metrica}</div>
+          <div style={{fontSize:9,color:"#4a5568",fontStyle:"italic"}}>🔧 {m.tool}</div>
+        </div>
+      ))}
+    </>}
+  </div>;
+}
+
 // ── APP ROOT ─────────────────────────────────────────────────
 function App(){
   const [checks,setChecks]=useState({});
@@ -637,9 +991,10 @@ function App(){
     </div>
 
     <div style={{paddingTop:14}}>
-      {view==="week" &&<WeekView checks={checks} setChecks={setChecks} showToast={showToast} setConfetti={setConfetti}/>}
-      {view==="month"&&<MonthView allWeeksData={allWeeksData}/>}
-      {view==="year" &&<YearView  allWeeksData={allWeeksData}/>}
+      {view==="week"  &&<WeekView checks={checks} setChecks={setChecks} showToast={showToast} setConfetti={setConfetti}/>}
+      {view==="month" &&<MonthView allWeeksData={allWeeksData}/>}
+      {view==="year"  &&<YearView  allWeeksData={allWeeksData}/>}
+      {view==="rutina"&&<RutinaView/>}
     </div>
 
     {view==="week"&&<div style={{textAlign:"center",marginTop:18,padding:"0 14px"}}>
