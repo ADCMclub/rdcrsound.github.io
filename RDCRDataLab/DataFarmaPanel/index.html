@@ -1,32 +1,42 @@
+
+Eco admin final · HTML
+Copiar
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>ECO FARMA — Panel Administrador</title>
+<title>ECO FARMA — Administrador</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet"/>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{--gold:#f5c842;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--bg0:#070a0f;--bg1:#0f1219;--border:#1e2330;--border2:#252a38;--txt:#e8e2d0;--txt2:#9ca3af;--txt3:#4b5563;--txt4:#252a38;--mono:'Space Mono',monospace;--radius:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#f5c842;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;
+  --bg0:#070a0f;--bg1:#0f1219;--border:#1e2330;--border2:#252a38;
+  --txt:#e8e2d0;--txt2:#9ca3af;--txt3:#4b5563;--txt4:#252a38;
+  --mono:'Space Mono',monospace;--r:10px}
 html,body{background:var(--bg0);min-height:100vh;font-family:'Syne',sans-serif;color:var(--txt)}
-body{padding:1.25rem;max-width:1100px;margin:0 auto}
+body{padding:1.25rem;max-width:1000px;margin:0 auto}
 .hdr{display:flex;align-items:center;justify-content:space-between;padding-bottom:1rem;border-bottom:0.5px solid var(--border);margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem}
-.hdr-left{display:flex;align-items:center;gap:.75rem}
+.hdr-l{display:flex;align-items:center;gap:.75rem}
 .logo{width:44px;height:44px;background:var(--gold);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:13px;color:var(--bg0);flex-shrink:0}
 .htitle{font-size:18px;font-weight:800;color:var(--gold);font-family:var(--mono)}
 .hsub{font-size:10px;color:var(--txt3);font-family:var(--mono);margin-top:2px}
-.admin-badge{background:#2a0d00;border:0.5px solid var(--gold);color:var(--gold);font-size:10px;font-family:var(--mono);padding:4px 12px;border-radius:20px}
-.card{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem}
-.card-title{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.875rem;display:flex;align-items:center;gap:.5rem}
-.ct-num{background:var(--gold);color:var(--bg0);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
-.dropzone{border:1px dashed var(--border2);border-radius:var(--radius);padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:all .2s;position:relative;background:var(--bg0)}
+.badge{background:#2a0d00;border:0.5px solid var(--gold);color:var(--gold);font-size:10px;font-family:var(--mono);padding:4px 12px;border-radius:20px}
+.card{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem}
+.ctitle{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.875rem;display:flex;align-items:center;gap:.5rem}
+.cnum{background:var(--gold);color:var(--bg0);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.dropzone{border:1px dashed var(--border2);border-radius:var(--r);padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:all .2s;position:relative;background:var(--bg0)}
 .dropzone:hover,.dropzone.over{border-color:var(--gold);background:#0d1008}
 .dropzone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .dz-icon{font-size:40px;display:block;margin-bottom:.75rem}
 .dz-title{font-size:15px;font-weight:700;color:var(--txt2);font-family:var(--mono);margin-bottom:.4rem}
 .dz-sub{font-size:11px;color:var(--txt3);font-family:var(--mono);line-height:1.7}
 .dz-sub span{color:var(--gold)}
+.paste-area{width:100%;height:110px;background:var(--bg0);border:0.5px solid var(--border2);border-radius:8px;color:var(--txt);font-size:11px;font-family:var(--mono);padding:10px;resize:none;outline:none;line-height:1.5;margin-bottom:.6rem}
+.paste-area:focus{border-color:var(--gold)}
+.paste-area::placeholder{color:var(--txt4)}
 .status{font-size:11px;font-family:var(--mono);padding:10px 14px;border-radius:8px;margin-top:.75rem;display:none;line-height:1.6}
 .status.ok{background:#052e16;color:var(--green);display:block}
 .status.err{background:#2a0909;color:var(--red);display:block}
@@ -40,13 +50,13 @@ body{padding:1.25rem;max-width:1100px;margin:0 auto}
 .kv.gr{color:var(--green)}.kv.sm{font-size:13px;margin-top:2px}
 .ks{font-size:10px;color:var(--txt3);font-family:var(--mono);margin-top:4px}
 .hcheck{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin-bottom:1rem}
-.hc-item{background:var(--bg0);border-radius:7px;padding:.6rem .75rem;text-align:center;border:0.5px solid var(--border)}
-.hc-item.ok{border-color:var(--green)}.hc-item.miss{border-color:var(--red)}
-.hc-label{font-size:8px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-.hc-val{font-size:10px;font-family:var(--mono);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.hc-item.ok .hc-val{color:var(--green)}.hc-item.miss .hc-val{color:var(--red)}
+.hc{background:var(--bg0);border-radius:7px;padding:.6rem .75rem;text-align:center;border:0.5px solid var(--border)}
+.hc.ok{border-color:var(--green)}.hc.miss{border-color:var(--red)}
+.hc-lbl{font-size:8px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.hc-val{font-size:10px;font-family:var(--mono);font-weight:700}
+.hc.ok .hc-val{color:var(--green)}.hc.miss .hc-val{color:var(--red)}
 .hc-icon{font-size:14px;display:block;margin-bottom:2px}
-.tbl-wrap{overflow-x:auto;max-height:320px;overflow-y:auto;border-radius:8px;border:0.5px solid var(--border)}
+.tbl-wrap{overflow-x:auto;max-height:300px;overflow-y:auto;border-radius:8px;border:0.5px solid var(--border)}
 .tbl-wrap::-webkit-scrollbar{width:4px;height:4px}
 .tbl-wrap::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
 table{width:100%;border-collapse:collapse;font-size:11px;font-family:var(--mono)}
@@ -56,715 +66,271 @@ tbody tr:hover td{background:var(--bg0)}
 .td-gold{color:var(--gold)!important;font-weight:700}
 .td-prov{font-size:9px;padding:2px 6px;border-radius:3px;background:#0d1520;color:var(--blue)}
 .gen-section{text-align:center;padding:1.5rem}
-.gen-btn{background:var(--gold);color:var(--bg0);border:none;padding:16px 40px;border-radius:10px;font-size:15px;font-weight:700;font-family:var(--mono);cursor:pointer;letter-spacing:.5px}
-.gen-btn:hover{background:#e6b93a}
-.gen-btn:disabled{opacity:.3;cursor:default}
+.gen-btn{background:var(--gold);color:var(--bg0);border:none;padding:16px 40px;border-radius:10px;font-size:15px;font-weight:700;font-family:var(--mono);cursor:pointer;letter-spacing:.5px;transition:all .2s}
+.gen-btn:hover{background:#e6b93a;transform:translateY(-1px)}
+.gen-btn:disabled{opacity:.3;cursor:default;transform:none}
 .gen-desc{font-size:11px;color:var(--txt3);font-family:var(--mono);margin-top:.75rem;line-height:1.8}
 .gen-desc span{color:var(--txt2)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.info-box{background:var(--bg0);border:0.5px solid var(--border2);border-radius:8px;padding:.875rem;font-size:10px;font-family:var(--mono);color:var(--txt3);line-height:1.9}
+.info-box span{color:var(--txt2)}
 .footer{text-align:center;padding-top:1.5rem;border-top:0.5px solid var(--border);font-size:10px;font-family:var(--mono);color:var(--txt4)}
-@media(max-width:600px){body{padding:.875rem}.kstrip{grid-template-columns:1fr 1fr}.hcheck{grid-template-columns:1fr 1fr}.htitle{font-size:15px}}
+@media(max-width:600px){body{padding:.875rem}.kstrip{grid-template-columns:1fr 1fr}.hcheck{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
+ 
 <div class="hdr">
-  <div class="hdr-left">
+  <div class="hdr-l">
     <div class="logo">ECO</div>
     <div>
       <div class="htitle">ECO FARMA — ADMIN</div>
       <div class="hsub" id="lastUpdate">Sin datos cargados</div>
     </div>
   </div>
-  <div class="admin-badge">⬡ ADMINISTRADOR</div>
+  <div class="badge">⬡ ADMINISTRADOR</div>
 </div>
-
+ 
 <!-- PASO 1 -->
 <div class="card">
-  <div class="card-title"><span class="ct-num">1</span>Cargar archivo Excel o CSV</div>
-  <div class="dropzone" id="dz" ondragover="dzOver(event)" ondragleave="dzLeave()" ondrop="dzDrop(event)">
+  <div class="ctitle"><span class="cnum">1</span>Cargar archivo Excel o CSV</div>
+  <div class="dropzone" id="dz" ondragover="dzO(event)" ondragleave="dzL()" ondrop="dzD(event)">
     <input type="file" accept=".xlsx,.xls,.csv" onchange="onFile(event)"/>
     <span class="dz-icon">📂</span>
-    <div class="dz-title">Arrastra tu archivo aquí o haz clic para seleccionar</div>
-    <div class="dz-sub">
-      Formatos: <span>.xlsx · .xls · .csv</span><br>
-      Columnas requeridas en fila 1:<br>
-      <span>FARMACIA · USUARIO · VENTA POR UNIDAD · CANTON · PROVINCIA</span>
-    </div>
+    <div class="dz-title">Arrastra tu archivo aquí o haz clic</div>
+    <div class="dz-sub">Formatos: <span>.xlsx · .xls · .csv</span><br>Columnas fila 1: <span>FARMACIA · USUARIO · VENTA POR UNIDAD · CANTON · PROVINCIA</span></div>
   </div>
   <div class="status" id="fileStatus"></div>
 </div>
-
+ 
+<!-- PASO 1B: PEGAR -->
+<div class="card">
+  <div class="ctitle"><span class="cnum">1B</span>O pegar desde Excel (Ctrl+C → Ctrl+V)</div>
+  <textarea class="paste-area" id="pasteArea" placeholder="FARMACIA&#9;USUARIO&#9;VENTA POR UNIDAD&#9;CANTON&#9;PROVINCIA&#10;ECO CLINICA IBARRA&#9;USUARIO 1&#9;3147&#9;IBARRA&#9;IMBABURA&#10;..."></textarea>
+  <button onclick="processPaste()" style="background:var(--gold);color:var(--bg0);border:none;padding:8px 20px;border-radius:7px;font-size:11px;font-weight:700;font-family:var(--mono);cursor:pointer">⬡ PROCESAR</button>
+  <div class="status" id="pasteStatus"></div>
+</div>
+ 
 <!-- PASO 2 -->
 <div class="card" id="step2" style="display:none">
-  <div class="card-title"><span class="ct-num">2</span>Verificación de columnas</div>
+  <div class="ctitle"><span class="cnum">2</span>Verificación de columnas</div>
   <div class="hcheck" id="hcheck"></div>
   <div class="status" id="colStatus"></div>
 </div>
-
+ 
 <!-- PASO 3 -->
 <div class="card" id="step3" style="display:none">
-  <div class="card-title"><span class="ct-num">3</span>Resumen de datos</div>
+  <div class="ctitle"><span class="cnum">3</span>Resumen</div>
   <div class="kstrip">
-    <div class="kc hi"><div class="kl">Total Unidades</div><div class="kv" id="kTotal">—</div><div class="ks" id="kTotalS">—</div></div>
-    <div class="kc gr"><div class="kl">PDV Cargados</div><div class="kv gr" id="kPDV">—</div><div class="ks" id="kPDVS">—</div></div>
-    <div class="kc bl"><div class="kl">Provincias</div><div class="kv" style="font-size:13px" id="kProv">—</div><div class="ks" id="kProvS">—</div></div>
-    <div class="kc"><div class="kl">Cantones</div><div class="kv" id="kCant">—</div><div class="ks" id="kCantS">—</div></div>
+    <div class="kc hi"><div class="kl">Total Unidades</div><div class="kv" id="kT">—</div><div class="ks" id="kTs">—</div></div>
+    <div class="kc gr"><div class="kl">PDV</div><div class="kv gr" id="kP">—</div><div class="ks" id="kPs">—</div></div>
+    <div class="kc bl"><div class="kl">Provincias</div><div class="kv sm" id="kPr">—</div><div class="ks" id="kPrs">—</div></div>
+    <div class="kc"><div class="kl">Cantones</div><div class="kv" id="kC">—</div><div class="ks" id="kCs">—</div></div>
   </div>
 </div>
-
+ 
 <!-- PASO 4 -->
 <div class="card" id="step4" style="display:none">
-  <div class="card-title"><span class="ct-num">4</span>Vista previa — todos los PDV ordenados por ventas</div>
+  <div class="ctitle"><span class="cnum">4</span>Vista previa — todos los PDV ordenados por ventas</div>
   <div class="tbl-wrap">
     <table>
-      <thead><tr><th>#</th><th>Farmacia</th><th>Usuario</th><th>Venta Uds</th><th>Cantón</th><th>Provincia</th></tr></thead>
+      <thead><tr><th>#</th><th>Farmacia</th><th>Usuario</th><th>Uds.</th><th>Cantón</th><th>Provincia</th></tr></thead>
       <tbody id="previewBody"></tbody>
     </table>
   </div>
 </div>
-
+ 
 <!-- PASO 5 -->
 <div class="card" id="step5" style="display:none">
-  <div class="card-title"><span class="ct-num">5</span>Generar dashboard para farmacias</div>
+  <div class="ctitle"><span class="cnum">5</span>Generar dashboard para farmacias</div>
   <div class="gen-section">
     <button class="gen-btn" id="genBtn" onclick="generateViewer()" disabled>⬡ GENERAR DASHBOARD FARMACIAS</button>
     <div class="gen-desc">
-      Se descargará <span>ECO_Viewer_[fecha].html</span><br>
+      Se descarga <span>ECO_Viewer_[fecha].html</span><br>
       Envíalo por <span>WhatsApp · Email · Carpeta compartida</span><br>
-      Las farmacias lo abren en su celular — sin instalar nada
+      Las farmacias lo abren en celular o computador — <span>sin instalar nada</span>
     </div>
     <div class="status" id="genStatus" style="margin-top:1rem"></div>
   </div>
+  <div class="two-col">
+    <div class="info-box">
+      <span>El viewer incluye:</span><br>
+      ✔ Ranking PDV con filtros en cascada<br>
+      ✔ Ranking Usuarios con farmacia al lado<br>
+      ✔ Gráfica estilo bolsa de valores<br>
+      ✔ Ticker rápido en vivo<br>
+      ✔ Filtro provincia → cantón → farmacia<br>
+      ✔ Vista geográfica por cantón<br>
+      ✔ Optimizado para celular
+    </div>
+    <div class="info-box">
+      <span>Columnas requeridas:</span><br>
+      A: FARMACIA<br>B: USUARIO<br>
+      C: VENTA POR UNIDAD<br>
+      D: CANTON <span>(sin tilde)</span><br>
+      E: PROVINCIA<br><br>
+      <span>Todo en MAYÚSCULAS · Sin espacios extra</span>
+    </div>
+  </div>
 </div>
-
+ 
 <div class="footer">ECO FARMA · Panel Administrador · Solo uso interno</div>
-
+ 
 <script>
-let loadedData=null, loadedFileName='';
-
-function dzOver(e){e.preventDefault();document.getElementById('dz').classList.add('over');}
-function dzLeave(){document.getElementById('dz').classList.remove('over');}
-function dzDrop(e){e.preventDefault();dzLeave();const f=e.dataTransfer.files[0];if(f)processFile(f);}
-function onFile(e){const f=e.target.files[0];if(f)processFile(f);e.target.value='';}
-
+var loadedData=null, loadedFname='';
+ 
+function dzO(e){e.preventDefault();document.getElementById('dz').classList.add('over');}
+function dzL(){document.getElementById('dz').classList.remove('over');}
+function dzD(e){e.preventDefault();dzL();var f=e.dataTransfer.files[0];if(f)processFile(f);}
+function onFile(e){var f=e.target.files[0];if(f)processFile(f);e.target.value='';}
+ 
 function processFile(file){
-  loadedFileName=file.name;
-  const n=file.name.toLowerCase();
+  loadedFname=file.name;
+  var n=file.name.toLowerCase();
   setS('fileStatus','⏳ Cargando...','info');
   if(n.endsWith('.csv')||n.endsWith('.txt')){
-    const r=new FileReader();
-    r.onload=e=>{const rows=parseDelimited(e.target.result);if(!rows)return setS('fileStatus','❌ No se reconocieron columnas. Verifica los encabezados.','err');onDataLoaded(rows,file.name);};
+    var r=new FileReader();
+    r.onload=function(e){var rows=parseDelim(e.target.result);if(!rows)return setS('fileStatus','❌ Columnas no reconocidas. Verifica los encabezados.','err');onLoaded(rows,file.name);};
     r.readAsText(file,'UTF-8');
-  } else if(n.endsWith('.xlsx')||n.endsWith('.xls')){
-    const r=new FileReader();
-    r.onload=e=>{
+  }else if(n.endsWith('.xlsx')||n.endsWith('.xls')){
+    var r=new FileReader();
+    r.onload=function(e){
       try{
-        const wb=XLSX.read(e.target.result,{type:'array'});
-        const ws=wb.Sheets[wb.SheetNames[0]];
-        const json=XLSX.utils.sheet_to_json(ws,{defval:'',raw:false});
-        const rows=normalizeRows(json);
-        if(!rows)return setS('fileStatus','❌ No se reconocieron columnas. Verifica: FARMACIA, USUARIO, VENTA POR UNIDAD, CANTON, PROVINCIA','err');
-        onDataLoaded(rows,file.name);
+        var wb=XLSX.read(e.target.result,{type:'array'});
+        var ws=wb.Sheets[wb.SheetNames[0]];
+        var json=XLSX.utils.sheet_to_json(ws,{defval:'',raw:false});
+        var rows=normRows(json);
+        if(!rows)return setS('fileStatus','❌ Columnas no reconocidas. Necesita: FARMACIA, USUARIO, VENTA POR UNIDAD, CANTON, PROVINCIA','err');
+        onLoaded(rows,file.name);
       }catch(ex){setS('fileStatus','❌ Error: '+ex.message,'err');}
     };
     r.readAsArrayBuffer(file);
-  } else setS('fileStatus','❌ Formato no soportado. Usa .xlsx, .xls o .csv','err');
+  }else setS('fileStatus','❌ Formato no soportado. Usa .xlsx .xls .csv','err');
 }
-
-function onDataLoaded(rows,fname){
+ 
+function processPaste(){
+  var txt=document.getElementById('pasteArea').value.trim();
+  var rows=parseDelim(txt);
+  if(!rows)return setS('pasteStatus','❌ Columnas no reconocidas. Incluye la fila de encabezados.','err');
+  onLoaded(rows,'pegado manual');
+}
+ 
+function onLoaded(rows,fname){
   loadedData=rows;
-  const now=new Date().toLocaleString('es');
+  var now=new Date().toLocaleString('es');
   setS('fileStatus','✔ '+rows.length+' filas cargadas desde "'+fname+'" · '+now,'ok');
-  document.getElementById('lastUpdate').textContent='Último archivo: '+fname+' · '+now;
-  showColCheck(rows);
-  showSummary(rows);
-  showPreview(rows);
-  ['step2','step3','step4','step5'].forEach(id=>document.getElementById(id).style.display='block');
+  document.getElementById('lastUpdate').textContent='Archivo: '+fname+' · '+now;
+  showColCheck(rows);showSummary(rows);showPreview(rows);
+  ['step2','step3','step4','step5'].forEach(function(id){document.getElementById(id).style.display='block';});
   document.getElementById('genBtn').disabled=false;
   document.getElementById('genStatus').style.display='none';
 }
-
+ 
 function showColCheck(rows){
-  if(!rows.length){document.getElementById('hcheck').innerHTML='<div style="color:var(--red);font-family:var(--mono);font-size:11px">Sin filas</div>';return;}
-  const sample=rows[0];
-  const keys=Object.keys(sample).map(k=>k.trim());
-  const checks=[
-    {label:'FARMACIA',ok:keys.some(k=>k.toLowerCase().includes('farmacia'))},
-    {label:'USUARIO',ok:keys.some(k=>k.toLowerCase().includes('usuario'))},
-    {label:'VENTA POR UNIDAD',ok:keys.some(k=>k.toLowerCase().includes('venta')||k.toLowerCase().includes('unidad'))},
-    {label:'CANTON',ok:keys.some(k=>k.toLowerCase().includes('canton')||k.toLowerCase().includes('cantón'))},
-    {label:'PROVINCIA',ok:keys.some(k=>k.toLowerCase().includes('provincia'))}
+  if(!rows.length)return;
+  var keys=Object.keys(rows[0]).map(function(k){return k.trim().toLowerCase();});
+  var checks=[
+    {label:'FARMACIA',ok:keys.some(function(k){return k.includes('farmacia');})},
+    {label:'USUARIO',ok:keys.some(function(k){return k.includes('usuario');})},
+    {label:'VENTA POR UNIDAD',ok:keys.some(function(k){return k.includes('venta')||k.includes('unidad');})},
+    {label:'CANTON',ok:keys.some(function(k){return k.includes('canton')||k.includes('cantón');})},
+    {label:'PROVINCIA',ok:keys.some(function(k){return k.includes('provincia');})}
   ];
-  document.getElementById('hcheck').innerHTML=checks.map(c=>`
-    <div class="hc-item ${c.ok?'ok':'miss'}">
-      <span class="hc-icon">${c.ok?'✔':'✗'}</span>
-      <div class="hc-label">${c.label}</div>
-      <div class="hc-val">${c.ok?'Encontrado':'No encontrado'}</div>
-    </div>`).join('');
-  const allOk=checks.every(c=>c.ok);
-  const cs=document.getElementById('colStatus');
-  cs.textContent=allOk?'✔ Todas las columnas reconocidas correctamente.':'⚠ Algunas columnas no fueron reconocidas. Verifica los encabezados.';
-  cs.className='status '+(allOk?'ok':'err');
+  document.getElementById('hcheck').innerHTML=checks.map(function(c){
+    return'<div class="hc '+(c.ok?'ok':'miss')+'"><span class="hc-icon">'+(c.ok?'✔':'✗')+'</span><div class="hc-lbl">'+c.label+'</div><div class="hc-val">'+(c.ok?'OK':'Falta')+'</div></div>';
+  }).join('');
+  var allOk=checks.every(function(c){return c.ok;});
+  setS('colStatus',allOk?'✔ Todas las columnas reconocidas correctamente.':'⚠ Alguna columna no fue reconocida. Verifica los encabezados.',allOk?'ok':'err');
 }
-
+ 
 function showSummary(rows){
-  const agg=aggregate(rows);
-  const total=agg.reduce((s,r)=>s+r.venta,0);
-  const provs=[...new Set(agg.map(r=>r.provincia).filter(Boolean))];
-  const cants=[...new Set(agg.map(r=>r.canton).filter(Boolean))];
-  document.getElementById('kTotal').textContent=total.toLocaleString('es');
-  document.getElementById('kTotalS').textContent='Promedio: '+Math.round(total/agg.length).toLocaleString('es')+'/PDV';
-  document.getElementById('kPDV').textContent=agg.length;
-  document.getElementById('kPDVS').textContent=rows.length+' filas en el archivo';
-  document.getElementById('kProv').textContent=provs.join(' & ');
-  document.getElementById('kProvS').textContent=provs.length+' provincia(s)';
-  document.getElementById('kCant').textContent=cants.length;
-  document.getElementById('kCantS').textContent='Líder: '+(agg[0]?.farmacia||'—');
+  var agg=doAgg(rows);
+  var total=agg.reduce(function(s,r){return s+r.venta;},0);
+  var provs=[...new Set(agg.map(function(r){return r.provincia;}).filter(Boolean))];
+  var cants=[...new Set(agg.map(function(r){return r.canton;}).filter(Boolean))];
+  document.getElementById('kT').textContent=total.toLocaleString('es');
+  document.getElementById('kTs').textContent='Prom: '+Math.round(total/agg.length).toLocaleString('es')+'/PDV';
+  document.getElementById('kP').textContent=agg.length;
+  document.getElementById('kPs').textContent=rows.length+' filas';
+  document.getElementById('kPr').textContent=provs.join(' & ');
+  document.getElementById('kPrs').textContent=provs.length+' provincia(s)';
+  document.getElementById('kC').textContent=cants.length;
+  document.getElementById('kCs').textContent='Líder: '+(agg[0]?agg[0].farmacia:'—');
 }
-
+ 
 function showPreview(rows){
-  const agg=aggregate(rows);
-  document.getElementById('previewBody').innerHTML=agg.map((r,i)=>`
-    <tr>
-      <td style="color:var(--txt4);text-align:right">${i+1}</td>
-      <td class="${i===0?'td-gold':''}" style="max-width:220px">${r.farmacia}</td>
-      <td>${r.usuario}</td>
-      <td class="td-gold">${r.venta.toLocaleString('es')}</td>
-      <td>${r.canton}</td>
-      <td><span class="td-prov">${r.provincia}</span></td>
-    </tr>`).join('');
+  var agg=doAgg(rows);
+  document.getElementById('previewBody').innerHTML=agg.map(function(r,i){
+    return'<tr><td style="color:var(--txt4);text-align:right">'+(i+1)+'</td><td class="'+(i===0?'td-gold':'')+'" style="max-width:220px">'+r.farmacia+'</td><td>'+r.usuario+'</td><td class="td-gold">'+r.venta.toLocaleString('es')+'</td><td>'+r.canton+'</td><td><span class="td-prov">'+r.provincia+'</span></td></tr>';
+  }).join('');
 }
-
-function aggregate(rows){
-  const m={};
-  rows.forEach(r=>{if(!m[r.farmacia])m[r.farmacia]={...r,venta:0};m[r.farmacia].venta+=r.venta;});
-  return Object.values(m).sort((a,b)=>b.venta-a.venta);
+ 
+function doAgg(rows){
+  var m={};
+  rows.forEach(function(r){if(!m[r.farmacia])m[r.farmacia]=Object.assign({},r,{venta:0});m[r.farmacia].venta+=r.venta;});
+  return Object.values(m).sort(function(a,b){return b.venta-a.venta;});
 }
-
-function normalizeRows(json){
+function normRows(json){
   if(!json.length)return null;
-  const keys=Object.keys(json[0]);
-  const fi=keys.find(k=>k.toLowerCase().includes('farmacia'));
-  const ui=keys.find(k=>k.toLowerCase().includes('usuario'));
-  const vi=keys.find(k=>k.toLowerCase().includes('venta')||k.toLowerCase().includes('unidad'));
-  const cai=keys.find(k=>k.toLowerCase().includes('canton')||k.toLowerCase().includes('cantón'));
-  const pri=keys.find(k=>k.toLowerCase().includes('provincia'));
+  var keys=Object.keys(json[0]);
+  var fi=keys.find(function(k){return k.toLowerCase().includes('farmacia');});
+  var ui=keys.find(function(k){return k.toLowerCase().includes('usuario');});
+  var vi=keys.find(function(k){return k.toLowerCase().includes('venta')||k.toLowerCase().includes('unidad');});
+  var cai=keys.find(function(k){return k.toLowerCase().includes('canton')||k.toLowerCase().includes('cantón');});
+  var pri=keys.find(function(k){return k.toLowerCase().includes('provincia');});
   if(!fi||!vi)return null;
-  return json.filter(r=>r[fi]&&String(r[fi]).trim()).map(r=>({
-    farmacia:String(r[fi]).trim(),
-    usuario:ui?String(r[ui]).trim():'—',
-    venta:parseFloat(String(r[vi]).replace(/[^0-9.]/g,''))||0,
-    canton:cai?String(r[cai]).trim():'—',
-    provincia:pri?String(r[pri]).trim():'—'
-  }));
+  return json.filter(function(r){return r[fi]&&String(r[fi]).trim();}).map(function(r){return{farmacia:String(r[fi]).trim(),usuario:ui?String(r[ui]).trim():'—',venta:parseFloat(String(r[vi]).replace(/[^0-9.]/g,''))||0,canton:cai?String(r[cai]).trim():'—',provincia:pri?String(r[pri]).trim():'—'};});
 }
-
-function parseDelimited(text){
-  const lines=text.trim().split(/\r?\n/);if(lines.length<2)return null;
-  const sep=lines[0].includes('\t')?'\t':',';
-  const hdr=lines[0].split(sep).map(h=>h.trim().toLowerCase());
-  const fi=hdr.findIndex(h=>h.includes('farmacia'));
-  const ui=hdr.findIndex(h=>h.includes('usuario'));
-  const vi=hdr.findIndex(h=>h.includes('venta')||h.includes('unidad'));
-  const cai=hdr.findIndex(h=>h.includes('canton')||h.includes('cantón'));
-  const pri=hdr.findIndex(h=>h.includes('provincia'));
+function parseDelim(text){
+  var lines=text.trim().split(/\r?\n/);if(lines.length<2)return null;
+  var sep=lines[0].includes('\t')?'\t':',';
+  var hdr=lines[0].split(sep).map(function(h){return h.trim().toLowerCase();});
+  var fi=hdr.findIndex(function(h){return h.includes('farmacia');});
+  var ui=hdr.findIndex(function(h){return h.includes('usuario');});
+  var vi=hdr.findIndex(function(h){return h.includes('venta')||h.includes('unidad');});
+  var cai=hdr.findIndex(function(h){return h.includes('canton')||h.includes('cantón');});
+  var pri=hdr.findIndex(function(h){return h.includes('provincia');});
   if(fi<0||vi<0)return null;
-  const rows=[];
-  for(let i=1;i<lines.length;i++){
-    const c=lines[i].split(sep);if(!c[fi]?.trim())continue;
-    rows.push({farmacia:c[fi].trim(),usuario:ui>=0?c[ui].trim():'—',venta:parseFloat(c[vi])||0,canton:cai>=0?c[cai].trim():'—',provincia:pri>=0?c[pri].trim():'—'});
-  }
+  var rows=[];
+  for(var i=1;i<lines.length;i++){var c=lines[i].split(sep);if(!c[fi]||!c[fi].trim())continue;rows.push({farmacia:c[fi].trim(),usuario:ui>=0?c[ui].trim():'—',venta:parseFloat(c[vi])||0,canton:cai>=0?c[cai].trim():'—',provincia:pri>=0?c[pri].trim():'—'});}
   return rows.length?rows:null;
 }
-
-function setS(id,msg,type){const s=document.getElementById(id);s.textContent=msg;s.className='status '+type;}
-
-// ═══════════════════════════════════════════════════════════
+function setS(id,msg,type){var s=document.getElementById(id);s.textContent=msg;s.className='status '+type;}
+ 
+// ═══════════════════════════════════
 // GENERATE VIEWER
-// ═══════════════════════════════════════════════════════════
+// ═══════════════════════════════════
 function generateViewer(){
   if(!loadedData||!loadedData.length){alert('Primero carga un archivo.');return;}
-  const btn=document.getElementById('genBtn');
+  var btn=document.getElementById('genBtn');
   btn.disabled=true;btn.textContent='⏳ GENERANDO...';
   try{
-    const now=new Date();
-    const dateStr=now.toLocaleDateString('es',{day:'2-digit',month:'2-digit',year:'numeric'});
-    const timeStr=now.toLocaleTimeString('es');
-    const agg=aggregate(loadedData);
-    const provs=[...new Set(agg.map(r=>r.provincia).filter(Boolean))];
-    const html=buildViewer(JSON.stringify(loadedData),dateStr,timeStr,loadedFileName,provs.join(' & '),agg.length);
-    const blob=new Blob([html],{type:'text/html;charset=utf-8'});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    const d=now.toISOString().slice(0,10).replace(/-/g,'');
+    var now=new Date();
+    var dateStr=now.toLocaleDateString('es',{day:'2-digit',month:'2-digit',year:'numeric'});
+    var timeStr=now.toLocaleTimeString('es');
+    var agg=doAgg(loadedData);
+    var provs=[...new Set(agg.map(function(r){return r.provincia;}).filter(Boolean))];
+    var safeJson=JSON.stringify(loadedData).replace(/<\/script>/gi,'<\\/script>');
+    var html=buildViewer(safeJson,dateStr,timeStr,loadedFname,provs.join(' & '),agg.length);
+    var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    var d=now.toISOString().slice(0,10).replace(/-/g,'');
     a.href=url;a.download='ECO_Viewer_'+d+'.html';
-    document.body.appendChild(a);a.click();
-    document.body.removeChild(a);URL.revokeObjectURL(url);
-    setS('genStatus','✔ Dashboard generado: ECO_Viewer_'+d+'.html · '+agg.length+' PDV · '+dateStr+' '+timeStr,'ok');
+    document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+    setS('genStatus','✔ Generado: ECO_Viewer_'+d+'.html · '+agg.length+' PDV · '+dateStr+' '+timeStr,'ok');
     btn.textContent='⬡ GENERAR DASHBOARD FARMACIAS';btn.disabled=false;
   }catch(ex){
     setS('genStatus','❌ Error: '+ex.message,'err');
     btn.textContent='⬡ GENERAR DASHBOARD FARMACIAS';btn.disabled=false;
   }
 }
-
-// ═══════════════════════════════════════════════════════════
-// VIEWER TEMPLATE
-// ═══════════════════════════════════════════════════════════
-function buildViewer(jsonData,dateStr,timeStr,srcFile,provincias,pdvCount){
-return `<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
-<meta name="theme-color" content="#070a0f"/>
-<title>ECO FARMA — Dashboard ${dateStr}</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"><\/script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet"/>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{--gold:#f5c842;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--bg0:#070a0f;--bg1:#0f1219;--border:#1e2330;--border2:#252a38;--txt:#e8e2d0;--txt2:#9ca3af;--txt3:#4b5563;--txt4:#252a38;--mono:'Space Mono',monospace;--r:10px}
-html,body{background:var(--bg0);min-height:100vh;font-family:'Syne',sans-serif;color:var(--txt);padding-bottom:72px}
-/* HEADER */
-.hdr{position:sticky;top:0;z-index:50;background:var(--bg0);border-bottom:0.5px solid var(--border);padding:.65rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
-.hdr-l{display:flex;align-items:center;gap:.6rem;min-width:0}
-.logo{width:32px;height:32px;background:var(--gold);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:11px;color:var(--bg0);flex-shrink:0}
-.htitle{font-size:13px;font-weight:800;color:var(--gold);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hsub{font-size:9px;color:var(--txt3);font-family:var(--mono);margin-top:1px}
-.pill{display:flex;align-items:center;gap:4px;font-size:9px;font-family:var(--mono);color:var(--green);background:#052e16;padding:3px 8px;border-radius:20px;border:0.5px solid #166534;flex-shrink:0;white-space:nowrap}
-.dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pu 1.5s infinite}
-@keyframes pu{0%,100%{opacity:1}50%{opacity:.2}}
-/* BOTTOM NAV */
-.bnav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:#0a0d13;border-top:0.5px solid var(--border);display:flex;padding-bottom:env(safe-area-inset-bottom)}
-.bi{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.45rem .2rem;gap:2px;cursor:pointer;border:none;background:none;color:var(--txt3);font-family:var(--mono);font-size:8px;text-transform:uppercase;transition:color .2s}
-.bi.on{color:var(--gold)}
-.bic{font-size:17px;line-height:1}
-/* SECTIONS */
-.sec{display:none;padding:.875rem .875rem 0;animation:fi .2s ease}
-.sec.show{display:block}
-@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-/* CARD */
-.card{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.875rem;margin-bottom:.75rem}
-.pt{font-size:9px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.55rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
-.pt select{background:var(--bg0);color:var(--txt2);border:0.5px solid var(--border2);border-radius:4px;font-size:9px;font-family:var(--mono);padding:3px 6px;outline:none;max-width:100%}
-/* KPI */
-.kg{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.75rem}
-.kc{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.7rem;position:relative;overflow:hidden}
-.kc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--border)}
-.kc.hi::before{background:var(--gold)}.kc.gr::before{background:var(--green)}.kc.rd::before{background:var(--red)}.kc.bl::before{background:var(--blue)}
-.kl{font-size:8px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px}
-.kv{font-size:20px;font-weight:700;font-family:var(--mono);color:var(--gold);line-height:1}
-.kv.sm{font-size:12px;margin-top:1px;line-height:1.3}
-.kv.gr{color:var(--green)}.kv.rd{color:var(--red)}.kv.bl{color:var(--blue)}
-.ks{font-size:9px;color:var(--txt3);font-family:var(--mono);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.kb{display:inline-block;font-size:8px;font-family:var(--mono);padding:2px 6px;border-radius:3px;margin-top:3px}
-.kb.up{background:#052e16;color:var(--green)}.kb.dn{background:#2a0909;color:var(--red)}
-/* FILTERS */
-.fb{display:flex;flex-direction:column;gap:.45rem;margin-bottom:.75rem}
-.tabs{display:flex;gap:4px;flex-wrap:wrap}
-.tab{padding:6px 12px;border-radius:6px;font-size:10px;font-family:var(--mono);cursor:pointer;border:0.5px solid var(--border2);background:var(--bg1);color:var(--txt3);min-height:34px;transition:all .2s}
-.tab.on{background:var(--gold);color:var(--bg0);border-color:var(--gold);font-weight:700}
-.frow{display:flex;gap:.4rem}
-.gsel{background:var(--bg1);border:0.5px solid var(--border2);color:var(--txt2);padding:6px 8px;border-radius:6px;font-size:10px;font-family:var(--mono);outline:none;flex:1;min-height:34px}
-.gsel:focus{border-color:var(--gold)}
-.srch{background:var(--bg1);border:0.5px solid var(--border2);color:var(--txt);padding:8px 10px;border-radius:6px;font-size:13px;font-family:var(--mono);outline:none;width:100%;min-height:40px}
-.srch::placeholder{color:var(--txt4)}
-.srch:focus{border-color:var(--gold)}
-.fc{font-size:9px;font-family:var(--mono);color:var(--txt4);text-align:right}
-/* RANKING */
-.rl{display:flex;flex-direction:column;gap:4px}
-.ri{display:flex;align-items:center;gap:6px;padding:8px 9px;background:var(--bg0);border:0.5px solid #13161e;border-radius:8px;min-height:44px}
-.ri.r1{border-left:2px solid var(--gold)}.ri.r23{border-left:2px solid var(--green)}.ri.bot{border-left:2px solid var(--red)}.ri.mid{border-left:2px solid var(--border)}
-.rp{font-family:var(--mono);font-size:10px;color:var(--txt4);width:18px;text-align:right;flex-shrink:0}
-.rbar{height:3px;border-radius:2px;background:var(--gold);opacity:.4;flex-shrink:0;min-width:2px}
-.rn{flex:1;font-size:11px;color:#c9c5be;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ri.r1 .rn{color:var(--gold);font-weight:700}
-.rtg{font-size:8px;font-family:var(--mono);padding:2px 4px;border-radius:3px;flex-shrink:0;background:#0d1520;color:var(--blue);max-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rv{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;min-width:42px;text-align:right}
-.pgn{display:flex;align-items:center;justify-content:space-between;margin-top:.55rem;padding-top:.55rem;border-top:0.5px solid var(--border)}
-.pgb{background:var(--bg0);border:0.5px solid var(--border2);color:var(--txt3);padding:6px 14px;border-radius:6px;font-size:10px;font-family:var(--mono);cursor:pointer;min-height:34px}
-.pgb:disabled{opacity:.2;cursor:default}
-.pgi{font-size:10px;font-family:var(--mono);color:var(--txt4)}
-/* CHART */
-.cwrap{position:relative;width:100%}
-/* CANTON TABLE */
-.gt{width:100%;border-collapse:collapse;font-size:10px;font-family:var(--mono)}
-.gt th{color:var(--txt4);text-align:left;padding:5px 6px;border-bottom:0.5px solid var(--border);font-weight:400;text-transform:uppercase;font-size:8px;letter-spacing:.5px}
-.gt td{padding:5px 6px;border-bottom:0.5px solid #0d1016;color:var(--txt2);vertical-align:middle}
-.gt tr:hover td{background:var(--bg0)}
-.gbg{background:#0d1016;border-radius:2px;height:4px;width:50px;display:inline-block;vertical-align:middle}
-.gf{height:4px;border-radius:2px}
-.gbadge{font-size:8px;padding:1px 5px;border-radius:3px;background:#13161e;color:var(--txt3)}
-/* TICKER */
-.tkr{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:.75rem}
-.tl{padding:.45rem .75rem;border-bottom:0.5px solid var(--border);font-size:8px;font-family:var(--mono);color:var(--txt3);text-transform:uppercase;letter-spacing:.8px;display:flex;align-items:center;gap:.35rem}
-.tw{overflow:hidden;padding:.4rem 0;position:relative}
-.tw::after{content:'';position:absolute;right:0;top:0;bottom:0;width:28px;background:linear-gradient(to left,var(--bg1),transparent);z-index:2;pointer-events:none}
-.tt{display:flex;white-space:nowrap;will-change:transform}
-.tt.run{animation:tks 140s linear infinite}
-.tt:hover{animation-play-state:paused}
-@keyframes tks{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.ti{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;margin-right:1.5rem;flex-shrink:0}
-.ti .n{color:var(--txt2)}.ti .v{color:var(--gold);font-weight:700}.ti .p{font-size:8px;padding:1px 3px;border-radius:2px;background:#0d1520;color:var(--blue)}.ti .r{font-size:8px;color:var(--txt4)}
-.ti.r1 .n{color:var(--gold)}.ti.last .n{color:var(--red)}
-.sep{color:var(--border);margin:0 .25rem;font-size:10px}
-/* INFO */
-.info-card{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.875rem;margin-bottom:.75rem;font-size:11px;font-family:var(--mono);color:var(--txt3);line-height:2}
-.info-card span{color:var(--txt2)}
-/* DESKTOP */
-@media(min-width:768px){
-  body{padding-bottom:0}
-  .bnav{display:none}
-  .sec{display:block !important;padding:0}
-  .dw{padding:1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-  .dw .full{grid-column:1/-1}
-  .kg{grid-template-columns:repeat(5,1fr)}
-  .kv{font-size:18px}.kv.sm{font-size:12px}
-  .fb{flex-direction:row;flex-wrap:wrap;align-items:center}
-  .fb .srch{width:auto;flex:1;max-width:250px;min-height:32px;font-size:11px;padding:5px 10px}
-  .gsel{flex:0 0 auto;min-height:32px}
-  .tab{min-height:28px;padding:4px 12px}
-}
-</style>
-</head>
-<body>
-
-<div class="hdr">
-  <div class="hdr-l">
-    <div class="logo">ECO</div>
-    <div>
-      <div class="htitle">ECO FARMA</div>
-      <div class="hsub">${pdvCount} PDV · ${provincias}</div>
-    </div>
-  </div>
-  <div class="pill"><span class="dot"></span>Act. ${dateStr}</div>
-</div>
-
-<!-- INICIO -->
-<div class="sec show" id="s0">
-<div class="dw">
-  <div class="full">
-    <div class="kg">
-      <div class="kc hi"><div class="kl">Total Unidades</div><div class="kv" id="k1">—</div><div class="ks" id="k1s">—</div></div>
-      <div class="kc gr"><div class="kl">PDV Activos</div><div class="kv gr" id="k2">—</div><div class="ks" id="k2s">—</div></div>
-      <div class="kc bl"><div class="kl">Provincias</div><div class="kv bl" id="k3">—</div><div class="ks" id="k3s">—</div></div>
-      <div class="kc gr"><div class="kl">Líder</div><div class="kv sm gr" id="k4">—</div><div class="ks" id="k4s">—</div><div class="kb up" id="k4b">—</div></div>
-      <div class="kc rd"><div class="kl">Atención</div><div class="kv sm rd" id="k5">—</div><div class="ks" id="k5s">—</div><div class="kb dn" id="k5b">—</div></div>
-    </div>
-    <div class="tkr">
-      <div class="tl"><span class="dot"></span>Ranking en vivo · toca para pausar</div>
-      <div class="tw"><div class="tt" id="tkrT"></div></div>
-    </div>
-  </div>
-  <div>
-    <div class="card">
-      <div class="pt"><span>Top 10 PDV</span></div>
-      <div class="rl" id="top10"></div>
-    </div>
-  </div>
-  <div>
-    <div class="card">
-      <div class="pt"><span>Por provincia</span></div>
-      <div class="cwrap" style="height:220px"><canvas id="provC0" role="img" aria-label="Provincias">Provincias</canvas></div>
-    </div>
-    <div class="card">
-      <div class="pt"><span>Por cantón</span></div>
-      <div style="overflow-x:auto;max-height:200px;overflow-y:auto">
-        <table class="gt"><thead><tr><th>#</th><th>Cantón</th><th>Prov.</th><th style="text-align:right">Uds.</th><th>PDV</th></tr></thead><tbody id="cB0"></tbody></table>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- RANKING -->
-<div class="sec" id="s1">
-<div class="dw">
-<div class="full">
-  <div class="fb">
-    <div class="tabs">
-      <span class="tab on" onclick="setTab('all',this)">TODOS</span>
-      <span class="tab" onclick="setTab('top',this)">TOP 10</span>
-      <span class="tab" onclick="setTab('bot',this)">ÚLTIMOS 10</span>
-    </div>
-    <div class="frow">
-      <select class="gsel" id="selProv" onchange="onProv()"></select>
-      <select class="gsel" id="selCant" onchange="applyF()"></select>
-    </div>
-    <input class="srch" id="srch" placeholder="Buscar farmacia, cantón, provincia…" oninput="applyF()"/>
-    <span class="fc" id="fc"></span>
-  </div>
-  <div class="card">
-    <div class="pt"><span>Ranking completo</span><span id="rc" style="color:var(--txt4)"></span></div>
-    <div class="rl" id="rl"></div>
-    <div class="pgn">
-      <button class="pgb" id="pp" onclick="pg(-1)" disabled>◀ ANTERIOR</button>
-      <span class="pgi" id="pi">—</span>
-      <button class="pgb" id="pn" onclick="pg(1)" disabled>SIGUIENTE ▶</button>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
-<!-- GRÁFICAS -->
-<div class="sec" id="s2">
-<div class="dw">
-<div class="full">
-  <div class="card">
-    <div class="pt">
-      <span>Comparativo PDV — nombres completos</span>
-      <select id="cv" onchange="renderBar()">
-        <option value="10">Top 10</option>
-        <option value="20">Top 20</option>
-        <option value="30">Top 30</option>
-        <option value="bot">Últimos 10</option>
-      </select>
-    </div>
-    <div class="cwrap" id="barWrap"><canvas id="barC" role="img" aria-label="Ventas PDV">Ventas PDV</canvas></div>
-  </div>
-</div>
-<div>
-  <div class="card">
-    <div class="pt"><span>Por provincia</span></div>
-    <div class="cwrap" style="height:220px"><canvas id="provC" role="img" aria-label="Provincias">Provincias</canvas></div>
-  </div>
-</div>
-<div>
-  <div class="card">
-    <div class="pt"><span>Por cantón</span></div>
-    <div style="overflow-x:auto;max-height:260px;overflow-y:auto">
-      <table class="gt"><thead><tr><th>#</th><th>Cantón</th><th>Prov.</th><th style="text-align:right">Uds.</th><th>PDV</th><th>%</th></tr></thead><tbody id="cB"></tbody></table>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
-<!-- INFO -->
-<div class="sec" id="s3">
-<div class="dw"><div class="full">
-  <div class="info-card">
-    <span>Archivo fuente:</span> ${srcFile}<br>
-    <span>Generado:</span> ${dateStr} — ${timeStr}<br>
-    <span>PDV incluidos:</span> ${pdvCount}<br>
-    <span>Cobertura:</span> ${provincias}<br>
-    <br>
-    Para actualizar, el administrador debe cargar el nuevo Excel en<br>
-    <span>ECO_Admin.html</span> y generar un nuevo archivo viewer.
-  </div>
-</div></div>
-</div>
-
-<nav class="bnav">
-  <button class="bi on" onclick="goS(0,this)"><span class="bic">◈</span>Inicio</button>
-  <button class="bi" onclick="goS(1,this)"><span class="bic">≡</span>Ranking</button>
-  <button class="bi" onclick="goS(2,this)"><span class="bic">▲</span>Gráficas</button>
-  <button class="bi" onclick="goS(3,this)"><span class="bic">ℹ</span>Info</button>
-</nav>
-
-<script>
-const RAW=${jsonData};
-let agg=[],filt=[],tab='all',pg_=0,PG=10,barI=null,pI=null,pI0=null,pv={};
-
-function aggregate(rows){const m={};rows.forEach(r=>{if(!m[r.farmacia])m[r.farmacia]={...r,venta:0};m[r.farmacia].venta+=r.venta;});return Object.values(m).sort((a,b)=>b.venta-a.venta);}
-function aggK(data,key){const m={};data.forEach(r=>{const k=r[key]||'—';if(!m[k])m[k]={venta:0,pdv:0,prov:r.provincia};m[k].venta+=r.venta;m[k].pdv++;});return Object.entries(m).map(([k,v])=>({name:k,...v})).sort((a,b)=>b.venta-a.venta);}
-
-function goS(n,el){document.querySelectorAll('.sec').forEach((s,i)=>s.classList.toggle('show',i===n));document.querySelectorAll('.bi').forEach(b=>b.classList.remove('on'));el.classList.add('on');if(n===2)setTimeout(()=>{renderBar();mkP('provC',pI,r=>pI=r);},60);}
-
-// FILTERS - con opción TODAS
-function initFilters(){
-  const provs=[...new Set(agg.map(r=>r.provincia).filter(Boolean))].sort();
-  document.getElementById('selProv').innerHTML=
-    '<option value="">TODAS LAS PROVINCIAS</option>'+
-    provs.map(p=>\`<option value="\${p}">\${p}</option>\`).join('');
-  document.getElementById('selCant').innerHTML='<option value="">TODOS LOS CANTONES</option>'+
-    [...new Set(agg.map(r=>r.canton).filter(Boolean))].sort().map(c=>\`<option value="\${c}">\${c}</option>\`).join('');
-}
-function onProv(){
-  const prov=document.getElementById('selProv').value;
-  const cants=[...new Set(agg.filter(r=>!prov||r.provincia===prov).map(r=>r.canton).filter(Boolean))].sort();
-  document.getElementById('selCant').innerHTML=
-    '<option value="">TODOS LOS CANTONES</option>'+
-    cants.map(c=>\`<option value="\${c}">\${c}</option>\`).join('');
-  pg_=0;applyF();
-}
-function setTab(t,el){tab=t;pg_=0;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));el.classList.add('on');applyF();}
-function applyF(){
-  const q=(document.getElementById('srch')?.value||'').toLowerCase().trim();
-  const prov=document.getElementById('selProv').value;
-  const cant=document.getElementById('selCant').value;
-  let src=[...agg];
-  if(prov)src=src.filter(r=>r.provincia===prov);
-  if(cant)src=src.filter(r=>r.canton===cant);
-  if(tab==='top')src=src.slice(0,10);
-  else if(tab==='bot')src=src.slice(-10).reverse();
-  if(q)src=src.filter(r=>[r.farmacia,r.canton,r.provincia,r.usuario].join(' ').toLowerCase().includes(q));
-  filt=src;
-  const fc=document.getElementById('fc');
-  if(fc)fc.textContent=src.length+' PDV mostrados';
-  renderRank();
-}
-
-// RANKING
-function renderRank(){
-  const total=filt.length,pages=Math.ceil(total/PG)||1;
-  if(pg_>=pages)pg_=Math.max(0,pages-1);
-  const slice=filt.slice(pg_*PG,(pg_+1)*PG);
-  const maxV=agg[0]?.venta||1;
-  const el=document.getElementById('rl');el.innerHTML='';
-  if(!slice.length){el.innerHTML='<div style="padding:1rem;text-align:center;color:var(--txt4);font-size:11px;font-family:var(--mono)">Sin resultados para los filtros seleccionados</div>';return;}
-  slice.forEach(r=>{
-    const gr=agg.findIndex(x=>x.farmacia===r.farmacia)+1;
-    const prev=pv[r.farmacia]||0,diff=r.venta-prev;
-    const pct=prev>0?((diff/prev)*100).toFixed(1):null;
-    const cls=gr===1?'ri r1':gr<=3?'ri r23':gr===agg.length?'ri bot':'ri mid';
-    const bw=Math.max(2,Math.round((r.venta/maxV)*48));
-    el.innerHTML+=\`<div class="\${cls}" title="\${r.farmacia} — \${r.canton} (\${r.provincia}) · \${r.usuario}">
-      <span class="rp">\${gr}</span>
-      <span class="rbar" style="width:\${bw}px"></span>
-      <span class="rn">\${r.farmacia}</span>
-      <span class="rtg">\${r.canton}</span>
-      <span class="rv">\${r.venta.toLocaleString('es')}</span>
-    </div>\`;
-    pv[r.farmacia]=r.venta;
-  });
-  const rc=document.getElementById('rc');
-  if(rc)rc.textContent=\`\${pg_*PG+1}–\${Math.min((pg_+1)*PG,total)} de \${total}\`;
-  document.getElementById('pi').textContent=\`Pág \${pg_+1}/\${pages}\`;
-  document.getElementById('pp').disabled=pg_===0;
-  document.getElementById('pn').disabled=pg_>=pages-1;
-}
-function pg(d){pg_+=d;renderRank();}
-
-// TOP 10
-function renderTop10(){
-  const top=agg.slice(0,10),maxV=agg[0]?.venta||1;
-  document.getElementById('top10').innerHTML=top.map((r,i)=>{
-    const cls=i===0?'ri r1':i<=2?'ri r23':'ri mid';
-    const bw=Math.max(2,Math.round((r.venta/maxV)*48));
-    return\`<div class="\${cls}" title="\${r.farmacia} — \${r.canton} (\${r.provincia})">
-      <span class="rp">\${i+1}</span><span class="rbar" style="width:\${bw}px"></span>
-      <span class="rn">\${r.farmacia}</span>
-      <span class="rtg">\${r.canton}</span>
-      <span class="rv">\${r.venta.toLocaleString('es')}</span>
-    </div>\`;
-  }).join('');
-}
-
-// BAR CHART — HORIZONTAL, nombres completos
-function renderBar(){
-  const v=document.getElementById('cv').value;
-  const src=v==='bot'?[...agg].slice(-10).reverse():agg.slice(0,parseInt(v));
-  const topV=agg[0]?.venta||1,botV=agg[agg.length-1]?.venta||0;
-  const colors=src.map(r=>r.venta===topV?'#f5c842':r.venta===botV?'#ef4444':r.venta>=topV*.7?'#22c55e':'#3b82f6');
-  // Altura dinámica: 38px por barra
-  const h=Math.max(280,src.length*38+60);
-  const wrap=document.getElementById('barWrap');
-  wrap.style.height=h+'px';
-  if(barI)barI.destroy();
-  barI=new Chart(document.getElementById('barC'),{
-    type:'bar',
-    data:{
-      labels:src.map(r=>r.farmacia),
-      datasets:[{data:src.map(r=>r.venta),backgroundColor:colors,borderRadius:4,borderSkipped:false}]
-    },
-    options:{
-      indexAxis:'y',
-      responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label:(c)=>{const r=src[c.dataIndex];return[\`\${c.raw.toLocaleString('es')} uds\`,\`\${r.canton} · \${r.provincia}\`];}}}
-      },
-      scales:{
-        x:{grid:{color:'#13161e'},ticks:{color:'#4b5563',font:{family:'Space Mono',size:9},callback:v=>v.toLocaleString('es')}},
-        y:{grid:{color:'transparent'},ticks:{color:'#e8e2d0',font:{family:'Space Mono',size:9},crossAlign:'far'}}
-      }
-    }
-  });
-}
-
-// PROVINCE DONUT
-function mkP(cid,inst,cb){
-  const pa=aggK(agg,'provincia');
-  const total=pa.reduce((s,r)=>s+r.venta,0);
-  const pal=['#f5c842','#3b82f6','#22c55e','#ef4444','#a78bfa'];
-  if(inst)inst.destroy();
-  cb(new Chart(document.getElementById(cid),{
-    type:'doughnut',
-    data:{labels:pa.map(p=>p.name),datasets:[{data:pa.map(p=>p.venta),backgroundColor:pal.slice(0,pa.length),borderWidth:1.5,borderColor:'#0f1219'}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'60%',
-      plugins:{legend:{display:true,position:'right',labels:{color:'#6b7280',font:{family:'Space Mono',size:9},boxWidth:10,padding:8}},
-               tooltip:{callbacks:{label:(c)=>\`\${c.label}: \${c.raw.toLocaleString('es')} (\${((c.raw/total)*100).toFixed(1)}%)\`}}}}
-  }));
-}
-
-// CANTON TABLE
-function renderCant(tbid){
-  const ca=aggK(agg,'canton');
-  const total=ca.reduce((s,r)=>s+r.venta,0);
-  const maxV=ca[0]?.venta||1;
-  const pal={};
-  const colors=['#f5c842','#3b82f6','#22c55e','#ef4444','#a78bfa'];
-  [...new Set(ca.map(c=>c.prov))].forEach((p,i)=>pal[p]=colors[i%colors.length]);
-  document.getElementById(tbid).innerHTML=ca.map((c,i)=>{
-    const pct=((c.venta/total)*100).toFixed(1);
-    const bw=Math.round((c.venta/maxV)*46);
-    const bc=pal[c.prov]||'#6b7280';
-    return\`<tr>
-      <td style="color:var(--txt4)">\${i+1}</td>
-      <td style="color:\${i<3?'var(--gold)':'var(--txt2)'};font-weight:\${i<3?700:400};max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\${c.name}">\${c.name}</td>
-      <td><span class="gbadge">\${c.prov}</span></td>
-      <td style="text-align:right;color:var(--gold);font-weight:700">\${c.venta.toLocaleString('es')}</td>
-      <td style="color:var(--txt4)">\${c.pdv}</td>
-      <td><div class="gbg"><div class="gf" style="width:\${bw}px;background:\${bc}"></div></div><span style="font-size:8px;color:var(--txt4);margin-left:3px">\${pct}%</span></td>
-    </tr>\`;
-  }).join('');
-}
-
-// TICKER
-function renderTicker(){
-  const track=document.getElementById('tkrT');
-  track.classList.remove('run');
-  const items=agg.map((r,i)=>{
-    const cls=i===0?'ti r1':i===agg.length-1?'ti last':'ti';
-    const sym=i===0?'◆':i===agg.length-1?'▽':'·';
-    return\`<span class="\${cls}"><span class="r">\${String(i+1).padStart(2,'0')}</span><span class="p">\${r.provincia.slice(0,3)}</span><span class="n">\${sym} \${r.farmacia}</span><span class="v">\${r.venta.toLocaleString('es')}</span></span><span class="sep">|</span>\`;
-  }).join('');
-  track.innerHTML=items+items;
-  void track.offsetWidth;
-  track.classList.add('run');
-}
-
-// KPIs
-function renderKPIs(){
-  const total=agg.reduce((s,r)=>s+r.venta,0);
-  const provs=[...new Set(agg.map(r=>r.provincia).filter(Boolean))];
-  const cants=[...new Set(agg.map(r=>r.canton).filter(Boolean))];
-  const top=agg[0],bot=agg[agg.length-1];
-  document.getElementById('k1').textContent=total.toLocaleString('es');
-  document.getElementById('k1s').textContent='Prom: '+Math.round(total/agg.length).toLocaleString('es')+'/PDV';
-  document.getElementById('k2').textContent=agg.length;
-  document.getElementById('k2s').textContent=cants.length+' cantones';
-  document.getElementById('k3').textContent=provs.length;
-  document.getElementById('k3s').textContent=provs.join(' · ');
-  if(top){document.getElementById('k4').textContent=top.farmacia;document.getElementById('k4s').textContent=top.canton+' · '+top.provincia;document.getElementById('k4b').textContent=top.venta.toLocaleString('es')+' uds';}
-  if(bot){document.getElementById('k5').textContent=bot.farmacia;document.getElementById('k5s').textContent=bot.canton+' · '+bot.provincia;document.getElementById('k5b').textContent=bot.venta.toLocaleString('es')+' uds';}
-}
-
-// INIT
-agg=aggregate(RAW);
-renderKPIs();
-initFilters();
-applyF();
-renderTop10();
-renderTicker();
-mkP('provC0',pI0,r=>pI0=r);
-renderCant('cB0');
-renderCant('cB');
-<\/script>
-</body>
-</html>`;
+ 
+// ═══════════════════════════════════════════════════════════════
+// VIEWER TEMPLATE — full-featured, no upload buttons
+// ═══════════════════════════════════════════════════════════════
+function buildViewer(safeJson,dateStr,timeStr,srcFile,provincias,pdvCount){
+return '<!DOCTYPE html>\n<html lang="es">\n<head>\n<meta charset="UTF-8"/>\n<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>\n<meta name="theme-color" content="#070a0f"/>\n<title>ECO FARMA \u2014 '+dateStr+'<\/title>\n<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"><\/script>\n<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet"/>\n<style>\n*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}\n:root{\n  --gold:#f5c842;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--purple:#a78bfa;\n  --bg0:#070a0f;--bg1:#0f1219;--border:#1e2330;--border2:#252a38;\n  --txt:#e8e2d0;--txt2:#9ca3af;--txt3:#4b5563;--txt4:#252a38;\n  --mono:\'Space Mono\',monospace;--r:10px\n}\nhtml,body{background:var(--bg0);min-height:100vh;font-family:\'Syne\',sans-serif;color:var(--txt);padding-bottom:72px}\n.hdr{position:sticky;top:0;z-index:50;background:var(--bg0);border-bottom:0.5px solid var(--border);padding:.65rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}\n.hdr-l{display:flex;align-items:center;gap:.6rem;min-width:0;flex:1}\n.logo{width:32px;height:32px;background:var(--gold);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:11px;color:var(--bg0);flex-shrink:0}\n.htitle{font-size:13px;font-weight:800;color:var(--gold);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n.hsub{font-size:9px;color:var(--txt3);font-family:var(--mono);margin-top:1px}\n.pill{display:flex;align-items:center;gap:4px;font-size:9px;font-family:var(--mono);color:var(--green);background:#052e16;padding:3px 8px;border-radius:20px;border:0.5px solid #166534;white-space:nowrap;flex-shrink:0}\n.dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pu 1.5s infinite}\n@keyframes pu{0%,100%{opacity:1}50%{opacity:.2}}\n.bnav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:#0a0d13;border-top:0.5px solid var(--border);display:flex;padding-bottom:env(safe-area-inset-bottom)}\n.bi{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.45rem .15rem;gap:2px;cursor:pointer;border:none;background:none;color:var(--txt3);font-family:var(--mono);font-size:7px;text-transform:uppercase;transition:color .2s}\n.bi.on{color:var(--gold)}\n.bic{font-size:16px;line-height:1}\n.sec{display:none;padding:.875rem .875rem 0;animation:fi .2s ease}\n.sec.show{display:block}\n@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}\n.card{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.875rem;margin-bottom:.75rem}\n.pt{font-size:9px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.55rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.35rem}\n.pt select{background:var(--bg0);color:var(--txt2);border:0.5px solid var(--border2);border-radius:4px;font-size:9px;font-family:var(--mono);padding:3px 6px;outline:none}\n.kg{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.75rem}\n.kc{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.7rem;position:relative;overflow:hidden}\n.kc::before{content:\'\';position:absolute;top:0;left:0;right:0;height:2px;background:var(--border)}\n.kc.hi::before{background:var(--gold)}.kc.gr::before{background:var(--green)}.kc.rd::before{background:var(--red)}.kc.bl::before{background:var(--blue)}\n.kl{font-size:8px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px}\n.kv{font-size:20px;font-weight:700;font-family:var(--mono);color:var(--gold);line-height:1;transition:color .4s}\n.kv.sm{font-size:12px;margin-top:1px;line-height:1.3}\n.kv.gr{color:var(--green)}.kv.rd{color:var(--red)}.kv.bl{color:var(--blue)}.kv.flash{color:#fff}\n.ks{font-size:9px;color:var(--txt3);font-family:var(--mono);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.kb{display:inline-block;font-size:8px;font-family:var(--mono);padding:2px 6px;border-radius:3px;margin-top:3px}\n.kb.up{background:#052e16;color:var(--green)}.kb.dn{background:#2a0909;color:var(--red)}\n.fb{display:flex;flex-direction:column;gap:.45rem;margin-bottom:.75rem}\n.frow{display:flex;gap:.4rem;flex-wrap:wrap}\n.gsel{background:var(--bg1);border:0.5px solid var(--border2);color:var(--txt2);padding:6px 8px;border-radius:6px;font-size:10px;font-family:var(--mono);outline:none;flex:1;min-height:34px;min-width:130px}\n.gsel:focus{border-color:var(--gold)}\n.srch{background:var(--bg1);border:0.5px solid var(--border2);color:var(--txt);padding:8px 10px;border-radius:6px;font-size:13px;font-family:var(--mono);outline:none;width:100%;min-height:40px}\n.srch::placeholder{color:var(--txt4)}\n.srch:focus{border-color:var(--gold)}\n.fc{font-size:9px;font-family:var(--mono);color:var(--txt4)}\n.tabs{display:flex;gap:4px;flex-wrap:wrap}\n.tab{padding:6px 12px;border-radius:6px;font-size:10px;font-family:var(--mono);cursor:pointer;border:0.5px solid var(--border2);background:var(--bg1);color:var(--txt3);min-height:34px}\n.tab.on{background:var(--gold);color:var(--bg0);border-color:var(--gold);font-weight:700}\n.rl{display:flex;flex-direction:column;gap:4px}\n.ri{display:flex;align-items:center;gap:6px;padding:7px 9px;background:var(--bg0);border:0.5px solid #13161e;border-radius:8px;min-height:42px}\n.ri.r1{border-left:2px solid var(--gold)}.ri.r23{border-left:2px solid var(--green)}.ri.bot{border-left:2px solid var(--red)}.ri.mid{border-left:2px solid var(--border)}\n.rp{font-family:var(--mono);font-size:10px;color:var(--txt4);width:18px;text-align:right;flex-shrink:0}\n.rbar{height:3px;border-radius:2px;background:var(--gold);opacity:.4;flex-shrink:0;min-width:2px}\n.rn{flex:1;font-size:11px;color:#c9c5be;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.ri.r1 .rn{color:var(--gold);font-weight:700}\n.rtg{font-size:8px;font-family:var(--mono);padding:2px 4px;border-radius:3px;flex-shrink:0;background:#0d1520;color:var(--blue);max-width:62px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.rv{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;min-width:42px;text-align:right}\n.pgn{display:flex;align-items:center;justify-content:space-between;margin-top:.55rem;padding-top:.55rem;border-top:0.5px solid var(--border)}\n.pgb{background:var(--bg0);border:0.5px solid var(--border2);color:var(--txt3);padding:6px 14px;border-radius:6px;font-size:10px;font-family:var(--mono);cursor:pointer;min-height:34px}\n.pgb:disabled{opacity:.2;cursor:default}\n.pgi{font-size:10px;font-family:var(--mono);color:var(--txt4)}\n.cwrap{position:relative;width:100%;height:240px}\n.cwrap canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important}\n.leg{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.5rem}\n.lp{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-family:var(--mono);padding:2px 8px;border-radius:4px;border:0.5px solid var(--border);color:var(--txt2)}\n.lp .lc{width:8px;height:8px;border-radius:2px;flex-shrink:0}\n.gt{width:100%;border-collapse:collapse;font-size:10px;font-family:var(--mono)}\n.gt th{color:var(--txt4);text-align:left;padding:5px 6px;border-bottom:0.5px solid var(--border);font-weight:400;text-transform:uppercase;font-size:8px;letter-spacing:.5px}\n.gt td{padding:5px 6px;border-bottom:0.5px solid #0d1016;color:var(--txt2);vertical-align:middle}\n.gt tr:hover td{background:var(--bg0)}\n.gbg{background:#0d1016;border-radius:2px;height:4px;width:50px;display:inline-block;vertical-align:middle}\n.gf{height:4px;border-radius:2px}\n.gbadge{font-size:8px;padding:1px 5px;border-radius:3px;background:#13161e;color:var(--txt3);white-space:nowrap}\n.stock-hdr{display:flex;align-items:baseline;gap:.75rem;margin-bottom:.5rem;flex-wrap:wrap}\n.sv{font-size:22px;font-weight:700;font-family:var(--mono);color:var(--gold)}\n.sc{font-size:11px;font-family:var(--mono);padding:2px 8px;border-radius:4px}\n.sc.up{background:#052e16;color:var(--green)}.sc.dn{background:#2a0909;color:var(--red)}\n.sm2{font-size:9px;font-family:var(--mono);color:var(--txt3)}\n.tkr{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:.75rem}\n.tl{padding:.4rem .75rem;border-bottom:0.5px solid var(--border);font-size:8px;font-family:var(--mono);color:var(--txt3);text-transform:uppercase;letter-spacing:.8px;display:flex;align-items:center;justify-content:space-between}\n.tw{overflow:hidden;padding:.35rem 0;position:relative}\n.tw::after{content:\'\';position:absolute;right:0;top:0;bottom:0;width:28px;background:linear-gradient(to left,var(--bg1),transparent);z-index:2;pointer-events:none}\n.tt{display:flex;white-space:nowrap;will-change:transform}\n.tt.run{animation:tks 50s linear infinite}\n.tt:hover{animation-play-state:paused}\n@keyframes tks{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}\n.ti{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;margin-right:1.5rem;flex-shrink:0}\n.ti .tn{color:var(--txt2)}.ti .tv{color:var(--gold);font-weight:700}\n.ti .tp{font-size:8px;padding:1px 3px;border-radius:2px;background:#0d1520;color:var(--blue)}\n.ti .tr2{font-size:8px;color:var(--txt4)}\n.ti.r1 .tn{color:var(--gold)}.ti.last .tn{color:var(--red)}\n.tsep{color:var(--border);margin:0 .25rem;font-size:10px}\n.ulist{display:flex;flex-direction:column;gap:3px;max-height:340px;overflow-y:auto}\n.ulist::-webkit-scrollbar{width:3px}\n.ulist::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}\n.ui{display:grid;grid-template-columns:20px 4px 1fr 1fr auto;align-items:center;gap:6px;padding:7px 9px;background:var(--bg0);border:0.5px solid #13161e;border-radius:7px;min-height:40px}\n.ui.r1{border-left:2px solid var(--gold)}.ui.r23{border-left:2px solid var(--green)}.ui.bot{border-left:2px solid var(--red)}.ui.mid{border-left:2px solid var(--border)}\n.ui-pos{font-family:var(--mono);font-size:10px;color:var(--txt4);text-align:right}\n.ui-bar{width:4px;border-radius:2px;background:var(--gold);opacity:.4;align-self:stretch}\n.ui-usr{font-size:11px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n.ui.r1 .ui-usr{color:var(--gold);font-weight:700}\n.ui-farm{font-size:10px;color:var(--txt3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--mono)}\n.ui-val{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--gold);text-align:right;flex-shrink:0;min-width:42px}\n.info-card{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.875rem;margin-bottom:.75rem;font-size:11px;font-family:var(--mono);color:var(--txt3);line-height:2}\n.info-card span{color:var(--txt2)}\n@media(min-width:768px){\n  body{padding-bottom:0}\n  .bnav{display:none}\n  .sec{display:block!important;padding:0}\n  .dw{padding:1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem}\n  .dw .full{grid-column:1/-1}\n  .kg{grid-template-columns:repeat(5,1fr)}\n  .kv{font-size:18px}.kv.sm{font-size:12px}\n  .fb{flex-direction:row;align-items:center}\n  .fb .srch{flex:1;max-width:220px;min-height:32px;font-size:11px;padding:5px 10px}\n  .gsel{flex:0 0 auto;min-height:32px;min-width:0}\n  .tab{min-height:28px;padding:4px 12px}\n}\n<\/style>\n<\/head>\n<body>\n\n<div class="hdr">\n  <div class="hdr-l">\n    <div class="logo">ECO<\/div>\n    <div style="min-width:0">\n      <div class="htitle">ECO FARMA<\/div>\n      <div class="hsub" id="hsub">'+pdvCount+' PDV \u00b7 '+provincias+'<\/div>\n    <\/div>\n  <\/div>\n  <div class="pill"><span class="dot"><\/span>Act. '+dateStr+'<\/div>\n<\/div>\n\n<!-- S0 INICIO -->\n<div class="sec show" id="s0">\n<div class="dw">\n  <div class="full">\n    <div class="kg">\n      <div class="kc hi"><div class="kl">Total Unidades<\/div><div class="kv" id="k1">\u2014<\/div><div class="ks" id="k1s">\u2014<\/div><\/div>\n      <div class="kc gr"><div class="kl">PDV Activos<\/div><div class="kv gr" id="k2">\u2014<\/div><div class="ks" id="k2s">\u2014<\/div><\/div>\n      <div class="kc bl"><div class="kl">Provincias<\/div><div class="kv bl" id="k3">\u2014<\/div><div class="ks" id="k3s">\u2014<\/div><\/div>\n      <div class="kc gr"><div class="kl">L\u00edder<\/div><div class="kv sm gr" id="k4">\u2014<\/div><div class="ks" id="k4s">\u2014<\/div><div class="kb up" id="k4b">\u2014<\/div><\/div>\n      <div class="kc rd"><div class="kl">Atenci\u00f3n<\/div><div class="kv sm rd" id="k5">\u2014<\/div><div class="ks" id="k5s">\u2014<\/div><div class="kb dn" id="k5b">\u2014<\/div><\/div>\n    <\/div>\n    <div class="tkr">\n      <div class="tl"><span style="display:flex;align-items:center;gap:.35rem"><span class="dot"><\/span>RANKING EN VIVO \u00b7 pausa al pasar el cursor<\/span><span style="color:var(--txt4);font-size:8px">'+dateStr+' '+timeStr+'<\/span><\/div>\n      <div class="tw"><div class="tt" id="tkrT"><\/div><\/div>\n    <\/div>\n    <div class="card">\n      <div class="pt"><span>Tendencia de ventas \u2014 estilo bolsa<\/span>\n        <select id="stockMode" onchange="renderStock()">\n          <option value="all">Todos los PDV<\/option>\n          <option value="top10">Top 10<\/option>\n          <option value="bot10">Últimos 10<\/option>\n        <\/select>\n      <\/div>\n      <div id="stockHdr" class="stock-hdr"><\/div>\n      <div class="cwrap" style="height:200px" id="stockWrap"><canvas id="stockC" role="img" aria-label="Tendencia"><\/canvas><\/div>\n    <\/div>\n  <\/div>\n  <div>\n    <div class="card"><div class="pt"><span>Top 10 PDV<\/span><\/div><div class="rl" id="top10"><\/div><\/div>\n  <\/div>\n  <div>\n    <div class="card"><div class="pt"><span>Top 10 Usuarios<\/span><span style="color:var(--txt4)">usuario \u00b7 farmacia<\/span><\/div><div class="ulist" id="top10u"><\/div><\/div>\n  <\/div>\n<\/div>\n<\/div>\n\n<!-- S1 RANKING PDV -->\n<div class="sec" id="s1">\n<div class="dw"><div class="full">\n  <div class="fb">\n    <div class="tabs">\n      <span class="tab on" onclick="setTab(\'pdv\',\'all\',this)">TODOS<\/span>\n      <span class="tab" onclick="setTab(\'pdv\',\'top\',this)">TOP 10<\/span>\n      <span class="tab" onclick="setTab(\'pdv\',\'bot\',this)">\u00daSLTIMOS 10<\/span>\n    <\/div>\n    <div class="frow">\n      <select class="gsel" id="pdvProv" onchange="cascPdvProv()"><option value="">TODAS LAS PROVINCIAS<\/option><\/select>\n      <select class="gsel" id="pdvCant" onchange="cascPdvCant()"><option value="">TODOS LOS CANTONES<\/option><\/select>\n      <select class="gsel" id="pdvFarm" onchange="applyPdvF()"><option value="">TODAS LAS FARMACIAS<\/option><\/select>\n    <\/div>\n    <input class="srch" id="pdvSrch" placeholder="Buscar farmacia, cantón, usuario\u2026" oninput="applyPdvF()"/>\n    <span class="fc" id="pdvFc"><\/span>\n  <\/div>\n  <div class="card"><div class="pt"><span>Ranking por PDV<\/span><span id="pdvRc" style="color:var(--txt4)"><\/span><\/div>\n    <div class="rl" id="pdvRl"><\/div>\n    <div class="pgn"><button class="pgb" id="pdvPp" onclick="chPg(\'pdv\',-1)" disabled>\u25c4 ANTERIOR<\/button><span class="pgi" id="pdvPi">\u2014<\/span><button class="pgb" id="pdvPn" onclick="chPg(\'pdv\',1)" disabled>SIGUIENTE \u25ba<\/button><\/div>\n  <\/div>\n<\/div><\/div>\n<\/div>\n\n<!-- S2 RANKING USUARIO -->\n<div class="sec" id="s2">\n<div class="dw"><div class="full">\n  <div class="fb">\n    <div class="tabs">\n      <span class="tab on" onclick="setTab(\'usr\',\'all\',this)">TODOS<\/span>\n      <span class="tab" onclick="setTab(\'usr\',\'top\',this)">TOP 10<\/span>\n      <span class="tab" onclick="setTab(\'usr\',\'bot\',this)">\u00daSLTIMOS 10<\/span>\n    <\/div>\n    <div class="frow">\n      <select class="gsel" id="usrProv" onchange="cascUsrProv()"><option value="">TODAS LAS PROVINCIAS<\/option><\/select>\n      <select class="gsel" id="usrCant" onchange="cascUsrCant()"><option value="">TODOS LOS CANTONES<\/option><\/select>\n    <\/div>\n    <input class="srch" id="usrSrch" placeholder="Buscar usuario o farmacia\u2026" oninput="applyUsrF()"/>\n    <span class="fc" id="usrFc"><\/span>\n  <\/div>\n  <div class="card">\n    <div class="pt"><span>Ranking por Usuario<\/span><span style="color:var(--txt4);font-size:8px">usuario \u2014 farmacia<\/span><\/div>\n    <div style="display:grid;grid-template-columns:20px 4px 1fr 1fr auto;gap:6px;padding:4px 9px;border-bottom:0.5px solid var(--border);margin-bottom:4px">\n      <span style="font-size:8px;font-family:var(--mono);color:var(--txt4)">#<\/span><span><\/span>\n      <span style="font-size:8px;font-family:var(--mono);color:var(--txt3);text-transform:uppercase">Usuario<\/span>\n      <span style="font-size:8px;font-family:var(--mono);color:var(--txt3);text-transform:uppercase">Farmacia<\/span>\n      <span style="font-size:8px;font-family:var(--mono);color:var(--txt3);text-transform:uppercase;text-align:right">Uds.<\/span>\n    <\/div>\n    <div class="ulist" id="usrRl"><\/div>\n    <div class="pgn"><button class="pgb" id="usrPp" onclick="chPg(\'usr\',-1)" disabled>\u25c4 ANTERIOR<\/button><span class="pgi" id="usrPi">\u2014<\/span><button class="pgb" id="usrPn" onclick="chPg(\'usr\',1)" disabled>SIGUIENTE \u25ba<\/button><\/div>\n  <\/div>\n<\/div><\/div>\n<\/div>\n\n<!-- S3 GRÁFICAS -->\n<div class="sec" id="s3">\n<div class="dw">\n  <div class="full">\n    <div class="card">\n      <div class="pt"><span>Comparativo PDV \u2014 nombres completos<\/span>\n        <select id="cv" onchange="renderBar()">\n          <option value="10">Top 10<\/option><option value="20">Top 20<\/option>\n          <option value="30">Top 30<\/option><option value="bot">Últimos 10<\/option>\n        <\/select><\/div>\n      <div id="barWrap" class="cwrap"><canvas id="barC" role="img" aria-label="Ventas PDV"><\/canvas><\/div>\n    <\/div>\n  <\/div>\n  <div>\n    <div class="card"><div class="pt"><span>Por provincia<\/span><\/div>\n      <div id="leg3" class="leg"><\/div>\n      <div class="cwrap" id="cw3"><canvas id="provC3" role="img" aria-label="Provincias"><\/canvas><\/div>\n    <\/div>\n  <\/div>\n  <div>\n    <div class="card"><div class="pt"><span>Por cant\u00f3n<\/span><\/div>\n      <div style="overflow-x:auto;max-height:260px;overflow-y:auto">\n        <table class="gt"><thead><tr><th>#<\/th><th>Cant\u00f3n<\/th><th>Prov.<\/th><th style="text-align:right">Uds.<\/th><th>PDV<\/th><th>%<\/th><\/tr><\/thead><tbody id="cB3"><\/tbody><\/table>\n      <\/div>\n    <\/div>\n  <\/div>\n<\/div>\n<\/div>\n\n<!-- S4 GEO -->\n<div class="sec" id="s4">\n<div class="dw">\n  <div class="full">\n    <div class="card"><div class="pt"><span>Por provincia<\/span><\/div>\n      <div id="leg4" class="leg"><\/div>\n      <div class="cwrap" id="cw4"><canvas id="provC4" role="img" aria-label="Provincias geo"><\/canvas><\/div>\n    <\/div>\n  <\/div>\n  <div class="full">\n    <div class="card"><div class="pt"><span>Farmacias por cant\u00f3n<\/span>\n      <select id="geoProvSel" onchange="renderGeoTable()"><option value="">Todas las provincias<\/option><\/select>\n    <\/div>\n    <div style="overflow-x:auto;max-height:400px;overflow-y:auto">\n      <table class="gt"><thead><tr><th>Cant\u00f3n<\/th><th>Farmacia<\/th><th>Usuario<\/th><th style="text-align:right">Uds.<\/th><th>Prov.<\/th><\/tr><\/thead><tbody id="geoBody"><\/tbody><\/table>\n    <\/div>\n    <\/div>\n  <\/div>\n<\/div>\n<\/div>\n\n<!-- S5 INFO -->\n<div class="sec" id="s5">\n<div class="dw"><div class="full">\n  <div class="info-card">\n    <span>Archivo fuente:<\/span> '+srcFile+'<br>\n    <span>Generado:<\/span> '+dateStr+' \u2014 '+timeStr+'<br>\n    <span>PDV incluidos:<\/span> '+pdvCount+'<br>\n    <span>Cobertura:<\/span> '+provincias+'<br><br>\n    Para actualizar este dashboard, el administrador debe<br>\n    cargar el nuevo Excel en <span>ECO_Admin_Final.html<\/span> y generar un nuevo archivo.\n  <\/div>\n<\/div><\/div>\n<\/div>\n\n<nav class="bnav">\n  <button class="bi on" onclick="goS(0,this)"><span class="bic">◈<\/span>Inicio<\/button>\n  <button class="bi" onclick="goS(1,this)"><span class="bic">≡<\/span>PDV<\/button>\n  <button class="bi" onclick="goS(2,this)"><span class="bic">👤<\/span>Usuarios<\/button>\n  <button class="bi" onclick="goS(3,this)"><span class="bic">▲<\/span>Gr\u00e1ficas<\/button>\n  <button class="bi" onclick="goS(4,this)"><span class="bic">⊞<\/span>Geo<\/button>\n  <button class="bi" onclick="goS(5,this)"><span class="bic">ℹ<\/span>Info<\/button>\n<\/nav>\n\n<script>\nvar RAW='+safeJson+';\nvar PAL=[\'#f5c842\',\'#3b82f6\',\'#22c55e\',\'#ef4444\',\'#a78bfa\',\'#fb923c\',\'#38bdf8\'];\nvar aggPdv=[],aggUsr=[],filtPdv=[],filtUsr=[],tabPdv=\'all\',tabUsr=\'all\',pgPdv=0,pgUsr=0,PG=10;\nvar barI=null,provI3=null,provI4=null,stockI=null;\nfunction doAgg(rows){var m={};rows.forEach(function(r){if(!m[r.farmacia])m[r.farmacia]=Object.assign({},r,{venta:0});m[r.farmacia].venta+=r.venta;});return Object.values(m).sort(function(a,b){return b.venta-a.venta;});}\nfunction aggK(data,key){var m={};data.forEach(function(r){var k=r[key]||\'—\';if(!m[k])m[k]={venta:0,pdv:0,prov:r.provincia};m[k].venta+=r.venta;m[k].pdv++;});return Object.entries(m).map(function(e){return Object.assign({name:e[0]},e[1]);}).sort(function(a,b){return b.venta-a.venta;});}\nfunction goS(n,el){\n  document.querySelectorAll(\'.sec\').forEach(function(s,i){s.classList.toggle(\'show\',i===n);});\n  document.querySelectorAll(\'.bi\').forEach(function(b){b.classList.remove(\'on\');});el.classList.add(\'on\');\n  if(n===3)setTimeout(function(){renderBar();if(provI3){provI3.destroy();provI3=null;}renderProv(\'provC3\',\'cw3\',\'leg3\',function(i){provI3=i;});renderCant(\'cB3\');},80);\n  if(n===4)setTimeout(function(){if(provI4){provI4.destroy();provI4=null;}renderProv(\'provC4\',\'cw4\',\'leg4\',function(i){provI4=i;});renderGeoTable();},80);\n}\nfunction initPdvF(){\n  var ps=[...new Set(aggPdv.map(function(r){return r.provincia;}).filter(Boolean))].sort();\n  document.getElementById(\'pdvProv\').innerHTML=\'<option value="">TODAS LAS PROVINCIAS<\/option>\'+ps.map(function(p){return\'<option value="\'+p+\'">\'+p+\'<\/option>\';}).join(\'\');\n  var ac=[...new Set(aggPdv.map(function(r){return r.canton;}).filter(Boolean))].sort();\n  document.getElementById(\'pdvCant\').innerHTML=\'<option value="">TODOS LOS CANTONES<\/option>\'+ac.map(function(c){return\'<option value="\'+c+\'">\'+c+\'<\/option>\';}).join(\'\');\n  var af=aggPdv.map(function(r){return r.farmacia;}).sort();\n  document.getElementById(\'pdvFarm\').innerHTML=\'<option value="">TODAS LAS FARMACIAS<\/option>\'+af.map(function(f){return\'<option value="\'+f+\'">\'+f+\'<\/option>\';}).join(\'\');\n}\nfunction initUsrF(){\n  var ps=[...new Set(aggPdv.map(function(r){return r.provincia;}).filter(Boolean))].sort();\n  document.getElementById(\'usrProv\').innerHTML=\'<option value="">TODAS LAS PROVINCIAS<\/option>\'+ps.map(function(p){return\'<option value="\'+p+\'">\'+p+\'<\/option>\';}).join(\'\');\n  var ac=[...new Set(aggPdv.map(function(r){return r.canton;}).filter(Boolean))].sort();\n  document.getElementById(\'usrCant\').innerHTML=\'<option value="">TODOS LOS CANTONES<\/option>\'+ac.map(function(c){return\'<option value="\'+c+\'">\'+c+\'<\/option>\';}).join(\'\');\n}\nfunction initGeo(){\n  var ps=[...new Set(aggPdv.map(function(r){return r.provincia;}).filter(Boolean))].sort();\n  document.getElementById(\'geoProvSel\').innerHTML=\'<option value="">Todas las provincias<\/option>\'+ps.map(function(p){return\'<option value="\'+p+\'">\'+p+\'<\/option>\';}).join(\'\');\n}\nfunction cascPdvProv(){var p=document.getElementById(\'pdvProv\').value;var s=p?aggPdv.filter(function(r){return r.provincia===p;}):aggPdv;var ac=[...new Set(s.map(function(r){return r.canton;}).filter(Boolean))].sort();document.getElementById(\'pdvCant\').innerHTML=\'<option value="">TODOS LOS CANTONES<\/option>\'+ac.map(function(c){return\'<option value="\'+c+\'">\'+c+\'<\/option>\';}).join(\'\');var af=s.map(function(r){return r.farmacia;}).sort();document.getElementById(\'pdvFarm\').innerHTML=\'<option value="">TODAS LAS FARMACIAS<\/option>\'+af.map(function(f){return\'<option value="\'+f+\'">\'+f+\'<\/option>\';}).join(\'\');pgPdv=0;applyPdvF();}\nfunction cascPdvCant(){var p=document.getElementById(\'pdvProv\').value;var c=document.getElementById(\'pdvCant\').value;var s=aggPdv.filter(function(r){return(!p||r.provincia===p)&&(!c||r.canton===c);});var af=s.map(function(r){return r.farmacia;}).sort();document.getElementById(\'pdvFarm\').innerHTML=\'<option value="">TODAS LAS FARMACIAS<\/option>\'+af.map(function(f){return\'<option value="\'+f+\'">\'+f+\'<\/option>\';}).join(\'\');pgPdv=0;applyPdvF();}\nfunction applyPdvF(){var q=(document.getElementById(\'pdvSrch\').value||\'\'). toLowerCase().trim();var p=document.getElementById(\'pdvProv\').value;var c=document.getElementById(\'pdvCant\').value;var f=document.getElementById(\'pdvFarm\').value;var s=aggPdv.slice();if(p)s=s.filter(function(r){return r.provincia===p;});if(c)s=s.filter(function(r){return r.canton===c;});if(f)s=s.filter(function(r){return r.farmacia===f;});if(tabPdv===\'top\')s=s.slice(0,10);else if(tabPdv===\'bot\')s=s.slice(-10).reverse();if(q)s=s.filter(function(r){return(r.farmacia+\' \'+r.canton+\' \'+r.provincia).toLowerCase().indexOf(q)>=0;});filtPdv=s;var fc=document.getElementById(\'pdvFc\');if(fc)fc.textContent=s.length+\' PDV\';renderPdvR();}\nfunction cascUsrProv(){var p=document.getElementById(\'usrProv\').value;var s=p?aggPdv.filter(function(r){return r.provincia===p;}):aggPdv;var ac=[...new Set(s.map(function(r){return r.canton;}).filter(Boolean))].sort();document.getElementById(\'usrCant\').innerHTML=\'<option value="">TODOS LOS CANTONES<\/option>\'+ac.map(function(c){return\'<option value="\'+c+\'">\'+c+\'<\/option>\';}).join(\'\');pgUsr=0;applyUsrF();}\nfunction cascUsrCant(){pgUsr=0;applyUsrF();}\nfunction applyUsrF(){var q=(document.getElementById(\'usrSrch\').value||\'\'). toLowerCase().trim();var p=document.getElementById(\'usrProv\').value;var c=document.getElementById(\'usrCant\').value;var s=aggUsr.slice();if(p)s=s.filter(function(r){return r.provincia===p;});if(c)s=s.filter(function(r){return r.canton===c;});if(tabUsr===\'top\')s=s.slice(0,10);else if(tabUsr===\'bot\')s=s.slice(-10).reverse();if(q)s=s.filter(function(r){return(r.usuario+\' \'+r.farmacia).toLowerCase().indexOf(q)>=0;});filtUsr=s;var fc=document.getElementById(\'usrFc\');if(fc)fc.textContent=s.length+\' usuarios\';renderUsrR();}\nfunction setTab(type,t,el){if(type===\'pdv\'){tabPdv=t;pgPdv=0;}else{tabUsr=t;pgUsr=0;}var par=el.parentNode;par.querySelectorAll(\'.tab\').forEach(function(x){x.classList.remove(\'on\');});el.classList.add(\'on\');if(type===\'pdv\')applyPdvF();else applyUsrF();}\nfunction renderPdvR(){var tot=filtPdv.length,pages=Math.ceil(tot/PG)||1;if(pgPdv>=pages)pgPdv=Math.max(0,pages-1);var sl=filtPdv.slice(pgPdv*PG,(pgPdv+1)*PG);var mx=aggPdv[0]?aggPdv[0].venta:1;var el=document.getElementById(\'pdvRl\');el.innerHTML=\'\';if(!sl.length){el.innerHTML=\'<div style="padding:1rem;text-align:center;color:var(--txt4);font-size:11px;font-family:var(--mono)">Sin resultados<\/div>\';return;}sl.forEach(function(r){var gr=aggPdv.findIndex(function(x){return x.farmacia===r.farmacia;})+1;var cls=gr===1?\'ri r1\':gr<=3?\'ri r23\':gr===aggPdv.length?\'ri bot\':\'ri mid\';var bw=Math.max(2,Math.round((r.venta/mx)*48));el.innerHTML+=\'<div class="\'+cls+\'" title="\'+r.farmacia+\' — \'+r.canton+\' (\'+r.provincia+\') · \'+r.usuario+\'"><span class="rp">\'+gr+\'<\/span><span class="rbar" style="width:\'+bw+\'px"><\/span><span class="rn">\'+r.farmacia+\'<\/span><span class="rtg">\'+r.canton+\'<\/span><span class="rv">\'+r.venta.toLocaleString(\'es\')+\'<\/span><\/div>\';});var rc=document.getElementById(\'pdvRc\');if(rc)rc.textContent=(pgPdv*PG+1)+\'–\'+Math.min((pgPdv+1)*PG,tot)+\' de \'+tot;document.getElementById(\'pdvPi\').textContent=\'Pág \'+(pgPdv+1)+\'/\'+pages;document.getElementById(\'pdvPp\').disabled=pgPdv===0;document.getElementById(\'pdvPn\').disabled=pgPdv>=pages-1;}\nfunction renderUsrR(){var tot=filtUsr.length,pages=Math.ceil(tot/PG)||1;if(pgUsr>=pages)pgUsr=Math.max(0,pages-1);var sl=filtUsr.slice(pgUsr*PG,(pgUsr+1)*PG);var mx=aggUsr[0]?aggUsr[0].venta:1;var el=document.getElementById(\'usrRl\');el.innerHTML=\'\';if(!sl.length){el.innerHTML=\'<div style="padding:1rem;text-align:center;color:var(--txt4);font-size:11px;font-family:var(--mono)">Sin resultados<\/div>\';return;}sl.forEach(function(r){var gr=aggUsr.findIndex(function(x){return x.usuario===r.usuario;})+1;var cls=gr===1?\'ui r1\':gr<=3?\'ui r23\':gr===aggUsr.length?\'ui bot\':\'ui mid\';var bh=Math.max(8,Math.round((r.venta/mx)*32));el.innerHTML+=\'<div class="\'+cls+\'" title="\'+r.usuario+\' — \'+r.farmacia+\'"><span class="ui-pos">\'+gr+\'<\/span><span class="ui-bar" style="height:\'+bh+\'px"><\/span><span class="ui-usr">\'+r.usuario+\'<\/span><span class="ui-farm">\'+r.farmacia+\'<\/span><span class="ui-val">\'+r.venta.toLocaleString(\'es\')+\'<\/span><\/div>\';});;document.getElementById(\'usrPi\').textContent=\'Pág \'+(pgUsr+1)+\'/\'+pages;document.getElementById(\'usrPp\').disabled=pgUsr===0;document.getElementById(\'usrPn\').disabled=pgUsr>=pages-1;}\nfunction chPg(t,d){if(t===\'pdv\'){pgPdv+=d;renderPdvR();}else{pgUsr+=d;renderUsrR();}}\nfunction renderTop10(){var top=aggPdv.slice(0,10),mx=aggPdv[0]?aggPdv[0].venta:1;document.getElementById(\'top10\').innerHTML=top.map(function(r,i){var cls=i===0?\'ri r1\':i<=2?\'ri r23\':\'ri mid\';var bw=Math.max(2,Math.round((r.venta/mx)*48));return\'<div class="\'+cls+\'" title="\'+r.farmacia+\' — \'+r.canton+\'"><span class="rp">\'+( i+1)+\'<\/span><span class="rbar" style="width:\'+bw+\'px"><\/span><span class="rn">\'+r.farmacia+\'<\/span><span class="rtg">\'+r.canton+\'<\/span><span class="rv">\'+r.venta.toLocaleString(\'es\')+\'<\/span><\/div>\';}).join(\'\');}\nfunction renderTop10U(){var top=aggUsr.slice(0,10),mx=aggUsr[0]?aggUsr[0].venta:1;var el=document.getElementById(\'top10u\');el.innerHTML=\'\';top.forEach(function(r,i){var cls=i===0?\'ui r1\':i<=2?\'ui r23\':\'ui mid\';var bh=Math.max(8,Math.round((r.venta/mx)*32));el.innerHTML+=\'<div class="\'+cls+\'"><span class="ui-pos">\'+( i+1)+\'<\/span><span class="ui-bar" style="height:\'+bh+\'px"><\/span><span class="ui-usr">\'+r.usuario+\'<\/span><span class="ui-farm">\'+r.farmacia+\'<\/span><span class="ui-val">\'+r.venta.toLocaleString(\'es\')+\'<\/span><\/div>\';});}\nfunction renderStock(){var mode=document.getElementById(\'stockMode\').value;var src=mode===\'top10\'?aggPdv.slice(0,10):mode===\'bot10\'?aggPdv.slice(-10).reverse():aggPdv.slice();var sorted=src.slice().sort(function(a,b){return a.venta-b.venta;});var vals=sorted.map(function(r){return r.venta;});var total=src.reduce(function(s,r){return s+r.venta;},0);var avg=total/src.length;var top=src[0]?src[0].venta:0;var brecha=src.length>1?((src[0].venta-src[src.length-1].venta)/src[src.length-1].venta*100).toFixed(1):0;document.getElementById(\'stockHdr\').innerHTML=\'<span class="sv">\'+total.toLocaleString(\'es\')+\'<\/span><span class="sc up">▲ TOP: \'+top.toLocaleString(\'es\')+\'<\/span><span class="sm2">Prom: \'+Math.round(avg).toLocaleString(\'es\')+\' uds · Brecha: \'+brecha+\'%<\/span>\';var canvas=document.getElementById(\'stockC\');var ex=Chart.getChart(canvas);if(ex)ex.destroy();var ctx=canvas.getContext(\'2d\');var grad=ctx.createLinearGradient(0,0,0,200);grad.addColorStop(0,\'rgba(245,200,66,.35)\');grad.addColorStop(1,\'rgba(245,200,66,.0)\');stockI=new Chart(canvas,{type:\'line\',data:{labels:sorted.map(function(r){return r.farmacia.length>12?r.farmacia.slice(0,12)+\'…\':r.farmacia;}),datasets:[{data:vals,borderColor:\'#f5c842\',borderWidth:2,backgroundColor:grad,fill:true,tension:.45,pointRadius:2,pointBackgroundColor:\'#f5c842\',pointHoverRadius:5}]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:\'index\'},plugins:{legend:{display:false},tooltip:{callbacks:{title:function(items){return sorted[items[0].dataIndex]?sorted[items[0].dataIndex].farmacia:\'\';},label:function(c){var r=sorted[c.dataIndex];return[c.raw.toLocaleString(\'es\')+\' uds\',r?r.canton+\' · \'+r.provincia:\'\'];}}}},scales:{x:{grid:{color:\'#13161e\'},ticks:{color:\'#4b5563\',font:{family:\'Space Mono\',size:8},maxRotation:35,autoSkip:true,maxTicksLimit:10}},y:{grid:{color:\'#13161e\'},ticks:{color:\'#4b5563\',font:{family:\'Space Mono\',size:8},callback:function(v){return v>=1000?(v/1000).toFixed(0)+\'k\':v;}}}}}}); }\nfunction renderBar(){var v=document.getElementById(\'cv\').value;var src=v===\'bot\'?aggPdv.slice(-10).reverse():aggPdv.slice(0,parseInt(v));var topV=aggPdv[0]?aggPdv[0].venta:1,botV=aggPdv[aggPdv.length-1]?aggPdv[aggPdv.length-1].venta:0;var colors=src.map(function(r){return r.venta===topV?\'#f5c842\':r.venta===botV?\'#ef4444\':r.venta>=topV*.7?\'#22c55e\':\'#3b82f6\';});var h=Math.max(280,src.length*38+60);document.getElementById(\'barWrap\').style.height=h+\'px\';if(barI)barI.destroy();barI=new Chart(document.getElementById(\'barC\'),{type:\'bar\',data:{labels:src.map(function(r){return r.farmacia;}),datasets:[{data:src.map(function(r){return r.venta;}),backgroundColor:colors,borderRadius:4,borderSkipped:false}]},options:{indexAxis:\'y\',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){var r=src[c.dataIndex];return[c.raw.toLocaleString(\'es\')+\' uds\',r.canton+\' · \'+r.provincia];}}}},sus:{x:{grid:{color:\'#13161e\'},ticks:{color:\'#4b5563\',font:{family:\'Space Mono\',size:9},callback:function(v){return v.toLocaleString(\'es\');}}},y:{grid:{color:\'transparent\'},ticks:{color:\'#e8e2d0\',font:{family:\'Space Mono\',size:9},crossAlign:\'far\'}}}}});}\nfunction renderProv(cid,wid,lid,cb){var pa=aggK(aggPdv,\'provincia\');if(!pa.length)return;var total=pa.reduce(function(s,r){return s+r.venta;},0);var legEl=document.getElementById(lid);if(legEl)legEl.innerHTML=pa.map(function(p,i){return\'<span class="lp"><span class="lc" style="background:\'+PAL[i%PAL.length]+\'"><\/span>\'+p.name+\': \'+p.venta.toLocaleString(\'es\')+\' (\'+(p.venta/total*100).toFixed(1)+\'%)<\/span>\';}).join(\'\');var canvas=document.getElementById(cid);if(!canvas)return;var ex=Chart.getChart(canvas);if(ex)ex.destroy();var inst=new Chart(canvas,{type:\'doughnut\',data:{labels:pa.map(function(p){return p.name;}),datasets:[{data:pa.map(function(p){return p.venta;}),backgroundColor:PAL.slice(0,pa.length),borderWidth:2,borderColor:\'#0f1219\',hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:false,cutout:\'58%\',animation:{duration:600},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.label+\': \'+c.raw.toLocaleString(\'es\')+\' (\'+(c.raw/total*100).toFixed(1)+\'%)\';}}}}}}); if(cb)cb(inst);}\nfunction renderCant(tbid){var ca=aggK(aggPdv,\'canton\');var total=ca.reduce(function(s,r){return s+r.venta;},0);var maxV=ca[0]?ca[0].venta:1;var pc={};[...new Set(ca.map(function(c){return c.prov;}))].forEach(function(p,i){pc[p]=PAL[i%PAL.length];});document.getElementById(tbid).innerHTML=ca.map(function(c,i){var pct=(c.venta/total*100).toFixed(1);var bw=Math.round((c.venta/maxV)*46);var bc=pc[c.prov]||\'#6b7280\';return\'<tr><td style="color:var(--txt4)">\'+( i+1)+\'<\/td><td style="color:\'+(i<3?\'var(--gold)\':\'var(--txt2)\')+\';font-weight:\'+(i<3?700:400)+\';max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\'+c.name+\'">\'+c.name+\'<\/td><td><span class="gbadge">\'+c.prov+\'<\/span><\/td><td style="text-align:right;color:var(--gold);font-weight:700">\'+c.venta.toLocaleString(\'es\')+\'<\/td><td style="color:var(--txt4)">\'+c.pdv+\'<\/td><td><div class="gbg"><div class="gf" style="width:\'+bw+\'px;background:\'+bc+\'"><\/div><\/div><span style="font-size:8px;color:var(--txt4);margin-left:3px">\'+pct+\'%<\/span><\/td><\/tr>\';}).join(\'\');}\nfunction renderGeoTable(){var prov=document.getElementById(\'geoProvSel\').value;var src=prov?aggPdv.filter(function(r){return r.provincia===prov;}):aggPdv;var byC={};src.forEach(function(r){if(!byC[r.canton])byC[r.canton]={canton:r.canton,prov:r.provincia,items:[]};byC[r.canton].items.push(r);});var sorted=Object.values(byC).sort(function(a,b){return a.canton.localeCompare(b.canton);});var html=\'\';sorted.forEach(function(g){g.items.sort(function(a,b){return b.venta-a.venta;});g.items.forEach(function(r,i){html+=\'<tr>\';if(i===0)html+=\'<td rowspan="\'+g.items.length+\'" style="color:var(--gold);font-weight:700;vertical-align:top;border-right:0.5px solid var(--border);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\'+g.canton+\'">\'+g.canton+\'<\/td>\';html+=\'<td style="color:\'+(i===0?\'var(--txt)\':\'var(--txt2)\')+\';max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="\'+r.farmacia+\'">\'+r.farmacia+\'<\/td><td style="color:var(--txt3);font-size:9px">\'+r.usuario+\'<\/td><td style="text-align:right;color:var(--gold);font-weight:700">\'+r.venta.toLocaleString(\'es\')+\'<\/td><td><span class="gbadge">\'+r.provincia+\'<\/span><\/td><\/tr>\';});});document.getElementById(\'geoBody\').innerHTML=html;}\nfunction renderTicker(){var track=document.getElementById(\'tkrT\');track.classList.remove(\'run\');var items=aggPdv.map(function(r,i){var cls=i===0?\'ti r1\':i===aggPdv.length-1?\'ti last\':\'ti\';var sym=i===0?\'◆\':i===aggPdv.length-1?\'▽\':\'·\';return\'<span class="\'+cls+\'"><span class="tr2">\'+String(i+1).padStart(2,\'0\')+\'<\/span><span class="tp">\'+r.provincia.slice(0,3)+\'<\/span><span class="tn">\'+sym+\' \'+r.farmacia+\'<\/span><span class="tv">\'+r.venta.toLocaleString(\'es\')+\'<\/span><\/span><span class="tsep">|<\/span>\';}).join(\'\');track.innerHTML=items+items;void track.offsetWidth;track.classList.add(\'run\');}\nfunction renderKPIs(){var total=aggPdv.reduce(function(s,r){return s+r.venta;},0);var provs=[...new Set(aggPdv.map(function(r){return r.provincia;}).filter(Boolean))];var cants=[...new Set(aggPdv.map(function(r){return r.canton;}).filter(Boolean))];var top=aggPdv[0],bot=aggPdv[aggPdv.length-1];var k1=document.getElementById(\'k1\');k1.textContent=total.toLocaleString(\'es\');k1.classList.add(\'flash\');setTimeout(function(){k1.classList.remove(\'flash\');},600);document.getElementById(\'k1s\').textContent=\'Prom: \'+Math.round(total/aggPdv.length).toLocaleString(\'es\')+\'/PDV\';document.getElementById(\'k2\').textContent=aggPdv.length;document.getElementById(\'k2s\').textContent=cants.length+\' cantones\';document.getElementById(\'k3\').textContent=provs.length;document.getElementById(\'k3s\').textContent=provs.join(\' · \');if(top){document.getElementById(\'k4\').textContent=top.farmacia;document.getElementById(\'k4s\').textContent=top.canton+\' · \'+top.provincia;document.getElementById(\'k4b\').textContent=top.venta.toLocaleString(\'es\')+\' uds\';}if(bot){document.getElementById(\'k5\').textContent=bot.farmacia;document.getElementById(\'k5s\').textContent=bot.canton+\' · \'+bot.provincia;document.getElementById(\'k5b\').textContent=bot.venta.toLocaleString(\'es\')+\' uds\';}}\nfunction init(){var mPdv={};RAW.forEach(function(r){if(!mPdv[r.farmacia])mPdv[r.farmacia]=Object.assign({},r,{venta:0});mPdv[r.farmacia].venta+=r.venta;});aggPdv=Object.values(mPdv).sort(function(a,b){return b.venta-a.venta;});var mUsr={};RAW.forEach(function(r){if(!mUsr[r.usuario])mUsr[r.usuario]=Object.assign({},r,{venta:0});mUsr[r.usuario].venta+=r.venta;});aggUsr=Object.values(mUsr).sort(function(a,b){return b.venta-a.venta;});filtPdv=aggPdv.slice();filtUsr=aggUsr.slice();renderKPIs();initPdvF();initUsrF();initGeo();renderPdvR();renderUsrR();renderTop10();renderTop10U();renderTicker();renderCant(\'cB3\');setTimeout(function(){renderStock();},220);}\ninit();\n<\/script>\n<\/body>\n<\/html>';
 }
 </script>
 </body>

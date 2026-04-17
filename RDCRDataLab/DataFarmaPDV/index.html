@@ -1,114 +1,130 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
 <meta name="theme-color" content="#070a0f"/>
-<title>ECO FARMA — Dashboard 13/04/2026</title>
+<title>ECO FARMA — 16/04/2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{--gold:#f5c842;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--bg0:#070a0f;--bg1:#0f1219;--border:#1e2330;--border2:#252a38;--txt:#e8e2d0;--txt2:#9ca3af;--txt3:#4b5563;--txt4:#252a38;--mono:'Space Mono',monospace;--r:10px}
+:root{
+  --gold:#f5c842;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--purple:#a78bfa;
+  --bg0:#070a0f;--bg1:#0f1219;--border:#1e2330;--border2:#252a38;
+  --txt:#e8e2d0;--txt2:#9ca3af;--txt3:#4b5563;--txt4:#252a38;
+  --mono:'Space Mono',monospace;--r:10px
+}
 html,body{background:var(--bg0);min-height:100vh;font-family:'Syne',sans-serif;color:var(--txt);padding-bottom:72px}
-/* HEADER */
 .hdr{position:sticky;top:0;z-index:50;background:var(--bg0);border-bottom:0.5px solid var(--border);padding:.65rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
-.hdr-l{display:flex;align-items:center;gap:.6rem;min-width:0}
+.hdr-l{display:flex;align-items:center;gap:.6rem;min-width:0;flex:1}
 .logo{width:32px;height:32px;background:var(--gold);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:11px;color:var(--bg0);flex-shrink:0}
 .htitle{font-size:13px;font-weight:800;color:var(--gold);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hsub{font-size:9px;color:var(--txt3);font-family:var(--mono);margin-top:1px}
-.pill{display:flex;align-items:center;gap:4px;font-size:9px;font-family:var(--mono);color:var(--green);background:#052e16;padding:3px 8px;border-radius:20px;border:0.5px solid #166534;flex-shrink:0;white-space:nowrap}
+.pill{display:flex;align-items:center;gap:4px;font-size:9px;font-family:var(--mono);color:var(--green);background:#052e16;padding:3px 8px;border-radius:20px;border:0.5px solid #166534;white-space:nowrap;flex-shrink:0}
 .dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pu 1.5s infinite}
 @keyframes pu{0%,100%{opacity:1}50%{opacity:.2}}
-/* BOTTOM NAV */
 .bnav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:#0a0d13;border-top:0.5px solid var(--border);display:flex;padding-bottom:env(safe-area-inset-bottom)}
-.bi{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.45rem .2rem;gap:2px;cursor:pointer;border:none;background:none;color:var(--txt3);font-family:var(--mono);font-size:8px;text-transform:uppercase;transition:color .2s}
+.bi{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.45rem .15rem;gap:2px;cursor:pointer;border:none;background:none;color:var(--txt3);font-family:var(--mono);font-size:7px;text-transform:uppercase;transition:color .2s}
 .bi.on{color:var(--gold)}
-.bic{font-size:17px;line-height:1}
-/* SECTIONS */
+.bic{font-size:16px;line-height:1}
 .sec{display:none;padding:.875rem .875rem 0;animation:fi .2s ease}
 .sec.show{display:block}
 @keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-/* CARD */
 .card{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.875rem;margin-bottom:.75rem}
-.pt{font-size:9px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.55rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
-.pt select{background:var(--bg0);color:var(--txt2);border:0.5px solid var(--border2);border-radius:4px;font-size:9px;font-family:var(--mono);padding:3px 6px;outline:none;max-width:100%}
-/* KPI */
+.pt{font-size:9px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.55rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.35rem}
+.pt select{background:var(--bg0);color:var(--txt2);border:0.5px solid var(--border2);border-radius:4px;font-size:9px;font-family:var(--mono);padding:3px 6px;outline:none}
 .kg{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.75rem}
 .kc{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.7rem;position:relative;overflow:hidden}
 .kc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--border)}
 .kc.hi::before{background:var(--gold)}.kc.gr::before{background:var(--green)}.kc.rd::before{background:var(--red)}.kc.bl::before{background:var(--blue)}
 .kl{font-size:8px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px}
-.kv{font-size:20px;font-weight:700;font-family:var(--mono);color:var(--gold);line-height:1}
+.kv{font-size:20px;font-weight:700;font-family:var(--mono);color:var(--gold);line-height:1;transition:color .4s}
 .kv.sm{font-size:12px;margin-top:1px;line-height:1.3}
-.kv.gr{color:var(--green)}.kv.rd{color:var(--red)}.kv.bl{color:var(--blue)}
+.kv.gr{color:var(--green)}.kv.rd{color:var(--red)}.kv.bl{color:var(--blue)}.kv.flash{color:#fff}
 .ks{font-size:9px;color:var(--txt3);font-family:var(--mono);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .kb{display:inline-block;font-size:8px;font-family:var(--mono);padding:2px 6px;border-radius:3px;margin-top:3px}
 .kb.up{background:#052e16;color:var(--green)}.kb.dn{background:#2a0909;color:var(--red)}
-/* FILTERS */
 .fb{display:flex;flex-direction:column;gap:.45rem;margin-bottom:.75rem}
-.tabs{display:flex;gap:4px;flex-wrap:wrap}
-.tab{padding:6px 12px;border-radius:6px;font-size:10px;font-family:var(--mono);cursor:pointer;border:0.5px solid var(--border2);background:var(--bg1);color:var(--txt3);min-height:34px;transition:all .2s}
-.tab.on{background:var(--gold);color:var(--bg0);border-color:var(--gold);font-weight:700}
-.frow{display:flex;gap:.4rem}
-.gsel{background:var(--bg1);border:0.5px solid var(--border2);color:var(--txt2);padding:6px 8px;border-radius:6px;font-size:10px;font-family:var(--mono);outline:none;flex:1;min-height:34px}
+.frow{display:flex;gap:.4rem;flex-wrap:wrap}
+.gsel{background:var(--bg1);border:0.5px solid var(--border2);color:var(--txt2);padding:6px 8px;border-radius:6px;font-size:10px;font-family:var(--mono);outline:none;flex:1;min-height:34px;min-width:130px}
 .gsel:focus{border-color:var(--gold)}
 .srch{background:var(--bg1);border:0.5px solid var(--border2);color:var(--txt);padding:8px 10px;border-radius:6px;font-size:13px;font-family:var(--mono);outline:none;width:100%;min-height:40px}
 .srch::placeholder{color:var(--txt4)}
 .srch:focus{border-color:var(--gold)}
-.fc{font-size:9px;font-family:var(--mono);color:var(--txt4);text-align:right}
-/* RANKING */
+.fc{font-size:9px;font-family:var(--mono);color:var(--txt4)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}
+.tab{padding:6px 12px;border-radius:6px;font-size:10px;font-family:var(--mono);cursor:pointer;border:0.5px solid var(--border2);background:var(--bg1);color:var(--txt3);min-height:34px}
+.tab.on{background:var(--gold);color:var(--bg0);border-color:var(--gold);font-weight:700}
 .rl{display:flex;flex-direction:column;gap:4px}
-.ri{display:flex;align-items:center;gap:6px;padding:8px 9px;background:var(--bg0);border:0.5px solid #13161e;border-radius:8px;min-height:44px}
+.ri{display:flex;align-items:center;gap:6px;padding:7px 9px;background:var(--bg0);border:0.5px solid #13161e;border-radius:8px;min-height:42px}
 .ri.r1{border-left:2px solid var(--gold)}.ri.r23{border-left:2px solid var(--green)}.ri.bot{border-left:2px solid var(--red)}.ri.mid{border-left:2px solid var(--border)}
 .rp{font-family:var(--mono);font-size:10px;color:var(--txt4);width:18px;text-align:right;flex-shrink:0}
 .rbar{height:3px;border-radius:2px;background:var(--gold);opacity:.4;flex-shrink:0;min-width:2px}
 .rn{flex:1;font-size:11px;color:#c9c5be;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ri.r1 .rn{color:var(--gold);font-weight:700}
-.rtg{font-size:8px;font-family:var(--mono);padding:2px 4px;border-radius:3px;flex-shrink:0;background:#0d1520;color:var(--blue);max-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rtg{font-size:8px;font-family:var(--mono);padding:2px 4px;border-radius:3px;flex-shrink:0;background:#0d1520;color:var(--blue);max-width:62px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rv{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;min-width:42px;text-align:right}
 .pgn{display:flex;align-items:center;justify-content:space-between;margin-top:.55rem;padding-top:.55rem;border-top:0.5px solid var(--border)}
 .pgb{background:var(--bg0);border:0.5px solid var(--border2);color:var(--txt3);padding:6px 14px;border-radius:6px;font-size:10px;font-family:var(--mono);cursor:pointer;min-height:34px}
 .pgb:disabled{opacity:.2;cursor:default}
 .pgi{font-size:10px;font-family:var(--mono);color:var(--txt4)}
-/* CHART */
-.cwrap{position:relative;width:100%}
-/* CANTON TABLE */
+.cwrap{position:relative;width:100%;height:240px}
+.cwrap canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important}
+.leg{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.5rem}
+.lp{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-family:var(--mono);padding:2px 8px;border-radius:4px;border:0.5px solid var(--border);color:var(--txt2)}
+.lp .lc{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 .gt{width:100%;border-collapse:collapse;font-size:10px;font-family:var(--mono)}
 .gt th{color:var(--txt4);text-align:left;padding:5px 6px;border-bottom:0.5px solid var(--border);font-weight:400;text-transform:uppercase;font-size:8px;letter-spacing:.5px}
 .gt td{padding:5px 6px;border-bottom:0.5px solid #0d1016;color:var(--txt2);vertical-align:middle}
 .gt tr:hover td{background:var(--bg0)}
 .gbg{background:#0d1016;border-radius:2px;height:4px;width:50px;display:inline-block;vertical-align:middle}
 .gf{height:4px;border-radius:2px}
-.gbadge{font-size:8px;padding:1px 5px;border-radius:3px;background:#13161e;color:var(--txt3)}
-/* TICKER */
+.gbadge{font-size:8px;padding:1px 5px;border-radius:3px;background:#13161e;color:var(--txt3);white-space:nowrap}
+.stock-hdr{display:flex;align-items:baseline;gap:.75rem;margin-bottom:.5rem;flex-wrap:wrap}
+.sv{font-size:22px;font-weight:700;font-family:var(--mono);color:var(--gold)}
+.sc{font-size:11px;font-family:var(--mono);padding:2px 8px;border-radius:4px}
+.sc.up{background:#052e16;color:var(--green)}.sc.dn{background:#2a0909;color:var(--red)}
+.sm2{font-size:9px;font-family:var(--mono);color:var(--txt3)}
 .tkr{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:.75rem}
-.tl{padding:.45rem .75rem;border-bottom:0.5px solid var(--border);font-size:8px;font-family:var(--mono);color:var(--txt3);text-transform:uppercase;letter-spacing:.8px;display:flex;align-items:center;gap:.35rem}
-.tw{overflow:hidden;padding:.4rem 0;position:relative}
+.tl{padding:.4rem .75rem;border-bottom:0.5px solid var(--border);font-size:8px;font-family:var(--mono);color:var(--txt3);text-transform:uppercase;letter-spacing:.8px;display:flex;align-items:center;justify-content:space-between}
+.tw{overflow:hidden;padding:.35rem 0;position:relative}
 .tw::after{content:'';position:absolute;right:0;top:0;bottom:0;width:28px;background:linear-gradient(to left,var(--bg1),transparent);z-index:2;pointer-events:none}
 .tt{display:flex;white-space:nowrap;will-change:transform}
-.tt.run{animation:tks 140s linear infinite}
+.tt.run{animation:tks 50s linear infinite}
 .tt:hover{animation-play-state:paused}
 @keyframes tks{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .ti{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;margin-right:1.5rem;flex-shrink:0}
-.ti .n{color:var(--txt2)}.ti .v{color:var(--gold);font-weight:700}.ti .p{font-size:8px;padding:1px 3px;border-radius:2px;background:#0d1520;color:var(--blue)}.ti .r{font-size:8px;color:var(--txt4)}
-.ti.r1 .n{color:var(--gold)}.ti.last .n{color:var(--red)}
-.sep{color:var(--border);margin:0 .25rem;font-size:10px}
-/* INFO */
+.ti .tn{color:var(--txt2)}.ti .tv{color:var(--gold);font-weight:700}
+.ti .tp{font-size:8px;padding:1px 3px;border-radius:2px;background:#0d1520;color:var(--blue)}
+.ti .tr2{font-size:8px;color:var(--txt4)}
+.ti.r1 .tn{color:var(--gold)}.ti.last .tn{color:var(--red)}
+.tsep{color:var(--border);margin:0 .25rem;font-size:10px}
+.ulist{display:flex;flex-direction:column;gap:3px;max-height:340px;overflow-y:auto}
+.ulist::-webkit-scrollbar{width:3px}
+.ulist::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.ui{display:grid;grid-template-columns:20px 4px 1fr 1fr auto;align-items:center;gap:6px;padding:7px 9px;background:var(--bg0);border:0.5px solid #13161e;border-radius:7px;min-height:40px}
+.ui.r1{border-left:2px solid var(--gold)}.ui.r23{border-left:2px solid var(--green)}.ui.bot{border-left:2px solid var(--red)}.ui.mid{border-left:2px solid var(--border)}
+.ui-pos{font-family:var(--mono);font-size:10px;color:var(--txt4);text-align:right}
+.ui-bar{width:4px;border-radius:2px;background:var(--gold);opacity:.4;align-self:stretch}
+.ui-usr{font-size:11px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ui.r1 .ui-usr{color:var(--gold);font-weight:700}
+.ui-farm{font-size:10px;color:var(--txt3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--mono)}
+.ui-val{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--gold);text-align:right;flex-shrink:0;min-width:42px}
 .info-card{background:var(--bg1);border:0.5px solid var(--border);border-radius:var(--r);padding:.875rem;margin-bottom:.75rem;font-size:11px;font-family:var(--mono);color:var(--txt3);line-height:2}
 .info-card span{color:var(--txt2)}
-/* DESKTOP */
 @media(min-width:768px){
   body{padding-bottom:0}
   .bnav{display:none}
-  .sec{display:block !important;padding:0}
+  .sec{display:block!important;padding:0}
   .dw{padding:1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
   .dw .full{grid-column:1/-1}
   .kg{grid-template-columns:repeat(5,1fr)}
   .kv{font-size:18px}.kv.sm{font-size:12px}
-  .fb{flex-direction:row;flex-wrap:wrap;align-items:center}
-  .fb .srch{width:auto;flex:1;max-width:250px;min-height:32px;font-size:11px;padding:5px 10px}
-  .gsel{flex:0 0 auto;min-height:32px}
+  .fb{flex-direction:row;align-items:center}
+  .fb .srch{flex:1;max-width:220px;min-height:32px;font-size:11px;padding:5px 10px}
+  .gsel{flex:0 0 auto;min-height:32px;min-width:0}
   .tab{min-height:28px;padding:4px 12px}
 }
 </style>
@@ -118,15 +134,15 @@ html,body{background:var(--bg0);min-height:100vh;font-family:'Syne',sans-serif;c
 <div class="hdr">
   <div class="hdr-l">
     <div class="logo">ECO</div>
-    <div>
+    <div style="min-width:0">
       <div class="htitle">ECO FARMA</div>
-      <div class="hsub">81 PDV · CARCHI & IMBABURA</div>
+      <div class="hsub" id="hsub">81 PDV · CARCHI & IMBABURA</div>
     </div>
   </div>
-  <div class="pill"><span class="dot"></span>Act. 13/04/2026</div>
+  <div class="pill"><span class="dot"></span>Act. 16/04/2026</div>
 </div>
 
-<!-- INICIO -->
+<!-- S0 INICIO -->
 <div class="sec show" id="s0">
 <div class="dw">
   <div class="full">
@@ -138,316 +154,209 @@ html,body{background:var(--bg0);min-height:100vh;font-family:'Syne',sans-serif;c
       <div class="kc rd"><div class="kl">Atención</div><div class="kv sm rd" id="k5">—</div><div class="ks" id="k5s">—</div><div class="kb dn" id="k5b">—</div></div>
     </div>
     <div class="tkr">
-      <div class="tl"><span class="dot"></span>Ranking en vivo · toca para pausar</div>
+      <div class="tl"><span style="display:flex;align-items:center;gap:.35rem"><span class="dot"></span>RANKING EN VIVO · pausa al pasar el cursor</span><span style="color:var(--txt4);font-size:8px">16/04/2026 19:30:18</span></div>
       <div class="tw"><div class="tt" id="tkrT"></div></div>
     </div>
-  </div>
-  <div>
     <div class="card">
-      <div class="pt"><span>Top 10 PDV</span></div>
-      <div class="rl" id="top10"></div>
+      <div class="pt"><span>Tendencia de ventas — estilo bolsa</span>
+        <select id="stockMode" onchange="renderStock()">
+          <option value="all">Todos los PDV</option>
+          <option value="top10">Top 10</option>
+          <option value="bot10">Últimos 10</option>
+        </select>
+      </div>
+      <div id="stockHdr" class="stock-hdr"></div>
+      <div class="cwrap" style="height:200px" id="stockWrap"><canvas id="stockC" role="img" aria-label="Tendencia"></canvas></div>
     </div>
   </div>
   <div>
-    <div class="card">
-      <div class="pt"><span>Por provincia</span></div>
-      <div class="cwrap" style="height:220px"><canvas id="provC0" role="img" aria-label="Provincias">Provincias</canvas></div>
+    <div class="card"><div class="pt"><span>Top 10 PDV</span></div><div class="rl" id="top10"></div></div>
+  </div>
+  <div>
+    <div class="card"><div class="pt"><span>Top 10 Usuarios</span><span style="color:var(--txt4)">usuario · farmacia</span></div><div class="ulist" id="top10u"></div></div>
+  </div>
+</div>
+</div>
+
+<!-- S1 RANKING PDV -->
+<div class="sec" id="s1">
+<div class="dw"><div class="full">
+  <div class="fb">
+    <div class="tabs">
+      <span class="tab on" onclick="setTab('pdv','all',this)">TODOS</span>
+      <span class="tab" onclick="setTab('pdv','top',this)">TOP 10</span>
+      <span class="tab" onclick="setTab('pdv','bot',this)">ÚSLTIMOS 10</span>
     </div>
+    <div class="frow">
+      <select class="gsel" id="pdvProv" onchange="cascPdvProv()"><option value="">TODAS LAS PROVINCIAS</option></select>
+      <select class="gsel" id="pdvCant" onchange="cascPdvCant()"><option value="">TODOS LOS CANTONES</option></select>
+      <select class="gsel" id="pdvFarm" onchange="applyPdvF()"><option value="">TODAS LAS FARMACIAS</option></select>
+    </div>
+    <input class="srch" id="pdvSrch" placeholder="Buscar farmacia, cantón, usuario…" oninput="applyPdvF()"/>
+    <span class="fc" id="pdvFc"></span>
+  </div>
+  <div class="card"><div class="pt"><span>Ranking por PDV</span><span id="pdvRc" style="color:var(--txt4)"></span></div>
+    <div class="rl" id="pdvRl"></div>
+    <div class="pgn"><button class="pgb" id="pdvPp" onclick="chPg('pdv',-1)" disabled>◄ ANTERIOR</button><span class="pgi" id="pdvPi">—</span><button class="pgb" id="pdvPn" onclick="chPg('pdv',1)" disabled>SIGUIENTE ►</button></div>
+  </div>
+</div></div>
+</div>
+
+<!-- S2 RANKING USUARIO -->
+<div class="sec" id="s2">
+<div class="dw"><div class="full">
+  <div class="fb">
+    <div class="tabs">
+      <span class="tab on" onclick="setTab('usr','all',this)">TODOS</span>
+      <span class="tab" onclick="setTab('usr','top',this)">TOP 10</span>
+      <span class="tab" onclick="setTab('usr','bot',this)">ÚSLTIMOS 10</span>
+    </div>
+    <div class="frow">
+      <select class="gsel" id="usrProv" onchange="cascUsrProv()"><option value="">TODAS LAS PROVINCIAS</option></select>
+      <select class="gsel" id="usrCant" onchange="cascUsrCant()"><option value="">TODOS LOS CANTONES</option></select>
+    </div>
+    <input class="srch" id="usrSrch" placeholder="Buscar usuario o farmacia…" oninput="applyUsrF()"/>
+    <span class="fc" id="usrFc"></span>
+  </div>
+  <div class="card">
+    <div class="pt"><span>Ranking por Usuario</span><span style="color:var(--txt4);font-size:8px">usuario — farmacia</span></div>
+    <div style="display:grid;grid-template-columns:20px 4px 1fr 1fr auto;gap:6px;padding:4px 9px;border-bottom:0.5px solid var(--border);margin-bottom:4px">
+      <span style="font-size:8px;font-family:var(--mono);color:var(--txt4)">#</span><span></span>
+      <span style="font-size:8px;font-family:var(--mono);color:var(--txt3);text-transform:uppercase">Usuario</span>
+      <span style="font-size:8px;font-family:var(--mono);color:var(--txt3);text-transform:uppercase">Farmacia</span>
+      <span style="font-size:8px;font-family:var(--mono);color:var(--txt3);text-transform:uppercase;text-align:right">Uds.</span>
+    </div>
+    <div class="ulist" id="usrRl"></div>
+    <div class="pgn"><button class="pgb" id="usrPp" onclick="chPg('usr',-1)" disabled>◄ ANTERIOR</button><span class="pgi" id="usrPi">—</span><button class="pgb" id="usrPn" onclick="chPg('usr',1)" disabled>SIGUIENTE ►</button></div>
+  </div>
+</div></div>
+</div>
+
+<!-- S3 GRÁFICAS -->
+<div class="sec" id="s3">
+<div class="dw">
+  <div class="full">
     <div class="card">
-      <div class="pt"><span>Por cantón</span></div>
-      <div style="overflow-x:auto;max-height:200px;overflow-y:auto">
-        <table class="gt"><thead><tr><th>#</th><th>Cantón</th><th>Prov.</th><th style="text-align:right">Uds.</th><th>PDV</th></tr></thead><tbody id="cB0"></tbody></table>
+      <div class="pt"><span>Comparativo PDV — nombres completos</span>
+        <select id="cv" onchange="renderBar()">
+          <option value="10">Top 10</option><option value="20">Top 20</option>
+          <option value="30">Top 30</option><option value="bot">Últimos 10</option>
+        </select></div>
+      <div id="barWrap" class="cwrap"><canvas id="barC" role="img" aria-label="Ventas PDV"></canvas></div>
+    </div>
+  </div>
+  <div>
+    <div class="card"><div class="pt"><span>Por provincia</span></div>
+      <div id="leg3" class="leg"></div>
+      <div class="cwrap" id="cw3"><canvas id="provC3" role="img" aria-label="Provincias"></canvas></div>
+    </div>
+  </div>
+  <div>
+    <div class="card"><div class="pt"><span>Por cantón</span></div>
+      <div style="overflow-x:auto;max-height:260px;overflow-y:auto">
+        <table class="gt"><thead><tr><th>#</th><th>Cantón</th><th>Prov.</th><th style="text-align:right">Uds.</th><th>PDV</th><th>%</th></tr></thead><tbody id="cB3"></tbody></table>
       </div>
     </div>
   </div>
 </div>
 </div>
 
-<!-- RANKING -->
-<div class="sec" id="s1">
+<!-- S4 GEO -->
+<div class="sec" id="s4">
 <div class="dw">
-<div class="full">
-  <div class="fb">
-    <div class="tabs">
-      <span class="tab on" onclick="setTab('all',this)">TODOS</span>
-      <span class="tab" onclick="setTab('top',this)">TOP 10</span>
-      <span class="tab" onclick="setTab('bot',this)">ÚLTIMOS 10</span>
-    </div>
-    <div class="frow">
-      <select class="gsel" id="selProv" onchange="onProv()"></select>
-      <select class="gsel" id="selCant" onchange="applyF()"></select>
-    </div>
-    <input class="srch" id="srch" placeholder="Buscar farmacia, cantón, provincia…" oninput="applyF()"/>
-    <span class="fc" id="fc"></span>
-  </div>
-  <div class="card">
-    <div class="pt"><span>Ranking completo</span><span id="rc" style="color:var(--txt4)"></span></div>
-    <div class="rl" id="rl"></div>
-    <div class="pgn">
-      <button class="pgb" id="pp" onclick="pg(-1)" disabled>◀ ANTERIOR</button>
-      <span class="pgi" id="pi">—</span>
-      <button class="pgb" id="pn" onclick="pg(1)" disabled>SIGUIENTE ▶</button>
+  <div class="full">
+    <div class="card"><div class="pt"><span>Por provincia</span></div>
+      <div id="leg4" class="leg"></div>
+      <div class="cwrap" id="cw4"><canvas id="provC4" role="img" aria-label="Provincias geo"></canvas></div>
     </div>
   </div>
-</div>
+  <div class="full">
+    <div class="card"><div class="pt"><span>Farmacias por cantón</span>
+      <select id="geoProvSel" onchange="renderGeoTable()"><option value="">Todas las provincias</option></select>
+    </div>
+    <div style="overflow-x:auto;max-height:400px;overflow-y:auto">
+      <table class="gt"><thead><tr><th>Cantón</th><th>Farmacia</th><th>Usuario</th><th style="text-align:right">Uds.</th><th>Prov.</th></tr></thead><tbody id="geoBody"></tbody></table>
+    </div>
+    </div>
+  </div>
 </div>
 </div>
 
-<!-- GRÁFICAS -->
-<div class="sec" id="s2">
-<div class="dw">
-<div class="full">
-  <div class="card">
-    <div class="pt">
-      <span>Comparativo PDV — nombres completos</span>
-      <select id="cv" onchange="renderBar()">
-        <option value="10">Top 10</option>
-        <option value="20">Top 20</option>
-        <option value="30">Top 30</option>
-        <option value="bot">Últimos 10</option>
-      </select>
-    </div>
-    <div class="cwrap" id="barWrap"><canvas id="barC" role="img" aria-label="Ventas PDV">Ventas PDV</canvas></div>
-  </div>
-</div>
-<div>
-  <div class="card">
-    <div class="pt"><span>Por provincia</span></div>
-    <div class="cwrap" style="height:220px"><canvas id="provC" role="img" aria-label="Provincias">Provincias</canvas></div>
-  </div>
-</div>
-<div>
-  <div class="card">
-    <div class="pt"><span>Por cantón</span></div>
-    <div style="overflow-x:auto;max-height:260px;overflow-y:auto">
-      <table class="gt"><thead><tr><th>#</th><th>Cantón</th><th>Prov.</th><th style="text-align:right">Uds.</th><th>PDV</th><th>%</th></tr></thead><tbody id="cB"></tbody></table>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
-<!-- INFO -->
-<div class="sec" id="s3">
+<!-- S5 INFO -->
+<div class="sec" id="s5">
 <div class="dw"><div class="full">
   <div class="info-card">
-    <span>Archivo fuente:</span> 1_5109760675526215207.xlsx<br>
-    <span>Generado:</span> 13/04/2026 — 22:46:22<br>
+    <span>Archivo fuente:</span> PRUEBA DC.xlsx<br>
+    <span>Generado:</span> 16/04/2026 — 19:30:18<br>
     <span>PDV incluidos:</span> 81<br>
-    <span>Cobertura:</span> CARCHI & IMBABURA<br>
-    <br>
-    Para actualizar, el administrador debe cargar el nuevo Excel en<br>
-    <span>ECO_Admin.html</span> y generar un nuevo archivo viewer.
+    <span>Cobertura:</span> CARCHI & IMBABURA<br><br>
+    Para actualizar este dashboard, el administrador debe<br>
+    cargar el nuevo Excel en <span>ECO_Admin_Final.html</span> y generar un nuevo archivo.
   </div>
 </div></div>
 </div>
 
 <nav class="bnav">
   <button class="bi on" onclick="goS(0,this)"><span class="bic">◈</span>Inicio</button>
-  <button class="bi" onclick="goS(1,this)"><span class="bic">≡</span>Ranking</button>
-  <button class="bi" onclick="goS(2,this)"><span class="bic">▲</span>Gráficas</button>
-  <button class="bi" onclick="goS(3,this)"><span class="bic">ℹ</span>Info</button>
+  <button class="bi" onclick="goS(1,this)"><span class="bic">≡</span>PDV</button>
+  <button class="bi" onclick="goS(2,this)"><span class="bic">👤</span>Usuarios</button>
+  <button class="bi" onclick="goS(3,this)"><span class="bic">▲</span>Gráficas</button>
+  <button class="bi" onclick="goS(4,this)"><span class="bic">⊞</span>Geo</button>
+  <button class="bi" onclick="goS(5,this)"><span class="bic">ℹ</span>Info</button>
 </nav>
 
 <script>
-const RAW=[{"farmacia":"ECO CLINICA IBARRA","usuario":"USUARIO 1","venta":50000,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"USUARIO 2","venta":1758,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI 2","usuario":"USUARIO 3","venta":4375,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN ANDRES BELLO","usuario":"USUARIO 4","venta":3746,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO CENTRAL SAN GABRIEL","usuario":"USUARIO 5","venta":4034,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA HOSPITAL METROPOLITANO","usuario":"USUARIO 6","venta":230000,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA SANTA MARIANITA","usuario":"USUARIO 7","venta":2159,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO CRUZ ROJA OTAVALO","usuario":"USUARIO 8","venta":2873,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO MODERNA","usuario":"USUARIO 9","venta":2262,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA TEODORO GOMEZ","usuario":"USUARIO 10","venta":2020,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO HOSP SAN VICENTE DE PAUL","usuario":"USUARIO 11","venta":2916,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO ATUNTAQUI CENTRAL","usuario":"USUARIO 12","venta":3183,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO IBARRA MARIANO ACOSTA","usuario":"USUARIO 13","venta":2944,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA VICTORIA","usuario":"USUARIO 14","venta":2752,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO COTACACHI LAS LOMAS","usuario":"USUARIO 15","venta":2177,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA AJAVI","usuario":"USUARIO 16","venta":2244,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA GALO PLAZA","usuario":"USUARIO 17","venta":1017,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO URCUQUI","usuario":"USUARIO 18","venta":1400,"canton":"URCUQUI","provincia":"CARCHI"},{"farmacia":"ECO ANDINATEL OTAVALO","usuario":"USUARIO 19","venta":2488,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA BOLA AMARILLA","usuario":"USUARIO 20","venta":1723,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO COPACABANA","usuario":"USUARIO 21","venta":2695,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO LOS CORAZAS","usuario":"USUARIO 22","venta":2250,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA PILANQUI","usuario":"USUARIO 23","venta":1969,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO VEINTIMILLA TULCAN","usuario":"USUARIO 24","venta":2894,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO COTACACHI QUIROGA","usuario":"USUARIO 25","venta":2726,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA MERCADO AMAZONAS","usuario":"USUARIO 26","venta":1826,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO SAN GABRIEL","usuario":"USUARIO 27","venta":1707,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PARIS","usuario":"USUARIO 28","venta":1707,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA EL RETORNO","usuario":"USUARIO 29","venta":1970,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA SANTA MONICA","usuario":"USUARIO 30","venta":1340,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA CRISTOBAL DE TROYA","usuario":"USUARIO 31","venta":1708,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA EL CARMEN","usuario":"USUARIO 32","venta":1255,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO SAN ANTONIO DE IBARRA","usuario":"USUARIO 33","venta":1882,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO COTACACHI MERCADO PRINCIPAL","usuario":"USUARIO 34","venta":2524,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI LUIS LEORO","usuario":"USUARIO 35","venta":1627,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO PIMAMPIRO","usuario":"USUARIO 36","venta":2394,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO 31 DE OCTUBRE","usuario":"USUARIO 37","venta":2548,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO BOLIVAR ATUNTAQUI","usuario":"USUARIO 38","venta":2002,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO IBARRA 13 DE ABRIL","usuario":"USUARIO 39","venta":2580,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PARQUE LA MERCED","usuario":"USUARIO 40","venta":1880,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA INGLESA","usuario":"USUARIO 41","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO CARCHI BOLIVAR","usuario":"USUARIO 42","venta":1763,"canton":"BOLIVAR","provincia":"CARCHI"},{"farmacia":"ECO TULCAN PARQUE AYORA","usuario":"USUARIO 43","venta":1646,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO MIRA","usuario":"USUARIO 44","venta":2054,"canton":"MIRA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN SUCRE","usuario":"USUARIO 45","venta":2427,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO PIMAMPIRO PAQUISHA","usuario":"USUARIO 46","venta":2473,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA OBELISCO","usuario":"USUARIO 47","venta":1737,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN RUIZ","usuario":"USUARIO 48","venta":2180,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO EL CISNE","usuario":"USUARIO 49","venta":1505,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO JULIO ANDRADE","usuario":"USUARIO 50","venta":1694,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO TULCAN ROBERTO GRIJALVA","usuario":"USUARIO 51","venta":1928,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO EL ANGEL PARQUE CENTRAL","usuario":"USUARIO 52","venta":2470,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO","usuario":"USUARIO 53","venta":2120,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO GONZALEZ SUAREZ COTACACHI","usuario":"USUARIO 54","venta":1885,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO IBARRA CARANQUI","usuario":"USUARIO 55","venta":1482,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO EL ANGEL","usuario":"USUARIO 56","venta":1818,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO AV ATAHUALPA","usuario":"USUARIO 57","venta":1806,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO OBISPO MOSQUERA","usuario":"USUARIO 58","venta":1532,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA 10 DE AGOSTO","usuario":"USUARIO 59","venta":1861,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO SANCHEZ Y CIFUENTES","usuario":"USUARIO 60","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI PICHINCHA","usuario":"USUARIO 61","venta":1465,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO CARCHI HUACA","usuario":"USUARIO 62","venta":964,"canton":"SAN PEDRO DE HUACA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO SUCRE","usuario":"USUARIO 63","venta":1165,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO SAN PABLO","usuario":"USUARIO 64","venta":1319,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA LUIS VARGAS TORRES","usuario":"USUARIO 65","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA EUGENIO ESPEJO","usuario":"USUARIO 66","venta":1521,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IMBABURA ANDRADE MARIN","usuario":"USUARIO 67","venta":1095,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO MODESTO JARAMILLO","usuario":"USUARIO 68","venta":1939,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA AV JAIME ROLDOS","usuario":"USUARIO 69","venta":1805,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA CANDELARIA","usuario":"USUARIO 70","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN LUCIANO CORAL","usuario":"USUARIO 71","venta":1194,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA MERCED","usuario":"USUARIO 72","venta":787,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO BOLIVAR","usuario":"USUARIO 73","venta":1249,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA JUAN DE VELASCO","usuario":"USUARIO 74","venta":725,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ANTONIO ANTE SAN ROQUE","usuario":"USUARIO 75","venta":1123,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PRIORATO","usuario":"USUARIO 76","venta":1186,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA HUERTOS FAMILIARES","usuario":"USUARIO 77","venta":1191,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA RAFAEL SANCHEZ","usuario":"USUARIO 78","venta":828,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA FRAY VACAS","usuario":"USUARIO 79","venta":968,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO LUIS CISNEROS","usuario":"USUARIO 80","venta":1547,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA SUDAMERICANA","usuario":"USUARIO 81","venta":598,"canton":"IBARRA","provincia":"IMBABURA"}];
-let agg=[],filt=[],tab='all',pg_=0,PG=10,barI=null,pI=null,pI0=null,pv={};
-
-function aggregate(rows){const m={};rows.forEach(r=>{if(!m[r.farmacia])m[r.farmacia]={...r,venta:0};m[r.farmacia].venta+=r.venta;});return Object.values(m).sort((a,b)=>b.venta-a.venta);}
-function aggK(data,key){const m={};data.forEach(r=>{const k=r[key]||'—';if(!m[k])m[k]={venta:0,pdv:0,prov:r.provincia};m[k].venta+=r.venta;m[k].pdv++;});return Object.entries(m).map(([k,v])=>({name:k,...v})).sort((a,b)=>b.venta-a.venta);}
-
-function goS(n,el){document.querySelectorAll('.sec').forEach((s,i)=>s.classList.toggle('show',i===n));document.querySelectorAll('.bi').forEach(b=>b.classList.remove('on'));el.classList.add('on');if(n===2)setTimeout(()=>{renderBar();mkP('provC',pI,r=>pI=r);},60);}
-
-// FILTERS - con opción TODAS
-function initFilters(){
-  const provs=[...new Set(agg.map(r=>r.provincia).filter(Boolean))].sort();
-  document.getElementById('selProv').innerHTML=
-    '<option value="">TODAS LAS PROVINCIAS</option>'+
-    provs.map(p=>`<option value="${p}">${p}</option>`).join('');
-  document.getElementById('selCant').innerHTML='<option value="">TODOS LOS CANTONES</option>'+
-    [...new Set(agg.map(r=>r.canton).filter(Boolean))].sort().map(c=>`<option value="${c}">${c}</option>`).join('');
+var RAW=[{"farmacia":"ECO CLINICA IBARRA","usuario":"VTRUEDA","venta":50000,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO COTACACHI QUIROGA","usuario":"GMREA","venta":1000000,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO HOSP SAN VICENTE DE PAUL","usuario":"CSARROYO","venta":4375,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO CLINICA IBARRA","usuario":"JMCHAMORRO","venta":3746,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO CRUZ ROJA OTAVALO","usuario":"GIANDRANGO","venta":4034,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA HOSPITAL METROPOLITANO","usuario":"JCPEREZ","venta":230000,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"LEGONZALEZ","venta":2159,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO COTACACHI LAS LOMAS","usuario":"JAGUSTAY","venta":2873,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO CLINICA IBARRA","usuario":"CAVASQUEZ","venta":2262,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA HOSPITAL METROPOLITANO","usuario":"CGINTRIAGO","venta":2020,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO HOSP SAN VICENTE DE PAUL","usuario":"JOMAFLA","venta":2916,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN ANDRES BELLO","usuario":"JEPOZO","venta":3183,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO VEINTIMILLA TULCAN","usuario":"DEGARCIA","venta":2944,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO CLINICA IBARRA","usuario":"DAPILATAX","venta":2752,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO COTACACHI LAS LOMAS","usuario":"ACFLORES","venta":2177,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO CLINICA IBARRA","usuario":"BADALGO","venta":2244,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN ANDRES BELLO","usuario":"CNARIAS","venta":1017,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"JCCORONADO","venta":1400,"canton":"URCUQUI","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI LUIS LEORO","usuario":"ALRUIZI","venta":2488,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO SAN GABRIEL","usuario":"AABASTIDAS","venta":1723,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO JULIO ANDRADE","usuario":"DAMENDIETA","venta":2695,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN ANDRES BELLO","usuario":"DANOGUERA","venta":2250,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO VEINTIMILLA TULCAN","usuario":"YEYANDUN","venta":1969,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO COPACABANA","usuario":"LEGUERRA","venta":2894,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"TLROSALES","venta":2726,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA GALO PLAZA","usuario":"JMHURTADO","venta":1826,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO COTACACHI LAS LOMAS","usuario":"HPFERNANDE","venta":1707,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO GONZALEZ SUAREZ COTACACHI","usuario":"EMSALAS","venta":1707,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO COTACACHI MERCADO PRINCIPAL","usuario":"KMCRUZG","venta":1970,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN ANDRES BELLO","usuario":"RSLOPEZ","venta":1340,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO CRUZ ROJA OTAVALO","usuario":"NJBOSMEDI","venta":1708,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO MODERNA","usuario":"MNRODRIGUE","venta":1255,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO URCUQUI","usuario":"AJTORRES","venta":1882,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA JUAN DE VELASCO","usuario":"MBSALME","venta":2524,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO IBARRA PARIS","usuario":"YETERAN","venta":1627,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO COTACACHI MERCADO PRINCIPAL","usuario":"PAFERNANDE","venta":2394,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO LOS CORAZAS","usuario":"AKROSALES","venta":2548,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO CARCHI BOLIVAR","usuario":"SESOLANO","venta":2002,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO MODERNA","usuario":"AJGUEVARAP","venta":2580,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO MODESTO JARAMILLO","usuario":"SJCARRASCO","venta":1880,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ANDINATEL OTAVALO","usuario":"PAACERO","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO EL CISNE","usuario":"IMCHUMA","venta":1763,"canton":"BOLIVAR","provincia":"CARCHI"},{"farmacia":"ECO VEINTIMILLA TULCAN","usuario":"BMNARVAEZ","venta":1646,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA TEODORO GOMEZ","usuario":"JSARIAS","venta":2054,"canton":"MIRA","provincia":"CARCHI"},{"farmacia":"ECO EL ANGEL PARQUE CENTRAL","usuario":"CSGODOYM","venta":2427,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO","usuario":"MFYACELGA","venta":2473,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA PARQUE LA MERCED","usuario":"ERNARANJO","venta":1737,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PARQUE LA MERCED","usuario":"NAMORILLO","venta":2180,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"JRALVAREZ","venta":1505,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO SUCRE","usuario":"DMMARTINEZ","venta":1694,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO IBARRA TEODORO GOMEZ","usuario":"LEJURADO","venta":1928,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO SUCRE","usuario":"JSMARQUEZ","venta":2470,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO BOLIVAR ATUNTAQUI","usuario":"CICAHUASQU","venta":2120,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA SANTA MONICA","usuario":"JAANDRADES","venta":1885,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO CENTRAL SAN GABRIEL","usuario":"CMHIDALGO","venta":1482,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO JULIO ANDRADE","usuario":"REMUNOZ","venta":1818,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA GALO PLAZA","usuario":"CBANGULO","venta":1806,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA VICTORIA","usuario":"MEGAVILIMA","venta":1532,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO LOS CORAZAS","usuario":"EAGARCES","venta":1861,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO ANDINATEL OTAVALO","usuario":"MAANDRADEL","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA TEODORO GOMEZ","usuario":"MFBURBANOC","venta":1465,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LUIS VARGAS TORRES","usuario":"CFVEGA","venta":964,"canton":"SAN PEDRO DE HUACA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA HOSPITAL METROPOLITANO","usuario":"AASARAUZH","venta":1165,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO PIMAMPIRO","usuario":"GMAJALA","venta":1319,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA SANTA MARIANITA","usuario":"DSCHAGNA","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO PIMAMPIRO PAQUISHA","usuario":"GZNARVAEZ","venta":1521,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO GONZALEZ SUAREZ COTACACHI","usuario":"KSROSALES","venta":1095,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO BOLIVAR","usuario":"AMHERRERAD","venta":1939,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO PIMAMPIRO PAQUISHA","usuario":"AREGAS","venta":1805,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO COPACABANA","usuario":"JSFLORESM","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA OBELISCO","usuario":"KAVELA","venta":1194,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA SANTA MARIANITA","usuario":"LMRUIZV","venta":787,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA LA MERCED","usuario":"CPHERRERIA","venta":1249,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA CARANQUI","usuario":"WCCHICAS","venta":725,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA SANTA MARIANITA","usuario":"ALYANQUI","venta":1123,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO MODERNA","usuario":"MBVINACHI","venta":1186,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA AJAVI","usuario":"RAAREQUIP","venta":1191,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA CARANQUI","usuario":"EBHERNANDE","venta":828,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO","usuario":"MYBRAZALES","venta":968,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO ATUNTAQUI PICHINCHA","usuario":"WMESPINOSA","venta":1547,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO CRUZ ROJA OTAVALO","usuario":"DMIBUJES","venta":598,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA RAFAEL SANCHEZ","usuario":"ERPARRENO","venta":50000,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO URCUQUI","usuario":"YMGONZAGA","venta":1000000,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI 2","usuario":"EAMONTENEG","venta":4375,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA AJAVI","usuario":"JEVITEB","venta":3746,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO IBARRA PARIS","usuario":"GNSUAREZ","venta":4034,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO CARCHI BOLIVAR","usuario":"JSMENESES","venta":230000,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO COPACABANA","usuario":"LEMEDIAVIL","venta":2159,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO PIMAMPIRO","usuario":"AMQUILLIGA","venta":2873,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA LA MERCED","usuario":"ALHERRERIA","venta":2262,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO HOSP SAN VICENTE DE PAUL","usuario":"DPPOMASQUI","venta":2020,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO EL ANGEL PARQUE CENTRAL","usuario":"DELEON","venta":2916,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO BOLIVAR ATUNTAQUI","usuario":"CLMONTENEG","venta":3183,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO CENTRAL SAN GABRIEL","usuario":"ALPOZO","venta":2944,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LUIS VARGAS TORRES","usuario":"AAMAFLA","venta":2752,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA TEODORO GOMEZ","usuario":"FTRACINE","venta":2177,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA VICTORIA","usuario":"CSANDRADE","venta":2244,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA EL CARMEN","usuario":"HILOPEZ","venta":1017,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO CARCHI HUACA","usuario":"NRVILLARRE","venta":1400,"canton":"URCUQUI","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI PICHINCHA","usuario":"FSLOPEZ","venta":2488,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA MARIANO ACOSTA","usuario":"APQUIMBITA","venta":1723,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI 2","usuario":"DPBARAHONA","venta":2695,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO CRUZ ROJA OTAVALO","usuario":"CAHERNANDM","venta":2250,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO SAN ANTONIO DE IBARRA","usuario":"MGVELA","venta":1969,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PILANQUI","usuario":"NLESPANA","venta":2894,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO CENTRAL SAN GABRIEL","usuario":"JLNAZATET","venta":2726,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO 31 DE OCTUBRE","usuario":"GLTITUANA","venta":1826,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA CRISTOBAL DE TROYA","usuario":"LJFUENTES","venta":1707,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA MARIANO ACOSTA","usuario":"AEDELGADOZ","venta":1707,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA BOLA AMARILLA","usuario":"YLVASQUEZ","venta":1970,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO AV ATAHUALPA","usuario":"GPCHACON","venta":1340,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA MERCADO AMAZONAS","usuario":"ARMUNOZ","venta":1708,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA GALO PLAZA","usuario":"SRTORRES","venta":1255,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI 2","usuario":"ALGUAGALON","venta":1882,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA VICTORIA","usuario":"NSDELGADO","venta":2524,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO IBARRA INGLESA","usuario":"MCTAPIA","venta":1627,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO SAN PABLO","usuario":"MOREYES","venta":2394,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA EL RETORNO","usuario":"JAGUAMANU","venta":2548,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN PARQUE AYORA","usuario":"CMIMBAQUIN","venta":2002,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO MIRA","usuario":"AXPULE","venta":2580,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA OBELISCO","usuario":"MGBALDEON","venta":1880,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA AJAVI","usuario":"FVRUIZ","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO 31 DE OCTUBRE","usuario":"NSLANCHIMB","venta":1763,"canton":"BOLIVAR","provincia":"CARCHI"},{"farmacia":"ECO IBARRA EUGENIO ESPEJO","usuario":"BECRIOLLO","venta":1646,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO ATUNTAQUI 2","usuario":"GSRUEDA","venta":2054,"canton":"MIRA","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI CENTRAL","usuario":"CGVEGA","venta":2427,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO AV ATAHUALPA","usuario":"KLGUERRA","venta":2473,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI CENTRAL","usuario":"TFPONCE","venta":1737,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA CRISTOBAL DE TROYA","usuario":"TLECHEVERI","venta":2180,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO IBARRA PILANQUI","usuario":"AMPAEZ","venta":1505,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO SAN ANTONIO DE IBARRA","usuario":"JKROJAS","venta":1694,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO IBARRA LA VICTORIA","usuario":"DEENRIQUEZ","venta":1928,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO ATUNTAQUI CENTRAL","usuario":"WJSAA","venta":2470,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI LUIS LEORO","usuario":"TMLOPEZ","venta":2120,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA SANTA MONICA","usuario":"CSNAVARRO","venta":1885,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO IBARRA BOLA AMARILLA","usuario":"RAANDRADEV","venta":1482,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OBISPO MOSQUERA","usuario":"ARALVAREZ","venta":1818,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO PIMAMPIRO","usuario":"JPROSERO","venta":1806,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA CRISTOBAL DE TROYA","usuario":"SGARBOLEDA","venta":1532,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ANDINATEL OTAVALO","usuario":"MKGUERRA","venta":1861,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA EL CARMEN","usuario":"NMRUEDA","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO URCUQUI","usuario":"JAQUITO","venta":1465,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA SUDAMERICANA","usuario":"MFITAS","venta":964,"canton":"SAN PEDRO DE HUACA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA EL RETORNO","usuario":"PMCHICAIZJ","venta":1165,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA INGLESA","usuario":"XAVERDUGA","venta":1319,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO TULCAN RUIZ","usuario":"AMGUDINO","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO 31 DE OCTUBRE","usuario":"CGONATE","venta":1521,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA INGLESA","usuario":"WAALARCONA","venta":1095,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PILANQUI","usuario":"MJPIJAL","venta":1939,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA 10 DE AGOSTO","usuario":"MEPOLO","venta":1805,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO CARCHI HUACA","usuario":"VACUASAPAZ","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA 13 DE ABRIL","usuario":"XMORTIZ","venta":1194,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO EL CISNE","usuario":"JPBEDON","venta":787,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO SAN GABRIEL","usuario":"WAMORENOR","venta":1249,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO MODERNA","usuario":"LMVALLEJOC","venta":725,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA MERCADO AMAZONAS","usuario":"SJPEREZ","venta":1123,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PRIORATO","usuario":"JDCRIOLLO","venta":1186,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO LOS CORAZAS","usuario":"DLOYOLA","venta":1191,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA MARIANO ACOSTA","usuario":"IACAHUASQU","venta":828,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI 2","usuario":"ALRAMOSP","venta":968,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO ATUNTAQUI CENTRAL","usuario":"DEANDINO","venta":1547,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO COTACACHI QUIROGA","usuario":"LAMALDONAD","venta":598,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO SAN ANTONIO DE IBARRA","usuario":"JCCADENA","venta":50000,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA HUERTOS FAMILIARES","usuario":"DFPANCHEZR","venta":1000000,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"FAORTEGA","venta":4375,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO BOLIVAR ATUNTAQUI","usuario":"CASIZAI","venta":3746,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO IBARRA SANTA MONICA","usuario":"ERALBAN","venta":4034,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO IMBABURA ANDRADE MARIN","usuario":"TPBUITRON","venta":230000,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OBISPO MOSQUERA","usuario":"MVACOSTA","venta":2159,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA 10 DE AGOSTO","usuario":"JFPOLO","venta":2873,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA 13 DE ABRIL","usuario":"AAPADILLA","venta":2262,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO LUIS CISNEROS","usuario":"MECHACON","venta":2020,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA MARIANO ACOSTA","usuario":"MCPINEDA","venta":2916,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN SUCRE","usuario":"JKVILLARRE","venta":3183,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO MIRA","usuario":"PLYEPEZ","venta":2944,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA EL RETORNO","usuario":"GMSALAZAR","venta":2752,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA EUGENIO ESPEJO","usuario":"SDGINESL","venta":2177,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN RUIZ","usuario":"JSROSERO","venta":2244,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO BOLIVAR","usuario":"MFJACOME","venta":1017,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO MIRA","usuario":"ECSILVA","venta":1400,"canton":"URCUQUI","provincia":"CARCHI"},{"farmacia":"ECO TULCAN ROBERTO GRIJALVA","usuario":"NKMEJIA","venta":2488,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN ROBERTO GRIJALVA","usuario":"YMPAUCAR","venta":1723,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN LUCIANO CORAL","usuario":"JVIZCAINO","venta":2695,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO SANCHEZ Y CIFUENTES","usuario":"MAFELIX","venta":2250,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA SANTA MARIANITA","usuario":"BDVIVEROS","venta":1969,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO ANTONIO ANTE SAN ROQUE","usuario":"MAORTEGAA","venta":2894,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO TULCAN RUIZ","usuario":"GPGUERRERO","venta":2726,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA HUERTOS FAMILIARES","usuario":"JECALDEC","venta":1826,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN SUCRE","usuario":"EPLOPEZ102","venta":1707,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN PARQUE AYORA","usuario":"JJSALAZAC","venta":1707,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO SAN PABLO","usuario":"MAROLDAN","venta":1970,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO SAN GABRIEL","usuario":"VEIRUAL","venta":1340,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN SUCRE","usuario":"SPORTEGA","venta":1708,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA CANDELARIA","usuario":"GECABRERAP","venta":1255,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO SANCHEZ Y CIFUENTES","usuario":"SMORBE","venta":1882,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IMBABURA ANDRADE MARIN","usuario":"EVSIMBAN","venta":2524,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO TULCAN ROBERTO GRIJALVA","usuario":"LMIMBAQUIN","venta":1627,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA CANDELARIA","usuario":"FFAGUILAR","venta":2394,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO TULCAN LUCIANO CORAL","usuario":"KLCUASPUD","venta":2548,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO MODESTO JARAMILLO","usuario":"RDCHAVEZ","venta":2002,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO IBARRA 13 DE ABRIL","usuario":"LMORTIZ","venta":2580,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA EL CARMEN","usuario":"CMARCINIEG","venta":1880,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO EL ANGEL","usuario":"HAPORTILLY","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PRIORATO","usuario":"YAPARRA","venta":1763,"canton":"BOLIVAR","provincia":"CARCHI"},{"farmacia":"ECO IBARRA AV JAIME ROLDOS","usuario":"NAPORTIL","venta":1646,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA FRAY VACAS","usuario":"ERCHIRIBOG","venta":2054,"canton":"MIRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA PARQUE LA MERCED","usuario":"CGCABALLER","venta":2427,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA MERCADO AMAZONAS","usuario":"ASPUPIALES","venta":2473,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA FRAY VACAS","usuario":"NSMORENO","venta":1737,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA BOLA AMARILLA","usuario":"MRSALVADOR","venta":2180,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO ANTONIO ANTE SAN ROQUE","usuario":"ZOJARAMILL","venta":1505,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA BOLA AMARILLA","usuario":"JVCHILUIZA","venta":1694,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO CENTRAL SAN GABRIEL","usuario":"ARHERNANDE","venta":1928,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO EL ANGEL","usuario":"JEIBARRA","venta":2470,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA OBELISCO","usuario":"CGCABALLER","venta":2120,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA HOSPITAL METROPOLITANO","usuario":"JAFUENTES","venta":1885,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO IBARRA BOLA AMARILLA","usuario":"SYENRIQUER","venta":1482,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN PARQUE AYORA","usuario":"ELAYALAR","venta":1818,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO LUIS CISNEROS","usuario":"RDCHAVEZ","venta":1806,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO EL ANGEL","usuario":"KRMENESES","venta":1532,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO CENTRAL SAN GABRIEL","usuario":"NYRAMIREZ","venta":1861,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA AV JAIME ROLDOS","usuario":"BYPOTOSI","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA HOSPITAL METROPOLITANO","usuario":"PATERANL","venta":1465,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA PARIS","usuario":"SMCARDENAS","venta":964,"canton":"SAN PEDRO DE HUACA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA AJAVI","usuario":"SYENRIQUER","venta":1165,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA 10 DE AGOSTO","usuario":"SCGALLEGOP","venta":1319,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA PARIS","usuario":"MGUALSAQ","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO MODERNA","usuario":"DLOYOLA","venta":1521,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO EL ANGEL","usuario":"LMENESES","venta":1095,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO ATUNTAQUI LUIS LEORO","usuario":"ARCASTILLO","venta":1939,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO LOS CORAZAS","usuario":"PBTACO","venta":1805,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA MARIANO ACOSTA","usuario":"NLREASCOS","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA AV JAIME ROLDOS","usuario":"ARHERNANDE","venta":1194,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO COPACABANA","usuario":"MFJACOME","venta":787,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO EL ANGEL","usuario":"DELEON","venta":1249,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO CARCHI BOLIVAR","usuario":"PYEPEZ","venta":725,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA 10 DE AGOSTO","usuario":"JCCORONADO","venta":1123,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO ANTONIO ANTE SAN ROQUE","usuario":"LMVALLEJOC","venta":1186,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"NLREASCOS","venta":1191,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA EL RETORNO","usuario":"VGGUAMAN","venta":828,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"ARCASTILLO","venta":968,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"SCGALLEGOP","venta":1547,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO SANCHEZ Y CIFUENTES","usuario":"VJLEON","venta":598,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN ROBERTO GRIJALVA","usuario":"SPORTEGA","venta":50000,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO COTACACHI MERCADO PRINCIPAL","usuario":"MAVARGAS","venta":1000000,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO GONZALEZ SUAREZ COTACACHI","usuario":"MTPAREDES","venta":4375,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"EROSALES","venta":3746,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO","usuario":"MFJACOME","venta":4034,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO COTACACHI QUIROGA","usuario":"JLVEGA","venta":230000,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN SUCRE","usuario":"LMIMBAQUIN","venta":2159,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"MEDI IBARRA MARIANO ACOSTA","usuario":"ARHERNANDE","venta":2873,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO AV ATAHUALPA","usuario":"ARCASTILLO","venta":2262,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO SAN PABLO","usuario":"AEHUERA","venta":2020,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO 31 DE OCTUBRE","usuario":"MAANDRADEL","venta":2916,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA BOLA AMARILLA","usuario":"SRTORRES","venta":3183,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO IBARRA RAFAEL SANCHEZ","usuario":"SMPEREZ","venta":2944,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA GALO PLAZA","usuario":"MRSALVADOR","venta":2752,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI LUIS LEORO","usuario":"DNFLORES","venta":2177,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO CARCHI HUACA","usuario":"SCASTRO","venta":2244,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA PARIS","usuario":"NLREASCOS","venta":1017,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA 10 DE AGOSTO","usuario":"GMTARAMBIS","venta":1400,"canton":"URCUQUI","provincia":"CARCHI"},{"farmacia":"ECO IBARRA BOLA AMARILLA","usuario":"VJLEON","venta":2488,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO HOSP SAN VICENTE DE PAUL","usuario":"CJROBLES","venta":1723,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN LUCIANO CORAL","usuario":"ELAYALAR","venta":2695,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO ATUNTAQUI CENTRAL","usuario":"MRRUIZ","venta":2250,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO LUIS CISNEROS","usuario":"CAHERNANDM","venta":1969,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO MODESTO JARAMILLO","usuario":"ACESPARZA","venta":2894,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO MIRA","usuario":"MDYEPEZ","venta":2726,"canton":"COTACACHI","provincia":"IMBABURA"},{"farmacia":"ECO COTACACHI LAS LOMAS","usuario":"MAVARGAS","venta":1826,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO SAN ANTONIO DE IBARRA","usuario":"CSANCHEZ","venta":1707,"canton":"MONTUFAR","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA 10 DE AGOSTO","usuario":"BYPOTOSI","venta":1707,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IMBABURA ANDRADE MARIN","usuario":"FAORTEGA","venta":1970,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO ANDINATEL OTAVALO","usuario":"NSLANCHIMB","venta":1340,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA JUAN DE VELASCO","usuario":"FAORTEGA","venta":1708,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA JUAN DE VELASCO","usuario":"MLPAREDES","venta":1255,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO JULIO ANDRADE","usuario":"LDLOBATO","venta":1882,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO ANDINATEL OTAVALO","usuario":"CGONATE","venta":2524,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO COTACACHI MERCADO PRINCIPAL","usuario":"LAMALDONAD","venta":1627,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA EUGENIO ESPEJO","usuario":"HMVISARREA","venta":2394,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO IMBABURA ANDRADE MARIN","usuario":"BYPOTOSI","venta":2548,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA MARIANO ACOSTA","usuario":"FAORTEGA","venta":2002,"canton":"ANTONIO ANTE","provincia":"CARCHI"},{"farmacia":"ECO IMBABURA ANDRADE MARIN","usuario":"DICEVALLOS","venta":2580,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO ATUNTAQUI PICHINCHA","usuario":"DNFLORES","venta":1880,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA EL CARMEN","usuario":"MBSALME","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO EL ANGEL","usuario":"JGARMAS","venta":1763,"canton":"BOLIVAR","provincia":"CARCHI"},{"farmacia":"ECO IBARRA AV JAIME ROLDOS","usuario":"MATINAJERO","venta":1646,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA 13 DE ABRIL","usuario":"FGTERAN","venta":2054,"canton":"MIRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA INGLESA","usuario":"SMPEREZ","venta":2427,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO EL ANGEL PARQUE CENTRAL","usuario":"LMENESES","venta":2473,"canton":"PIMAMPIRO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA GALO PLAZA","usuario":"SYENRIQUER","venta":1737,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN ANDRES BELLO","usuario":"LNAVARRETE","venta":2180,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO IBARRA HUERTOS FAMILIARES","usuario":"JECAZA","venta":1505,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA SANTA MONICA","usuario":"TLCALDERON","venta":1694,"canton":"TULCAN","provincia":"CARCHI"},{"farmacia":"ECO EL ANGEL","usuario":"NATERANR","venta":1928,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO VEINTIMILLA TULCAN","usuario":"EEHIDROBO","venta":2470,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO ANDINATEL OTAVALO","usuario":"GULASSO","venta":2120,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO TULCAN LUCIANO CORAL","usuario":"FFBORJA","venta":1885,"canton":"COTACACHI","provincia":"CARCHI"},{"farmacia":"ECO IBARRA FRAY VACAS","usuario":"nsmoreno","venta":1482,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO COTACACHI QUIROGA","usuario":"TVUBIDIA","venta":1818,"canton":"ESPEJO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO 31 DE OCTUBRE","usuario":"GULASSO","venta":1806,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA OBELISCO","usuario":"LMSOTELO","venta":1532,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO MODERNA","usuario":"DEPEREZ","venta":1861,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO","usuario":"CESPARZA","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN PARQUE AYORA","usuario":"FFBORJA","venta":1465,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO JULIO ANDRADE","usuario":"MAMENDIETA","venta":964,"canton":"SAN PEDRO DE HUACA","provincia":"CARCHI"},{"farmacia":"ECO TULCAN SUCRE","usuario":"CVILLARREA","venta":1165,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA VICTORIA","usuario":"FANDRADE","venta":1319,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO IBARRA MERCADO AMAZONAS","usuario":"MABENITES","venta":1241,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OBISPO MOSQUERA","usuario":"CJORTIZ","venta":1521,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA PARIS","usuario":"ASLOPEZ","venta":1095,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LA CANDELARIA","usuario":"JPSANCHEZ","venta":1939,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO OTAVALO COPACABANA","usuario":"DAESPARZA","venta":1805,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA SANTA MARIANITA","usuario":"VJLEON","venta":1428,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO BOLIVAR ATUNTAQUI","usuario":"ZYDOMINGUE","venta":1194,"canton":"TULCAN","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA AJAVI","usuario":"VJLEON","venta":787,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ANTONIO ANTE SAN ROQUE","usuario":"JEDOMINGUE","venta":1249,"canton":"OTAVALO","provincia":"IMBABURA"},{"farmacia":"ECO PIMAMPIRO PAQUISHA","usuario":"FGUERRERO","venta":725,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA CRISTOBAL DE TROYA","usuario":"ESFLORES","venta":1123,"canton":"ANTONIO ANTE","provincia":"IMBABURA"},{"farmacia":"ECO IBARRA LUIS VARGAS TORRES","usuario":"CJORTIZ","venta":1186,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO ATUNTAQUI LUIS LEORO","usuario":"ZYDOMINGUE","venta":1191,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO LUIS CISNEROS","usuario":"NGHIDROVO","venta":828,"canton":"IBARRA","provincia":"CARCHI"},{"farmacia":"ECO IBARRA CARANQUI","usuario":"CAIBARRACH","venta":968,"canton":"IBARRA","provincia":"IMBABURA"},{"farmacia":"ECO OTAVALO SUCRE","usuario":"DAESPARZA","venta":1547,"canton":"OTAVALO","provincia":"CARCHI"},{"farmacia":"ECO CRUZ ROJA OTAVALO","usuario":"NGHIDROVO","venta":598,"canton":"IBARRA","provincia":"IMBABURA"}];
+var PAL=['#f5c842','#3b82f6','#22c55e','#ef4444','#a78bfa','#fb923c','#38bdf8'];
+var aggPdv=[],aggUsr=[],filtPdv=[],filtUsr=[],tabPdv='all',tabUsr='all',pgPdv=0,pgUsr=0,PG=10;
+var barI=null,provI3=null,provI4=null,stockI=null;
+function doAgg(rows){var m={};rows.forEach(function(r){if(!m[r.farmacia])m[r.farmacia]=Object.assign({},r,{venta:0});m[r.farmacia].venta+=r.venta;});return Object.values(m).sort(function(a,b){return b.venta-a.venta;});}
+function aggK(data,key){var m={};data.forEach(function(r){var k=r[key]||'—';if(!m[k])m[k]={venta:0,pdv:0,prov:r.provincia};m[k].venta+=r.venta;m[k].pdv++;});return Object.entries(m).map(function(e){return Object.assign({name:e[0]},e[1]);}).sort(function(a,b){return b.venta-a.venta;});}
+function goS(n,el){
+  document.querySelectorAll('.sec').forEach(function(s,i){s.classList.toggle('show',i===n);});
+  document.querySelectorAll('.bi').forEach(function(b){b.classList.remove('on');});el.classList.add('on');
+  if(n===3)setTimeout(function(){renderBar();if(provI3){provI3.destroy();provI3=null;}renderProv('provC3','cw3','leg3',function(i){provI3=i;});renderCant('cB3');},80);
+  if(n===4)setTimeout(function(){if(provI4){provI4.destroy();provI4=null;}renderProv('provC4','cw4','leg4',function(i){provI4=i;});renderGeoTable();},80);
 }
-function onProv(){
-  const prov=document.getElementById('selProv').value;
-  const cants=[...new Set(agg.filter(r=>!prov||r.provincia===prov).map(r=>r.canton).filter(Boolean))].sort();
-  document.getElementById('selCant').innerHTML=
-    '<option value="">TODOS LOS CANTONES</option>'+
-    cants.map(c=>`<option value="${c}">${c}</option>`).join('');
-  pg_=0;applyF();
+function initPdvF(){
+  var ps=[...new Set(aggPdv.map(function(r){return r.provincia;}).filter(Boolean))].sort();
+  document.getElementById('pdvProv').innerHTML='<option value="">TODAS LAS PROVINCIAS</option>'+ps.map(function(p){return'<option value="'+p+'">'+p+'</option>';}).join('');
+  var ac=[...new Set(aggPdv.map(function(r){return r.canton;}).filter(Boolean))].sort();
+  document.getElementById('pdvCant').innerHTML='<option value="">TODOS LOS CANTONES</option>'+ac.map(function(c){return'<option value="'+c+'">'+c+'</option>';}).join('');
+  var af=aggPdv.map(function(r){return r.farmacia;}).sort();
+  document.getElementById('pdvFarm').innerHTML='<option value="">TODAS LAS FARMACIAS</option>'+af.map(function(f){return'<option value="'+f+'">'+f+'</option>';}).join('');
 }
-function setTab(t,el){tab=t;pg_=0;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));el.classList.add('on');applyF();}
-function applyF(){
-  const q=(document.getElementById('srch')?.value||'').toLowerCase().trim();
-  const prov=document.getElementById('selProv').value;
-  const cant=document.getElementById('selCant').value;
-  let src=[...agg];
-  if(prov)src=src.filter(r=>r.provincia===prov);
-  if(cant)src=src.filter(r=>r.canton===cant);
-  if(tab==='top')src=src.slice(0,10);
-  else if(tab==='bot')src=src.slice(-10).reverse();
-  if(q)src=src.filter(r=>[r.farmacia,r.canton,r.provincia,r.usuario].join(' ').toLowerCase().includes(q));
-  filt=src;
-  const fc=document.getElementById('fc');
-  if(fc)fc.textContent=src.length+' PDV mostrados';
-  renderRank();
+function initUsrF(){
+  var ps=[...new Set(aggPdv.map(function(r){return r.provincia;}).filter(Boolean))].sort();
+  document.getElementById('usrProv').innerHTML='<option value="">TODAS LAS PROVINCIAS</option>'+ps.map(function(p){return'<option value="'+p+'">'+p+'</option>';}).join('');
+  var ac=[...new Set(aggPdv.map(function(r){return r.canton;}).filter(Boolean))].sort();
+  document.getElementById('usrCant').innerHTML='<option value="">TODOS LOS CANTONES</option>'+ac.map(function(c){return'<option value="'+c+'">'+c+'</option>';}).join('');
 }
-
-// RANKING
-function renderRank(){
-  const total=filt.length,pages=Math.ceil(total/PG)||1;
-  if(pg_>=pages)pg_=Math.max(0,pages-1);
-  const slice=filt.slice(pg_*PG,(pg_+1)*PG);
-  const maxV=agg[0]?.venta||1;
-  const el=document.getElementById('rl');el.innerHTML='';
-  if(!slice.length){el.innerHTML='<div style="padding:1rem;text-align:center;color:var(--txt4);font-size:11px;font-family:var(--mono)">Sin resultados para los filtros seleccionados</div>';return;}
-  slice.forEach(r=>{
-    const gr=agg.findIndex(x=>x.farmacia===r.farmacia)+1;
-    const prev=pv[r.farmacia]||0,diff=r.venta-prev;
-    const pct=prev>0?((diff/prev)*100).toFixed(1):null;
-    const cls=gr===1?'ri r1':gr<=3?'ri r23':gr===agg.length?'ri bot':'ri mid';
-    const bw=Math.max(2,Math.round((r.venta/maxV)*48));
-    el.innerHTML+=`<div class="${cls}" title="${r.farmacia} — ${r.canton} (${r.provincia}) · ${r.usuario}">
-      <span class="rp">${gr}</span>
-      <span class="rbar" style="width:${bw}px"></span>
-      <span class="rn">${r.farmacia}</span>
-      <span class="rtg">${r.canton}</span>
-      <span class="rv">${r.venta.toLocaleString('es')}</span>
-    </div>`;
-    pv[r.farmacia]=r.venta;
-  });
-  const rc=document.getElementById('rc');
-  if(rc)rc.textContent=`${pg_*PG+1}–${Math.min((pg_+1)*PG,total)} de ${total}`;
-  document.getElementById('pi').textContent=`Pág ${pg_+1}/${pages}`;
-  document.getElementById('pp').disabled=pg_===0;
-  document.getElementById('pn').disabled=pg_>=pages-1;
+function initGeo(){
+  var ps=[...new Set(aggPdv.map(function(r){return r.provincia;}).filter(Boolean))].sort();
+  document.getElementById('geoProvSel').innerHTML='<option value="">Todas las provincias</option>'+ps.map(function(p){return'<option value="'+p+'">'+p+'</option>';}).join('');
 }
-function pg(d){pg_+=d;renderRank();}
-
-// TOP 10
-function renderTop10(){
-  const top=agg.slice(0,10),maxV=agg[0]?.venta||1;
-  document.getElementById('top10').innerHTML=top.map((r,i)=>{
-    const cls=i===0?'ri r1':i<=2?'ri r23':'ri mid';
-    const bw=Math.max(2,Math.round((r.venta/maxV)*48));
-    return`<div class="${cls}" title="${r.farmacia} — ${r.canton} (${r.provincia})">
-      <span class="rp">${i+1}</span><span class="rbar" style="width:${bw}px"></span>
-      <span class="rn">${r.farmacia}</span>
-      <span class="rtg">${r.canton}</span>
-      <span class="rv">${r.venta.toLocaleString('es')}</span>
-    </div>`;
-  }).join('');
-}
-
-// BAR CHART — HORIZONTAL, nombres completos
-function renderBar(){
-  const v=document.getElementById('cv').value;
-  const src=v==='bot'?[...agg].slice(-10).reverse():agg.slice(0,parseInt(v));
-  const topV=agg[0]?.venta||1,botV=agg[agg.length-1]?.venta||0;
-  const colors=src.map(r=>r.venta===topV?'#f5c842':r.venta===botV?'#ef4444':r.venta>=topV*.7?'#22c55e':'#3b82f6');
-  // Altura dinámica: 38px por barra
-  const h=Math.max(280,src.length*38+60);
-  const wrap=document.getElementById('barWrap');
-  wrap.style.height=h+'px';
-  if(barI)barI.destroy();
-  barI=new Chart(document.getElementById('barC'),{
-    type:'bar',
-    data:{
-      labels:src.map(r=>r.farmacia),
-      datasets:[{data:src.map(r=>r.venta),backgroundColor:colors,borderRadius:4,borderSkipped:false}]
-    },
-    options:{
-      indexAxis:'y',
-      responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label:(c)=>{const r=src[c.dataIndex];return[`${c.raw.toLocaleString('es')} uds`,`${r.canton} · ${r.provincia}`];}}}
-      },
-      scales:{
-        x:{grid:{color:'#13161e'},ticks:{color:'#4b5563',font:{family:'Space Mono',size:9},callback:v=>v.toLocaleString('es')}},
-        y:{grid:{color:'transparent'},ticks:{color:'#e8e2d0',font:{family:'Space Mono',size:9},crossAlign:'far'}}
-      }
-    }
-  });
-}
-
-// PROVINCE DONUT
-function mkP(cid,inst,cb){
-  const pa=aggK(agg,'provincia');
-  const total=pa.reduce((s,r)=>s+r.venta,0);
-  const pal=['#f5c842','#3b82f6','#22c55e','#ef4444','#a78bfa'];
-  if(inst)inst.destroy();
-  cb(new Chart(document.getElementById(cid),{
-    type:'doughnut',
-    data:{labels:pa.map(p=>p.name),datasets:[{data:pa.map(p=>p.venta),backgroundColor:pal.slice(0,pa.length),borderWidth:1.5,borderColor:'#0f1219'}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'60%',
-      plugins:{legend:{display:true,position:'right',labels:{color:'#6b7280',font:{family:'Space Mono',size:9},boxWidth:10,padding:8}},
-               tooltip:{callbacks:{label:(c)=>`${c.label}: ${c.raw.toLocaleString('es')} (${((c.raw/total)*100).toFixed(1)}%)`}}}}
-  }));
-}
-
-// CANTON TABLE
-function renderCant(tbid){
-  const ca=aggK(agg,'canton');
-  const total=ca.reduce((s,r)=>s+r.venta,0);
-  const maxV=ca[0]?.venta||1;
-  const pal={};
-  const colors=['#f5c842','#3b82f6','#22c55e','#ef4444','#a78bfa'];
-  [...new Set(ca.map(c=>c.prov))].forEach((p,i)=>pal[p]=colors[i%colors.length]);
-  document.getElementById(tbid).innerHTML=ca.map((c,i)=>{
-    const pct=((c.venta/total)*100).toFixed(1);
-    const bw=Math.round((c.venta/maxV)*46);
-    const bc=pal[c.prov]||'#6b7280';
-    return`<tr>
-      <td style="color:var(--txt4)">${i+1}</td>
-      <td style="color:${i<3?'var(--gold)':'var(--txt2)'};font-weight:${i<3?700:400};max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${c.name}">${c.name}</td>
-      <td><span class="gbadge">${c.prov}</span></td>
-      <td style="text-align:right;color:var(--gold);font-weight:700">${c.venta.toLocaleString('es')}</td>
-      <td style="color:var(--txt4)">${c.pdv}</td>
-      <td><div class="gbg"><div class="gf" style="width:${bw}px;background:${bc}"></div></div><span style="font-size:8px;color:var(--txt4);margin-left:3px">${pct}%</span></td>
-    </tr>`;
-  }).join('');
-}
-
-// TICKER
-function renderTicker(){
-  const track=document.getElementById('tkrT');
-  track.classList.remove('run');
-  const items=agg.map((r,i)=>{
-    const cls=i===0?'ti r1':i===agg.length-1?'ti last':'ti';
-    const sym=i===0?'◆':i===agg.length-1?'▽':'·';
-    return`<span class="${cls}"><span class="r">${String(i+1).padStart(2,'0')}</span><span class="p">${r.provincia.slice(0,3)}</span><span class="n">${sym} ${r.farmacia}</span><span class="v">${r.venta.toLocaleString('es')}</span></span><span class="sep">|</span>`;
-  }).join('');
-  track.innerHTML=items+items;
-  void track.offsetWidth;
-  track.classList.add('run');
-}
-
-// KPIs
-function renderKPIs(){
-  const total=agg.reduce((s,r)=>s+r.venta,0);
-  const provs=[...new Set(agg.map(r=>r.provincia).filter(Boolean))];
-  const cants=[...new Set(agg.map(r=>r.canton).filter(Boolean))];
-  const top=agg[0],bot=agg[agg.length-1];
-  document.getElementById('k1').textContent=total.toLocaleString('es');
-  document.getElementById('k1s').textContent='Prom: '+Math.round(total/agg.length).toLocaleString('es')+'/PDV';
-  document.getElementById('k2').textContent=agg.length;
-  document.getElementById('k2s').textContent=cants.length+' cantones';
-  document.getElementById('k3').textContent=provs.length;
-  document.getElementById('k3s').textContent=provs.join(' · ');
-  if(top){document.getElementById('k4').textContent=top.farmacia;document.getElementById('k4s').textContent=top.canton+' · '+top.provincia;document.getElementById('k4b').textContent=top.venta.toLocaleString('es')+' uds';}
-  if(bot){document.getElementById('k5').textContent=bot.farmacia;document.getElementById('k5s').textContent=bot.canton+' · '+bot.provincia;document.getElementById('k5b').textContent=bot.venta.toLocaleString('es')+' uds';}
-}
-
-// INIT
-agg=aggregate(RAW);
-renderKPIs();
-initFilters();
-applyF();
-renderTop10();
-renderTicker();
-mkP('provC0',pI0,r=>pI0=r);
-renderCant('cB0');
-renderCant('cB');
+function cascPdvProv(){var p=document.getElementById('pdvProv').value;var s=p?aggPdv.filter(function(r){return r.provincia===p;}):aggPdv;var ac=[...new Set(s.map(function(r){return r.canton;}).filter(Boolean))].sort();document.getElementById('pdvCant').innerHTML='<option value="">TODOS LOS CANTONES</option>'+ac.map(function(c){return'<option value="'+c+'">'+c+'</option>';}).join('');var af=s.map(function(r){return r.farmacia;}).sort();document.getElementById('pdvFarm').innerHTML='<option value="">TODAS LAS FARMACIAS</option>'+af.map(function(f){return'<option value="'+f+'">'+f+'</option>';}).join('');pgPdv=0;applyPdvF();}
+function cascPdvCant(){var p=document.getElementById('pdvProv').value;var c=document.getElementById('pdvCant').value;var s=aggPdv.filter(function(r){return(!p||r.provincia===p)&&(!c||r.canton===c);});var af=s.map(function(r){return r.farmacia;}).sort();document.getElementById('pdvFarm').innerHTML='<option value="">TODAS LAS FARMACIAS</option>'+af.map(function(f){return'<option value="'+f+'">'+f+'</option>';}).join('');pgPdv=0;applyPdvF();}
+function applyPdvF(){var q=(document.getElementById('pdvSrch').value||''). toLowerCase().trim();var p=document.getElementById('pdvProv').value;var c=document.getElementById('pdvCant').value;var f=document.getElementById('pdvFarm').value;var s=aggPdv.slice();if(p)s=s.filter(function(r){return r.provincia===p;});if(c)s=s.filter(function(r){return r.canton===c;});if(f)s=s.filter(function(r){return r.farmacia===f;});if(tabPdv==='top')s=s.slice(0,10);else if(tabPdv==='bot')s=s.slice(-10).reverse();if(q)s=s.filter(function(r){return(r.farmacia+' '+r.canton+' '+r.provincia).toLowerCase().indexOf(q)>=0;});filtPdv=s;var fc=document.getElementById('pdvFc');if(fc)fc.textContent=s.length+' PDV';renderPdvR();}
+function cascUsrProv(){var p=document.getElementById('usrProv').value;var s=p?aggPdv.filter(function(r){return r.provincia===p;}):aggPdv;var ac=[...new Set(s.map(function(r){return r.canton;}).filter(Boolean))].sort();document.getElementById('usrCant').innerHTML='<option value="">TODOS LOS CANTONES</option>'+ac.map(function(c){return'<option value="'+c+'">'+c+'</option>';}).join('');pgUsr=0;applyUsrF();}
+function cascUsrCant(){pgUsr=0;applyUsrF();}
+function applyUsrF(){var q=(document.getElementById('usrSrch').value||''). toLowerCase().trim();var p=document.getElementById('usrProv').value;var c=document.getElementById('usrCant').value;var s=aggUsr.slice();if(p)s=s.filter(function(r){return r.provincia===p;});if(c)s=s.filter(function(r){return r.canton===c;});if(tabUsr==='top')s=s.slice(0,10);else if(tabUsr==='bot')s=s.slice(-10).reverse();if(q)s=s.filter(function(r){return(r.usuario+' '+r.farmacia).toLowerCase().indexOf(q)>=0;});filtUsr=s;var fc=document.getElementById('usrFc');if(fc)fc.textContent=s.length+' usuarios';renderUsrR();}
+function setTab(type,t,el){if(type==='pdv'){tabPdv=t;pgPdv=0;}else{tabUsr=t;pgUsr=0;}var par=el.parentNode;par.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});el.classList.add('on');if(type==='pdv')applyPdvF();else applyUsrF();}
+function renderPdvR(){var tot=filtPdv.length,pages=Math.ceil(tot/PG)||1;if(pgPdv>=pages)pgPdv=Math.max(0,pages-1);var sl=filtPdv.slice(pgPdv*PG,(pgPdv+1)*PG);var mx=aggPdv[0]?aggPdv[0].venta:1;var el=document.getElementById('pdvRl');el.innerHTML='';if(!sl.length){el.innerHTML='<div style="padding:1rem;text-align:center;color:var(--txt4);font-size:11px;font-family:var(--mono)">Sin resultados</div>';return;}sl.forEach(function(r){var gr=aggPdv.findIndex(function(x){return x.farmacia===r.farmacia;})+1;var cls=gr===1?'ri r1':gr<=3?'ri r23':gr===aggPdv.length?'ri bot':'ri mid';var bw=Math.max(2,Math.round((r.venta/mx)*48));el.innerHTML+='<div class="'+cls+'" title="'+r.farmacia+' — '+r.canton+' ('+r.provincia+') · '+r.usuario+'"><span class="rp">'+gr+'</span><span class="rbar" style="width:'+bw+'px"></span><span class="rn">'+r.farmacia+'</span><span class="rtg">'+r.canton+'</span><span class="rv">'+r.venta.toLocaleString('es')+'</span></div>';});var rc=document.getElementById('pdvRc');if(rc)rc.textContent=(pgPdv*PG+1)+'–'+Math.min((pgPdv+1)*PG,tot)+' de '+tot;document.getElementById('pdvPi').textContent='Pág '+(pgPdv+1)+'/'+pages;document.getElementById('pdvPp').disabled=pgPdv===0;document.getElementById('pdvPn').disabled=pgPdv>=pages-1;}
+function renderUsrR(){var tot=filtUsr.length,pages=Math.ceil(tot/PG)||1;if(pgUsr>=pages)pgUsr=Math.max(0,pages-1);var sl=filtUsr.slice(pgUsr*PG,(pgUsr+1)*PG);var mx=aggUsr[0]?aggUsr[0].venta:1;var el=document.getElementById('usrRl');el.innerHTML='';if(!sl.length){el.innerHTML='<div style="padding:1rem;text-align:center;color:var(--txt4);font-size:11px;font-family:var(--mono)">Sin resultados</div>';return;}sl.forEach(function(r){var gr=aggUsr.findIndex(function(x){return x.usuario===r.usuario;})+1;var cls=gr===1?'ui r1':gr<=3?'ui r23':gr===aggUsr.length?'ui bot':'ui mid';var bh=Math.max(8,Math.round((r.venta/mx)*32));el.innerHTML+='<div class="'+cls+'" title="'+r.usuario+' — '+r.farmacia+'"><span class="ui-pos">'+gr+'</span><span class="ui-bar" style="height:'+bh+'px"></span><span class="ui-usr">'+r.usuario+'</span><span class="ui-farm">'+r.farmacia+'</span><span class="ui-val">'+r.venta.toLocaleString('es')+'</span></div>';});;document.getElementById('usrPi').textContent='Pág '+(pgUsr+1)+'/'+pages;document.getElementById('usrPp').disabled=pgUsr===0;document.getElementById('usrPn').disabled=pgUsr>=pages-1;}
+function chPg(t,d){if(t==='pdv'){pgPdv+=d;renderPdvR();}else{pgUsr+=d;renderUsrR();}}
+function renderTop10(){var top=aggPdv.slice(0,10),mx=aggPdv[0]?aggPdv[0].venta:1;document.getElementById('top10').innerHTML=top.map(function(r,i){var cls=i===0?'ri r1':i<=2?'ri r23':'ri mid';var bw=Math.max(2,Math.round((r.venta/mx)*48));return'<div class="'+cls+'" title="'+r.farmacia+' — '+r.canton+'"><span class="rp">'+( i+1)+'</span><span class="rbar" style="width:'+bw+'px"></span><span class="rn">'+r.farmacia+'</span><span class="rtg">'+r.canton+'</span><span class="rv">'+r.venta.toLocaleString('es')+'</span></div>';}).join('');}
+function renderTop10U(){var top=aggUsr.slice(0,10),mx=aggUsr[0]?aggUsr[0].venta:1;var el=document.getElementById('top10u');el.innerHTML='';top.forEach(function(r,i){var cls=i===0?'ui r1':i<=2?'ui r23':'ui mid';var bh=Math.max(8,Math.round((r.venta/mx)*32));el.innerHTML+='<div class="'+cls+'"><span class="ui-pos">'+( i+1)+'</span><span class="ui-bar" style="height:'+bh+'px"></span><span class="ui-usr">'+r.usuario+'</span><span class="ui-farm">'+r.farmacia+'</span><span class="ui-val">'+r.venta.toLocaleString('es')+'</span></div>';});}
+function renderStock(){var mode=document.getElementById('stockMode').value;var src=mode==='top10'?aggPdv.slice(0,10):mode==='bot10'?aggPdv.slice(-10).reverse():aggPdv.slice();var sorted=src.slice().sort(function(a,b){return a.venta-b.venta;});var vals=sorted.map(function(r){return r.venta;});var total=src.reduce(function(s,r){return s+r.venta;},0);var avg=total/src.length;var top=src[0]?src[0].venta:0;var brecha=src.length>1?((src[0].venta-src[src.length-1].venta)/src[src.length-1].venta*100).toFixed(1):0;document.getElementById('stockHdr').innerHTML='<span class="sv">'+total.toLocaleString('es')+'</span><span class="sc up">▲ TOP: '+top.toLocaleString('es')+'</span><span class="sm2">Prom: '+Math.round(avg).toLocaleString('es')+' uds · Brecha: '+brecha+'%</span>';var canvas=document.getElementById('stockC');var ex=Chart.getChart(canvas);if(ex)ex.destroy();var ctx=canvas.getContext('2d');var grad=ctx.createLinearGradient(0,0,0,200);grad.addColorStop(0,'rgba(245,200,66,.35)');grad.addColorStop(1,'rgba(245,200,66,.0)');stockI=new Chart(canvas,{type:'line',data:{labels:sorted.map(function(r){return r.farmacia.length>12?r.farmacia.slice(0,12)+'…':r.farmacia;}),datasets:[{data:vals,borderColor:'#f5c842',borderWidth:2,backgroundColor:grad,fill:true,tension:.45,pointRadius:2,pointBackgroundColor:'#f5c842',pointHoverRadius:5}]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{legend:{display:false},tooltip:{callbacks:{title:function(items){return sorted[items[0].dataIndex]?sorted[items[0].dataIndex].farmacia:'';},label:function(c){var r=sorted[c.dataIndex];return[c.raw.toLocaleString('es')+' uds',r?r.canton+' · '+r.provincia:''];}}}},scales:{x:{grid:{color:'#13161e'},ticks:{color:'#4b5563',font:{family:'Space Mono',size:8},maxRotation:35,autoSkip:true,maxTicksLimit:10}},y:{grid:{color:'#13161e'},ticks:{color:'#4b5563',font:{family:'Space Mono',size:8},callback:function(v){return v>=1000?(v/1000).toFixed(0)+'k':v;}}}}}}); }
+function renderBar(){var v=document.getElementById('cv').value;var src=v==='bot'?aggPdv.slice(-10).reverse():aggPdv.slice(0,parseInt(v));var topV=aggPdv[0]?aggPdv[0].venta:1,botV=aggPdv[aggPdv.length-1]?aggPdv[aggPdv.length-1].venta:0;var colors=src.map(function(r){return r.venta===topV?'#f5c842':r.venta===botV?'#ef4444':r.venta>=topV*.7?'#22c55e':'#3b82f6';});var h=Math.max(280,src.length*38+60);document.getElementById('barWrap').style.height=h+'px';if(barI)barI.destroy();barI=new Chart(document.getElementById('barC'),{type:'bar',data:{labels:src.map(function(r){return r.farmacia;}),datasets:[{data:src.map(function(r){return r.venta;}),backgroundColor:colors,borderRadius:4,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){var r=src[c.dataIndex];return[c.raw.toLocaleString('es')+' uds',r.canton+' · '+r.provincia];}}}},sus:{x:{grid:{color:'#13161e'},ticks:{color:'#4b5563',font:{family:'Space Mono',size:9},callback:function(v){return v.toLocaleString('es');}}},y:{grid:{color:'transparent'},ticks:{color:'#e8e2d0',font:{family:'Space Mono',size:9},crossAlign:'far'}}}}});}
+function renderProv(cid,wid,lid,cb){var pa=aggK(aggPdv,'provincia');if(!pa.length)return;var total=pa.reduce(function(s,r){return s+r.venta;},0);var legEl=document.getElementById(lid);if(legEl)legEl.innerHTML=pa.map(function(p,i){return'<span class="lp"><span class="lc" style="background:'+PAL[i%PAL.length]+'"></span>'+p.name+': '+p.venta.toLocaleString('es')+' ('+(p.venta/total*100).toFixed(1)+'%)</span>';}).join('');var canvas=document.getElementById(cid);if(!canvas)return;var ex=Chart.getChart(canvas);if(ex)ex.destroy();var inst=new Chart(canvas,{type:'doughnut',data:{labels:pa.map(function(p){return p.name;}),datasets:[{data:pa.map(function(p){return p.venta;}),backgroundColor:PAL.slice(0,pa.length),borderWidth:2,borderColor:'#0f1219',hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',animation:{duration:600},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.label+': '+c.raw.toLocaleString('es')+' ('+(c.raw/total*100).toFixed(1)+'%)';}}}}}}); if(cb)cb(inst);}
+function renderCant(tbid){var ca=aggK(aggPdv,'canton');var total=ca.reduce(function(s,r){return s+r.venta;},0);var maxV=ca[0]?ca[0].venta:1;var pc={};[...new Set(ca.map(function(c){return c.prov;}))].forEach(function(p,i){pc[p]=PAL[i%PAL.length];});document.getElementById(tbid).innerHTML=ca.map(function(c,i){var pct=(c.venta/total*100).toFixed(1);var bw=Math.round((c.venta/maxV)*46);var bc=pc[c.prov]||'#6b7280';return'<tr><td style="color:var(--txt4)">'+( i+1)+'</td><td style="color:'+(i<3?'var(--gold)':'var(--txt2)')+';font-weight:'+(i<3?700:400)+';max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+c.name+'">'+c.name+'</td><td><span class="gbadge">'+c.prov+'</span></td><td style="text-align:right;color:var(--gold);font-weight:700">'+c.venta.toLocaleString('es')+'</td><td style="color:var(--txt4)">'+c.pdv+'</td><td><div class="gbg"><div class="gf" style="width:'+bw+'px;background:'+bc+'"></div></div><span style="font-size:8px;color:var(--txt4);margin-left:3px">'+pct+'%</span></td></tr>';}).join('');}
+function renderGeoTable(){var prov=document.getElementById('geoProvSel').value;var src=prov?aggPdv.filter(function(r){return r.provincia===prov;}):aggPdv;var byC={};src.forEach(function(r){if(!byC[r.canton])byC[r.canton]={canton:r.canton,prov:r.provincia,items:[]};byC[r.canton].items.push(r);});var sorted=Object.values(byC).sort(function(a,b){return a.canton.localeCompare(b.canton);});var html='';sorted.forEach(function(g){g.items.sort(function(a,b){return b.venta-a.venta;});g.items.forEach(function(r,i){html+='<tr>';if(i===0)html+='<td rowspan="'+g.items.length+'" style="color:var(--gold);font-weight:700;vertical-align:top;border-right:0.5px solid var(--border);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+g.canton+'">'+g.canton+'</td>';html+='<td style="color:'+(i===0?'var(--txt)':'var(--txt2)')+';max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+r.farmacia+'">'+r.farmacia+'</td><td style="color:var(--txt3);font-size:9px">'+r.usuario+'</td><td style="text-align:right;color:var(--gold);font-weight:700">'+r.venta.toLocaleString('es')+'</td><td><span class="gbadge">'+r.provincia+'</span></td></tr>';});});document.getElementById('geoBody').innerHTML=html;}
+function renderTicker(){var track=document.getElementById('tkrT');track.classList.remove('run');var items=aggPdv.map(function(r,i){var cls=i===0?'ti r1':i===aggPdv.length-1?'ti last':'ti';var sym=i===0?'◆':i===aggPdv.length-1?'▽':'·';return'<span class="'+cls+'"><span class="tr2">'+String(i+1).padStart(2,'0')+'</span><span class="tp">'+r.provincia.slice(0,3)+'</span><span class="tn">'+sym+' '+r.farmacia+'</span><span class="tv">'+r.venta.toLocaleString('es')+'</span></span><span class="tsep">|</span>';}).join('');track.innerHTML=items+items;void track.offsetWidth;track.classList.add('run');}
+function renderKPIs(){var total=aggPdv.reduce(function(s,r){return s+r.venta;},0);var provs=[...new Set(aggPdv.map(function(r){return r.provincia;}).filter(Boolean))];var cants=[...new Set(aggPdv.map(function(r){return r.canton;}).filter(Boolean))];var top=aggPdv[0],bot=aggPdv[aggPdv.length-1];var k1=document.getElementById('k1');k1.textContent=total.toLocaleString('es');k1.classList.add('flash');setTimeout(function(){k1.classList.remove('flash');},600);document.getElementById('k1s').textContent='Prom: '+Math.round(total/aggPdv.length).toLocaleString('es')+'/PDV';document.getElementById('k2').textContent=aggPdv.length;document.getElementById('k2s').textContent=cants.length+' cantones';document.getElementById('k3').textContent=provs.length;document.getElementById('k3s').textContent=provs.join(' · ');if(top){document.getElementById('k4').textContent=top.farmacia;document.getElementById('k4s').textContent=top.canton+' · '+top.provincia;document.getElementById('k4b').textContent=top.venta.toLocaleString('es')+' uds';}if(bot){document.getElementById('k5').textContent=bot.farmacia;document.getElementById('k5s').textContent=bot.canton+' · '+bot.provincia;document.getElementById('k5b').textContent=bot.venta.toLocaleString('es')+' uds';}}
+function init(){var mPdv={};RAW.forEach(function(r){if(!mPdv[r.farmacia])mPdv[r.farmacia]=Object.assign({},r,{venta:0});mPdv[r.farmacia].venta+=r.venta;});aggPdv=Object.values(mPdv).sort(function(a,b){return b.venta-a.venta;});var mUsr={};RAW.forEach(function(r){if(!mUsr[r.usuario])mUsr[r.usuario]=Object.assign({},r,{venta:0});mUsr[r.usuario].venta+=r.venta;});aggUsr=Object.values(mUsr).sort(function(a,b){return b.venta-a.venta;});filtPdv=aggPdv.slice();filtUsr=aggUsr.slice();renderKPIs();initPdvF();initUsrF();initGeo();renderPdvR();renderUsrR();renderTop10();renderTop10U();renderTicker();renderCant('cB3');setTimeout(function(){renderStock();},220);}
+init();
 </script>
 </body>
 </html>
