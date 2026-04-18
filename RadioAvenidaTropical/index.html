@@ -47,6 +47,52 @@ nav a:hover{color:var(--neon-green)}
 .radio-frame{width:100%;min-height:170px;border-radius:15px;border:none;background:#000;margin:5px 0}
 .signal-indicators{display:flex;justify-content:center;gap:6px;margin-top:10px}
 .signal-bar{width:5px;height:18px;background:#FF6300;border-radius:3px;animation:signalPulse 1.5s infinite}
+/* NUEVA SECCIÓN OYENTES CONECTADOS */
+.listeners-container {
+  margin: 15px auto 5px;
+  padding: 8px 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 40px;
+  border: 1.5px solid var(--neon-green);
+  box-shadow: 0 0 15px var(--neon-green-glow);
+  backdrop-filter: blur(4px);
+}
+.listeners-icon {
+  color: var(--neon-green);
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 6px var(--neon-green));
+}
+.listeners-number {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--neon-yellow), var(--neon-green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px var(--neon-yellow-glow);
+}
+.listeners-label {
+  color: #ccc;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.live-pulse {
+  width: 10px;
+  height: 10px;
+  background: var(--neon-green);
+  border-radius: 50%;
+  margin-right: 5px;
+  animation: livePulse 1.5s infinite;
+  box-shadow: 0 0 10px var(--neon-green);
+}
+@keyframes livePulse { 0% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0.6; transform: scale(1); } }
+
 .programacion-section{padding:40px 20px;background:var(--dark-bg)}
 .section-title{text-align:center;font-size:1.8rem;color:var(--neon-orange);margin-bottom:25px}
 .live-now-card{background:linear-gradient(135deg,rgba(57,255,20,0.12),rgba(255,94,0,0.08));border:2px solid var(--neon-green);border-radius:24px;padding:15px;margin-bottom:30px;max-width:900px;margin-left:auto;margin-right:auto}
@@ -133,6 +179,15 @@ footer p{margin:5px 0}
     <div class="signal-indicators">
       <div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div>
     </div>
+    
+    <!-- NUEVA SECCIÓN: OYENTES CONECTADOS -->
+    <div class="listeners-container" id="listenersWidget">
+      <i class="fas fa-headphones listeners-icon"></i>
+      <span class="live-pulse"></span>
+      <span class="listeners-number" id="listenersCount">387</span>
+      <span class="listeners-label">OYENTES</span>
+    </div>
+    
     <p>Streaming 128 kbps • RDCR Sound Network • 100% TROPICAL</p>
   </div>
 </section>
@@ -228,8 +283,7 @@ const programacionSemanal = {
         {hora:"12:00 - 13:00", titulo:"++ PRENDIDOS", conductor:"Diego Cheito Grijalva", descripcion:"Salsa intensa", genero:"Energética"},
         {hora:"13:00 - 17:30", titulo:"SÁBADO SALSERO", conductor:"Avenida Tropical", descripcion:"Salsa dura", genero:"Dura"},
         {hora:"17:30 - 18:30", titulo:"TIMBA Y SABOR", conductor:"Ivette", descripcion:"Timba cubana", genero:"Timba"},
-        // JUST REMIX desde 18:30 (3 horas)
-        {hora:"18:30 - 21:30", titulo:"JUST REMIX", conductor:"Henry Loor", descripcion:"Mezclas exclusivas y energía tropical", genero:"Remix"},
+        {hora:"18:30 - 21:30", titulo:"JUST REMIX", conductor:"Avenida Tropical", descripcion:"Mezclas exclusivas y energía tropical", genero:"Remix"},
         {hora:"21:30 - 24:00", titulo:"DJ INVITADOS", conductor:"DJ Invitados", descripcion:"Sesiones especiales con los mejores DJs", genero:"DJ Set"}
     ],
     domingo: [
@@ -280,7 +334,6 @@ function obtenerProgramaActual() {
     return null;
 }
 
-// Función para aplicar animación DJ si el programa actual es de mezclas/DJ
 function actualizarModoDJ() {
     const playerFrame = document.getElementById("interactivePlayer");
     const programa = obtenerProgramaActual();
@@ -290,13 +343,29 @@ function actualizarModoDJ() {
     }
     const titulo = programa.titulo.toUpperCase();
     const genero = programa.genero.toUpperCase();
-    // Palabras clave que activan el modo DJ
     if (titulo.includes("REMIX") || titulo.includes("MIX") || titulo.includes("DJ") || genero.includes("DJ") || genero.includes("REMIX") || genero.includes("MIX")) {
         playerFrame.classList.add("player-dj-mode");
     } else {
         playerFrame.classList.remove("player-dj-mode");
     }
 }
+
+// Simulación de oyentes conectados (fluctúa entre 120 y 580)
+let baseListeners = Math.floor(Math.random() * 200) + 250; // 250-450 inicial
+function actualizarOyentes() {
+    const countSpan = document.getElementById("listenersCount");
+    if (!countSpan) return;
+    // Variación suave
+    let variacion = Math.floor(Math.random() * 40) - 20; // -20 a +20
+    let nuevosOyentes = baseListeners + variacion;
+    if (nuevosOyentes < 120) nuevosOyentes = 120;
+    if (nuevosOyentes > 580) nuevosOyentes = 580;
+    countSpan.textContent = nuevosOyentes;
+    // Cambiar base gradualmente
+    baseListeners = Math.floor(baseListeners * 0.9 + nuevosOyentes * 0.1);
+}
+setInterval(actualizarOyentes, 20000); // cada 20 seg
+actualizarOyentes(); // inicial
 
 function actualizarLiveNow() {
     const actual = obtenerProgramaActual();
@@ -306,7 +375,6 @@ function actualizarLiveNow() {
     } else {
         container.innerHTML = "<div>Disfrutando la mejor salsa del mundo</div>";
     }
-    // Actualizar también la animación del reproductor
     actualizarModoDJ();
 }
 
@@ -419,7 +487,6 @@ setInterval(() => {
 
 construirProgramacion();
 actualizarLiveNow();
-// Actualizar cada minuto: programa en vivo + animación DJ
 setInterval(() => {
     actualizarLiveNow();
 }, 60000);
