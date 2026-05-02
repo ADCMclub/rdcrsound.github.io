@@ -298,8 +298,22 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 40px rgba(0,136,255,0.3);
       max-width: 950px;
       margin: 0 auto;
+      /* Transición experta para el cambio de emisora */
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease, box-shadow 0.3s ease;
     }
-    .station-title { font-size: 2rem; font-family: 'Playfair Display', serif; margin-bottom: 5px; text-align: center; }
+    /* Clase que se activa al cambiar de emisora (reduce un poco) */
+    .vintage-player.switching {
+      transform: scale(0.96);
+      opacity: 0.8;
+      box-shadow: 0 0 70px var(--neon-blue-glow);
+    }
+    .station-title { 
+      font-size: 2rem; 
+      font-family: 'Playfair Display', serif; 
+      margin-bottom: 5px; 
+      text-align: center; 
+      transition: color 0.3s ease;
+    }
     .station-subtitle { font-size: 0.9rem; opacity: 0.8; text-align: center; margin-bottom: 20px; }
     .player-area { width: 100%; }
     .cstrEmbed {
@@ -585,8 +599,8 @@
   <section class="hero" id="inicio"><div class="hero-content"><h2>La banda sonora de tu vida</h2><p>Baladas que viven en la memoria • 24/7</p><a href="#reproductor" class="btn-neon" style="display: inline-block; margin-top: 25px; padding: 12px 30px; border: 2px solid #0088FF; border-radius: 60px; color: #0088FF; text-decoration: none; font-weight: 700; transition: 0.3s;"><i class="fas fa-play"></i> Escuchar ahora</a></div></section>
 
   <section class="vintage-player-section" id="reproductor">
-    <div class="vintage-player">
-      <h2 class="station-title">DC CLÁSICOS</h2>
+    <div class="vintage-player" id="mainPlayer">
+      <h2 class="station-title" id="stationTitle">DC CLÁSICOS</h2>
       <p class="station-subtitle">Donde viven tus recuerdos</p>
       <div class="player-area">
         <div data-type="newStreamPlayer" data-publicToken="483de68b-f9e5-4fa3-b5ee-b27252721c33" data-theme="dark" data-color="0088FF" class="cstrEmbed">
@@ -609,7 +623,18 @@
 
   <section><div class="section-title"><h2>Mensajes del alma</h2></div><div class="message-slider"><p id="message-text">Cargando...</p></div><div class="message-controls" id="messageControls"></div></section>
 
-  <section><div class="section-title"><h2>Otras emisoras de RDCR Sound Network</h2></div><div class="other-stations"><div class="station-buttons"><a href="https://rdcrsound.adcm.club/RadioAvenidaTropical/" target="_blank" class="station-btn"><i class="fas fa-umbrella-beach"></i> Avenida Tropical</a></div></div></section>
+  <section>
+    <div class="section-title"><h2>Otras emisoras de RDCR Sound Network</h2></div>
+    <div class="other-stations">
+      <div class="station-buttons">
+        <!-- Se eliminó target="_blank" y se agregó la clase para la transición experta -->
+        <a href="https://rdcrsound.adcm.club/RadioAvenidaTropical/" class="station-btn switch-station-btn" id="switchToAvenida">
+          <i class="fas fa-umbrella-beach"></i> Avenida Tropical
+        </a>
+        <!-- Puedes agregar más botones con la clase "switch-station-btn" y funcionarán igual -->
+      </div>
+    </div>
+  </section>
 
   <footer><div class="footer-content"><h3>DC CLÁSICOS</h3><p>La radio emocional · RDCR Sound Network © 2026</p><p>Las canciones que marcaron tu historia</p></div></footer>
 
@@ -654,8 +679,39 @@
 
       // Cargar reproductor Caster
       const script=document.createElement('script'); script.src='//cdn.cloud.caster.fm/widgets/embed.js'; script.async=true; document.body.appendChild(script);
+
+      // ------------------------------
+      // NUEVA FUNCIONALIDAD: CAMBIO DE EMISORA CON DISEÑO EXPERTO
+      // ------------------------------
+      const playerContainer = document.getElementById('mainPlayer');
+      const stationTitle = document.getElementById('stationTitle');
+      const switchButtons = document.querySelectorAll('.switch-station-btn');
+
+      switchButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault(); // Evita la navegación inmediata
+          const targetUrl = this.href;
+          
+          // 1. Activar clase de transición en el reproductor (reduce un poco)
+          playerContainer.classList.add('switching');
+          
+          // 2. Cambiar el texto del título temporalmente (toque experto)
+          const originalTitle = stationTitle.textContent;
+          const newStationName = this.textContent.trim() || 'Avenida Tropical';
+          stationTitle.textContent = `Cambiando a ${newStationName}...`;
+          stationTitle.style.color = 'var(--neon-blue-glow)';
+          
+          // 3. Navegar a la nueva emisora después de un breve delay para que se vea la animación
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 400); // 400ms es el tiempo de la transición CSS
+        });
+      });
+
     })();
   </script>
-  <style>.btn-neon:hover{background:#0088FF;color:#000;transform:scale(1.05);box-shadow:0 0 30px #0088FF;}</style>
+  <style>
+    .btn-neon:hover{background:#0088FF;color:#000;transform:scale(1.05);box-shadow:0 0 30px #0088FF;}
+  </style>
 </body>
 </html>

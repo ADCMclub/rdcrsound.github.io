@@ -2,1728 +2,2177 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#060612">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>RadioSync</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;900&family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AudioLabRDCR IA — Panel de Conducción</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --cyan:    #00f5ff;
-  --pink:    #ff00aa;
-  --yellow:  #ffe600;
-  --green:   #39ff14;
-  --purple:  #bf00ff;
-  --orange:  #ff6b00;
-  --bg:      #060612;
-  --bg2:     #0d0d24;
-  --card:    rgba(255,255,255,0.05);
-  --border:  rgba(0,245,255,0.18);
-  --text:    #ffffff;
-  --muted:   rgba(255,255,255,0.52);
-  --r:       14px;
-  --nav:     64px;
-  --F:       'Exo 2', sans-serif;
-  --FD:      'Orbitron', monospace;
-  --FU:      'Rajdhani', sans-serif;
+/* ═══════════════════════════════════════════════
+   VARIABLES
+═══════════════════════════════════════════════ */
+:root{
+  --c:    #00f5ff;
+  --pk:   #c800ff;
+  --gn:   #39ff14;
+  --yw:   #ffe600;
+  --rd:   #ff3b3b;
+  --or:   #ff7b00;
+  --bg:   #06060f;
+  --bg2:  #0c0c1e;
+  --bg3:  #111128;
+  --card: rgba(255,255,255,0.04);
+  --b:    rgba(0,245,255,0.18);
+  --b2:   rgba(255,255,255,0.08);
+  --txt:  #f0f0ff;
+  --mut:  rgba(240,240,255,0.5);
+  --F:    'Exo 2',sans-serif;
+  --FD:   'Orbitron',monospace;
+  --FU:   'Rajdhani',sans-serif;
+  --sw:   240px;
+  --hh:   58px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--F);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;padding-bottom:calc(var(--nav) + 8px)}
-body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 90% 50% at 15% -10%,rgba(0,245,255,.09) 0%,transparent 55%),
-  radial-gradient(ellipse 60% 50% at 85% 110%,rgba(191,0,255,.09) 0%,transparent 55%)}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--F);background:var(--bg);color:var(--txt);display:flex;flex-direction:column}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 40% at 0% 0%,rgba(0,245,255,.07) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 40% at 100% 100%,rgba(200,0,255,.07) 0%,transparent 60%),
+    radial-gradient(ellipse 30% 30% at 50% 50%,rgba(57,255,20,.025) 0%,transparent 70%);
+}
 a{color:inherit;text-decoration:none}
-button{cursor:pointer;border:none;background:none;font-family:var(--F)}
-input,textarea,select{font-family:var(--F)}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+button{cursor:pointer;border:none;background:none;font-family:var(--F);color:var(--txt)}
+input,textarea,select{font-family:var(--F);color:var(--txt)}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--b);border-radius:4px}
 
-/* LAYOUT */
-.wrap{position:relative;z-index:1;max-width:480px;margin:0 auto}
-.view{display:none}
-.view.active{display:block}
-
-/* HEADER */
-.hdr{
-  position:sticky;top:0;z-index:100;
-  background:rgba(6,6,18,.94);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  padding:11px 16px;display:flex;align-items:center;justify-content:space-between
+/* ═══════════════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════════════ */
+.topbar{
+  height:var(--hh);flex-shrink:0;z-index:100;
+  background:rgba(6,6,15,.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--b);
+  display:flex;align-items:center;padding:0 20px;gap:20px;
+  position:relative;
 }
-.hdr-logo{display:flex;align-items:center;gap:9px}
-.hdr-ico{
-  width:34px;height:34px;border-radius:9px;
-  background:linear-gradient(135deg,var(--cyan),var(--purple));
-  display:flex;align-items:center;justify-content:center;font-size:17px
+.tb-logo{display:flex;align-items:center;gap:10px;min-width:200px}
+.tb-logo-ico{
+  width:34px;height:34px;border-radius:8px;
+  background:linear-gradient(135deg,var(--c),var(--pk));
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+  box-shadow:0 0 12px rgba(0,245,255,.3)
 }
-.hdr-name{font-family:var(--FD);font-size:14px;font-weight:900;
-  background:linear-gradient(90deg,var(--cyan),var(--pink));
+.tb-logo-name{font-family:var(--FD);font-size:15px;font-weight:900;
+  background:linear-gradient(90deg,var(--c),var(--pk));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px}
-.hdr-sub{font-size:10px;color:var(--muted);font-family:var(--FU);letter-spacing:2px}
-.live-badge{display:flex;align-items:center;gap:5px;
-  background:rgba(255,0,0,.12);border:1px solid rgba(255,0,0,.35);
-  border-radius:20px;padding:4px 10px;font-family:var(--FU);font-size:11px;
-  font-weight:700;color:#ff4444;letter-spacing:1px}
-.live-dot{width:6px;height:6px;border-radius:50%;background:#ff4444;animation:blink 1.4s infinite}
-@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
-.offline-badge{display:flex;align-items:center;gap:5px;
-  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);
-  border-radius:20px;padding:4px 10px;font-family:var(--FU);font-size:11px;
-  font-weight:700;color:var(--muted);letter-spacing:1px;display:none}
-
-/* PLAYER */
-.player{
-  margin:14px;border-radius:var(--r);
-  background:linear-gradient(135deg,rgba(0,245,255,.07),rgba(191,0,255,.07));
-  border:1px solid var(--border);overflow:hidden;position:relative
+.tb-logo-sub{font-size:9px;color:var(--mut);font-family:var(--FU);letter-spacing:2px;margin-top:1px}
+.tb-center{flex:1;display:flex;align-items:center;justify-content:center;gap:24px}
+.tb-now{display:flex;align-items:center;gap:10px}
+.tb-wave{display:flex;align-items:center;gap:2px;height:16px}
+.tb-wave span{display:block;width:2px;border-radius:2px;background:var(--c);
+  animation:wv .7s ease-in-out infinite}
+.tb-wave span:nth-child(1){height:4px;animation-delay:0s}
+.tb-wave span:nth-child(2){height:12px;animation-delay:.1s}
+.tb-wave span:nth-child(3){height:16px;animation-delay:.2s}
+.tb-wave span:nth-child(4){height:10px;animation-delay:.3s}
+.tb-wave span:nth-child(5){height:6px;animation-delay:.15s}
+.tb-wave span:nth-child(6){height:14px;animation-delay:.05s}
+@keyframes wv{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.2)}}
+.tb-wave.off span{animation-play-state:paused;opacity:.2}
+.tb-song{font-size:13px;font-weight:700;max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-song small{font-weight:300;color:var(--mut);font-size:11px;margin-left:4px}
+.live-pill{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,59,59,.12);border:1px solid rgba(255,59,59,.4);
+  border-radius:20px;padding:4px 11px;font-family:var(--FU);
+  font-size:11px;font-weight:700;color:var(--rd);letter-spacing:1px
 }
-.player-inner{padding:18px;position:relative}
-.np-label{font-family:var(--FU);font-size:10px;letter-spacing:3px;color:var(--cyan);
-  text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.wave{display:flex;align-items:center;gap:2px;height:13px}
-.wave span{display:block;width:2px;background:var(--cyan);border-radius:2px;
-  animation:wa .8s ease-in-out infinite}
-.wave span:nth-child(1){height:4px;animation-delay:0s}
-.wave span:nth-child(2){height:10px;animation-delay:.1s}
-.wave span:nth-child(3){height:13px;animation-delay:.2s}
-.wave span:nth-child(4){height:8px;animation-delay:.3s}
-.wave span:nth-child(5){height:5px;animation-delay:.15s}
-@keyframes wa{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.25)}}
-.wave.off span{animation-play-state:paused;opacity:.3}
-.track-title{font-size:19px;font-weight:900;line-height:1.2;white-space:nowrap;
-  overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
-.track-artist{font-size:13px;color:var(--muted);font-weight:300}
-.player-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px}
-.btn-play{
-  width:56px;height:56px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,var(--cyan),var(--purple));
-  display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;
-  box-shadow:0 0 18px rgba(0,245,255,.4);transition:transform .15s,box-shadow .15s
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--rd);animation:blink 1.3s infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+.tb-right{display:flex;align-items:center;gap:12px;min-width:200px;justify-content:flex-end}
+.tb-clock{font-family:var(--FD);font-size:16px;font-weight:700;color:var(--c);letter-spacing:2px}
+.tb-date{font-size:10px;color:var(--mut);text-align:right;font-family:var(--FU)}
+
+/* ═══════════════════════════════════════════════
+   LAYOUT PRINCIPAL
+═══════════════════════════════════════════════ */
+.layout{flex:1;display:flex;overflow:hidden;position:relative;z-index:1}
+
+/* ═══════════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════════ */
+.sidebar{
+  width:var(--sw);flex-shrink:0;
+  background:rgba(10,10,28,.97);border-right:1px solid var(--b);
+  display:flex;flex-direction:column;overflow:hidden;
 }
-.btn-play:active{transform:scale(.93)}
-.btn-play.on{background:linear-gradient(135deg,#ff3333,var(--pink));box-shadow:0 0 18px rgba(255,0,0,.4)}
-.vol-row{display:flex;align-items:center;gap:8px;flex:1;margin-left:14px}
-.vol-row span{font-size:15px}
-.vol{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:4px;outline:none;
-  background:linear-gradient(90deg,var(--cyan) 70%,rgba(255,255,255,.15) 70%)}
-.vol::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;
-  border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);cursor:pointer}
-.listeners-chip{display:flex;align-items:center;gap:5px;
-  background:rgba(57,255,20,.08);border:1px solid rgba(57,255,20,.25);
-  border-radius:20px;padding:5px 11px;font-size:11px;font-family:var(--FU);color:var(--green);font-weight:700}
-/* estado conexión */
-.stream-status{
-  background:rgba(0,0,0,.3);border-top:1px solid var(--border);
-  padding:8px 18px;font-size:11px;color:var(--muted);font-family:var(--FU);
-  display:flex;align-items:center;gap:6px
+.sb-section{padding:8px 0}
+.sb-label{font-size:9px;color:var(--mut);font-family:var(--FU);letter-spacing:2px;
+  text-transform:uppercase;padding:6px 18px 4px}
+.sb-btn{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 18px;width:100%;text-align:left;
+  font-size:13px;font-weight:600;color:var(--mut);
+  transition:all .2s;border-left:3px solid transparent;
 }
-.status-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.status-dot.ok{background:var(--green);box-shadow:0 0 6px var(--green)}
-.status-dot.err{background:#ff4444}
-.status-dot.wait{background:var(--yellow);animation:blink 1s infinite}
-
-/* WHATSAPP */
-.btn-wa{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  margin:0 14px 14px;
-  background:linear-gradient(135deg,#25D366,#128C7E);
-  border-radius:var(--r);padding:15px;
-  font-size:15px;font-weight:700;color:#fff;letter-spacing:.3px;
-  box-shadow:0 4px 18px rgba(37,211,102,.28);transition:transform .15s;
-  position:relative;overflow:hidden
+.sb-btn:hover{color:var(--txt);background:rgba(255,255,255,.04)}
+.sb-btn.active{color:var(--c);background:rgba(0,245,255,.07);border-left-color:var(--c)}
+.sb-ico{font-size:17px;width:22px;text-align:center;flex-shrink:0}
+.sb-txt{flex:1}
+.sb-badge{
+  background:var(--pk);color:#fff;border-radius:10px;
+  padding:1px 7px;font-size:10px;font-weight:700
 }
-.btn-wa::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);
-  transform:translateX(-100%);animation:sh 2.6s infinite}
-@keyframes sh{to{transform:translateX(100%)}}
-.btn-wa:active{transform:scale(.97)}
-.wa-ico{font-size:23px}
-.wa-txt{display:flex;flex-direction:column;text-align:left}
-.wa-t{font-size:14px;font-weight:800}
-.wa-s{font-size:10px;opacity:.85}
+.sb-divider{height:1px;background:var(--b2);margin:4px 18px}
 
-/* CLIMATE */
-.wx-card{
-  margin:0 14px;background:rgba(0,245,255,.05);
-  border:1px solid var(--border);border-radius:var(--r);padding:15px;
-  display:flex;align-items:center;justify-content:space-between
+/* ESTADO STREAM SIDEBAR */
+.sb-stream{
+  margin:10px 12px;padding:10px 12px;border-radius:10px;
+  background:rgba(0,0,0,.3);border:1px solid var(--b2);
 }
-.wx-L{display:flex;align-items:center;gap:13px}
-.wx-ico{font-size:40px;filter:drop-shadow(0 0 8px rgba(0,245,255,.35))}
-.wx-temp{font-family:var(--FD);font-size:30px;font-weight:900;color:var(--cyan);line-height:1}
-.wx-desc{font-size:12px;color:var(--muted);margin-top:3px}
-.wx-city{font-size:10px;color:var(--cyan);font-family:var(--FU);letter-spacing:2px;text-transform:uppercase}
-.wx-R{text-align:right}
-.wx-det{font-size:11px;color:var(--muted);line-height:1.9;font-family:var(--FU)}
-.wx-det strong{color:var(--text)}
-.wx-up{font-size:10px;color:var(--muted);margin-top:6px}
-.wx-nokey{
-  padding:12px 14px;background:rgba(255,230,0,.07);border:1px solid rgba(255,230,0,.25);
-  border-radius:var(--r);margin:0 14px;font-size:12px;color:var(--yellow);
-  display:flex;align-items:flex-start;gap:8px
+.ss-row{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.ss-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ss-dot.ok{background:var(--gn);box-shadow:0 0 6px var(--gn)}
+.ss-dot.err{background:var(--rd)}
+.ss-dot.wait{background:var(--yw);animation:blink .8s infinite}
+.ss-label{font-size:12px;font-weight:700}
+.ss-url{font-size:10px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--FU)}
+.btn-stream{
+  width:100%;margin-top:7px;padding:7px;border-radius:7px;
+  font-size:12px;font-weight:700;font-family:var(--F);
+  transition:all .15s
 }
+.btn-stream.play{background:linear-gradient(135deg,var(--c),var(--pk));color:#fff}
+.btn-stream.stop{background:rgba(255,59,59,.15);border:1px solid rgba(255,59,59,.35);color:var(--rd)}
 
-/* SECTION */
-.sec{margin-bottom:18px}
-.sec-hdr{display:flex;align-items:center;justify-content:space-between;
-  padding:0 14px;margin-bottom:10px}
-.sec-ttl{font-family:var(--FU);font-size:12px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:7px}
-.sec-ttl::before{content:'';display:block;width:3px;height:15px;background:var(--cyan);border-radius:2px}
+/* ═══════════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════════ */
+.main{flex:1;overflow-y:auto;padding:20px}
+.view{display:none}
+.view.active{display:block;animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* CARDS SCROLL */
-.cs{display:flex;gap:10px;padding:0 14px;overflow-x:auto;scrollbar-width:none}
-.cs::-webkit-scrollbar{display:none}
-.crd{flex-shrink:0;width:210px;background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r);padding:13px;transition:border-color .2s}
-.crd:active{border-color:var(--cyan)}
-.tag{display:inline-block;font-size:9px;font-family:var(--FU);font-weight:700;
-  letter-spacing:1px;text-transform:uppercase;border-radius:4px;padding:2px 7px;margin-bottom:7px}
-.t-n{background:rgba(0,245,255,.13);color:var(--cyan)}
-.t-p{background:rgba(255,230,0,.13);color:var(--yellow)}
-.t-s{background:rgba(255,0,170,.13);color:var(--pink)}
-.crd-t{font-size:13px;font-weight:700;line-height:1.35;margin-bottom:5px}
-.crd-b{font-size:11px;color:var(--muted);line-height:1.5}
-.crd-time{font-size:10px;color:var(--muted);margin-top:7px;font-family:var(--FU)}
-
-/* SOCIAL */
-.soc{display:flex;gap:9px;padding:0 14px;justify-content:center;flex-wrap:wrap}
-.soc-btn{display:flex;flex-direction:column;align-items:center;gap:4px;
-  padding:11px 14px;border-radius:var(--r);border:1px solid var(--border);
-  background:var(--card);font-size:9px;color:var(--muted);font-family:var(--FU);
-  letter-spacing:1px;min-width:65px;transition:transform .15s}
-.soc-btn:active{transform:scale(.93)}
-.s-ic{font-size:21px}
-.soc-btn.fb{border-color:rgba(24,119,242,.3)}
-.soc-btn.ig{border-color:rgba(225,48,108,.3)}
-.soc-btn.yt{border-color:rgba(255,0,0,.3)}
-.soc-btn.tk{border-color:rgba(255,255,255,.2)}
-
-/* SCHEDULE */
-.sched{padding:0 14px;display:flex;flex-direction:column;gap:7px}
-.sc-it{display:flex;align-items:center;gap:11px;
-  background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:11px 13px;
-  transition:border-color .2s}
-.sc-it.now{border-color:var(--cyan);background:rgba(0,245,255,.05)}
-.sc-t{font-family:var(--FD);font-size:12px;font-weight:700;color:var(--cyan);min-width:70px;flex-shrink:0}
-.sc-dot{width:7px;height:7px;border-radius:50%;background:var(--border);flex-shrink:0}
-.sc-it.now .sc-dot{background:var(--cyan);box-shadow:0 0 7px var(--cyan);animation:blink 1.4s infinite}
-.sc-nm{font-size:13px;font-weight:700}
-.sc-hst{font-size:11px;color:var(--muted);margin-top:2px;font-family:var(--FU)}
-.sc-badge{font-size:9px;font-family:var(--FU);font-weight:700;
-  background:rgba(0,245,255,.12);color:var(--cyan);border-radius:6px;padding:3px 7px;flex-shrink:0}
-
-/* BOTTOM NAV */
-.nav{
-  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
-  width:100%;max-width:480px;height:var(--nav);z-index:200;
-  background:rgba(6,6,18,.97);backdrop-filter:blur(20px);
-  border-top:1px solid var(--border);display:flex;align-items:stretch
+/* ═══════════════════════════════════════════════
+   RIGHT PANEL (Cabina)
+═══════════════════════════════════════════════ */
+.rpanel{
+  width:310px;flex-shrink:0;
+  background:rgba(8,8,22,.98);border-left:1px solid var(--b);
+  display:flex;flex-direction:column;overflow:hidden;
 }
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:3px;font-size:9px;color:var(--muted);font-family:var(--FU);
-  letter-spacing:.5px;transition:color .2s;padding:5px 3px}
-.nb .ni{font-size:19px;transition:transform .2s}
-.nb.active{color:var(--cyan)}
-.nb.active .ni{transform:translateY(-2px);filter:drop-shadow(0 0 5px var(--cyan))}
-
-/* CABINA */
-.cab-hdr{
-  padding:13px 14px;
-  background:linear-gradient(135deg,rgba(0,245,255,.07),rgba(191,0,255,.05));
-  border-bottom:1px solid var(--border);margin-bottom:10px
+.rp-hdr{
+  padding:12px 14px;border-bottom:1px solid var(--b);
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0
 }
-.cab-ttl{font-family:var(--FD);font-size:13px;font-weight:900;color:var(--cyan);
-  letter-spacing:1px;margin-bottom:7px}
-.cab-met{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.cm{background:rgba(0,0,0,.3);border:1px solid rgba(0,245,255,.12);
-  border-radius:9px;padding:7px;text-align:center}
-.cm-v{font-family:var(--FD);font-size:17px;font-weight:900}
-.cv-c{color:var(--cyan)} .cv-g{color:var(--green)} .cv-y{color:var(--yellow)}
-.cm-l{font-size:9px;color:var(--muted);font-family:var(--FU);letter-spacing:1px;
-  text-transform:uppercase;margin-top:2px}
-.cm-sub{font-size:9px;color:var(--muted);font-family:var(--FU);margin-top:1px}
+.rp-ttl{font-family:var(--FU);font-size:12px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--c);display:flex;align-items:center;gap:7px}
+.rp-cnt{font-size:11px;color:var(--mut);font-family:var(--FU)}
 
-/* IA BOX */
-.ia{margin:0 14px 10px;
-  background:linear-gradient(135deg,rgba(191,0,255,.1),rgba(0,245,255,.06));
-  border:1px solid rgba(191,0,255,.25);border-radius:var(--r);
-  padding:11px 13px;display:flex;align-items:flex-start;gap:9px}
-.ia-ic{font-size:20px;flex-shrink:0}
-.ia-lbl{font-size:9px;font-family:var(--FU);letter-spacing:2px;color:var(--purple);
-  font-weight:700;text-transform:uppercase}
-.ia-txt{font-size:12px;line-height:1.5;margin-top:3px}
-
-/* FILTROS */
-.filters{padding:0 14px;margin-bottom:9px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
-.filters::-webkit-scrollbar{display:none}
-.f-btn{flex-shrink:0;font-size:11px;font-family:var(--FU);font-weight:700;letter-spacing:.5px;
-  border-radius:8px;padding:6px 12px;border:1px solid var(--border);color:var(--muted);
-  transition:all .2s}
-.f-btn.on{background:rgba(0,245,255,.12);border-color:rgba(0,245,255,.4);color:var(--cyan)}
-
-/* MSGS */
-.msgs{
-  margin:0 14px;height:270px;overflow-y:auto;
-  background:rgba(0,0,0,.25);border:1px solid var(--border);
-  border-radius:var(--r);padding:9px;display:flex;flex-direction:column;gap:5px
+/* Métricas cabina */
+.rp-metrics{
+  display:grid;grid-template-columns:1fr 1fr;gap:7px;
+  padding:10px 12px;border-bottom:1px solid var(--b2);flex-shrink:0
 }
-.msg{background:rgba(255,255,255,.03);border-radius:9px;padding:7px 9px;
-  border-left:3px solid transparent;animation:mi .3s ease}
-@keyframes mi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.msg.pedido{border-left-color:var(--cyan)}
-.msg.saludo{border-left-color:var(--green)}
-.msg.consulta{border-left-color:var(--yellow)}
-.msg.destacado{border-left-color:var(--pink);background:rgba(255,0,170,.06)}
+.rp-m{background:rgba(0,0,0,.3);border:1px solid var(--b2);
+  border-radius:8px;padding:7px 9px;text-align:center}
+.rp-mv{font-family:var(--FD);font-size:16px;font-weight:900}
+.rp-ml{font-size:9px;color:var(--mut);font-family:var(--FU);letter-spacing:1px;text-transform:uppercase}
+
+/* Filtros */
+.rp-filters{display:flex;gap:5px;padding:8px 10px;border-bottom:1px solid var(--b2);flex-shrink:0;overflow-x:auto}
+.rp-f{flex-shrink:0;font-size:10px;font-family:var(--FU);font-weight:700;
+  border-radius:6px;padding:4px 9px;border:1px solid var(--b2);color:var(--mut);transition:all .2s}
+.rp-f.on{background:rgba(0,245,255,.1);border-color:rgba(0,245,255,.35);color:var(--c)}
+
+/* Mensajes */
+.rp-msgs{flex:1;overflow-y:auto;padding:8px}
+.msg{background:rgba(255,255,255,.03);border-radius:8px;padding:7px 9px;
+  border-left:3px solid transparent;margin-bottom:5px;animation:mi .3s ease}
+@keyframes mi{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
+.msg.pedido{border-left-color:var(--c)}
+.msg.saludo{border-left-color:var(--gn)}
+.msg.consulta{border-left-color:var(--yw)}
+.msg.destacado{border-left-color:var(--pk);background:rgba(200,0,255,.06)}
 .msg-top{display:flex;align-items:center;gap:5px;margin-bottom:3px}
 .msg-nom{font-size:11px;font-weight:700}
-.msg-tag{font-size:8px;font-family:var(--FU);font-weight:700;letter-spacing:1px;
+.msg-tag{font-size:8px;font-family:var(--FU);font-weight:700;letter-spacing:.5px;
   text-transform:uppercase;border-radius:3px;padding:1px 5px}
-.mt-p{background:rgba(0,245,255,.13);color:var(--cyan)}
-.mt-s{background:rgba(57,255,20,.13);color:var(--green)}
-.mt-c{background:rgba(255,230,0,.13);color:var(--yellow)}
-.mt-o{background:rgba(255,255,255,.08);color:var(--muted)}
-.msg-hr{font-size:9px;color:var(--muted);margin-left:auto;font-family:var(--FU)}
-.msg-tx{font-size:12px;line-height:1.4}
-.msg-acts{display:flex;gap:5px;margin-top:5px}
+.mt-p{background:rgba(0,245,255,.15);color:var(--c)}
+.mt-s{background:rgba(57,255,20,.15);color:var(--gn)}
+.mt-c{background:rgba(255,230,0,.15);color:var(--yw)}
+.mt-o{background:rgba(255,255,255,.08);color:var(--mut)}
+.msg-hr{font-size:9px;color:var(--mut);margin-left:auto;font-family:var(--FU)}
+.msg-tx{font-size:12px;line-height:1.4;color:var(--txt)}
+.msg-acts{display:flex;gap:4px;margin-top:5px}
 .ma{font-size:9px;font-family:var(--FU);font-weight:700;border-radius:5px;
-  padding:3px 7px;border:1px solid var(--border);color:var(--muted);transition:all .2s}
-.ma:active{background:var(--border);color:var(--text)}
-.ma.p{border-color:rgba(0,245,255,.35);color:var(--cyan)}
+  padding:2px 7px;border:1px solid var(--b2);color:var(--mut);transition:all .15s}
+.ma:hover{background:var(--b2);color:var(--txt)}
+.ma.p{border-color:rgba(0,245,255,.3);color:var(--c)}
 
-/* PEDIDOS */
-.ped-list{margin:0 14px;display:flex;flex-direction:column;gap:6px}
-.ped-it{display:flex;align-items:center;gap:9px;
-  background:var(--card);border:1px solid var(--border);border-radius:9px;padding:9px 11px}
-.ped-n{width:22px;height:22px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,var(--cyan),var(--purple));
-  display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900}
-.ped-info{flex:1}
-.ped-can{font-size:13px;font-weight:700}
-.ped-art{font-size:10px;color:var(--muted)}
-.ped-cnt{background:rgba(0,245,255,.08);border:1px solid rgba(0,245,255,.2);
-  border-radius:7px;padding:3px 7px;font-size:11px;font-weight:700;color:var(--cyan);font-family:var(--FU)}
-.ped-it.done{opacity:.4}
-.ped-it.done .ped-can{text-decoration:line-through}
+/* Input mensaje */
+.rp-input{padding:10px;border-top:1px solid var(--b2);flex-shrink:0}
+.rp-input-row{display:flex;gap:6px}
+.rp-inp{flex:1;padding:8px 10px;background:rgba(255,255,255,.05);
+  border:1px solid var(--b2);border-radius:7px;font-size:12px;outline:none;
+  transition:border-color .2s;color:var(--txt)}
+.rp-inp:focus{border-color:var(--c)}
+.rp-send{padding:8px 12px;border-radius:7px;
+  background:linear-gradient(135deg,var(--c),var(--pk));
+  color:#fff;font-size:12px;font-weight:700;flex-shrink:0}
 
-/* OYENTES */
-.oy-list{margin:0 14px;display:flex;flex-direction:column;gap:6px}
-.oy-row{display:flex;align-items:center;gap:9px;
-  background:var(--card);border:1px solid var(--border);border-radius:9px;padding:9px 11px}
-.oy-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;
-  justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
-.oy-nm{font-size:12px;font-weight:700}
-.oy-ms{font-size:10px;color:var(--muted)}
-.oy-badge{font-size:14px}
+/* ═══════════════════════════════════════════════
+   COMPONENTES REUTILIZABLES
+═══════════════════════════════════════════════ */
+.card{background:var(--card);border:1px solid var(--b);border-radius:14px;padding:18px}
+.card+.card{margin-top:14px}
+.card-ttl{font-family:var(--FU);font-size:11px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--c);margin-bottom:14px;
+  padding-bottom:10px;border-bottom:1px solid var(--b2);
+  display:flex;align-items:center;gap:8px}
+.card-ttl::before{content:'';display:block;width:3px;height:14px;background:var(--c);border-radius:2px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat{background:rgba(0,0,0,.4);border:1px solid var(--b2);border-radius:10px;
+  padding:12px;text-align:center;position:relative;overflow:hidden}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.stat.c::before{background:var(--c)} .stat.pk::before{background:var(--pk)}
+.stat.gn::before{background:var(--gn)} .stat.yw::before{background:var(--yw)}
+.stat-v{font-family:var(--FD);font-size:22px;font-weight:900;line-height:1}
+.stat-v.c{color:var(--c)} .stat-v.pk{color:var(--pk)}
+.stat-v.gn{color:var(--gn)} .stat-v.yw{color:var(--yw)}
+.stat-l{font-size:10px;color:var(--mut);margin-top:4px;font-family:var(--FU);letter-spacing:1px;text-transform:uppercase}
+.stat-t{font-size:10px;margin-top:3px}
+.stat-t.up{color:var(--gn)} .stat-t.dn{color:var(--rd)}
 
-/* PANEL */
-.panel-lock{margin:40px 14px 0;text-align:center}
-.lk-ico{font-size:46px;margin-bottom:14px}
-.lk-ttl{font-family:var(--FD);font-size:17px;font-weight:900;color:var(--cyan);margin-bottom:7px}
-.lk-sub{font-size:12px;color:var(--muted);margin-bottom:22px}
-.inp{width:100%;padding:13px 15px;background:rgba(255,255,255,.05);
-  border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-size:14px;
-  outline:none;transition:border-color .2s;-webkit-appearance:none}
-.inp:focus{border-color:var(--cyan)}
-.btn-prim{width:100%;margin-top:10px;padding:14px;
-  background:linear-gradient(135deg,var(--cyan),var(--purple));
-  border-radius:var(--r);color:#fff;font-size:14px;font-weight:700;
-  font-family:var(--F);letter-spacing:.4px;box-shadow:0 4px 18px rgba(0,245,255,.22);
-  transition:transform .15s;-webkit-appearance:none}
-.btn-prim:active{transform:scale(.97)}
-.p-cont{padding:0 14px 14px;display:none}
-.p-sec{background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r);padding:14px;margin-bottom:12px}
-.p-sec-t{font-family:var(--FU);font-size:11px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;color:var(--cyan);margin-bottom:11px;
-  padding-bottom:8px;border-bottom:1px solid var(--border)}
-.fg{margin-bottom:9px}
-.flbl{font-size:10px;color:var(--muted);font-family:var(--FU);letter-spacing:1px;
+/* INPUT FORMS */
+.fg{margin-bottom:10px}
+.flbl{font-size:10px;color:var(--mut);font-family:var(--FU);letter-spacing:1px;
   text-transform:uppercase;margin-bottom:4px;display:block}
-.inp-sm{width:100%;padding:9px 11px;background:rgba(255,255,255,.05);
-  border:1px solid var(--border);border-radius:9px;color:var(--text);
-  font-size:12px;outline:none;transition:border-color .2s}
-.inp-sm:focus{border-color:var(--cyan)}
-.ta{width:100%;padding:9px 11px;min-height:60px;background:rgba(255,255,255,.05);
-  border:1px solid var(--border);border-radius:9px;color:var(--text);
-  font-size:12px;outline:none;resize:vertical;transition:border-color .2s}
-.ta:focus{border-color:var(--cyan)}
-.row-b{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
-.btn-sv{padding:9px 18px;border-radius:8px;
-  background:linear-gradient(135deg,var(--cyan),var(--purple));
-  color:#fff;font-size:12px;font-weight:700;font-family:var(--F);
-  box-shadow:0 0 10px rgba(0,245,255,.22)}
-.btn-sv:active{opacity:.8}
-.btn-add{padding:9px 14px;border-radius:8px;
-  background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.3);
-  color:var(--cyan);font-size:12px;font-weight:700;font-family:var(--F)}
-.btn-del{padding:9px 14px;border-radius:8px;
-  background:rgba(255,68,68,.1);border:1px solid rgba(255,68,68,.25);
-  color:#ff4444;font-size:12px;font-weight:700;font-family:var(--F)}
-.btn-del:active{opacity:.8}
-.tgl-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.tgl-lbl{font-size:12px}
-.tgl{position:relative;width:42px;height:23px}
+.finp{width:100%;padding:10px 12px;background:rgba(255,255,255,.05);
+  border:1px solid var(--b2);border-radius:9px;font-size:13px;outline:none;
+  transition:border-color .2s;-webkit-appearance:none}
+.finp:focus{border-color:var(--c)}
+.fta{width:100%;padding:10px 12px;background:rgba(255,255,255,.05);
+  border:1px solid var(--b2);border-radius:9px;font-size:13px;outline:none;
+  resize:vertical;min-height:70px;transition:border-color .2s}
+.fta:focus{border-color:var(--c)}
+.fsel{width:100%;padding:10px 12px;background:rgba(255,255,255,.05);
+  border:1px solid var(--b2);border-radius:9px;font-size:13px;outline:none;-webkit-appearance:none}
+option{background:#111128}
+
+/* BUTTONS */
+.btn{padding:10px 20px;border-radius:9px;font-size:13px;font-weight:700;
+  font-family:var(--F);transition:all .15s;cursor:pointer}
+.btn:active{transform:scale(.97)}
+.btn-prime{background:linear-gradient(135deg,var(--c),var(--pk));color:#fff;
+  box-shadow:0 0 14px rgba(0,245,255,.2)}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid var(--b2);color:var(--txt)}
+.btn-gn{background:rgba(57,255,20,.1);border:1px solid rgba(57,255,20,.3);color:var(--gn)}
+.btn-pk{background:rgba(200,0,255,.12);border:1px solid rgba(200,0,255,.3);color:var(--pk)}
+.btn-rd{background:rgba(255,59,59,.1);border:1px solid rgba(255,59,59,.3);color:var(--rd)}
+.btn-yw{background:rgba(255,230,0,.1);border:1px solid rgba(255,230,0,.3);color:var(--yw)}
+.btn-sm{padding:7px 14px;font-size:12px;border-radius:7px}
+.btn-xs{padding:4px 10px;font-size:10px;border-radius:6px}
+.row-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+
+/* TOGGLE */
+.tgl-row{display:flex;align-items:center;justify-content:space-between;
+  padding:8px 0;border-bottom:1px solid var(--b2)}
+.tgl-row:last-child{border-bottom:none}
+.tgl-lbl{font-size:13px}
+.tgl-sub{font-size:10px;color:var(--mut);margin-top:1px;font-family:var(--FU)}
+.tgl{position:relative;width:42px;height:23px;flex-shrink:0}
 .tgl input{opacity:0;width:0;height:0}
 .tgl-s{position:absolute;inset:0;background:rgba(255,255,255,.08);
   border-radius:23px;cursor:pointer;transition:background .3s}
-.tgl-s::before{content:'';position:absolute;left:3px;top:3px;width:17px;height:17px;
-  border-radius:50%;background:var(--muted);transition:transform .3s,background .3s}
-.tgl input:checked+.tgl-s{background:rgba(0,245,255,.25)}
-.tgl input:checked+.tgl-s::before{transform:translateX(19px);background:var(--cyan);box-shadow:0 0 7px var(--cyan)}
-.fb-ok{display:none;padding:9px;text-align:center;
-  background:rgba(57,255,20,.08);border:1px solid rgba(57,255,20,.25);
-  border-radius:9px;color:var(--green);font-size:12px;font-weight:700;margin-top:7px}
+.tgl-s::before{content:'';position:absolute;left:3px;top:3px;
+  width:17px;height:17px;border-radius:50%;
+  background:var(--mut);transition:transform .3s,background .3s}
+.tgl input:checked+.tgl-s{background:rgba(0,245,255,.2)}
+.tgl input:checked+.tgl-s::before{transform:translateX(19px);background:var(--c);box-shadow:0 0 8px var(--c)}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;gap:4px;
+  border-radius:6px;padding:3px 9px;font-size:10px;font-weight:700;font-family:var(--FU);letter-spacing:.5px}
+.badge-c{background:rgba(0,245,255,.13);color:var(--c);border:1px solid rgba(0,245,255,.2)}
+.badge-pk{background:rgba(200,0,255,.13);color:var(--pk);border:1px solid rgba(200,0,255,.2)}
+.badge-gn{background:rgba(57,255,20,.13);color:var(--gn);border:1px solid rgba(57,255,20,.2)}
+.badge-yw{background:rgba(255,230,0,.13);color:var(--yw);border:1px solid rgba(255,230,0,.2)}
+.badge-rd{background:rgba(255,59,59,.13);color:var(--rd);border:1px solid rgba(255,59,59,.2)}
+
+/* ═══════════════════════════════════════════════
+   PLAYLIST
+═══════════════════════════════════════════════ */
+.pl-item{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;
+  border-radius:9px;border:1px solid transparent;
+  transition:all .2s;margin-bottom:4px;cursor:pointer
+}
+.pl-item:hover{background:rgba(255,255,255,.04);border-color:var(--b2)}
+.pl-item.current{background:rgba(0,245,255,.07);border-color:rgba(0,245,255,.25)}
+.pl-num{width:22px;font-size:11px;color:var(--mut);font-family:var(--FU);text-align:center;flex-shrink:0}
+.pl-item.current .pl-num{color:var(--c)}
+.pl-ico{font-size:16px;width:24px;text-align:center;flex-shrink:0}
+.pl-info{flex:1;min-width:0}
+.pl-title{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-artist{font-size:11px;color:var(--mut)}
+.pl-dur{font-family:var(--FU);font-size:12px;color:var(--mut);flex-shrink:0}
+.pl-acts{display:flex;gap:5px;flex-shrink:0}
+.pl-tag{font-size:9px;font-family:var(--FU);font-weight:700;letter-spacing:.5px;
+  text-transform:uppercase;border-radius:4px;padding:2px 7px}
+.pl-tag-ia{background:rgba(200,0,255,.15);color:var(--pk)}
+.pl-tag-prox{background:rgba(255,230,0,.12);color:var(--yw)}
+
+/* PROGRESS BAR */
+.progress-wrap{margin-top:10px}
+.prog-row{display:flex;justify-content:space-between;font-family:var(--FU);
+  font-size:11px;color:var(--mut);margin-bottom:5px}
+.prog-bar{height:4px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;border-radius:4px;
+  background:linear-gradient(90deg,var(--c),var(--pk));transition:width 1s linear}
+
+/* ═══════════════════════════════════════════════
+   IA BOX
+═══════════════════════════════════════════════ */
+.ia-box{
+  background:linear-gradient(135deg,rgba(200,0,255,.1),rgba(0,245,255,.06));
+  border:1px solid rgba(200,0,255,.25);border-radius:12px;padding:14px;
+  position:relative;overflow:hidden
+}
+.ia-box::before{
+  content:''; position:absolute;top:-20px;right:-20px;
+  width:80px;height:80px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,0,255,.15),transparent 70%);
+  pointer-events:none
+}
+.ia-top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.ia-ico{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,var(--pk),var(--c));
+  display:flex;align-items:center;justify-content:center;font-size:15px
+}
+.ia-lbl{font-size:10px;font-family:var(--FU);letter-spacing:2px;color:var(--pk);
+  font-weight:700;text-transform:uppercase}
+.ia-status{font-size:11px;color:var(--mut)}
+.ia-output{
+  background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.08);
+  border-radius:9px;padding:12px;font-size:13px;line-height:1.7;
+  min-height:60px;color:var(--txt);white-space:pre-wrap;word-break:break-word
+}
+.ia-cursor{display:inline-block;width:2px;height:13px;background:var(--c);
+  vertical-align:middle;animation:cur .8s infinite}
+@keyframes cur{0%,100%{opacity:1}50%{opacity:0}}
+.ia-thinking{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:13px}
+.ia-dots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--pk);
+  animation:dt .9s infinite both}
+.ia-dots span:nth-child(2){animation-delay:.15s}
+.ia-dots span:nth-child(3){animation-delay:.3s}
+@keyframes dt{0%,80%,100%{transform:scale(0);opacity:.3}40%{transform:scale(1);opacity:1}}
+
+/* BLOQUE PROGRAMACIÓN */
+.blk{
+  display:flex;align-items:stretch;gap:0;margin-bottom:8px;
+  border-radius:10px;overflow:hidden;border:1px solid var(--b2)
+}
+.blk-time{
+  width:80px;flex-shrink:0;background:rgba(0,0,0,.4);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:10px;border-right:1px solid var(--b2)
+}
+.blk-t{font-family:var(--FD);font-size:12px;font-weight:700;color:var(--c)}
+.blk-dur{font-size:10px;color:var(--mut);font-family:var(--FU)}
+.blk-body{flex:1;padding:10px 14px;background:var(--card)}
+.blk-name{font-size:14px;font-weight:700;margin-bottom:3px}
+.blk-host{font-size:11px;color:var(--mut);font-family:var(--FU)}
+.blk-acts{display:flex;align-items:center;gap:6px;margin-top:6px}
+.blk.active{border-color:rgba(0,245,255,.35);background:rgba(0,245,255,.03)}
+.blk.active .blk-body{background:rgba(0,245,255,.04)}
+
+/* VOCES */
+.voice-card{
+  background:var(--card);border:1px solid var(--b2);border-radius:10px;
+  padding:12px;transition:border-color .2s;cursor:pointer
+}
+.voice-card.selected{border-color:var(--c);background:rgba(0,245,255,.06)}
+.vc-avatar{font-size:28px;margin-bottom:6px}
+.vc-name{font-size:13px;font-weight:700}
+.vc-lang{font-size:10px;color:var(--mut);font-family:var(--FU);margin-top:2px}
+.vc-rate{display:flex;gap:2px;margin-top:4px}
+.vc-star{font-size:10px;color:var(--yw)}
+
+/* TTS CONTROL */
+.tts-ctrl{
+  background:rgba(0,0,0,.4);border:1px solid var(--b2);
+  border-radius:10px;padding:12px
+}
+.tts-row{display:flex;align-items:center;gap:10px}
+.tts-slider{flex:1;-webkit-appearance:none;appearance:none;
+  height:4px;border-radius:4px;outline:none;
+  background:linear-gradient(90deg,var(--c) 50%,rgba(255,255,255,.15) 50%)}
+.tts-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;
+  border-radius:50%;background:var(--c);cursor:pointer;box-shadow:0 0 6px var(--c)}
 
 /* TOAST */
 .toast{
-  position:fixed;top:76px;left:50%;transform:translateX(-50%) translateY(-16px);
-  max-width:340px;width:calc(100% - 28px);z-index:999;
-  background:rgba(10,10,26,.97);border:1px solid var(--cyan);border-radius:var(--r);
-  padding:11px 14px;display:flex;align-items:center;gap:9px;
-  font-size:12px;opacity:0;pointer-events:none;transition:all .3s;
-  box-shadow:0 4px 18px rgba(0,245,255,.18)}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast.warn{border-color:var(--yellow)}
-.toast.err{border-color:#ff4444}
-.toast.ok{border-color:var(--green)}
-.t-ic{font-size:18px;flex-shrink:0}
-
-/* INSTALL */
-.inst-ban{margin:0 14px 12px;
-  background:rgba(255,230,0,.06);border:1px solid rgba(255,230,0,.25);
-  border-radius:var(--r);padding:11px 13px;
-  display:none;align-items:center;gap:9px}
-.inst-ico{font-size:22px;flex-shrink:0}
-.inst-t{font-size:12px;font-weight:700;color:var(--yellow)}
-.inst-s{font-size:10px;color:var(--muted);margin-top:1px}
-.inst-btn{padding:7px 13px;border-radius:8px;
-  background:linear-gradient(135deg,var(--yellow),var(--orange));
-  color:#000;font-size:11px;font-weight:800;flex-shrink:0}
-
-/* SETUP BANNER (sin config) */
-.setup-banner{
-  margin:14px;padding:16px;border-radius:var(--r);
-  background:rgba(255,230,0,.06);border:1px dashed rgba(255,230,0,.35);
-  text-align:center;
+  position:fixed;top:70px;right:20px;z-index:9999;
+  background:rgba(10,10,28,.97);border:1px solid var(--c);border-radius:12px;
+  padding:12px 16px;display:flex;align-items:center;gap:10px;
+  font-size:13px;opacity:0;pointer-events:none;
+  transition:all .3s;box-shadow:0 4px 20px rgba(0,245,255,.15);
+  max-width:340px;transform:translateY(-8px)
 }
-.setup-banner h3{font-size:14px;color:var(--yellow);margin-bottom:6px;font-family:var(--FU);letter-spacing:1px}
-.setup-banner p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}
-.setup-banner button{padding:10px 20px;border-radius:9px;
-  background:linear-gradient(135deg,var(--yellow),var(--orange));
-  color:#000;font-size:13px;font-weight:800;font-family:var(--F)}
+.toast.show{opacity:1;transform:none}
+.toast.warn{border-color:var(--yw)}
+.toast.err{border-color:var(--rd)}
+.toast.ok{border-color:var(--gn)}
+.toast.pk{border-color:var(--pk)}
+.t-ico{font-size:18px;flex-shrink:0}
 
-/* EMPTY STATE */
-.empty{text-align:center;padding:28px;color:var(--muted);font-size:12px}
-
-/* BACKEND INFO CARD */
-.backend-info{
-  margin:14px;padding:14px;border-radius:var(--r);
-  background:rgba(191,0,255,.07);border:1px solid rgba(191,0,255,.25);
+/* MODAL */
+.modal-ov{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center
 }
-.bi-t{font-size:12px;font-weight:700;color:var(--purple);font-family:var(--FU);
-  letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
-.bi-b{font-size:11px;color:var(--muted);line-height:1.7}
-.bi-b strong{color:var(--text)}
-.bi-b a{color:var(--cyan);text-decoration:underline}
+.modal-ov.open{display:flex}
+.modal{
+  background:var(--bg3);border:1px solid var(--b);border-radius:16px;
+  padding:24px;width:500px;max-width:95vw;max-height:85vh;overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.5)
+}
+.modal-ttl{font-family:var(--FD);font-size:15px;font-weight:900;color:var(--c);
+  margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--b2)}
+.modal-close{float:right;font-size:18px;color:var(--mut);cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--txt)}
 
-.sp{height:14px}
+/* API KEY notice */
+.api-notice{
+  background:rgba(255,230,0,.07);border:1px solid rgba(255,230,0,.25);
+  border-radius:10px;padding:12px 14px;margin-bottom:14px;
+  font-size:12px;color:var(--mut);line-height:1.6
+}
+.api-notice strong{color:var(--yw)}
+.api-notice a{color:var(--c)}
+
+/* EMPTY */
+.empty{text-align:center;padding:30px;color:var(--mut);font-size:13px;line-height:1.7}
+
+/* LOADING SPINNER */
+.spin{
+  display:inline-block;width:18px;height:18px;border-radius:50%;
+  border:2px solid rgba(0,245,255,.3);border-top-color:var(--c);
+  animation:spin .7s linear infinite;vertical-align:middle
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ALERT INTELIGENTE */
+.smart-alert{
+  display:flex;align-items:center;gap:10px;
+  border-radius:10px;padding:10px 14px;margin-bottom:8px;
+  border:1px solid;animation:mi .3s ease
+}
+.sa-c{background:rgba(0,245,255,.07);border-color:rgba(0,245,255,.25)}
+.sa-yw{background:rgba(255,230,0,.07);border-color:rgba(255,230,0,.25)}
+.sa-pk{background:rgba(200,0,255,.07);border-color:rgba(200,0,255,.25)}
+.sa-gn{background:rgba(57,255,20,.07);border-color:rgba(57,255,20,.25)}
+.sa-ico{font-size:18px;flex-shrink:0}
+.sa-txt{font-size:12px;line-height:1.5}
+.sa-ttl{font-weight:700;margin-bottom:2px}
+
+/* WAVEFORM VIZ */
+.waveform{display:flex;align-items:center;gap:2px;height:40px;padding:0 4px}
+.wf-bar{flex:1;border-radius:2px;background:linear-gradient(0deg,var(--c),var(--pk));opacity:.6;transition:height .3s}
 </style>
 </head>
 <body>
 
+<!-- AUDIO ELEMENT -->
+<audio id="streamAudio" preload="none"></audio>
+
 <!-- TOAST -->
 <div class="toast" id="toast">
-  <span class="t-ic" id="tIco">🔔</span>
-  <span id="tMsg"></span>
+  <span class="t-ico" id="tIco">🔔</span>
+  <span id="tMsg">—</span>
 </div>
 
-<!-- NAV -->
-<nav class="nav">
-  <button class="nb active" onclick="go('inicio',this)">
-    <span class="ni">🏠</span><span>Inicio</span>
-  </button>
-  <button class="nb" onclick="go('cabina',this)">
-    <span class="ni">🎙️</span><span>Cabina</span>
-  </button>
-  <button class="nb" onclick="go('pedidos',this)">
-    <span class="ni">🎵</span><span>Pedidos</span>
-  </button>
-  <button class="nb" onclick="go('oyentes',this)">
-    <span class="ni">👥</span><span>Oyentes</span>
-  </button>
-  <button class="nb" onclick="go('panel',this)">
-    <span class="ni">⚙️</span><span>Panel</span>
-  </button>
-</nav>
+<!-- MODAL CONFIGURACIÓN RÁPIDA -->
+<div class="modal-ov" id="modalConfig">
+  <div class="modal">
+    <div class="modal-ttl">
+      ⚙️ Configuración de AudioLabRDCR
+      <span class="modal-close" onclick="closeModal('modalConfig')">✕</span>
+    </div>
 
-<div class="wrap">
+    <div class="api-notice">
+      <strong>🔑 ¿Cómo obtener las API Keys?</strong><br>
+      • <strong>Claude IA:</strong> Registrate en <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> → API Keys → Crear key<br>
+      • <strong>Clima:</strong> Registrate en <a href="https://openweathermap.org" target="_blank">openweathermap.org</a> → API Keys (gratis)<br>
+      • <strong>Stream:</strong> Usá la URL directa de tu servidor Icecast/Shoutcast/HLS
+    </div>
 
-<!-- HEADER -->
-<header class="hdr">
-  <div class="hdr-logo">
-    <div class="hdr-ico">📻</div>
+    <div class="fg">
+      <label class="flbl">Nombre de la Radio</label>
+      <input id="cfgNombre" class="finp" placeholder="Mi Radio FM 103.5">
+    </div>
+    <div class="fg">
+      <label class="flbl">URL del Stream (Icecast / Shoutcast / HLS)</label>
+      <input id="cfgStream" class="finp" placeholder="https://stream.turadio.com:8000/live">
+    </div>
+    <div class="fg">
+      <label class="flbl">URL Metadatos Icecast (/status-json.xsl) — opcional para canción + oyentes en tiempo real</label>
+      <input id="cfgMeta" class="finp" placeholder="https://stream.turadio.com:8000/status-json.xsl">
+    </div>
+    <div class="fg">
+      <label class="flbl">API Key Claude IA (Anthropic) — para Conducción IA real</label>
+      <input id="cfgApiKey" class="finp" type="password" placeholder="sk-ant-api03-...">
+    </div>
+    <div class="fg">
+      <label class="flbl">Ciudad para el clima</label>
+      <input id="cfgCiudad" class="finp" placeholder="Quito">
+    </div>
+    <div class="fg">
+      <label class="flbl">API Key OpenWeatherMap — clima en tiempo real</label>
+      <input id="cfgWxKey" class="finp" placeholder="tu_api_key">
+    </div>
+    <div class="fg">
+      <label class="flbl">Número WhatsApp (código país + número, sin +)</label>
+      <input id="cfgWA" class="finp" placeholder="5939XXXXXXXX">
+    </div>
+    <div class="fg">
+      <label class="flbl">Nombre del Locutor / Personalidad IA</label>
+      <input id="cfgLocutor" class="finp" placeholder="Ej: Diego, Valentina, Radio Bot...">
+    </div>
+    <div class="fg">
+      <label class="flbl">Estilo de conducción de la IA</label>
+      <select id="cfgEstilo" class="fsel finp">
+        <option value="dinamico">Dinámico y juvenil</option>
+        <option value="formal">Formal y profesional</option>
+        <option value="tropical">Tropical y festivo</option>
+        <option value="nocturno">Nocturno y tranquilo</option>
+        <option value="noticiero">Noticioso e informativo</option>
+        <option value="humor">Con humor y entretenimiento</option>
+      </select>
+    </div>
+    <div class="row-b">
+      <button class="btn btn-prime" onclick="guardarConfig()">💾 Guardar configuración</button>
+      <button class="btn btn-ghost" onclick="closeModal('modalConfig')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     TOPBAR
+═══════════════════════════════════════════════ -->
+<div class="topbar">
+  <div class="tb-logo">
+    <div class="tb-logo-ico">📻</div>
     <div>
-      <div class="hdr-name" id="hdrName">RADIOSYNC</div>
-      <div class="hdr-sub">TU VOZ · TU MÚSICA</div>
+      <div class="tb-logo-name" id="tbNombre">AUDIOLABRDCR</div>
+      <div class="tb-logo-sub">CONDUCCIÓN IA • 24/7</div>
     </div>
   </div>
-  <div class="live-badge" id="liveBadge">
-    <span class="live-dot"></span>EN VIVO
-  </div>
-  <div class="offline-badge" id="offlineBadge">OFFLINE</div>
-</header>
 
-<!-- ══════════════════════════════════════
-     INICIO
-══════════════════════════════════════ -->
-<section class="view active" id="view-inicio">
-
-  <!-- BANNER: sin configuración -->
-  <div class="setup-banner" id="setupBanner" style="display:none">
-    <h3>⚙️ CONFIGURÁ TU RADIO</h3>
-    <p>Todavía no configuraste el stream ni la información de tu radio.<br>
-       Ingresá al <strong>Panel</strong> para empezar.</p>
-    <button onclick="go('panel', document.querySelector('.nb:last-child'))">
-      IR AL PANEL →
-    </button>
-  </div>
-
-  <!-- PLAYER -->
-  <div class="player">
-    <div class="player-inner">
-      <div class="np-label">
-        <div class="wave off" id="wave">
-          <span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <span id="npLabel">LISTO PARA EMITIR</span>
+  <div class="tb-center">
+    <div class="live-pill" id="livePill" style="display:none">
+      <span class="live-dot"></span> ON AIR
+    </div>
+    <div class="tb-now">
+      <div class="tb-wave off" id="tbWave">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
       </div>
-      <div class="track-title" id="trackTitle">—</div>
-      <div class="track-artist" id="trackArtist">Presioná ▶ para conectar al stream</div>
-      <div class="player-row">
-        <button class="btn-play" id="btnPlay" onclick="togglePlay()">▶</button>
-        <div class="vol-row">
-          <span>🔈</span>
-          <input type="range" class="vol" id="volSlider" min="0" max="100" value="80" oninput="setVol(this.value)">
-          <span>🔊</span>
-        </div>
-        <div class="listeners-chip">👥 <span id="oyentes">—</span></div>
-      </div>
-    </div>
-    <div class="stream-status">
-      <span class="status-dot wait" id="sDot"></span>
-      <span id="sMsg">Esperando conexión</span>
-    </div>
-  </div>
-  <audio id="audio" preload="none"></audio>
-
-  <!-- WHATSAPP -->
-  <a class="btn-wa" id="btnWA" href="#" target="_blank" onclick="abrirWA(event)">
-    <span class="wa-ico">💬</span>
-    <div class="wa-txt">
-      <span class="wa-t">PEDÍ TU CANCIÓN POR WHATSAPP</span>
-      <span class="wa-s">¡Escribinos y te leemos al aire!</span>
-    </div>
-  </a>
-
-  <!-- INSTALAR APP -->
-  <div class="inst-ban" id="instBan">
-    <span class="inst-ico">📲</span>
-    <div style="flex:1">
-      <div class="inst-t">¡Instalá la App en tu celular!</div>
-      <div class="inst-s">Acceso directo desde la pantalla de inicio</div>
-    </div>
-    <button class="inst-btn" onclick="instalar()">INSTALAR</button>
-  </div>
-
-  <!-- CLIMA -->
-  <div class="sec">
-    <div class="sec-hdr">
-      <span class="sec-ttl">🌤 Clima en vivo</span>
-      <span style="font-size:10px;color:var(--muted)" id="wxLabel">—</span>
-    </div>
-    <!-- Sin API key -->
-    <div class="wx-nokey" id="wxNoKey">
-      <span>⚡</span>
       <div>
-        <strong style="color:var(--yellow)">Clima no configurado</strong><br>
-        Obtené tu API key GRATIS en
-        <a href="https://openweathermap.org/api" target="_blank" style="color:var(--cyan)">openweathermap.org</a>
-        e ingresala en el Panel → Configuración.
-      </div>
-    </div>
-    <!-- Con API key -->
-    <div class="wx-card" id="wxCard" style="display:none">
-      <div class="wx-L">
-        <div class="wx-ico" id="wxIco">—</div>
-        <div>
-          <div class="wx-temp" id="wxTemp">—</div>
-          <div class="wx-desc" id="wxDesc">—</div>
-          <div class="wx-city" id="wxCity">—</div>
+        <div class="tb-song" id="tbSong">Sin stream conectado
+          <small id="tbArtist"></small>
         </div>
       </div>
-      <div class="wx-R">
-        <div class="wx-det">
-          💧 <strong id="wxHum">—</strong> humedad<br>
-          💨 <strong id="wxViento">—</strong> viento<br>
-          🌡 Sensación <strong id="wxSens">—</strong>
-        </div>
-        <div class="wx-up" id="wxUp">—</div>
-      </div>
     </div>
   </div>
 
-  <!-- NOTICIAS -->
-  <div class="sec">
-    <div class="sec-hdr"><span class="sec-ttl">📰 Noticias</span></div>
-    <div class="cs" id="newsList">
-      <div class="empty" style="padding:0 14px">Sin noticias · Agregá desde el Panel</div>
-    </div>
-  </div>
-
-  <!-- SORTEOS -->
-  <div class="sec">
-    <div class="sec-hdr"><span class="sec-ttl">🎁 Sorteos & Promos</span></div>
-    <div class="cs" id="promoList">
-      <div class="empty" style="padding:0 14px">Sin promos · Agregá desde el Panel</div>
-    </div>
-  </div>
-
-  <!-- REDES -->
-  <div class="sec">
-    <div class="sec-hdr"><span class="sec-ttl">📲 Seguinos</span></div>
-    <div class="soc">
-      <a id="lFb" href="#" target="_blank" class="soc-btn fb">
-        <span class="s-ic">👤</span>Facebook
-      </a>
-      <a id="lIg" href="#" target="_blank" class="soc-btn ig">
-        <span class="s-ic">📸</span>Instagram
-      </a>
-      <a id="lYt" href="#" target="_blank" class="soc-btn yt">
-        <span class="s-ic">▶️</span>YouTube
-      </a>
-      <a id="lTk" href="#" target="_blank" class="soc-btn tk">
-        <span class="s-ic">🎵</span>TikTok
-      </a>
-    </div>
-  </div>
-
-  <!-- PROGRAMACIÓN -->
-  <div class="sec">
-    <div class="sec-hdr"><span class="sec-ttl">📋 Programación</span></div>
-    <div class="sched" id="schedList">
-      <div class="empty">Sin programación · Agregá desde el Panel</div>
-    </div>
-  </div>
-
-  <div class="sp"></div>
-</section>
-
-<!-- ══════════════════════════════════════
-     CABINA EN VIVO
-══════════════════════════════════════ -->
-<section class="view" id="view-cabina">
-
-  <div class="cab-hdr">
-    <div class="cab-ttl">🎙️ CABINA EN VIVO</div>
-    <div class="cab-met">
-      <div class="cm">
-        <div class="cm-v cv-c" id="cOy">—</div>
-        <div class="cm-l">Oyentes</div>
-        <div class="cm-sub" id="cOySub">—</div>
-      </div>
-      <div class="cm">
-        <div class="cm-v cv-g" id="cMsg">—</div>
-        <div class="cm-l">Msgs/min</div>
-        <div class="cm-sub" id="cMsgSub">—</div>
-      </div>
-      <div class="cm">
-        <div class="cm-v cv-y" id="cEng">—</div>
-        <div class="cm-l">Engagement</div>
-        <div class="cm-sub" id="cEngSub">—</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- IA -->
-  <div class="ia">
-    <span class="ia-ic">🤖</span>
+  <div class="tb-right">
     <div>
-      <div class="ia-lbl">IA Asistente del Locutor</div>
-      <div class="ia-txt" id="iaTxt">Esperando datos en vivo...</div>
+      <div class="tb-clock" id="tbClock">00:00:00</div>
+      <div class="tb-date" id="tbDate">—</div>
     </div>
+    <button class="btn btn-ghost btn-sm" onclick="openModal('modalConfig')" style="font-size:11px">⚙️ Config</button>
   </div>
+</div>
 
-  <!-- INFO BACKEND -->
-  <div class="backend-info">
-    <div class="bi-t">ℹ️ Sobre la Cabina</div>
-    <div class="bi-b">
-      Los <strong>mensajes de WhatsApp en tiempo real</strong> requieren conectar
-      la <strong>API Oficial de WhatsApp Business</strong> (Meta) o servicios como
-      <strong>Twilio / 360dialog</strong> a un backend propio.<br><br>
-      Los datos de <strong>oyentes y canciones</strong> se obtienen en tiempo real
-      desde tu servidor de streaming (Icecast/Shoutcast) una vez configurada la URL.<br><br>
-      La IA Asistente funciona sin backend: analiza los datos disponibles localmente.
-    </div>
-  </div>
+<!-- ═══════════════════════════════════════════════
+     LAYOUT
+═══════════════════════════════════════════════ -->
+<div class="layout">
 
-  <!-- FILTROS -->
-  <div class="filters">
-    <button class="f-btn on" id="fTodo" onclick="filtrar('todos',this)">Todos</button>
-    <button class="f-btn" id="fPed" onclick="filtrar('pedido',this)">🎵 Pedidos</button>
-    <button class="f-btn" id="fSal" onclick="filtrar('saludo',this)">👋 Saludos</button>
-    <button class="f-btn" id="fDest" onclick="filtrar('destacado',this)">⭐ Destacados</button>
-  </div>
-
-  <!-- MENSAJES -->
-  <div class="msgs" id="msgsBox">
-    <div class="empty">
-      Los mensajes aparecerán aquí cuando integres la API de WhatsApp.<br><br>
-      Por ahora podés probar el flujo con el simulador de abajo.
-    </div>
-  </div>
-
-  <!-- SIMULADOR PARA DEMOSTRACIÓN -->
-  <div style="padding:10px 14px">
-    <div style="font-size:10px;color:var(--muted);font-family:var(--FU);
-      letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">
-      🧪 Simulador (demo del flujo)
-    </div>
-    <div style="display:flex;gap:7px">
-      <input type="text" id="simInp" class="inp-sm" style="flex:1"
-        placeholder="Ej: Pongan Tusa de Karol G por favor">
-      <input type="text" id="simNom" class="inp-sm" style="width:110px"
-        placeholder="Nombre oyente">
-      <button onclick="simMsg()" class="btn-sv" style="padding:9px 13px;white-space:nowrap;font-size:11px">
-        Enviar
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sb-section">
+      <div class="sb-label">Principal</div>
+      <button class="sb-btn active" onclick="nav('dashboard',this)">
+        <span class="sb-ico">📊</span>
+        <span class="sb-txt">Dashboard</span>
+      </button>
+      <button class="sb-btn" onclick="nav('conduccion',this)">
+        <span class="sb-ico">🎙️</span>
+        <span class="sb-txt">Conducción IA</span>
+        <span class="sb-badge" id="iaAlerts">IA</span>
+      </button>
+      <button class="sb-btn" onclick="nav('programacion',this)">
+        <span class="sb-ico">📋</span>
+        <span class="sb-txt">Programación</span>
+      </button>
+      <button class="sb-btn" onclick="nav('playlist',this)">
+        <span class="sb-ico">🎵</span>
+        <span class="sb-txt">Playlist</span>
       </button>
     </div>
-  </div>
-
-  <div class="sp"></div>
-</section>
-
-<!-- ══════════════════════════════════════
-     PEDIDOS
-══════════════════════════════════════ -->
-<section class="view" id="view-pedidos">
-
-  <div style="padding:14px 14px 10px">
-    <div style="font-family:var(--FD);font-size:13px;font-weight:900;color:var(--cyan);margin-bottom:3px">
-      🎵 PEDIDOS EN VIVO
-    </div>
-    <div style="font-size:11px;color:var(--muted)">
-      Detectados automáticamente de los mensajes · Ordenados por repetición
-    </div>
-  </div>
-
-  <div class="ia">
-    <span class="ia-ic">🎯</span>
-    <div>
-      <div class="ia-lbl">Recomendación IA</div>
-      <div class="ia-txt" id="iaRec">Esperando pedidos en vivo...</div>
-    </div>
-  </div>
-
-  <div class="ped-list" id="pedList">
-    <div class="empty">
-      Sin pedidos aún · Los pedidos se detectan automáticamente cuando los oyentes escriben por WhatsApp.
-    </div>
-  </div>
-
-  <div class="sp"></div>
-</section>
-
-<!-- ══════════════════════════════════════
-     OYENTES
-══════════════════════════════════════ -->
-<section class="view" id="view-oyentes">
-
-  <div style="padding:14px 14px 10px">
-    <div style="font-family:var(--FD);font-size:13px;font-weight:900;color:var(--cyan);margin-bottom:3px">
-      👥 RANKING DE OYENTES
-    </div>
-    <div style="font-size:11px;color:var(--muted)">
-      Más activos del programa · Actualizado con cada mensaje
-    </div>
-  </div>
-
-  <!-- Métricas reales del stream -->
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:0 14px 14px">
-    <div class="cm" style="background:var(--card);border:1px solid var(--border)">
-      <div class="cm-v cv-c" id="oyActivos">—</div>
-      <div class="cm-l">Activos</div>
-      <div class="cm-sub" style="font-size:9px;color:var(--muted)">del stream</div>
-    </div>
-    <div class="cm" style="background:var(--card);border:1px solid var(--border)">
-      <div class="cm-v" style="color:var(--pink)" id="oySuper">—</div>
-      <div class="cm-l">Superfans</div>
-      <div class="cm-sub" style="font-size:9px;color:var(--muted)">≥5 msgs</div>
-    </div>
-    <div class="cm" style="background:var(--card);border:1px solid var(--border)">
-      <div class="cm-v cv-y" id="oyMensajes">—</div>
-      <div class="cm-l">Mensajes</div>
-      <div class="cm-sub" style="font-size:9px;color:var(--muted)">totales hoy</div>
-    </div>
-  </div>
-
-  <div class="oy-list" id="oyList">
-    <div class="empty">
-      Sin oyentes aún · El ranking se construye a partir de los mensajes recibidos en Cabina.
-    </div>
-  </div>
-
-  <div class="sp"></div>
-</section>
-
-<!-- ══════════════════════════════════════
-     PANEL DE CONTROL
-══════════════════════════════════════ -->
-<section class="view" id="view-panel">
-
-  <!-- LOGIN -->
-  <div class="panel-lock" id="pLock">
-    <div class="lk-ico">🔒</div>
-    <div class="lk-ttl">PANEL DE CONTROL</div>
-    <div class="lk-sub">Ingresá tu contraseña de administrador</div>
-    <input type="password" id="passInp" class="inp"
-      placeholder="Contraseña"
-      onkeydown="if(event.key==='Enter')login()">
-    <button class="btn-prim" onclick="login()">INGRESAR</button>
-    <div style="font-size:10px;color:var(--muted);margin-top:10px">
-      Contraseña por defecto: <strong style="color:var(--cyan)">radio2024</strong>
-    </div>
-  </div>
-
-  <!-- PANEL ADMIN -->
-  <div class="p-cont" id="pCont">
-
-    <div style="padding:14px 0 10px;display:flex;align-items:center;justify-content:space-between">
-      <div style="font-family:var(--FD);font-size:12px;font-weight:900;color:var(--cyan)">
-        ⚙️ PANEL ADMIN
-      </div>
-      <button onclick="logout()" class="btn-del" style="font-size:11px;padding:6px 11px">
-        Cerrar sesión
+    <div class="sb-divider"></div>
+    <div class="sb-section">
+      <div class="sb-label">Gestión</div>
+      <button class="sb-btn" onclick="nav('voces',this)">
+        <span class="sb-ico">🗣️</span>
+        <span class="sb-txt">Voces IA</span>
+      </button>
+      <button class="sb-btn" onclick="nav('analytics',this)">
+        <span class="sb-ico">📈</span>
+        <span class="sb-txt">Analytics</span>
+      </button>
+      <button class="sb-btn" onclick="nav('panel',this)">
+        <span class="sb-ico">⚙️</span>
+        <span class="sb-txt">Panel Admin</span>
       </button>
     </div>
+    <div class="sb-divider"></div>
 
-    <!-- CONFIG STREAM -->
-    <div class="p-sec">
-      <div class="p-sec-t">📻 Configuración del Stream</div>
-      <div class="fg">
-        <label class="flbl">Nombre de la radio</label>
-        <input id="cfgName" class="inp-sm" placeholder="Mi Radio FM 103.5">
-      </div>
-      <div class="fg">
-        <label class="flbl">URL del stream</label>
-        <input id="cfgUrl" class="inp-sm" placeholder="https://stream.turadio.com:8000/live">
-        <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5">
-          Compatible con Icecast, Shoutcast y HLS (.m3u8).<br>
-          Si tu servidor Icecast tiene CORS habilitado, los metadatos (canción, oyentes) se cargarán en tiempo real.
+    <!-- STREAM CONTROL SIDEBAR -->
+    <div style="padding:10px 10px 6px">
+      <div class="sb-label" style="padding:0 8px 6px">Control de Stream</div>
+      <div class="sb-stream">
+        <div class="ss-row">
+          <span class="ss-dot wait" id="sdot"></span>
+          <span class="ss-label" id="slbl">Desconectado</span>
         </div>
-      </div>
-      <div class="fg">
-        <label class="flbl">URL de metadatos (Icecast status-json.xsl) — opcional</label>
-        <input id="cfgMeta" class="inp-sm" placeholder="https://stream.turadio.com:8000/status-json.xsl">
-        <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5">
-          Si usás Icecast, esta URL entrega el nombre de la canción actual y la cantidad de oyentes en tiempo real.
-          Requiere que el servidor tenga habilitados los headers CORS.
-        </div>
-      </div>
-      <div class="row-b">
-        <button class="btn-sv" onclick="saveStream()">💾 Guardar stream</button>
-        <button class="btn-add" onclick="testStream()" style="background:rgba(57,255,20,.1);border-color:rgba(57,255,20,.3);color:var(--green)">
-          🔊 Probar conexión
+        <div class="ss-url" id="surl">Sin URL configurada</div>
+        <button class="btn-stream play" id="btnStream" onclick="toggleStream()">
+          ▶ Conectar Stream
         </button>
       </div>
-      <div class="fb-ok" id="fbStream">✅ Stream guardado</div>
     </div>
 
-    <!-- CONFIG WHATSAPP -->
-    <div class="p-sec">
-      <div class="p-sec-t">💬 WhatsApp</div>
-      <div class="fg">
-        <label class="flbl">Número WhatsApp (con código de país, sin + ni espacios)</label>
-        <input id="cfgWA" class="inp-sm" placeholder="5491155554444">
-        <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5">
-          Ejemplo Ecuador: <strong style="color:var(--text)">5939XXXXXXXX</strong> · Argentina: <strong style="color:var(--text)">5491XXXXXXXX</strong>
+    <div style="flex:1"></div>
+    <div style="padding:10px 12px;border-top:1px solid var(--b2)">
+      <div style="font-size:10px;color:var(--mut);line-height:1.6;font-family:var(--FU)">
+        <div style="color:var(--c);font-weight:700;margin-bottom:3px">AUDIOLABRDCR IA v2.0</div>
+        Compatible: RadioBoss · NextKast<br>
+        <span id="sbApiStatus">IA: Sin configurar</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main" id="mainArea">
+
+    <!-- ══ DASHBOARD ══ -->
+    <div class="view active" id="view-dashboard">
+
+      <!-- STATS -->
+      <div class="grid4" style="margin-bottom:16px">
+        <div class="stat c">
+          <div class="stat-v c" id="stOy">—</div>
+          <div class="stat-l">Oyentes</div>
+          <div class="stat-t up" id="stOyT">En tiempo real</div>
+        </div>
+        <div class="stat pk">
+          <div class="stat-v pk" id="stMsg">0</div>
+          <div class="stat-l">Mensajes hoy</div>
+          <div class="stat-t up">desde cabina</div>
+        </div>
+        <div class="stat gn">
+          <div class="stat-v gn" id="stPed">0</div>
+          <div class="stat-l">Pedidos</div>
+          <div class="stat-t up">detectados</div>
+        </div>
+        <div class="stat yw">
+          <div class="stat-v yw" id="stIAcalls">0</div>
+          <div class="stat-l">Intervenc. IA</div>
+          <div class="stat-t up">generadas hoy</div>
         </div>
       </div>
-      <div class="fg">
-        <label class="flbl">Mensaje de bienvenida al oyente (aparece al abrir WhatsApp)</label>
-        <textarea id="cfgWAmsg" class="ta" style="min-height:50px">Hola! Quiero pedir una canción 🎵</textarea>
-      </div>
-      <div class="row-b">
-        <button class="btn-sv" onclick="saveWA()">💾 Guardar WhatsApp</button>
-        <button class="btn-add" onclick="probarWA()">🧪 Probar enlace</button>
-      </div>
-      <div class="fb-ok" id="fbWA">✅ WhatsApp guardado</div>
-    </div>
 
-    <!-- CLIMA -->
-    <div class="p-sec">
-      <div class="p-sec-t">🌤 Clima (OpenWeatherMap)</div>
-      <div class="fg">
-        <label class="flbl">Ciudad</label>
-        <input id="cfgCiudad" class="inp-sm" placeholder="Quito" value="Quito">
-      </div>
-      <div class="fg">
-        <label class="flbl">API Key de OpenWeatherMap</label>
-        <input id="cfgWxKey" class="inp-sm" placeholder="tu_api_key_aqui">
-        <div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5">
-          1. Registrate GRATIS en <a href="https://openweathermap.org" target="_blank" style="color:var(--cyan)">openweathermap.org</a><br>
-          2. Ir a "API Keys" en tu cuenta y copiar la key<br>
-          3. La key puede tardar hasta 2 hs en activarse por primera vez
+      <div class="grid2">
+
+        <!-- AHORA SUENA -->
+        <div>
+          <div class="card">
+            <div class="card-ttl">🎵 Ahora suena</div>
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+              <div style="width:54px;height:54px;border-radius:10px;
+                background:linear-gradient(135deg,var(--c),var(--pk));
+                display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">
+                🎵
+              </div>
+              <div style="min-width:0">
+                <div style="font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="dashSong">—</div>
+                <div style="font-size:12px;color:var(--mut)" id="dashArtist">Sin reproducción</div>
+                <div style="margin-top:5px;display:flex;gap:6px">
+                  <span class="badge badge-c" id="dashStatus">OFFLINE</span>
+                </div>
+              </div>
+            </div>
+            <div class="progress-wrap">
+              <div class="prog-row">
+                <span id="progCur">0:00</span>
+                <span id="progTot">—</span>
+              </div>
+              <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+            </div>
+            <div class="waveform" id="waveformViz" style="margin-top:10px">
+              <!-- JS generado -->
+            </div>
+          </div>
+
+          <!-- CLIMA REAL -->
+          <div class="card" style="margin-top:14px">
+            <div class="card-ttl">🌤 Clima en vivo</div>
+            <div id="wxContent">
+              <div style="font-size:12px;color:var(--mut)">
+                Configurá ciudad y API Key de OpenWeatherMap en ⚙️ Config
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ALERTAS IA + PRÓXIMA CANCIÓN -->
+        <div>
+          <div class="card">
+            <div class="card-ttl">🤖 Alertas & Sugerencias IA</div>
+            <div id="alertasIA">
+              <div class="empty">La IA analizará la actividad una vez configurada y con stream activo</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <div class="card-ttl">⏭ Próximas en cola</div>
+            <div id="dashPlaylist">
+              <div class="empty">Sin canciones en la playlist · Agregá desde la sección Playlist</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row-b">
-        <button class="btn-sv" onclick="saveClima()">💾 Guardar clima</button>
-        <button class="btn-add" onclick="fetchClima()">🔄 Probar clima</button>
-      </div>
-      <div class="fb-ok" id="fbClima">✅ Clima guardado</div>
     </div>
 
-    <!-- REDES -->
-    <div class="p-sec">
-      <div class="p-sec-t">📲 Redes Sociales</div>
-      <div class="fg">
-        <label class="flbl">Facebook URL</label>
-        <input id="cfgFb" class="inp-sm" placeholder="https://facebook.com/turadio">
+    <!-- ══ CONDUCCIÓN IA ══ -->
+    <div class="view" id="view-conduccion">
+
+      <div class="grid2">
+        <div>
+          <!-- GENERADOR IA -->
+          <div class="card">
+            <div class="card-ttl">🎙️ Generador de Intervención IA</div>
+
+            <div class="fg">
+              <label class="flbl">Tipo de intervención</label>
+              <select id="iaTipo" class="fsel finp">
+                <option value="apertura">🎬 Apertura de programa</option>
+                <option value="cierre">🎤 Cierre de bloque</option>
+                <option value="presentar">🎵 Presentar canción</option>
+                <option value="hora">🕐 Mención de hora</option>
+                <option value="clima">🌤 Mención del clima</option>
+                <option value="saludo">👋 Saludo a oyentes</option>
+                <option value="sorteo">🎁 Anuncio de sorteo</option>
+                <option value="pedido">💬 Respuesta a pedido</option>
+                <option value="continuidad">📻 Continuidad de programa</option>
+                <option value="promo">📢 Promoción de la radio</option>
+                <option value="libre">✏️ Texto libre (describí)</option>
+              </select>
+            </div>
+            <div class="fg" id="fgContexto">
+              <label class="flbl">Contexto adicional (canción, nombre oyente, sorteo, etc.)</label>
+              <input id="iaContexto" class="finp" placeholder="Ej: próxima canción es 'Hotel California' de Eagles">
+            </div>
+            <div class="fg">
+              <label class="flbl">Tono / estilo de esta intervención</label>
+              <select id="iaTono" class="fsel finp">
+                <option value="">— Usar estilo configurado —</option>
+                <option value="energetico">Energético y festivo 🔥</option>
+                <option value="tranquilo">Tranquilo y relajado 🌙</option>
+                <option value="formal">Formal y serio 📰</option>
+                <option value="divertido">Divertido con humor 😄</option>
+                <option value="romantico">Romántico y suave 💕</option>
+                <option value="informativo">Informativo y directo 📋</option>
+              </select>
+            </div>
+            <div class="row-b">
+              <button class="btn btn-prime" onclick="generarIntervencion()" id="btnGenerar">
+                🤖 Generar con IA
+              </button>
+              <button class="btn btn-ghost btn-sm" onclick="limpiarIA()">Limpiar</button>
+            </div>
+          </div>
+
+          <!-- BLOQUES AUTOMÁTICOS -->
+          <div class="card" style="margin-top:14px">
+            <div class="card-ttl">⏰ Auto-intervenciones programadas</div>
+            <div class="tgl-row">
+              <div><div class="tgl-lbl">Mención de hora automática</div>
+                <div class="tgl-sub">Cada 30 minutos al aire</div></div>
+              <label class="tgl"><input type="checkbox" id="togHora" onchange="guardarToggle('togHora',this.checked)"><span class="tgl-s"></span></label>
+            </div>
+            <div class="tgl-row">
+              <div><div class="tgl-lbl">Identificación de emisora</div>
+                <div class="tgl-sub">Al inicio de cada hora</div></div>
+              <label class="tgl"><input type="checkbox" id="togID" onchange="guardarToggle('togID',this.checked)"><span class="tgl-s"></span></label>
+            </div>
+            <div class="tgl-row">
+              <div><div class="tgl-lbl">Presentación de canciones</div>
+                <div class="tgl-sub">Antes de cada tema</div></div>
+              <label class="tgl"><input type="checkbox" id="togPres" onchange="guardarToggle('togPres',this.checked)"><span class="tgl-s"></span></label>
+            </div>
+            <div class="tgl-row">
+              <div><div class="tgl-lbl">Saludos automáticos</div>
+                <div class="tgl-sub">Cada 20 minutos</div></div>
+              <label class="tgl"><input type="checkbox" id="togSaludo" onchange="guardarToggle('togSaludo',this.checked)"><span class="tgl-s"></span></label>
+            </div>
+            <div class="tgl-row">
+              <div><div class="tgl-lbl">Clima en vivo</div>
+                <div class="tgl-sub">Al detectar cambio de temperatura</div></div>
+              <label class="tgl"><input type="checkbox" id="togClima" onchange="guardarToggle('togClima',this.checked)"><span class="tgl-s"></span></label>
+            </div>
+            <div class="tgl-row">
+              <div><div class="tgl-lbl">Respuesta a pedidos populares</div>
+                <div class="tgl-sub">Cuando un pedido se repite 3+ veces</div></div>
+              <label class="tgl"><input type="checkbox" id="togPedidos" onchange="guardarToggle('togPedidos',this.checked)"><span class="tgl-s"></span></label>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <!-- OUTPUT IA -->
+          <div class="card">
+            <div class="card-ttl">📢 Texto generado</div>
+            <div class="ia-box">
+              <div class="ia-top">
+                <div class="ia-ico">🤖</div>
+                <div>
+                  <div class="ia-lbl">IA Asistente del Locutor</div>
+                  <div class="ia-status" id="iaStatusLbl">Listo para generar</div>
+                </div>
+              </div>
+              <div class="ia-output" id="iaOutput">
+                Presioná <strong>Generar con IA</strong> para crear una intervención.
+                <br><br>
+                <span style="color:var(--mut);font-size:12px">
+                  La IA usa el contexto de tu radio (nombre, estilo, canción actual, clima, oyentes) para generar texto natural como lo diría un locutor real.
+                </span>
+              </div>
+            </div>
+            <div class="row-b" style="margin-top:12px">
+              <button class="btn btn-gn btn-sm" onclick="hablarTexto()" id="btnHablar">
+                🔊 Leer en voz alta (TTS)
+              </button>
+              <button class="btn btn-pk btn-sm" onclick="detenerVoz()">⏹ Detener</button>
+              <button class="btn btn-ghost btn-sm" onclick="copiarTexto()">📋 Copiar</button>
+            </div>
+
+            <!-- CONTROL TTS -->
+            <div class="tts-ctrl" style="margin-top:12px">
+              <div style="font-size:10px;color:var(--mut);font-family:var(--FU);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Control de Voz (TTS del navegador)</div>
+              <div class="tts-row" style="margin-bottom:8px">
+                <span style="font-size:11px;color:var(--mut);width:60px">Velocidad</span>
+                <input type="range" class="tts-slider" id="ttsRate" min="0.5" max="2" step="0.1" value="1" oninput="updateTTS(this,'rate')">
+                <span style="font-size:11px;color:var(--c);width:30px" id="ttsRateVal">1.0</span>
+              </div>
+              <div class="tts-row" style="margin-bottom:8px">
+                <span style="font-size:11px;color:var(--mut);width:60px">Tono</span>
+                <input type="range" class="tts-slider" id="ttsPitch" min="0" max="2" step="0.1" value="1" oninput="updateTTS(this,'pitch')">
+                <span style="font-size:11px;color:var(--c);width:30px" id="ttsPitchVal">1.0</span>
+              </div>
+              <div class="fg" style="margin:8px 0 0">
+                <label class="flbl">Voz del sistema</label>
+                <select id="ttsVoice" class="fsel finp" style="font-size:12px;padding:7px 10px"></select>
+              </div>
+            </div>
+
+            <!-- HISTORIAL -->
+            <div style="margin-top:14px">
+              <div style="font-family:var(--FU);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mut);margin-bottom:8px">
+                Historial de hoy
+              </div>
+              <div id="iaHistorial" style="max-height:180px;overflow-y:auto">
+                <div class="empty" style="padding:10px">Sin intervenciones generadas aún</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="fg">
-        <label class="flbl">Instagram URL</label>
-        <input id="cfgIg" class="inp-sm" placeholder="https://instagram.com/turadio">
-      </div>
-      <div class="fg">
-        <label class="flbl">YouTube URL</label>
-        <input id="cfgYt" class="inp-sm" placeholder="https://youtube.com/@turadio">
-      </div>
-      <div class="fg">
-        <label class="flbl">TikTok URL</label>
-        <input id="cfgTk" class="inp-sm" placeholder="https://tiktok.com/@turadio">
-      </div>
-      <div class="row-b">
-        <button class="btn-sv" onclick="saveRedes()">💾 Guardar redes</button>
-      </div>
-      <div class="fb-ok" id="fbRedes">✅ Redes guardadas</div>
     </div>
 
-    <!-- NOTICIAS -->
-    <div class="p-sec">
-      <div class="p-sec-t">📰 Noticias</div>
-      <div id="edNoticias"></div>
-      <div class="row-b" style="margin-top:10px">
-        <button class="btn-add" onclick="agregarNoticia()">➕ Nueva noticia</button>
-        <button class="btn-sv" onclick="guardarNoticias()">💾 Guardar</button>
+    <!-- ══ PROGRAMACIÓN ══ -->
+    <div class="view" id="view-programacion">
+
+      <div class="grid2">
+        <div>
+          <div class="card">
+            <div class="card-ttl">📋 Grilla de programación</div>
+            <div id="schedList">
+              <div class="empty">Sin programas · Agregá desde el editor</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-ttl">➕ Agregar / editar bloque</div>
+            <div class="fg">
+              <label class="flbl">Hora de inicio</label>
+              <input type="time" id="blkHora" class="finp">
+            </div>
+            <div class="fg">
+              <label class="flbl">Duración</label>
+              <select id="blkDur" class="fsel finp">
+                <option value="30">30 minutos</option>
+                <option value="60" selected>1 hora</option>
+                <option value="90">1h 30min</option>
+                <option value="120">2 horas</option>
+                <option value="180">3 horas</option>
+                <option value="240">4 horas</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label class="flbl">Nombre del programa</label>
+              <input id="blkNombre" class="finp" placeholder="Ej: La Mañana Top">
+            </div>
+            <div class="fg">
+              <label class="flbl">Locutor / Responsable</label>
+              <input id="blkLocutor" class="finp" placeholder="Ej: Diego F. / IA Autónoma">
+            </div>
+            <div class="fg">
+              <label class="flbl">Tipo de bloque</label>
+              <select id="blkTipo" class="fsel finp">
+                <option value="musica">🎵 Musical / Hits</option>
+                <option value="nocturno">🌙 Nocturno / Ambient</option>
+                <option value="noticias">📰 Noticias / Informativo</option>
+                <option value="deportes">⚽ Deportivo</option>
+                <option value="entretenimiento">🎭 Entretenimiento</option>
+                <option value="ia">🤖 IA Autónoma 24/7</option>
+              </select>
+            </div>
+            <div class="tgl-row">
+              <div><div class="tgl-lbl">Conducción IA en este bloque</div>
+                <div class="tgl-sub">La IA genera intervenciones automáticas</div></div>
+              <label class="tgl"><input type="checkbox" id="blkIA"><span class="tgl-s"></span></label>
+            </div>
+            <div class="tgl-row">
+              <div><div class="tgl-lbl">Marcar como activo ahora</div></div>
+              <label class="tgl"><input type="checkbox" id="blkActivo"><span class="tgl-s"></span></label>
+            </div>
+            <div class="row-b">
+              <button class="btn btn-prime" onclick="agregarBloque()">➕ Agregar bloque</button>
+              <button class="btn btn-ghost btn-sm" onclick="guardarProg()">💾 Guardar</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="fb-ok" id="fbNot">✅ Noticias guardadas</div>
     </div>
 
-    <!-- SORTEOS -->
-    <div class="p-sec">
-      <div class="p-sec-t">🎁 Sorteos & Promociones</div>
-      <div id="edPromos"></div>
-      <div class="row-b" style="margin-top:10px">
-        <button class="btn-add" onclick="agregarPromo()">➕ Nueva promo/sorteo</button>
-        <button class="btn-sv" onclick="guardarPromos()">💾 Guardar</button>
+    <!-- ══ PLAYLIST ══ -->
+    <div class="view" id="view-playlist">
+
+      <div class="grid2">
+        <div>
+          <div class="card">
+            <div class="card-ttl">🎵 Cola de reproducción <span style="color:var(--mut);font-size:10px;font-family:var(--FU);margin-left:4px" id="plTotal">(0 temas)</span></div>
+            <div id="plList">
+              <div class="empty">Sin canciones · Agregá usando el formulario</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-ttl">➕ Agregar canción</div>
+            <div class="fg">
+              <label class="flbl">Título de la canción</label>
+              <input id="plTitulo" class="finp" placeholder="Ej: Bohemian Rhapsody">
+            </div>
+            <div class="fg">
+              <label class="flbl">Artista</label>
+              <input id="plArtista" class="finp" placeholder="Ej: Queen">
+            </div>
+            <div class="fg">
+              <label class="flbl">Duración (mm:ss)</label>
+              <input id="plDur" class="finp" placeholder="4:35">
+            </div>
+            <div class="fg">
+              <label class="flbl">Etiqueta</label>
+              <select id="plTag" class="fsel finp">
+                <option value="">Sin etiqueta</option>
+                <option value="ia">🤖 Intervención IA antes</option>
+                <option value="prox">⏭ Próxima</option>
+                <option value="pedido">💬 Pedido de oyente</option>
+              </select>
+            </div>
+            <div class="row-b">
+              <button class="btn btn-prime" onclick="agregarCancion()">➕ Agregar</button>
+              <button class="btn btn-ghost btn-sm" onclick="limpiarPlaylist()">🗑 Limpiar todo</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <div class="card-ttl">💬 Pedidos detectados</div>
+            <div id="pedidosList">
+              <div class="empty">Sin pedidos · Aparecen desde la Cabina</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="fb-ok" id="fbProm">✅ Promos guardadas</div>
     </div>
 
-    <!-- PROGRAMACIÓN -->
-    <div class="p-sec">
-      <div class="p-sec-t">📋 Programación semanal</div>
-      <div id="edSched"></div>
-      <div class="row-b" style="margin-top:10px">
-        <button class="btn-add" onclick="agregarPrograma()">➕ Agregar programa</button>
-        <button class="btn-sv" onclick="guardarSched()">💾 Guardar</button>
+    <!-- ══ VOCES IA ══ -->
+    <div class="view" id="view-voces">
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-ttl">🗣️ Voces del sistema (Web Speech API)</div>
+        <div style="font-size:12px;color:var(--mut);margin-bottom:14px;line-height:1.6">
+          El navegador incluye voces de texto a voz (TTS) <strong style="color:var(--txt)">sin costo adicional</strong>.
+          Las voces disponibles dependen de tu sistema operativo. Para voces IA profesionales de mayor calidad,
+          podés integrar servicios como <strong style="color:var(--c)">ElevenLabs</strong> o <strong style="color:var(--c)">Google Cloud TTS</strong> con su API key.
+        </div>
+        <div id="vocesGrid" class="grid4">
+          <div class="empty">Cargando voces del sistema...</div>
+        </div>
       </div>
-      <div class="fb-ok" id="fbSch">✅ Programación guardada</div>
+
+      <div class="card">
+        <div class="card-ttl">🎛️ Prueba de voz</div>
+        <div class="fg">
+          <label class="flbl">Texto de prueba</label>
+          <textarea id="voicePrueba" class="fta" style="min-height:80px">Buenos días oyentes de la mejor radio del mundo. Les habla su locutor favorito. Hoy tenemos un día espectacular con mucha música y buenas noticias.</textarea>
+        </div>
+        <div class="row-b">
+          <button class="btn btn-prime" onclick="probarVoz()">🔊 Escuchar voz seleccionada</button>
+          <button class="btn btn-ghost btn-sm" onclick="detenerVoz()">⏹ Detener</button>
+        </div>
+        <div style="margin-top:14px;padding:12px;background:rgba(200,0,255,.06);border:1px solid rgba(200,0,255,.2);border-radius:10px;font-size:12px;color:var(--mut);line-height:1.6">
+          <strong style="color:var(--pk)">💡 Para voces IA profesionales:</strong><br>
+          • <strong style="color:var(--txt)">ElevenLabs</strong> — Voces clonadas ultra-realistas. Plan gratuito disponible. <a href="https://elevenlabs.io" target="_blank" style="color:var(--c)">elevenlabs.io</a><br>
+          • <strong style="color:var(--txt)">Google Cloud TTS</strong> — Voces WaveNet en español. <a href="https://cloud.google.com/text-to-speech" target="_blank" style="color:var(--c)">cloud.google.com</a><br>
+          • <strong style="color:var(--txt)">Amazon Polly</strong> — Solución robusta para producción. <a href="https://aws.amazon.com/polly" target="_blank" style="color:var(--c)">aws.amazon.com/polly</a><br>
+          <br>Estas integraciones requieren configurar tu API key y un pequeño servidor intermediario (el navegador no puede llamarlas directamente por CORS).
+        </div>
+      </div>
     </div>
 
-    <!-- AUTOMATIZACIÓN IA -->
-    <div class="p-sec">
-      <div class="p-sec-t">🤖 Automatización & IA</div>
-      <div class="tgl-row">
-        <span class="tgl-lbl">Alertas inteligentes (baja/alta actividad)</span>
-        <label class="tgl"><input type="checkbox" id="tAlertas" checked><span class="tgl-s"></span></label>
+    <!-- ══ ANALYTICS ══ -->
+    <div class="view" id="view-analytics">
+
+      <div class="grid4" style="margin-bottom:16px">
+        <div class="stat c">
+          <div class="stat-v c" id="anOy">—</div>
+          <div class="stat-l">Oyentes actuales</div>
+        </div>
+        <div class="stat pk">
+          <div class="stat-v pk" id="anMsg">0</div>
+          <div class="stat-l">Mensajes sesión</div>
+        </div>
+        <div class="stat gn">
+          <div class="stat-v gn" id="anPed">0</div>
+          <div class="stat-l">Pedidos sesión</div>
+        </div>
+        <div class="stat yw">
+          <div class="stat-v yw" id="anIA">0</div>
+          <div class="stat-l">Intervenc. IA</div>
+        </div>
       </div>
-      <div class="tgl-row">
-        <span class="tgl-lbl">Sugerencias IA al locutor</span>
-        <label class="tgl"><input type="checkbox" id="tIA" checked><span class="tgl-s"></span></label>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="card-ttl">👥 Oyentes activos</div>
+          <div id="oyentesList">
+            <div class="empty">Sin datos · Los oyentes se registran cuando envían mensajes a Cabina</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-ttl">🎵 Top pedidos</div>
+          <div id="topPedidos">
+            <div class="empty">Sin pedidos detectados</div>
+          </div>
+        </div>
       </div>
-      <div class="tgl-row">
-        <span class="tgl-lbl">Detección automática de pedidos</span>
-        <label class="tgl"><input type="checkbox" id="tPedidos" checked><span class="tgl-s"></span></label>
-      </div>
-      <div class="tgl-row">
-        <span class="tgl-lbl">Actualización automática del clima (cada 10 min)</span>
-        <label class="tgl"><input type="checkbox" id="tClima" checked><span class="tgl-s"></span></label>
-      </div>
-      <div class="row-b">
-        <button class="btn-sv" onclick="guardarAuto()">💾 Guardar ajustes</button>
-      </div>
-      <div class="fb-ok" id="fbAuto">✅ Ajustes guardados</div>
     </div>
 
-    <!-- CONTRASEÑA -->
-    <div class="p-sec">
-      <div class="p-sec-t">🔐 Cambiar Contraseña</div>
-      <div class="fg">
-        <label class="flbl">Nueva contraseña</label>
-        <input type="password" id="pass1" class="inp-sm" placeholder="Nueva contraseña">
+    <!-- ══ PANEL ADMIN ══ -->
+    <div class="view" id="view-panel">
+
+      <!-- LOGIN -->
+      <div id="panelLock" style="max-width:400px;margin:60px auto;text-align:center">
+        <div style="font-size:48px;margin-bottom:14px">🔒</div>
+        <div style="font-family:var(--FD);font-size:18px;color:var(--c);margin-bottom:6px">PANEL ADMIN</div>
+        <div style="font-size:13px;color:var(--mut);margin-bottom:22px">
+          Ingresá tu contraseña de administrador
+        </div>
+        <input type="password" id="passInp" class="finp" placeholder="Contraseña"
+          onkeydown="if(event.key==='Enter')loginPanel()">
+        <div class="row-b" style="margin-top:10px;justify-content:center">
+          <button class="btn btn-prime" onclick="loginPanel()">INGRESAR</button>
+        </div>
+        <div style="font-size:11px;color:var(--mut);margin-top:10px">
+          Por defecto: <strong style="color:var(--c)">radio2024</strong>
+        </div>
       </div>
-      <div class="fg">
-        <label class="flbl">Confirmar contraseña</label>
-        <input type="password" id="pass2" class="inp-sm" placeholder="Repetir">
+
+      <!-- CONTENIDO ADMIN -->
+      <div id="panelCont" style="display:none">
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div style="font-family:var(--FD);font-size:14px;font-weight:900;color:var(--c)">
+            ⚙️ PANEL DE ADMINISTRACIÓN
+          </div>
+          <button class="btn btn-rd btn-sm" onclick="logoutPanel()">Cerrar sesión</button>
+        </div>
+
+        <div class="grid2">
+          <div>
+            <!-- CONFIG GENERAL -->
+            <div class="card">
+              <div class="card-ttl">📻 Configuración general</div>
+              <div class="fg">
+                <label class="flbl">Nombre de la radio</label>
+                <input id="pNombre" class="finp" placeholder="Mi Radio FM">
+              </div>
+              <div class="fg">
+                <label class="flbl">URL del stream</label>
+                <input id="pStream" class="finp" placeholder="https://...">
+              </div>
+              <div class="fg">
+                <label class="flbl">URL metadatos Icecast (status-json.xsl)</label>
+                <input id="pMeta" class="finp" placeholder="https://.../status-json.xsl">
+              </div>
+              <div class="fg">
+                <label class="flbl">Número WhatsApp (sin + ni espacios)</label>
+                <input id="pWA" class="finp" placeholder="5939XXXXXXXX">
+              </div>
+              <div class="row-b">
+                <button class="btn btn-prime btn-sm" onclick="guardarPanel()">💾 Guardar</button>
+              </div>
+              <div id="fbPanel" style="display:none;margin-top:8px;color:var(--gn);font-size:12px">✅ Guardado</div>
+            </div>
+
+            <!-- REDES -->
+            <div class="card" style="margin-top:14px">
+              <div class="card-ttl">📲 Redes Sociales</div>
+              <div class="fg"><label class="flbl">Facebook</label>
+                <input id="pFb" class="finp" placeholder="https://facebook.com/turadio"></div>
+              <div class="fg"><label class="flbl">Instagram</label>
+                <input id="pIg" class="finp" placeholder="https://instagram.com/turadio"></div>
+              <div class="fg"><label class="flbl">YouTube</label>
+                <input id="pYt" class="finp" placeholder="https://youtube.com/@turadio"></div>
+              <div class="row-b">
+                <button class="btn btn-prime btn-sm" onclick="guardarRedes()">💾 Guardar redes</button>
+              </div>
+              <div id="fbRedes" style="display:none;margin-top:8px;color:var(--gn);font-size:12px">✅ Guardado</div>
+            </div>
+          </div>
+
+          <div>
+            <!-- IA CONFIG -->
+            <div class="card">
+              <div class="card-ttl">🤖 Configuración de IA</div>
+              <div class="fg">
+                <label class="flbl">API Key Claude (Anthropic)</label>
+                <input id="pApiKey" class="finp" type="password" placeholder="sk-ant-api03-...">
+                <div style="font-size:10px;color:var(--mut);margin-top:4px;line-height:1.5">
+                  Obtené tu key GRATIS en <a href="https://console.anthropic.com" target="_blank" style="color:var(--c)">console.anthropic.com</a>
+                  (requiere tarjeta de crédito para el plan de pago, hay créditos gratuitos al registrarse)
+                </div>
+              </div>
+              <div class="fg">
+                <label class="flbl">Nombre del locutor IA</label>
+                <input id="pLocutor" class="finp" placeholder="Ej: Diego, Valentina, Radio Bot">
+              </div>
+              <div class="fg">
+                <label class="flbl">Estilo de conducción</label>
+                <select id="pEstilo" class="fsel finp">
+                  <option value="dinamico">Dinámico y juvenil</option>
+                  <option value="formal">Formal y profesional</option>
+                  <option value="tropical">Tropical y festivo</option>
+                  <option value="nocturno">Nocturno y tranquilo</option>
+                  <option value="noticiero">Noticioso e informativo</option>
+                  <option value="humor">Con humor y entretenimiento</option>
+                </select>
+              </div>
+              <div class="fg">
+                <label class="flbl">Descripción de tu radio (para que la IA entienda el contexto)</label>
+                <textarea id="pDescRadio" class="fta" style="min-height:70px"
+                  placeholder="Ej: Radio tropical para jóvenes de 18 a 35 años, música pop, reggaeton y tropical, ubicada en Quito, Ecuador"></textarea>
+              </div>
+              <div class="row-b">
+                <button class="btn btn-prime btn-sm" onclick="guardarIA()">💾 Guardar IA</button>
+                <button class="btn btn-pk btn-sm" onclick="probarIA()">🧪 Probar IA</button>
+              </div>
+              <div id="fbIA" style="display:none;margin-top:8px;color:var(--gn);font-size:12px">✅ Guardado</div>
+            </div>
+
+            <!-- CAMBIAR PASS -->
+            <div class="card" style="margin-top:14px">
+              <div class="card-ttl">🔐 Cambiar contraseña</div>
+              <div class="fg">
+                <label class="flbl">Nueva contraseña</label>
+                <input type="password" id="newP1" class="finp" placeholder="Mínimo 6 caracteres">
+              </div>
+              <div class="fg">
+                <label class="flbl">Confirmar</label>
+                <input type="password" id="newP2" class="finp" placeholder="Repetir">
+              </div>
+              <div class="row-b">
+                <button class="btn btn-prime btn-sm" onclick="cambiarPass()">🔒 Cambiar</button>
+              </div>
+              <div id="fbPass" style="display:none;margin-top:8px;color:var(--gn);font-size:12px">✅ Contraseña actualizada</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="row-b">
-        <button class="btn-sv" onclick="cambiarPass()">🔒 Cambiar contraseña</button>
-      </div>
-      <div class="fb-ok" id="fbPass">✅ Contraseña actualizada</div>
     </div>
 
-    <div class="sp"></div>
+  </main>
+
+  <!-- RIGHT PANEL — CABINA -->
+  <div class="rpanel">
+    <div class="rp-hdr">
+      <span class="rp-ttl">💬 Cabina en vivo</span>
+      <span class="rp-cnt" id="rpCnt">0 msgs</span>
+    </div>
+    <div class="rp-metrics">
+      <div class="rp-m">
+        <div class="rp-mv" style="color:var(--c)" id="rpOy">—</div>
+        <div class="rp-ml">Oyentes</div>
+      </div>
+      <div class="rp-m">
+        <div class="rp-mv" style="color:var(--pk)" id="rpMsg">0</div>
+        <div class="rp-ml">Msgs</div>
+      </div>
+      <div class="rp-m">
+        <div class="rp-mv" style="color:var(--gn)" id="rpPed">0</div>
+        <div class="rp-ml">Pedidos</div>
+      </div>
+      <div class="rp-m">
+        <div class="rp-mv" style="color:var(--yw)" id="rpSup">0</div>
+        <div class="rp-ml">Superfans</div>
+      </div>
+    </div>
+    <div class="rp-filters">
+      <button class="rp-f on" id="rfTodo" onclick="filtrar('todos',this)">Todos</button>
+      <button class="rp-f" id="rfPed" onclick="filtrar('pedido',this)">🎵 Ped.</button>
+      <button class="rp-f" id="rfSal" onclick="filtrar('saludo',this)">👋 Sal.</button>
+      <button class="rp-f" id="rfDest" onclick="filtrar('dest',this)">⭐ Dest.</button>
+    </div>
+    <div class="rp-msgs" id="rpMsgs">
+      <div class="empty" style="padding:20px 10px">
+        Los mensajes de oyentes aparecen aquí.<br>
+        Simulá mensajes con el campo de abajo o integrá WhatsApp Business API.
+      </div>
+    </div>
+    <div class="rp-input">
+      <div style="font-size:9px;color:var(--mut);font-family:var(--FU);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px">
+        Simulador de mensaje
+      </div>
+      <div style="display:flex;gap:5px;margin-bottom:5px">
+        <input id="simNom" class="rp-inp" style="flex:0 0 100px" placeholder="Nombre">
+        <input id="simTxt" class="rp-inp" placeholder="Mensaje del oyente..."
+          onkeydown="if(event.key==='Enter')simularMsg()">
+      </div>
+      <button onclick="simularMsg()" class="rp-send" style="width:100%">Enviar mensaje demo</button>
+    </div>
   </div>
-</section>
 
-</div><!-- /wrap -->
+</div><!-- /layout -->
 
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════ -->
 <script>
-/* ═══════════════════════════════════════
-   HELPERS localStorage
-═══════════════════════════════════════ */
-const LS = {
-  get: k => { try { return localStorage.getItem(k) } catch { return null } },
-  set: (k,v) => { try { localStorage.setItem(k,v) } catch {} },
-  getJSON: (k,d=[]) => { try { return JSON.parse(localStorage.getItem(k)) || d } catch { return d } },
-  setJSON: (k,v) => { try { localStorage.setItem(k,JSON.stringify(v)) } catch {} }
+/* ══════════════════════════
+   ESTADO
+══════════════════════════ */
+const S = {
+  msgs: [], pedidos: {}, oyentesDB: {},
+  filtro: 'todos', iaCallsToday: 0,
+  streamPlaying: false, streamOyentes: null,
+  playlist: [], progr: [], selectedVoice: null,
+  ttsRate: 1, ttsPitch: 1,
+  wxData: null, wxInterval: null,
+  autoHora: false, autoID: false, autoPres: false,
+  autoSaludo: false, autoClima: false, autoPedidos: false,
+};
+
+/* ══════════════════════════
+   LOCAL STORAGE HELPERS
+══════════════════════════ */
+const L = {
+  g: k => { try{return localStorage.getItem(k)}catch{return null} },
+  s: (k,v) => { try{localStorage.setItem(k,v)}catch{} },
+  gJ: (k,d=[]) => { try{return JSON.parse(localStorage.getItem(k))||d}catch{return d} },
+  sJ: (k,v) => { try{localStorage.setItem(k,JSON.stringify(v))}catch{} },
 };
 const CFG = {
-  name:       () => LS.get('r_name')    || '',
-  url:        () => LS.get('r_url')     || '',
-  meta:       () => LS.get('r_meta')    || '',
-  wa:         () => LS.get('r_wa')      || '',
-  waMsg:      () => LS.get('r_wamsg')   || 'Hola! Quiero pedir una canción 🎵',
-  ciudad:     () => LS.get('r_city')    || '',
-  wxKey:      () => LS.get('r_wxkey')   || '',
-  fb:         () => LS.get('r_fb')      || '',
-  ig:         () => LS.get('r_ig')      || '',
-  yt:         () => LS.get('r_yt')      || '',
-  tk:         () => LS.get('r_tk')      || '',
-  pass:       () => LS.get('r_pass')    || 'radio2024',
-  news:       () => LS.getJSON('r_news'),
-  promos:     () => LS.getJSON('r_promos'),
-  sched:      () => LS.getJSON('r_sched'),
-  tAlertas:   () => LS.get('r_tAlertas') !== 'false',
-  tIA:        () => LS.get('r_tIA') !== 'false',
-  tPedidos:   () => LS.get('r_tPedidos') !== 'false',
-  tClima:     () => LS.get('r_tClima') !== 'false',
+  nombre:   ()=>L.g('rs_nombre')||'',
+  stream:   ()=>L.g('rs_stream')||'',
+  meta:     ()=>L.g('rs_meta')||'',
+  apiKey:   ()=>L.g('rs_apikey')||'',
+  ciudad:   ()=>L.g('rs_ciudad')||'',
+  wxKey:    ()=>L.g('rs_wxkey')||'',
+  wa:       ()=>L.g('rs_wa')||'',
+  locutor:  ()=>L.g('rs_locutor')||'IA',
+  estilo:   ()=>L.g('rs_estilo')||'dinamico',
+  descRadio:()=>L.g('rs_desc')||'',
+  pass:     ()=>L.g('rs_pass')||'radio2024',
+  fb:       ()=>L.g('rs_fb')||'',
+  ig:       ()=>L.g('rs_ig')||'',
+  yt:       ()=>L.g('rs_yt')||'',
+  playlist: ()=>L.gJ('rs_playlist'),
+  progr:    ()=>L.gJ('rs_progr'),
 };
 
-/* ═══════════════════════════════════════
-   ESTADO
-═══════════════════════════════════════ */
-const S = {
-  playing:   false,
-  vol:       80,
-  msgs:      [],
-  pedidos:   {},
-  oyentesDB: {},
-  filtro:    'todos',
-  streamOy:  null,  // oyentes del servidor Icecast
-  totalMsgs: 0,
-};
-
-/* ═══════════════════════════════════════
+/* ══════════════════════════
    INIT
-═══════════════════════════════════════ */
+══════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+  iniciarReloj();
   aplicarConfig();
-  renderNoticias(); renderPromos(); renderSched();
-  verificarSetup();
+  cargarToggles();
+  cargarPlaylist();
+  cargarProg();
+  initVoces();
+  generarWaveform();
   fetchClima();
   if (CFG.meta()) fetchMetadata();
-  initPWA();
-  loadPanelFields();
+  setInterval(fetchMetadata, 15000);
+  verificarApiKey();
 });
-
-function verificarSetup() {
-  const sinConfig = !CFG.url() && !CFG.name();
-  document.getElementById('setupBanner').style.display = sinConfig ? 'block' : 'none';
-}
 
 function aplicarConfig() {
-  const n = CFG.name() || 'RADIOSYNC';
-  el('hdrName').textContent = n;
-  document.title = `📻 ${n}`;
-  const audio = document.getElementById('audio');
-  if (CFG.url()) audio.src = '';
-  if (CFG.fb()) el('lFb').href = CFG.fb();
-  if (CFG.ig()) el('lIg').href = CFG.ig();
-  if (CFG.yt()) el('lYt').href = CFG.yt();
-  if (CFG.tk()) el('lTk').href = CFG.tk();
-  if (document.getElementById('tAlertas')) {
-    document.getElementById('tAlertas').checked = CFG.tAlertas();
-    document.getElementById('tIA').checked = CFG.tIA();
-    document.getElementById('tPedidos').checked = CFG.tPedidos();
-    document.getElementById('tClima').checked = CFG.tClima();
+  const n = CFG.nombre() || 'AUDIOLABRDCR';
+  el('tbNombre').textContent = n;
+  document.title = `${n} — Panel IA`;
+  const url = CFG.stream();
+  el('surl').textContent = url || 'Sin URL configurada';
+  el('sbApiStatus').textContent = CFG.apiKey() ? '✅ IA: Configurada' : '⚠️ IA: Sin configurar';
+}
+
+function verificarApiKey() {
+  if (!CFG.apiKey()) {
+    mostrarAlertaIA([{
+      tipo:'sa-yw', ico:'⚠️',
+      ttl:'API Key de Claude no configurada',
+      txt:'Sin la key, la IA no puede generar intervenciones reales. Configurá en ⚙️ Config o Panel Admin.'
+    }]);
+  } else {
+    mostrarAlertaIA([{
+      tipo:'sa-gn', ico:'✅',
+      ttl:'IA lista para generar',
+      txt:'Claude API configurada. Presioná "Generar con IA" en la sección Conducción IA.'
+    }]);
   }
 }
 
-/* ═══════════════════════════════════════
-   PLAYER
-═══════════════════════════════════════ */
-const audio = document.getElementById('audio');
-let metaInterval = null;
+/* ══════════════════════════
+   RELOJ
+══════════════════════════ */
+function iniciarReloj() {
+  function tick() {
+    const now = new Date();
+    el('tbClock').textContent = now.toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    el('tbDate').textContent = now.toLocaleDateString('es',{weekday:'long',day:'numeric',month:'long'});
+    // Auto intervenciones
+    const min = now.getMinutes(); const seg = now.getSeconds();
+    if (seg === 0) {
+      if (S.autoHora && min % 30 === 0) autoIntervenir('hora');
+      if (S.autoID && min === 0) autoIntervenir('apertura');
+      if (S.autoSaludo && min % 20 === 0 && min !== 0) autoIntervenir('saludo');
+    }
+  }
+  tick(); setInterval(tick, 1000);
+}
+
+/* ══════════════════════════
+   STREAM AUDIO
+══════════════════════════ */
+const audio = document.getElementById('streamAudio');
 
 audio.addEventListener('playing', () => {
-  S.playing = true;
-  el('btnPlay').textContent = '⏹';
-  el('btnPlay').classList.add('on');
-  el('wave').classList.remove('off');
-  el('npLabel').textContent = 'SONANDO AHORA';
-  el('liveBadge').style.display = 'flex';
-  el('offlineBadge').style.display = 'none';
-  setStatus('ok', 'Transmisión activa');
-  toast('📻', `¡${CFG.name() || 'Radio'} en vivo!`, 'ok');
-  if (CFG.meta()) metaInterval = setInterval(fetchMetadata, 15000);
+  S.streamPlaying = true;
+  el('sdot').className = 'ss-dot ok';
+  el('slbl').textContent = 'En vivo';
+  el('btnStream').textContent = '⏹ Desconectar';
+  el('btnStream').className = 'btn-stream stop';
+  el('tbWave').classList.remove('off');
+  el('livePill').style.display = 'flex';
+  el('dashStatus').textContent = 'ON AIR';
+  el('dashStatus').className = 'badge badge-gn';
+  toast('📻', 'Stream conectado · EN VIVO', 'ok');
+  if (CFG.meta()) fetchMetadata();
 });
-
-audio.addEventListener('pause', onStop);
+audio.addEventListener('pause', stopStream);
 audio.addEventListener('error', () => {
-  onStop();
-  setStatus('err', 'Error al conectar · Verificá la URL del stream');
-  toast('❌', 'No se pudo conectar. Verificá la URL en el Panel.', 'err');
+  stopStream();
+  toast('❌', 'Error al conectar el stream. Verificá la URL en Config.', 'err');
 });
-audio.addEventListener('stalled', () => setStatus('wait', 'Cargando stream...'));
-audio.addEventListener('waiting', () => setStatus('wait', 'Conectando...'));
+audio.addEventListener('waiting', () => {
+  el('sdot').className = 'ss-dot wait';
+  el('slbl').textContent = 'Conectando...';
+});
 
-function onStop() {
-  S.playing = false;
-  el('btnPlay').textContent = '▶';
-  el('btnPlay').classList.remove('on');
-  el('wave').classList.add('off');
-  el('npLabel').textContent = 'LISTO PARA EMITIR';
-  el('liveBadge').style.display = 'none';
-  el('offlineBadge').style.display = 'flex';
-  setStatus('err', 'Desconectado');
-  if (metaInterval) { clearInterval(metaInterval); metaInterval = null; }
+function stopStream() {
+  S.streamPlaying = false;
+  el('sdot').className = 'ss-dot err';
+  el('slbl').textContent = 'Desconectado';
+  el('btnStream').textContent = '▶ Conectar Stream';
+  el('btnStream').className = 'btn-stream play';
+  el('tbWave').classList.add('off');
+  el('livePill').style.display = 'none';
+  el('dashStatus').textContent = 'OFFLINE';
+  el('dashStatus').className = 'badge badge-rd';
 }
 
-function setStatus(tipo, msg) {
-  const d = el('sDot'); const m = el('sMsg');
-  d.className = `status-dot ${tipo}`;
-  m.textContent = msg;
-}
-
-function togglePlay() {
-  if (!CFG.url()) {
-    toast('⚠️', 'Configurá la URL del stream en el Panel primero', 'warn');
-    go('panel', document.querySelector('.nb:last-child'));
-    return;
-  }
-  if (S.playing) {
+function toggleStream() {
+  if (S.streamPlaying) {
     audio.pause(); audio.src = '';
   } else {
-    setStatus('wait', 'Conectando al stream...');
-    audio.src = CFG.url();
-    audio.volume = S.vol / 100;
+    const url = CFG.stream();
+    if (!url) { toast('⚠️', 'Configurá la URL del stream en ⚙️ Config', 'warn'); openModal('modalConfig'); return; }
+    el('sdot').className = 'ss-dot wait';
+    el('slbl').textContent = 'Conectando...';
+    audio.src = url;
+    audio.volume = 0.8;
     audio.play().catch(() => {});
   }
 }
 
-function setVol(v) {
-  S.vol = Number(v);
-  audio.volume = S.vol / 100;
-  const s = el('volSlider');
-  s.style.background = `linear-gradient(90deg,var(--cyan) ${v}%,rgba(255,255,255,.15) ${v}%)`;
-}
-
-/* ═══════════════════════════════════════
+/* ══════════════════════════
    METADATA ICECAST (real)
-   GET /status-json.xsl
-═══════════════════════════════════════ */
+══════════════════════════ */
 async function fetchMetadata() {
   const url = CFG.meta();
   if (!url) return;
   try {
-    const r = await fetch(url, { cache: 'no-store' });
+    const r = await fetch(url, {cache:'no-store'});
     const d = await r.json();
-    // Icecast devuelve icestats.source (puede ser array o objeto)
     const src = d?.icestats?.source;
-    const mount = Array.isArray(src) ? src[0] : src;
-    if (mount) {
-      const titulo = mount.title || mount.song || '—';
-      const artista = mount.artist || '';
-      const oyentes = mount.listeners !== undefined ? mount.listeners : '—';
-      el('trackTitle').textContent = titulo !== '—' ? titulo : (CFG.name() || 'En vivo');
-      el('trackArtist').textContent = artista || '♪ Transmisión en vivo';
-      el('oyentes').textContent = oyentes;
-      el('cOy').textContent = oyentes;
-      el('oyActivos').textContent = oyentes;
-      S.streamOy = oyentes;
-    }
-  } catch(e) {
-    // CORS o error de red — no mostrar error al usuario, simplemente no actualizamos
-  }
+    const m = Array.isArray(src) ? src[0] : src;
+    if (!m) return;
+    const titulo = m.title || m.song || '—';
+    const artista = m.artist || '';
+    const oy = m.listeners ?? '—';
+    el('tbSong').innerHTML = esc(titulo) + (artista ? `<small> — ${esc(artista)}</small>` : '');
+    el('dashSong').textContent = titulo;
+    el('dashArtist').textContent = artista || '♪ En vivo';
+    el('stOy').textContent = oy; el('rpOy').textContent = oy;
+    el('anOy').textContent = oy; el('stOyT').textContent = 'dato real Icecast';
+    S.streamOyentes = oy;
+    el('cabOy') && (el('cabOy').textContent = oy);
+  } catch(e) { /* CORS o sin meta — silencio */ }
 }
 
-/* ═══════════════════════════════════════
-   WHATSAPP
-═══════════════════════════════════════ */
-function abrirWA(e) {
-  const num = CFG.wa().replace(/\D/g,'');
-  if (!num) {
-    e.preventDefault();
-    toast('⚠️', 'Configurá el número de WhatsApp en el Panel', 'warn');
-    return;
-  }
-  const msg = encodeURIComponent(CFG.waMsg());
-  document.getElementById('btnWA').href = `https://wa.me/${num}?text=${msg}`;
-}
-
-function probarWA() {
-  const num = el('cfgWA').value.replace(/\D/g,'');
-  if (!num) { toast('⚠️','Ingresá el número primero','warn'); return; }
-  const msg = encodeURIComponent(el('cfgWAmsg').value || 'Hola! Test enlace de la app 📻');
-  window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
-}
-
-/* ═══════════════════════════════════════
-   CLIMA — OpenWeatherMap API real
-═══════════════════════════════════════ */
-let climaInterval = null;
-
+/* ══════════════════════════
+   CLIMA REAL
+══════════════════════════ */
 async function fetchClima() {
-  const key = CFG.wxKey();
-  const city = CFG.ciudad();
+  const key = CFG.wxKey(); const city = CFG.ciudad();
   if (!key || !city) {
-    el('wxNoKey').style.display = 'flex';
-    el('wxCard').style.display = 'none';
+    el('wxContent').innerHTML = `<div style="font-size:12px;color:var(--mut)">Configurá ciudad y API Key de OpenWeatherMap en ⚙️ Config</div>`;
     return;
   }
   try {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${key}&units=metric&lang=es`;
-    const r = await fetch(url);
+    const r = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${key}&units=metric&lang=es`);
     const d = await r.json();
-    if (d.cod !== 200) {
-      el('wxNoKey').innerHTML = `<span>⚠️</span><div><strong style="color:var(--yellow)">Error clima: ${d.message}</strong><br>Verificá la API Key y la ciudad en el Panel.</div>`;
-      el('wxNoKey').style.display = 'flex';
-      el('wxCard').style.display = 'none';
-      return;
-    }
-    el('wxNoKey').style.display = 'none';
-    el('wxCard').style.display = 'flex';
-    el('wxTemp').textContent = Math.round(d.main.temp) + '°C';
+    if (d.cod !== 200) throw new Error(d.message);
+    S.wxData = d;
+    const temp = Math.round(d.main.temp);
     const desc = d.weather[0].description;
-    el('wxDesc').textContent = desc.charAt(0).toUpperCase() + desc.slice(1);
-    el('wxIco').textContent = wxEmoji(d.weather[0].icon);
-    el('wxHum').textContent = d.main.humidity + '%';
-    el('wxViento').textContent = Math.round(d.wind.speed * 3.6) + ' km/h';
-    el('wxSens').textContent = Math.round(d.main.feels_like) + '°C';
-    el('wxCity').textContent = d.name;
-    el('wxLabel').textContent = d.name;
-    const now = new Date();
-    el('wxUp').textContent = `🕐 Actualizado: ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
-    // Refresco automático cada 10 min si está habilitado
-    if (CFG.tClima()) {
-      if (climaInterval) clearInterval(climaInterval);
-      climaInterval = setInterval(fetchClima, 600000);
-    }
+    const ico = wxEmoji(d.weather[0].icon);
+    el('wxContent').innerHTML = `
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="font-size:42px;filter:drop-shadow(0 0 8px rgba(0,245,255,.3))">${ico}</div>
+        <div>
+          <div style="font-family:var(--FD);font-size:28px;font-weight:900;color:var(--c)">${temp}°C</div>
+          <div style="font-size:12px;color:var(--mut)">${desc.charAt(0).toUpperCase()+desc.slice(1)}</div>
+          <div style="font-size:11px;color:var(--mut);margin-top:3px">
+            💧 ${d.main.humidity}% · 💨 ${Math.round(d.wind.speed*3.6)} km/h · 🌡 Sens. ${Math.round(d.main.feels_like)}°C
+          </div>
+          <div style="font-size:10px;color:var(--mut);margin-top:3px;font-family:var(--FU)">
+            📍 ${d.name} · Actualizado ${new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'})}
+          </div>
+        </div>
+      </div>
+    `;
+    if (!S.wxInterval) S.wxInterval = setInterval(fetchClima, 600000);
   } catch(e) {
-    el('wxNoKey').innerHTML = `<span>⚠️</span><div><strong>Error de red</strong>: no se pudo obtener el clima. Verificá tu conexión.</div>`;
-    el('wxNoKey').style.display = 'flex';
+    el('wxContent').innerHTML = `<div style="font-size:12px;color:var(--rd)">⚠️ Error: ${e.message}. Verificá la API Key y la ciudad.</div>`;
   }
 }
 
 function wxEmoji(icon) {
-  const m={'01d':'☀️','01n':'🌙','02d':'⛅','02n':'🌥','03d':'☁️','03n':'☁️','04d':'☁️','04n':'☁️',
-    '09d':'🌧','09n':'🌧','10d':'🌦','10n':'🌧','11d':'⛈','11n':'⛈','13d':'❄️','13n':'❄️','50d':'🌫','50n':'🌫'};
+  const m={
+    '01d':'☀️','01n':'🌙','02d':'⛅','02n':'🌥','03d':'☁️','03n':'☁️',
+    '04d':'☁️','04n':'☁️','09d':'🌧','09n':'🌧','10d':'🌦','10n':'🌧',
+    '11d':'⛈','11n':'⛈','13d':'❄️','13n':'❄️','50d':'🌫','50n':'🌫'
+  };
   return m[icon]||'🌤';
 }
 
-/* ═══════════════════════════════════════
+/* ══════════════════════════
+   IA — CLAUDE API REAL
+══════════════════════════ */
+function construirPromptSistema() {
+  const n = CFG.nombre() || 'la radio';
+  const loc = CFG.locutor() || 'el locutor IA';
+  const est = CFG.estilo();
+  const desc = CFG.descRadio();
+  const estilos = {
+    dinamico: 'dinámico, juvenil, con mucha energía y entusiasmo',
+    formal: 'formal, profesional, claro y conciso',
+    tropical: 'alegre, tropical, festivo, con expresiones latinas',
+    nocturno: 'tranquilo, relajado, suave, ideal para la noche',
+    noticiero: 'informativo, directo, serio pero cercano',
+    humor: 'divertido, con humor sutil, entretenido y cercano',
+  };
+  const hora = new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'});
+  const fecha = new Date().toLocaleDateString('es',{weekday:'long',day:'numeric',month:'long'});
+  const clima = S.wxData
+    ? `Clima actual: ${Math.round(S.wxData.main.temp)}°C, ${S.wxData.weather[0].description} en ${S.wxData.name}.`
+    : 'Sin datos de clima disponibles.';
+  const oyentes = S.streamOyentes ? `Hay aproximadamente ${S.streamOyentes} oyentes en este momento.` : '';
+
+  return `Sos ${loc}, el locutor IA de "${n}". ${desc ? `La radio se describe como: ${desc}.` : ''}
+Estilo de conducción: ${estilos[est]||est}.
+Hora actual: ${hora}. Fecha: ${fecha}.
+${clima}
+${oyentes}
+
+INSTRUCCIONES:
+- Generá intervenciones de radio cortas, naturales y fluidas (máx 4-5 oraciones)
+- Usá lenguaje coloquial apropiado para el estilo de la radio
+- No uses hashtags, emojis ni formato especial
+- El texto debe sonar exactamente como lo diría un locutor real al micrófono
+- No menciones que sos una IA
+- Incluí el nombre de la radio de forma natural cuando sea apropiado
+- Si se menciona una canción, presentala de forma interesante
+- Respondé SOLO con el texto del locutor, sin ningún encabezado, explicación ni formato adicional`;
+}
+
+async function generarIntervencion() {
+  const key = CFG.apiKey();
+  if (!key) {
+    toast('⚠️', 'Configurá la API Key de Claude en ⚙️ Config o Panel Admin', 'warn');
+    openModal('modalConfig');
+    return;
+  }
+
+  const tipo = el('iaTipo').value;
+  const ctx = el('iaContexto').value.trim();
+  const tono = el('iaTono').value;
+
+  const tipoDesc = {
+    apertura: 'apertura de programa / bienvenida al aire',
+    cierre: 'cierre de bloque o sección',
+    presentar: 'presentación de una canción',
+    hora: 'mención natural de la hora actual',
+    clima: 'comentario sobre el clima actual',
+    saludo: 'saludo espontáneo a los oyentes',
+    sorteo: 'anuncio de sorteo o concurso',
+    pedido: 'respuesta a un pedido de canción de un oyente',
+    continuidad: 'intervención de continuidad / mantenimiento del aire',
+    promo: 'promoción de la radio / invitar a seguir escuchando',
+    libre: ctx || 'intervención libre según el contexto',
+  };
+
+  const prompt = `Tipo de intervención: ${tipoDesc[tipo] || tipo}.
+${ctx ? `Contexto específico: ${ctx}.` : ''}
+${tono ? `Tono para esta intervención: ${tono}.` : ''}
+Generá la intervención ahora:`;
+
+  // UI: thinking state
+  el('btnGenerar').disabled = true;
+  el('btnGenerar').innerHTML = '<span class="spin"></span> Generando...';
+  el('iaStatusLbl').textContent = 'Claude está generando...';
+  el('iaOutput').innerHTML = '<div class="ia-thinking"><div class="ia-dots"><span></span><span></span><span></span></div> Pensando como locutor...</div>';
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: construirPromptSistema(),
+        messages: [{ role: 'user', content: prompt }],
+      })
+    });
+    const data = await resp.json();
+    if (data.error) throw new Error(data.error.message);
+    const texto = data.content?.find(b=>b.type==='text')?.text || '';
+    if (!texto) throw new Error('Respuesta vacía de la API');
+
+    el('iaOutput').textContent = texto;
+    el('iaStatusLbl').textContent = 'Texto listo · Podés leerlo en voz alta';
+    S.iaCallsToday++;
+    el('stIAcalls').textContent = S.iaCallsToday;
+    el('anIA').textContent = S.iaCallsToday;
+
+    // Guardar en historial
+    agregarHistorial(tipo, texto);
+    toast('🤖', 'Intervención generada con IA real', 'pk');
+  } catch(e) {
+    el('iaOutput').textContent = `Error: ${e.message}\n\nVerificá que tu API Key sea correcta y que tengas créditos disponibles en console.anthropic.com`;
+    el('iaStatusLbl').textContent = 'Error de IA';
+    toast('❌', `Error de IA: ${e.message.slice(0,60)}`, 'err');
+  } finally {
+    el('btnGenerar').disabled = false;
+    el('btnGenerar').innerHTML = '🤖 Generar con IA';
+  }
+}
+
+async function autoIntervenir(tipo) {
+  if (!CFG.apiKey() || !S.streamPlaying) return;
+  const ctx = tipo === 'hora' ? `Son las ${new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'})}` : '';
+  // Versión simplificada para auto-intervenciones
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514', max_tokens:300,
+        system: construirPromptSistema(),
+        messages:[{role:'user',content:`Tipo: ${tipo}. ${ctx}. Generá la intervención (máx 2-3 oraciones):`}]
+      })
+    });
+    const d = await resp.json();
+    const txt = d.content?.find(b=>b.type==='text')?.text||'';
+    if (txt) {
+      const utt = new SpeechSynthesisUtterance(txt);
+      if (S.selectedVoice) utt.voice = S.selectedVoice;
+      utt.rate = S.ttsRate; utt.pitch = S.ttsPitch;
+      speechSynthesis.speak(utt);
+      S.iaCallsToday++;
+      el('stIAcalls').textContent = S.iaCallsToday;
+      agregarHistorial('auto-'+tipo, txt);
+      toast('🎙️', `Auto-intervención IA: ${tipo}`, 'pk');
+    }
+  } catch(e) {}
+}
+
+async function probarIA() {
+  const key = el('pApiKey').value.trim();
+  if (!key) { toast('⚠️','Ingresá la API Key primero','warn'); return; }
+  el('fbIA').style.display='none';
+  toast('🧪','Probando conexión con Claude...','ok');
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514', max_tokens:100,
+        messages:[{role:'user',content:'Decí exactamente: "Conexión con Claude IA exitosa. Tu radio está lista."'}]
+      })
+    });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error.message);
+    const txt = d.content?.[0]?.text||'';
+    toast('✅', txt.slice(0,80), 'ok');
+  } catch(e) {
+    toast('❌',`Error: ${e.message.slice(0,60)}`,'err');
+  }
+}
+
+function agregarHistorial(tipo, texto) {
+  const box = el('iaHistorial');
+  const hora = new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'});
+  const item = document.createElement('div');
+  item.style.cssText = 'background:rgba(255,255,255,.03);border:1px solid var(--b2);border-radius:8px;padding:8px 10px;margin-bottom:5px;font-size:11px;cursor:pointer';
+  item.innerHTML = `<div style="display:flex;justify-content:space-between;color:var(--mut);font-family:var(--FU);font-size:10px;margin-bottom:3px"><span>${tipo}</span><span>${hora}</span></div><div style="line-height:1.5;color:var(--txt)">${esc(texto.slice(0,120))}${texto.length>120?'...':''}</div>`;
+  item.onclick = () => { el('iaOutput').textContent = texto; hablarTexto(); };
+  if (box.querySelector('.empty')) box.innerHTML = '';
+  box.insertBefore(item, box.firstChild);
+}
+
+function limpiarIA() {
+  el('iaOutput').textContent = 'Presioná "Generar con IA" para crear una intervención.';
+  el('iaStatusLbl').textContent = 'Listo para generar';
+  el('iaContexto').value = '';
+}
+
+/* ══════════════════════════
+   TTS — WEB SPEECH API
+══════════════════════════ */
+function initVoces() {
+  function cargar() {
+    const voces = speechSynthesis.getVoices().filter(v => v.lang.startsWith('es') || v.lang.startsWith('pt'));
+    const select = el('ttsVoice');
+    if (!select) return;
+    const todas = speechSynthesis.getVoices();
+    select.innerHTML = todas.map((v,i) =>
+      `<option value="${i}" ${v.lang.startsWith('es') && !S.selectedVoice ? 'selected' : ''}>${v.name} (${v.lang})</option>`
+    ).join('');
+    if (voces.length > 0 && !S.selectedVoice) S.selectedVoice = voces[0];
+    select.onchange = () => {
+      S.selectedVoice = speechSynthesis.getVoices()[parseInt(select.value)];
+    };
+    renderVocesGrid(todas);
+  }
+  speechSynthesis.onvoiceschanged = cargar;
+  setTimeout(cargar, 500);
+}
+
+function renderVocesGrid(voces) {
+  const grid = el('vocesGrid');
+  if (!grid) return;
+  const esp = voces.filter(v => v.lang.startsWith('es')).slice(0,8);
+  if (!esp.length) {
+    grid.innerHTML = '<div class="empty" style="grid-column:1/-1">No se detectaron voces en español. Verificá la configuración de idioma de tu sistema.</div>';
+    return;
+  }
+  grid.innerHTML = esp.map((v,i) => `
+    <div class="voice-card ${i===0?'selected':''}" onclick="seleccionarVoz(this,'${esc(v.name)}')">
+      <div class="vc-avatar">${i<3?['🎙️','🗣️','📢'][i]:'🔊'}</div>
+      <div class="vc-name">${esc(v.name)}</div>
+      <div class="vc-lang">${v.lang} · ${v.localService?'Local':'Online'}</div>
+      <div class="vc-rate"><span class="vc-star">★★★★</span><span class="vc-star" style="opacity:.3">★</span></div>
+    </div>
+  `).join('');
+}
+
+function seleccionarVoz(card, nombre) {
+  document.querySelectorAll('.voice-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+  const v = speechSynthesis.getVoices().find(x=>x.name===nombre);
+  if (v) { S.selectedVoice = v; toast('🗣️',`Voz seleccionada: ${nombre}`,'ok'); }
+}
+
+function hablarTexto() {
+  const txt = el('iaOutput').textContent;
+  if (!txt || txt.startsWith('Presioná') || txt.startsWith('Error')) {
+    toast('⚠️','No hay texto generado aún','warn'); return;
+  }
+  detenerVoz();
+  const utt = new SpeechSynthesisUtterance(txt);
+  if (S.selectedVoice) utt.voice = S.selectedVoice;
+  utt.rate = S.ttsRate; utt.pitch = S.ttsPitch; utt.lang = 'es-ES';
+  speechSynthesis.speak(utt);
+  toast('🔊','Reproduciendo en voz alta...','ok');
+}
+
+function probarVoz() {
+  const txt = el('voicePrueba').value.trim();
+  if (!txt) return;
+  detenerVoz();
+  const utt = new SpeechSynthesisUtterance(txt);
+  if (S.selectedVoice) utt.voice = S.selectedVoice;
+  utt.rate = S.ttsRate; utt.pitch = S.ttsPitch; utt.lang = 'es-ES';
+  speechSynthesis.speak(utt);
+}
+
+function detenerVoz() { speechSynthesis.cancel(); }
+
+function updateTTS(inp, prop) {
+  const v = parseFloat(inp.value);
+  if (prop==='rate') { S.ttsRate=v; el('ttsRateVal').textContent=v.toFixed(1); }
+  else { S.ttsPitch=v; el('ttsPitchVal').textContent=v.toFixed(1); }
+  inp.style.background = `linear-gradient(90deg,var(--c) ${(v/parseFloat(inp.max))*100}%,rgba(255,255,255,.15) ${(v/parseFloat(inp.max))*100}%)`;
+}
+
+function copiarTexto() {
+  const txt = el('iaOutput').textContent;
+  navigator.clipboard.writeText(txt).then(()=>toast('📋','Texto copiado al portapapeles','ok')).catch(()=>{});
+}
+
+/* ══════════════════════════
+   PLAYLIST
+══════════════════════════ */
+function cargarPlaylist() { S.playlist = CFG.playlist(); renderPlaylist(); }
+
+function agregarCancion() {
+  const t=el('plTitulo').value.trim(), a=el('plArtista').value.trim();
+  if (!t) { toast('⚠️','Ingresá el título de la canción','warn'); return; }
+  S.playlist.push({titulo:t, artista:a||'—', dur:el('plDur').value||'?:??', tag:el('plTag').value, id:Date.now()});
+  L.sJ('rs_playlist',S.playlist);
+  el('plTitulo').value=''; el('plArtista').value=''; el('plDur').value=''; el('plTag').value='';
+  renderPlaylist(); toast('🎵',`"${t}" agregada a la playlist`,'ok');
+}
+
+function limpiarPlaylist() {
+  if (!confirm('¿Limpiar toda la playlist?')) return;
+  S.playlist=[]; L.sJ('rs_playlist',[]); renderPlaylist();
+}
+
+function renderPlaylist() {
+  const list = el('plList');
+  el('plTotal').textContent = `(${S.playlist.length} temas)`;
+  if (!S.playlist.length) { list.innerHTML='<div class="empty">Sin canciones</div>'; renderDashPlaylist(); return; }
+  list.innerHTML = S.playlist.map((c,i)=>`
+    <div class="pl-item ${i===0?'current':''}">
+      <span class="pl-num">${i===0?'▶':i+1}</span>
+      <span class="pl-ico">🎵</span>
+      <div class="pl-info">
+        <div class="pl-title">${esc(c.titulo)}</div>
+        <div class="pl-artist">${esc(c.artista)}</div>
+      </div>
+      <span class="pl-dur">${esc(c.dur)}</span>
+      <div class="pl-acts">
+        ${c.tag==='ia'?`<span class="pl-tag pl-tag-ia">IA</span>`:''}
+        ${c.tag==='prox'?`<span class="pl-tag pl-tag-prox">PROX</span>`:''}
+        <button class="btn btn-rd btn-xs" onclick="eliminarCancion(${c.id})" style="padding:3px 7px">✕</button>
+      </div>
+    </div>
+  `).join('');
+  renderDashPlaylist();
+}
+
+function renderDashPlaylist() {
+  const box = el('dashPlaylist');
+  const prox = S.playlist.slice(0,4);
+  if (!prox.length) { box.innerHTML='<div class="empty">Sin canciones en cola</div>'; return; }
+  box.innerHTML = prox.map((c,i)=>`
+    <div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--b2)">
+      <span style="font-family:var(--FD);font-size:11px;color:var(--mut);width:18px">${i+1}</span>
+      <span style="font-size:14px">🎵</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.titulo)}</div>
+        <div style="font-size:10px;color:var(--mut)">${esc(c.artista)}</div>
+      </div>
+      <span style="font-size:11px;color:var(--mut);font-family:var(--FU)">${esc(c.dur)}</span>
+    </div>
+  `).join('');
+}
+
+function eliminarCancion(id) {
+  S.playlist = S.playlist.filter(c=>c.id!==id);
+  L.sJ('rs_playlist',S.playlist); renderPlaylist();
+}
+
+/* ══════════════════════════
+   PROGRAMACIÓN
+══════════════════════════ */
+function cargarProg() { S.progr = CFG.progr(); renderProg(); }
+
+function agregarBloque() {
+  const h=el('blkHora').value, n=el('blkNombre').value.trim();
+  if (!h||!n) { toast('⚠️','Completá hora y nombre','warn'); return; }
+  S.progr.push({
+    hora:h, dur:el('blkDur').value, nombre:n,
+    locutor:el('blkLocutor').value||'—',
+    tipo:el('blkTipo').value, ia:el('blkIA').checked,
+    activo:el('blkActivo').checked, id:Date.now()
+  });
+  S.progr.sort((a,b)=>a.hora.localeCompare(b.hora));
+  L.sJ('rs_progr',S.progr); renderProg();
+  el('blkNombre').value=''; el('blkLocutor').value='';
+  toast('📋',`Bloque "${n}" agregado`,'ok');
+}
+
+function guardarProg() { L.sJ('rs_progr',S.progr); toast('💾','Programación guardada','ok'); }
+
+function renderProg() {
+  const list = el('schedList');
+  if (!S.progr.length) { list.innerHTML='<div class="empty">Sin bloques · Agregá usando el editor</div>'; return; }
+  list.innerHTML = S.progr.map(b=>{
+    const tipoIco = {musica:'🎵',nocturno:'🌙',noticias:'📰',deportes:'⚽',entretenimiento:'🎭',ia:'🤖'}[b.tipo]||'📻';
+    return `
+    <div class="blk ${b.activo?'active':''}">
+      <div class="blk-time">
+        <div class="blk-t">${b.hora}</div>
+        <div class="blk-dur">${b.dur}min</div>
+      </div>
+      <div class="blk-body">
+        <div class="blk-name">${tipoIco} ${esc(b.nombre)}</div>
+        <div class="blk-host">🎙️ ${esc(b.locutor)}</div>
+        <div class="blk-acts">
+          ${b.ia?`<span class="badge badge-pk" style="font-size:9px">IA AUTO</span>`:''}
+          ${b.activo?`<span class="badge badge-gn" style="font-size:9px">EN VIVO</span>`:''}
+          <button class="btn btn-rd btn-xs" onclick="eliminarBloque(${b.id})" style="margin-left:auto">✕ Eliminar</button>
+        </div>
+      </div>
+    </div>
+  `}).join('');
+}
+
+function eliminarBloque(id) {
+  S.progr=S.progr.filter(b=>b.id!==id); L.sJ('rs_progr',S.progr); renderProg();
+}
+
+/* ══════════════════════════
    MENSAJES / CABINA
-═══════════════════════════════════════ */
+══════════════════════════ */
 function detectarTipo(txt) {
-  const t = txt.toLowerCase();
-  if (/pon[eé]n?|pedir?|quiero\s+que\s+pon|pongan|pedido|quiero\s+escuchar|pueden\s+poner/.test(t)) return 'pedido';
-  if (/hola|saludos|buenos|buenas|escuch|amor|mejor\s+radio|los\s+quiero|me\s+encan/.test(t)) return 'saludo';
-  if (/[?¿]|cuándo|cuando|cómo|como|cuanto|horario|programa|sorteo|promo|gana/.test(t)) return 'consulta';
+  const t=txt.toLowerCase();
+  if(/pon[eé]n?|pedir?|quiero|pedido|pongan|escuchar|pueden\s+poner/.test(t)) return 'pedido';
+  if(/hola|saludos|buenos|buenas|escuch|amor|mejor|encanta|me\s+gustan/.test(t)) return 'saludo';
+  if(/[?¿]|cuándo|cómo|cuanto|horario|sorteo|promo|ganador/.test(t)) return 'consulta';
   return 'otro';
 }
 
-function agregarMensaje(nombre, texto, tipo) {
-  if (!tipo) tipo = detectarTipo(texto);
-  const hora = new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'});
-  const msg = { id: Date.now() + Math.random(), nombre, texto, tipo, hora, destacado: false };
-  S.msgs.unshift(msg);
-  S.totalMsgs++;
-  if (S.msgs.length > 80) S.msgs.pop();
+function simularMsg() {
+  const nom=el('simNom').value.trim()||'Oyente', txt=el('simTxt').value.trim();
+  if (!txt) { toast('⚠️','Escribí un mensaje','warn'); return; }
+  agregarMensaje(nom,txt);
+  el('simTxt').value='';
+}
 
-  // Registrar oyente
-  if (!S.oyentesDB[nombre]) S.oyentesDB[nombre] = { nombre, msgs:0, tipos:[] };
+function agregarMensaje(nombre, texto, tipo) {
+  if (!tipo) tipo=detectarTipo(texto);
+  const hora=new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit'});
+  const msg={id:Date.now()+Math.random(),nombre,texto,tipo,hora,destacado:false};
+  S.msgs.unshift(msg);
+
+  // Stats
+  const total=S.msgs.length;
+  el('stMsg').textContent=total; el('rpMsg').textContent=total;
+  el('anMsg').textContent=total; el('rpCnt').textContent=`${total} msgs`;
+
+  // Oyente
+  if (!S.oyentesDB[nombre]) S.oyentesDB[nombre]={nombre,msgs:0,tipos:[]};
   S.oyentesDB[nombre].msgs++;
   if (!S.oyentesDB[nombre].tipos.includes(tipo)) S.oyentesDB[nombre].tipos.push(tipo);
+  const sup=Object.values(S.oyentesDB).filter(o=>o.msgs>=5).length;
+  el('rpSup').textContent=sup;
 
-  // Detectar pedido
-  if (tipo === 'pedido' && CFG.tPedidos()) {
-    const m = texto.match(/(?:pon[eé]n?|pongan|quiero|pedir?|escuchar)\s+["']?(.+?)["']?\s*(?:de\s+(.+?))?[!?.\s]*$/i);
+  // Pedido
+  if (tipo==='pedido') {
+    const m=texto.match(/(?:pon[eé]n?|pongan|quiero|pedir?)\s+["']?(.+?)["']?\s*(?:de\s+(.+?))?[!?.]*$/i);
     if (m) {
-      const k = m[1].trim().toLowerCase();
-      if (!S.pedidos[k]) S.pedidos[k] = { cancion: m[1].trim(), artista: m[2]?.trim()||'—', count: 0, done: false };
+      const k=m[1].trim().toLowerCase();
+      if (!S.pedidos[k]) S.pedidos[k]={cancion:m[1].trim(),artista:m[2]?.trim()||'—',count:0};
       S.pedidos[k].count++;
+      el('stPed').textContent=Object.keys(S.pedidos).length;
+      el('rpPed').textContent=Object.keys(S.pedidos).length;
+      el('anPed').textContent=Object.keys(S.pedidos).length;
       renderPedidos();
+    }
+    if (S.autoPedidos) {
+      const cnt=Object.values(S.pedidos).find(p=>p.cancion===m?.[1]?.trim())?.count||1;
+      if (cnt>=3) autoIntervenir('pedido');
     }
   }
 
-  // Actualizar métricas
-  el('cMsg').textContent = S.totalMsgs;
-  el('oyMensajes').textContent = S.totalMsgs;
-  const sup = Object.values(S.oyentesDB).filter(o=>o.msgs>=5).length;
-  el('oySuper').textContent = sup;
-
-  // IA Sugerencia
-  if (CFG.tIA()) updateIA(tipo, texto);
-
-  renderMensajes();
-  renderOyentes();
-
-  if (tipo === 'pedido') toast('🎵', `${nombre}: "${texto.slice(0,40)}..."`, 'ok');
+  renderMsgs(); renderOyentes();
+  if (tipo==='pedido') toast('🎵',`${nombre}: "${texto.slice(0,40)}"...`,'pk');
 }
 
-function updateIA(tipo, texto) {
-  const peds = Object.values(S.pedidos);
-  let sug = '';
-  if (peds.length > 0) {
-    const top = peds.sort((a,b)=>b.count-a.count)[0];
-    sug = `🎵 "${top.cancion}" es el pedido más repetido (${top.count}×) — ideal para poner ahora.`;
-  } else if (tipo === 'saludo') {
-    sug = '👋 Tus oyentes están saludando — buen momento para dar un shoutout.';
-  } else if (tipo === 'consulta') {
-    sug = '❓ Hay consultas sobre el sorteo — recordá anunciar las bases al aire.';
-  } else {
-    sug = '💡 Mucha actividad — invitá a participar por WhatsApp.';
-  }
-  el('iaTxt').textContent = sug;
-}
-
-function simMsg() {
-  const txt = el('simInp').value.trim();
-  const nom = el('simNom').value.trim() || 'Oyente Demo';
-  if (!txt) { toast('⚠️','Escribí un mensaje primero','warn'); return; }
-  agregarMensaje(nom, txt);
-  el('simInp').value = '';
-}
-
-function filtrar(f, btn) {
-  S.filtro = f;
-  document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  renderMensajes();
-}
-
-function renderMensajes() {
-  const box = el('msgsBox');
-  const lista = S.filtro === 'todos'
-    ? S.msgs
-    : S.filtro === 'destacado'
-    ? S.msgs.filter(m=>m.destacado)
-    : S.msgs.filter(m=>m.tipo===S.filtro);
-
-  if (!lista.length) {
-    box.innerHTML = `<div class="empty">Sin mensajes en este filtro</div>`;
-    return;
-  }
-  box.innerHTML = lista.map(m=>`
-    <div class="msg ${m.tipo} ${m.destacado?'destacado':''}" id="m${m.id}">
+function renderMsgs() {
+  const box=el('rpMsgs');
+  const lista=S.filtro==='todos'?S.msgs:S.filtro==='dest'?S.msgs.filter(m=>m.destacado):S.msgs.filter(m=>m.tipo===S.filtro);
+  if (!lista.length) { box.innerHTML='<div class="empty" style="padding:16px 10px">Sin mensajes en este filtro</div>'; return; }
+  box.innerHTML=lista.map(m=>`
+    <div class="msg ${m.tipo} ${m.destacado?'destacado':''}">
       <div class="msg-top">
         <span class="msg-nom">${esc(m.nombre)}</span>
-        <span class="msg-tag mt-${m.tipo==='otro'?'o':m.tipo[0]}">${lblTipo(m.tipo)}</span>
+        <span class="msg-tag mt-${m.tipo==='otro'?'o':m.tipo[0]}">${lblT(m.tipo)}</span>
         <span class="msg-hr">${m.hora}</span>
       </div>
       <div class="msg-tx">${esc(m.texto)}</div>
       <div class="msg-acts">
-        <button class="ma p" onclick="destacar(${m.id})">⭐</button>
-        <button class="ma" onclick="responderMsg(${m.id})">💬 Resp.</button>
-        <button class="ma" onclick="archivar(${m.id})">🗑</button>
+        <button class="ma p" onclick="togDest(${m.id})">⭐</button>
+        <button class="ma" onclick="iaResponder(${m.id})">🤖 IA</button>
+        <button class="ma" onclick="delMsg(${m.id})">🗑</button>
       </div>
     </div>
   `).join('');
-  box.scrollTop = 0;
 }
 
-function lblTipo(t){return{pedido:'PEDIDO',saludo:'SALUDO',consulta:'CONSULTA',otro:'MSG'}[t]||'MSG'}
-function destacar(id){const m=S.msgs.find(x=>x.id==id);if(m){m.destacado=!m.destacado;renderMensajes()}}
-function archivar(id){S.msgs=S.msgs.filter(x=>x.id!=id);renderMensajes()}
-function responderMsg(id){
+function lblT(t){return{pedido:'PEDIDO',saludo:'SALUDO',consulta:'CONSULTA',otro:'MSG'}[t]||'MSG'}
+function togDest(id){const m=S.msgs.find(x=>x.id==id);if(m){m.destacado=!m.destacado;renderMsgs()}}
+function delMsg(id){S.msgs=S.msgs.filter(x=>x.id!=id);renderMsgs()}
+async function iaResponder(id){
   const m=S.msgs.find(x=>x.id==id); if(!m) return;
-  const num=CFG.wa().replace(/\D/g,'');
-  if(!num){toast('⚠️','Configurá el WhatsApp en el Panel','warn');return;}
-  const txt=encodeURIComponent(`Hola ${m.nombre}! Te respondemos desde la cabina 🎙️`);
-  window.open(`https://wa.me/${num}?text=${txt}`,'_blank');
+  el('iaTipo').value='pedido';
+  el('iaContexto').value=`Mensaje del oyente ${m.nombre}: "${m.texto}"`;
+  nav('conduccion', document.querySelectorAll('.sb-btn')[1]);
+  await generarIntervencion();
 }
 
-/* ═══════════════════════════════════════
-   PEDIDOS
-═══════════════════════════════════════ */
+function filtrar(f, btn) {
+  S.filtro=f;
+  document.querySelectorAll('.rp-f').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); renderMsgs();
+}
+
 function renderPedidos() {
-  const list = el('pedList');
-  const items = Object.values(S.pedidos).sort((a,b)=>b.count-a.count);
-  if (!items.length) {
-    list.innerHTML='<div class="empty">Sin pedidos detectados aún</div>';
-    return;
-  }
-  list.innerHTML = items.map((p,i)=>`
-    <div class="ped-it ${p.done?'done':''}">
-      <div class="ped-n">${i+1}</div>
-      <div class="ped-info">
-        <div class="ped-can">${esc(p.cancion)}</div>
-        <div class="ped-art">— ${esc(p.artista)}</div>
+  const list=el('pedidosList');
+  const anPed=el('topPedidos');
+  const items=Object.values(S.pedidos).sort((a,b)=>b.count-a.count);
+  if (!items.length) { list.innerHTML='<div class="empty">Sin pedidos</div>'; if(anPed)anPed.innerHTML='<div class="empty">Sin pedidos</div>'; return; }
+  const html=items.map((p,i)=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--b2)">
+      <span style="width:20px;font-size:11px;color:var(--mut);font-family:var(--FU)">${i+1}</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.cancion)}</div>
+        <div style="font-size:10px;color:var(--mut)">— ${esc(p.artista)}</div>
       </div>
-      <div class="ped-cnt">${p.count}×</div>
-      <button onclick="togglePed('${esc(p.cancion)}')" style="font-size:17px;padding:3px">
-        ${p.done?'✅':'▶️'}
-      </button>
+      <span style="font-family:var(--FD);font-size:12px;color:var(--c)">${p.count}×</span>
     </div>
   `).join('');
-  const top = items.find(p=>!p.done);
-  if (top) el('iaRec').textContent=`🎯 Más pedido sin reproducir: "${top.cancion}" (${top.count}×) — ¡ponelo ahora!`;
+  list.innerHTML=html; if(anPed)anPed.innerHTML=html;
 }
-
-function togglePed(cancion){
-  const k=cancion.toLowerCase();
-  if(S.pedidos[k]){
-    S.pedidos[k].done=!S.pedidos[k].done;
-    renderPedidos();
-    if(S.pedidos[k].done) toast('✅',`"${cancion}" marcada como reproducida`,'ok');
-  }
-}
-
-/* ═══════════════════════════════════════
-   OYENTES
-═══════════════════════════════════════ */
-const AV_COLORS=['#00f5ff','#ff00aa','#39ff14','#ffe600','#bf00ff','#ff6b00'];
-const BADGES=['🏆','💎','🌟','🔥','👑'];
 
 function renderOyentes() {
-  const list = el('oyList');
-  const items = Object.values(S.oyentesDB).sort((a,b)=>b.msgs-a.msgs).slice(0,20);
-  if (!items.length) {
-    list.innerHTML='<div class="empty">Sin oyentes registrados aún · Se llenan cuando hay mensajes en Cabina</div>';
-    return;
-  }
-  list.innerHTML = items.map((o,i)=>{
-    const col = AV_COLORS[i%AV_COLORS.length];
-    const ini = o.nombre.split(' ').map(n=>n[0]||'').join('').slice(0,2).toUpperCase();
-    const isVIP = o.msgs>=5;
-    return `
-      <div class="oy-row">
-        <div class="oy-av" style="background:${col}18;border:2px solid ${col}">${ini}</div>
-        <div style="flex:1">
-          <div class="oy-nm">${esc(o.nombre)} ${isVIP?'<span style="font-size:9px;background:rgba(0,245,255,.13);color:var(--cyan);border-radius:3px;padding:1px 5px;font-family:var(--FU)">VIP</span>':''}</div>
-          <div class="oy-ms">${o.msgs} msgs · ${o.tipos.join(', ')}</div>
-        </div>
-        <div class="oy-badge">${i<5?BADGES[i]:''}</div>
-      </div>
-    `;
+  const list=el('oyentesList'); if(!list) return;
+  const items=Object.values(S.oyentesDB).sort((a,b)=>b.msgs-a.msgs).slice(0,10);
+  if (!items.length){list.innerHTML='<div class="empty">Sin oyentes registrados</div>';return;}
+  const cols=['#00f5ff','#c800ff','#39ff14','#ffe600','#ff7b00'];
+  list.innerHTML=items.map((o,i)=>{
+    const ini=o.nombre.split(' ').map(n=>n[0]||'').join('').slice(0,2).toUpperCase();
+    const col=cols[i%cols.length];
+    return `<div style="display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--b2)">
+      <div style="width:32px;height:32px;border-radius:50%;background:${col}18;border:2px solid ${col};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">${ini}</div>
+      <div style="flex:1"><div style="font-size:12px;font-weight:700">${esc(o.nombre)}</div><div style="font-size:10px;color:var(--mut)">${o.msgs} msgs · ${o.tipos.join(', ')}</div></div>
+      ${o.msgs>=5?'<span class="badge badge-pk" style="font-size:9px">VIP</span>':''}
+    </div>`;
   }).join('');
-  el('oyActivos').textContent = items.length;
-  el('oySuper').textContent = items.filter(o=>o.msgs>=5).length;
 }
 
-/* ═══════════════════════════════════════
-   PANEL — GUARDADO DE CONFIG
-═══════════════════════════════════════ */
-function login() {
-  if (el('passInp').value === CFG.pass()) {
-    el('pLock').style.display='none';
-    el('pCont').style.display='block';
-    loadPanelFields();
+/* ══════════════════════════
+   ALERTAS DASHBOARD
+══════════════════════════ */
+function mostrarAlertaIA(alertas) {
+  const box=el('alertasIA');
+  box.innerHTML=alertas.map(a=>`
+    <div class="smart-alert ${a.tipo}">
+      <span class="sa-ico">${a.ico}</span>
+      <div class="sa-txt"><div class="sa-ttl">${a.ttl}</div>${a.txt}</div>
+    </div>
+  `).join('');
+}
+
+/* ══════════════════════════
+   WAVEFORM VISUAL
+══════════════════════════ */
+function generarWaveform() {
+  const box=el('waveformViz'); if(!box) return;
+  const bars=32;
+  box.innerHTML=Array.from({length:bars},(_,i)=>{
+    const h=20+Math.random()*60;
+    return `<div class="wf-bar" id="wfb${i}" style="height:${h}%;opacity:0.4"></div>`;
+  }).join('');
+  setInterval(()=>{
+    if (!S.streamPlaying) return;
+    for(let i=0;i<bars;i++){
+      const b=document.getElementById(`wfb${i}`);
+      if(b) b.style.height=`${10+Math.random()*80}%`;
+    }
+  },200);
+}
+
+/* ══════════════════════════
+   PANEL ADMIN
+══════════════════════════ */
+function loginPanel(){
+  if(el('passInp').value===CFG.pass()){
+    el('panelLock').style.display='none';
+    el('panelCont').style.display='block';
+    cargarCamposPanel();
     toast('✅','Bienvenido al Panel','ok');
   } else {
     toast('❌','Contraseña incorrecta','err');
     el('passInp').value='';
   }
 }
-function logout() {
-  el('pLock').style.display='block';
-  el('pCont').style.display='none';
-  el('passInp').value='';
+function logoutPanel(){el('panelLock').style.display='block';el('panelCont').style.display='none'}
+function cargarCamposPanel(){
+  el('pNombre').value=CFG.nombre(); el('pStream').value=CFG.stream();
+  el('pMeta').value=CFG.meta(); el('pWA').value=CFG.wa();
+  el('pFb').value=CFG.fb(); el('pIg').value=CFG.ig(); el('pYt').value=CFG.yt();
+  el('pApiKey').value=CFG.apiKey(); el('pLocutor').value=CFG.locutor();
+  el('pEstilo').value=CFG.estilo(); el('pDescRadio').value=CFG.descRadio();
+}
+function guardarPanel(){
+  L.s('rs_nombre',el('pNombre').value.trim()); L.s('rs_stream',el('pStream').value.trim());
+  L.s('rs_meta',el('pMeta').value.trim()); L.s('rs_wa',el('pWA').value.trim());
+  showFB('fbPanel'); aplicarConfig();
+}
+function guardarRedes(){
+  L.s('rs_fb',el('pFb').value.trim()); L.s('rs_ig',el('pIg').value.trim()); L.s('rs_yt',el('pYt').value.trim());
+  showFB('fbRedes');
+}
+function guardarIA(){
+  L.s('rs_apikey',el('pApiKey').value.trim()); L.s('rs_locutor',el('pLocutor').value.trim());
+  L.s('rs_estilo',el('pEstilo').value); L.s('rs_desc',el('pDescRadio').value.trim());
+  showFB('fbIA'); aplicarConfig(); verificarApiKey();
+}
+function cambiarPass(){
+  const p1=el('newP1').value,p2=el('newP2').value;
+  if(!p1){toast('⚠️','Ingresá contraseña','warn');return;}
+  if(p1!==p2){toast('❌','Las contraseñas no coinciden','err');return;}
+  if(p1.length<6){toast('⚠️','Mínimo 6 caracteres','warn');return;}
+  L.s('rs_pass',p1); el('newP1').value=''; el('newP2').value=''; showFB('fbPass');
 }
 
-function loadPanelFields() {
-  if (!el('cfgName')) return;
-  el('cfgName').value=CFG.name();
-  el('cfgUrl').value=CFG.url();
-  el('cfgMeta').value=CFG.meta();
-  el('cfgWA').value=CFG.wa();
-  el('cfgWAmsg').value=CFG.waMsg();
-  el('cfgCiudad').value=CFG.ciudad()||'';
-  el('cfgWxKey').value=CFG.wxKey();
-  el('cfgFb').value=CFG.fb();
-  el('cfgIg').value=CFG.ig();
-  el('cfgYt').value=CFG.yt();
-  el('cfgTk').value=CFG.tk();
-  el('tAlertas').checked=CFG.tAlertas();
-  el('tIA').checked=CFG.tIA();
-  el('tPedidos').checked=CFG.tPedidos();
-  el('tClima').checked=CFG.tClima();
-  renderEditorNoticias();
-  renderEditorPromos();
-  renderEditorSched();
+/* ══════════════════════════
+   MODAL CONFIG RÁPIDA
+══════════════════════════ */
+function openModal(id){ el(id).classList.add('open'); cargarCamposModal(); }
+function closeModal(id){ el(id).classList.remove('open'); }
+function cargarCamposModal(){
+  el('cfgNombre').value=CFG.nombre(); el('cfgStream').value=CFG.stream();
+  el('cfgMeta').value=CFG.meta(); el('cfgApiKey').value=CFG.apiKey();
+  el('cfgCiudad').value=CFG.ciudad(); el('cfgWxKey').value=CFG.wxKey();
+  el('cfgWA').value=CFG.wa(); el('cfgLocutor').value=CFG.locutor();
+  el('cfgEstilo').value=CFG.estilo()||'dinamico';
+}
+function guardarConfig(){
+  L.s('rs_nombre',el('cfgNombre').value.trim()); L.s('rs_stream',el('cfgStream').value.trim());
+  L.s('rs_meta',el('cfgMeta').value.trim()); L.s('rs_apikey',el('cfgApiKey').value.trim());
+  L.s('rs_ciudad',el('cfgCiudad').value.trim()); L.s('rs_wxkey',el('cfgWxKey').value.trim());
+  L.s('rs_wa',el('cfgWA').value.trim()); L.s('rs_locutor',el('cfgLocutor').value.trim());
+  L.s('rs_estilo',el('cfgEstilo').value);
+  closeModal('modalConfig'); aplicarConfig(); fetchClima(); verificarApiKey();
+  toast('💾','Configuración guardada','ok');
 }
 
-function saveStream() {
-  LS.set('r_name', el('cfgName').value.trim());
-  LS.set('r_url', el('cfgUrl').value.trim());
-  LS.set('r_meta', el('cfgMeta').value.trim());
-  showFB('fbStream'); aplicarConfig(); verificarSetup();
+/* ══════════════════════════
+   TOGGLES AUTO-IA
+══════════════════════════ */
+function cargarToggles(){
+  const tg=(id,prop)=>{ const v=L.g(`tog_${id}`)!=='false'; el(id).checked=v; S[prop]=v; };
+  tg('togHora','autoHora'); tg('togID','autoID'); tg('togPres','autoPres');
+  tg('togSaludo','autoSaludo'); tg('togClima','autoClima'); tg('togPedidos','autoPedidos');
+}
+function guardarToggle(id,val){
+  L.s(`tog_${id}`,val);
+  const map={togHora:'autoHora',togID:'autoID',togPres:'autoPres',togSaludo:'autoSaludo',togClima:'autoClima',togPedidos:'autoPedidos'};
+  if(map[id]) S[map[id]]=val;
+  toast(val?'✅':'⏸',`${id.replace('tog','')} ${val?'activado':'desactivado'}`,'ok');
 }
 
-function testStream() {
-  const url = el('cfgUrl').value.trim();
-  if (!url) { toast('⚠️','Ingresá la URL del stream primero','warn'); return; }
-  toast('🔊','Intentando conectar...','ok');
-  const a = new Audio(url);
-  a.volume = 0.01;
-  a.play().then(()=>{ a.pause(); toast('✅','¡Stream accesible! Guardá y probá el player.','ok'); })
-    .catch(()=>{ toast('❌','No se pudo conectar. Verificá la URL o el CORS del servidor.','err'); });
-}
-
-function saveWA() {
-  LS.set('r_wa', el('cfgWA').value.trim());
-  LS.set('r_wamsg', el('cfgWAmsg').value.trim());
-  showFB('fbWA');
-}
-
-function saveClima() {
-  LS.set('r_city', el('cfgCiudad').value.trim());
-  LS.set('r_wxkey', el('cfgWxKey').value.trim());
-  showFB('fbClima');
-  fetchClima();
-}
-
-function saveRedes() {
-  LS.set('r_fb', el('cfgFb').value.trim());
-  LS.set('r_ig', el('cfgIg').value.trim());
-  LS.set('r_yt', el('cfgYt').value.trim());
-  LS.set('r_tk', el('cfgTk').value.trim());
-  showFB('fbRedes'); aplicarConfig();
-}
-
-function guardarAuto() {
-  LS.set('r_tAlertas', el('tAlertas').checked);
-  LS.set('r_tIA', el('tIA').checked);
-  LS.set('r_tPedidos', el('tPedidos').checked);
-  LS.set('r_tClima', el('tClima').checked);
-  showFB('fbAuto');
-}
-
-function cambiarPass() {
-  const p1=el('pass1').value, p2=el('pass2').value;
-  if (!p1) { toast('⚠️','Ingresá la nueva contraseña','warn'); return; }
-  if (p1!==p2) { toast('❌','Las contraseñas no coinciden','err'); return; }
-  if (p1.length<6) { toast('⚠️','Mínimo 6 caracteres','warn'); return; }
-  LS.set('r_pass',p1);
-  el('pass1').value=''; el('pass2').value='';
-  showFB('fbPass');
-}
-
-/* ── Noticias ── */
-function renderEditorNoticias() {
-  const data=CFG.news();
-  el('edNoticias').innerHTML=data.map((n,i)=>`
-    <div style="border:1px solid var(--border);border-radius:9px;padding:9px;margin-bottom:7px">
-      <div class="fg"><label class="flbl">Título</label>
-        <input class="inp-sm" id="nt-${i}" value="${esc(n.titulo)}"></div>
-      <div class="fg"><label class="flbl">Contenido</label>
-        <textarea class="ta" id="nb-${i}" style="min-height:45px">${esc(n.cuerpo)}</textarea></div>
-      <div class="fg"><label class="flbl">Fecha/Tiempo (ej: Hoy, Hace 2h)</label>
-        <input class="inp-sm" id="nh-${i}" value="${esc(n.tiempo)}"></div>
-      <button onclick="eliminarNoticia(${i})" class="btn-del" style="font-size:11px;padding:5px 10px">🗑 Eliminar</button>
-    </div>`).join('');
-}
-function agregarNoticia(){
-  const d=CFG.news(); d.push({titulo:'Nueva noticia',cuerpo:'',tiempo:'Ahora'});
-  LS.setJSON('r_news',d); renderEditorNoticias();
-}
-function eliminarNoticia(i){const d=CFG.news();d.splice(i,1);LS.setJSON('r_news',d);renderEditorNoticias()}
-function guardarNoticias(){
-  const d=CFG.news().map((_,i)=>({
-    titulo: el(`nt-${i}`)?.value||'',
-    cuerpo: el(`nb-${i}`)?.value||'',
-    tiempo: el(`nh-${i}`)?.value||''
-  }));
-  LS.setJSON('r_news',d); showFB('fbNot'); renderNoticias();
-}
-function renderNoticias(){
-  const d=CFG.news();
-  el('newsList').innerHTML=d.length?d.map(n=>`
-    <div class="crd">
-      <span class="tag t-n">NOTICIA</span>
-      <div class="crd-t">${esc(n.titulo)}</div>
-      <div class="crd-b">${esc(n.cuerpo)}</div>
-      <div class="crd-time">${esc(n.tiempo)}</div>
-    </div>`).join(''):`<div class="empty" style="padding:0 14px;min-width:180px">Sin noticias · Agregá desde el Panel</div>`;
-}
-
-/* ── Promos ── */
-function renderEditorPromos() {
-  const data=CFG.promos();
-  el('edPromos').innerHTML=data.map((p,i)=>`
-    <div style="border:1px solid var(--border);border-radius:9px;padding:9px;margin-bottom:7px">
-      <div class="fg"><label class="flbl">Tipo</label>
-        <select class="inp-sm" id="ptp-${i}">
-          <option value="promo" ${p.tipo==='promo'?'selected':''}>Promoción</option>
-          <option value="sorteo" ${p.tipo==='sorteo'?'selected':''}>Sorteo</option>
-        </select></div>
-      <div class="fg"><label class="flbl">Título</label>
-        <input class="inp-sm" id="pt-${i}" value="${esc(p.titulo)}"></div>
-      <div class="fg"><label class="flbl">Descripción</label>
-        <textarea class="ta" id="pb-${i}" style="min-height:45px">${esc(p.cuerpo)}</textarea></div>
-      <div class="fg"><label class="flbl">Estado</label>
-        <input class="inp-sm" id="pst-${i}" value="${esc(p.estado||'Activo')}"></div>
-      <button onclick="eliminarPromo(${i})" class="btn-del" style="font-size:11px;padding:5px 10px">🗑 Eliminar</button>
-    </div>`).join('');
-}
-function agregarPromo(){const d=CFG.promos();d.push({tipo:'promo',titulo:'Nueva promo',cuerpo:'',estado:'Activo'});LS.setJSON('r_promos',d);renderEditorPromos()}
-function eliminarPromo(i){const d=CFG.promos();d.splice(i,1);LS.setJSON('r_promos',d);renderEditorPromos()}
-function guardarPromos(){
-  const d=CFG.promos().map((_,i)=>({
-    tipo: el(`ptp-${i}`)?.value||'promo',
-    titulo: el(`pt-${i}`)?.value||'',
-    cuerpo: el(`pb-${i}`)?.value||'',
-    estado: el(`pst-${i}`)?.value||'Activo'
-  }));
-  LS.setJSON('r_promos',d); showFB('fbProm'); renderPromos();
-}
-function renderPromos(){
-  const d=CFG.promos();
-  el('promoList').innerHTML=d.length?d.map(p=>`
-    <div class="crd">
-      <span class="tag ${p.tipo==='sorteo'?'t-s':'t-p'}">${p.tipo==='sorteo'?'🎁 SORTEO':'🏷 PROMO'}</span>
-      <div class="crd-t">${esc(p.titulo)}</div>
-      <div class="crd-b">${esc(p.cuerpo)}</div>
-      <div class="crd-time">${esc(p.estado||'Activo')}</div>
-    </div>`).join(''):`<div class="empty" style="padding:0 14px;min-width:180px">Sin promos · Agregá desde el Panel</div>`;
-}
-
-/* ── Programación ── */
-function renderEditorSched(){
-  const data=CFG.sched();
-  el('edSched').innerHTML=data.map((s,i)=>`
-    <div style="border:1px solid var(--border);border-radius:9px;padding:9px;margin-bottom:7px">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
-        <div class="fg" style="margin:0"><label class="flbl">Horario</label>
-          <input class="inp-sm" id="sh-${i}" value="${esc(s.hora)}"></div>
-        <div class="fg" style="margin:0"><label class="flbl">Programa</label>
-          <input class="inp-sm" id="sn-${i}" value="${esc(s.nombre)}"></div>
-      </div>
-      <div class="fg" style="margin-top:7px"><label class="flbl">Locutor/a</label>
-        <input class="inp-sm" id="sl-${i}" value="${esc(s.locutor)}"></div>
-      <div class="tgl-row" style="margin-top:6px">
-        <span style="font-size:11px;color:var(--muted)">Activo ahora (EN VIVO)</span>
-        <label class="tgl"><input type="checkbox" id="sa-${i}" ${s.actual?'checked':''}><span class="tgl-s"></span></label>
-      </div>
-      <button onclick="eliminarPrograma(${i})" class="btn-del" style="font-size:11px;padding:5px 10px;margin-top:5px">🗑 Eliminar</button>
-    </div>`).join('');
-}
-function agregarPrograma(){const d=CFG.sched();d.push({hora:'00:00 - 06:00',nombre:'Nuevo Programa',locutor:'',actual:false});LS.setJSON('r_sched',d);renderEditorSched()}
-function eliminarPrograma(i){const d=CFG.sched();d.splice(i,1);LS.setJSON('r_sched',d);renderEditorSched()}
-function guardarSched(){
-  const d=CFG.sched().map((_,i)=>({
-    hora: el(`sh-${i}`)?.value||'',
-    nombre: el(`sn-${i}`)?.value||'',
-    locutor: el(`sl-${i}`)?.value||'',
-    actual: el(`sa-${i}`)?.checked||false
-  }));
-  LS.setJSON('r_sched',d); showFB('fbSch'); renderSched();
-}
-function renderSched(){
-  const d=CFG.sched();
-  el('schedList').innerHTML=d.length?d.map(s=>`
-    <div class="sc-it ${s.actual?'now':''}">
-      <span class="sc-t">${esc(s.hora)}</span>
-      <span class="sc-dot"></span>
-      <div style="flex:1">
-        <div class="sc-nm">${esc(s.nombre)}</div>
-        <div class="sc-hst">🎙️ ${esc(s.locutor)}</div>
-      </div>
-      ${s.actual?'<span class="sc-badge">EN VIVO</span>':''}
-    </div>`).join(''):`<div class="empty">Sin programación · Agregá desde el Panel</div>`;
-}
-
-/* ═══════════════════════════════════════
-   PWA
-═══════════════════════════════════════ */
-let deferredInstall=null;
-function initPWA(){
-  const manifest={
-    name: CFG.name()||'RadioSync',short_name:'Radio',
-    start_url:location.href,display:'standalone',
-    background_color:'#060612',theme_color:'#060612',
-    icons:[{src:'https://api.iconify.design/emojione:radio.svg',sizes:'192x192',type:'image/svg+xml'}]
-  };
-  const blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
-  const url=URL.createObjectURL(blob);
-  document.getElementById('manifest-link')?.remove();
-  const lnk=document.createElement('link');
-  lnk.id='manifest-link';lnk.rel='manifest';lnk.href=url;
-  document.head.appendChild(lnk);
-
-  window.addEventListener('beforeinstallprompt',e=>{
-    e.preventDefault(); deferredInstall=e;
-    el('instBan').style.display='flex';
-  });
-  window.addEventListener('appinstalled',()=>{
-    el('instBan').style.display='none';
-    toast('📲','¡App instalada exitosamente!','ok');
-  });
-}
-function instalar(){
-  if(deferredInstall){
-    deferredInstall.prompt();
-    deferredInstall.userChoice.then(r=>{if(r.outcome==='accepted')toast('📲','Instalando app...','ok')});
-    deferredInstall=null;
-  } else {
-    toast('💡','En iPhone/Safari: menú → "Añadir a pantalla de inicio"','warn');
-  }
-}
-
-/* ═══════════════════════════════════════
+/* ══════════════════════════
    NAVEGACIÓN
-═══════════════════════════════════════ */
-function go(v, btn) {
+══════════════════════════ */
+function nav(v, btn) {
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.nb').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.sb-btn').forEach(x=>x.classList.remove('active'));
   el('view-'+v).classList.add('active');
-  btn.classList.add('active');
-  window.scrollTo(0,0);
+  if(btn) btn.classList.add('active');
+  if(v==='analytics'){el('anOy').textContent=S.streamOyentes||'—';el('anMsg').textContent=S.msgs.length;el('anPed').textContent=Object.keys(S.pedidos).length;el('anIA').textContent=S.iaCallsToday;renderOyentes()}
+  if(v==='panel'){el('panelLock').style.display='block';el('panelCont').style.display='none';}
+  if(v==='voces') initVoces();
 }
 
-/* ═══════════════════════════════════════
+/* ══════════════════════════
    TOAST
-═══════════════════════════════════════ */
+══════════════════════════ */
 let toastT=null;
 function toast(ico,msg,type='ok'){
   const e=el('toast');
   el('tIco').textContent=ico; el('tMsg').textContent=msg;
   e.className=`toast ${type} show`;
   if(toastT) clearTimeout(toastT);
-  toastT=setTimeout(()=>e.classList.remove('show'),3400);
+  toastT=setTimeout(()=>e.classList.remove('show'),3600);
 }
 
-/* ═══════════════════════════════════════
+/* ══════════════════════════
    UTILS
-═══════════════════════════════════════ */
+══════════════════════════ */
 function el(id){return document.getElementById(id)}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function showFB(id){const e=el(id);if(!e)return;e.style.display='block';setTimeout(()=>e.style.display='none',2400)}
+function showFB(id){const e=el(id);if(!e)return;e.style.display='block';setTimeout(()=>e.style.display='none',2500)}
 </script>
 </body>
 </html>
