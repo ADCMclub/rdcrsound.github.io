@@ -3,561 +3,638 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Rutina RDCR | Check de Pasiones</title>
+    <title>DataLab by RDCR | Soluciones Digitales</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background: linear-gradient(145deg, #0b1a2e 0%, #0a111f 100%);
-            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Poppins', sans-serif;
-            padding: 24px 20px 60px;
-            color: #eef5ff;
+            font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
+            background: #fef9f5;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 230, 210, 0.3) 0%, rgba(250, 240, 245, 0.1) 90%);
+            color: #1a1e2b;
+            scroll-behavior: smooth;
+            line-height: 1.4;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1280px;
             margin: 0 auto;
+            padding: 0 24px;
         }
 
-        /* encabezado + selector de mes/año */
-        .header {
-            text-align: center;
-            margin-bottom: 28px;
-        }
-
-        .header h1 {
-            font-size: 1.9rem;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #FFD966, #FFA500);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 8px;
-        }
-
-        .sub {
-            opacity: 0.8;
-            font-size: 0.9rem;
-            border-left: 3px solid #ffb347;
-            padding-left: 12px;
-            margin: 8px auto 20px;
-            max-width: 85%;
-        }
-
-        .month-year-picker {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            align-items: center;
-            background: #111c2ed9;
-            backdrop-filter: blur(6px);
-            border-radius: 60px;
-            padding: 10px 18px;
-            width: fit-content;
-            margin: 0 auto 20px;
-            border: 1px solid #2c3f55;
-        }
-
-        .month-year-picker button {
-            background: #1e2f42;
-            border: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-            width: 40px;
-            border-radius: 40px;
+        /* ========= BOTÓN SUBIR (ARRIBA) ========= */
+        .go-top {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            background: #ff6b4a;
             color: white;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .month-year-picker button:hover {
-            background: #ffa5005e;
-            transform: scale(1.02);
-        }
-
-        #monthYearDisplay {
-            font-weight: 600;
-            font-size: 1.3rem;
-            min-width: 170px;
-            text-align: center;
-            background: #02182e;
-            padding: 6px 12px;
-            border-radius: 32px;
-        }
-
-        /* estadisticas */
-        .stats {
-            background: #0e1a28aa;
-            border-radius: 28px;
-            padding: 14px 18px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 28px;
-            backdrop-filter: blur(4px);
-            border: 1px solid #2b4b6e;
-        }
-
-        .stat-card {
-            background: #030e1a;
-            padding: 8px 16px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .stat-card span {
-            color: #ffcd7e;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-right: 6px;
-        }
-
-        /* cuadrícula de días */
-        .weekdays {
-            display: flex;
-            justify-content: space-between;
-            background: #061a2c60;
-            padding: 12px 10px;
-            border-radius: 32px;
-            margin-bottom: 16px;
-            font-weight: bold;
-            backdrop-filter: blur(2px);
-        }
-
-        .weekdays div {
-            width: 14%;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-
-        .routine-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .day-card {
-            background: #0e1c2cee;
-            border-radius: 32px;
-            padding: 12px 18px;
-            transition: 0.1s;
-            border: 1px solid #2b4b6e60;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .day-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-            border-bottom: 1px dashed #2e577a;
-            padding-bottom: 6px;
-        }
-
-        .day-name {
-            font-weight: 800;
-            font-size: 1.3rem;
-            background: linear-gradient(120deg, #ffe6b3, #ffbc6e);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .date-badge {
-            font-size: 0.7rem;
-            background: #00000066;
-            padding: 4px 12px;
-            border-radius: 50px;
-        }
-
-        .tasks-area {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            row-gap: 12px;
-            margin: 10px 0 6px;
-        }
-
-        .task-item {
-            background: #071727;
-            padding: 8px 14px;
-            border-radius: 100px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: 0.1s linear;
-            border: 1px solid #2a4a6e;
-            flex: 0 0 auto;
-        }
-
-        .task-item.completed {
-            background: #1f4d2e;
-            border-color: #b3ffcf;
-            opacity: 0.85;
-            text-decoration: line-through;
-            filter: drop-shadow(0 0 3px #8affb2);
-        }
-
-        .task-item.completed .task-emoji {
-            filter: grayscale(0);
-        }
-
-        .task-emoji {
-            font-size: 1.4rem;
-        }
-
-        .task-text {
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .task-check {
-            width: 22px;
-            height: 22px;
+            width: 52px;
+            height: 52px;
             border-radius: 30px;
-            background: #2f4f6f;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            z-index: 99;
+            transition: all 0.25s ease;
+            opacity: 0;
+            visibility: hidden;
+            font-size: 26px;
+            border: none;
+        }
+
+        .go-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .go-top:hover {
+            background: #e25534;
+            transform: translateY(-5px);
+        }
+
+        /* ========= WHATSAPP FLOTANTE + MODAL ========= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            transition: 0.2s;
+            color: white;
+            font-size: 32px;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.07);
+            background: #20b859;
+        }
+
+        .modal-wa {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 340px;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.35);
+            z-index: 101;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.25s ease;
+            pointer-events: none;
+        }
+
+        .modal-wa.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .wa-header {
+            background: #075E54;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 28px 28px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .close-modal-wa {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            color: white;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
             font-size: 14px;
         }
 
-        .task-item.completed .task-check {
-            background: #6fbf4c;
-            content: "✓";
+        .wa-body {
+            padding: 20px;
         }
 
-        /* pie y reset */
-        .reset-btn {
-            margin-top: 40px;
-            background: #941c2c80;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 60px;
-            font-weight: bold;
-            color: white;
+        .wa-body input, .wa-body textarea {
             width: 100%;
-            cursor: pointer;
-            backdrop-filter: blur(4px);
-            transition: 0.2s;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
         }
 
-        .reset-btn:hover {
-            background: #b32f40;
+        .wa-body button {
+            background: #25D366;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* ========= BOTÓN ATRÁS (superior izquierda) ========= */
+        .back-btn-top {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            z-index: 105;
+        }
+
+        .btn-back-top {
+            background: #1a1e2b;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 10px 22px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(2px);
+        }
+
+        .btn-back-top:hover {
+            background: #ff6b4a;
+            transform: translateX(-4px);
+        }
+
+        /* ========= HEADER / NAVBAR (con padding izquierdo para que no tape el botón) ========= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 0 20px 0;
+            flex-wrap: wrap;
+            margin-left: 0;
+        }
+
+        /* Desplazamos el logo y el contenido para que no quede debajo del botón fijo */
+        .logo h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b4a, #d93c2c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        /* Ajuste para desktop: el navbar tiene un padding-left adicional porque el botón está fijo arriba a la izquierda */
+        @media (min-width: 1024px) {
+            .navbar {
+                padding-left: 80px;
+            }
+        }
+        @media (max-width: 1023px) {
+            .navbar {
+                padding-left: 70px;
+            }
+        }
+        @media (max-width: 640px) {
+            .navbar {
+                padding-left: 55px;
+            }
+        }
+
+        /* resto estilos */
+        .hero {
+            text-align: center;
+            margin: 48px 0;
+        }
+
+        .hero h2 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(125deg, #2d3e50, #ff6b4a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            margin: 60px 0;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px 24px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 15px 30px -12px rgba(0,0,0,0.08);
+            transition: 0.25s;
+            border: 1px solid rgba(255, 107, 74, 0.2);
+        }
+
+        .service-card i {
+            font-size: 48px;
+            background: linear-gradient(145deg, #ff6b4a, #d93c2c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 40px 0 24px;
+            border-left: 6px solid #ff6b4a;
+            padding-left: 20px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            transition: 0.2s;
+            cursor: pointer;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
+            border: 1px solid #ffe3d9;
+        }
+
+        .project-card:hover {
+            transform: scale(1.02);
+            border-color: #ffaa90;
+        }
+
+        .thumbnail-img {
+            background: linear-gradient(135deg, #fde9e2, #fff0ea);
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 3.8rem;
+            color: #ff6b4a;
+            border-bottom: 1px solid #ffded3;
+        }
+
+        .project-info {
+            padding: 24px;
+        }
+
+        .project-info h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .mock-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f2f4f8;
+            border-radius: 60px;
+            padding: 8px 18px;
+            font-weight: 600;
+            color: #ff6b4a;
+            text-decoration: none;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            pointer-events: none;
+        }
+
+        /* MODAL PREVIEW lightbox */
+        .modal-preview {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.2s;
+        }
+
+        .modal-preview.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .preview-container {
+            background: #fffdfa;
+            width: 90%;
+            max-width: 1100px;
+            height: 85vh;
+            border-radius: 48px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.5);
+            animation: scaleUp 0.25s ease;
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 26px;
+            background: #1e2a3a;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .preview-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            width: 40px;
+            border-radius: 50%;
+            transition: 0.1s;
+        }
+
+        .preview-header button:hover {
+            background: rgba(255,255,240,0.2);
+        }
+
+        .preview-iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
+            background: white;
+        }
+
+        .radio-banner {
+            background: #1e2a3a;
+            border-radius: 40px;
+            padding: 42px 32px;
+            margin: 40px 0;
+            color: white;
+            background-image: linear-gradient(120deg, #1e2a3a, #2a3b4e);
         }
 
         footer {
-            font-size: 0.7rem;
             text-align: center;
-            margin-top: 28px;
-            opacity: 0.6;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding: 40px 0 32px;
+            margin-top: 40px;
+            color: #5e6f8d;
         }
 
-        @media (max-width: 550px) {
-            .task-text {
-                font-size: 0.75rem;
-            }
-            .day-name {
-                font-size: 1rem;
-            }
-            .task-item {
-                padding: 5px 10px;
-            }
+        @media (max-width: 680px) {
+            .hero h2 { font-size: 2.2rem; }
+            .preview-container { width: 95%; height: 80vh; }
+            .modal-wa { width: 300px; right: 16px; bottom: 90px; }
+            .btn-back-top { padding: 6px 14px; font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h1>🎙️ RDCR · CHECK DE PASIÓN</h1>
-        <div class="sub">Lunes a Domingo · Sin horarios · Solo tu constancia en <strong>audio, oratoria, datos, radio y edición</strong></div>
-        <div class="month-year-picker">
-            <button id="prevMonthBtn">◀</button>
-            <div id="monthYearDisplay">Enero 2026</div>
-            <button id="nextMonthBtn">▶</button>
+
+    <!-- Botón Subir (arriba) -->
+    <div class="go-top" id="goTopBtn"><i class="fas fa-arrow-up"></i></div>
+
+    <!-- Botón WhatsApp flotante + modal -->
+    <div class="whatsapp-float" id="whatsappFloatBtn"><i class="fab fa-whatsapp"></i></div>
+    <div class="modal-wa" id="waModal">
+        <div class="wa-header">
+            <i class="fab fa-whatsapp"></i>
+            <h4>WhatsApp directo</h4>
+            <div class="close-modal-wa" id="closeWaModal">✕</div>
+        </div>
+        <div class="wa-body">
+            <form id="waForm">
+                <input type="text" id="waName" placeholder="Tu nombre *" required>
+                <input type="tel" id="waPhone" placeholder="Número telefónico *" required>
+                <textarea id="waMessage" rows="3" placeholder="Cuéntanos sobre tu proyecto: web, app, radio o datos..."></textarea>
+                <button type="submit"><i class="fab fa-whatsapp"></i> Enviar mensaje</button>
+            </form>
         </div>
     </div>
 
-    <div class="stats">
-        <div class="stat-card">📆 <span id="totalDaysSpan">0</span> días</div>
-        <div class="stat-card">✅ <span id="completedChecksSpan">0</span> checks</div>
-        <div class="stat-card">🔥 Racha <span id="streakSpan">0</span> días</div>
+    <!-- BOTÓN ATRÁS en la parte superior izquierda (fijo) -->
+    <div class="back-btn-top">
+        <button class="btn-back-top" id="backButton">
+            <i class="fas fa-arrow-left"></i> Volver a RDCR Sound
+        </button>
     </div>
 
-    <div class="weekdays">
-        <div>LUN</div><div>MAR</div><div>MIÉ</div><div>JUE</div><div>VIE</div><div>SÁB</div><div>DOM</div>
+    <!-- MODAL PREVIEW (lightbox) -->
+    <div id="previewModal" class="modal-preview">
+        <div class="preview-container">
+            <div class="preview-header">
+                <span id="previewTitle">Vista previa</span>
+                <button id="closePreviewBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <iframe id="previewIframe" class="preview-iframe" title="vista previa del proyecto" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation"></iframe>
+        </div>
     </div>
-    <div id="routineContainer" class="routine-grid">
-        <!-- dinámico con JS -->
+
+    <div class="container">
+        <!-- Header con desplazamiento para evitar que el logo tape el botón fijo -->
+        <div class="navbar">
+            <div class="logo">
+                <h1>DataLab <span style="color:#ff6b4a;">by RDCR</span></h1>
+                <span>innovación digital · audio · datos</span>
+            </div>
+            <div style="font-weight:500; background:#fff0e8; padding:6px 20px; border-radius:40px;">
+                <i class="fas fa-microphone-alt"></i> + soluciones creativas
+            </div>
+        </div>
+
+        <!-- Hero -->
+        <div class="hero">
+            <h2>Transformamos ideas en</h2>
+            <h2 style="font-size:3rem;">Experiencias digitales</h2>
+            <p>Desarrollo web, aplicaciones, datos, radio online y contenido interactivo.<br>✨ Calidad & tendencias visuales.</p>
+        </div>
+
+        <!-- Servicios -->
+        <div class="services">
+            <div class="service-card"><i class="fas fa-code"></i><h3>Web & Apps</h3><p>Landing pages, dashboards, apps progresivas.</p></div>
+            <div class="service-card"><i class="fas fa-chart-line"></i><h3>DataLab</h3><p>Analytics, BI, IA y visualización de datos.</p></div>
+            <div class="service-card"><i class="fas fa-broadcast-tower"></i><h3>Radio Digital</h3><p>Streaming, reproductores y podcasts.</p></div>
+            <div class="service-card"><i class="fas fa-palette"></i><h3>Branding UI</h3><p>Identidad visual única y experiencias.</p></div>
+        </div>
+
+        <!-- Proyectos destacados (cards con modal) -->
+        <div class="section-title"><i class="fas fa-star-of-life" style="color:#ff6b4a;"></i> Proyectos destacados (click para vista previa)</div>
+        <div class="portfolio-grid" id="portfolioGrid">
+            <div class="project-card" data-url="https://rdcrsound.adcm.club/DCClasicosEC/" data-title="DC Clásicos EC">
+                <div class="thumbnail-img"><i class="fas fa-headphones"></i> <i class="fas fa-music"></i><div style="font-size:0.9rem;">🎼 Radio emocional</div></div>
+                <div class="project-info"><h3>DC Clásicos EC</h3><p>Las canciones que marcaron tu historia. Emisora online nostálgica.</p><div class="mock-link"><i class="fas fa-eye"></i> Ver miniatura (click)</div></div>
+            </div>
+            <div class="project-card" data-url="https://rdcrsound.adcm.club/RadioAvenidaTropical/" data-title="Radio Avenida Tropical">
+                <div class="thumbnail-img"><i class="fas fa-umbrella-beach"></i> <i class="fas fa-sun"></i><div style="font-size:0.9rem;">🌴 Ritmo Tropical</div></div>
+                <div class="project-info"><h3>Radio Avenida Tropical</h3><p>Sabrosura, merengue, salsa y lo mejor del Caribe.</p><div class="mock-link"><i class="fas fa-eye"></i> Vista previa</div></div>
+            </div>
+            <div class="project-card" data-url="https://rdcrsound.adcm.club/DarioLavoz/" data-title="Darío La Voz">
+                <div class="thumbnail-img"><i class="fas fa-microphone-alt"></i> <i class="fas fa-user-tie"></i><div style="font-size:0.8rem;">🎙️ La voz con estilo</div></div>
+                <div class="project-info"><h3>Darío La Voz</h3><p>Contenido inspiracional, podcast exclusivo y locución profesional.</p><div class="mock-link"><i class="fas fa-eye"></i> Explorar preview</div></div>
+            </div>
+        </div>
+
+        <!-- Sección extra -->
+        <div class="radio-banner">
+            <div style="display: flex; flex-wrap:wrap; justify-content: space-between; align-items:center;">
+                <div><h3><i class="fas fa-chart-simple"></i> DataLab Intelligence</h3><p style="opacity:0.9;">Plataformas de datos a medida, dashboards predictivos y automatización.</p></div>
+                <div><span style="background:#ff6b4a; padding:10px 22px; border-radius:60px; font-weight:bold;">🎧 + de 20 proyectos</span></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 DataLab by RDCR — Transformación digital, webs, apps, radio y datos.</p>
+            <p><i class="fab fa-whatsapp"></i> Contáctanos &nbsp;|&nbsp; <a href="#" id="footerTop" style="color:#ff6b4a; text-decoration:none;">Subir</a></p>
+        </footer>
     </div>
-    <button id="resetAllDataBtn" class="reset-btn">⟳ Reiniciar todos mis checks del mes</button>
-    <footer>Independiente · tus hábitos creativos: 🎧 edición audio · 🎙️ oratoria · 📊 analista de datos · 📻 radio · 💪 ejercicio · 🎬 contenido para redes</footer>
-</div>
 
-<script>
-    // ---------- CONFIGURACIÓN DE TAREAS SEGÚN DÍA DE SEMANA (sin horarios) ----------
-    // inspirado en lo que comentas: lunes graba audio, martes video para social, etc.
-    // Integro tus pasiones: ejercicio, radio, oratoria, edición audio, analista de datos.
-    const WEEKLY_TASKS = {
-        1: [  // Lunes
-            { emoji: "🎙️", text: "Grabar audio (podcast / locución)" },
-            { emoji: "🏋️", text: "Ejercicio matutino (20-30 min)" },
-            { emoji: "📻", text: "Sintonizar emisora RDCR / análisis de parrilla" },
-            { emoji: "✂️", text: "Edición de audio (proyecto pendiente)" }
-        ],
-        2: [  // Martes
-            { emoji: "📹", text: "Grabar video para redes sociales (promo / clip)" },
-            { emoji: "🎤", text: "Oratoria: práctica de discurso 10 min" },
-            { emoji: "📊", text: "Analista de datos: revisar métricas de audiencia" },
-            { emoji: "🏃", text: "Ejercicio / movilidad" }
-        ],
-        3: [  // Miércoles
-            { emoji: "🔊", text: "Edición avanzada de audio (mezcla / master)" },
-            { emoji: "📻", text: "Planificar programa de radio o playlist" },
-            { emoji: "🗣️", text: "Oratoria: grabar y escuchar tu voz" },
-            { emoji: "📈", text: "DataLab: dashboard o análisis de tendencias" }
-        ],
-        4: [  // Jueves
-            { emoji: "🎧", text: "Editar contenido para RDCR Sound Network" },
-            { emoji: "🏋️‍♂️", text: "Ejercicio de fuerza o cardio breve" },
-            { emoji: "📊", text: "Analista de datos: reporte de oyentes" },
-            { emoji: "📱", text: "Promoción de podcast / clip para redes" }
-        ],
-        5: [  // Viernes
-            { emoji: "🎙️", text: "Oratoria: ejercicio de dicción / improvisación" },
-            { emoji: "📊", text: "Datos: visualización y KPIs de la semana" },
-            { emoji: "🎛️", text: "Edición de audio: limpieza y efectos" },
-            { emoji: "📻", text: "Grabar cuña para radio / streaming" }
-        ],
-        6: [  // Sábado
-            { emoji: "🏃", text: "Ejercicio al aire libre o rutina intensa" },
-            { emoji: "🎙️", text: "Oratoria: revisar grabaciones previas" },
-            { emoji: "📊", text: "Análisis de datos de toda la semana" },
-            { emoji: "🎬", text: "Edición de video corto para difusión" }
-        ],
-        0: [  // Domingo (domingo es 0 en getDay)
-            { emoji: "🧘", text: "Ejercicio suave / estiramientos" },
-            { emoji: "📻", text: "Escuchar radio online y criticar formato" },
-            { emoji: "✍️", text: "Planificar siguiente semana (Data / Audio / Oratoria)" },
-            { emoji: "🎚️", text: "Edición ligera de audio pendiente" }
-        ]
-    };
+    <script>
+        // ========== SCROLL TOP ==========
+        const goTopBtn = document.getElementById('goTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) goTopBtn.classList.add('show');
+            else goTopBtn.classList.remove('show');
+        });
+        goTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        document.getElementById('footerTop')?.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-    // fecha actual
-    let currentDisplayDate = new Date();  // año, mes que se muestra
-    let currentYear = currentDisplayDate.getFullYear();
-    let currentMonth = currentDisplayDate.getMonth(); // 0-11
+        // ========== BOTÓN ATRÁS (superior izquierda) ==========
+        const backBtn = document.getElementById('backButton');
+        backBtn.addEventListener('click', () => {
+            window.location.href = 'https://rdcrsound.adcm.club/';
+        });
 
-    // ---------- ALMACENAMIENTO: checks por fecha (YYYY-MM-DD) --- mapa de tareas completadas usando clave "fecha|textotarea"
-    // Cada check guardamos el texto completo de la tarea + día para evitar duplicados.
-    let completedMap = new Map(); // key = `${dateStr}|${taskText}`  -> true
+        // ========== MODAL PREVIEW (con iframe, no abre nueva pestaña) ==========
+        const previewModal = document.getElementById('previewModal');
+        const previewIframe = document.getElementById('previewIframe');
+        const previewTitleSpan = document.getElementById('previewTitle');
+        const closePreviewBtn = document.getElementById('closePreviewBtn');
 
-    // Cargar datos desde localStorage (independiente)
-    function loadStorage() {
-        const stored = localStorage.getItem("RDCR_routine_checks");
-        if(stored) {
-            try {
-                const arr = JSON.parse(stored);
-                completedMap.clear();
-                arr.forEach(key => completedMap.set(key, true));
-            } catch(e) {}
+        function openPreview(url, title) {
+            if (!url) return;
+            previewTitleSpan.innerText = title || 'Vista previa';
+            previewIframe.src = url;   // Carga el proyecto dentro del modal
+            previewModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-        renderCurrentMonthView();
-    }
 
-    function saveStorage() {
-        const keysArray = Array.from(completedMap.keys());
-        localStorage.setItem("RDCR_routine_checks", JSON.stringify(keysArray));
-    }
-
-    // Obtener tareas de un día específico (según día semana)
-    function getTasksForWeekday(weekdayIndex) {
-        // weekdayIndex: 0 domingo ... 6 sábado (getDay)
-        return WEEKLY_TASKS[weekdayIndex] || WEEKLY_TASKS[0];
-    }
-
-    // marcar / desmarcar tarea
-    function toggleTask(dateStr, taskText) {
-        const key = `${dateStr}|${taskText}`;
-        if(completedMap.has(key)) {
-            completedMap.delete(key);
-        } else {
-            completedMap.set(key, true);
+        function closePreview() {
+            previewModal.classList.remove('active');
+            setTimeout(() => {
+                previewIframe.src = 'about:blank';
+            }, 250);
+            document.body.style.overflow = '';
         }
-        saveStorage();
-        renderCurrentMonthView();  // refrescar vista
-    }
 
-    // obtener si tarea esta completada
-    function isTaskCompleted(dateStr, taskText) {
-        return completedMap.has(`${dateStr}|${taskText}`);
-    }
+        previewModal.addEventListener('click', (e) => {
+            if (e.target === previewModal) closePreview();
+        });
+        closePreviewBtn.addEventListener('click', closePreview);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && previewModal.classList.contains('active')) closePreview();
+        });
 
-    // calcular estadisticas del mes actual en pantalla
-    function computeMonthlyStats(year, month) {
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        let totalChecks = 0;
-        let totalPossibleTasks = 0;
-        for(let d = 1; d <= daysInMonth; d++) {
-            const dateObj = new Date(year, month, d);
-            const weekday = dateObj.getDay(); // 0 domingo
-            const tasks = getTasksForWeekday(weekday);
-            const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-            totalPossibleTasks += tasks.length;
-            for(let task of tasks) {
-                if(isTaskCompleted(dateStr, task.text)) totalChecks++;
-            }
-        }
-        return { totalPossibleTasks, totalChecks, daysInMonth };
-    }
-
-    // calcular racha actual (considerando días consecutivos completos? o mejor racha de dias que completaron al menos 1 tarea? pero para motivar: racha de dias donde completó todo? pero flexible: Racha = días con al menos un check)
-    // Usaré racha de días con al menos una tarea completada (para sentir progreso)
-    function computeStreak(currentYear, currentMonth) {
-        let today = new Date();
-        today.setHours(0,0,0,0);
-        let streak = 0;
-        let checkDate = new Date(today);
-        // buscar desde hoy hacia atrás máximo 60 días. Pero limitado al mes actual? mejor racha global
-        // para mostrar racha motivacional: días consecutivos donde exista al menos 1 check hecho (cualquier día)
-        let currentStreak = 0;
-        let tempDate = new Date(today);
-        while(true) {
-            const y = tempDate.getFullYear();
-            const m = tempDate.getMonth();
-            const d = tempDate.getDate();
-            const dateStr = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-            const weekday = tempDate.getDay();
-            const tasks = getTasksForWeekday(weekday);
-            let hasAnyCheck = false;
-            for(let task of tasks) {
-                if(isTaskCompleted(dateStr, task.text)) { hasAnyCheck = true; break; }
-            }
-            if(hasAnyCheck) {
-                currentStreak++;
-                tempDate.setDate(tempDate.getDate() - 1);
-            } else {
-                break;
-            }
-            if(currentStreak > 365) break;
-        }
-        return currentStreak;
-    }
-
-    // Renderizar la vista del mes actual y año
-    function renderCurrentMonthView() {
-        const year = currentYear;
-        const month = currentMonth;
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const firstDayOfMonth = new Date(year, month, 1).getDay(); // 0 domingo
-
-        const container = document.getElementById("routineContainer");
-        container.innerHTML = "";
-
-        // estadísticas
-        const { totalPossibleTasks, totalChecks, daysInMonth: daysCnt } = computeMonthlyStats(year, month);
-        document.getElementById("totalDaysSpan").innerText = daysCnt;
-        document.getElementById("completedChecksSpan").innerText = totalChecks;
-        const streak = computeStreak(year, month);
-        document.getElementById("streakSpan").innerText = streak;
-        document.getElementById("monthYearDisplay").innerText = new Date(year, month).toLocaleString('es-ES', { month: 'long', year: 'numeric' });
-
-        // generar días
-        for(let day = 1; day <= daysInMonth; day++) {
-            const currentDate = new Date(year, month, day);
-            const weekdayIndex = currentDate.getDay(); // 0 domingo..6 sabado
-            const tasks = getTasksForWeekday(weekdayIndex);
-            const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-            const dayNameSpanish = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"][weekdayIndex];
-
-            const dayCard = document.createElement("div");
-            dayCard.className = "day-card";
-
-            // header día
-            dayCard.innerHTML = `
-                <div class="day-header">
-                    <span class="day-name">${dayNameSpanish}</span>
-                    <span class="date-badge">${day} / ${month+1} / ${year}</span>
-                </div>
-                <div class="tasks-area" id="tasks-${dateStr}"></div>
-            `;
-            container.appendChild(dayCard);
-            const tasksArea = dayCard.querySelector(`.tasks-area`);
-            // llenar tareas
-            tasks.forEach(task => {
-                const completed = isTaskCompleted(dateStr, task.text);
-                const taskDiv = document.createElement("div");
-                taskDiv.className = `task-item ${completed ? 'completed' : ''}`;
-                taskDiv.innerHTML = `
-                    <span class="task-emoji">${task.emoji}</span>
-                    <span class="task-text">${task.text}</span>
-                    <span class="task-check">${completed ? '✓' : '○'}</span>
-                `;
-                taskDiv.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    toggleTask(dateStr, task.text);
-                });
-                tasksArea.appendChild(taskDiv);
+        // Asignar evento click a cards de proyectos
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                const url = card.getAttribute('data-url');
+                const title = card.getAttribute('data-title');
+                if (url) {
+                    e.preventDefault();
+                    openPreview(url, title);
+                } else {
+                    console.warn('URL no definida');
+                }
             });
-        }
+        });
 
-        // mensaje si no hay tareas (no debería)
-    }
+        // ========== WHATSAPP MODAL (formulario) ==========
+        const waFloat = document.getElementById('whatsappFloatBtn');
+        const waModal = document.getElementById('waModal');
+        const closeWa = document.getElementById('closeWaModal');
+        const waForm = document.getElementById('waForm');
 
-    // cambiar mes
-    function changeMonth(delta) {
-        let newMonth = currentMonth + delta;
-        let newYear = currentYear;
-        if(newMonth < 0) {
-            newMonth = 11;
-            newYear--;
-        } else if(newMonth > 11) {
-            newMonth = 0;
-            newYear++;
-        }
-        currentMonth = newMonth;
-        currentYear = newYear;
-        renderCurrentMonthView();
-    }
+        function openWaModal() { waModal.classList.add('open'); }
+        function closeWaModal() { waModal.classList.remove('open'); }
+        waFloat.addEventListener('click', (e) => { e.stopPropagation(); openWaModal(); });
+        closeWa.addEventListener('click', closeWaModal);
+        window.addEventListener('click', (e) => {
+            if (waModal.classList.contains('open') && !waModal.contains(e.target) && e.target !== waFloat && !waFloat.contains(e.target))
+                closeWaModal();
+        });
 
-    // reset todos checks del mes visible
-    function resetCurrentMonthChecks() {
-        const year = currentYear;
-        const month = currentMonth;
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        for(let d = 1; d <= daysInMonth; d++) {
-            const dateObj = new Date(year, month, d);
-            const weekday = dateObj.getDay();
-            const tasks = getTasksForWeekday(weekday);
-            const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-            for(let task of tasks) {
-                const key = `${dateStr}|${task.text}`;
-                if(completedMap.has(key)) completedMap.delete(key);
+        waForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('waName').value.trim();
+            const phone = document.getElementById('waPhone').value.trim();
+            const message = document.getElementById('waMessage').value.trim();
+            if (!name || !phone) {
+                alert('Por favor ingresa nombre y teléfono');
+                return;
             }
-        }
-        saveStorage();
-        renderCurrentMonthView();
-    }
-
-    // inicializar eventos
-    document.getElementById("prevMonthBtn").addEventListener("click", () => changeMonth(-1));
-    document.getElementById("nextMonthBtn").addEventListener("click", () => changeMonth(1));
-    document.getElementById("resetAllDataBtn").addEventListener("click", () => {
-        if(confirm(`¿Reiniciar TODOS los checks del mes ${new Date(currentYear, currentMonth).toLocaleString('es', {month:'long'})}? Esta acción no se puede deshacer.`)) {
-            resetCurrentMonthChecks();
-        }
-    });
-
-    loadStorage();
-</script>
+            // Cambia este número por el real de WhatsApp de DataLab / RDCR
+            const businessNumber = '593987654321';
+            let waText = `Hola, soy ${name}.%0ATeléfono: ${phone}.%0A`;
+            waText += `Mensaje: ${message || 'Me interesa un proyecto de DataLab (web, app, radio o datos)'}.`;
+            window.open(`https://wa.me/${businessNumber}?text=${waText}`, '_blank');
+            closeWaModal();
+            waForm.reset();
+        });
+    </script>
 </body>
-
 </html>
