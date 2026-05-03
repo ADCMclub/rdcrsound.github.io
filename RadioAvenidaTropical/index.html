@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes,viewport-fit=cover">
-<meta name="description" content="Avenida Tropical - Radio 100% tropical con la mejor salsa, timba y ritmos. Programacion actualizada.">
+<meta name="description" content="Avenida Tropical - Radio 100% tropical con la mejor salsa, timba y ritmos. Programacion en cards interactivas.">
 <title>Avenida Tropical | RDCR Sound Network</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -38,72 +38,71 @@ nav a:hover{color:var(--neon-green)}
 .player-section{padding:15px 15px 20px;background:var(--darker-bg);text-align:center}
 .player-container{max-width:380px;margin:0 auto;background:rgba(20,20,20,0.95);border-radius:24px;padding:16px}
 .player-title{font-size:1.1rem;color:var(--neon-orange);margin-bottom:10px}
-.square-player{aspect-ratio:1 / 1;width:100%;max-width:320px;margin:0 auto;background:radial-gradient(circle at 30% 30%, #1a0033, #000000);border-radius:28px;padding:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;animation:squareGlow 1.5s infinite alternate;box-shadow:0 0 25px var(--dj-purple);border:2px solid rgba(255,94,0,0.5)}
-@keyframes squareGlow{0%{box-shadow:0 0 12px var(--dj-purple);border-color:rgba(255,94,0,0.4)}100%{box-shadow:0 0 35px #ff44ee,0 0 15px var(--neon-yellow);border-color:var(--neon-yellow)}}
-.radio-frame-square{width:100%;height:auto;min-height:180px;border-radius:20px;overflow:hidden;background:#000;margin-bottom:8px}
-.signal-indicators{display:flex;justify-content:center;gap:5px;margin-top:8px}
-.signal-bar{width:4px;height:14px;background:#FF6300;border-radius:2px;animation:signalPulse 1.5s infinite}
-.listeners-counter{background:linear-gradient(135deg,rgba(0,0,0,0.9),rgba(30,30,40,0.95));border-radius:40px;display:inline-flex;align-items:center;gap:8px;padding:4px 14px;margin-top:10px;border:1px solid var(--neon-yellow)}
+.square-player{aspect-ratio:1 / 1;width:100%;max-width:300px;margin:0 auto;background:radial-gradient(circle at 30% 30%, #1a0033, #000000);border-radius:28px;padding:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;animation:squareGlow 1.5s infinite alternate;box-shadow:0 0 25px var(--dj-purple);border:2px solid rgba(255,94,0,0.5)}
+@keyframes squareGlow{0%{box-shadow:0 0 12px var(--dj-purple)}100%{box-shadow:0 0 35px #ff44ee,0 0 15px var(--neon-yellow)}}
+.radio-frame-square{width:100%;min-height:160px;border-radius:20px;overflow:hidden;background:#000;margin-bottom:6px}
+.signal-indicators{display:flex;justify-content:center;gap:5px;margin-top:6px}
+.signal-bar{width:4px;height:12px;background:#FF6300;border-radius:2px;animation:signalPulse 1.5s infinite}
+.listeners-counter{background:linear-gradient(135deg,rgba(0,0,0,0.9),rgba(30,30,40,0.95));border-radius:40px;display:inline-flex;align-items:center;gap:8px;padding:4px 14px;margin-top:8px;border:1px solid var(--neon-yellow)}
 .listeners-counter i{font-size:1rem;color:var(--neon-green)}
 .counter-number{font-size:1.2rem;font-weight:800;color:var(--neon-yellow);font-family:monospace}
 .counter-label{font-weight:600;font-size:0.55rem;color:#ddd}
 .programacion-section{padding:20px 12px;background:var(--dark-bg)}
 .section-title{text-align:center;font-size:1.2rem;color:var(--neon-orange);margin-bottom:15px}
 .section-title:after{content:'';display:block;width:40px;height:2px;background:var(--neon-green);margin:5px auto 0}
-.live-now-card{background:linear-gradient(135deg,rgba(57,255,20,0.12),rgba(255,94,0,0.06));border:2px solid var(--neon-green);border-radius:16px;padding:10px;margin-bottom:20px;text-align:center}
-.live-badge{background:var(--neon-green);color:black;padding:2px 10px;border-radius:30px;font-weight:bold;display:inline-block;margin-bottom:4px;font-size:0.65rem}
+.live-now-card{background:linear-gradient(135deg,rgba(57,255,20,0.15),rgba(255,94,0,0.08));border:2px solid var(--neon-green);border-radius:20px;padding:12px;margin-bottom:20px;text-align:center}
+.live-badge{background:var(--neon-green);color:black;padding:3px 12px;border-radius:30px;font-weight:bold;display:inline-block;margin-bottom:5px;font-size:0.7rem}
 .current-program-name{font-size:1rem;color:var(--neon-yellow);font-weight:800}
-.dias-tabs{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:15px}
-.dia-tab{padding:5px 12px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,240,31,0.3);border-radius:40px;font-weight:700;cursor:pointer;font-size:0.7rem;position:relative}
+.dias-tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:18px}
+.dia-tab{padding:6px 14px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,240,31,0.3);border-radius:40px;font-weight:700;cursor:pointer;font-size:0.75rem;position:relative;transition:0.2s}
 .dia-tab.active{background:var(--neon-yellow);color:var(--dark-bg);border-color:var(--neon-yellow)}
-.hoy-badge{position:absolute;top:-7px;right:-5px;background:var(--neon-orange);color:black;font-size:0.5rem;padding:1px 4px;border-radius:20px}
+.dia-tab:hover{background:rgba(255,240,31,0.2);transform:scale(1.02)}
+.hoy-badge{position:absolute;top:-8px;right:-6px;background:var(--neon-orange);color:black;font-size:0.55rem;padding:1px 5px;border-radius:20px}
+/* CARDS INTERACTIVAS - PROGRAMA */
 .programas-container{max-width:100%;margin:0 auto}
 .programas-dia{display:none}
 .programas-dia.active{display:block}
-.programas-lista{display:flex;flex-direction:column;gap:10px}
-/* PROGRAMAS CENTRADOS - TEXTO CENTRADO */
-.programa-item{background:rgba(255,255,255,0.03);border-left:4px solid var(--neon-orange);border-radius:14px;padding:12px;text-align:center;transition:0.1s}
-.programa-item.en-vivo{background:rgba(57,255,20,0.12);border-left-color:var(--neon-green)}
-.en-vivo-tag{background:var(--neon-green);color:black;font-weight:bold;font-size:0.6rem;padding:2px 10px;border-radius:20px;display:inline-block;margin-bottom:6px}
-.programa-hora{background:var(--neon-orange);color:black;padding:3px 12px;border-radius:30px;font-weight:bold;font-size:0.7rem;display:inline-block;margin-bottom:8px}
-.programa-nombre{font-size:0.95rem;font-weight:800;color:var(--neon-yellow);margin-bottom:5px;text-align:center}
-.programa-conductor{font-size:0.7rem;color:#ccc;display:flex;align-items:center;justify-content:center;gap:5px}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:8px}
+.programa-card{background:linear-gradient(145deg,#141414,#0c0c0c);border-radius:20px;padding:14px;text-align:center;border:1px solid rgba(255,94,0,0.3);transition:all 0.25s ease;cursor:pointer;position:relative;overflow:hidden}
+.programa-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,94,0,0.15),transparent);transition:left 0.5s}
+.programa-card:hover{transform:translateY(-5px);border-color:var(--neon-orange);box-shadow:0 8px 20px rgba(255,94,0,0.3);background:linear-gradient(145deg,#181818,#0f0f0f)}
+.programa-card:hover::before{left:100%}
+.programa-card.en-vivo-card{border:2px solid var(--neon-green);box-shadow:0 0 12px var(--neon-green-glow);background:linear-gradient(145deg,#1a2a1a,#0a1a0a)}
+.en-vivo-badge-card{background:var(--neon-green);color:black;font-weight:800;font-size:0.6rem;padding:3px 12px;border-radius:30px;display:inline-block;margin-bottom:8px;letter-spacing:1px}
+.programa-hora-card{background:var(--neon-orange);color:black;padding:4px 12px;border-radius:40px;font-weight:bold;font-size:0.7rem;display:inline-block;margin-bottom:10px}
+.programa-nombre-card{font-size:1rem;font-weight:800;color:var(--neon-yellow);margin:8px 0 6px;text-align:center}
+.programa-conductor-card{font-size:0.7rem;color:#aaa;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:6px}
+.programa-conductor-card i{color:var(--neon-green);font-size:0.7rem}
+.btn-pedir-card{background:transparent;border:1.5px solid var(--neon-orange);color:var(--neon-orange);padding:5px 12px;border-radius:40px;font-size:0.65rem;font-weight:600;cursor:pointer;margin-top:10px;transition:0.2s;width:auto;display:inline-flex;align-items:center;gap:5px}
+.btn-pedir-card:hover{background:var(--neon-orange);color:black;box-shadow:0 0 8px var(--neon-orange)}
 .other-radios-section{padding:20px 12px;background:var(--darker-bg);text-align:center}
-.radio-card{display:inline-block;background:var(--card-bg);border:2px solid var(--neon-green);border-radius:16px;padding:15px;text-decoration:none;color:white;max-width:200px;text-align:center}
-.radio-card h3{font-size:0.9rem;margin:4px 0}
-.radio-card p{font-size:0.7rem}
+.radio-card{display:inline-block;background:var(--card-bg);border:2px solid var(--neon-green);border-radius:18px;padding:15px;text-decoration:none;color:white;max-width:200px;text-align:center;transition:0.2s}
+.radio-card:hover{transform:translateY(-3px);border-color:var(--neon-orange)}
 .top5-wrapper{text-align:center;padding:12px 15px;background:var(--dark-bg);border-top:1px solid rgba(255,94,0,0.2);border-bottom:1px solid rgba(57,255,20,0.1)}
-.circle-top5-btn{width:65px;height:65px;background:radial-gradient(circle,var(--neon-orange),#b33f00);border-radius:50%;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 0 15px var(--neon-orange-glow);border:none;color:black}
-.circle-top5-btn i{font-size:1.4rem;margin-bottom:2px}
-.circle-top5-btn span{font-size:0.6rem;font-weight:800}
+.circle-top5-btn{width:65px;height:65px;background:radial-gradient(circle,var(--neon-orange),#b33f00);border-radius:50%;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 0 15px var(--neon-orange-glow);border:none;color:black;transition:0.2s}
+.circle-top5-btn:hover{transform:scale(1.05);box-shadow:0 0 25px var(--neon-orange)}
 .top5-collapsible{max-height:0;overflow:hidden;transition:max-height 0.45s ease;background:var(--dark-bg)}
 .top5-collapsible.open{max-height:1100px}
 .top5-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;padding:15px 10px 20px}
-.top5-item{background:linear-gradient(145deg,#111111,#0a0a0a);border-radius:24px;padding:12px 8px;text-align:center;border:1px solid var(--neon-yellow)}
-.top5-rank{font-size:1.5rem;font-weight:800;color:var(--neon-orange)}
-.artist-img{width:55px;height:55px;border-radius:50%;object-fit:cover;margin:5px auto 8px;border:2px solid var(--neon-green);display:block}
+.top5-item{background:linear-gradient(145deg,#111111,#0a0a0a);border-radius:24px;padding:12px 8px;text-align:center;border:1px solid var(--neon-yellow);transition:0.2s}
+.top5-item:hover{transform:translateY(-4px);border-color:var(--neon-green)}
+.artist-img{width:55px;height:55px;border-radius:50%;object-fit:cover;margin:5px auto 8px;border:2px solid var(--neon-green)}
 .top5-title{font-weight:800;margin:5px 0 2px;color:var(--neon-yellow);font-size:0.8rem}
-.top5-artist{font-size:0.6rem;color:#bbb;margin-bottom:8px}
-.youtube-link{display:inline-flex;align-items:center;gap:4px;background:#ff0000cc;padding:3px 10px;border-radius:40px;text-decoration:none;color:white;font-size:0.6rem}
+.youtube-link{display:inline-flex;align-items:center;gap:5px;background:#ff0000cc;padding:4px 12px;border-radius:40px;text-decoration:none;color:white;font-size:0.6rem;margin-top:6px}
 footer{background:rgba(5,5,5,0.98);text-align:center;padding:15px;border-top:2px solid var(--neon-green);font-size:0.7rem}
-@keyframes signalPulse{0%,100%{transform:scaleY(0.5);opacity:0.6}50%{transform:scaleY(1);opacity:1}}
-.cstrEmbed, [data-type="newStreamPlayer"] { background: #000000 !important; border-radius: 18px; }
-@media (max-width: 550px){
-    .hero-tagline{font-size:0.85rem}.btn{padding:5px 12px;min-width:100px;font-size:0.7rem}
-    .programa-nombre{font-size:0.85rem}.top5-grid{grid-template-columns:repeat(auto-fit,minmax(125px,1fr))}
-    .square-player{max-width:280px}
-}
+@keyframes signalPulse{0%,100%{transform:scaleY(0.5)}50%{transform:scaleY(1)}}
+.cstrEmbed,[data-type="newStreamPlayer"]{background:#000!important;border-radius:18px}
+@media (max-width: 600px){.cards-grid{grid-template-columns:1fr;gap:12px}.programa-card{padding:12px}}
 </style>
 </head>
 <body>
-<div class="modal-overlay" id="songRequestModal"><div class="modal-container"><button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button><h2 style="color:var(--neon-yellow);margin-bottom:12px;font-size:1.1rem;">Pedir Cancion</h2><form><input type="text" id="nombreCompleto" class="form-input" placeholder="Tu nombre" required><input type="text" id="cancion" class="form-input" placeholder="Cancion / Artista" required><textarea id="comentario" class="form-input" placeholder="Dedicatoria" rows="2"></textarea><button type="button" class="btn-modal btn-send" id="directSendBtn"><i class="fab fa-whatsapp"></i> Enviar</button><button type="button" class="btn-modal btn-cancel" id="cancelFormBtn">Cancelar</button></form></div></div>
+<div class="modal-overlay" id="songRequestModal"><div class="modal-container"><button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button><h2 style="color:var(--neon-yellow);margin-bottom:12px;">Pedir Cancion</h2><form><input type="text" id="nombreCompleto" class="form-input" placeholder="Tu nombre" required><input type="text" id="cancion" class="form-input" placeholder="Cancion / Artista" required><textarea id="comentario" class="form-input" placeholder="Dedicatoria" rows="2"></textarea><button type="button" class="btn-modal btn-send" id="directSendBtn"><i class="fab fa-whatsapp"></i> Enviar</button><button type="button" class="btn-modal btn-cancel" id="cancelFormBtn">Cancelar</button></form></div></div>
 <div class="back-button" id="backButton"><i class="fas fa-arrow-left"></i> Volver</div>
 <header><div class="logo"><i class="fas fa-palm-tree logo-icon"></i><div class="logo-text"><h1>Avenida Tropical</h1></div></div><nav><ul><li><a href="#inicio">Inicio</a></li><li><a href="#player">En Vivo</a></li><li><a href="#programacion">Prog</a></li><li><a href="#top5Seccion">Top5</a></li></ul></nav></header>
 <div class="whatsapp-float" id="whatsappBtn"><i class="fab fa-whatsapp"></i></div>
 <div class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></div>
 <section class="hero" id="inicio"><div class="hero-content"><div class="hero-tagline">CON LA MUSICA QUE TE PEGA FUERTE</div><div><a href="#player" class="btn btn-primary"><i class="fas fa-play-circle"></i> Escuchar</a><a href="#programacion" class="btn btn-secondary"><i class="fas fa-calendar-alt"></i> Programacion</a></div></div></section>
 
-<!-- REPRODUCTOR EN FORMA CUADRADA -->
 <section class="player-section" id="player"><div class="player-container"><h2 class="player-title">AVENIDA TROPICAL EN VIVO</h2>
 <div class="square-player"><div class="radio-frame-square"><div data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="dark" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div><script src="//cdn.cloud.caster.fm//widgets/embed.js"></script></div><div class="signal-indicators"><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div></div><div class="listeners-counter"><i class="fas fa-headphones"></i><div><span class="counter-number" id="listenerCount">178</span><div class="counter-label">OYENTES</div></div></div></div>
 <p style="margin-top:8px;font-size:0.6rem;opacity:0.6;">128kbps • RDCR Sound Network</p></div></section>
@@ -111,79 +110,21 @@ footer{background:rgba(5,5,5,0.98);text-align:center;padding:15px;border-top:2px
 <div class="top5-wrapper" id="top5Seccion"><div class="circle-top5-btn" id="toggleTop5Btn"><i class="fas fa-chart-line"></i><span>TOP 5</span><i class="fas fa-chevron-down" id="toggleIcon" style="font-size:0.55rem;margin-top:2px;"></i></div></div>
 <div class="top5-collapsible" id="top5Collapsible"><div class="top5-grid"><div class="top5-item"><div class="top5-rank">#1</div><img class="artist-img" src="https://picsum.photos/id/107/60/60" alt="Joe Arroyo"><div class="top5-title">La Rebelion</div><div class="top5-artist">Joe Arroyo</div><a href="https://www.youtube.com/results?search_query=Joe+Arroyo+La+Rebelion" target="_blank" class="youtube-link"><i class="fab fa-youtube"></i> Youtube</a></div><div class="top5-item"><div class="top5-rank">#2</div><img class="artist-img" src="https://picsum.photos/id/29/60/60" alt="Hector Lavoe"><div class="top5-title">El Cantante</div><div class="top5-artist">Hector Lavoe</div><a href="https://www.youtube.com/results?search_query=Hector+Lavoe+El+Cantante" target="_blank" class="youtube-link"><i class="fab fa-youtube"></i> Youtube</a></div><div class="top5-item"><div class="top5-rank">#3</div><img class="artist-img" src="https://picsum.photos/id/155/60/60" alt="Willie Colon"><div class="top5-title">Idilio</div><div class="top5-artist">Willie Colon</div><a href="https://www.youtube.com/results?search_query=Willie+Colon+Idilio" target="_blank" class="youtube-link"><i class="fab fa-youtube"></i> Youtube</a></div><div class="top5-item"><div class="top5-rank">#4</div><img class="artist-img" src="https://picsum.photos/id/42/60/60" alt="Lalo Rodriguez"><div class="top5-title">Ven Devorame</div><div class="top5-artist">Lalo Rodriguez</div><a href="https://www.youtube.com/results?search_query=Lalo+Rodriguez+Ven+Dev%C3%B3rame" target="_blank" class="youtube-link"><i class="fab fa-youtube"></i> Youtube</a></div><div class="top5-item"><div class="top5-rank">#5</div><img class="artist-img" src="https://picsum.photos/id/169/60/60" alt="Rubén Blades"><div class="top5-title">Pedro Navaja</div><div class="top5-artist">Rubén Blades</div><a href="https://www.youtube.com/results?search_query=Rub%C3%A9n+Blades+Pedro+Navaja" target="_blank" class="youtube-link"><i class="fab fa-youtube"></i> Youtube</a></div></div><p style="text-align:center;padding-bottom:12px;font-size:0.6rem;">Top semanal - Pide tu favorita</p></div>
 
-<!-- PROGRAMACION CENTRADA - NOMBRES CENTRADOS -->
+<!-- PROGRAMACION CON CARDS INTERACTIVAS -->
 <section class="programacion-section" id="programacion"><h2 class="section-title">Programacion</h2><div class="live-now-card" id="liveNowWidget"><div class="live-badge">EN VIVO AHORA</div><div id="liveNowContent">Cargando...</div></div><div class="dias-tabs" id="diasTabs"></div><div class="programas-container" id="programasContainer"></div></section>
 <section class="other-radios-section"><h2 class="section-title">RDCR Sound Network</h2><div><a href="https://rdcrsound.adcm.club/DCClasicosEC/" target="_self" class="radio-card"><i class="fas fa-radio" style="font-size:1.3rem;color:var(--neon-yellow);"></i><h3>DC Clasicos EC</h3><p>Los clasicos de siempre</p></a></div></section>
-<footer><i class="fas fa-satellite-dish" style="font-size:1rem;color:var(--neon-green);"></i><h3 style="margin:3px 0;font-size:0.8rem;">RDCR Sound Network</h3><p>CON LA MUSICA QUE TE PEGA FUERTE - 100% Tropical</p><p>Avenida Tropical · 2026</p></footer>
+<footer><i class="fas fa-satellite-dish" style="font-size:1rem;color:var(--neon-green);"></i><h3 style="margin:3px 0;">RDCR Sound Network</h3><p>CON LA MUSICA QUE TE PEGA FUERTE - 100% Tropical</p><p>Avenida Tropical · 2026</p></footer>
 
 <script>
-// PARRILLA ACTUALIZADA CON HORARIOS EXACTOS (TIMBA Y SABOR 17:30-18:00, JUST REMIXX DJ HOXX)
+// PROGRAMACION COMPLETA CON CARDS
 const programacionReal = {
-  domingo: [
-    {hora:"00:00 - 07:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},
-    {hora:"07:00 - 09:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},
-    {hora:"09:00 - 14:00",nombre:"DOMINGO SALSERO",conductor:"Avenida Tropical"},
-    {hora:"14:00 - 18:00",nombre:"MIXES DE SALSA",conductor:"Avenida Tropical"},
-    {hora:"18:00 - 21:00",nombre:"JUST REMIXX",conductor:"DJ HOXX"},
-    {hora:"21:00 - 23:59",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}
-  ],
-  lunes: [
-    {hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},
-    {hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},
-    {hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},
-    {hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},
-    {hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},
-    {hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},
-    {hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}
-  ],
-  martes: [
-    {hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},
-    {hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},
-    {hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},
-    {hora:"18:00 - 18:30",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},
-    {hora:"18:30 - 19:30",nombre:"LOS MAXIMOS DE LA SALSA",conductor:"Maximino Rivera Jr."},
-    {hora:"19:30 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},
-    {hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},
-    {hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}
-  ],
-  miercoles: [
-    {hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},
-    {hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},
-    {hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},
-    {hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},
-    {hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},
-    {hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},
-    {hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}
-  ],
-  jueves: [
-    {hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},
-    {hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},
-    {hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},
-    {hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},
-    {hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},
-    {hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},
-    {hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}
-  ],
-  viernes: [
-    {hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},
-    {hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},
-    {hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},
-    {hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},
-    {hora:"19:00 - 21:00",nombre:"EL MENSAJERO DE LA SALSA",conductor:"Diego Cheito Grijalva"},
-    {hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},
-    {hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}
-  ],
-  sabado: [
-    {hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},
-    {hora:"06:00 - 08:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},
-    {hora:"08:00 - 09:00",nombre:"ENTRETELONES",conductor:"Dario Castellanos"},
-    {hora:"09:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},
-    {hora:"12:00 - 13:00",nombre:"PRENDIDOS",conductor:"Diego Cheito Grijalva"},
-    {hora:"13:00 - 17:30",nombre:"SABADO SALSERO",conductor:"Avenida Tropical"},
-    {hora:"17:30 - 18:00",nombre:"TIMBA Y SABOR",conductor:"Ivette"},
-    {hora:"18:30 - 21:30",nombre:"JUST REMIXX",conductor:"DJ HOXX"},
-    {hora:"21:30 - 23:59",nombre:"DJ INVITADOS",conductor:"Guest DJ"}
-  ]
+  domingo: [{hora:"00:00 - 07:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"07:00 - 09:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"09:00 - 14:00",nombre:"DOMINGO SALSERO",conductor:"Avenida Tropical"},{hora:"14:00 - 18:00",nombre:"MIXES DE SALSA",conductor:"Avenida Tropical"},{hora:"18:00 - 21:00",nombre:"JUST REMIXX",conductor:"DJ HOXX"},{hora:"21:00 - 23:59",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
+  lunes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
+  martes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 18:30",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"18:30 - 19:30",nombre:"LOS MAXIMOS DE LA SALSA",conductor:"Maximino Rivera Jr."},{hora:"19:30 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
+  miercoles: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
+  jueves: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
+  viernes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"EL MENSAJERO DE LA SALSA",conductor:"Diego Cheito Grijalva"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
+  sabado: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 08:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"08:00 - 09:00",nombre:"ENTRETELONES",conductor:"Dario Castellanos"},{hora:"09:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 13:00",nombre:"PRENDIDOS",conductor:"Diego Cheito Grijalva"},{hora:"13:00 - 17:30",nombre:"SABADO SALSERO",conductor:"Avenida Tropical"},{hora:"17:30 - 18:00",nombre:"TIMBA Y SABOR",conductor:"Ivette"},{hora:"18:30 - 21:30",nombre:"JUST REMIXX",conductor:"DJ HOXX"},{hora:"21:30 - 23:59",nombre:"DJ INVITADOS",conductor:"Guest DJ"}]
 };
 const diasMap = [{key:"domingo",label:"Domingo"},{key:"lunes",label:"Lunes"},{key:"martes",label:"Martes"},{key:"miercoles",label:"Miercoles"},{key:"jueves",label:"Jueves"},{key:"viernes",label:"Viernes"},{key:"sabado",label:"Sabado"}];
 const hoy = new Date();
@@ -221,7 +162,7 @@ function programaEnVivo(prog, diaKey){
   let [eh,em] = end.split(':').map(Number);
   return (minActual >= sh*60+sm && minActual <= eh*60+em);
 }
-function construirProgramacion(){
+function construirProgramacionCards(){
   const tabsDiv = document.getElementById("diasTabs");
   const progContainer = document.getElementById("programasContainer");
   tabsDiv.innerHTML = ""; progContainer.innerHTML = "";
@@ -241,20 +182,25 @@ function construirProgramacion(){
     const diaDiv = document.createElement("div");
     diaDiv.className = `programas-dia ${esHoy ? "active" : ""}`;
     diaDiv.id = `prog-${dia.key}`;
-    const listaDiv = document.createElement("div");
-    listaDiv.className = "programas-lista";
+    const cardsGrid = document.createElement("div");
+    cardsGrid.className = "cards-grid";
     const progDia = programacionReal[dia.key];
     if(progDia){
       progDia.forEach(prog => {
         const enVivo = programaEnVivo(prog, dia.key);
-        const item = document.createElement("div");
-        item.className = `programa-item ${enVivo ? "en-vivo" : ""}`;
-        if(enVivo){ const et = document.createElement("div"); et.className="en-vivo-tag"; et.innerHTML="EN VIVO"; item.appendChild(et); }
-        item.innerHTML += `<div class="programa-hora">${prog.hora}</div><div class="programa-nombre">${prog.nombre}</div><div class="programa-conductor"><i class="fas fa-user"></i> ${prog.conductor}</div>`;
-        listaDiv.appendChild(item);
+        const card = document.createElement("div");
+        card.className = `programa-card ${enVivo ? "en-vivo-card" : ""}`;
+        if(enVivo){ const badgeLive = document.createElement("div"); badgeLive.className="en-vivo-badge-card"; badgeLive.innerHTML="🔴 EN VIVO AHORA"; card.appendChild(badgeLive); }
+        const horaSpan = document.createElement("div"); horaSpan.className="programa-hora-card"; horaSpan.innerText = prog.hora;
+        const nombreSpan = document.createElement("div"); nombreSpan.className="programa-nombre-card"; nombreSpan.innerText = prog.nombre;
+        const conductorDiv = document.createElement("div"); conductorDiv.className="programa-conductor-card"; conductorDiv.innerHTML = `<i class="fas fa-user-circle"></i> ${prog.conductor}`;
+        const btnPedir = document.createElement("button"); btnPedir.className = "btn-pedir-card"; btnPedir.innerHTML = '<i class="fab fa-whatsapp"></i> Pedir cancion';
+        btnPedir.addEventListener("click", (e) => { e.stopPropagation(); document.getElementById("comentario").value = `Pedido para ${prog.nombre} - `; document.getElementById("songRequestModal").classList.add("active"); });
+        card.appendChild(horaSpan); card.appendChild(nombreSpan); card.appendChild(conductorDiv); card.appendChild(btnPedir);
+        cardsGrid.appendChild(card);
       });
     }
-    diaDiv.appendChild(listaDiv);
+    diaDiv.appendChild(cardsGrid);
     progContainer.appendChild(diaDiv);
   });
 }
@@ -270,7 +216,7 @@ window.addEventListener("scroll",()=>{const btn=document.getElementById("scrollT
 document.getElementById("scrollTopBtn")?.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
 document.getElementById("backButton")?.addEventListener("click",()=>window.location.href="https://rdcrsound.adcm.club");
 setInterval(()=>{document.querySelectorAll('.signal-bar').forEach(bar=>{bar.style.transform=`scaleY(${Math.random()*0.8+0.3})`;});},500);
-construirProgramacion(); actualizarLiveNow(); setInterval(actualizarLiveNow,60000); setInterval(updateListeners,9000); if(listenerSpan) listenerSpan.innerText=165+Math.floor(Math.random()*40);
+construirProgramacionCards(); actualizarLiveNow(); setInterval(actualizarLiveNow,60000); setInterval(updateListeners,9000); if(listenerSpan) listenerSpan.innerText=165+Math.floor(Math.random()*40);
 const toggleBtn=document.getElementById("toggleTop5Btn"), coll=document.getElementById("top5Collapsible"), iconSpan=document.getElementById("toggleIcon"); let open=false;
 toggleBtn?.addEventListener("click",()=>{if(!open){coll.classList.add("open");if(iconSpan){iconSpan.classList.remove("fa-chevron-down");iconSpan.classList.add("fa-chevron-up");}open=true;}else{coll.classList.remove("open");if(iconSpan){iconSpan.classList.remove("fa-chevron-up");iconSpan.classList.add("fa-chevron-down");}open=false;}});
 </script>
