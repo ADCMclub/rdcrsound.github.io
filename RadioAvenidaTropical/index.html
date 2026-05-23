@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes,viewport-fit=cover">
-<meta name="description" content="Avenida Tropical - Radio 100% tropical con la mejor salsa, timba y ritmos. Reproductor original con todas las funciones.">
+<meta name="description" content="Avenida Tropical - Radio 100% tropical con la mejor salsa, timba y ritmos. Reproductor estilo disco giratorio.">
 <title>Avenida Tropical | RDCR Sound Network</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -34,20 +34,33 @@ nav a:hover{color:var(--neon-green)}
 .btn{padding:8px 22px;border-radius:50px;font-weight:700;text-decoration:none;display:inline-block;margin:5px;min-width:130px;font-size:0.85rem}
 .btn-primary{background:var(--neon-orange);color:var(--dark-bg);box-shadow:0 0 12px var(--neon-orange-glow)}
 .btn-secondary{background:transparent;border:2px solid var(--neon-green);color:var(--neon-green)}
-/* REPRODUCTOR TAMAÑO ORIGINAL RECTANGULAR - SIN CONTROLES ADICIONALES */
-.player-section{padding:15px 15px 20px;background:var(--darker-bg);text-align:center}
-.player-container{max-width:750px;margin:0 auto;background:rgba(20,20,20,0.95);border-radius:24px;padding:18px}
+/* REPRODUCTOR ESTILO DISCO GIRATORIO */
+.player-section{padding:15px 15px 25px;background:var(--darker-bg);text-align:center}
+.player-container{max-width:950px;margin:0 auto;background:rgba(20,20,20,0.95);border-radius:32px;padding:25px}
 .player-title{font-size:1.3rem;color:var(--neon-orange);margin-bottom:12px;font-weight:800}
-.original-player-wrapper{width:100%;margin:0 auto;background:radial-gradient(circle at 30% 30%, #1a0033, #000000);border-radius:28px;padding:8px;animation:rectGlow 1.5s infinite alternate;box-shadow:0 0 25px var(--dj-purple);border:2px solid rgba(255,94,0,0.5)}
+.disc-player-wrapper{background:radial-gradient(circle at 30% 30%, #1a0033, #000000);border-radius:40px;padding:25px;animation:rectGlow 1.5s infinite alternate;box-shadow:0 0 25px var(--dj-purple);border:2px solid rgba(255,94,0,0.5)}
 @keyframes rectGlow{0%{box-shadow:0 0 12px var(--dj-purple)}100%{box-shadow:0 0 35px #ff44ee,0 0 15px var(--neon-yellow)}}
-.radio-frame-original{width:100%;min-height:200px;border-radius:20px;overflow:hidden;background:#000}
-.signal-indicators{display:flex;justify-content:center;gap:6px;margin-top:12px}
-.signal-bar{width:5px;height:14px;background:#FF6300;border-radius:2px;animation:signalPulse 1.5s infinite}
-.listeners-counter{background:linear-gradient(135deg,rgba(0,0,0,0.9),rgba(30,30,40,0.95));border-radius:40px;display:inline-flex;align-items:center;gap:10px;padding:5px 20px;margin-top:12px;border:1px solid var(--neon-yellow)}
-.listeners-counter i{font-size:1.1rem;color:var(--neon-green)}
-.counter-number{font-size:1.3rem;font-weight:800;color:var(--neon-yellow);font-family:monospace}
-.counter-label{font-weight:600;font-size:0.6rem;color:#ddd}
-.stream-info{font-size:0.7rem;opacity:0.6;margin-top:10px}
+.disc-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:40px;margin-bottom:20px}
+/* DISCO GIRATORIO ESTILO VINILO - VELOCIDAD MUY LENTA (12s) */
+.rotating-disc{position:relative;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #1a1a1a, #050505);box-shadow:0 0 0 10px #1a1a1a, 0 0 0 15px #2a2a2a, 0 15px 30px rgba(0,0,0,0.6);animation:spinDisc 12s linear infinite;cursor:pointer}
+.rotating-disc::before{content:'';position:absolute;top:50%;left:50%;width:32px;height:32px;background:radial-gradient(circle, #ff5e00, #8b2c00);border-radius:50%;transform:translate(-50%,-50%);z-index:2;box-shadow:0 0 0 4px #ffcc00,0 0 0 8px #111}
+.rotating-disc::after{content:'';position:absolute;top:12%;left:12%;width:76%;height:76%;border-radius:50%;background:repeating-radial-gradient(circle at 30% 30%, rgba(180,180,180,0.08) 0px, rgba(180,180,180,0.08) 4px, transparent 4px, transparent 12px);pointer-events:none}
+@keyframes spinDisc{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+/* PORTADA MAS GRANDE EN EL CENTRO DEL DISCO */
+.disc-center-art{position:absolute;top:50%;left:50%;width:150px;height:150px;border-radius:50%;transform:translate(-50%,-50%);z-index:3;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;border:4px solid var(--neon-yellow);box-shadow:0 0 20px rgba(255,240,31,0.7)}
+.disc-center-art img{width:100%;height:100%;object-fit:cover}
+.music-info{flex:1;min-width:260px;text-align:left;background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);padding:20px 25px;border-radius:60px;border-left:5px solid var(--neon-green);box-shadow:0 0 15px rgba(0,0,0,0.5)}
+.nowplaying-text{color:#ddd;font-size:0.8rem;letter-spacing:1.5px}
+#songNameDisplay{font-size:1.4rem;font-weight:800;color:var(--neon-yellow);margin:8px 0;word-break:break-word}
+#artistNameDisplay{font-size:1rem;color:var(--neon-green);display:flex;align-items:center;gap:6px}
+/* MINI PLAYER RADIOBOSS */
+.miniplayer-container{display:flex;justify-content:center;margin:15px 0 10px}
+.signal-indicators{display:flex;justify-content:center;gap:7px;margin-top:15px}
+.signal-bar{width:6px;height:16px;background:#FF6300;border-radius:3px;animation:signalPulse 1.5s infinite}
+.listeners-counter{background:linear-gradient(135deg,rgba(0,0,0,0.9),rgba(30,30,40,0.95));border-radius:40px;display:inline-flex;align-items:center;gap:12px;padding:6px 22px;margin-top:15px;border:1px solid var(--neon-yellow)}
+.listeners-counter i{font-size:1.2rem;color:var(--neon-green)}
+.counter-number{font-size:1.4rem;font-weight:800;color:var(--neon-yellow);font-family:monospace}
+.stream-info{font-size:0.75rem;opacity:0.7;margin-top:12px}
 .programacion-section{padding:20px 12px;background:var(--dark-bg)}
 .section-title{text-align:center;font-size:1.5rem;color:var(--neon-orange);margin-bottom:18px;font-weight:800}
 .section-title:after{content:'';display:block;width:50px;height:3px;background:var(--neon-green);margin:8px auto 0}
@@ -59,7 +72,6 @@ nav a:hover{color:var(--neon-green)}
 .dia-tab.active{background:var(--neon-yellow);color:var(--dark-bg);border-color:var(--neon-yellow)}
 .dia-tab:hover{background:rgba(255,240,31,0.2);transform:scale(1.02)}
 .hoy-badge{position:absolute;top:-8px;right:-6px;background:var(--neon-orange);color:black;font-size:0.55rem;padding:1px 5px;border-radius:20px}
-/* CARDS PROGRAMAS */
 .programas-container{max-width:100%;margin:0 auto}
 .programas-dia{display:none}
 .programas-dia.active{display:block}
@@ -67,39 +79,34 @@ nav a:hover{color:var(--neon-green)}
 .programa-card{background:linear-gradient(145deg,#141414,#0c0c0c);border-radius:20px;padding:16px;text-align:center;border:1px solid rgba(255,94,0,0.3);transition:all 0.25s ease;position:relative;overflow:hidden}
 .programa-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,94,0,0.12),transparent);transition:left 0.5s}
 .programa-card:hover{transform:translateY(-5px);border-color:var(--neon-orange);box-shadow:0 8px 20px rgba(255,94,0,0.3)}
-.programa-card:hover::before{left:100%}
 .programa-card.en-vivo-card{border:2px solid var(--neon-green);box-shadow:0 0 14px var(--neon-green-glow);background:linear-gradient(145deg,#1a2a1a,#0a1a0a)}
 .en-vivo-badge-card{background:var(--neon-green);color:black;font-weight:800;font-size:0.65rem;padding:3px 14px;border-radius:30px;display:inline-block;margin-bottom:10px}
 .programa-hora-card{background:var(--neon-orange);color:black;padding:5px 14px;border-radius:40px;font-weight:bold;font-size:0.75rem;display:inline-block;margin-bottom:12px}
-.programa-nombre-card{font-size:1.1rem;font-weight:800;color:var(--neon-yellow);margin:10px 0 8px;text-align:center}
+.programa-nombre-card{font-size:1.1rem;font-weight:800;color:var(--neon-yellow);margin:10px 0 8px}
 .programa-conductor-card{font-size:0.75rem;color:#bbb;display:flex;align-items:center;justify-content:center;gap:6px}
-.programa-conductor-card i{color:var(--neon-green)}
 .other-radios-section{padding:20px 12px;background:var(--darker-bg);text-align:center}
 .radio-card{display:inline-block;background:var(--card-bg);border:2px solid var(--neon-green);border-radius:18px;padding:15px;text-decoration:none;color:white;max-width:210px;text-align:center;transition:0.2s}
 .radio-card:hover{transform:translateY(-3px);border-color:var(--neon-orange)}
 .top5-wrapper{text-align:center;padding:12px 15px;background:var(--dark-bg);border-top:1px solid rgba(255,94,0,0.2);border-bottom:1px solid rgba(57,255,20,0.1)}
 .circle-top5-btn{width:65px;height:65px;background:radial-gradient(circle,var(--neon-orange),#b33f00);border-radius:50%;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 0 15px var(--neon-orange-glow);border:none;color:black;transition:0.2s}
 .circle-top5-btn:hover{transform:scale(1.05);box-shadow:0 0 25px var(--neon-orange)}
-.circle-top5-btn i{font-size:1.5rem;margin-bottom:2px}
-.circle-top5-btn span{font-size:0.65rem;font-weight:800}
 .top5-collapsible{max-height:0;overflow:hidden;transition:max-height 0.45s ease;background:var(--dark-bg)}
 .top5-collapsible.open{max-height:1100px}
 .top5-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;padding:15px 10px 20px}
-.top5-item{background:linear-gradient(145deg,#111111,#0a0a0a);border-radius:24px;padding:12px 8px;text-align:center;border:1px solid var(--neon-yellow);transition:0.2s}
-.top5-item:hover{transform:translateY(-4px);border-color:var(--neon-green)}
+.top5-item{background:linear-gradient(145deg,#111,#0a0a0a);border-radius:24px;padding:12px 8px;text-align:center;border:1px solid var(--neon-yellow);transition:0.2s}
 .artist-img{width:55px;height:55px;border-radius:50%;object-fit:cover;margin:5px auto 8px;border:2px solid var(--neon-green)}
 .top5-title{font-weight:800;margin:5px 0 2px;color:var(--neon-yellow);font-size:0.8rem}
 .youtube-link{display:inline-flex;align-items:center;gap:4px;background:#ff0000cc;padding:3px 10px;border-radius:40px;text-decoration:none;color:white;font-size:0.6rem;margin-top:6px}
 footer{background:rgba(5,5,5,0.98);text-align:center;padding:15px;border-top:2px solid var(--neon-green);font-size:0.7rem}
 @keyframes signalPulse{0%,100%{transform:scaleY(0.5)}50%{transform:scaleY(1)}}
-.cstrEmbed,[data-type="newStreamPlayer"]{background:#000!important;border-radius:18px}
 @media (max-width: 600px){
-    .cards-grid{grid-template-columns:1fr;gap:12px}
+    .disc-row{flex-direction:column;gap:20px}
+    .rotating-disc{width:200px;height:200px}
+    .disc-center-art{width:115px;height:115px}
+    .music-info{text-align:center;width:100%}
+    .player-container{padding:15px}
+    .cards-grid{grid-template-columns:1fr}
     header{padding:10px 5% 10px 85px}
-    .logo-text h1{font-size:1.1rem}
-    .hero-tagline{font-size:1rem}
-    .player-container{max-width:100%;padding:12px}
-    .radio-frame-original{min-height:180px}
 }
 </style>
 </head>
@@ -111,17 +118,41 @@ footer{background:rgba(5,5,5,0.98);text-align:center;padding:15px;border-top:2px
 <div class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></div>
 <section class="hero" id="inicio"><div class="hero-content"><div class="hero-tagline">CON LA MUSICA QUE TE PEGA FUERTE</div><div><a href="#player" class="btn btn-primary"><i class="fas fa-play-circle"></i> Escuchar</a><a href="#programacion" class="btn btn-secondary"><i class="fas fa-calendar-alt"></i> Programacion</a></div></div></section>
 
-<!-- REPRODUCTOR TAMAÑO ORIGINAL RECTANGULAR - CON TODAS LAS FUNCIONES DEL WIDGET -->
-<section class="player-section" id="player"><div class="player-container"><h2 class="player-title">AVENIDA TROPICAL EN VIVO</h2>
-<div class="original-player-wrapper">
-    <div class="radio-frame-original">
-        <!-- Reproductor original de Caster.fm con todas sus funciones (volumen, play, etc) -->
-        <div data-type="newStreamPlayer" data-publicToken="947dd617-7446-4a04-ada7-9a0c52685efe" data-theme="dark" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div>
-        <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+<!-- REPRODUCTOR ESTILO DISCO GIRATORIO CON MINI PLAYER RADIOBOSS -->
+<section class="player-section" id="player"><div class="player-container"><h2 class="player-title">AVENIDA TROPICAL · SONIDO DIGITAL</h2>
+<div class="disc-player-wrapper">
+    <div class="disc-row">
+        <div class="rotating-disc">
+            <div class="disc-center-art">
+                <img id="discCoverArt" src="https://c42.radioboss.fm/w/artwork/174.jpg" alt="cover">
+            </div>
+        </div>
+        <div class="music-info">
+            <div class="nowplaying-text"><i class="fas fa-music"></i> SONANDO AHORA</div>
+            <div id="songNameDisplay">Cargando...</div>
+            <div id="artistNameDisplay"><i class="fas fa-microphone-alt"></i> <span id="artistNameSpan">Avenida Tropical</span></div>
+            <div style="font-size:0.75rem;margin-top:8px;"><i class="fas fa-tachometer-alt"></i> Directo desde los estudios</div>
+        </div>
     </div>
+    
+    <!-- MINI PLAYER RADIOBOSS CLOUD (Widget oficial) -->
+    <div class="miniplayer-container">
+        <div class='rbcloud_mplayer' id='rbcloud_mplayer17793'></div>
+        <script src='https://c42.radioboss.fm/w/mplayer.js?u=https%3A%2F%2Fc42.radioboss.fm%3A8174%2Fstream&amp;wid=17793&amp;pw=92&amp;ca=%2339ff14&amp;cg=%23fff01f'></script>
+    </div>
+    
+    <!-- Widget NowPlaying para obtener metadata de la canción y portada -->
+    <div style="display:none;" id="hiddenNowPlaying">
+        <div class='rbcloud_nowplaying' style='display: flex; align-items: center;'>
+            <div><a target='_blank' href='https://c42.radioboss.fm/w/artwork/174.jpg'><img id='rbcloud_np_c15549' src='https://c42.radioboss.fm/w/artwork/174.jpg' width='65' height='65' alt='cover art'></a></div>
+            <div style='margin-left: 5pt;'><div id='rbcloud_np_a15549' style='font-weight: bold'></div><div id='rbcloud_np_t15549'>...</div></div>
+        </div>
+        <script src='https://c42.radioboss.fm/w/nowplaying2.js?u=174&amp;wid=15549&amp;tf=1'></script>
+    </div>
+    
     <div class="signal-indicators"><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div></div>
     <div class="listeners-counter"><i class="fas fa-headphones"></i><div><span class="counter-number" id="listenerCount">178</span><div class="counter-label">OYENTES AHORA</div></div></div>
-    <div class="stream-info">128 kbps • RDCR Sound Network • Sonido Tropical</div>
+    <div class="stream-info">320 kbps • RDCR Sound Network • Sonido Tropical • Ritmo y Sabor</div>
 </div></div></section>
 
 <div class="top5-wrapper" id="top5Seccion"><div class="circle-top5-btn" id="toggleTop5Btn"><i class="fas fa-chart-line"></i><span>TOP 5</span><i class="fas fa-chevron-down" id="toggleIcon" style="font-size:0.55rem;margin-top:2px;"></i></div></div>
@@ -132,7 +163,7 @@ footer{background:rgba(5,5,5,0.98);text-align:center;padding:15px;border-top:2px
 <footer><i class="fas fa-satellite-dish" style="font-size:1rem;color:var(--neon-green);"></i><h3 style="margin:4px 0;">RDCR Sound Network</h3><p>CON LA MUSICA QUE TE PEGA FUERTE - 100% Tropical</p><p>Avenida Tropical · 2026</p></footer>
 
 <script>
-// PROGRAMACION COMPLETA ACTUALIZADA CON TIMBA Y SABOR (sabado 17:30-18:00) y JUST REMIXX DJ HOXX
+// PROGRAMACION COMPLETA
 const programacionReal = {
   domingo: [{hora:"00:00 - 07:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"07:00 - 09:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"09:00 - 14:00",nombre:"DOMINGO SALSERO",conductor:"Avenida Tropical"},{hora:"14:00 - 18:00",nombre:"MIXES DE SALSA",conductor:"Avenida Tropical"},{hora:"18:00 - 21:00",nombre:"JUST REMIXX",conductor:"DJ HOXX"},{hora:"21:00 - 23:59",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
   lunes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
@@ -213,6 +244,25 @@ function construirProgramacionCards(){
     diaDiv.appendChild(cardsGrid); progContainer.appendChild(diaDiv);
   });
 }
+function syncNowPlayingToDisc() {
+    setTimeout(() => {
+        const artistaElem = document.getElementById('rbcloud_np_a15549');
+        const tituloElem = document.getElementById('rbcloud_np_t15549');
+        const coverImg = document.getElementById('rbcloud_np_c15549');
+        if(artistaElem && artistaElem.innerText && artistaElem.innerText !== '...' && artistaElem.innerText !== '') {
+            document.getElementById('artistNameSpan').innerText = artistaElem.innerText;
+        }
+        if(tituloElem && tituloElem.innerText && tituloElem.innerText !== '...' && tituloElem.innerText !== '') {
+            document.getElementById('songNameDisplay').innerText = tituloElem.innerText;
+        }
+        if(coverImg && coverImg.src) {
+            const discImg = document.getElementById('discCoverArt');
+            if(discImg) discImg.src = coverImg.src;
+        }
+    }, 600);
+}
+setInterval(syncNowPlayingToDisc, 4000);
+syncNowPlayingToDisc();
 let currentListeners = 178;
 const listenerSpan = document.getElementById('listenerCount');
 function updateListeners(){ let delta = Math.floor(Math.random()*14)-4; let nv = currentListeners+delta; if(nv<70) nv=70+Math.floor(Math.random()*20); if(nv>290) nv=250+Math.floor(Math.random()*30); currentListeners=nv; if(listenerSpan) listenerSpan.innerText=currentListeners; }
