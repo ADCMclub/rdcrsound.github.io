@@ -159,8 +159,9 @@
       flex-wrap: wrap;
     }
 
+    /* COLUMNA IZQUIERDA - PISTAS RECIENTES */
     .side-column-left {
-      flex: 0 0 180px;
+      flex: 0 0 200px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -173,8 +174,9 @@
       align-items: center;
     }
 
+    /* COLUMNA DERECHA - PRÓXIMA PISTA */
     .side-column-right {
-      flex: 0 0 200px;
+      flex: 0 0 180px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -252,7 +254,6 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* PISTA ACTUAL - SOLO TEXTO */
     .track-info-center {
       text-align: center; margin-top: 12px; padding: 10px 14px;
       background: rgba(0,0,0,0.5); border-radius: 15px;
@@ -267,7 +268,6 @@
       font-size: 1rem; color: #E8E1D1; font-style: italic;
     }
 
-    /* MINI PLAYER DEBAJO */
     .mini-player-wrapper {
       width: 100%; max-width: 320px; margin: 10px auto 0; display: flex; justify-content: center;
       background: rgba(10,10,15,0.6); border-radius: 40px; padding: 6px 14px;
@@ -275,19 +275,15 @@
     }
     .mini-player-wrapper .rbcloud_mplayer { display: flex; justify-content: center; width: 100%; }
 
-    /* PRÓXIMA PISTA */
-    .next-track-mini {
-      display: flex; align-items: center; gap: 8px; padding: 6px;
-      background: rgba(0,0,0,0.3); border-radius: 10px;
-    }
-    .next-track-mini img {
+    /* PRÓXIMA PISTA (lado derecho) */
+    .rbcloud_nexttrack #rbcloud_nt_a677 { font-weight: 600 !important; font-size: 0.75rem !important; color: #44CCFF !important; }
+    .rbcloud_nexttrack #rbcloud_nt_t677 { font-size: 0.68rem !important; color: #D4CFC2 !important; font-style: italic !important; }
+    .rbcloud_nexttrack img {
       width: 40px !important; height: 40px !important; border-radius: 8px !important;
       object-fit: cover !important; border: 1px solid rgba(0,136,255,0.4) !important; background: #111 !important;
     }
-    .rbcloud_nexttrack #rbcloud_nt_a677 { font-weight: 600 !important; font-size: 0.75rem !important; color: #44CCFF !important; }
-    .rbcloud_nexttrack #rbcloud_nt_t677 { font-size: 0.68rem !important; color: #D4CFC2 !important; font-style: italic !important; }
 
-    /* PISTAS RECIENTES */
+    /* PISTAS RECIENTES (lado izquierdo) */
     .recent-list {
       display: flex; flex-direction: column; gap: 5px; max-height: 300px; overflow-y: auto;
     }
@@ -502,13 +498,17 @@
   <section class="vintage-player-section" id="reproductor">
     <div class="player-layout">
       
-      <!-- COLUMNA IZQUIERDA - PRÓXIMA PISTA -->
+      <!-- COLUMNA IZQUIERDA - PISTAS RECIENTES -->
       <div class="side-column-left">
         <div class="side-box">
-          <h4><i class="fas fa-forward"></i> PRÓXIMA PISTA</h4>
-          <div class='rbcloud_nexttrack' style='display: flex; align-items: center;'>
-            <div><a target='_blank' href='https://c42.radioboss.fm/w/artwork_next/173.jpg'><img id='rbcloud_nt_c677' src='https://c42.radioboss.fm/w/artwork_next/173.jpg' width='40' height='40' alt='cover art'></a></div>
-            <div style='margin-left: 5pt;'><div id='rbcloud_nt_a677' style='font-weight: bold'></div><div id='rbcloud_nt_t677'>...</div></div>
+          <h4><i class="fas fa-history"></i> PISTAS RECIENTES</h4>
+          <div class="recent-list">
+            <div class='rbcloud_recenttracks' id='rbcloud_recent5829' data-cnt='5'>
+              <div class='rbcloud_recent_track' style='display: flex; align-items: center; margin-bottom: 5pt;'>
+                <div class='rbcloud_recent_track_cover' data-size='35'></div>
+                <div style='margin-left: 5pt;'><div class='rbcloud_recent_artist' style='font-weight: bold'></div><div class='rbcloud_recent_title'>...</div></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -528,7 +528,6 @@
           </div>
         </div>
         
-        <!-- NOMBRE DE ARTISTA Y CANCIÓN (NowPlaying widget) -->
         <div class="track-info-center">
           <div class='rbcloud_nowplaying' style='display: flex; align-items: center; justify-content: center;'>
             <div style='text-align: center;'>
@@ -538,23 +537,18 @@
           </div>
         </div>
         
-        <!-- MINI PLAYER DEBAJO (NUEVO WIDGET) -->
         <div class="mini-player-wrapper">
           <div class='rbcloud_mplayer' id='rbcloud_mplayer11977'></div>
         </div>
       </div>
 
-      <!-- COLUMNA DERECHA - PISTAS RECIENTES -->
+      <!-- COLUMNA DERECHA - PRÓXIMA PISTA -->
       <div class="side-column-right">
         <div class="side-box">
-          <h4><i class="fas fa-history"></i> PISTAS RECIENTES</h4>
-          <div class="recent-list">
-            <div class='rbcloud_recenttracks' id='rbcloud_recent5829' data-cnt='5'>
-              <div class='rbcloud_recent_track' style='display: flex; align-items: center; margin-bottom: 5pt;'>
-                <div class='rbcloud_recent_track_cover' data-size='35'></div>
-                <div style='margin-left: 5pt;'><div class='rbcloud_recent_artist' style='font-weight: bold'></div><div class='rbcloud_recent_title'>...</div></div>
-              </div>
-            </div>
+          <h4><i class="fas fa-forward"></i> PRÓXIMA PISTA</h4>
+          <div class='rbcloud_nexttrack' style='display: flex; align-items: center;'>
+            <div><a target='_blank' href='https://c42.radioboss.fm/w/artwork_next/173.jpg'><img id='rbcloud_nt_c677' src='https://c42.radioboss.fm/w/artwork_next/173.jpg' width='40' height='40' alt='cover art'></a></div>
+            <div style='margin-left: 5pt;'><div id='rbcloud_nt_a677' style='font-weight: bold'></div><div id='rbcloud_nt_t677'>...</div></div>
           </div>
         </div>
       </div>
@@ -622,20 +616,11 @@
     </div>
   </footer>
 
-  <!-- Scripts de RadioBOSS Cloud -->
   <script src='https://c42.radioboss.fm/w/cover.js?u=173&amp;wid=1280'></script>
   <script src='https://c42.radioboss.fm/w/player.js?u=https%3A%2F%2Fc42.radioboss.fm%3A8173%2Fstream&amp;wid=4017'></script>
-  
-  <!-- NUEVO MINI PLAYER -->
   <script src='https://c42.radioboss.fm/w/mplayer.js?u=https%3A%2F%2Fc42.radioboss.fm%3A8173%2Fstream&amp;wid=11977&amp;pw=82&amp;ca=%23026ece&amp;cg=%23fef7e6'></script>
-  
-  <!-- NUEVO NOWPLAYING -->
   <script src='https://c42.radioboss.fm/w/nowplaying2.js?u=173&amp;wid=19097&amp;tf=0'></script>
-  
-  <!-- NEXT TRACK -->
   <script src='https://c42.radioboss.fm/w/nexttrack.js?u=173&amp;wid=677&amp;tf=0'></script>
-  
-  <!-- RECENT TRACKS -->
   <script src='https://c42.radioboss.fm/w/recent.js?u=173&amp;wid=5829&amp;v=2&amp;tf=0'></script>
 
   <script>
@@ -688,14 +673,12 @@
 
       const obs=new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting)e.target.classList.add('visible'); }); },{threshold:0.12}); document.querySelectorAll('section').forEach(s=>obs.observe(s));
 
-      // Sincronizar portada del vinilo con NowPlaying
       setInterval(() => {
         var npImg = document.getElementById('rbcloud_np_c19097');
         var vc = document.getElementById('vinylCover');
         if (npImg && vc && npImg.src && npImg.src !== vc.src && !npImg.src.includes('data:image')) vc.src = npImg.src;
       }, 2000);
 
-      // Control de vinilo con clic
       const vinylDisc = document.getElementById('vinylDisc');
       let isPlaying = false;
       vinylDisc.addEventListener('click', () => {
