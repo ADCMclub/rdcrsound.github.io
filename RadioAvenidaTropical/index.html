@@ -37,11 +37,11 @@ nav a:hover{color:var(--neon-green);background:rgba(57,255,20,0.1)}
 .btn-primary{background:var(--neon-orange);color:var(--dark-bg);box-shadow:0 4px 15px var(--neon-orange-glow)}
 .btn-secondary{background:transparent;border:2px solid var(--neon-green);color:var(--neon-green)}
 .player-section{padding:20px 12px 30px;background:var(--darker-bg);text-align:center}
-.player-container{max-width:100%;margin:0 auto;background:rgba(20,20,20,0.96);border-radius:28px;padding:18px 12px}
+.player-container{max-width:1150px;margin:0 auto;background:rgba(20,20,20,0.96);border-radius:28px;padding:18px 15px}
 .player-title{font-size:1.1rem;color:var(--neon-orange);margin-bottom:12px;font-weight:800}
-.disc-player-wrapper{background:radial-gradient(circle at 30% 30%, #1a0033, #000000);border-radius:32px;padding:18px 12px;animation:rectGlow 1.5s infinite alternate;box-shadow:0 0 20px var(--dj-purple);border:1px solid rgba(255,94,0,0.6)}
+.disc-player-wrapper{background:radial-gradient(circle at 30% 30%, #1a0033, #000000);border-radius:32px;padding:18px 15px;animation:rectGlow 1.5s infinite alternate;box-shadow:0 0 20px var(--dj-purple);border:1px solid rgba(255,94,0,0.6);display:flex;flex-direction:column;align-items:center;justify-content:center}
 @keyframes rectGlow{0%{box-shadow:0 0 12px var(--dj-purple)}100%{box-shadow:0 0 28px #ff44ee,0 0 12px var(--neon-yellow)}}
-.disc-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:20px;margin-bottom:15px}
+.disc-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:25px;margin-bottom:15px;width:100%}
 .rotating-disc{position:relative;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #1a1a1a, #050505);box-shadow:0 0 0 6px #1a1a1a, 0 0 0 10px #2a2a2a, 0 12px 25px rgba(0,0,0,0.5);animation:spinDisc 12s linear infinite;cursor:pointer;flex-shrink:0}
 .rotating-disc::before{content:'';position:absolute;top:50%;left:50%;width:28px;height:28px;background:radial-gradient(circle, #ff5e00, #8b2c00);border-radius:50%;transform:translate(-50%,-50%);z-index:2;box-shadow:0 0 0 3px #ffcc00,0 0 0 6px #111}
 .rotating-disc::after{content:'';position:absolute;top:12%;left:12%;width:76%;height:76%;border-radius:50%;background:repeating-radial-gradient(circle at 30% 30%, rgba(180,180,180,0.08) 0px, rgba(180,180,180,0.08) 4px, transparent 4px, transparent 12px);pointer-events:none}
@@ -50,16 +50,20 @@ nav a:hover{color:var(--neon-green);background:rgba(57,255,20,0.1)}
 .disc-center-art img{width:100%;height:100%;object-fit:cover}
 .music-info{flex:1;min-width:240px;text-align:center;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);padding:16px 18px;border-radius:40px;border-top:3px solid var(--neon-green);border-bottom:3px solid var(--neon-green);box-shadow:0 0 12px rgba(0,0,0,0.6)}
 .nowplaying-text{color:#ddd;font-size:0.7rem;letter-spacing:1.5px}
-#songNameDisplay{font-size:1.1rem;font-weight:800;color:var(--neon-yellow);margin:6px 0;word-break:break-word}
-#artistNameDisplay{font-size:0.85rem;color:var(--neon-green);display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
-.miniplayer-container{display:flex;justify-content:center;margin:12px 0 8px;transform:scale(0.95)}
-.signal-indicators{display:flex;justify-content:center;gap:6px;margin-top:12px}
+#songNameDisplay{font-size:1rem;font-weight:800;color:var(--neon-yellow);margin:6px 0;word-break:break-word}
+#artistNameDisplay{font-size:0.8rem;color:var(--neon-green);display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+.miniplayer-container{display:flex;justify-content:center;margin:12px 0 8px;transform:scale(0.92);width:100%}
+.widgets-panel{display:flex;flex-wrap:wrap;gap:15px;margin-top:15px;width:100%}
+.widget-left{flex:1;min-width:250px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);border-radius:20px;padding:10px;border:1px solid var(--neon-green)}
+.widget-right{flex:1;min-width:250px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);border-radius:20px;padding:10px;border:1px solid var(--neon-yellow)}
+.widget-title{font-size:0.75rem;color:var(--neon-orange);font-weight:800;margin-bottom:8px;text-align:center;letter-spacing:1px}
+.signal-indicators{display:flex;justify-content:center;gap:6px;margin-top:10px}
 .signal-bar{width:5px;height:14px;background:#FF6300;border-radius:3px;animation:signalPulse 1.5s infinite}
-.listeners-counter{background:linear-gradient(135deg,rgba(0,0,0,0.9),rgba(30,30,40,0.95));border-radius:50px;display:inline-flex;align-items:center;gap:10px;padding:6px 20px;margin-top:12px;border:1px solid var(--neon-yellow)}
+.listeners-counter{background:linear-gradient(135deg,rgba(0,0,0,0.9),rgba(30,30,40,0.95));border-radius:50px;display:inline-flex;align-items:center;gap:10px;padding:5px 18px;margin-top:10px;border:1px solid var(--neon-yellow)}
 .listeners-counter i{font-size:1rem;color:var(--neon-green)}
-.counter-number{font-size:1.2rem;font-weight:800;color:var(--neon-yellow);font-family:monospace}
-.counter-label{font-size:0.55rem;opacity:0.9}
-.stream-info{font-size:0.65rem;opacity:0.7;margin-top:12px}
+.counter-number{font-size:1.1rem;font-weight:800;color:var(--neon-yellow);font-family:monospace}
+.counter-label{font-size:0.5rem;opacity:0.9}
+.stream-info{font-size:0.6rem;opacity:0.7;margin-top:8px}
 .programacion-section{padding:20px 12px;background:var(--dark-bg)}
 .section-title{text-align:center;font-size:1.3rem;color:var(--neon-orange);margin-bottom:18px;font-weight:800}
 .section-title:after{content:'';display:block;width:50px;height:3px;background:var(--neon-green);margin:8px auto 0}
@@ -100,19 +104,26 @@ nav a:hover{color:var(--neon-green);background:rgba(57,255,20,0.1)}
 .youtube-link:active{transform:scale(0.96)}
 footer{background:rgba(5,5,5,0.98);text-align:center;padding:20px 12px;border-top:2px solid var(--neon-green);font-size:0.65rem}
 @keyframes signalPulse{0%,100%{transform:scaleY(0.6)}50%{transform:scaleY(1)}}
+.rbcloud_songrequest input, .rbcloud_songrequest button{background:rgba(0,0,0,0.8);border:1px solid var(--neon-green);color:white;border-radius:30px;padding:6px 12px;font-size:0.7rem}
+.rbcloud_songrequest button{background:var(--neon-orange);color:black;font-weight:bold;cursor:pointer;border:none}
+.rbcloud_recent_track, .rbcloud_nexttrack{color:#ddd;font-size:0.7rem}
+.rbcloud_recent_track{margin-bottom:6px;}
 @media (min-width: 481px){
     .cards-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr));}
-    .rotating-disc{width:220px;height:220px}
-    .disc-center-art{width:130px;height:130px}
-    #songNameDisplay{font-size:1.3rem}
+    .rotating-disc{width:210px;height:210px}
+    .disc-center-art{width:125px;height:125px}
+    #songNameDisplay{font-size:1.2rem}
     .hero-tagline{font-size:1.2rem}
+    .disc-row{gap:30px}
+    .music-info{min-width:260px}
 }
 @media (max-width: 380px){
     .rotating-disc{width:160px;height:160px}
     .disc-center-art{width:95px;height:95px}
     .music-info{padding:12px}
-    #songNameDisplay{font-size:0.95rem}
+    #songNameDisplay{font-size:0.9rem}
     .dia-tab{padding:6px 12px;font-size:0.65rem}
+    .disc-row{gap:16px}
 }
 </style>
 </head>
@@ -129,7 +140,7 @@ footer{background:rgba(5,5,5,0.98);text-align:center;padding:20px 12px;border-to
     <div class="disc-row">
         <div class="rotating-disc">
             <div class="disc-center-art">
-                <img id="discCoverArt" src="https://c42.radioboss.fm/w/artwork/174.jpg" alt="cover">
+                <img id="discCoverArt" src="https://c42.radioboss.fm/w/artwork/174.jpg" alt="cover" onerror="this.src='https://picsum.photos/id/107/130/130'">
             </div>
         </div>
         <div class="music-info">
@@ -140,19 +151,55 @@ footer{background:rgba(5,5,5,0.98);text-align:center;padding:20px 12px;border-to
         </div>
     </div>
     
-    <!-- MINI PLAYER RADIOBOSS CLOUD (Widget oficial) -->
     <div class="miniplayer-container">
         <div class='rbcloud_mplayer' id='rbcloud_mplayer17793'></div>
         <script src='https://c42.radioboss.fm/w/mplayer.js?u=https%3A%2F%2Fc42.radioboss.fm%3A8174%2Fstream&amp;wid=17793&amp;pw=92&amp;ca=%2339ff14&amp;cg=%23fff01f'></script>
     </div>
     
-    <!-- Widget NowPlaying oculto para metadata -->
     <div style="display:none;" id="hiddenNowPlaying">
         <div class='rbcloud_nowplaying' style='display: flex; align-items: center;'>
             <div><a target='_blank' href='https://c42.radioboss.fm/w/artwork/174.jpg'><img id='rbcloud_np_c15549' src='https://c42.radioboss.fm/w/artwork/174.jpg' width='65' height='65' alt='cover art'></a></div>
             <div style='margin-left: 5pt;'><div id='rbcloud_np_a15549' style='font-weight: bold'></div><div id='rbcloud_np_t15549'>...</div></div>
         </div>
         <script src='https://c42.radioboss.fm/w/nowplaying2.js?u=174&amp;wid=15549&amp;tf=1'></script>
+    </div>
+    
+    <!-- PANEL DE WIDGETS: IZQUIERDA RECIENTES, DERECHA PRÓXIMA + SOLICITAR -->
+    <div class="widgets-panel">
+        <!-- Lado izquierdo: Canciones Recientes -->
+        <div class="widget-left">
+            <div class="widget-title"><i class="fas fa-history"></i> RECIENTES</div>
+            <div class='rbcloud_recenttracks' id='rbcloud_recent5239' data-cnt='6'>
+                <div class='rbcloud_recent_track' style='display: flex; align-items: center; margin-bottom: 6pt;'>
+                    <div class='rbcloud_recent_track_cover' data-size='50'></div>
+                    <div style='margin-left: 8pt;'><div class='rbcloud_recent_artist' style='font-weight: bold; font-size:0.7rem; color:var(--neon-green)'></div><div class='rbcloud_recent_title' style='font-size:0.65rem; color:#ddd'>...</div></div>
+                </div>
+            </div>
+            <script src='https://c42.radioboss.fm/w/recent.js?u=174&amp;wid=5239&amp;v=2&amp;tf=1'></script>
+        </div>
+        
+        <!-- Lado derecho: Próxima Canción + Solicitar Canción (compacto) -->
+        <div class="widget-right">
+            <div class="widget-title"><i class="fas fa-forward-step"></i> PRÓXIMA</div>
+            <div class='rbcloud_nexttrack' style='display: flex; align-items: center; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:12px;'>
+                <div><a target='_blank' href='https://c42.radioboss.fm/w/artwork_next/174.jpg'><img id='rbcloud_nt_c9598' src='https://c42.radioboss.fm/w/artwork_next/174.jpg' width='55' height='55' alt='cover art' style="border-radius:10px; border:2px solid var(--neon-yellow)"></a></div>
+                <div style='text-align:left'><div id='rbcloud_nt_a9598' style='font-weight: bold; color:var(--neon-yellow); font-size:0.75rem'></div><div id='rbcloud_nt_t9598' style='font-size:0.65rem; color:#ccc'>...</div></div>
+            </div>
+            <script src='https://c42.radioboss.fm/w/nexttrack.js?u=174&amp;wid=9598&amp;tf=1'></script>
+            
+            <!-- SOLICITA TU CANCIÓN justo debajo de PRÓXIMA, compacto -->
+            <div style="margin-top:10px; border-top:1px solid rgba(255,240,31,0.3); padding-top:10px;">
+                <div class="widget-title" style="margin-bottom:6px;"><i class="fas fa-headset"></i> SOLICITA</div>
+                <div class='rbcloud_songrequest' id='rbcloud_songrequest12060'>
+                    <div class='rbc_search' style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <input class='rbc_ed_query' placeholder='Buscar...' style="flex:1; font-size:0.7rem;">
+                        <button class='rbc_bt_search' style="background:var(--neon-green); color:black; border:none; font-size:0.7rem;">🔍 Buscar</button>
+                    </div>
+                    <div class='rbc_result' style="margin-top:8px;"></div>
+                </div>
+                <script src='https://c42.radioboss.fm/w/songrequest.js?u=174&amp;wid=12060'></script>
+            </div>
+        </div>
     </div>
     
     <div class="signal-indicators"><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div></div>
@@ -169,19 +216,19 @@ footer{background:rgba(5,5,5,0.98);text-align:center;padding:20px 12px;border-to
 
 <script>
 const programacionReal = {
-  domingo: [{hora:"00:00 - 07:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"07:00 - 09:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"09:00 - 14:00",nombre:"DOMINGO SALSERO",conductor:"Avenida Tropical"},{hora:"14:00 - 18:00",nombre:"MIXES DE SALSA",conductor:"Avenida Tropical"},{hora:"18:00 - 21:00",nombre:"JUST REMIXX",conductor:"DJ HOXX"},{hora:"21:00 - 23:59",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
   lunes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
   martes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 18:30",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"18:30 - 19:30",nombre:"LOS MAXIMOS DE LA SALSA",conductor:"Maximino Rivera Jr."},{hora:"19:30 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
   miercoles: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
   jueves: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
   viernes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"EL MENSAJERO DE LA SALSA",conductor:"Diego Cheito Grijalva"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
-  sabado: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 08:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"08:00 - 09:00",nombre:"ENTRETELONES",conductor:"Dario Castellanos"},{hora:"09:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 13:00",nombre:"PRENDIDOS",conductor:"Diego Cheito Grijalva"},{hora:"13:00 - 17:30",nombre:"SABADO SALSERO",conductor:"Avenida Tropical"},{hora:"17:30 - 18:00",nombre:"TIMBA Y SABOR",conductor:"Ivette"},{hora:"18:30 - 21:30",nombre:"JUST REMIXX",conductor:"DJ HOXX"},{hora:"21:30 - 23:59",nombre:"DJ INVITADOS",conductor:"Guest DJ"}]
+  sabado: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 08:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"08:00 - 09:00",nombre:"ENTRETELONES",conductor:"Dario Castellanos"},{hora:"09:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 13:00",nombre:"PRENDIDOS",conductor:"Diego Cheito Grijalva"},{hora:"13:00 - 17:30",nombre:"SABADO SALSERO",conductor:"Avenida Tropical"},{hora:"17:30 - 18:00",nombre:"TIMBA Y SABOR",conductor:"Ivette"},{hora:"18:30 - 21:30",nombre:"JUST REMIXX",conductor:"DJ HOXX"},{hora:"21:30 - 23:59",nombre:"DJ INVITADOS",conductor:"Guest DJ"}],
+  domingo: [{hora:"00:00 - 07:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"07:00 - 09:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"09:00 - 14:00",nombre:"DOMINGO SALSERO",conductor:"Avenida Tropical"},{hora:"14:00 - 18:00",nombre:"MIXES DE SALSA",conductor:"Avenida Tropical"},{hora:"18:00 - 21:00",nombre:"JUST REMIXX",conductor:"DJ HOXX"},{hora:"21:00 - 23:59",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}]
 };
-const diasMap = [{key:"domingo",label:"Domingo"},{key:"lunes",label:"Lunes"},{key:"martes",label:"Martes"},{key:"miercoles",label:"Miercoles"},{key:"jueves",label:"Jueves"},{key:"viernes",label:"Viernes"},{key:"sabado",label:"Sabado"}];
+const diasMap = [{key:"lunes",label:"Lunes"},{key:"martes",label:"Martes"},{key:"miercoles",label:"Miercoles"},{key:"jueves",label:"Jueves"},{key:"viernes",label:"Viernes"},{key:"sabado",label:"Sabado"},{key:"domingo",label:"Domingo"}];
 const hoy = new Date();
 let diaActualKey = "";
 const diaNum = hoy.getDay();
-if(diaNum===0) diaActualKey="domingo"; else if(diaNum===1) diaActualKey="lunes"; else if(diaNum===2) diaActualKey="martes"; else if(diaNum===3) diaActualKey="miercoles"; else if(diaNum===4) diaActualKey="jueves"; else if(diaNum===5) diaActualKey="viernes"; else if(diaNum===6) diaActualKey="sabado";
+if(diaNum===1) diaActualKey="lunes"; else if(diaNum===2) diaActualKey="martes"; else if(diaNum===3) diaActualKey="miercoles"; else if(diaNum===4) diaActualKey="jueves"; else if(diaNum===5) diaActualKey="viernes"; else if(diaNum===6) diaActualKey="sabado"; else if(diaNum===0) diaActualKey="domingo";
 
 function obtenerProgramaActual() {
   const progDia = programacionReal[diaActualKey];
@@ -259,13 +306,13 @@ function syncNowPlayingToDisc() {
         if(tituloElem && tituloElem.innerText && tituloElem.innerText !== '...' && tituloElem.innerText !== '') {
             document.getElementById('songNameDisplay').innerText = tituloElem.innerText;
         }
-        if(coverImg && coverImg.src && coverImg.src !== window.location.href) {
+        if(coverImg && coverImg.src && coverImg.src !== window.location.href && coverImg.src.includes('http')) {
             const discImg = document.getElementById('discCoverArt');
             if(discImg) discImg.src = coverImg.src;
         }
-    }, 600);
+    }, 700);
 }
-setInterval(syncNowPlayingToDisc, 4000);
+setInterval(syncNowPlayingToDisc, 5000);
 syncNowPlayingToDisc();
 let currentListeners = 178;
 const listenerSpan = document.getElementById('listenerCount');
