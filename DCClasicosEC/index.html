@@ -153,7 +153,7 @@
       align-items: flex-start;
       justify-content: center;
       gap: 20px;
-      max-width: 950px;
+      max-width: 1100px;
       width: 100%;
       margin: 0 auto;
       flex-wrap: wrap;
@@ -174,12 +174,12 @@
       align-items: center;
     }
 
-    /* COLUMNA DERECHA - PRÓXIMA PISTA */
+    /* COLUMNA DERECHA - PRÓXIMA PISTA + SOLICITUD */
     .side-column-right {
-      flex: 0 0 180px;
+      flex: 0 0 240px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .player-frame {
@@ -205,6 +205,82 @@
       letter-spacing: 1px; text-align: center;
     }
     .side-box h4 i { margin-right: 4px; }
+
+    /* Estilos para el widget de solicitud de canciones */
+    .rbcloud_songrequest { 
+      font-family: 'Montserrat', sans-serif; 
+      color: var(--text); 
+      width: 100%;
+    }
+    .rbcloud_songrequest .rbc_search { 
+      display: flex; 
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .rbcloud_songrequest input, .rbcloud_songrequest button { 
+      box-sizing: border-box; 
+      height: 34px; 
+      border-radius: 20px;
+      font-size: 0.75rem;
+    }
+    .rbcloud_songrequest input { 
+      padding: 6px 12px; 
+      border: 1px solid rgba(0,136,255,0.4); 
+      flex: 1; 
+      background: rgba(0,0,0,0.6);
+      color: var(--text);
+      outline: none;
+    }
+    .rbcloud_songrequest input:focus {
+      border-color: var(--neon-blue);
+      box-shadow: 0 0 6px rgba(0,136,255,0.3);
+    }
+    .rbcloud_songrequest button { 
+      padding: 6px 12px; 
+      min-width: 70px; 
+      background: linear-gradient(135deg, var(--neon-blue), var(--dark-blue));
+      border: none;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .rbcloud_songrequest button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 10px var(--neon-blue);
+    }
+    .rbcloud_songrequest .rbc_result { 
+      border: 1px solid rgba(0,136,255,0.3); 
+      border-radius: 16px;
+      display: none; 
+      margin-top: 8px; 
+      padding: 6px 10px;
+      background: rgba(0,0,0,0.5);
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    .rbcloud_songrequest .rbc_result_item { 
+      display: flex; 
+      align-items: center; 
+      padding: 6px 0; 
+      gap: 8px;
+      border-bottom: 1px solid rgba(0,136,255,0.2);
+    }
+    .rbcloud_songrequest .rbc_result_item:last-child { border-bottom: none; }
+    .rbcloud_songrequest .rbc_result_item div:first-child { 
+      flex: 1; 
+      word-break: break-word; 
+      font-size: 0.7rem;
+      line-height: 1.3;
+    }
+    .rbcloud_songrequest .rbc_result_item button {
+      height: 26px;
+      min-width: 50px;
+      padding: 0 8px;
+      font-size: 0.65rem;
+      background: var(--neon-blue);
+      border-radius: 30px;
+    }
 
     .vinyl-only-container {
       display: flex; align-items: center; justify-content: center;
@@ -542,13 +618,25 @@
         </div>
       </div>
 
-      <!-- COLUMNA DERECHA - PRÓXIMA PISTA -->
+      <!-- COLUMNA DERECHA - PRÓXIMA PISTA + SOLICITUD DE CANCIONES -->
       <div class="side-column-right">
         <div class="side-box">
           <h4><i class="fas fa-forward"></i> PRÓXIMA PISTA</h4>
           <div class='rbcloud_nexttrack' style='display: flex; align-items: center;'>
             <div><a target='_blank' href='https://c42.radioboss.fm/w/artwork_next/173.jpg'><img id='rbcloud_nt_c677' src='https://c42.radioboss.fm/w/artwork_next/173.jpg' width='40' height='40' alt='cover art'></a></div>
             <div style='margin-left: 5pt;'><div id='rbcloud_nt_a677' style='font-weight: bold'></div><div id='rbcloud_nt_t677'>...</div></div>
+          </div>
+        </div>
+        
+        <!-- WIDGET DE SOLICITUD DE CANCIONES (RadioBOSS Cloud) -->
+        <div class="side-box">
+          <h4><i class="fas fa-microphone-alt"></i> SOLICITA TU CANCIÓN</h4>
+          <div class='rbcloud_songrequest' id='rbcloud_songrequest17985'>
+            <div class='rbc_search'>
+              <input class='rbc_ed_query' placeholder='Busca tu canción...'>
+              <button class='rbc_bt_search'><i class="fas fa-search"></i> Buscar</button>
+            </div>
+            <div class='rbc_result'></div>
           </div>
         </div>
       </div>
@@ -622,6 +710,8 @@
   <script src='https://c42.radioboss.fm/w/nowplaying2.js?u=173&amp;wid=19097&amp;tf=0'></script>
   <script src='https://c42.radioboss.fm/w/nexttrack.js?u=173&amp;wid=677&amp;tf=0'></script>
   <script src='https://c42.radioboss.fm/w/recent.js?u=173&amp;wid=5829&amp;v=2&amp;tf=0'></script>
+  <!-- Script del widget de solicitud de canciones -->
+  <script src='https://c42.radioboss.fm/w/songrequest.js?u=173&amp;wid=17985'></script>
 
   <script>
     (function(){
@@ -676,7 +766,7 @@
       setInterval(() => {
         var npImg = document.getElementById('rbcloud_np_c19097');
         var vc = document.getElementById('vinylCover');
-        if (npImg && vc && npImg.src && npImg.src !== vc.src && !npImg.src.includes('data:image')) vc.src = npImg.src;
+        if (npImg && vc && npImg.src && vc.src !== npImg.src && npImg.src && !npImg.src.includes('data:image')) vc.src = npImg.src;
       }, 2000);
 
       const vinylDisc = document.getElementById('vinylDisc');
