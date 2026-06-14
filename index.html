@@ -36,7 +36,6 @@
         .radios-section, .services-section, .compact-section { padding: 40px 20px; max-width: 1200px; margin: 0 auto 25px; text-align: center; }
         .radios-section h2, .services-section h2, .compact-section h2 { margin-bottom: 25px; font-size: 1.8em; position: relative; color: var(--cian-electrico); }
         .radios-section h2::after, .services-section h2::after, .compact-section h2::after { content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); width: 70px; height: 3px; background: linear-gradient(90deg, transparent, var(--cian-electrico), transparent); border-radius: 2px; box-shadow: 0 0 6px var(--cian-electrico); }
-        /* Grid de radios centrado */
         .radios-grid { 
             display: grid; 
             grid-template-columns: repeat(2, minmax(280px, 400px)); 
@@ -75,7 +74,7 @@
         .podcast-toggle-btn { background: linear-gradient(45deg, var(--cian-electrico), #00B8D4); color: var(--negro-profundo); border: none; padding: 12px 24px; font-size: 1em; font-weight: 700; border-radius: 50px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0, 229, 255, 0.3); margin: 10px auto; border: 2px solid white; }
         .podcast-toggle-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 25px rgba(0, 229, 255, 0.6); }
         .podcast-dropdown { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.6s ease, opacity 0.4s ease; margin-top: 0; width: 100%; }
-        .podcast-dropdown.open { max-height: 1200px; /* Suficiente para móvil */ opacity: 1; margin-top: 25px; }
+        .podcast-dropdown.open { max-height: 1200px; opacity: 1; margin-top: 25px; }
         .podcasts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
         .podcast-card { background: var(--gris-oscuro); border-radius: 10px; padding: 15px; text-align: center; transition: all 0.3s ease; border: 1px solid transparent; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; }
         .podcast-card.spotify { border-color: #1DB954; }
@@ -98,18 +97,117 @@
         .podcast-card.iheart:hover { background: #c7004c; color: white; transform: translateY(-5px); box-shadow: 0 8px 20px rgba(199, 0, 76, 0.3); }
         .podcast-card.iheart i { color: #c7004c; font-size: 2em; margin-bottom: 10px; }
         .podcast-card.iheart:hover i { color: white; }
-        .publicidad-carousel { position: relative; width: 100%; max-width: 700px; margin: 15px auto 0; overflow: hidden; border-radius: 12px; box-shadow: 0 6px 18px rgba(0, 229, 255, 0.15); border: 1.5px solid var(--cian-electrico); }
-        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; height: 150px; }
-        .carousel-slide { min-width: 100%; height: 100%; position: relative; }
-        .carousel-img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-        .carousel-controls { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); display: flex; justify-content: space-between; padding: 0 10px; z-index: 10; }
-        .carousel-btn { background: rgba(0, 229, 255, 0.2); border: 1.5px solid var(--cian-electrico); color: var(--blanco-limpio); width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1em; transition: all 0.3s ease; backdrop-filter: blur(5px); }
+        
+        /* Estilos corregidos para el carrusel de publicidad - tamaño original */
+        .publicidad-carousel { 
+            position: relative; 
+            width: 100%; 
+            max-width: 800px; 
+            margin: 20px auto; 
+            overflow: hidden; 
+            border-radius: 16px; 
+            box-shadow: 0 8px 25px rgba(0, 229, 255, 0.2); 
+            border: 2px solid var(--cian-electrico);
+            background: #000;
+        }
+        .carousel-track { 
+            display: flex; 
+            transition: transform 0.5s ease-in-out; 
+        }
+        .carousel-slide { 
+            min-width: 100%; 
+            position: relative; 
+        }
+        .carousel-img { 
+            width: 100%; 
+            height: auto; 
+            min-height: 300px;
+            object-fit: contain; 
+            background: #0a0a0a;
+            display: block;
+        }
+        .carousel-caption { 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background: linear-gradient(transparent, rgba(0,0,0,0.9)); 
+            color: var(--blanco-limpio); 
+            padding: 20px; 
+            border-radius: 0 0 16px 16px; 
+            text-align: center;
+        }
+        .carousel-caption h3 { 
+            color: var(--cian-electrico); 
+            font-size: 1.3em; 
+            margin-bottom: 8px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        .carousel-caption p { 
+            font-size: 1em; 
+            opacity: 0.95;
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
+        }
+        .carousel-controls { 
+            position: absolute; 
+            top: 50%; 
+            left: 0; 
+            right: 0; 
+            transform: translateY(-50%); 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 0 15px; 
+            z-index: 10; 
+        }
+        .carousel-btn { 
+            background: rgba(0, 229, 255, 0.3); 
+            border: 2px solid var(--cian-electrico); 
+            color: var(--blanco-limpio); 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.3em; 
+            transition: all 0.3s ease; 
+            backdrop-filter: blur(5px);
+        }
+        .carousel-btn:hover { 
+            background: var(--cian-electrico); 
+            color: var(--negro-profundo); 
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--cian-electrico);
+        }
+        .carousel-dots { 
+            display: flex; 
+            justify-content: center; 
+            gap: 12px; 
+            margin-top: 20px; 
+        }
+        .dot { 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            background: rgba(255,255,255,0.4); 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+        }
+        .dot.active { 
+            background: var(--cian-electrico); 
+            width: 30px; 
+            border-radius: 6px; 
+            box-shadow: 0 0 8px var(--cian-electrico);
+        }
+        .dot:hover { background: var(--cian-electrico); transform: scale(1.2); }
+        
         .estadisticas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 25px; }
         .estadistica-card { background: var(--gris-oscuro); padding: 20px; border-radius: 10px; border: 1px solid var(--cian-electrico); transition: all 0.3s ease; text-align: center; }
         .back-to-top { position: fixed; bottom: 25px; right: 25px; width: 45px; height: 45px; background: var(--cian-electrico); border: 2px solid var(--blanco-limpio); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--negro-profundo); font-size: 1.2em; cursor: pointer; z-index: 999; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3); opacity: 0; visibility: hidden; transform: translateY(20px); }
         .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
-        .whatsapp-float { position: fixed; bottom: 80px; right: 20px; width: 50px; height: 50px; background: linear-gradient(135deg, #25D366, #128C7E); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--blanco-limpio); font-size: 1.3em; cursor: pointer; z-index: 1000; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); animation: whatsappPulse 2s infinite; text-decoration: none; }
-        @keyframes whatsappPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .whatsapp-float { position: fixed; bottom: 80px; right: 20px; width: 55px; height: 55px; background: linear-gradient(135deg, #25D366, #128C7E); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--blanco-limpio); font-size: 1.5em; cursor: pointer; z-index: 1000; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); animation: whatsappPulse 2s infinite; text-decoration: none; }
+        @keyframes whatsappPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(10px); animation: modalFadeIn 0.3s ease; padding: 15px; }
         @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
         .modal-content { background: var(--negro-profundo); border-radius: 12px; width: 95%; max-width: 700px; max-height: 80vh; overflow-y: auto; border: 2px solid var(--cian-electrico); box-shadow: 0 0 30px rgba(0, 229, 255, 0.5); position: relative; animation: modalSlideUp 0.4s ease; }
@@ -120,7 +218,8 @@
         .podcast-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
         footer { background: rgba(15, 15, 15, 0.98); padding: 30px 20px 20px; margin-top: 40px; border-top: 1px solid rgba(0, 229, 255, 0.2); }
         .social-icons { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
-        .social-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--gris-oscuro); display: flex; align-items: center; justify-content: center; color: var(--cian-electrico); text-decoration: none; border: 1px solid var(--cian-electrico); transition: all 0.3s ease; }
+        .social-icon { width: 45px; height: 45px; border-radius: 50%; background: var(--gris-oscuro); display: flex; align-items: center; justify-content: center; color: var(--cian-electrico); text-decoration: none; border: 1px solid var(--cian-electrico); transition: all 0.3s ease; font-size: 1.2em; }
+        .social-icon:hover { background: var(--cian-electrico); color: var(--negro-profundo); transform: translateY(-3px); }
         #whatsappFormModal .modal-content { max-width: 450px; }
         .whatsapp-form-container { padding: 20px; }
         .form-group { margin-bottom: 20px; }
@@ -132,28 +231,31 @@
         .btn-whatsapp-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4); }
         .whatsapp-note { text-align: center; font-size: 0.85em; color: rgba(255, 255, 255, 0.6); margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
         
-        /* Responsive */
         @media (max-width: 768px) {
             header { padding: 12px 15px; }
             .logo h2 { font-size: 1.1em; }
             .nav-buttons { flex-direction: column; width: 100%; margin-top: 15px; display: none; gap: 8px; }
             .nav-buttons.active { display: flex; }
             .nav-btn { width: 100%; justify-content: center; padding: 10px; font-size: 0.9em; }
-            .hero h1 { font-size: 1.8em; }
+            .hero h1 { font-size: 1.6em; }
             .radios-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
             .services-grid, .podcasts-grid { grid-template-columns: 1fr; }
             .podcast-container { grid-template-columns: 1fr; padding: 15px; }
             .podcast-dropdown.open { max-height: 1000px; }
             .estadisticas-grid { grid-template-columns: 1fr; }
-            .publicidad-carousel .carousel-track { height: 120px; }
+            .publicidad-carousel { max-width: 100%; }
+            .carousel-img { min-height: 200px; }
+            .carousel-caption h3 { font-size: 1em; }
+            .carousel-caption p { font-size: 0.85em; }
+            .carousel-controls .carousel-btn { width: 35px; height: 35px; font-size: 1em; }
             .btn-dario-voz, .podcast-toggle-btn { padding: 10px 18px; font-size: 0.9em; }
         }
-        
         @media (max-width: 480px) {
             .radios-grid { gap: 15px; }
             .radio-card { height: 160px; }
             .hero-buttons .btn-primary-action { padding: 8px 16px; font-size: 0.8em; }
             .compact-section h2, .radios-section h2, .services-section h2 { font-size: 1.5em; }
+            .carousel-img { min-height: 180px; }
         }
     </style>
 </head>
@@ -164,7 +266,7 @@
     <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
     <header id="mainHeader">
         <div class="logo"><img src="/img_radio/RDCR SOUND NETWORK/10.png" alt="RDCR Sound Network" style="height:35px;width:auto;"><h2>RDCR SOUND</h2></div>
-        <button class="nav-btn" id="menuToggle" style="display:none;"><i class="fas fa-bars"></i></button>
+        <button class="nav-btn" id="menuToggle" style="display:none;"><i class="fas fa-bars"></i> Menú</button>
         <nav class="nav-buttons" id="mainNav">
             <button class="nav-btn" onclick="scrollToSection('radios')"><i class="fas fa-radio"></i> Radio</button>
             <button class="nav-btn" onclick="scrollToSection('servicios')"><i class="fas fa-cogs"></i> Servicios</button>
@@ -203,7 +305,7 @@
                 <div class="contador-texto">Descargas de App</div>
             </div>
         </div>
-        <button class="quienes-btn" onclick="openModal('quienesSomos')" style="display:block;margin:25px auto 0;padding:10px 20px;background:linear-gradient(45deg,#9C27B0,#673AB7);border:1.5px solid var(--blanco-limpio);border-radius:6px;color:var(--blanco-limpio);font-weight:600;cursor:pointer;transition:all 0.3s ease;font-size:0.85em;"><i class="fas fa-users"></i> Quiénes Somos</button>
+        <button class="quienes-btn" onclick="openModal('quienesSomos')" style="display:block;margin:25px auto 0;padding:12px 24px;background:linear-gradient(45deg,#9C27B0,#673AB7);border:1.5px solid var(--blanco-limpio);border-radius:8px;color:var(--blanco-limpio);font-weight:600;cursor:pointer;transition:all 0.3s ease;font-size:0.9em;"><i class="fas fa-users"></i> Quiénes Somos</button>
     </section>
 
     <section class="radios-section" id="radios">
@@ -260,61 +362,65 @@
         </div>
     </section>
     
+    <!-- SECCIÓN DE PUBLICIDAD CORREGIDA - TAMAÑO ORIGINAL RESTAURADO -->
     <section class="compact-section" id="publicidad">
         <h2>Publicidad</h2>
-        <p style="text-align:center;max-width:700px;margin:0 auto 15px;color:rgba(255,255,255,0.8);font-size:0.9em;">Tu marca puede llegar a miles de oyentes en nuestra red de radios online.</p>
+        <p style="text-align:center;max-width:700px;margin:0 auto 20px;color:rgba(255,255,255,0.9);font-size:1em;">Tu marca puede llegar a miles de oyentes en nuestra red de radios online.</p>
         <div class="publicidad-carousel">
             <div class="carousel-track">
                 <div class="carousel-slide">
                     <img src="/img_radio/Auspiciantes/RDCR PAUTA 1.jpg" alt="Publicidad Ejemplo 1" class="carousel-img">
-                    <div class="carousel-caption" style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.85));color:var(--blanco-limpio);padding:8px;border-radius:0 0 12px 12px;">
-                        <h3 style="color:var(--cian-electrico);font-size:0.9em;">PAUTA CON NOSOTROS</h3><p style="font-size:0.8em;">pregunta nuestros precios.</p>
+                    <div class="carousel-caption">
+                        <h3>PAUTA CON NOSOTROS</h3>
+                        <p>Llega a miles de oyentes en toda Latinoamérica</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
                     <img src="/img_radio/Auspiciantes/RDCR PAUTA 2.jpg" alt="Publicidad Ejemplo 2" class="carousel-img">
-                    <div class="carousel-caption" style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.85));color:var(--blanco-limpio);padding:8px;border-radius:0 0 12px 12px;">
-                        <h3 style="color:var(--cian-electrico);font-size:0.9em;">PAUTA CON NOSOTROS</h3><p style="font-size:0.8em;">pregunta nuestros precios.</p>
+                    <div class="carousel-caption">
+                        <h3>PUBLICIDAD EFECTIVA</h3>
+                        <p>Segmentación precisa y resultados medibles</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="/img_radio/Auspiciantes/RDCR PAUTA  3.jpg" alt="Publicidad Ejemplo 3" class="carousel-img">
+                    <div class="carousel-caption">
+                        <h3>ALCANZA TU AUDIENCIA</h3>
+                        <p>Estrategias personalizadas para tu marca</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="/img_radio/Auspiciantes/RDCR PAUTA 4.jpg" alt="Publicidad Ejemplo 4" class="carousel-img">
+                    <div class="carousel-caption">
+                        <h3>PRECIOS COMPETITIVOS</h3>
+                        <p>Consultá nuestras tarifas especiales</p>
                     </div>
                 </div>
             </div>
-            <div class="carousel-track">
-                <div class="carousel-slide">
-                    <img src="/img_radio/Auspiciantes/RDCR PAUTA  3.jpg" alt="Publicidad Ejemplo 1" class="carousel-img">
-                    <div class="carousel-caption" style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.85));color:var(--blanco-limpio);padding:8px;border-radius:0 0 12px 12px;">
-                        <h3 style="color:var(--cian-electrico);font-size:0.9em;">PAUTA CON NOSOTROS</h3><p style="font-size:0.8em;">pregunta nuestros precios.</p>
-                    </div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="/img_radio/Auspiciantes/RDCR PAUTA 4.jpg" alt="Publicidad Ejemplo 2" class="carousel-img">
-                    <div class="carousel-caption" style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.85));color:var(--blanco-limpio);padding:8px;border-radius:0 0 12px 12px;">
-                        <h3 style="color:var(--cian-electrico);font-size:0.9em;">PAUTA CON NOSOTROS</h3><p style="font-size:0.8em;">pregunta nuestros precios.</p>
-                    </div>
-                </div>
-            </div
             <div class="carousel-controls">
                 <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
                 <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
-        <button class="tarifario-btn" onclick="openModal('tarifario')" style="display:block;margin:20px auto 0;padding:10px 18px;background:linear-gradient(45deg,#32CD32,#228B22);color:white;border:none;border-radius:6px;font-size:0.85em;font-weight:600;cursor:pointer;"><i class="fas fa-file-invoice-dollar"></i> Ver Tarifario Publicitario</button>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <button class="tarifario-btn" onclick="openModal('tarifario')" style="display:block;margin:25px auto 0;padding:12px 24px;background:linear-gradient(45deg,#32CD32,#228B22);color:white;border:none;border-radius:8px;font-size:0.9em;font-weight:600;cursor:pointer;transition:all 0.3s ease;"><i class="fas fa-file-invoice-dollar"></i> Ver Tarifario Publicitario</button>
     </section>
     
     <section class="compact-section" id="download">
         <h2>Descarga Nuestra App</h2>
         <p style="text-align:center;max-width:600px;margin:0 auto 20px;color:rgba(255,255,255,0.8);font-size:0.9em;">Lleva RDCR Sound Network contigo a todas partes.</p>
-        <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+        <div style="display:flex;justify-content:center;gap:15px;flex-wrap:wrap;">
             <a href="https://www.appcreator24.com/app1472133-ekgbdf" target="_blank" class="btn-primary-action"><i class="fab fa-google-play"></i> Google Play</a>
             <a href="https://rdcrsound.adcm.club/" target="_blank" class="btn-primary-action"><i class="fab fa-app-store-ios"></i> App Store</a>
         </div>
     </section>
     
-    <section id="contacto" style="padding:30px 20px;max-width:700px;margin:0 auto;text-align:center;">
-        <h2 style="margin-bottom:20px;color:var(--cian-electrico);font-size:1.6em;">Contacto</h2>
-        <div style="display:flex;flex-direction:column;gap:12px;align-items:center;">
-            <div style="display:flex;align-items:center;gap:8px;"><i class="fab fa-whatsapp" style="color:#25D366;font-size:1.2em;"></i><span>+593 961 480 654</span></div>
-            <div style="display:flex;align-items:center;gap:8px;"><i class="fas fa-envelope" style="color:var(--cian-electrico);font-size:1.2em;"></i><span>rdcrsound@gmail.com</span></div>
-            <div style="display:flex;align-items:center;gap:8px;"><i class="fas fa-map-marker-alt" style="color:var(--cian-electrico);font-size:1.2em;"></i><span>Quito, Ecuador</span></div>
+    <section id="contacto" style="padding:40px 20px;max-width:700px;margin:0 auto;text-align:center;">
+        <h2 style="margin-bottom:25px;color:var(--cian-electrico);font-size:1.8em;">Contacto</h2>
+        <div style="display:flex;flex-direction:column;gap:15px;align-items:center;">
+            <div style="display:flex;align-items:center;gap:12px;font-size:1.1em;"><i class="fab fa-whatsapp" style="color:#25D366;font-size:1.4em;"></i><span>+593 961 480 654</span></div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:1.1em;"><i class="fas fa-envelope" style="color:var(--cian-electrico);font-size:1.4em;"></i><span>rdcrsound@gmail.com</span></div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:1.1em;"><i class="fas fa-map-marker-alt" style="color:var(--cian-electrico);font-size:1.4em;"></i><span>Quito, Ecuador</span></div>
         </div>
     </section>
     
@@ -347,16 +453,16 @@
         </div>
     </div>
     
-    <div id="quienesSomos" class="modal"><div class="modal-content"><div class="modal-header"><h2>QUIÉNES SOMOS</h2><button class="close-modal" onclick="closeModal('quienesSomos')">&times;</button></div><div class="modal-body" style="padding:20px;"><p><strong>RDCR Sound Network</strong> nace de una visión clara: crear radio online con identidad, criterio y propósito.</p><p>Desde el lanzamiento de Avenida Tropical en septiembre de 2020, el proyecto creció con pasión y convicción, apostando por una radio digital hecha con carácter, calidad y sentido cultural.</p><p>En julio de 2021, este camino dio un paso decisivo con la creación de RDCR, comprendiendo que el futuro no era una sola emisora, sino la construcción de una red sólida y en constante evolución. Así surge RDCR Sound Network, una propuesta que integra música, contenido, tecnología y pensamiento estratégico bajo una misma visión.</p><p>Hoy, RDCR Sound Network entra en una nueva etapa. La radio sigue siendo nuestro origen, pero el proyecto evoluciona hacia una red de conocimiento y medios, donde la experiencia sonora se complementa con nuevas áreas especializadas:</p><ul style="padding-left:20px;"><li><strong>RDCR AudioLab</strong>, enfocado en la producción y edición profesional de audio;</li><li><strong>RDCR OratoriaLab</strong>, dedicado al desarrollo de la voz, la comunicación y la neuro-oratoria;</li><li><strong>RDCR DataLab</strong>, orientado al análisis y visualización de datos aplicados a medios y contenidos digitales.</li></ul><p>Esta transformación se expresa en una imagen renovada, nuevos talentos, programación actualizada y una estructura pensada para el presente y proyectada al futuro. Nuestra historia no se deja atrás; se convierte en experiencia, método y aprendizaje.</p><p><strong>RDCR Sound Network no es solo radio online.<br>Es una plataforma que crea, comunica, analiza y forma.</strong></p><p><strong>DARÍO CASTELLANOS</strong></p><p>Radios online con visión.<br>Contenido con identidad.<br>Conocimiento que evoluciona.</p></div></div></div>
+    <div id="quienesSomos" class="modal"><div class="modal-content"><div class="modal-header"><h2>QUIÉNES SOMOS</h2><button class="close-modal" onclick="closeModal('quienesSomos')">&times;</button></div><div class="modal-body" style="padding:25px;"><p><strong>RDCR Sound Network</strong> nace de una visión clara: crear radio online con identidad, criterio y propósito.</p><p>Desde el lanzamiento de Avenida Tropical en septiembre de 2020, el proyecto creció con pasión y convicción, apostando por una radio digital hecha con carácter, calidad y sentido cultural.</p><p>En julio de 2021, este camino dio un paso decisivo con la creación de RDCR, comprendiendo que el futuro no era una sola emisora, sino la construcción de una red sólida y en constante evolución. Así surge RDCR Sound Network, una propuesta que integra música, contenido, tecnología y pensamiento estratégico bajo una misma visión.</p><p>Hoy, RDCR Sound Network entra en una nueva etapa. La radio sigue siendo nuestro origen, pero el proyecto evoluciona hacia una red de conocimiento y medios, donde la experiencia sonora se complementa con nuevas áreas especializadas:</p><ul style="padding-left:20px;margin:15px 0;"><li><strong>RDCR AudioLab</strong>, enfocado en la producción y edición profesional de audio;</li><li><strong>RDCR OratoriaLab</strong>, dedicado al desarrollo de la voz, la comunicación y la neuro-oratoria;</li><li><strong>RDCR DataLab</strong>, orientado al análisis y visualización de datos aplicados a medios y contenidos digitales.</li></ul><p>Esta transformación se expresa en una imagen renovada, nuevos talentos, programación actualizada y una estructura pensada para el presente y proyectada al futuro.</p><p><strong>RDCR Sound Network no es solo radio online.<br>Es una plataforma que crea, comunica, analiza y forma.</strong></p><p><strong>DARÍO CASTELLANOS</strong></p><p>Radios online con visión.<br>Contenido con identidad.<br>Conocimiento que evoluciona.</p></div></div></div>
     
-    <div id="tarifario" class="modal"><div class="modal-content"><div class="modal-header"><h2>Tarifario Publicitario</h2><button class="close-modal" onclick="closeModal('tarifario')">&times;</button></div><div class="modal-body" style="padding:20px;"><h3 style="color:var(--cian-electrico);margin:15px 0 10px;">PUBLICIDAD EN RADIOS ONLINE</h3><p>RDCR Sound Network es una red de radios online en Ecuador que conecta marcas con audiencias reales, activas y segmentadas.</p><h4 style="color:var(--cian-electrico);margin:15px 0 10px;">Cuñas Publicitarias (por emisión)</h4><ul><li><strong>Cuña de 15 segundos:</strong> 15 USD</li><li><strong>Cuña de 30 segundos:</strong> 30 USD</li><li><strong>Cuña de 60 segundos:</strong> 55 USD</li><li><strong>Paquete de 10 cuñas de 30 segundos:</strong> 260 USD</li><li><strong>Paquete de 20 cuñas de 30 segundos:</strong> 480 USD</li></ul><h4 style="color:var(--cian-electrico);margin:15px 0 10px;">Programas Patrocinados</h4><ul><li><strong>Bloque de 15 minutos:</strong> 90 USD</li><li><strong>Media hora:</strong> 160 USD</li><li><strong>Hora completa:</strong> 300 USD</li></ul><h4 style="color:var(--cian-electrico);margin:15px 0 10px;">Contacto Comercial</h4><p><strong>Correo electrónico:</strong> rdcrsound@gmail.com</p><p><strong>Teléfono y WhatsApp:</strong> +593 961 480 654</p></div></div></div>
+    <div id="tarifario" class="modal"><div class="modal-content"><div class="modal-header"><h2>Tarifario Publicitario</h2><button class="close-modal" onclick="closeModal('tarifario')">&times;</button></div><div class="modal-body" style="padding:25px;"><h3 style="color:var(--cian-electrico);margin:15px 0 10px;">PUBLICIDAD EN RADIOS ONLINE</h3><p>RDCR Sound Network es una red de radios online en Ecuador que conecta marcas con audiencias reales, activas y segmentadas.</p><h4 style="color:var(--cian-electrico);margin:20px 0 10px;">Cuñas Publicitarias (por emisión)</h4><ul style="margin-left:20px;margin-bottom:15px;"><li><strong>Cuña de 15 segundos:</strong> 15 USD</li><li><strong>Cuña de 30 segundos:</strong> 30 USD</li><li><strong>Cuña de 60 segundos:</strong> 55 USD</li><li><strong>Paquete de 10 cuñas de 30 segundos:</strong> 260 USD</li><li><strong>Paquete de 20 cuñas de 30 segundos:</strong> 480 USD</li></ul><h4 style="color:var(--cian-electrico);margin:20px 0 10px;">Programas Patrocinados</h4><ul style="margin-left:20px;margin-bottom:15px;"><li><strong>Bloque de 15 minutos:</strong> 90 USD</li><li><strong>Media hora:</strong> 160 USD</li><li><strong>Hora completa:</strong> 300 USD</li></ul><h4 style="color:var(--cian-electrico);margin:20px 0 10px;">Contacto Comercial</h4><p><strong>Correo electrónico:</strong> rdcrsound@gmail.com</p><p><strong>Teléfono y WhatsApp:</strong> +593 961 480 654</p></div></div></div>
     
-    <!-- Modales de podcasts (simplificados pero funcionales) -->
-    <div id="podcastSpotify" class="modal"><div class="podcast-modal-content"><div class="modal-header"><h2>Podcasts en Spotify</h2><button class="close-modal" onclick="closeModal('podcastSpotify')">&times;</button></div><div class="podcast-container"><div class="podcast-item"><h3 style="color:var(--cian-electrico);">Entretelones Radio Show</h3><iframe style="border-radius:8px; width:100%; height:200px;" src="https://open.spotify.com/embed/show/6esb0xUeklWFNoqCWSorpa" frameborder="0" allowfullscreen></iframe></div><div class="podcast-item"><h3 style="color:var(--cian-electrico);">Mano a Mano con Darío</h3><iframe style="border-radius:8px; width:100%; height:200px;" src="https://open.spotify.com/embed/show/4fqSdu2l8WuOkoTKT67r9n" frameborder="0" allowfullscreen></iframe></div><button class="podcast-back-btn" onclick="closeModal('podcastSpotify')" style="grid-column:1/-1; background:var(--cian-electrico); color:black; border:none; padding:8px; border-radius:8px; cursor:pointer;"><i class="fas fa-arrow-left"></i> Volver</button></div></div></div>
-    <div id="podcastApple" class="modal"><div class="podcast-modal-content"><div class="modal-header"><h2>Podcasts en Apple</h2><button class="close-modal" onclick="closeModal('podcastApple')">&times;</button></div><div class="podcast-container"><div class="podcast-item"><h3 style="color:var(--cian-electrico);">Entretelones Radio Show</h3><iframe allow="autoplay *; encrypted-media *" frameborder="0" height="200" style="width:100%" src="https://embed.podcasts.apple.com/ec/podcast/entretelones-radio-show-podcast/id1819687775"></iframe></div><div class="podcast-item"><h3 style="color:var(--cian-electrico);">Mano a Mano con Darío</h3><iframe allow="autoplay *; encrypted-media *" frameborder="0" height="200" style="width:100%" src="https://embed.podcasts.apple.com/ec/podcast/mano-a-mano-con-dar%C3%ADo/id1819685664"></iframe></div><button class="podcast-back-btn" onclick="closeModal('podcastApple')" style="grid-column:1/-1; background:var(--cian-electrico); color:black; border:none; padding:8px; border-radius:8px; cursor:pointer;">Volver</button></div></div></div>
-    <div id="podcastTunein" class="modal"><div class="podcast-modal-content"><div class="modal-header"><h2>Podcasts en TuneIn</h2><button class="close-modal" onclick="closeModal('podcastTunein')">&times;</button></div><div class="podcast-container"><div class="podcast-item"><h3 style="color:var(--cian-electrico);">Entretelones</h3><iframe src="https://tunein.com/embed/player/p4634508/" style="width:100%; height:120px;" frameborder="no"></iframe></div><div class="podcast-item"><h3 style="color:var(--cian-electrico);">Mano a Mano</h3><iframe src="https://tunein.com/embed/player/p4643902/" style="width:100%; height:120px;" frameborder="no"></iframe></div><button class="podcast-back-btn" onclick="closeModal('podcastTunein')" style="grid-column:1/-1; background:var(--cian-electrico); color:black; border:none; padding:8px; border-radius:8px; cursor:pointer;">Volver</button></div></div></div>
-    <div id="podcastIvoxx" class="modal"><div class="podcast-modal-content"><div class="modal-header"><h2>Podcasts en IVOOX</h2><button class="close-modal" onclick="closeModal('podcastIvoxx')">&times;</button></div><div class="podcast-container"><div class="podcast-item"><h3 style="color:var(--cian-electrico);">Entretelones</h3><iframe src="https://www.ivoox.com/player_es_podcast_1255565_zp_1.html" width="100%" height="200" frameborder="0" allowfullscreen></iframe></div><div class="podcast-item"><h3 style="color:var(--cian-electrico);">Mano a Mano</h3><iframe src="https://www.ivoox.com/player_es_podcast_2390635_zp_1.html" width="100%" height="200" frameborder="0" allowfullscreen></iframe></div><button class="podcast-back-btn" onclick="closeModal('podcastIvoxx')" style="grid-column:1/-1; background:var(--cian-electrico); color:black; border:none; padding:8px; border-radius:8px; cursor:pointer;">Volver</button></div></div></div>
-    <div id="podcastIheart" class="modal"><div class="podcast-modal-content"><div class="modal-header"><h2>Podcasts en iHeart</h2><button class="close-modal" onclick="closeModal('podcastIheart')">&times;</button></div><div class="podcast-container"><div class="podcast-item"><h3 style="color:var(--cian-electrico);">Entretelones</h3><iframe allow="autoplay" width="100%" height="200" src="https://iheart.com/podcast/318417098/?embed=true"></iframe></div><div class="podcast-item"><h3 style="color:var(--cian-electrico);">Mano a Mano</h3><iframe allow="autoplay" width="100%" height="200" src="https://iheart.com/podcast/318417066/?embed=true"></iframe></div><button class="podcast-back-btn" onclick="closeModal('podcastIheart')" style="grid-column:1/-1; background:var(--cian-electrico); color:black; border:none; padding:8px; border-radius:8px; cursor:pointer;">Volver</button></div></div></div>
+    <!-- Modales Podcasts -->
+    <div id="podcastSpotify" class="modal"><div class="podcast-modal-content"><div class="modal-header"><h2>Podcasts en Spotify</h2><button class="close-modal" onclick="closeModal('podcastSpotify')">&times;</button></div><div class="podcast-container"><div class="podcast-item"><h3 style="color:var(--cian-electrico);margin-bottom:10px;">Entretelones Radio Show</h3><iframe style="border-radius:8px; width:100%; height:200px;" src="https://open.spotify.com/embed/show/6esb0xUeklWFNoqCWSorpa" frameborder="0" allowfullscreen></iframe></div><div class="podcast-item"><h3 style="color:var(--cian-electrico);margin-bottom:10px;">Mano a Mano con Darío</h3><iframe style="border-radius:8px; width:100%; height:200px;" src="https://open.spotify.com/embed/show/4fqSdu2l8WuOkoTKT67r9n" frameborder="0" allowfullscreen></iframe></div><button class="podcast-back-btn" onclick="closeModal('podcastSpotify')" style="grid-column:1/-1; background:var(--cian-electrico); color:black; border:none; padding:10px; border-radius:8px; cursor:pointer; margin-top:10px; font-weight:600;"><i class="fas fa-arrow-left"></i> Volver</button></div></div></div>
+    <div id="podcastApple" class="modal"><div class="podcast-modal-content"><div class="modal-header"><h2>Podcasts en Apple</h2><button class="close-modal" onclick="closeModal('podcastApple')">&times;</button></div><div class="podcast-container"><div class="podcast-item"><h3 style="color:var(--cian-electrico);margin-bottom:10px;">Entretelones Radio Show</h3><iframe allow="autoplay *; encrypted-media *" frameborder="0" height="200" style="width:100%" src="https://embed.podcasts.apple.com/ec/podcast/entretelones-radio-show-podcast/id1819687775"></iframe></div><div class="podcast-item"><h3 style="color:var(--cian-electrico);margin-bottom:10px;">Mano a Mano con Darío</h3><iframe allow="autoplay *; encrypted-media *" frameborder="0" height="200" style="width:100%" src="https://embed.podcasts.apple.com/ec/podcast/mano-a-mano-con-dar%C3%ADo/id1819685664"></iframe></div><button class="podcast-back-btn" onclick="closeModal('podcastApple')" style="grid-column:1/-1; background:var(--cian-electrico); color:black; border:none; padding:10px; border-radius:8px; cursor:pointer; margin-top:10px; font-weight:600;">Volver</button></div></div></div>
+    <div id="podcastTunein" class="modal"><div class="podcast-modal-content"><div class="modal-header"><h2>Podcasts en TuneIn</h2><button class="close-modal" onclick="closeModal('podcastTunein')">&times;</button></div><div class="podcast-container"><div class="podcast-item"><h3 style="color:var(--cian-electrico);margin-bottom:10px;">Entretelones</h3><iframe src="https://tunein.com/embed/player/p4634508/" style="width:100%; height:120px;" frameborder="no"></iframe></div><div class="podcast-item"><h3 style="color:var(--cian-electrico);margin-bottom:10px;">Mano a Mano</h3><iframe src="https://tunein.com/embed/player/p4643902/" style="width:100%; height:120px;" frameborder="no"></iframe></div><button class="podcast-back-btn" onclick="closeModal('podcastTunein')" style="grid-column:1/-1; background:var(--cian-electrico); color:black; border:none; padding:10px; border-radius:8px; cursor:pointer; margin-top:10px; font-weight:600;">Volver</button></div></div></div>
+    <div id="podcastIvoxx" class="modal"><div class="podcast-modal-content"><div class="modal-header"><h2>Podcasts en IVOOX</h2><button class="close-modal" onclick="closeModal('podcastIvoxx')">&times;</button></div><div class="podcast-container"><div class="podcast-item"><h3 style="color:var(--cian-electrico);margin-bottom:10px;">Entretelones</h3><iframe src="https://www.ivoox.com/player_es_podcast_1255565_zp_1.html" width="100%" height="200" frameborder="0" allowfullscreen></iframe></div><div class="podcast-item"><h3 style="color:var(--cian-electrico);margin-bottom:10px;">Mano a Mano</h3><iframe src="https://www.ivoox.com/player_es_podcast_2390635_zp_1.html" width="100%" height="200" frameborder="0" allowfullscreen></iframe></div><button class="podcast-back-btn" onclick="closeModal('podcastIvoxx')" style="grid-column:1/-1; background:var(--cian-electrico); color:black; border:none; padding:10px; border-radius:8px; cursor:pointer; margin-top:10px; font-weight:600;">Volver</button></div></div></div>
+    <div id="podcastIheart" class="modal"><div class="podcast-modal-content"><div class="modal-header"><h2>Podcasts en iHeart</h2><button class="close-modal" onclick="closeModal('podcastIheart')">&times;</button></div><div class="podcast-container"><div class="podcast-item"><h3 style="color:var(--cian-electrico);margin-bottom:10px;">Entretelones</h3><iframe allow="autoplay" width="100%" height="200" src="https://iheart.com/podcast/318417098/?embed=true"></iframe></div><div class="podcast-item"><h3 style="color:var(--cian-electrico);margin-bottom:10px;">Mano a Mano</h3><iframe allow="autoplay" width="100%" height="200" src="https://iheart.com/podcast/318417066/?embed=true"></iframe></div><button class="podcast-back-btn" onclick="closeModal('podcastIheart')" style="grid-column:1/-1; background:var(--cian-electrico); color:black; border:none; padding:10px; border-radius:8px; cursor:pointer; margin-top:10px; font-weight:600;">Volver</button></div></div></div>
     
     <script>
         function scrollToSection(sectionId) { const section = document.getElementById(sectionId); if(section) section.scrollIntoView({ behavior: 'smooth' }); }
@@ -366,23 +472,77 @@
         window.addEventListener('click', (e) => { if(e.target.classList.contains('modal')) { e.target.style.display = 'none'; document.body.style.overflow = 'auto'; } });
         document.addEventListener('keydown', (e) => { if(e.key === 'Escape') { document.querySelectorAll('.modal').forEach(modal => modal.style.display = 'none'); document.body.style.overflow = 'auto'; } });
         
-        // Carrusel
+        // Carrusel de publicidad - funcionamiento correcto con tamaño original
         const track = document.querySelector('.carousel-track');
         const slides = document.querySelectorAll('.carousel-slide');
         const prev = document.querySelector('.prev-btn');
         const next = document.querySelector('.next-btn');
-        let current = 0, autoInterval;
-        function updateCarousel() { track.style.transform = `translateX(-${current * 100}%)`; }
-        function nextSlide() { current = (current + 1) % slides.length; updateCarousel(); }
-        function prevSlide() { current = (current - 1 + slides.length) % slides.length; updateCarousel(); }
-        function startAuto() { autoInterval = setInterval(nextSlide, 4000); }
-        next.addEventListener('click', () => { nextSlide(); clearInterval(autoInterval); startAuto(); });
-        prev.addEventListener('click', () => { prevSlide(); clearInterval(autoInterval); startAuto(); });
-        const carousel = document.querySelector('.publicidad-carousel');
-        carousel.addEventListener('mouseenter', () => clearInterval(autoInterval));
-        carousel.addEventListener('mouseleave', startAuto);
+        let currentIndex = 0;
+        let autoInterval;
+        const dotsContainer = document.getElementById('carouselDots');
         
-        // Contadores
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentIndex);
+            });
+        }
+        
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        }
+        
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+        
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+        
+        function startAuto() {
+            if (autoInterval) clearInterval(autoInterval);
+            autoInterval = setInterval(nextSlide, 5000);
+        }
+        
+        function stopAuto() {
+            if (autoInterval) clearInterval(autoInterval);
+        }
+        
+        function createDots() {
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    stopAuto();
+                    startAuto();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+        
+        if (next && prev) {
+            next.addEventListener('click', () => { nextSlide(); stopAuto(); startAuto(); });
+            prev.addEventListener('click', () => { prevSlide(); stopAuto(); startAuto(); });
+        }
+        
+        const carousel = document.querySelector('.publicidad-carousel');
+        if (carousel) {
+            carousel.addEventListener('mouseenter', stopAuto);
+            carousel.addEventListener('mouseleave', startAuto);
+        }
+        
+        createDots();
+        startAuto();
+        
+        // Contadores con efecto conteo
         function iniciarContadores() {
             const contadores = document.querySelectorAll('.contador-numero');
             const base = { contadorVisitas: 15842, contadorOyentes: 3256, contadorDescargas: 8742 };
@@ -406,18 +566,35 @@
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
         if(menuToggle) {
-            function checkSize() { if(window.innerWidth <= 768) { menuToggle.style.display = 'flex'; mainNav.style.display = 'none'; } else { menuToggle.style.display = 'none'; mainNav.style.display = 'flex'; } }
+            function checkSize() { 
+                if(window.innerWidth <= 768) { 
+                    menuToggle.style.display = 'flex'; 
+                    mainNav.classList.remove('active');
+                    mainNav.style.display = 'none'; 
+                } else { 
+                    menuToggle.style.display = 'none'; 
+                    mainNav.style.display = 'flex'; 
+                } 
+            }
             checkSize();
             window.addEventListener('resize', checkSize);
-            menuToggle.addEventListener('click', () => mainNav.classList.toggle('active'));
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => { if(window.innerWidth <= 768) mainNav.classList.remove('active'); }));
+            menuToggle.addEventListener('click', () => {
+                if (mainNav.style.display === 'none' || mainNav.style.display === '') {
+                    mainNav.style.display = 'flex';
+                } else {
+                    mainNav.style.display = 'none';
+                }
+            });
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => { if(window.innerWidth <= 768) mainNav.style.display = 'none'; }));
         }
         
         function togglePodcasts() {
             const dd = document.getElementById('podcastDropdown');
             const icon = document.getElementById('toggleIcon');
-            dd.classList.toggle('open');
-            icon.style.transform = dd.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+            if (dd) {
+                dd.classList.toggle('open');
+                if (icon) icon.style.transform = dd.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
         }
         
         document.getElementById('whatsappContactForm').addEventListener('submit', function(e) {
@@ -434,11 +611,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.body.style.opacity = '0';
             setTimeout(() => document.body.style.opacity = '1', 100);
-            updateCarousel();
-            startAuto();
             iniciarContadores();
         });
     </script>
     <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
 </body>
 </html>
+<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
