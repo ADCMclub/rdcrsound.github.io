@@ -92,7 +92,10 @@ nav a:hover{border-color:var(--acento);color:var(--acento)}
 
 .player-title{font-size:0.78rem;color:var(--acento);margin-bottom:24px;text-align:left;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;text-transform:uppercase}
 
-.miniplayer-container{display:flex;justify-content:center;margin:24px 0 8px;width:100%}
+.play-here-tag{display:flex;align-items:center;gap:8px;font-size:0.72rem;color:var(--acento);margin-top:16px;font-weight:600}
+.play-here-tag i{animation:bounceDown 1.4s infinite}
+@keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+.hero-miniplayer{margin-top:10px;display:flex;justify-content:flex-start;background:var(--superficie);border:1px solid var(--acento);border-radius:999px;padding:6px 10px;width:fit-content}
 .widgets-panel{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px;width:100%}
 .widget-left,.widget-right{flex:1;min-width:250px;background:var(--negro-profundo);border-radius:var(--radio-radius);padding:14px;border:1px solid var(--borde)}
 .widget-title{font-size:0.7rem;color:var(--acento);font-weight:600;margin-bottom:10px;text-align:center;letter-spacing:0.04em;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
@@ -159,6 +162,8 @@ footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
   nav a{width:100%;text-align:center;display:block}
   .logo h1{font-size:1rem}
   .hero-stage{grid-template-columns:1fr;justify-items:center;text-align:center;gap:24px}
+  .play-here-tag{justify-content:center}
+  .hero-miniplayer{margin-left:auto;margin-right:auto}
   .music-info{text-align:center}
   #artistNameDisplay{justify-content:center}
   .hero-meta-row{justify-content:center}
@@ -225,6 +230,11 @@ footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
         <div id="songNameDisplay">Cargando...</div>
         <div id="artistNameDisplay"><i class="fas fa-microphone-alt"></i> <span id="artistNameSpan">Avenida Tropical</span></div>
       </div>
+      <div class="play-here-tag mono"><i class="fas fa-arrow-down"></i> Tocá play para escuchar</div>
+      <div class="hero-miniplayer">
+        <div class='rbcloud_mplayer' id='rbcloud_mplayer17793'></div>
+        <script src='https://c42.radioboss.fm/w/mplayer.js?u=https%3A%2F%2Fc42.radioboss.fm%3A8174%2Fstream&amp;wid=17793&amp;pw=92&amp;ca=%23FF6B4A&amp;cg=%230A0A0B'></script>
+      </div>
       <div class="hero-meta-row">
         <a href="#programacion" class="btn btn-secondary"><i class="fas fa-calendar-alt"></i> Programación</a>
         <div class="live-status-badge"><span class="live-dot-sm"></span><span>En vivo</span></div>
@@ -237,11 +247,6 @@ footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
   <div class="player-container">
     <h2 class="player-title">Avenida Tropical · sonido digital</h2>
     <div class="disc-player-wrapper">
-      <div class="miniplayer-container">
-        <div class='rbcloud_mplayer' id='rbcloud_mplayer17793'></div>
-        <script src='https://c42.radioboss.fm/w/mplayer.js?u=https%3A%2F%2Fc42.radioboss.fm%3A8174%2Fstream&amp;wid=17793&amp;pw=92&amp;ca=%23FF6B4A&amp;cg=%230A0A0B'></script>
-      </div>
-
       <div style="display:none;" id="hiddenNowPlaying">
         <div class='rbcloud_nowplaying' style='display: flex; align-items: center;'>
           <div><a target='_blank' href='https://c42.radioboss.fm/w/artwork/174.jpg'><img id='rbcloud_np_c15549' src='https://c42.radioboss.fm/w/artwork/174.jpg' width='65' height='65' alt='cover art'></a></div>
@@ -284,6 +289,7 @@ footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
           </div>
         </div>
       </div>
+
 
       <div class="signal-indicators"><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div></div>
       <div class="stream-info">320 kbps · RDCR Sound Network · Sonido tropical</div>
