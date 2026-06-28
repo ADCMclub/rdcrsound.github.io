@@ -1,184 +1,1030 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes,viewport-fit=cover">
-<meta name="description" content="Avenida Tropical - Radio 100% tropical con la mejor salsa, timba y ritmos.">
-<title>Avenida Tropical | RDCR Sound Network</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --negro-profundo:#0A0A0B; --negro-suave:#111113; --superficie:#15151A; --borde:#26262C;
-  --blanco-limpio:#F5F3EF; --gris-texto:#9A9CA3; --gris-dim:#5C5E66;
-  --acento:#FF6B4A; --acento-dim:#C24E33; --radio-radius:14px;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:var(--blanco-limpio);background:var(--negro-profundo);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:16px}
-h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;font-weight:600}
-.mono{font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;text-transform:uppercase}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <meta name="description" content="Avenida Tropical - Radio 100% tropical con la mejor salsa, timba y ritmos.">
+  <title>Avenida Tropical | RDCR Sound Network</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --negro-profundo: #0A0A0B;
+      --negro-suave: #111113;
+      --superficie: #15151A;
+      --borde: #26262C;
+      --blanco-limpio: #F5F3EF;
+      --gris-texto: #9A9CA3;
+      --gris-dim: #5C5E66;
+      --acento: #FF6B4A;
+      --acento-dim: #C24E33;
+      --radio-radius: 14px;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--blanco-limpio);
+      background: var(--negro-profundo);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      font-size: 16px;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
 
-.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);display:flex;justify-content:center;align-items:center;z-index:10000;opacity:0;visibility:hidden;transition:all 0.25s ease;padding:15px}
-.modal-overlay.active{opacity:1;visibility:visible}
-.modal-container{background:var(--negro-suave);border-radius:var(--radio-radius);padding:24px;width:100%;max-width:420px;border:1px solid var(--borde);position:relative}
-.close-modal{position:absolute;top:12px;right:14px;background:transparent;border:1px solid var(--borde);color:var(--blanco-limpio);font-size:1rem;cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease}
-.close-modal:hover{border-color:var(--acento);color:var(--acento)}
-.form-input{width:100%;padding:12px 14px;background:var(--negro-profundo);border:1px solid var(--borde);border-radius:10px;color:var(--blanco-limpio);margin-bottom:12px;font-size:0.95rem;font-family:'Inter',sans-serif;transition:border-color 0.2s ease}
-.form-input:focus{outline:none;border-color:var(--acento)}
-.btn-modal{padding:12px 20px;border-radius:999px;font-weight:600;border:none;cursor:pointer;margin:5px 5px 0 0;font-size:0.88rem;transition:transform 0.2s ease}
-.btn-send{background:var(--acento);color:var(--negro-profundo)}
-.btn-send:hover{transform:translateY(-2px)}
-.btn-cancel{background:transparent;color:var(--blanco-limpio);border:1px solid var(--borde)}
-.btn-cancel:hover{border-color:var(--acento);color:var(--acento)}
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+      padding: 15px;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-container {
+      background: var(--negro-suave);
+      border-radius: var(--radio-radius);
+      padding: 24px;
+      width: 100%;
+      max-width: 420px;
+      border: 1px solid var(--borde);
+      position: relative;
+    }
+    .close-modal {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      background: transparent;
+      border: 1px solid var(--borde);
+      color: var(--blanco-limpio);
+      font-size: 1rem;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .close-modal:hover {
+      border-color: var(--acento);
+      color: var(--acento);
+    }
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--negro-profundo);
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      color: var(--blanco-limpio);
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--acento);
+    }
+    .btn-modal {
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      margin: 5px 5px 0 0;
+      font-size: 0.88rem;
+      transition: transform 0.2s ease;
+    }
+    .btn-send {
+      background: var(--acento);
+      color: var(--negro-profundo);
+    }
+    .btn-send:hover {
+      transform: translateY(-2px);
+    }
+    .btn-cancel {
+      background: transparent;
+      color: var(--blanco-limpio);
+      border: 1px solid var(--borde);
+    }
+    .btn-cancel:hover {
+      border-color: var(--acento);
+      color: var(--acento);
+    }
 
-header{
-  background:rgba(10,10,11,0.88);backdrop-filter:blur(12px);padding:14px 20px;
-  border-bottom:1px solid var(--borde);position:sticky;top:0;z-index:1000;
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;
-}
-.back-button{
-  background:transparent;border:1px solid var(--borde);border-radius:50%;width:38px;height:38px;
-  display:flex;align-items:center;justify-content:center;color:var(--blanco-limpio);font-size:0.9rem;
-  flex-shrink:0;cursor:pointer;transition:border-color 0.2s ease;text-decoration:none;
-}
-.back-button:hover{border-color:var(--acento);color:var(--acento)}
-.logo{display:flex;flex-direction:column;align-items:center;gap:2px}
-.live-indicator{display:inline-flex;align-items:center;gap:5px;font-size:0.65rem;color:var(--gris-dim)}
-.live-dot-sm{width:5px;height:5px;border-radius:50%;background:#E24B4A;animation:livePulse 1.5s infinite}
-@keyframes livePulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.logo h1{font-size:1.1rem;color:var(--blanco-limpio);margin:0}
-.logo h1 .accent{color:var(--acento)}
-.nav-toggle{display:none;background:transparent;border:1px solid var(--borde);border-radius:50%;width:38px;height:38px;color:var(--blanco-limpio);font-size:1rem;cursor:pointer;align-items:center;justify-content:center;justify-self:end}
-nav ul{display:flex;list-style:none;gap:8px;justify-content:flex-end}
-nav a{color:var(--gris-texto);text-decoration:none;font-weight:500;padding:8px 16px;font-size:0.82rem;border-radius:999px;border:1px solid var(--borde);transition:all 0.2s ease;white-space:nowrap}
-nav a:hover{border-color:var(--acento);color:var(--acento)}
+    header {
+      background: rgba(10,10,11,0.88);
+      backdrop-filter: blur(12px);
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--borde);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+    .back-button {
+      background: transparent;
+      border: 1px solid var(--borde);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blanco-limpio);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      text-decoration: none;
+    }
+    .back-button:hover {
+      border-color: var(--acento);
+      color: var(--acento);
+    }
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.65rem;
+      color: var(--gris-dim);
+    }
+    .live-dot-sm {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #E24B4A;
+      animation: livePulse 1.5s infinite;
+    }
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .logo h1 {
+      font-size: 1.1rem;
+      color: var(--blanco-limpio);
+      margin: 0;
+    }
+    .logo h1 .accent {
+      color: var(--acento);
+    }
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--borde);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      color: var(--blanco-limpio);
+      font-size: 1rem;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      justify-self: end;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    nav a {
+      color: var(--gris-texto);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      border-radius: 999px;
+      border: 1px solid var(--borde);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    nav a:hover {
+      border-color: var(--acento);
+      color: var(--acento);
+    }
 
-.whatsapp-float{position:fixed;bottom:75px;right:16px;width:52px;height:52px;background:var(--acento);border-radius:50%;display:flex;justify-content:center;align-items:center;color:var(--negro-profundo);font-size:24px;cursor:pointer;z-index:999;transition:transform 0.2s ease}
-.whatsapp-float:hover{transform:scale(1.08)}
-.scroll-top{position:fixed;bottom:18px;right:16px;width:44px;height:44px;background:var(--superficie);border:1px solid var(--borde);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--blanco-limpio);cursor:pointer;z-index:997;opacity:0;visibility:hidden;transition:all 0.2s ease}
-.scroll-top.active{opacity:1;visibility:visible}
-.scroll-top:hover{border-color:var(--acento);color:var(--acento)}
+    .whatsapp-float {
+      position: fixed;
+      bottom: 75px;
+      right: 16px;
+      width: 52px;
+      height: 52px;
+      background: var(--acento);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--negro-profundo);
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 999;
+      transition: transform 0.2s ease;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+    }
+    .scroll-top {
+      position: fixed;
+      bottom: 18px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      background: var(--superficie);
+      border: 1px solid var(--borde);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blanco-limpio);
+      cursor: pointer;
+      z-index: 997;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+    }
+    .scroll-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-top:hover {
+      border-color: var(--acento);
+      color: var(--acento);
+    }
 
-.hero{padding:40px 20px 0;border-bottom:none}
-.hero-stage{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;padding-bottom:40px}
-.hero-tagline{font-size:0.78em;color:var(--acento);margin-bottom:10px;font-weight:600;display:block}
-.hero h2{font-size:clamp(1.7rem,5vw,2.6rem);margin-bottom:10px;line-height:1.1}
-.hero p{color:var(--gris-texto);font-size:0.96rem;margin-bottom:20px;max-width:420px}
-.btn{padding:12px 24px;border-radius:999px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin:0 10px 10px 0;font-size:0.9rem;transition:transform 0.2s ease}
-.btn-primary{background:var(--acento);color:var(--negro-profundo)}
-.btn-primary:hover{transform:translateY(-2px)}
-.btn-secondary{background:transparent;border:1px solid var(--borde);color:var(--blanco-limpio)}
-.btn-secondary:hover{border-color:var(--acento);color:var(--acento)}
+    .hero {
+      padding: 40px 20px 0;
+      border-bottom: none;
+    }
+    .hero-stage {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 28px;
+      padding-bottom: 40px;
+    }
+    .disc-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    .rotating-disc {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #1a1a1a, #050505);
+      border: 1px solid var(--borde);
+      animation: spinDisc 12s linear infinite;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .rotating-disc::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 7px;
+      height: 7px;
+      background: var(--gris-dim);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      border: 1px solid var(--borde);
+    }
+    .rotating-disc::after {
+      content: '';
+      position: absolute;
+      top: 12%;
+      left: 12%;
+      width: 76%;
+      height: 76%;
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle at 30% 30%, rgba(180,180,180,0.06) 0px, rgba(180,180,180,0.06) 4px, transparent 4px, transparent 12px);
+      pointer-events: none;
+    }
+    @keyframes spinDisc {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .disc-center-art {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      background: var(--negro-suave);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 3px solid var(--borde);
+    }
+    .disc-center-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-text-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+    .hero-tagline {
+      font-size: 0.78em;
+      color: var(--acento);
+      margin-bottom: 10px;
+      font-weight: 600;
+      display: block;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: clamp(1.7rem, 5vw, 2.6rem);
+      margin-bottom: 10px;
+      line-height: 1.1;
+      text-align: center;
+    }
+    .hero p {
+      color: var(--gris-texto);
+      font-size: 0.96rem;
+      margin-bottom: 20px;
+      max-width: 420px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn {
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 10px 10px 0;
+      font-size: 0.9rem;
+      transition: transform 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--acento);
+      color: var(--negro-profundo);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--borde);
+      color: var(--blanco-limpio);
+    }
+    .btn-secondary:hover {
+      border-color: var(--acento);
+      color: var(--acento);
+    }
 
-.player-section{padding:0 16px 50px;border-bottom:1px solid var(--borde)}
-.player-container{max-width:1100px;margin:0 auto}
-.disc-player-wrapper{background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio-radius);padding:24px 20px}
+    .player-section {
+      padding: 0 16px 50px;
+      border-bottom: 1px solid var(--borde);
+    }
+    .player-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .disc-player-wrapper {
+      background: var(--superficie);
+      border: 1px solid var(--borde);
+      border-radius: var(--radio-radius);
+      padding: 24px 20px;
+    }
+    .player-title {
+      font-size: 0.78rem;
+      color: var(--acento);
+      margin-bottom: 24px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .music-info {
+      text-align: center;
+      width: 100%;
+    }
+    .nowplaying-text {
+      color: var(--gris-dim);
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      text-align: center;
+    }
+    #songNameDisplay {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--blanco-limpio);
+      margin: 8px 0;
+      word-break: break-word;
+      font-family: 'Space Grotesk', sans-serif;
+      text-align: center;
+    }
+    #artistNameDisplay {
+      font-size: 0.9rem;
+      color: var(--acento);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .stream-status {
+      font-size: 0.7rem;
+      color: var(--gris-dim);
+      margin-top: 10px;
+      text-align: center;
+    }
 
-.rotating-disc{position:relative;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#1a1a1a,#050505);border:1px solid var(--borde);animation:spinDisc 12s linear infinite;cursor:pointer;flex-shrink:0}
-.rotating-disc::before{content:'';position:absolute;top:50%;left:50%;width:7px;height:7px;background:var(--gris-dim);border-radius:50%;transform:translate(-50%,-50%);z-index:2;border:1px solid var(--borde)}
-.rotating-disc::after{content:'';position:absolute;top:12%;left:12%;width:76%;height:76%;border-radius:50%;background:repeating-radial-gradient(circle at 30% 30%,rgba(180,180,180,0.06) 0px,rgba(180,180,180,0.06) 4px,transparent 4px,transparent 12px);pointer-events:none}
-@keyframes spinDisc{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-.disc-center-art{position:absolute;top:50%;left:50%;width:110px;height:110px;border-radius:50%;transform:translate(-50%,-50%);z-index:3;background:var(--negro-suave);display:flex;align-items:center;justify-content:center;overflow:hidden;border:3px solid var(--borde)}
-.disc-center-art img{width:100%;height:100%;object-fit:cover}
+    .play-here-tag {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      color: var(--acento);
+      margin: 16px 0 10px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .play-here-tag i {
+      animation: bounceDown 1.4s infinite;
+    }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+    .hero-miniplayer {
+      display: flex;
+      justify-content: center;
+      background: var(--superficie);
+      border: 1px solid var(--acento);
+      border-radius: 999px;
+      padding: 6px 10px;
+      width: fit-content;
+      margin: 0 auto 18px;
+    }
+    .widgets-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+      width: 100%;
+    }
+    .widget-left, .widget-right {
+      flex: 1;
+      min-width: 250px;
+      background: var(--negro-profundo);
+      border-radius: var(--radio-radius);
+      padding: 14px;
+      border: 1px solid var(--borde);
+    }
+    .widget-title {
+      font-size: 0.7rem;
+      color: var(--acento);
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: center;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
 
-.music-info{text-align:left}
-.nowplaying-text{color:var(--gris-dim);font-size:0.68rem;letter-spacing:0.05em;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
-#songNameDisplay{font-size:1.3rem;font-weight:600;color:var(--blanco-limpio);margin:8px 0;word-break:break-word;font-family:'Space Grotesk',sans-serif}
-#artistNameDisplay{font-size:0.9rem;color:var(--acento);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.stream-status{font-size:0.7rem;color:var(--gris-dim);margin-top:10px}
+    .rbcloud_songrequest input, .rbcloud_songrequest button {
+      background: var(--superficie);
+      border: 1px solid var(--borde);
+      color: var(--blanco-limpio);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.78rem;
+    }
+    .rbcloud_songrequest input:focus {
+      outline: none;
+      border-color: var(--acento);
+    }
+    .rbcloud_songrequest button {
+      background: var(--acento);
+      color: var(--negro-profundo);
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s ease;
+    }
+    .rbcloud_songrequest button:hover {
+      transform: translateY(-1px);
+    }
+    .rbcloud_recent_track, .rbcloud_nexttrack {
+      color: var(--gris-texto);
+      font-size: 0.78rem;
+    }
+    .rbcloud_recent_track {
+      margin-bottom: 8px;
+    }
 
-.player-title{font-size:0.78rem;color:var(--acento);margin-bottom:24px;text-align:left;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;text-transform:uppercase}
+    .signal-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 18px;
+    }
+    .signal-bar {
+      width: 4px;
+      height: 14px;
+      background: var(--acento-dim);
+      border-radius: 3px;
+      animation: signalPulse 1.5s infinite;
+    }
+    @keyframes signalPulse {
+      0%, 100% { transform: scaleY(0.6); }
+      50% { transform: scaleY(1); }
+    }
+    .live-status-badge {
+      background: var(--negro-profundo);
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      margin-top: 14px;
+      border: 1px solid var(--borde);
+    }
+    .live-status-badge .live-dot-sm {
+      width: 7px;
+      height: 7px;
+    }
+    .live-status-badge span {
+      font-size: 0.78rem;
+      color: var(--blanco-limpio);
+      font-weight: 500;
+    }
+    .stream-info {
+      font-size: 0.68rem;
+      color: var(--gris-dim);
+      margin-top: 10px;
+      text-align: center;
+    }
+    .hero-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
 
-.play-here-tag{display:flex;align-items:center;gap:8px;font-size:0.72rem;color:var(--acento);margin-top:16px;font-weight:600}
-.play-here-tag i{animation:bounceDown 1.4s infinite}
-@keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
-.hero-miniplayer{margin-top:10px;display:flex;justify-content:flex-start;background:var(--superficie);border:1px solid var(--acento);border-radius:999px;padding:6px 10px;width:fit-content}
-.widgets-panel{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px;width:100%}
-.widget-left,.widget-right{flex:1;min-width:250px;background:var(--negro-profundo);border-radius:var(--radio-radius);padding:14px;border:1px solid var(--borde)}
-.widget-title{font-size:0.7rem;color:var(--acento);font-weight:600;margin-bottom:10px;text-align:center;letter-spacing:0.04em;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+    .programacion-section {
+      padding: 60px 16px;
+      border-bottom: 1px solid var(--borde);
+    }
+    .section-eyebrow {
+      display: block;
+      text-align: center;
+      font-size: 0.78em;
+      color: var(--acento);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      margin-bottom: 32px;
+    }
+    .live-now-card {
+      background: var(--superficie);
+      border: 1px solid var(--borde);
+      border-radius: var(--radio-radius);
+      padding: 20px;
+      margin-bottom: 28px;
+      text-align: center;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .live-badge {
+      background: var(--acento);
+      color: var(--negro-profundo);
+      padding: 6px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.7rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .current-program-name {
+      font-size: 1.1rem;
+      color: var(--blanco-limpio);
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .dias-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .dia-tab {
+      padding: 9px 16px;
+      background: transparent;
+      border: 1px solid var(--borde);
+      border-radius: 999px;
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 0.78rem;
+      position: relative;
+      transition: all 0.2s ease;
+      color: var(--gris-texto);
+    }
+    .dia-tab.active {
+      background: var(--acento);
+      color: var(--negro-profundo);
+      border-color: var(--acento);
+    }
+    .hoy-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--negro-profundo);
+      color: var(--acento);
+      font-size: 0.55rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--acento);
+      white-space: nowrap;
+    }
+    .programas-dia {
+      display: none;
+    }
+    .programas-dia.active {
+      display: block;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .programa-card {
+      background: var(--superficie);
+      border-radius: var(--radio-radius);
+      padding: 16px;
+      text-align: center;
+      border: 1px solid var(--borde);
+      transition: border-color 0.2s ease;
+    }
+    .programa-card.en-vivo-card {
+      border-color: var(--acento);
+    }
+    .en-vivo-badge-card {
+      background: var(--acento);
+      color: var(--negro-profundo);
+      font-weight: 600;
+      font-size: 0.62rem;
+      padding: 4px 14px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .programa-hora-card {
+      background: var(--negro-profundo);
+      color: var(--acento);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.7rem;
+      display: inline-block;
+      margin-bottom: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .programa-nombre-card {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--blanco-limpio);
+      margin: 8px 0 6px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .programa-conductor-card {
+      font-size: 0.76rem;
+      color: var(--gris-texto);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
 
-.rbcloud_songrequest input,.rbcloud_songrequest button{background:var(--superficie);border:1px solid var(--borde);color:var(--blanco-limpio);border-radius:999px;padding:8px 14px;font-size:0.78rem}
-.rbcloud_songrequest input:focus{outline:none;border-color:var(--acento)}
-.rbcloud_songrequest button{background:var(--acento);color:var(--negro-profundo);font-weight:600;cursor:pointer;border:none;transition:transform 0.2s ease}
-.rbcloud_songrequest button:hover{transform:translateY(-1px)}
-.rbcloud_recent_track,.rbcloud_nexttrack{color:var(--gris-texto);font-size:0.78rem}
-.rbcloud_recent_track{margin-bottom:8px}
+    .other-radios-section {
+      padding: 60px 16px;
+      text-align: center;
+      border-bottom: 1px solid var(--borde);
+    }
+    .radio-card {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--superficie);
+      border: 1px solid var(--borde);
+      border-radius: var(--radio-radius);
+      padding: 20px 24px;
+      text-decoration: none;
+      color: var(--blanco-limpio);
+      width: 100%;
+      max-width: 260px;
+      text-align: center;
+      transition: border-color 0.2s ease;
+    }
+    .radio-card:hover {
+      border-color: var(--acento);
+    }
+    .radio-card h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+    }
+    .radio-card p {
+      font-size: 0.78rem;
+      color: var(--gris-texto);
+    }
 
-.signal-indicators{display:flex;gap:6px;margin-top:18px}
-.signal-bar{width:4px;height:14px;background:var(--acento-dim);border-radius:3px;animation:signalPulse 1.5s infinite}
-@keyframes signalPulse{0%,100%{transform:scaleY(0.6)}50%{transform:scaleY(1)}}
-.live-status-badge{background:var(--negro-profundo);border-radius:999px;display:inline-flex;align-items:center;gap:10px;padding:8px 20px;margin-top:14px;border:1px solid var(--borde)}
-.live-status-badge .live-dot-sm{width:7px;height:7px}
-.live-status-badge span{font-size:0.78rem;color:var(--blanco-limpio);font-weight:500}
-.stream-info{font-size:0.68rem;color:var(--gris-dim);margin-top:10px}
-.hero-meta-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:18px}
+    /* PLATAFORMAS INTERACTIVAS - DISEÑO 3D CON FLIP */
+    .plataformas-section {
+      padding: 50px 16px 60px;
+      text-align: center;
+      background: var(--negro-profundo);
+    }
+    .plataformas-title {
+      font-size: 1.4rem;
+      margin-bottom: 32px;
+      color: var(--blanco-limpio);
+      font-weight: 600;
+    }
+    .plataformas-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+    .platform-card {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .platform-card:hover {
+      transform: rotateY(180deg) scale(1.1);
+    }
+    .platform-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+    .platform-front, .platform-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--borde);
+      background: var(--superficie);
+    }
+    .platform-front {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .platform-front img {
+      width: 50%;
+      height: 50%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+    .platform-back {
+      background: var(--acento);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px;
+    }
+    .platform-back i {
+      font-size: 1.5rem;
+      color: var(--negro-profundo);
+    }
+    .platform-back span {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--negro-profundo);
+      text-align: center;
+      line-height: 1.2;
+    }
 
-.programacion-section{padding:60px 16px;border-bottom:1px solid var(--borde)}
-.section-eyebrow{display:block;text-align:center;font-size:0.78em;color:var(--acento);margin-bottom:12px}
-.section-title{text-align:center;font-size:clamp(1.5rem,4vw,2rem);margin-bottom:32px}
-.live-now-card{background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio-radius);padding:20px;margin-bottom:28px;text-align:center;max-width:600px;margin-left:auto;margin-right:auto}
-.live-badge{background:var(--acento);color:var(--negro-profundo);padding:6px 18px;border-radius:999px;font-weight:600;display:inline-block;margin-bottom:10px;font-size:0.7rem;letter-spacing:0.03em;text-transform:uppercase}
-.current-program-name{font-size:1.1rem;color:var(--blanco-limpio);font-weight:600;margin-bottom:6px;font-family:'Space Grotesk',sans-serif}
+    /* Animación flotante */
+    .platform-card:nth-child(1) { animation: floatPlatform 3s ease-in-out infinite; }
+    .platform-card:nth-child(2) { animation: floatPlatform 3s ease-in-out 0.3s infinite; }
+    .platform-card:nth-child(3) { animation: floatPlatform 3s ease-in-out 0.6s infinite; }
+    .platform-card:nth-child(4) { animation: floatPlatform 3s ease-in-out 0.9s infinite; }
+    .platform-card:nth-child(5) { animation: floatPlatform 3s ease-in-out 1.2s infinite; }
+    .platform-card:nth-child(6) { animation: floatPlatform 3s ease-in-out 1.5s infinite; }
 
-.dias-tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:28px}
-.dia-tab{padding:9px 16px;background:transparent;border:1px solid var(--borde);border-radius:999px;font-weight:500;cursor:pointer;font-size:0.78rem;position:relative;transition:all 0.2s ease;color:var(--gris-texto)}
-.dia-tab.active{background:var(--acento);color:var(--negro-profundo);border-color:var(--acento)}
-.hoy-badge{position:absolute;top:-8px;right:-8px;background:var(--negro-profundo);color:var(--acento);font-size:0.55rem;padding:2px 7px;border-radius:999px;border:1px solid var(--acento);white-space:nowrap}
-.programas-dia{display:none}
-.programas-dia.active{display:block}
-.cards-grid{display:grid;grid-template-columns:1fr;gap:12px}
-.programa-card{background:var(--superficie);border-radius:var(--radio-radius);padding:16px;text-align:center;border:1px solid var(--borde);transition:border-color 0.2s ease}
-.programa-card.en-vivo-card{border-color:var(--acento)}
-.en-vivo-badge-card{background:var(--acento);color:var(--negro-profundo);font-weight:600;font-size:0.62rem;padding:4px 14px;border-radius:999px;display:inline-block;margin-bottom:10px;letter-spacing:0.03em;text-transform:uppercase}
-.programa-hora-card{background:var(--negro-profundo);color:var(--acento);padding:6px 14px;border-radius:999px;font-weight:600;font-size:0.7rem;display:inline-block;margin-bottom:12px;font-family:'JetBrains Mono',monospace}
-.programa-nombre-card{font-size:0.98rem;font-weight:600;color:var(--blanco-limpio);margin:8px 0 6px;font-family:'Space Grotesk',sans-serif}
-.programa-conductor-card{font-size:0.76rem;color:var(--gris-texto);display:flex;align-items:center;justify-content:center;gap:6px}
+    @keyframes floatPlatform {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .platform-card:hover {
+      animation-play-state: paused;
+    }
 
-.other-radios-section{padding:60px 16px;text-align:center;border-bottom:1px solid var(--borde)}
-.radio-card{display:inline-flex;flex-direction:column;align-items:center;background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio-radius);padding:20px 24px;text-decoration:none;color:var(--blanco-limpio);width:100%;max-width:260px;text-align:center;transition:border-color 0.2s ease}
-.radio-card:hover{border-color:var(--acento)}
-.radio-card h3{font-size:1rem;margin:8px 0 4px}
-.radio-card p{font-size:0.78rem;color:var(--gris-texto)}
+    footer {
+      background: var(--negro-suave);
+      text-align: center;
+      padding: 40px 20px 26px;
+      border-top: 1px solid var(--borde);
+    }
+    footer h3 {
+      font-size: 1.1rem;
+      margin: 8px 0 4px;
+    }
+    footer p {
+      font-size: 0.78rem;
+      color: var(--gris-dim);
+      margin: 3px 0;
+    }
 
-footer{background:var(--negro-suave);text-align:center;padding:40px 20px 26px;border-top:1px solid var(--borde)}
-footer h3{font-size:1.1rem;margin:8px 0 4px}
-footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
-
-@media (min-width:481px){
-  .cards-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
-  .rotating-disc{width:210px;height:210px}
-  .disc-center-art{width:125px;height:125px}
-  #songNameDisplay{font-size:1.15rem}
-}
-@media (max-width:768px){
-  header{padding:12px 16px}
-  .nav-toggle{display:flex}
-  nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--negro-suave);border-bottom:1px solid var(--borde);padding:10px 16px}
-  nav.open{display:block}
-  nav ul{flex-direction:column;gap:6px}
-  nav a{width:100%;text-align:center;display:block}
-  .logo h1{font-size:1rem}
-  .hero-stage{grid-template-columns:1fr;justify-items:center;text-align:center;gap:24px}
-  .play-here-tag{justify-content:center}
-  .hero-miniplayer{margin-left:auto;margin-right:auto}
-  .music-info{text-align:center}
-  #artistNameDisplay{justify-content:center}
-  .hero-meta-row{justify-content:center}
-  .player-title{text-align:center}
-}
-@media (max-width:380px){
-  .rotating-disc{width:160px;height:160px}
-  .disc-center-art{width:95px;height:95px}
-  .music-info{padding:14px}
-  #songNameDisplay{font-size:0.9rem}
-  .dia-tab{padding:7px 13px;font-size:0.7rem}
-  .disc-row{gap:16px}
-  .back-button span{display:none}
-}
-</style>
+    @media (min-width: 768px) {
+      .hero-stage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 36px;
+      }
+      .disc-wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+      .hero-text-content {
+        align-items: center;
+        text-align: center;
+      }
+      .music-info, .play-here-tag, .hero-meta-row, #artistNameDisplay {
+        justify-content: center;
+        text-align: center;
+      }
+      .hero-miniplayer {
+        margin: 0 auto 18px;
+      }
+      .rotating-disc {
+        width: 210px;
+        height: 210px;
+      }
+      .disc-center-art {
+        width: 125px;
+        height: 125px;
+      }
+      #songNameDisplay {
+        font-size: 1.15rem;
+      }
+      .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+    }
+    @media (max-width: 768px) {
+      header {
+        padding: 12px 16px;
+      }
+      .nav-toggle {
+        display: flex;
+      }
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--negro-suave);
+        border-bottom: 1px solid var(--borde);
+        padding: 10px 16px;
+      }
+      nav.open {
+        display: block;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 6px;
+      }
+      nav a {
+        width: 100%;
+        text-align: center;
+        display: block;
+      }
+      .logo h1 {
+        font-size: 1rem;
+      }
+      .hero-stage {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 24px;
+      }
+      .music-info, .play-here-tag, .hero-meta-row, #artistNameDisplay {
+        justify-content: center;
+        text-align: center;
+      }
+      .hero-miniplayer {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .platform-card {
+        width: 85px;
+        height: 85px;
+      }
+    }
+    @media (max-width: 380px) {
+      .rotating-disc {
+        width: 160px;
+        height: 160px;
+      }
+      .disc-center-art {
+        width: 95px;
+        height: 95px;
+      }
+      #songNameDisplay {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
 <div class="modal-overlay" id="songRequestModal">
@@ -216,18 +1062,20 @@ footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
 
 <section class="hero" id="inicio">
   <div class="hero-stage">
-    <div class="rotating-disc" id="discDisc">
-      <div class="disc-center-art">
-        <img id="discCoverArt" src="https://c42.radioboss.fm/w/artwork/174.jpg" alt="cover" onerror="this.src='https://picsum.photos/id/107/130/130'">
+    <div class="disc-wrapper">
+      <div class="rotating-disc" id="discDisc">
+        <div class="disc-center-art">
+          <img id="discCoverArt" src="https://c42.radioboss.fm/w/artwork/174.jpg" alt="cover" onerror="this.src='https://picsum.photos/id/107/130/130'">
+        </div>
       </div>
     </div>
-    <div>
+    <div class="hero-text-content">
       <span class="hero-tagline mono">Con la música que te pega fuerte</span>
       <h2>100% salsa, timba y sabor</h2>
       <p>Salsa, timba y ritmos tropicales. Clásica, romántica, dura y actual.</p>
       <div class="music-info">
         <div class="nowplaying-text"><i class="fas fa-music"></i> Sonando ahora</div>
-        <div id="songNameDisplay">Cargando...</div>
+        <div id="songNameDisplay">Mesclado Salsa Romantica - Corazon De Acero Dj Onel-2024</div>
         <div id="artistNameDisplay"><i class="fas fa-microphone-alt"></i> <span id="artistNameSpan">Avenida Tropical</span></div>
       </div>
       <div class="play-here-tag mono"><i class="fas fa-arrow-down"></i> Tocá play para escuchar</div>
@@ -255,7 +1103,6 @@ footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
         <script src='https://c42.radioboss.fm/w/nowplaying2.js?u=174&amp;wid=15549&amp;tf=1'></script>
       </div>
 
-      <!-- PANEL DE WIDGETS: IZQUIERDA RECIENTES, DERECHA PRÓXIMA + SOLICITAR -->
       <div class="widgets-panel">
         <div class="widget-left">
           <div class="widget-title"><i class="fas fa-history"></i> Recientes</div>
@@ -267,7 +1114,6 @@ footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
           </div>
           <script src='https://c42.radioboss.fm/w/recent.js?u=174&amp;wid=5239&amp;v=2&amp;tf=1'></script>
         </div>
-
         <div class="widget-right">
           <div class="widget-title"><i class="fas fa-forward-step"></i> Próxima</div>
           <div class='rbcloud_nexttrack' style='display: flex; align-items: center; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:12px;'>
@@ -275,7 +1121,6 @@ footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
             <div style='text-align:left'><div id='rbcloud_nt_a9598' style='font-weight: bold; color:var(--acento); font-size:0.78rem'></div><div id='rbcloud_nt_t9598' style='font-size:0.68rem; color:var(--gris-texto)'>...</div></div>
           </div>
           <script src='https://c42.radioboss.fm/w/nexttrack.js?u=174&amp;wid=9598&amp;tf=1'></script>
-
           <div style="margin-top:12px; border-top:1px solid var(--borde); padding-top:12px;">
             <div class="widget-title" style="margin-bottom:8px;"><i class="fas fa-headset"></i> Solicita</div>
             <div class='rbcloud_songrequest' id='rbcloud_songrequest12060'>
@@ -289,8 +1134,6 @@ footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
           </div>
         </div>
       </div>
-
-
       <div class="signal-indicators"><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div></div>
       <div class="stream-info">320 kbps · RDCR Sound Network · Sonido tropical</div>
     </div>
@@ -320,6 +1163,11 @@ footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
   </div>
 </section>
 
+<section class="plataformas-section">
+  <h2 class="plataformas-title">ESCUCHANOS TAMBIÉN EN ESTAS PLATAFORMAS</h2>
+  <div class="plataformas-grid" id="plataformasGrid"></div>
+</section>
+
 <footer>
   <i class="fas fa-satellite-dish" style="font-size:1rem;color:var(--acento);"></i>
   <h3>RDCR Sound Network</h3>
@@ -328,133 +1176,165 @@ footer p{font-size:0.78rem;color:var(--gris-dim);margin:3px 0}
 </footer>
 
 <script>
-const programacionReal = {
-  lunes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
-  martes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 18:30",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"18:30 - 19:30",nombre:"LOS MAXIMOS DE LA SALSA",conductor:"Maximino Rivera Jr."},{hora:"19:30 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
-  miercoles: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
-  jueves: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
-  viernes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"EL MENSAJERO DE LA SALSA",conductor:"Diego Cheito Grijalva"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
-  sabado: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 08:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"08:00 - 09:00",nombre:"ENTRETELONES",conductor:"Dario Castellanos"},{hora:"09:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 13:00",nombre:"PRENDIDOS",conductor:"Diego Cheito Grijalva"},{hora:"13:00 - 17:30",nombre:"SABADO SALSERO",conductor:"Avenida Tropical"},{hora:"17:30 - 18:00",nombre:"TIMBA Y SABOR",conductor:"Ivette"},{hora:"18:30 - 21:30",nombre:"JUST REMIXX",conductor:"DJ HOXX"},{hora:"21:30 - 23:59",nombre:"DJ INVITADOS",conductor:"Guest DJ"}],
-  domingo: [{hora:"00:00 - 07:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"07:00 - 09:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"09:00 - 14:00",nombre:"DOMINGO SALSERO",conductor:"Avenida Tropical"},{hora:"14:00 - 18:00",nombre:"MIXES DE SALSA",conductor:"Avenida Tropical"},{hora:"18:00 - 21:00",nombre:"JUST REMIXX",conductor:"DJ HOXX"},{hora:"21:00 - 23:59",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}]
-};
-const diasMap = [{key:"lunes",label:"Lunes"},{key:"martes",label:"Martes"},{key:"miercoles",label:"Miercoles"},{key:"jueves",label:"Jueves"},{key:"viernes",label:"Viernes"},{key:"sabado",label:"Sabado"},{key:"domingo",label:"Domingo"}];
-const hoy = new Date();
-let diaActualKey = "";
-const diaNum = hoy.getDay();
-if(diaNum===1) diaActualKey="lunes"; else if(diaNum===2) diaActualKey="martes"; else if(diaNum===3) diaActualKey="miercoles"; else if(diaNum===4) diaActualKey="jueves"; else if(diaNum===5) diaActualKey="viernes"; else if(diaNum===6) diaActualKey="sabado"; else if(diaNum===0) diaActualKey="domingo";
+  const programacionReal = {
+    lunes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
+    martes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 18:30",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"18:30 - 19:30",nombre:"LOS MAXIMOS DE LA SALSA",conductor:"Maximino Rivera Jr."},{hora:"19:30 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
+    miercoles: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
+    jueves: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"NOCHE ROMANTICA",conductor:"Avenida Tropical"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
+    viernes: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 18:00",nombre:"TARDE SALSERA",conductor:"Avenida Tropical"},{hora:"18:00 - 19:00",nombre:"BOLEROS TROPICALES",conductor:"Avenida Tropical"},{hora:"19:00 - 21:00",nombre:"EL MENSAJERO DE LA SALSA",conductor:"Diego Cheito Grijalva"},{hora:"21:00 - 21:30",nombre:"REFLEXION AL SON",conductor:"Avenida Tropical"},{hora:"21:30 - 24:00",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}],
+    sabado: [{hora:"00:00 - 06:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"06:00 - 08:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"08:00 - 09:00",nombre:"ENTRETELONES",conductor:"Dario Castellanos"},{hora:"09:00 - 12:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"12:00 - 13:00",nombre:"PRENDIDOS",conductor:"Diego Cheito Grijalva"},{hora:"13:00 - 17:30",nombre:"SABADO SALSERO",conductor:"Avenida Tropical"},{hora:"17:30 - 18:00",nombre:"TIMBA Y SABOR",conductor:"Ivette"},{hora:"18:30 - 21:30",nombre:"JUST REMIXX",conductor:"DJ HOXX"},{hora:"21:30 - 23:59",nombre:"DJ INVITADOS",conductor:"Guest DJ"}],
+    domingo: [{hora:"00:00 - 07:00",nombre:"SALSA DE MADRUGADA",conductor:"Avenida Tropical"},{hora:"07:00 - 09:00",nombre:"MAÑANA TROPICAL",conductor:"Avenida Tropical"},{hora:"09:00 - 14:00",nombre:"DOMINGO SALSERO",conductor:"Avenida Tropical"},{hora:"14:00 - 18:00",nombre:"MIXES DE SALSA",conductor:"Avenida Tropical"},{hora:"18:00 - 21:00",nombre:"JUST REMIXX",conductor:"DJ HOXX"},{hora:"21:00 - 23:59",nombre:"SALSA NOCTURNA",conductor:"Avenida Tropical"}]
+  };
+  const diasMap = [{key:"lunes",label:"Lunes"},{key:"martes",label:"Martes"},{key:"miercoles",label:"Miércoles"},{key:"jueves",label:"Jueves"},{key:"viernes",label:"Viernes"},{key:"sabado",label:"Sábado"},{key:"domingo",label:"Domingo"}];
+  const hoy = new Date();
+  let diaActualKey = "";
+  const diaNum = hoy.getDay();
+  if(diaNum===1) diaActualKey="lunes"; else if(diaNum===2) diaActualKey="martes"; else if(diaNum===3) diaActualKey="miercoles"; else if(diaNum===4) diaActualKey="jueves"; else if(diaNum===5) diaActualKey="viernes"; else if(diaNum===6) diaActualKey="sabado"; else if(diaNum===0) diaActualKey="domingo";
 
-function obtenerProgramaActual() {
-  const progDia = programacionReal[diaActualKey];
-  if(!progDia) return null;
-  const ahora = new Date();
-  const minActual = ahora.getHours()*60 + ahora.getMinutes();
-  for(let p of progDia){
-    let [start,end] = p.hora.split(' - ');
+  function obtenerProgramaActual() {
+    const progDia = programacionReal[diaActualKey];
+    if(!progDia) return null;
+    const ahora = new Date();
+    const minActual = ahora.getHours()*60 + ahora.getMinutes();
+    for(let p of progDia){
+      let [start,end] = p.hora.split(' - ');
+      let [sh,sm] = start.split(':').map(Number);
+      let [eh,em] = end.split(':').map(Number);
+      let startMin = sh*60+sm, endMin = eh*60+em;
+      if(minActual >= startMin && minActual <= endMin) return p;
+    }
+    return null;
+  }
+  function actualizarLiveNow(){
+    const actual = obtenerProgramaActual();
+    const cont = document.getElementById("liveNowContent");
+    if(actual){
+      cont.innerHTML = `<div class="current-program-name">${actual.nombre}</div><div style="font-size:0.82rem;color:var(--gris-texto);">${actual.conductor}</div><div style="font-size:0.7rem;color:var(--gris-dim);margin-top:4px;">${actual.hora}</div>`;
+    } else { cont.innerHTML = "<div style='font-size:0.92rem;color:var(--gris-texto);'>Salsa tropical 24/7</div>"; }
+  }
+  function programaEnVivo(prog, diaKey){
+    if(diaKey !== diaActualKey) return false;
+    const ahora = new Date();
+    const minActual = ahora.getHours()*60 + ahora.getMinutes();
+    let [start,end] = prog.hora.split(' - ');
     let [sh,sm] = start.split(':').map(Number);
     let [eh,em] = end.split(':').map(Number);
-    let startMin = sh*60+sm, endMin = eh*60+em;
-    if(minActual >= startMin && minActual <= endMin) return p;
+    return (minActual >= sh*60+sm && minActual <= eh*60+em);
   }
-  return null;
-}
-function actualizarLiveNow(){
-  const actual = obtenerProgramaActual();
-  const cont = document.getElementById("liveNowContent");
-  if(actual){
-    cont.innerHTML = `<div class="current-program-name">${actual.nombre}</div><div style="font-size:0.82rem;color:var(--gris-texto);">${actual.conductor}</div><div style="font-size:0.7rem;color:var(--gris-dim);margin-top:4px;">${actual.hora}</div>`;
-  } else { cont.innerHTML = "<div style='font-size:0.92rem;color:var(--gris-texto);'>Salsa tropical 24/7</div>"; }
-}
-function programaEnVivo(prog, diaKey){
-  if(diaKey !== diaActualKey) return false;
-  const ahora = new Date();
-  const minActual = ahora.getHours()*60 + ahora.getMinutes();
-  let [start,end] = prog.hora.split(' - ');
-  let [sh,sm] = start.split(':').map(Number);
-  let [eh,em] = end.split(':').map(Number);
-  return (minActual >= sh*60+sm && minActual <= eh*60+em);
-}
-function construirProgramacionCards(){
-  const tabsDiv = document.getElementById("diasTabs"), progContainer = document.getElementById("programasContainer");
-  tabsDiv.innerHTML = ""; progContainer.innerHTML = "";
-  diasMap.forEach(dia => {
-    const esHoy = (dia.key === diaActualKey);
-    const tab = document.createElement("div");
-    tab.className = `dia-tab ${esHoy ? "active" : ""}`;
-    tab.textContent = dia.label;
-    if(esHoy){ const badge = document.createElement("span"); badge.className="hoy-badge"; badge.textContent="HOY"; tab.appendChild(badge); }
-    tab.onclick = () => {
-      document.querySelectorAll(".dia-tab").forEach(t=>t.classList.remove("active"));
-      tab.classList.add("active");
-      document.querySelectorAll(".programas-dia").forEach(p=>p.classList.remove("active"));
-      document.getElementById(`prog-${dia.key}`).classList.add("active");
-    };
-    tabsDiv.appendChild(tab);
-    const diaDiv = document.createElement("div"); diaDiv.className = `programas-dia ${esHoy ? "active" : ""}`; diaDiv.id = `prog-${dia.key}`;
-    const cardsGrid = document.createElement("div"); cardsGrid.className = "cards-grid";
-    const progDia = programacionReal[dia.key];
-    if(progDia){
-      progDia.forEach(prog => {
-        const enVivo = programaEnVivo(prog, dia.key);
-        const card = document.createElement("div");
-        card.className = `programa-card ${enVivo ? "en-vivo-card" : ""}`;
-        if(enVivo){ const badgeLive = document.createElement("div"); badgeLive.className="en-vivo-badge-card"; badgeLive.innerHTML="En vivo"; card.appendChild(badgeLive); }
-        const horaSpan = document.createElement("div"); horaSpan.className="programa-hora-card"; horaSpan.innerText = prog.hora;
-        const nombreSpan = document.createElement("div"); nombreSpan.className="programa-nombre-card"; nombreSpan.innerText = prog.nombre;
-        const conductorDiv = document.createElement("div"); conductorDiv.className="programa-conductor-card"; conductorDiv.innerHTML = `<i class="fas fa-user-circle"></i> ${prog.conductor}`;
-        card.appendChild(horaSpan); card.appendChild(nombreSpan); card.appendChild(conductorDiv);
-        cardsGrid.appendChild(card);
-      });
-    }
-    diaDiv.appendChild(cardsGrid); progContainer.appendChild(diaDiv);
+  function construirProgramacionCards(){
+    const tabsDiv = document.getElementById("diasTabs"), progContainer = document.getElementById("programasContainer");
+    tabsDiv.innerHTML = ""; progContainer.innerHTML = "";
+    diasMap.forEach(dia => {
+      const esHoy = (dia.key === diaActualKey);
+      const tab = document.createElement("div");
+      tab.className = `dia-tab ${esHoy ? "active" : ""}`;
+      tab.textContent = dia.label;
+      if(esHoy){ const badge = document.createElement("span"); badge.className="hoy-badge"; badge.textContent="HOY"; tab.appendChild(badge); }
+      tab.onclick = () => {
+        document.querySelectorAll(".dia-tab").forEach(t=>t.classList.remove("active"));
+        tab.classList.add("active");
+        document.querySelectorAll(".programas-dia").forEach(p=>p.classList.remove("active"));
+        document.getElementById(`prog-${dia.key}`).classList.add("active");
+      };
+      tabsDiv.appendChild(tab);
+      const diaDiv = document.createElement("div"); diaDiv.className = `programas-dia ${esHoy ? "active" : ""}`; diaDiv.id = `prog-${dia.key}`;
+      const cardsGrid = document.createElement("div"); cardsGrid.className = "cards-grid";
+      const progDia = programacionReal[dia.key];
+      if(progDia){
+        progDia.forEach(prog => {
+          const enVivo = programaEnVivo(prog, dia.key);
+          const card = document.createElement("div");
+          card.className = `programa-card ${enVivo ? "en-vivo-card" : ""}`;
+          if(enVivo){ const badgeLive = document.createElement("div"); badgeLive.className="en-vivo-badge-card"; badgeLive.innerHTML="En vivo"; card.appendChild(badgeLive); }
+          const horaSpan = document.createElement("div"); horaSpan.className="programa-hora-card"; horaSpan.innerText = prog.hora;
+          const nombreSpan = document.createElement("div"); nombreSpan.className="programa-nombre-card"; nombreSpan.innerText = prog.nombre;
+          const conductorDiv = document.createElement("div"); conductorDiv.className="programa-conductor-card"; conductorDiv.innerHTML = `<i class="fas fa-user-circle"></i> ${prog.conductor}`;
+          card.appendChild(horaSpan); card.appendChild(nombreSpan); card.appendChild(conductorDiv);
+          cardsGrid.appendChild(card);
+        });
+      }
+      diaDiv.appendChild(cardsGrid); progContainer.appendChild(diaDiv);
+    });
+  }
+  function syncNowPlayingToDisc() {
+      setTimeout(() => {
+          const artistaElem = document.getElementById('rbcloud_np_a15549');
+          const tituloElem = document.getElementById('rbcloud_np_t15549');
+          const coverImg = document.getElementById('rbcloud_np_c15549');
+          if(artistaElem && artistaElem.innerText && artistaElem.innerText !== '...' && artistaElem.innerText !== '') {
+              document.getElementById('artistNameSpan').innerText = artistaElem.innerText;
+          }
+          if(tituloElem && tituloElem.innerText && tituloElem.innerText !== '...' && tituloElem.innerText !== '') {
+              document.getElementById('songNameDisplay').innerText = tituloElem.innerText;
+          }
+          if(coverImg && coverImg.src && coverImg.src !== window.location.href && coverImg.src.includes('http')) {
+              const discImg = document.getElementById('discCoverArt');
+              if(discImg) discImg.src = coverImg.src;
+          }
+      }, 700);
+  }
+  setInterval(syncNowPlayingToDisc, 5000);
+  syncNowPlayingToDisc();
+
+  const modal = document.getElementById("songRequestModal");
+  document.getElementById("closeModalBtn")?.addEventListener("click",()=>modal.classList.remove("active"));
+  document.getElementById("cancelFormBtn")?.addEventListener("click",()=>modal.classList.remove("active"));
+  document.getElementById("whatsappBtn")?.addEventListener("click",()=>{document.getElementById("comentario").value="";modal.classList.add("active");});
+  document.getElementById("directSendBtn")?.addEventListener("click",()=>{const nom=document.getElementById("nombreCompleto").value.trim();const can=document.getElementById("cancion").value.trim();const com=document.getElementById("comentario").value.trim();if(!nom||!can){alert("Completa nombre y cancion");return;}const tel="593961480654";let msg=`*PETICION AVENIDA TROPICAL*%0A%0A*Nombre:* ${encodeURIComponent(nom)}%0A*Cancion:* ${encodeURIComponent(can)}%0A*Comentario:* ${encodeURIComponent(com)}`;window.location.href=`https://wa.me/${tel}?text=${msg}`;modal.classList.remove("active");document.getElementById("nombreCompleto").value="";document.getElementById("cancion").value="";document.getElementById("comentario").value="";});
+  window.addEventListener("scroll",()=>{const btn=document.getElementById("scrollTopBtn");if(window.scrollY>200)btn.classList.add("active");else btn.classList.remove("active");});
+  document.getElementById("scrollTopBtn")?.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+  setInterval(()=>{document.querySelectorAll('.signal-bar').forEach(bar=>{bar.style.transform=`scaleY(${Math.random()*0.8+0.3})`;});},500);
+  construirProgramacionCards(); actualizarLiveNow(); setInterval(actualizarLiveNow,60000);
+
+  const navToggle = document.getElementById('navToggle');
+  const mainNav = document.getElementById('mainNav');
+  navToggle?.addEventListener('click', () => {
+    const isOpen = mainNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
   });
-}
-function syncNowPlayingToDisc() {
-    setTimeout(() => {
-        const artistaElem = document.getElementById('rbcloud_np_a15549');
-        const tituloElem = document.getElementById('rbcloud_np_t15549');
-        const coverImg = document.getElementById('rbcloud_np_c15549');
-        if(artistaElem && artistaElem.innerText && artistaElem.innerText !== '...' && artistaElem.innerText !== '') {
-            document.getElementById('artistNameSpan').innerText = artistaElem.innerText;
-        }
-        if(tituloElem && tituloElem.innerText && tituloElem.innerText !== '...' && tituloElem.innerText !== '') {
-            document.getElementById('songNameDisplay').innerText = tituloElem.innerText;
-        }
-        if(coverImg && coverImg.src && coverImg.src !== window.location.href && coverImg.src.includes('http')) {
-            const discImg = document.getElementById('discCoverArt');
-            if(discImg) discImg.src = coverImg.src;
-        }
-    }, 700);
-}
-setInterval(syncNowPlayingToDisc, 5000);
-syncNowPlayingToDisc();
+  document.querySelectorAll('#mainNav a').forEach(a => a.addEventListener('click', () => {
+    mainNav.classList.remove('open');
+    navToggle.setAttribute('aria-expanded','false');
+  }));
 
-const modal = document.getElementById("songRequestModal");
-document.getElementById("closeModalBtn")?.addEventListener("click",()=>modal.classList.remove("active"));
-document.getElementById("cancelFormBtn")?.addEventListener("click",()=>modal.classList.remove("active"));
-document.getElementById("whatsappBtn")?.addEventListener("click",()=>{document.getElementById("comentario").value="";modal.classList.add("active");});
-document.getElementById("directSendBtn")?.addEventListener("click",()=>{const nom=document.getElementById("nombreCompleto").value.trim();const can=document.getElementById("cancion").value.trim();const com=document.getElementById("comentario").value.trim();if(!nom||!can){alert("Completa nombre y cancion");return;}const tel="593961480654";let msg=`*PETICION AVENIDA TROPICAL*%0A%0A*Nombre:* ${encodeURIComponent(nom)}%0A*Cancion:* ${encodeURIComponent(can)}%0A*Comentario:* ${encodeURIComponent(com)}`;window.location.href=`https://wa.me/${tel}?text=${msg}`;modal.classList.remove("active");document.getElementById("nombreCompleto").value="";document.getElementById("cancion").value="";document.getElementById("comentario").value="";});
-window.addEventListener("scroll",()=>{const btn=document.getElementById("scrollTopBtn");if(window.scrollY>200)btn.classList.add("active");else btn.classList.remove("active");});
-document.getElementById("scrollTopBtn")?.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
-setInterval(()=>{document.querySelectorAll('.signal-bar').forEach(bar=>{bar.style.transform=`scaleY(${Math.random()*0.8+0.3})`;});},500);
-construirProgramacionCards(); actualizarLiveNow(); setInterval(actualizarLiveNow,60000);
+  const discDisc = document.getElementById('discDisc');
+  let discPlaying = true;
+  discDisc?.addEventListener('click', () => {
+    discPlaying = !discPlaying;
+    discDisc.style.animationPlayState = discPlaying ? 'running' : 'paused';
+  });
 
-const navToggle = document.getElementById('navToggle');
-const mainNav = document.getElementById('mainNav');
-navToggle?.addEventListener('click', () => {
-  const isOpen = mainNav.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', isOpen);
-});
-document.querySelectorAll('#mainNav a').forEach(a => a.addEventListener('click', () => {
-  mainNav.classList.remove('open');
-  navToggle.setAttribute('aria-expanded','false');
-}));
-
-const discDisc = document.getElementById('discDisc');
-let discPlaying = true;
-discDisc?.addEventListener('click', () => {
-  discPlaying = !discPlaying;
-  discDisc.style.animationPlayState = discPlaying ? 'running' : 'paused';
-});
+  (function() {
+    const platforms = [
+      { name: "YouTube", img: "https://img.icons8.com/color/96/youtube-play.png", url: "https://youtube.com", icon: "fa-youtube" },
+      { name: "Spotify", img: "https://img.icons8.com/color/96/spotify.png", url: "https://spotify.com", icon: "fa-spotify" },
+      { name: "Apple Music", img: "https://img.icons8.com/color/96/apple-music.png", url: "https://apple.com/music", icon: "fa-apple" },
+      { name: "Deezer", img: "https://img.icons8.com/color/96/deezer.png", url: "https://deezer.com", icon: "fa-music" },
+      { name: "SoundCloud", img: "https://img.icons8.com/color/96/soundcloud.png", url: "https://soundcloud.com", icon: "fa-soundcloud" },
+      { name: "Instagram", img: "https://img.icons8.com/color/96/instagram-new.png", url: "https://instagram.com", icon: "fa-instagram" }
+    ];
+    const grid = document.getElementById('plataformasGrid');
+    platforms.forEach(p => {
+      const a = document.createElement('a');
+      a.href = p.url;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.className = "platform-card";
+      a.title = p.name;
+      a.innerHTML = `
+        <div class="platform-card-inner">
+          <div class="platform-front">
+            <img src="${p.img}" alt="${p.name}" onerror="this.src='https://picsum.photos/id/108/100/100'">
+          </div>
+          <div class="platform-back">
+            <i class="fab ${p.icon}"></i>
+            <span>${p.name}</span>
+          </div>
+        </div>
+      `;
+      grid.appendChild(a);
+    });
+  })();
 </script>
 </body>
 </html>
