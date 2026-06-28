@@ -221,6 +221,108 @@
     }
     .station-btn:hover { border-color: var(--acento); color: var(--acento); transform: translateY(-2px); }
 
+    /* PLATAFORMAS INTERACTIVAS - DISEÑO 3D CON FLIP */
+    .plataformas-section {
+      padding: 50px 16px 60px;
+      text-align: center;
+      background: var(--negro-profundo);
+      border-bottom: 1px solid var(--borde);
+    }
+    .plataformas-title {
+      font-size: 1.4rem;
+      margin-bottom: 32px;
+      color: var(--blanco-limpio);
+      font-weight: 600;
+    }
+    .plataformas-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+    .platform-card {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .platform-card:hover {
+      transform: rotateY(180deg) scale(1.1);
+    }
+    .platform-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+    .platform-front, .platform-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--borde);
+      background: var(--superficie);
+    }
+    .platform-front {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .platform-front img {
+      width: 50%;
+      height: 50%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+    .platform-back {
+      background: var(--acento);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px;
+    }
+    .platform-back i {
+      font-size: 1.5rem;
+      color: var(--negro-profundo);
+    }
+    .platform-back span {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--negro-profundo);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* Animación flotante */
+    .platform-card:nth-child(1) { animation: floatPlatform 3s ease-in-out infinite; }
+    .platform-card:nth-child(2) { animation: floatPlatform 3s ease-in-out 0.3s infinite; }
+    .platform-card:nth-child(3) { animation: floatPlatform 3s ease-in-out 0.6s infinite; }
+    .platform-card:nth-child(4) { animation: floatPlatform 3s ease-in-out 0.9s infinite; }
+    .platform-card:nth-child(5) { animation: floatPlatform 3s ease-in-out 1.2s infinite; }
+    .platform-card:nth-child(6) { animation: floatPlatform 3s ease-in-out 1.5s infinite; }
+
+    @keyframes floatPlatform {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .platform-card:hover {
+      animation-play-state: paused;
+    }
+
     .floating-buttons { position: fixed; bottom: 18px; right: 18px; display: flex; flex-direction: column; gap: 12px; z-index: 1000; }
     .whatsapp-btn, .scroll-top-btn {
       width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -278,6 +380,7 @@
     @media (prefers-reduced-motion: reduce) {
       .vinyl-disc { animation: none; }
       section { opacity: 1; transform: none; transition: none; }
+      .platform-card { animation: none; }
     }
 
     @media (max-width: 768px) {
@@ -304,6 +407,7 @@
       .track-title { font-size: 0.82rem; }
       .schedule-grid { grid-template-columns: 1fr; }
       section { padding: 50px 18px; }
+      .platform-card { width: 85px; height: 85px; }
     }
 
     @media (max-width: 480px) {
@@ -481,6 +585,12 @@
     <div class="message-controls" id="messageControls"></div>
   </section>
 
+  <!-- NUEVA SECCIÓN: ESCUCHANOS TAMBIÉN EN ESTAS PLATAFORMAS -->
+  <section class="plataformas-section">
+    <h2 class="plataformas-title">ESCUCHANOS TAMBIÉN EN ESTAS PLATAFORMAS</h2>
+    <div class="plataformas-grid" id="plataformasGrid"></div>
+  </section>
+
   <section>
     <span class="section-eyebrow mono">RDCR Sound Network</span>
     <div class="section-title"><h2>Otras emisoras</h2></div>
@@ -576,6 +686,39 @@
         if (isPlaying) vinylDisc.classList.remove('paused');
         else vinylDisc.classList.add('paused');
       });
+
+      // CARGAR PLATAFORMAS INTERACTIVAS
+      (function() {
+        const platforms = [
+          { name: "YouTube", img: "https://img.icons8.com/color/96/youtube-play.png", url: "https://youtube.com", icon: "fa-youtube" },
+          { name: "Spotify", img: "https://img.icons8.com/color/96/spotify.png", url: "https://spotify.com", icon: "fa-spotify" },
+          { name: "Apple Music", img: "https://img.icons8.com/color/96/apple-music.png", url: "https://apple.com/music", icon: "fa-apple" },
+          { name: "Deezer", img: "https://img.icons8.com/color/96/deezer.png", url: "https://deezer.com", icon: "fa-music" },
+          { name: "SoundCloud", img: "https://img.icons8.com/color/96/soundcloud.png", url: "https://soundcloud.com", icon: "fa-soundcloud" },
+          { name: "Instagram", img: "https://img.icons8.com/color/96/instagram-new.png", url: "https://instagram.com", icon: "fa-instagram" }
+        ];
+        const grid = document.getElementById('plataformasGrid');
+        platforms.forEach(p => {
+          const a = document.createElement('a');
+          a.href = p.url;
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.className = "platform-card";
+          a.title = p.name;
+          a.innerHTML = `
+            <div class="platform-card-inner">
+              <div class="platform-front">
+                <img src="${p.img}" alt="${p.name}" onerror="this.src='https://picsum.photos/id/108/100/100'">
+              </div>
+              <div class="platform-back">
+                <i class="fab ${p.icon}"></i>
+                <span>${p.name}</span>
+              </div>
+            </div>
+          `;
+          grid.appendChild(a);
+        });
+      })();
 
     })();
   </script>
