@@ -221,7 +221,7 @@
     }
     .station-btn:hover { border-color: var(--acento); color: var(--acento); transform: translateY(-2px); }
 
-    /* PLATAFORMAS INTERACTIVAS - DISEÑO 3D CON FLIP */
+    /* PLATAFORMAS INTERACTIVAS - DISEÑO CON NOMBRES Y EFECTOS */
     .plataformas-section {
       padding: 50px 16px 60px;
       text-align: center;
@@ -238,89 +238,77 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
-      max-width: 800px;
+      gap: 18px;
+      max-width: 900px;
       margin: 0 auto;
-      perspective: 1000px;
     }
-    .platform-card {
-      width: 100px;
-      height: 100px;
+    .platform-item {
       position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      text-decoration: none;
-    }
-    .platform-card:hover {
-      transform: rotateY(180deg) scale(1.1);
-    }
-    .platform-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-    }
-    .platform-front, .platform-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--borde);
+      padding: 16px 22px;
       background: var(--superficie);
-    }
-    .platform-front {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--blanco-limpio);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      cursor: pointer;
       display: flex;
       align-items: center;
+      gap: 10px;
+      min-width: 160px;
       justify-content: center;
     }
-    .platform-front img {
-      width: 50%;
-      height: 50%;
-      object-fit: contain;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    .platform-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(232,162,61,0.15), transparent);
+      transition: left 0.5s ease;
     }
-    .platform-back {
-      background: var(--acento);
-      transform: rotateY(180deg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      padding: 10px;
+    .platform-item:hover::before {
+      left: 100%;
     }
-    .platform-back i {
-      font-size: 1.5rem;
-      color: var(--negro-profundo);
+    .platform-item:hover {
+      border-color: var(--acento);
+      background: var(--negro-suave);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(232,162,61,0.2);
     }
-    .platform-back span {
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: var(--negro-profundo);
-      text-align: center;
-      line-height: 1.2;
+    .platform-item i {
+      font-size: 1.4rem;
+      color: var(--acento);
+      transition: transform 0.3s ease;
+    }
+    .platform-item:hover i {
+      transform: scale(1.3) rotate(10deg);
+    }
+    .platform-item span {
+      position: relative;
+      z-index: 1;
     }
 
-    /* Animación flotante */
-    .platform-card:nth-child(1) { animation: floatPlatform 3s ease-in-out infinite; }
-    .platform-card:nth-child(2) { animation: floatPlatform 3s ease-in-out 0.3s infinite; }
-    .platform-card:nth-child(3) { animation: floatPlatform 3s ease-in-out 0.6s infinite; }
-    .platform-card:nth-child(4) { animation: floatPlatform 3s ease-in-out 0.9s infinite; }
-    .platform-card:nth-child(5) { animation: floatPlatform 3s ease-in-out 1.2s infinite; }
-    .platform-card:nth-child(6) { animation: floatPlatform 3s ease-in-out 1.5s infinite; }
+    /* Animaciones de entrada */
+    .platform-item:nth-child(1) { animation: fadeInUp 0.6s ease 0.1s both; }
+    .platform-item:nth-child(2) { animation: fadeInUp 0.6s ease 0.2s both; }
+    .platform-item:nth-child(3) { animation: fadeInUp 0.6s ease 0.3s both; }
+    .platform-item:nth-child(4) { animation: fadeInUp 0.6s ease 0.4s both; }
+    .platform-item:nth-child(5) { animation: fadeInUp 0.6s ease 0.5s both; }
 
-    @keyframes floatPlatform {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-    .platform-card:hover {
-      animation-play-state: paused;
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .floating-buttons { position: fixed; bottom: 18px; right: 18px; display: flex; flex-direction: column; gap: 12px; z-index: 1000; }
@@ -380,7 +368,7 @@
     @media (prefers-reduced-motion: reduce) {
       .vinyl-disc { animation: none; }
       section { opacity: 1; transform: none; transition: none; }
-      .platform-card { animation: none; }
+      .platform-item { animation: none; }
     }
 
     @media (max-width: 768px) {
@@ -407,7 +395,7 @@
       .track-title { font-size: 0.82rem; }
       .schedule-grid { grid-template-columns: 1fr; }
       section { padding: 50px 18px; }
-      .platform-card { width: 85px; height: 85px; }
+      .platform-item { min-width: 140px; padding: 14px 18px; font-size: 0.9rem; }
     }
 
     @media (max-width: 480px) {
@@ -440,7 +428,6 @@
     </div>
   </div>
 
-
   <div class="floating-buttons">
     <button class="whatsapp-btn" id="whatsappBtn" aria-label="Pedir canción por WhatsApp"><i class="fab fa-whatsapp"></i></button>
     <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba"><i class="fas fa-arrow-up"></i></button>
@@ -471,8 +458,6 @@
 
   <section class="vintage-player-section" id="reproductor">
     <div class="player-layout">
-
-      <!-- COLUMNA IZQUIERDA - PISTAS RECIENTES -->
       <div class="side-column-left">
         <div class="side-box">
           <h4><i class="fas fa-history"></i> Pistas recientes</h4>
@@ -487,7 +472,6 @@
         </div>
       </div>
 
-      <!-- COLUMNA CENTRAL - VINILO + TEXTO + MINI PLAYER -->
       <div class="center-column">
         <div class="player-frame">
           <div class="vinyl-only-container">
@@ -501,7 +485,6 @@
             </div>
           </div>
         </div>
-
         <div class="track-info-center">
           <div class='rbcloud_nowplaying' style='display: flex; align-items: center; justify-content: center;'>
             <div style='text-align: center;'>
@@ -510,13 +493,11 @@
             </div>
           </div>
         </div>
-
         <div class="mini-player-wrapper">
           <div class='rbcloud_mplayer' id='rbcloud_mplayer11977'></div>
         </div>
       </div>
 
-      <!-- COLUMNA DERECHA - PRÓXIMA PISTA + SOLICITUD DE CANCIONES -->
       <div class="side-column-right">
         <div class="side-box">
           <h4><i class="fas fa-forward"></i> Próxima pista</h4>
@@ -525,8 +506,6 @@
             <div style='margin-left: 5pt;'><div id='rbcloud_nt_a677' style='font-weight: bold'></div><div id='rbcloud_nt_t677'>...</div></div>
           </div>
         </div>
-
-        <!-- WIDGET DE SOLICITUD DE CANCIONES (RadioBOSS Cloud) -->
         <div class="side-box">
           <h4><i class="fas fa-microphone-alt"></i> Solicita tu canción</h4>
           <div class='rbcloud_songrequest' id='rbcloud_songrequest17985'>
@@ -585,7 +564,7 @@
     <div class="message-controls" id="messageControls"></div>
   </section>
 
-  <!-- NUEVA SECCIÓN: ESCUCHANOS TAMBIÉN EN ESTAS PLATAFORMAS -->
+  <!-- SECCIÓN: ESCUCHANOS TAMBIÉN EN ESTAS PLATAFORMAS -->
   <section class="plataformas-section">
     <h2 class="plataformas-title">ESCUCHANOS TAMBIÉN EN ESTAS PLATAFORMAS</h2>
     <div class="plataformas-grid" id="plataformasGrid"></div>
@@ -617,7 +596,6 @@
   <script src='https://c42.radioboss.fm/w/nowplaying2.js?u=173&amp;wid=19097&amp;tf=0'></script>
   <script src='https://c42.radioboss.fm/w/nexttrack.js?u=173&amp;wid=677&amp;tf=0'></script>
   <script src='https://c42.radioboss.fm/w/recent.js?u=173&amp;wid=5829&amp;v=2&amp;tf=0'></script>
-  <!-- Script del widget de solicitud de canciones -->
   <script src='https://c42.radioboss.fm/w/songrequest.js?u=173&amp;wid=17985'></script>
 
   <script>
@@ -673,10 +651,13 @@
 
       const obs=new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting)e.target.classList.add('visible'); }); },{threshold:0.12}); document.querySelectorAll('section').forEach(s=>obs.observe(s));
 
+      // SINCRONIZAR PORTADA DEL VINILO CON LA CANCIÓN ACTUAL
       setInterval(() => {
         var npImg = document.getElementById('rbcloud_np_c19097');
         var vc = document.getElementById('vinylCover');
-        if (npImg && vc && npImg.src && vc.src !== npImg.src && npImg.src && !npImg.src.includes('data:image')) vc.src = npImg.src;
+        if (npImg && vc && npImg.src && vc.src !== npImg.src && npImg.src && !npImg.src.includes('data:image')) {
+          vc.src = npImg.src;
+        }
       }, 2000);
 
       const vinylDisc = document.getElementById('vinylDisc');
@@ -687,15 +668,34 @@
         else vinylDisc.classList.add('paused');
       });
 
-      // CARGAR PLATAFORMAS INTERACTIVAS
+      // CARGAR 5 PLATAFORMAS CON NOMBRES E ICONOS
       (function() {
         const platforms = [
-          { name: "Tunein", img: "https://img.icons8.com/color/96/tunein.png", url: "https://tunein.com/radio/DCCLASICOSEC-s342662/", icon: "fa-tunein" },
-          { name: "Spotify", img: "https://img.icons8.com/color/96/spotify.png", url: "https://spotify.com", icon: "fa-spotify" },
-          { name: "Apple Music", img: "https://img.icons8.com/color/96/apple-music.png", url: "https://apple.com/music", icon: "fa-apple" },
-          { name: "Deezer", img: "https://img.icons8.com/color/96/deezer.png", url: "https://deezer.com", icon: "fa-music" },
-          { name: "SoundCloud", img: "https://img.icons8.com/color/96/soundcloud.png", url: "https://soundcloud.com", icon: "fa-soundcloud" },
-          { name: "Instagram", img: "https://img.icons8.com/color/96/instagram-new.png", url: "https://instagram.com", icon: "fa-instagram" }
+          { 
+            name: "TuneIn", 
+            url: "https://tunein.com/radio/DCCLASICOSEC-s342662/", 
+            icon: "fa-solid fa-tower-broadcast" 
+          },
+          { 
+            name: "MyTuner Radio", 
+            url: "https://mytuner-radio.com/radio/dc-clasicos-ec-503820/", 
+            icon: "fa-solid fa-radio" 
+          },
+          { 
+            name: "Raddios", 
+            url: "https://www.raddios.com/20492-radio-online-dc-clasicos-ec-online-ibarra-ecuador", 
+            icon: "fa-solid fa-globe" 
+          },
+          { 
+            name: "Radoxo", 
+            url: "https://radoxo.com/ecuador/dc-clasicos", 
+            icon: "fa-solid fa-signal" 
+          },
+          { 
+            name: "Emisoras.ec", 
+            url: "https://emisoras.ec/84838-dc-clasicos.html", 
+            icon: "fa-solid fa-map-marker-alt" 
+          }
         ];
         const grid = document.getElementById('plataformasGrid');
         platforms.forEach(p => {
@@ -703,19 +703,9 @@
           a.href = p.url;
           a.target = "_blank";
           a.rel = "noopener";
-          a.className = "platform-card";
-          a.title = p.name;
-          a.innerHTML = `
-            <div class="platform-card-inner">
-              <div class="platform-front">
-                <img src="${p.img}" alt="${p.name}" onerror="this.src='https://picsum.photos/id/108/100/100'">
-              </div>
-              <div class="platform-back">
-                <i class="fab ${p.icon}"></i>
-                <span>${p.name}</span>
-              </div>
-            </div>
-          `;
+          a.className = "platform-item";
+          a.title = `Escuchar en ${p.name}`;
+          a.innerHTML = `<i class="${p.icon}"></i><span>${p.name}</span>`;
           grid.appendChild(a);
         });
       })();
