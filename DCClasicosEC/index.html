@@ -299,6 +299,7 @@
     .platform-item:nth-child(3) { animation: fadeInUp 0.6s ease 0.3s both; }
     .platform-item:nth-child(4) { animation: fadeInUp 0.6s ease 0.4s both; }
     .platform-item:nth-child(5) { animation: fadeInUp 0.6s ease 0.5s both; }
+    .platform-item:nth-child(6) { animation: fadeInUp 0.6s ease 0.6s both; }
 
     @keyframes fadeInUp {
       from {
@@ -668,7 +669,7 @@
         else vinylDisc.classList.add('paused');
       });
 
-      // CARGAR 5 PLATAFORMAS CON NOMBRES E ICONOS
+      // CARGAR 6 PLATAFORMAS CON NOMBRES E ICONOS (incluyendo Online Radio Box)
       (function() {
         const platforms = [
           { 
@@ -695,6 +696,11 @@
             name: "Emisoras.ec", 
             url: "https://emisoras.ec/84838-dc-clasicos.html", 
             icon: "fa-solid fa-map-marker-alt" 
+          },
+          { 
+            name: "Online Radio Box", 
+            url: "https://onlineradiobox.com/search?cs=ec.dc953&played=1&q=dc%20clasicos&s=Todos%20los%20estilos&c=ec", 
+            icon: "fa-solid fa-square-radio" 
           }
         ];
         const grid = document.getElementById('plataformasGrid');
