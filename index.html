@@ -116,8 +116,8 @@
         .podcasts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
         .podcast-card { background: var(--superficie); border-radius: var(--radio-radius); padding: 20px; text-align: center; transition: all 0.2s ease; border: 1px solid var(--borde); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; }
         .podcast-card:hover { border-color: var(--acento); transform: translateY(-3px); }
-        .podcast-card i { color: var(--gris-texto); font-size: 1.8em; margin-bottom: 10px; transition: color 0.2s ease; }
-        .podcast-card:hover i { color: var(--acento); }
+        .podcast-card i { color: var(--acento); font-size: 1.8em; margin-bottom: 10px; transition: transform 0.2s ease; }
+        .podcast-card:hover i { transform: scale(1.15); }
         .podcast-card h3 { font-size: 0.92em; margin-bottom: 4px; color: var(--blanco-limpio); }
         .podcast-card p { font-size: 0.74em; color: var(--gris-dim); }
 
@@ -173,6 +173,32 @@
         .modal-body strong { color: var(--blanco-limpio); }
         .modal-body ul { padding-left: 20px; margin: 14px 0; }
         .modal-body h3, .modal-body h4 { color: var(--acento); margin: 18px 0 10px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1em; }
+        .tarifa-nota { background: var(--superficie); border: 1px solid var(--borde); border-radius: 10px; padding: 14px 16px; font-size: 0.86em; margin: 14px 0 20px; }
+        .tarifa-nota strong { color: var(--acento); }
+        .piloto-card { background: var(--superficie); border: 1px solid var(--acento-dim); border-radius: 10px; padding: 18px 18px 16px; margin: 14px 0 22px; }
+        .piloto-card .piloto-badge { display: inline-block; background: var(--acento); color: var(--negro-profundo); font-size: 0.68em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 3px 10px; border-radius: 999px; margin-bottom: 10px; }
+        .piloto-card ul { margin: 10px 0 0; }
+        .tarifario-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--acento); color: var(--negro-profundo); font-weight: 600; padding: 11px 20px; border-radius: 999px; text-decoration: none; font-size: 0.88em; margin-top: 6px; }
+
+        .historia-timeline { margin: 16px 0 22px; }
+        .historia-item { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; }
+        .historia-badge { flex-shrink: 0; min-width: 68px; text-align: center; padding: 7px 10px; border-radius: 999px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; font-size: 0.8em; color: var(--negro-profundo); }
+        .historia-item:nth-child(odd) .historia-badge { background: var(--acento); }
+        .historia-item:nth-child(even) .historia-badge { background: var(--acento-dim); color: var(--blanco-limpio); }
+        .historia-text h4 { margin: 0 0 4px; color: var(--blanco-limpio); font-family: 'Inter', sans-serif; font-size: 0.95em; }
+        .historia-text p { margin: 0; color: var(--gris-texto); font-size: 0.9em; }
+
+        .labs-mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0 20px; }
+        .lab-mini-card { background: var(--superficie); border-left: 3px solid var(--acento); border-radius: 8px; padding: 12px 14px; }
+        .lab-mini-card:nth-child(2) { border-left-color: var(--acento-dim); }
+        .lab-mini-card:nth-child(3) { border-left-color: var(--acento); }
+        .lab-mini-card h5 { margin: 0 0 4px; color: var(--blanco-limpio); font-size: 0.88em; font-family: 'Space Grotesk', sans-serif; }
+        .lab-mini-card p { margin: 0; font-size: 0.78em; color: var(--gris-texto); }
+
+        .historia-quote { background: var(--negro-profundo); border-left: 3px solid var(--acento); border-radius: 8px; padding: 16px 18px; margin: 18px 0; color: var(--blanco-limpio); font-size: 0.94em; }
+        .historia-firma { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--borde); }
+        .historia-firma strong { display: block; color: var(--acento); font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.02em; margin-bottom: 4px; }
+        .historia-firma span { display: block; color: var(--gris-dim); font-size: 0.82em; line-height: 1.6; }
         .podcast-modal-content { background: var(--negro-suave); border-radius: var(--radio-radius); width: 95%; max-width: 1000px; max-height: 80vh; overflow-y: auto; border: 1px solid var(--borde); position: relative; }
         .podcast-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 24px; }
         .podcast-item h3 { color: var(--acento); margin-bottom: 10px; font-size: 0.95em; font-family: 'Inter', sans-serif; font-weight: 600; }
@@ -495,9 +521,94 @@
         </div>
     </div>
 
-    <div id="quienesSomos" class="modal"><div class="modal-content"><div class="modal-header"><h2>Quiénes somos</h2><button class="close-modal" onclick="closeModal('quienesSomos')">&times;</button></div><div class="modal-body"><p><strong>RDCR Sound Network</strong> nace de una visión clara: crear radio online con identidad, criterio y propósito.</p><p>Desde el lanzamiento de Avenida Tropical en septiembre de 2020, el proyecto creció con pasión y convicción, apostando por una radio digital hecha con carácter, calidad y sentido cultural.</p><p>En julio de 2021, este camino dio un paso decisivo con la creación de RDCR, comprendiendo que el futuro no era una sola emisora, sino la construcción de una red sólida y en constante evolución. Así surge RDCR Sound Network, una propuesta que integra música, contenido, tecnología y pensamiento estratégico bajo una misma visión.</p><p>Hoy, RDCR Sound Network entra en una nueva etapa. La radio sigue siendo nuestro origen, pero el proyecto evoluciona hacia una red de conocimiento y medios, donde la experiencia sonora se complementa con nuevas áreas especializadas:</p><ul><li><strong>RDCR AudioLab</strong>, enfocado en la producción y edición profesional de audio;</li><li><strong>RDCR OratoriaLab</strong>, dedicado al desarrollo de la voz, la comunicación y la neuro-oratoria;</li><li><strong>RDCR DataLab</strong>, orientado al análisis y visualización de datos aplicados a medios y contenidos digitales.</li></ul><p>Esta transformación se expresa en una imagen renovada, nuevos talentos, programación actualizada y una estructura pensada para el presente y proyectada al futuro.</p><p><strong>RDCR Sound Network no es solo radio online.<br>Es una plataforma que crea, comunica, analiza y forma.</strong></p><p><strong>DARÍO CASTELLANOS</strong></p><p>Radios online con visión.<br>Contenido con identidad.<br>Conocimiento que evoluciona.</p></div></div></div>
+    <div id="quienesSomos" class="modal"><div class="modal-content"><div class="modal-header"><h2>Quiénes somos</h2><button class="close-modal" onclick="closeModal('quienesSomos')">&times;</button></div><div class="modal-body">
 
-    <div id="tarifario" class="modal"><div class="modal-content"><div class="modal-header"><h2>Tarifario publicitario</h2><button class="close-modal" onclick="closeModal('tarifario')">&times;</button></div><div class="modal-body"><h3>Publicidad en radios online</h3><p>RDCR Sound Network es una red de radios online en Ecuador que conecta marcas con audiencias reales, activas y segmentadas.</p><h4>Cuñas publicitarias (por emisión)</h4><ul><li><strong>Cuña de 15 segundos:</strong> 15 USD</li><li><strong>Cuña de 30 segundos:</strong> 30 USD</li><li><strong>Cuña de 60 segundos:</strong> 55 USD</li><li><strong>Paquete de 10 cuñas de 30 segundos:</strong> 260 USD</li><li><strong>Paquete de 20 cuñas de 30 segundos:</strong> 480 USD</li></ul><h4>Programas patrocinados</h4><ul><li><strong>Bloque de 15 minutos:</strong> 90 USD</li><li><strong>Media hora:</strong> 160 USD</li><li><strong>Hora completa:</strong> 300 USD</li></ul><h4>Contacto comercial</h4><p><strong>Correo electrónico:</strong> rdcrsound@gmail.com</p><p><strong>Teléfono y WhatsApp:</strong> +593 961 480 654</p></div></div></div>
+        <p><strong>RDCR Sound Network</strong> nace de una visión clara: crear radio online con identidad, criterio y propósito.</p>
+
+        <h4 style="margin-top:20px;">Nuestra historia</h4>
+        <div class="historia-timeline">
+            <div class="historia-item">
+                <div class="historia-badge">2020</div>
+                <div class="historia-text">
+                    <h4>Nace Avenida Tropical</h4>
+                    <p>El proyecto arranca en septiembre de 2020 y crece con pasión y convicción, apostando por una radio digital hecha con carácter, calidad y sentido cultural.</p>
+                </div>
+            </div>
+            <div class="historia-item">
+                <div class="historia-badge">2021</div>
+                <div class="historia-text">
+                    <h4>Se crea RDCR</h4>
+                    <p>En julio de 2021 este camino da un paso decisivo: el futuro no era una sola emisora, sino una red sólida y en constante evolución. Así surge RDCR Sound Network, integrando música, contenido, tecnología y pensamiento estratégico bajo una misma visión.</p>
+                </div>
+            </div>
+            <div class="historia-item">
+                <div class="historia-badge">Hoy</div>
+                <div class="historia-text">
+                    <h4>Una red de conocimiento y medios</h4>
+                    <p>La radio sigue siendo nuestro origen, pero el proyecto evoluciona: la experiencia sonora se complementa con nuevas áreas especializadas.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="labs-mini-grid">
+            <div class="lab-mini-card"><h5>RDCR AudioLab</h5><p>Producción y edición profesional de audio.</p></div>
+            <div class="lab-mini-card"><h5>RDCR OratoriaLab</h5><p>Desarrollo de la voz, la comunicación y la neuro-oratoria.</p></div>
+            <div class="lab-mini-card"><h5>RDCR DataLab</h5><p>Análisis y visualización de datos aplicados a medios.</p></div>
+        </div>
+
+        <p>Esta transformación se expresa en una imagen renovada, nuevos talentos, programación actualizada y una estructura pensada para el presente y proyectada al futuro.</p>
+
+        <div class="historia-quote">RDCR Sound Network no es solo radio online.<br>Es una plataforma que crea, comunica, analiza y forma.</div>
+
+        <div class="historia-firma">
+            <strong>DARÍO CASTELLANOS</strong>
+            <span>Radios online con visión.<br>Contenido con identidad.<br>Conocimiento que evoluciona.</span>
+        </div>
+
+    </div></div></div>
+
+    <div id="tarifario" class="modal"><div class="modal-content"><div class="modal-header"><h2>Tarifario publicitario</h2><button class="close-modal" onclick="closeModal('tarifario')">&times;</button></div><div class="modal-body">
+
+        <h3>Publicidad en radios online</h3>
+        <p>RDCR Sound Network conecta marcas con audiencias en Ecuador a través de dos emisoras online 24/7 y contenido en 5 plataformas de podcast.</p>
+
+        <div class="tarifa-nota">
+            <strong>Sobre estos precios:</strong> son tarifas de referencia, no un CPM cerrado — estamos instrumentando la medición de audiencia (oyentes concurrentes, alcance por plataforma) para poder confirmarte un precio ajustado a datos reales, no a una estimación. Si tu campaña necesita un número exacto de alcance garantizado, pedí la cotización personalizada abajo.
+        </div>
+
+        <div class="piloto-card">
+            <span class="piloto-badge">Recomendado para nuevos anunciantes</span>
+            <h4 style="margin-top:0;">Paquete piloto · 2 semanas</h4>
+            <p style="margin-bottom:0;">Probá la pauta con riesgo bajo antes de comprometerte a un contrato largo. Incluye:</p>
+            <ul>
+                <li>Rotación de tu cuña durante 14 días en la emisora que elijas</li>
+                <li>Reporte al cierre con emisiones realizadas y horarios de salida</li>
+                <li>Precio y alcance estimado se confirman junto con vos antes de arrancar, según duración de cuña y franja horaria</li>
+            </ul>
+        </div>
+
+        <h4>Cuñas publicitarias (por emisión) — tarifa de referencia</h4>
+        <ul>
+            <li><strong>Cuña de 15 segundos:</strong> desde 15 USD</li>
+            <li><strong>Cuña de 30 segundos:</strong> desde 30 USD</li>
+            <li><strong>Cuña de 60 segundos:</strong> desde 55 USD</li>
+            <li><strong>Paquete de 10 cuñas de 30 segundos:</strong> desde 260 USD</li>
+            <li><strong>Paquete de 20 cuñas de 30 segundos:</strong> desde 480 USD</li>
+        </ul>
+
+        <h4>Programas patrocinados — tarifa de referencia</h4>
+        <ul>
+            <li><strong>Bloque de 15 minutos:</strong> desde 90 USD</li>
+            <li><strong>Media hora:</strong> desde 160 USD</li>
+            <li><strong>Hora completa:</strong> desde 300 USD</li>
+        </ul>
+
+        <h4>Contacto comercial</h4>
+        <p><strong>Correo electrónico:</strong> rdcrsound@gmail.com</p>
+        <p><strong>Teléfono y WhatsApp:</strong> +593 961 480 654</p>
+        <a href="https://wa.me/593961480654?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20personalizada%20de%20publicidad%20en%20RDCR%20Sound%20Network" class="tarifario-cta" target="_blank"><i class="fab fa-whatsapp"></i> Pedir cotización personalizada</a>
+
+    </div></div></div>
 
     <!-- Modales Podcasts -->
     <div id="podcastSpotify" class="modal"><div class="podcast-modal-content"><div class="modal-header"><h2>Podcasts en Spotify</h2><button class="close-modal" onclick="closeModal('podcastSpotify')">&times;</button></div><div class="podcast-container"><div class="podcast-item"><h3>Entretelones Radio Show</h3><iframe style="border-radius:8px; width:100%; height:200px;" src="https://open.spotify.com/embed/show/6esb0xUeklWFNoqCWSorpa" frameborder="0" allowfullscreen></iframe></div><div class="podcast-item"><h3>Mano a Mano con Darío</h3><iframe style="border-radius:8px; width:100%; height:200px;" src="https://open.spotify.com/embed/show/4fqSdu2l8WuOkoTKT67r9n" frameborder="0" allowfullscreen></iframe></div><button class="podcast-back-btn" onclick="closeModal('podcastSpotify')"><i class="fas fa-arrow-left"></i> Volver</button></div></div></div>
