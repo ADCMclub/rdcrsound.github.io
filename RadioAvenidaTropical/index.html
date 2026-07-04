@@ -3,12 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <meta name="description" content="Avenida Tropical - Radio 100% tropical con la mejor salsa, timba y ritmos.">
+  <meta name="description" content="Avenida Tropical - Radio 100% tropical con la mejor salsa, timba y ritmos, en vivo las 24 horas.">
+  <meta name="theme-color" content="#0A0A0B">
+  <link rel="canonical" href="https://rdcrsound.adcm.club/AvenidaTropical/">
   <title>Avenida Tropical | RDCR Sound Network</title>
+
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RDCR Sound Network">
+  <meta property="og:title" content="Avenida Tropical | Radio en vivo de salsa y timba">
+  <meta property="og:description" content="100% salsa, timba y sabor tropical. Escuchá en vivo las 24 horas.">
+  <meta property="og:image" content="https://c42.radioboss.fm/w/artwork/174.jpg">
+  <meta property="og:url" content="https://rdcrsound.adcm.club/AvenidaTropical/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Avenida Tropical | Radio en vivo de salsa y timba">
+  <meta name="twitter:description" content="100% salsa, timba y sabor tropical. Escuchá en vivo las 24 horas.">
+  <meta name="twitter:image" content="https://c42.radioboss.fm/w/artwork/174.jpg">
+
+  <!-- Favicon (disco/vinilo, coherente con el signo visual del sitio) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230A0A0B' stroke='%23FF6B4A' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='10' fill='%23FF6B4A'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%230A0A0B'/%3E%3C/svg%3E">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RadioStation",
+    "name": "Avenida Tropical",
+    "url": "https://rdcrsound.adcm.club/AvenidaTropical/",
+    "logo": "https://c42.radioboss.fm/w/artwork/174.jpg",
+    "broadcastFrequency": "Streaming digital",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "RDCR Sound Network"
+    }
+  }
+  </script>
+
   <style>
     :root {
       --negro-profundo: #0A0A0B;
@@ -16,11 +50,12 @@
       --superficie: #15151A;
       --borde: #26262C;
       --blanco-limpio: #F5F3EF;
-      --gris-texto: #9A9CA3;
-      --gris-dim: #5C5E66;
+      --gris-texto: #A6A8AF;
+      --gris-dim: #82848B;
       --acento: #FF6B4A;
       --acento-dim: #C24E33;
       --radio-radius: 14px;
+      --focus-ring: #FF9478;
     }
     * {
       margin: 0;
@@ -48,6 +83,36 @@
       font-family: 'JetBrains Mono', monospace;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Foco visible por teclado en todo el sitio */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+
+    /* Respeta la preferencia de movimiento reducido del usuario */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
     }
 
     .modal-overlay {
@@ -101,6 +166,14 @@
       border-color: var(--acento);
       color: var(--acento);
     }
+    .form-field { margin-bottom: 12px; }
+    .form-label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--gris-texto);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
     .form-input {
       width: 100%;
       padding: 12px 14px;
@@ -108,7 +181,6 @@
       border: 1px solid var(--borde);
       border-radius: 10px;
       color: var(--blanco-limpio);
-      margin-bottom: 12px;
       font-size: 0.95rem;
       font-family: 'Inter', sans-serif;
       transition: border-color 0.2s ease;
@@ -126,6 +198,7 @@
       margin: 5px 5px 0 0;
       font-size: 0.88rem;
       transition: transform 0.2s ease;
+      font-family: 'Inter', sans-serif;
     }
     .btn-send {
       background: var(--acento);
@@ -245,6 +318,11 @@
       color: var(--acento);
     }
 
+    .whatsapp-float, .scroll-top {
+      appearance: none;
+      -webkit-appearance: none;
+      font-family: inherit;
+    }
     .whatsapp-float {
       position: fixed;
       bottom: 75px;
@@ -252,6 +330,7 @@
       width: 52px;
       height: 52px;
       background: var(--acento);
+      border: none;
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -693,6 +772,7 @@
       position: relative;
       transition: all 0.2s ease;
       color: var(--gris-texto);
+      font-family: inherit;
     }
     .dia-tab.active {
       background: var(--acento);
@@ -804,7 +884,7 @@
       color: var(--gris-texto);
     }
 
-    /* PLATAFORMAS INTERACTIVAS - DISEÑO CON NOMBRES Y EFECTOS */
+    /* PLATAFORMAS INTERACTIVAS */
     .plataformas-section {
       padding: 50px 16px 60px;
       text-align: center;
@@ -876,7 +956,6 @@
       z-index: 1;
     }
 
-    /* Animaciones de entrada */
     .platform-item:nth-child(1) { animation: fadeInUp 0.6s ease 0.1s both; }
     .platform-item:nth-child(2) { animation: fadeInUp 0.6s ease 0.2s both; }
     .platform-item:nth-child(3) { animation: fadeInUp 0.6s ease 0.3s both; }
@@ -983,7 +1062,6 @@
         font-size: 1rem;
       }
       .hero-stage {
-        grid-template-columns: 1fr;
         justify-items: center;
         text-align: center;
         gap: 24px;
@@ -1018,27 +1096,36 @@
   </style>
 </head>
 <body>
-<div class="modal-overlay" id="songRequestModal">
+<div class="modal-overlay" id="songRequestModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-container">
-    <button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button>
-    <h2 style="margin-bottom:16px;font-size:1.2rem;">Pedir canción</h2>
-    <form>
-      <input type="text" id="nombreCompleto" class="form-input" placeholder="Tu nombre" required>
-      <input type="text" id="cancion" class="form-input" placeholder="Canción / artista" required>
-      <textarea id="comentario" class="form-input" placeholder="Dedicatoria" rows="2"></textarea>
-      <button type="button" class="btn-modal btn-send" id="directSendBtn"><i class="fab fa-whatsapp"></i> Enviar</button>
+    <button class="close-modal" id="closeModalBtn" type="button" aria-label="Cerrar formulario"><i class="fas fa-times" aria-hidden="true"></i></button>
+    <h2 id="modalTitle" style="margin-bottom:16px;font-size:1.2rem;">Pedir canción</h2>
+    <form novalidate>
+      <div class="form-field">
+        <label class="form-label" for="nombreCompleto">Tu nombre</label>
+        <input type="text" id="nombreCompleto" class="form-input" placeholder="Ej: María Pérez" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="cancion">Canción y artista</label>
+        <input type="text" id="cancion" class="form-input" placeholder="Ej: La Fama - Rosalía y..." required>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="comentario">Dedicatoria (opcional)</label>
+        <textarea id="comentario" class="form-input" placeholder="Escribe tu dedicatoria" rows="2"></textarea>
+      </div>
+      <button type="button" class="btn-modal btn-send" id="directSendBtn"><i class="fab fa-whatsapp" aria-hidden="true"></i> Enviar</button>
       <button type="button" class="btn-modal btn-cancel" id="cancelFormBtn">Cancelar</button>
     </form>
   </div>
 </div>
 
 <header>
-  <a href="https://rdcrsound.adcm.club" class="back-button" id="backButton" aria-label="Volver a RDCR Sound Network"><i class="fas fa-arrow-left"></i></a>
+  <a href="https://rdcrsound.adcm.club" class="back-button" id="backButton" aria-label="Volver a RDCR Sound Network"><i class="fas fa-arrow-left" aria-hidden="true"></i></a>
   <div class="logo">
-    <span class="live-indicator"><span class="live-dot-sm"></span> En vivo</span>
+    <span class="live-indicator"><span class="live-dot-sm" aria-hidden="true"></span> En vivo</span>
     <h1><span class="accent">Avenida</span> Tropical</h1>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><i class="fas fa-bars"></i></button>
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav" type="button"><i class="fas fa-bars" aria-hidden="true"></i></button>
   <nav id="mainNav">
     <ul>
       <li><a href="#inicio">Inicio</a></li>
@@ -1048,15 +1135,15 @@
   </nav>
 </header>
 
-<div class="whatsapp-float" id="whatsappBtn" aria-label="Pedir canción por WhatsApp"><i class="fab fa-whatsapp"></i></div>
-<div class="scroll-top" id="scrollTopBtn" aria-label="Volver arriba"><i class="fas fa-arrow-up"></i></div>
+<button class="whatsapp-float" id="whatsappBtn" type="button" aria-label="Pedir canción por WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></button>
+<button class="scroll-top" id="scrollTopBtn" type="button" aria-label="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
 <section class="hero" id="inicio">
   <div class="hero-stage">
     <div class="disc-wrapper">
-      <div class="rotating-disc" id="discDisc">
+      <div class="rotating-disc" id="discDisc" role="button" tabindex="0" aria-label="Pausar o reanudar el giro del disco (decorativo, no afecta el audio)">
         <div class="disc-center-art">
-          <img id="discCoverArt" src="https://c42.radioboss.fm/w/artwork/174.jpg" alt="cover" onerror="this.src='https://picsum.photos/id/107/130/130'">
+          <img id="discCoverArt" src="https://c42.radioboss.fm/w/artwork/174.jpg" alt="Carátula del tema que está sonando ahora" onerror="this.src='https://picsum.photos/id/107/130/130'">
         </div>
       </div>
     </div>
@@ -1065,18 +1152,18 @@
       <h2>100% salsa, timba y sabor</h2>
       <p>Salsa, timba y ritmos tropicales. Clásica, romántica, dura y actual.</p>
       <div class="music-info">
-        <div class="nowplaying-text"><i class="fas fa-music"></i> Sonando ahora</div>
+        <div class="nowplaying-text"><i class="fas fa-music" aria-hidden="true"></i> Sonando ahora</div>
         <div id="songNameDisplay">Mesclado Salsa Romantica - Corazon De Acero Dj Onel-2024</div>
-        <div id="artistNameDisplay"><i class="fas fa-microphone-alt"></i> <span id="artistNameSpan">Avenida Tropical</span></div>
+        <div id="artistNameDisplay"><i class="fas fa-microphone-alt" aria-hidden="true"></i> <span id="artistNameSpan">Avenida Tropical</span></div>
       </div>
-      <div class="play-here-tag mono"><i class="fas fa-arrow-down"></i> Tocá play para escuchar</div>
+      <div class="play-here-tag mono"><i class="fas fa-arrow-down" aria-hidden="true"></i> Tocá play para escuchar</div>
       <div class="hero-miniplayer">
         <div class='rbcloud_mplayer' id='rbcloud_mplayer17793'></div>
         <script src='https://c42.radioboss.fm/w/mplayer.js?u=https%3A%2F%2Fc42.radioboss.fm%3A8174%2Fstream&amp;wid=17793&amp;pw=92&amp;ca=%23FF6B4A&amp;cg=%230A0A0B'></script>
       </div>
       <div class="hero-meta-row">
-        <a href="#programacion" class="btn btn-secondary"><i class="fas fa-calendar-alt"></i> Programación</a>
-        <div class="live-status-badge"><span class="live-dot-sm"></span><span>En vivo</span></div>
+        <a href="#programacion" class="btn btn-secondary"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Programación</a>
+        <div class="live-status-badge"><span class="live-dot-sm" aria-hidden="true"></span><span>En vivo</span></div>
       </div>
     </div>
   </div>
@@ -1096,7 +1183,7 @@
 
       <div class="widgets-panel">
         <div class="widget-left">
-          <div class="widget-title"><i class="fas fa-history"></i> Recientes</div>
+          <div class="widget-title"><i class="fas fa-history" aria-hidden="true"></i> Recientes</div>
           <div class='rbcloud_recenttracks' id='rbcloud_recent5239' data-cnt='6'>
             <div class='rbcloud_recent_track' style='display: flex; align-items: center; margin-bottom: 6pt;'>
               <div class='rbcloud_recent_track_cover' data-size='50'></div>
@@ -1106,18 +1193,19 @@
           <script src='https://c42.radioboss.fm/w/recent.js?u=174&amp;wid=5239&amp;v=2&amp;tf=1'></script>
         </div>
         <div class="widget-right">
-          <div class="widget-title"><i class="fas fa-forward-step"></i> Próxima</div>
+          <div class="widget-title"><i class="fas fa-forward-step" aria-hidden="true"></i> Próxima</div>
           <div class='rbcloud_nexttrack' style='display: flex; align-items: center; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:12px;'>
             <div><a target='_blank' href='https://c42.radioboss.fm/w/artwork_next/174.jpg'><img id='rbcloud_nt_c9598' src='https://c42.radioboss.fm/w/artwork_next/174.jpg' width='55' height='55' alt='cover art' style="border-radius:10px; border:1px solid var(--borde)"></a></div>
             <div style='text-align:left'><div id='rbcloud_nt_a9598' style='font-weight: bold; color:var(--acento); font-size:0.78rem'></div><div id='rbcloud_nt_t9598' style='font-size:0.68rem; color:var(--gris-texto)'>...</div></div>
           </div>
           <script src='https://c42.radioboss.fm/w/nexttrack.js?u=174&amp;wid=9598&amp;tf=1'></script>
           <div style="margin-top:12px; border-top:1px solid var(--borde); padding-top:12px;">
-            <div class="widget-title" style="margin-bottom:8px;"><i class="fas fa-headset"></i> Solicita</div>
+            <div class="widget-title" style="margin-bottom:8px;"><i class="fas fa-headset" aria-hidden="true"></i> Solicita</div>
             <div class='rbcloud_songrequest' id='rbcloud_songrequest12060'>
               <div class='rbc_search' style="display:flex; gap:6px; flex-wrap:wrap;">
-                <input class='rbc_ed_query' placeholder='Buscar...' style="flex:1; font-size:0.74rem;">
-                <button class='rbc_bt_search' style="font-size:0.74rem;"><i class="fas fa-search"></i> Buscar</button>
+                <label class="sr-only" for="rbc_query_input">Buscar canción</label>
+                <input id="rbc_query_input" class='rbc_ed_query' placeholder='Buscar...' style="flex:1; font-size:0.74rem;">
+                <button class='rbc_bt_search' type="button" style="font-size:0.74rem;"><i class="fas fa-search" aria-hidden="true"></i> Buscar</button>
               </div>
               <div class='rbc_result' style="margin-top:8px;"></div>
             </div>
@@ -1125,7 +1213,7 @@
           </div>
         </div>
       </div>
-      <div class="signal-indicators"><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div></div>
+      <div class="signal-indicators" aria-hidden="true"><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div><div class="signal-bar"></div></div>
       <div class="stream-info">320 kbps · RDCR Sound Network · Sonido tropical</div>
     </div>
   </div>
@@ -1138,11 +1226,10 @@
     <div class="live-badge">En vivo ahora</div>
     <div id="liveNowContent">Cargando...</div>
   </div>
-  <div class="dias-tabs" id="diasTabs"></div>
+  <div class="dias-tabs" id="diasTabs" role="tablist" aria-label="Días de la semana"></div>
   <div class="programas-container" id="programasContainer"></div>
 </section>
 
-<!-- SECCIÓN: ESCUCHANOS TAMBIÉN EN ESTAS PLATAFORMAS -->
 <section class="plataformas-section">
   <h2 class="plataformas-title">ESCUCHANOS TAMBIÉN EN ESTAS PLATAFORMAS</h2>
   <div class="plataformas-grid" id="plataformasGrid"></div>
@@ -1153,7 +1240,7 @@
   <h2 class="section-title">Otras emisoras</h2>
   <div>
     <a href="https://rdcrsound.adcm.club/DCClasicosEC/" target="_self" class="radio-card">
-      <i class="fas fa-radio" style="font-size:1.3rem;color:var(--acento);"></i>
+      <i class="fas fa-radio" style="font-size:1.3rem;color:var(--acento);" aria-hidden="true"></i>
       <h3>DC Clásicos</h3>
       <p>Los clásicos de siempre</p>
     </a>
@@ -1161,7 +1248,7 @@
 </section>
 
 <footer>
-  <i class="fas fa-satellite-dish" style="font-size:1rem;color:var(--acento);"></i>
+  <i class="fas fa-satellite-dish" style="font-size:1rem;color:var(--acento);" aria-hidden="true"></i>
   <h3>RDCR Sound Network</h3>
   <p>Con la música que te pega fuerte · 100% tropical</p>
   <p>Avenida Tropical · 2026</p>
@@ -1218,13 +1305,17 @@
     tabsDiv.innerHTML = ""; progContainer.innerHTML = "";
     diasMap.forEach(dia => {
       const esHoy = (dia.key === diaActualKey);
-      const tab = document.createElement("div");
+      const tab = document.createElement("button");
+      tab.type = "button";
       tab.className = `dia-tab ${esHoy ? "active" : ""}`;
+      tab.setAttribute("role", "tab");
+      tab.setAttribute("aria-selected", esHoy ? "true" : "false");
       tab.textContent = dia.label;
-      if(esHoy){ const badge = document.createElement("span"); badge.className="hoy-badge"; badge.textContent="HOY"; tab.appendChild(badge); }
+      if(esHoy){ const badge = document.createElement("span"); badge.className="hoy-badge"; badge.textContent="HOY"; badge.setAttribute("aria-hidden","true"); tab.appendChild(badge); }
       tab.onclick = () => {
-        document.querySelectorAll(".dia-tab").forEach(t=>t.classList.remove("active"));
+        document.querySelectorAll(".dia-tab").forEach(t=>{t.classList.remove("active"); t.setAttribute("aria-selected","false");});
         tab.classList.add("active");
+        tab.setAttribute("aria-selected","true");
         document.querySelectorAll(".programas-dia").forEach(p=>p.classList.remove("active"));
         document.getElementById(`prog-${dia.key}`).classList.add("active");
       };
@@ -1240,7 +1331,7 @@
           if(enVivo){ const badgeLive = document.createElement("div"); badgeLive.className="en-vivo-badge-card"; badgeLive.innerHTML="En vivo"; card.appendChild(badgeLive); }
           const horaSpan = document.createElement("div"); horaSpan.className="programa-hora-card"; horaSpan.innerText = prog.hora;
           const nombreSpan = document.createElement("div"); nombreSpan.className="programa-nombre-card"; nombreSpan.innerText = prog.nombre;
-          const conductorDiv = document.createElement("div"); conductorDiv.className="programa-conductor-card"; conductorDiv.innerHTML = `<i class="fas fa-user-circle"></i> ${prog.conductor}`;
+          const conductorDiv = document.createElement("div"); conductorDiv.className="programa-conductor-card"; conductorDiv.innerHTML = `<i class="fas fa-user-circle" aria-hidden="true"></i> ${prog.conductor}`;
           card.appendChild(horaSpan); card.appendChild(nombreSpan); card.appendChild(conductorDiv);
           cardsGrid.appendChild(card);
         });
@@ -1248,6 +1339,8 @@
       diaDiv.appendChild(cardsGrid); progContainer.appendChild(diaDiv);
     });
   }
+
+  let nowPlayingInterval = null;
   function syncNowPlayingToDisc() {
       setTimeout(() => {
           const artistaElem = document.getElementById('rbcloud_np_a15549');
@@ -1265,13 +1358,28 @@
           }
       }, 700);
   }
-  setInterval(syncNowPlayingToDisc, 5000);
+  function startNowPlayingPolling(){
+    if(nowPlayingInterval) return;
+    nowPlayingInterval = setInterval(syncNowPlayingToDisc, 5000);
+  }
+  function stopNowPlayingPolling(){
+    if(!nowPlayingInterval) return;
+    clearInterval(nowPlayingInterval);
+    nowPlayingInterval = null;
+  }
+  // Pausa el sondeo de "sonando ahora" cuando la pestaña no está visible,
+  // para no consumir batería/red sin necesidad.
+  document.addEventListener('visibilitychange', () => {
+    if(document.hidden){ stopNowPlayingPolling(); }
+    else { syncNowPlayingToDisc(); startNowPlayingPolling(); }
+  });
+  startNowPlayingPolling();
   syncNowPlayingToDisc();
 
   const modal = document.getElementById("songRequestModal");
   document.getElementById("closeModalBtn")?.addEventListener("click",()=>modal.classList.remove("active"));
   document.getElementById("cancelFormBtn")?.addEventListener("click",()=>modal.classList.remove("active"));
-  document.getElementById("whatsappBtn")?.addEventListener("click",()=>{document.getElementById("comentario").value="";modal.classList.add("active");});
+  document.getElementById("whatsappBtn")?.addEventListener("click",()=>{document.getElementById("comentario").value="";modal.classList.add("active");document.getElementById("nombreCompleto").focus();});
   document.getElementById("directSendBtn")?.addEventListener("click",()=>{const nom=document.getElementById("nombreCompleto").value.trim();const can=document.getElementById("cancion").value.trim();const com=document.getElementById("comentario").value.trim();if(!nom||!can){alert("Completa nombre y cancion");return;}const tel="593961480654";let msg=`*PETICION AVENIDA TROPICAL*%0A%0A*Nombre:* ${encodeURIComponent(nom)}%0A*Cancion:* ${encodeURIComponent(can)}%0A*Comentario:* ${encodeURIComponent(com)}`;window.location.href=`https://wa.me/${tel}?text=${msg}`;modal.classList.remove("active");document.getElementById("nombreCompleto").value="";document.getElementById("cancion").value="";document.getElementById("comentario").value="";});
   window.addEventListener("scroll",()=>{const btn=document.getElementById("scrollTopBtn");if(window.scrollY>200)btn.classList.add("active");else btn.classList.remove("active");});
   document.getElementById("scrollTopBtn")?.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
@@ -1291,43 +1399,50 @@
 
   const discDisc = document.getElementById('discDisc');
   let discPlaying = true;
-  discDisc?.addEventListener('click', () => {
+  function toggleDisc(){
     discPlaying = !discPlaying;
     discDisc.style.animationPlayState = discPlaying ? 'running' : 'paused';
+  }
+  discDisc?.addEventListener('click', toggleDisc);
+  discDisc?.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggleDisc();
+    }
   });
 
-  // CARGAR 6 PLATAFORMAS CON NOMBRES E ICONOS (incluyendo Online Radio Box)
+  // Plataformas donde escuchar la radio
   (function() {
     const platforms = [
-      { 
-        name: "TuneIn", 
-        url: "https://tunein.com/radio/AVENIDA-TROPICAL-s342661/", 
-        icon: "fa-solid fa-tower-broadcast" 
+      {
+        name: "TuneIn",
+        url: "https://tunein.com/radio/AVENIDA-TROPICAL-s342661/",
+        icon: "fa-solid fa-tower-broadcast"
       },
-      { 
-        name: "MyTuner Radio", 
-        url: "https://mytuner-radio.com/radio/radio-avenida-tropical-469126/", 
-        icon: "fa-solid fa-radio" 
+      {
+        name: "MyTuner Radio",
+        url: "https://mytuner-radio.com/radio/radio-avenida-tropical-469126/",
+        icon: "fa-solid fa-radio"
       },
-      { 
-        name: "Raddios", 
-        url: "https://www.raddios.com/search.html?q=avenida+tropical", 
-        icon: "fa-solid fa-globe" 
+      {
+        name: "Raddios",
+        url: "https://www.raddios.com/search.html?q=avenida+tropical",
+        icon: "fa-solid fa-globe"
       },
-      { 
-        name: "Radoxo", 
-        url: "https://radoxo.com/ecuador/avenida-tropical", 
-        icon: "fa-solid fa-signal" 
+      {
+        name: "Radoxo",
+        url: "https://radoxo.com/ecuador/avenida-tropical",
+        icon: "fa-solid fa-signal"
       },
-      { 
-        name: "Emisoras.ec", 
-        url: "https://emisoras.ec/84837-avenida-tropical.html", 
-        icon: "fa-solid fa-map-marker-alt" 
+      {
+        name: "Emisoras.ec",
+        url: "https://emisoras.ec/84837-avenida-tropical.html",
+        icon: "fa-solid fa-map-marker-alt"
       },
-      { 
-        name: "Online Radio Box", 
-        url: "https://onlineradiobox.com/search?cs=ec.avenidatropical&played=1&q=avenida%20tropical&s=Todos%20los%20estilos&c=ec", 
-        icon: "fa-solid fa-square-radio" 
+      {
+        name: "Online Radio Box",
+        url: "https://onlineradiobox.com/search?cs=ec.avenidatropical&played=1&q=avenida%20tropical&s=Todos%20los%20estilos&c=ec",
+        icon: "fa-solid fa-square-radio"
       }
     ];
     const grid = document.getElementById('plataformasGrid');
@@ -1338,11 +1453,11 @@
       a.rel = "noopener";
       a.className = "platform-item";
       a.title = `Escuchar en ${p.name}`;
-      a.innerHTML = `<i class="${p.icon}"></i><span>${p.name}</span>`;
+      a.innerHTML = `<i class="${p.icon}" aria-hidden="true"></i><span>${p.name}</span>`;
       grid.appendChild(a);
     });
   })();
 </script>
+<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
 </body>
 </html>
-<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
