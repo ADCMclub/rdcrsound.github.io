@@ -4,10 +4,45 @@
   <meta charset="UTF-8">
   <title>DC CLÁSICOS · La radio emocional</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <meta name="description" content="DC Clásicos - La radio emocional de RDCR Sound Network. Baladas en español e inglés desde los 80 hasta hoy, en vivo las 24 horas.">
+  <meta name="theme-color" content="#0A0A0B">
+  <link rel="canonical" href="https://rdcrsound.adcm.club/DCClasicosEC/">
+
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RDCR Sound Network">
+  <meta property="og:title" content="DC Clásicos | La radio emocional">
+  <meta property="og:description" content="Las canciones que marcaron tu historia. Baladas en español e inglés desde los 80, en vivo las 24 horas.">
+  <meta property="og:image" content="https://c42.radioboss.fm/w/artwork/173.jpg">
+  <meta property="og:url" content="https://rdcrsound.adcm.club/DCClasicosEC/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DC Clásicos | La radio emocional">
+  <meta name="twitter:description" content="Las canciones que marcaron tu historia. Baladas en español e inglés desde los 80, en vivo las 24 horas.">
+  <meta name="twitter:image" content="https://c42.radioboss.fm/w/artwork/173.jpg">
+
+  <!-- Favicon (vinilo, coherente con el signo visual del sitio) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230A0A0B' stroke='%23E8A23D' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='10' fill='%23E8A23D'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%230A0A0B'/%3E%3C/svg%3E">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RadioStation",
+    "name": "DC Clásicos",
+    "url": "https://rdcrsound.adcm.club/DCClasicosEC/",
+    "logo": "https://c42.radioboss.fm/w/artwork/173.jpg",
+    "broadcastFrequency": "Streaming digital",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "RDCR Sound Network"
+    }
+  }
+  </script>
+
   <style>
     :root {
       --negro-profundo: #0A0A0B;
@@ -15,11 +50,12 @@
       --superficie: #15151A;
       --borde: #26262C;
       --blanco-limpio: #F5F3EF;
-      --gris-texto: #9A9CA3;
-      --gris-dim: #5C5E66;
+      --gris-texto: #A6A8AF;
+      --gris-dim: #82848B;
       --acento: #E8A23D;
       --acento-dim: #B57A26;
       --radio-radius: 14px;
+      --focus-ring: #F0BE73;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -30,6 +66,20 @@
     }
     h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; font-weight: 600; }
     .mono { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; text-transform: uppercase; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+
+    /* Foco visible por teclado en todo el sitio */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
 
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--negro-suave); }
@@ -137,6 +187,8 @@
       background: var(--gris-dim); border-radius: 50%; z-index: 4; border: 1px solid var(--borde);
     }
 
+    .vinyl-hint { font-size: 0.65rem; color: var(--gris-dim); text-align: center; margin-top: 10px; max-width: 220px; }
+
     .track-info-center {
       text-align: center; margin-top: 18px; padding: 12px 16px; background: var(--superficie);
       border-radius: var(--radio-radius); border: 1px solid var(--borde); width: 100%; max-width: 300px;
@@ -171,13 +223,12 @@
     .station-subtitle { font-size: 0.88rem; color: var(--gris-texto); text-align: center; margin-bottom: 16px; }
     .player-area { width: 100%; }
 
-    .decade-indicators { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px 0 14px; }
-    .decade {
+    .decade-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px 0 14px; }
+    .decade-tag {
       background: transparent; border: 1px solid var(--borde); border-radius: 999px; padding: 7px 18px;
-      font-weight: 600; cursor: pointer; transition: all 0.2s ease; color: var(--gris-texto); font-size: 0.82rem;
+      font-weight: 600; color: var(--gris-texto); font-size: 0.82rem; user-select: none;
     }
-    .decade:hover, .decade.active { background: var(--acento); color: var(--negro-profundo); border-color: var(--acento); }
-    .listener-counter {
+    .live-badge {
       display: inline-flex; align-items: center; gap: 6px; background: var(--negro-profundo); border: 1px solid var(--borde);
       border-radius: 999px; padding: 6px 16px; font-weight: 600; color: var(--acento); font-size: 0.82rem; margin-top: 10px;
     }
@@ -209,7 +260,7 @@
     .message-slider { background: var(--superficie); border-radius: var(--radio-radius); padding: 36px 24px; border: 1px solid var(--borde); max-width: 750px; margin: 0 auto; text-align: center; }
     #message-text { font-size: 1.15rem; font-style: italic; transition: opacity 0.35s, transform 0.35s; color: var(--blanco-limpio); }
     .message-controls { display: flex; justify-content: center; gap: 8px; margin-top: 22px; }
-    .message-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--borde); cursor: pointer; transition: all 0.2s ease; }
+    .message-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--borde); cursor: pointer; transition: all 0.2s ease; border: none; padding: 0; }
     .message-dot.active, .message-dot:hover { background: var(--acento); width: 22px; border-radius: 6px; }
 
     .other-stations { background: var(--superficie); border-radius: var(--radio-radius); padding: 28px 20px; border: 1px solid var(--borde); max-width: 650px; margin: 0 auto; text-align: center; }
@@ -221,7 +272,7 @@
     }
     .station-btn:hover { border-color: var(--acento); color: var(--acento); transform: translateY(-2px); }
 
-    /* PLATAFORMAS INTERACTIVAS - DISEÑO CON NOMBRES Y EFECTOS */
+    /* PLATAFORMAS INTERACTIVAS */
     .plataformas-section {
       padding: 50px 16px 60px;
       text-align: center;
@@ -293,7 +344,6 @@
       z-index: 1;
     }
 
-    /* Animaciones de entrada */
     .platform-item:nth-child(1) { animation: fadeInUp 0.6s ease 0.1s both; }
     .platform-item:nth-child(2) { animation: fadeInUp 0.6s ease 0.2s both; }
     .platform-item:nth-child(3) { animation: fadeInUp 0.6s ease 0.3s both; }
@@ -370,6 +420,7 @@
       .vinyl-disc { animation: none; }
       section { opacity: 1; transform: none; transition: none; }
       .platform-item { animation: none; }
+      .live-dot-sm, .live-dot { animation: none; }
     }
 
     @media (max-width: 768px) {
@@ -418,29 +469,29 @@
 
   <div class="whatsapp-modal" id="whatsappModal">
     <div class="modal-content">
-      <button class="close-modal" id="closeModal"><i class="fas fa-times"></i></button>
-      <div class="modal-header"><i class="fab fa-whatsapp"></i><h3>Pide tu canción</h3><p>Envíanos tu solicitud y la transmitiremos en DC Clásicos</p></div>
-      <form id="whatsappForm">
-        <div class="form-group"><label><i class="fas fa-user"></i> Nombre y apellido</label><input type="text" id="nombre" class="form-control" placeholder="Ej: Juan Pérez" required></div>
-        <div class="form-group"><label><i class="fas fa-music"></i> Canción</label><input type="text" id="cancion" class="form-control" placeholder="Ej: My Heart Will Go On - Céline Dion" required></div>
-        <div class="form-group"><label><i class="fas fa-comment"></i> Comentario</label><textarea id="comentario" class="form-control" placeholder="Ej: Esta canción me recuerda a..." required></textarea></div>
-        <button type="submit" class="submit-btn"><i class="fab fa-whatsapp"></i> Enviar por WhatsApp</button>
+      <button class="close-modal" id="closeModal" type="button"><i class="fas fa-times" aria-hidden="true"></i></button>
+      <div class="modal-header"><i class="fab fa-whatsapp" aria-hidden="true"></i><h3>Pide tu canción</h3><p>Envíanos tu solicitud y la transmitiremos en DC Clásicos</p></div>
+      <form id="whatsappForm" novalidate>
+        <div class="form-group"><label for="nombre"><i class="fas fa-user" aria-hidden="true"></i> Nombre y apellido</label><input type="text" id="nombre" class="form-control" placeholder="Ej: Juan Pérez" required></div>
+        <div class="form-group"><label for="cancion"><i class="fas fa-music" aria-hidden="true"></i> Canción</label><input type="text" id="cancion" class="form-control" placeholder="Ej: My Heart Will Go On - Céline Dion" required></div>
+        <div class="form-group"><label for="comentario"><i class="fas fa-comment" aria-hidden="true"></i> Comentario</label><textarea id="comentario" class="form-control" placeholder="Ej: Esta canción me recuerda a..." required></textarea></div>
+        <button type="submit" class="submit-btn"><i class="fab fa-whatsapp" aria-hidden="true"></i> Enviar por WhatsApp</button>
       </form>
     </div>
   </div>
 
   <div class="floating-buttons">
-    <button class="whatsapp-btn" id="whatsappBtn" aria-label="Pedir canción por WhatsApp"><i class="fab fa-whatsapp"></i></button>
-    <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba"><i class="fas fa-arrow-up"></i></button>
+    <button class="whatsapp-btn" id="whatsappBtn" type="button" aria-label="Pedir canción por WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></button>
+    <button class="scroll-top-btn" id="scrollTopBtn" type="button" aria-label="Volver arriba"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
   </div>
 
   <header id="mainHeader">
-    <a href="https://rdcrsound.adcm.club" class="back-button" target="_self" aria-label="Volver a RDCR Sound Network"><i class="fas fa-arrow-left"></i></a>
+    <a href="https://rdcrsound.adcm.club" class="back-button" target="_self" aria-label="Volver a RDCR Sound Network"><i class="fas fa-arrow-left" aria-hidden="true"></i></a>
     <div class="header-brand">
-      <span class="live-indicator"><span class="live-dot-sm"></span> En vivo</span>
+      <span class="live-indicator"><span class="live-dot-sm" aria-hidden="true"></span> En vivo</span>
       <h1>DC <span class="accent">CLÁSICOS</span></h1>
     </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav" type="button"><i class="fas fa-bars" aria-hidden="true"></i></button>
     <nav id="mainNav">
       <a href="#" class="nav-btn active" data-target="inicio">Inicio</a>
       <a href="#reproductor" class="nav-btn" data-target="reproductor">Escuchar</a>
@@ -453,7 +504,7 @@
       <p class="tagline mono">La radio emocional</p>
       <h2>La banda sonora de tu vida</h2>
       <p>Las canciones que marcaron tu historia · Baladas que viven en la memoria, 24/7</p>
-      <a href="#reproductor" class="btn-neon"><i class="fas fa-play"></i> Escuchar ahora</a>
+      <a href="#reproductor" class="btn-neon"><i class="fas fa-play" aria-hidden="true"></i> Escuchar ahora</a>
     </div>
   </section>
 
@@ -461,7 +512,7 @@
     <div class="player-layout">
       <div class="side-column-left">
         <div class="side-box">
-          <h4><i class="fas fa-history"></i> Pistas recientes</h4>
+          <h4><i class="fas fa-history" aria-hidden="true"></i> Pistas recientes</h4>
           <div class="recent-list">
             <div class='rbcloud_recenttracks' id='rbcloud_recent5829' data-cnt='5'>
               <div class='rbcloud_recent_track' style='display: flex; align-items: center; margin-bottom: 5pt;'>
@@ -476,15 +527,16 @@
       <div class="center-column">
         <div class="player-frame">
           <div class="vinyl-only-container">
-            <div class="vinyl-disc" id="vinylDisc">
+            <div class="vinyl-disc" id="vinylDisc" role="button" tabindex="0" aria-label="Animación decorativa del disco. No controla el audio: usá el reproductor de abajo para pausar la transmisión.">
               <div class="record-label">
                 <a target='_blank' href='https://c42.radioboss.fm/w/artwork/173.jpg'>
-                  <img id='vinylCover' src='https://c42.radioboss.fm/w/artwork/173.jpg' width='130' height='130' alt='cover art'>
+                  <img id='vinylCover' src='https://c42.radioboss.fm/w/artwork/173.jpg' width='130' height='130' alt='Carátula del tema que está sonando ahora'>
                 </a>
               </div>
               <div class="spindle-hole"></div>
             </div>
           </div>
+          <p class="vinyl-hint">El disco es solo decorativo — para pausar el audio, usá el reproductor de abajo</p>
         </div>
         <div class="track-info-center">
           <div class='rbcloud_nowplaying' style='display: flex; align-items: center; justify-content: center;'>
@@ -501,18 +553,19 @@
 
       <div class="side-column-right">
         <div class="side-box">
-          <h4><i class="fas fa-forward"></i> Próxima pista</h4>
+          <h4><i class="fas fa-forward" aria-hidden="true"></i> Próxima pista</h4>
           <div class='rbcloud_nexttrack' style='display: flex; align-items: center;'>
             <div><a target='_blank' href='https://c42.radioboss.fm/w/artwork_next/173.jpg'><img id='rbcloud_nt_c677' src='https://c42.radioboss.fm/w/artwork_next/173.jpg' width='40' height='40' alt='cover art'></a></div>
             <div style='margin-left: 5pt;'><div id='rbcloud_nt_a677' style='font-weight: bold'></div><div id='rbcloud_nt_t677'>...</div></div>
           </div>
         </div>
         <div class="side-box">
-          <h4><i class="fas fa-microphone-alt"></i> Solicita tu canción</h4>
+          <h4><i class="fas fa-microphone-alt" aria-hidden="true"></i> Solicita tu canción</h4>
           <div class='rbcloud_songrequest' id='rbcloud_songrequest17985'>
             <div class='rbc_search'>
-              <input class='rbc_ed_query' placeholder='Busca tu canción...'>
-              <button class='rbc_bt_search'><i class="fas fa-search"></i> Buscar</button>
+              <label class="sr-only" for="rbc_query_dc">Buscar canción</label>
+              <input id="rbc_query_dc" class='rbc_ed_query' placeholder='Busca tu canción...'>
+              <button class='rbc_bt_search' type="button"><i class="fas fa-search" aria-hidden="true"></i> Buscar</button>
             </div>
             <div class='rbc_result'></div>
           </div>
@@ -526,13 +579,13 @@
       <div class="player-area">
         <div class="hidden-player" id="rbcloud_player4017"></div>
       </div>
-      <div class="decade-indicators">
-        <button class="decade active" data-decade="80">80's</button>
-        <button class="decade" data-decade="90">90's</button>
-        <button class="decade" data-decade="00">00's</button>
-        <button class="decade" data-decade="10">10's</button>
+      <div class="decade-tags" aria-label="Décadas que suenan en la radio">
+        <span class="decade-tag">80's</span>
+        <span class="decade-tag">90's</span>
+        <span class="decade-tag">00's</span>
+        <span class="decade-tag">10's</span>
       </div>
-      <div class="listener-counter"><i class="fas fa-headphones"></i> <span id="listenerCount">1,234</span> oyentes</div>
+      <div class="live-badge"><i class="fas fa-headphones" aria-hidden="true"></i> Transmisión en vivo</div>
     </div>
   </section>
 
@@ -541,7 +594,7 @@
       <span class="section-eyebrow mono">Al aire</span>
       <div class="section-title"><h2>Programación</h2></div>
       <div class="now-playing">
-        <h3><span class="live-dot"></span> Ahora en emisión</h3>
+        <h3><span class="live-dot" aria-hidden="true"></span> Ahora en emisión</h3>
         <p class="current-program" id="currentProgram">Cargando...</p>
         <p class="current-time" id="currentTime"></p>
       </div>
@@ -577,7 +630,7 @@
     <div class="other-stations">
       <div class="station-buttons">
         <a href="https://rdcrsound.adcm.club/RadioAvenidaTropical/" class="station-btn switch-station-btn" id="switchToAvenida">
-          <i class="fas fa-umbrella-beach"></i> Avenida Tropical
+          <i class="fas fa-umbrella-beach" aria-hidden="true"></i> Avenida Tropical
         </a>
       </div>
     </div>
@@ -607,10 +660,6 @@
 
       window.addEventListener('scroll',()=>{ let s=document.body.scrollTop||document.documentElement.scrollTop; let h=document.documentElement.scrollHeight-document.documentElement.clientHeight; document.getElementById('scrollProgress').style.width=(s/h)*100+'%'; document.getElementById('mainHeader').classList.toggle('scrolled',window.scrollY>40); });
 
-      document.querySelectorAll('.decade').forEach(b=>{ b.addEventListener('click',function(){ document.querySelectorAll('.decade').forEach(x=>x.classList.remove('active')); this.classList.add('active'); }); });
-
-      let count=1234; setInterval(()=>{ count+=Math.floor(Math.random()*10)-3; if(count<1000)count=1000; if(count>2000)count=2000; document.getElementById('listenerCount').textContent=count.toLocaleString(); },5000);
-
       function renderSchedule(){
         document.getElementById('weekdaySchedule').innerHTML=weekdayProgram.map(p=>`<div class="schedule-item" data-start="${p.start}" data-end="${p.end}"><span class="schedule-time">${p.time}</span><span class="schedule-name">${p.name}</span></div>`).join('');
         document.getElementById('weekendSchedule').innerHTML=weekendProgram.map(p=>`<div class="schedule-item" data-start="${p.start}" data-end="${p.end}"><span class="schedule-time">${p.time}</span><span class="schedule-name">${p.name}</span></div>`).join('');
@@ -633,7 +682,7 @@
       } updateCurrentProgram(); setInterval(updateCurrentProgram,60000);
 
       let ci=0; let mi; const me=document.getElementById('message-text'); const mc=document.getElementById('messageControls');
-      messages.forEach((_,i)=>{ const d=document.createElement('button'); d.className='message-dot'+(i===0?' active':''); d.addEventListener('click',()=>{ clearInterval(mi); changeMsg(i); mi=setInterval(nextMsg,6000); }); mc.appendChild(d); });
+      messages.forEach((_,i)=>{ const d=document.createElement('button'); d.type='button'; d.className='message-dot'+(i===0?' active':''); d.setAttribute('aria-label',`Ver mensaje ${i+1} de ${messages.length}`); d.addEventListener('click',()=>{ clearInterval(mi); changeMsg(i); mi=setInterval(nextMsg,6000); }); mc.appendChild(d); });
       function changeMsg(i){ me.style.opacity='0'; me.style.transform='scale(0.9)'; setTimeout(()=>{ me.textContent=messages[i]; me.style.opacity='1'; me.style.transform='scale(1)'; },250); ci=i; document.querySelectorAll('.message-dot').forEach((d,j)=>d.classList.toggle('active',j===i)); }
       function nextMsg(){ changeMsg((ci+1)%messages.length); } changeMsg(0); mi=setInterval(nextMsg,6000);
 
@@ -661,46 +710,47 @@
         }
       }, 2000);
 
+      // El giro del disco es decorativo: pausarlo NO pausa el audio real.
+      // El control real de reproducción está en el mini-reproductor de RadioBoss (rbcloud_mplayer11977).
       const vinylDisc = document.getElementById('vinylDisc');
-      let isPlaying = false;
-      vinylDisc.addEventListener('click', () => {
-        isPlaying = !isPlaying;
-        if (isPlaying) vinylDisc.classList.remove('paused');
-        else vinylDisc.classList.add('paused');
+      function toggleVinylSpin(){ vinylDisc.classList.toggle('paused'); }
+      vinylDisc.addEventListener('click', toggleVinylSpin);
+      vinylDisc.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleVinylSpin(); }
       });
 
       // CARGAR 6 PLATAFORMAS CON NOMBRES E ICONOS (incluyendo Online Radio Box)
       (function() {
         const platforms = [
-          { 
-            name: "TuneIn", 
-            url: "https://tunein.com/radio/DCCLASICOSEC-s342662/", 
-            icon: "fa-solid fa-tower-broadcast" 
+          {
+            name: "TuneIn",
+            url: "https://tunein.com/radio/DCCLASICOSEC-s342662/",
+            icon: "fa-solid fa-tower-broadcast"
           },
-          { 
-            name: "MyTuner Radio", 
-            url: "https://mytuner-radio.com/radio/dc-clasicos-ec-503820/", 
-            icon: "fa-solid fa-radio" 
+          {
+            name: "MyTuner Radio",
+            url: "https://mytuner-radio.com/radio/dc-clasicos-ec-503820/",
+            icon: "fa-solid fa-radio"
           },
-          { 
-            name: "Raddios", 
-            url: "https://www.raddios.com/20492-radio-online-dc-clasicos-ec-online-ibarra-ecuador", 
-            icon: "fa-solid fa-globe" 
+          {
+            name: "Raddios",
+            url: "https://www.raddios.com/20492-radio-online-dc-clasicos-ec-online-ibarra-ecuador",
+            icon: "fa-solid fa-globe"
           },
-          { 
-            name: "Radoxo", 
-            url: "https://radoxo.com/ecuador/dc-clasicos", 
-            icon: "fa-solid fa-signal" 
+          {
+            name: "Radoxo",
+            url: "https://radoxo.com/ecuador/dc-clasicos",
+            icon: "fa-solid fa-signal"
           },
-          { 
-            name: "Emisoras.ec", 
-            url: "https://emisoras.ec/84838-dc-clasicos.html", 
-            icon: "fa-solid fa-map-marker-alt" 
+          {
+            name: "Emisoras.ec",
+            url: "https://emisoras.ec/84838-dc-clasicos.html",
+            icon: "fa-solid fa-map-marker-alt"
           },
-          { 
-            name: "Online Radio Box", 
-            url: "https://onlineradiobox.com/search?cs=ec.dc953&played=1&q=dc%20clasicos&s=Todos%20los%20estilos&c=ec", 
-            icon: "fa-solid fa-square-radio" 
+          {
+            name: "Online Radio Box",
+            url: "https://onlineradiobox.com/search?cs=ec.dc953&played=1&q=dc%20clasicos&s=Todos%20los%20estilos&c=ec",
+            icon: "fa-solid fa-square-radio"
           }
         ];
         const grid = document.getElementById('plataformasGrid');
@@ -711,13 +761,13 @@
           a.rel = "noopener";
           a.className = "platform-item";
           a.title = `Escuchar en ${p.name}`;
-          a.innerHTML = `<i class="${p.icon}"></i><span>${p.name}</span>`;
+          a.innerHTML = `<i class="${p.icon}" aria-hidden="true"></i><span>${p.name}</span>`;
           grid.appendChild(a);
         });
       })();
 
     })();
   </script>
+  <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
 </body>
 </html>
-<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"34b5b0b5f26441b49b5bcebc58ac1199"})});</script>
